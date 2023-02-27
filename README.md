@@ -17,7 +17,7 @@ https://developer.hashicorp.com/terraform/downloads
 sudo apt install ansible -y
 ```
 ### Support PEM 
-support.pem located in aws directory  
+support.pem located in UNiXIaC directory  
 ### Scripts Executable 
 ```
 sudo find . -name "*.sh" -exec chmod +x {} \; 
