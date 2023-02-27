@@ -24,5 +24,7 @@ sudo find . -name "*.sh" -exec chmod +x {} \;
 ```
 
 ## Instances
-### RHEL 9
-### Windows Server 2022
+- Linux
+  - RHEL 9
+- Windows
+  - Windows Server 2022
