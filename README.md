@@ -20,7 +20,7 @@ sudo apt install ansible -y
 support.pem located in aws directory  
 ### Scripts Executable 
 ```
-sudo chmod +x *.sh  
+sudo find . -name "*.sh" -exec chmod +x {} \; 
 ```
 
 ## Instances
