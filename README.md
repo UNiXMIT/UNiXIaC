@@ -25,3 +25,4 @@ sudo chmod +x *.sh
 
 ## Instances
 ### RHEL 9
+### Windows Server 2022

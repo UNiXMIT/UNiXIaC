@@ -1,5 +1,5 @@
 support.pem
-rhel9/.terraform/
-rhel9/.terraform.lock.hcl
-rhel9/hosts
-rhel9/terraform.tfstate*
+*/.terraform/
+*/.terraform.lock.hcl
+*/hosts
+*/terraform.tfstate*

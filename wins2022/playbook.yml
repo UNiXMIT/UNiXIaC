@@ -1,0 +1,38 @@
+# playbook.yml
+# this is main driver, all will do all hosts in hosts file
+#
+# dansible-playbook playbook.yml --tags debugavariable --limit suse
+# ansible-playbook playbook.yml --tags debugavariable --limit suse
+# use wsl1 microsoft terminal
+# cd gitclones/workwin10/ansible/ 
+# ansible-playbook -vv -i hosts playbook.yml
+# ansible-playbook -vv -i hosts playbook.yml --tags installlocations
+# ansible-playbook -vv -i hosts playbook.yml --limit linux
+# ansible-playbook -vv -i localhost playbook.yml
+# 
+---
+#    - hosts: local
+#      become: true
+#      roles:
+#      - vpnopenconnect
+
+# Add VMs to known hosts file, to allow ansible ssh to them.
+    - hosts: local
+      become: true
+      roles:
+      - addToKnownHosts
+
+    - hosts: linux
+      become: true
+      remote_user: ec2-user
+      roles:
+      - varsforallroles
+      - hosts
+      - role: suse15
+        when: "'suse' in group_names"
+#      - role: selinux
+#        when: "'redhatlinux8' in group_names"
+      - linux
+      - vcinstallproducts
+      - vcinstalllicenses
+      - vpnopenconnect
