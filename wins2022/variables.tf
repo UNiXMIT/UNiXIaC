@@ -36,7 +36,7 @@ variable "instance" {
     az               = "eu-west-2c"
     sg               = "MTURNER"
     ssh_key_name     = "support"
-    pemfile          = "../support.pem"
+    pemfile          = "~/.ssh/support.pem"
     owner            = "martin.turner@microfocus.com"
   }
 }
