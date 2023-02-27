@@ -6,7 +6,7 @@
 ## Prerequisites
 ### Python3 and pip
 ```
-sudo apt install python3 python3-pip -y  
+sudo dnf install python3 python3-pip -y  
 ```
 ### PFSSO 
 https://github.houston.softwaregrp.net/HPE-SW-SaaS/pfsso-python  
@@ -14,10 +14,10 @@ https://github.houston.softwaregrp.net/HPE-SW-SaaS/pfsso-python
 https://developer.hashicorp.com/terraform/downloads  
 ### Ansible   
 ```
-sudo apt install ansible -y
+sudo dnf install ansible -y
 ```
 ### Support PEM 
-support.pem located in UNiXIaC directory  
+support.pem located in ~/.ssh 
 ### Scripts Executable 
 ```
 sudo find . -name "*.sh" -exec chmod +x {} \; 
