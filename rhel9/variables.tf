@@ -1,11 +1,9 @@
 variable "corpid" {
   type = string
-  description = "corpid used to show who created the instance"
   default = "MTURNER"
 }
 
-variable "rhel9" {
-  description = "RHEL 9"
+variable "image" {
   default = {
     ami = "ami-05c96317a6278cfaa"
     name = "RHEL9"
@@ -13,12 +11,10 @@ variable "rhel9" {
 }
 
 variable "username" {
-  description = "User"
   default = "support"
 }
 
 variable "password" {
-  description = "Password"
   type = string
   default = "Unidos30"
   sensitive   = true

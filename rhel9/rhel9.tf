@@ -1,25 +1,13 @@
 locals {
-  vmname = "${var.corpid}-${var.rhel9.name}"
+  vmname = "${var.corpid}-${var.image.name}"
 }
 
-# data "cloudinit_config" "server_config" {
-#   gzip          = true
-#   base64_encode = true
-#   part {
-#     content_type = "text/cloud-config"
-#     content = templatefile("${path.module}/cloudConfig.yml", {
-#       header: var.instance.sg
-#     })
-#   }
-# }
-
 resource "aws_instance" "computer" {
-  ami               = var.rhel9.ami
+  ami               = var.image.ami
   instance_type     = var.instance.type
   availability_zone = var.instance.az
   security_groups   = [var.instance.sg]
   key_name          = var.instance.ssh_key_name
-  # user_data         = data.cloudinit_config.server_config.rendered
 
   root_block_device {
     volume_size = var.instance.root_disk_size
@@ -28,7 +16,7 @@ resource "aws_instance" "computer" {
 
   tags = {
     Name    = local.vmname
-    prod0   = "RHEL 9"
+    prod0   = var.image.ami
     Created = "${formatdate("YYYYMMDDhhmmss", timestamp())}"
     Owner   = var.instance.owner
   }
@@ -43,7 +31,7 @@ resource "aws_instance" "computer" {
       "echo \"if [[ -t 0 && $- = *i* ]]; then stty -ixon; fi\" >> /home/$user/.bashrc",
       "sudo sed -i -E \"s/#?AllowTcpForwarding no/AllowTcpForwarding yes/\" /etc/ssh/sshd_config",
       "sudo sed -i -E \"s/#?PasswordAuthentication no/PasswordAuthentication yes/\" /etc/ssh/sshd_config",
-      "sudo bash -c \"echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers\"",
+      "sudo bash -c 'echo \"%wheel ALL=(ALL) NOPASSWD: ALL\" >> /etc/sudoers'",
       "sudo service sshd restart",
       "sudo setenforce 0",
       "sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config",
