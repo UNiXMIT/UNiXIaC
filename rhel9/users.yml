@@ -5,11 +5,11 @@
     - name: Add the user '{{ myUsername }}' with primary group of 'sudo'
       ansible.builtin.user:
         name: '{{ myUsername }}'
-        password: '{{ python3 -c "from passlib.hash import sha512_crypt; import getpass; print(sha512_crypt.using(rounds=5000).hash(MyStrongPassword))" }}'
+        password: '{{ python3 -c "from passlib.hash import sha512_crypt; import getpass; print(sha512_crypt.using(rounds=5000).hash(myPassword))" }}'
         groups: wheel
         append: yes
     - name: Change root password
       user:
         name: admin
         update_password: always
-        password: '{{ python3 -c "from passlib.hash import sha512_crypt; import getpass; print(sha512_crypt.using(rounds=5000).hash(MyStrongPassword))" }}'
+        password: '{{ python3 -c "from passlib.hash import sha512_crypt; import getpass; print(sha512_crypt.using(rounds=5000).hash(myPassword))" }}'

@@ -57,6 +57,6 @@ resource "aws_instance" "computer" {
 
 }
 
-output "rhel9server_ip" {
+output "server_ip" {
     value = aws_instance.computer.public_ip
 }
