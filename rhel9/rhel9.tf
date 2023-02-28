@@ -42,7 +42,7 @@ resource "aws_instance" "computer" {
 
       type        = "ssh"
       host        = aws_instance.computer.public_ip
-      user        = "ec2-user"
+      user        = var.instance.ssh_user
       private_key = file(var.instance.pemfile)
     }
   }

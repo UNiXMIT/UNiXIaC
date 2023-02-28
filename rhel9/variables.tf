@@ -31,6 +31,7 @@ variable "instance" {
     volume_type      = "gp3"
     az               = "eu-west-2c"
     sg               = "MTURNER"
+    ssh_user         = "ec2-user"
     ssh_key_name     = "support"
     pemfile          = "~/.ssh/support.pem"
     owner            = "martin.turner@microfocus.com"
