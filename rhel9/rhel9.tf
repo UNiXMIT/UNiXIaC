@@ -2,16 +2,16 @@ locals {
   vmname = "${var.corpid}-${var.rhel9.name}"
 }
 
-data "cloudinit_config" "server_config" {
-  gzip          = true
-  base64_encode = true
-  part {
-    content_type = "text/cloud-config"
-    content = templatefile("${path.module}/cloudConfig.yml", {
-      header: var.instance.sg
-    })
-  }
-}
+# data "cloudinit_config" "server_config" {
+#   gzip          = true
+#   base64_encode = true
+#   part {
+#     content_type = "text/cloud-config"
+#     content = templatefile("${path.module}/cloudConfig.yml", {
+#       header: var.instance.sg
+#     })
+#   }
+# }
 
 resource "aws_instance" "computer" {
   ami               = var.rhel9.ami
@@ -63,7 +63,7 @@ resource "aws_instance" "computer" {
   provisioner "local-exec" {
     command = <<-EOT
               ansible-playbook -i hosts knownHosts.yml
-              ansible-playbook -i hosts users.yml
+              ansible-playbook -i hosts users.yml -e "myUsername=${var.username} mypassword=${var.password}"
               ansible-playbook -i hosts software.yml
     EOT
   }

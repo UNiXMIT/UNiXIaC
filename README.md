@@ -23,6 +23,7 @@ https://developer.hashicorp.com/terraform/downloads
 ### Ansible   
 ```
 sudo dnf install ansible sshpass -y
+python3 -m pip install passlib
 ```
 ### Support PEM 
 support.pem located in ~/.ssh 
