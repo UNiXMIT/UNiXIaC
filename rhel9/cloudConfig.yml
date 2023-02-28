@@ -4,5 +4,3 @@ repo_upgrade: false
 system_info:
   default_user:
     name: support
-runcmd:
- - curl -s https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/setup.sh | bash

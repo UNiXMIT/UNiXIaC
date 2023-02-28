@@ -29,7 +29,7 @@ support.pem located in ~/.ssh
 sudo chmod 600 ~/.ssh/support.pem
 ### Scripts Executable 
 ```
-sudo find . -name "*.sh" -exec chmod +x {} \; 
+sudo chmod +x *.sh
 ```
 
 ## Instances
