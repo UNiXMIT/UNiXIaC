@@ -28,14 +28,13 @@ resource "aws_instance" "computer" {
 
   provisioner "remote-exec" {
     inline = [
-      "echo \"if [[ -t 0 && $- = *i* ]]; then stty -ixon; fi\" >> /home/$user/.bashrc",
+      "echo \"if [[ -t 0 && $- = *i* ]]; then stty -ixon; fi\" >> /home/${var.username}/.bashrc",
       "sudo sed -i -E \"s/#?AllowTcpForwarding no/AllowTcpForwarding yes/\" /etc/ssh/sshd_config",
       "sudo sed -i -E \"s/#?PasswordAuthentication no/PasswordAuthentication yes/\" /etc/ssh/sshd_config",
       "sudo bash -c 'echo \"%wheel ALL=(ALL) NOPASSWD: ALL\" >> /etc/sudoers'",
       "sudo service sshd restart",
       "sudo setenforce 0",
-      "sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config",
-      "sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm"
+      "sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config"
     ]
 
     connection {

@@ -5,6 +5,7 @@
     dnf:
       name:
         - '@Development tools'
+        - epel-release
         - libnsl
         - podman
         - buildah
