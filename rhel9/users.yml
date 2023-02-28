@@ -1,15 +1,15 @@
 - name: User management
   hosts: all
-  remote_user: root
+  become: true
   tasks:
     - name: Add the user 'support' with primary group of 'sudo'
       ansible.builtin.user:
         name: support
-        password: Unidos30
-        group: wheel
+        password: "{{ 'Unidos30' | password_hash('sha512', 'mysecretsalt') }}"
+        groups: wheel
         append: yes
     - name: Change root password
       user:
         name: admin
         update_password: always
-        password: Unidos30
+        password: "{{ 'Unidos30' | password_hash('sha512', 'mysecretsalt') }}"

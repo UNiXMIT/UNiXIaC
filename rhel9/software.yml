@@ -1,11 +1,10 @@
 - hosts: all
-  remote_user: root
+  become: true
   tasks:
   - name: Package installation
     dnf:
       name:
-        - "Development Tools"
-        - https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+        - '@Development tools'
         - libnsl
         - podman
         - buildah
@@ -25,5 +24,4 @@
         - tcpdump
         - ed
         - glibc-devel.i686
-        - spax
       state: latest
