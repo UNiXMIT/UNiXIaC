@@ -22,9 +22,12 @@ resource "aws_instance" "computer" {
     Owner   = var.instance.owner
   }
 
-# setup hosts file for Ansible
   provisioner "local-exec" {
-    command = "echo '${local.vmname} ansible_host=${aws_instance.computer.public_ip}' >hosts"
+    command = "echo '${local.vmname} ansible_host=${aws_instance.computer.public_ip} ansible_port=22 ansible_user=support ansible_ssh_private_key_file=~/.ssh/support.pem' >hosts"
+  }
+
+  provisioner "local-exec" {
+    command = "ansible-playbook -vv -i hosts playbook.yml" 
   }
 
 }
