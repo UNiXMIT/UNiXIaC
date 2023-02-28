@@ -2,16 +2,16 @@ locals {
   vmname = "${var.corpid}-${var.rhel9.name}"
 }
 
-data "cloudinit_config" "server_config" {
-  gzip          = true
-  base64_encode = true
-  part {
-    content_type = "text/cloud-config"
-    content = templatefile("${path.module}/cloudConfig.yml", {
-      header: var.instance.sg
-    })
-  }
-}
+# data "cloudinit_config" "server_config" {
+#   gzip          = true
+#   base64_encode = true
+#   part {
+#     content_type = "text/cloud-config"
+#     content = templatefile("${path.module}/cloudConfig.yml", {
+#       header: var.instance.sg
+#     })
+#   }
+# }
 
 resource "aws_instance" "computer" {
   ami               = var.rhel9.ami
@@ -19,7 +19,7 @@ resource "aws_instance" "computer" {
   availability_zone = var.instance.az
   security_groups   = [var.instance.sg]
   key_name          = var.instance.ssh_key_name
-  user_data         = data.cloudinit_config.server_config.rendered
+  # user_data         = data.cloudinit_config.server_config.rendered
 
   root_block_device {
     volume_size = var.instance.root_disk_size
@@ -49,6 +49,13 @@ resource "aws_instance" "computer" {
       "sudo setenforce 0",
       "sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config" 
     ]
+
+    connection {
+      type        = "ssh"
+      host        = aws_instance.computer.public_ip
+      user        = var.instance.ssh_user
+      private_key = file(var.instance.pemfile)
+    }
   }
 
 # Ansible Playbooks
