@@ -1,7 +1,7 @@
 - name: User management
   hosts: all
   vars:
-    password_salt: "h4U5PBBeZWNfjpRiBPH9"
+    password_salt: "QYeL85HzkM5YGd3h"
   become: true
   tasks:
     - name: Add the user '{{ myUsername }}' with primary group of 'sudo'
