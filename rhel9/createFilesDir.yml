@@ -5,12 +5,12 @@
     copy:
       dest: "/etc/profile.d/profile.sh"
       content: |
-        "#!/bin/bash"
-        "# /etc/profile.d/profile.sh"
-        "cd ~/AcuSupport"
-        "[ -d \"/opt/microfocus/EnterpriseDeveloper/bin\" ] && . /opt/microfocus/EnterpriseDeveloper/bin/cobsetenv"
-        "export PATH=$PATH:~/AcuSupport/AcuScripts:~/MFSupport/MFScripts"
-        "export TERM=xterm"
+        #!/bin/bash
+        # /etc/profile.d/profile.sh
+        cd ~/AcuSupport
+        [ -d \"/opt/microfocus/EnterpriseDeveloper/bin\" ] && . /opt/microfocus/EnterpriseDeveloper/bin/cobsetenv
+        export PATH=$PATH:~/AcuSupport/AcuScripts:~/MFSupport/MFScripts
+        export TERM=xterm
     become: true
   - name: Make profile.sh executable
     file:
@@ -22,4 +22,49 @@
     file:
       path: "/home/support/AcuSupport"
       state: directory
+      mode: '0775'
+  - name: Create AcuDataFiles
+    file:
+      path: "/home/support/AcuSupport/AcuDataFiles"
+      state: directory
+      mode: '0775'
+  - name: Create AcuLogs
+    file:
+      path: "/home/support/AcuSupport/AcuLogs"
+      state: directory
+      mode: '0775'
+  - name: Create AcuResources
+    file:
+      path: "/home/support/AcuSupport/AcuResources"
+      state: directory
+      mode: '0775'
+  - name: Create AcuSamples
+    file:
+      path: "/home/support/AcuSupport/AcuSamples"
+      state: directory
+      mode: '0775'
+  - name: Create AcuScripts
+    file:
+      path: "/home/support/AcuSupport/AcuScripts"
+      state: directory
+      mode: '0775'
+  - name: Create CustomerPrograms
+    file:
+      path: "/home/support/AcuSupport/CustomerPrograms"
+      state: directory
+      mode: '0775'
+  - name: Create etc
+    file:
+      path: "/home/support/AcuSupport/etc"
+      state: directory
+      mode: '0775'
+  - name: Download setenv.sh
+    get_url:
+      url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/setenv.sh
+      dest: /home/support/AcuSupport/AcuScripts/setenv.sh
+      mode: '0775'
+  - name: Download startacu.sh
+    get_url:
+      url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/startacu.sh
+      dest: /home/support/AcuSupport/AcuScripts/startacu.sh
       mode: '0775'
