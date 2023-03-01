@@ -41,14 +41,14 @@ resource "aws_instance" "computer" {
     command = <<-EOT
               echo '${local.vmname} ansible_host=${aws_instance.computer.public_ip} ansible_port=22 ansible_user=${var.instance.ssh_user} ansible_ssh_private_key_file=${var.instance.pemfile}' > hostsMain
               echo '${local.vmname} ansible_host=${aws_instance.computer.public_ip} ansible_port=22 ansible_user=${var.username} ansible_password=${var.password}' > hostsSupport
-              ansible-playbook -i hosts knownHosts.yml
-              ansible-playbook -i hosts system.yml
-              ansible-playbook -i hosts users.yml -e "myUsername=${var.username} myPassword=${var.password}"
-              ansible-playbook -i hosts software.yml
+              ansible-playbook -i hostsMain knownHosts.yml
+              ansible-playbook -i hostsMain system.yml
+              ansible-playbook -i hostsMain users.yml -e "myUsername=${var.username} myPassword=${var.password}"
+              ansible-playbook -i hostsMain software.yml
               ansible-playbook -i hostsSupport createFilesDir.yml -e "myUsername=${var.username}"
-              ansible-playbook -i hostsSupport motd.yml
-              ansible-playbook -i hostsSupport cron.yml -e "myUsername=${var.username}"
-              ansible-playbook -i hostsSupport reboot.yml
+              ansible-playbook -i hostsMain motd.yml
+              ansible-playbook -i hostsMain cron.yml -e "myUsername=${var.username}"
+              ansible-playbook -i hostsMain reboot.yml
     EOT
   }
 
