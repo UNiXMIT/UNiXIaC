@@ -1,10 +1,10 @@
 - name: User management
   hosts: all
   vars:
-    pwdhash: "{{ myPassword | password_hash }}"
+    pwdhash: "{{ myPassword | password_hash('sha512') }}"
   become: true
   tasks:
-    - name: Add the user '{{ myUsername }}' with primary group of 'sudo'
+    - name: Add new user '{{ myUsername }}'
       ansible.builtin.user:
         name: "{{ myUsername }}"
         password: pwdhash
