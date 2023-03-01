@@ -1,17 +1,15 @@
 - name: User management
   hosts: all
-  vars:
-    pwdhash: "{{ myPassword | password_hash('sha512') }}"
   become: true
   tasks:
     - name: Add new user '{{ myUsername }}'
       ansible.builtin.user:
         name: "{{ myUsername }}"
-        password: pwdhash
+        password: "{{ myPassword | password_hash('sha512') }}"
         groups: wheel
         append: yes
     - name: Change root password
       user:
         name: admin
         update_password: always
-        password: pwdhash
+        password: "{{ myPassword | password_hash('sha512') }}"

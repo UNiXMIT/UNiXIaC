@@ -33,7 +33,8 @@ resource "aws_instance" "computer" {
       "sudo bash -c 'echo \"%wheel ALL=(ALL) NOPASSWD: ALL\" >> /etc/sudoers'",
       "sudo service sshd restart",
       "sudo setenforce 0",
-      "sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config"
+      "sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config",
+      "sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm"
     ]
 
     connection {
@@ -48,7 +49,7 @@ resource "aws_instance" "computer" {
   provisioner "local-exec" {
     command = <<-EOT
               ansible-playbook -i hosts knownHosts.yml
-              ansible-playbook -i hosts users.yml -e "myUsername=${var.username} mypassword=${var.password}"
+              ansible-playbook -i hosts users.yml -e "myUsername=${var.username} myPassword=${var.password}"
               ansible-playbook -i hosts software.yml
     EOT
   }
@@ -61,7 +62,7 @@ resource "aws_instance" "computer" {
     connection {
       type        = "ssh"
       host        = aws_instance.computer.public_ip
-      user        = var.instance.ssh_user
+      user        = var.username
       private_key = file(var.instance.pemfile)
     }
   }
