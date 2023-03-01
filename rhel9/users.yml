@@ -1,3 +1,4 @@
+---
 - name: User management
   hosts: all
   become: true

@@ -42,14 +42,34 @@ resource "aws_instance" "computer" {
               echo '${local.vmname} ansible_host=${aws_instance.computer.public_ip} ansible_port=22 ansible_user=${var.instance.ssh_user} ansible_ssh_private_key_file=${var.instance.pemfile}' > hostsMain
               echo '${local.vmname} ansible_host=${aws_instance.computer.public_ip} ansible_port=22 ansible_user=${var.username} ansible_password=${var.password}' > hostsSupport
               ansible-playbook -i hostsMain knownHosts.yml
-              ansible-playbook -i hostsMain system.yml
-              ansible-playbook -i hostsMain users.yml -e "myUsername=${var.username} myPassword=${var.password}"
-              ansible-playbook -i hostsMain software.yml
-              ansible-playbook -i hostsSupport createFilesDir.yml -e "myUsername=${var.username}"
+    EOT
+  }
+
+  provisioner "local-exec" {
+    command = "ansible-playbook -i hostsMain system.yml"
+  }
+
+  provisioner "local-exec" {
+    command = "ansible-playbook -i hostsMain users.yml -e \"myUsername=${var.username} myPassword=${var.password}\""
+  }
+
+  provisioner "local-exec" {
+    command = "ansible-playbook -i hostsMain software.yml"
+  }
+
+  provisioner "local-exec" {
+    command = "ansible-playbook -i hostsSupport createFilesDir.yml -e \"myUsername=${var.username}\""
+  }
+
+  provisioner "local-exec" {
+    command = <<-EOT
               ansible-playbook -i hostsMain motd.yml
               ansible-playbook -i hostsMain cron.yml -e "myUsername=${var.username}"
-              ansible-playbook -i hostsMain reboot.yml
     EOT
+  }
+
+  provisioner "local-exec" {
+    command = "ansible-playbook -i hostsMain reboot.yml"
   }
 
 }
