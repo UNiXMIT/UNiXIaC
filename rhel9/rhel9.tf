@@ -23,7 +23,7 @@ resource "aws_instance" "computer" {
 
 # Setup hosts file for Ansible
   provisioner "local-exec" {
-    command = "echo '${local.vmname} ansible_host=${aws_instance.computer.public_ip} ansible_port=22 ansible_user=ec2-user ansible_ssh_private_key_file=~/.ssh/support.pem' > hosts"
+    command = "echo '${local.vmname} ansible_host=${aws_instance.computer.public_ip} ansible_port=22 ansible_user=${var.instance.ssh_user} ansible_ssh_private_key_file=${var.instance.pemfile}' > hosts"
   }
 
   provisioner "remote-exec" {
@@ -65,6 +65,13 @@ resource "aws_instance" "computer" {
       user        = var.username
       private_key = file(var.instance.pemfile)
     }
+  }
+
+  provisioner "local-exec" {
+    command = <<-EOT
+              echo '${local.vmname} ansible_host=${aws_instance.computer.public_ip} ansible_port=22 ansible_user=${var.username} ansible_ssh_private_key_file=${var.instance.pemfile}' > hosts
+              ansible-playbook -i hosts createFilesDir.yml -e "myUsername=${var.username} myPassword=${var.password}"
+    EOT
   }
 
 }

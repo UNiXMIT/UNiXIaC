@@ -1,0 +1,25 @@
+---
+- hosts: all
+  tasks:
+  - name: Create profile.sh
+    copy:
+      dest: "/etc/profile.d/profile.sh"
+      content: |
+        "#!/bin/bash"
+        "# /etc/profile.d/profile.sh"
+        "cd ~/AcuSupport"
+        "[ -d \"/opt/microfocus/EnterpriseDeveloper/bin\" ] && . /opt/microfocus/EnterpriseDeveloper/bin/cobsetenv"
+        "export PATH=$PATH:~/AcuSupport/AcuScripts:~/MFSupport/MFScripts"
+        "export TERM=xterm"
+    become: true
+  - name: Make profile.sh executable
+    file:
+      path: "/etc/profile.d/profile.sh"
+      state: touch
+      mode: 0775
+    become: true
+  - name: Create AcuSupport
+    file:
+      path: "/home/support/AcuSupport"
+      state: directory
+      mode: '0775'
