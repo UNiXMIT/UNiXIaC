@@ -11,22 +11,23 @@
     copy:
       dest: "/etc/motd"
       content: |
-        
-        {{ ansible_distribution }} {{ ansible_distribution_version}}
+        ****************************************************************************************************
 
-        AcuCOBOL
-          Set Environment:
-            . setenv.sh (-h for usage)
-            
-            startacu.sh (-h for usage)
+            {{ ansible_distribution }} {{ ansible_distribution_version}}
 
-        MFCOBOL
-          Set Environment:
-            . setenvmf.sh
+            AcuCOBOL
+              Set Environment:
+                . setenv.sh (-h for usage)
+                
+                startacu.sh (-h for usage)
 
-            startmf.sh (-h for usage)
+            MFCOBOL
+              Set Environment:
+                . setenvmf.sh
 
-          Install Options:
-            -skipsafenet -skipautopass -IacceptEULA -ESadminID=support -il=/home/products/esXXpuXX
+                startmf.sh (-h for usage)
 
-    become: true
+              Install Options:
+                -skipsafenet -skipautopass -IacceptEULA -ESadminID=support -il=/home/products/esXXpuXX
+
+        ****************************************************************************************************

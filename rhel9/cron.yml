@@ -3,12 +3,14 @@
   gather_facts: yes
   become: true
   tasks:
-  - name: Load TCPtuning.conf at boot"
+  - name: Load TCPtuning.conf at boot
     cron:
+      name: TCP
       special_time: reboot
       job: "sysctl -p /home/{{ myUsername }}/AcuSupport/etc/TCPtuning.conf"
-  - name: Auto ShutDown"
+  - name: Auto ShutDown
     cron:
+      name: ShutDown
       minute: "0"
       hour: "18"
       job: "shutdown -h now"
