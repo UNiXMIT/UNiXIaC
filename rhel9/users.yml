@@ -1,17 +1,17 @@
 - name: User management
   hosts: all
   vars:
-    password_salt: "QYeL85HzkM5YGd3h"
+    pwdhash: "{{ myPassword | password_hash }}"
   become: true
   tasks:
     - name: Add the user '{{ myUsername }}' with primary group of 'sudo'
       ansible.builtin.user:
         name: "{{ myUsername }}"
-        password: "{{ myPassword | password_hash('sha512', password_salt) }}"
+        password: pwdhash
         groups: wheel
         append: yes
     - name: Change root password
       user:
         name: admin
         update_password: always
-        password: "{{ myPassword | password_hash('sha512', password_salt) }}"
+        password: pwdhash
