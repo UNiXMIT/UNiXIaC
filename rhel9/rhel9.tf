@@ -38,7 +38,6 @@ resource "aws_instance" "computer" {
     ]
 
     connection {
-
       type        = "ssh"
       host        = aws_instance.computer.public_ip
       user        = var.instance.ssh_user
@@ -53,6 +52,19 @@ resource "aws_instance" "computer" {
               ansible-playbook -i hosts users.yml -e "myUsername=${var.username} mypassword=${var.password}"
               ansible-playbook -i hosts software.yml
     EOT
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "echo \"if [[ -t 0 && $- = *i* ]]; then stty -ixon; fi\" >> /home/${var.username}/.bashrc",
+    ]
+
+    connection {
+      type        = "ssh"
+      host        = aws_instance.computer.public_ip
+      user        = var.instance.ssh_user
+      private_key = file(var.instance.pemfile)
+    }
   }
 
 }
