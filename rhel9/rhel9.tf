@@ -63,13 +63,13 @@ resource "aws_instance" "computer" {
       type        = "ssh"
       host        = aws_instance.computer.public_ip
       user        = var.username
-      private_key = file(var.instance.pemfile)
+      password    = var.password
     }
   }
 
   provisioner "local-exec" {
     command = <<-EOT
-              echo '${local.vmname} ansible_host=${aws_instance.computer.public_ip} ansible_port=22 ansible_user=${var.username} ansible_ssh_private_key_file=${var.instance.pemfile}' > hosts
+              echo '${local.vmname} ansible_host=${aws_instance.computer.public_ip} ansible_port=22 ansible_user=${var.username} ansible_password=${var.password}' > hosts
               ansible-playbook -i hosts createFilesDir.yml -e "myUsername=${var.username} myPassword=${var.password}"
     EOT
   }
