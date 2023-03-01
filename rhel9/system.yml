@@ -1,0 +1,13 @@
+---
+- hosts: all
+  gather_facts: yes
+  become: true
+  tasks:
+  - name: Disable SELinux
+    selinux:
+      state: disabled
+  tasks:
+  - name: Restart SSH
+    service:
+      name: ssh
+      state: restarted

@@ -20,51 +20,127 @@
     become: true
   - name: Create AcuSupport
     file:
-      path: "/home/support/AcuSupport"
+      path: "/home/{{ myUsername }}/AcuSupport"
       state: directory
       mode: '0775'
   - name: Create AcuDataFiles
     file:
-      path: "/home/support/AcuSupport/AcuDataFiles"
+      path: "/home/{{ myUsername }}/AcuSupport/AcuDataFiles"
       state: directory
       mode: '0775'
   - name: Create AcuLogs
     file:
-      path: "/home/support/AcuSupport/AcuLogs"
+      path: "/home/{{ myUsername }}/AcuSupport/AcuLogs"
       state: directory
       mode: '0775'
   - name: Create AcuResources
     file:
-      path: "/home/support/AcuSupport/AcuResources"
+      path: "/home/{{ myUsername }}/AcuSupport/AcuResources"
       state: directory
       mode: '0775'
   - name: Create AcuSamples
     file:
-      path: "/home/support/AcuSupport/AcuSamples"
+      path: "/home/{{ myUsername }}/AcuSupport/AcuSamples"
       state: directory
       mode: '0775'
   - name: Create AcuScripts
     file:
-      path: "/home/support/AcuSupport/AcuScripts"
+      path: "/home/{{ myUsername }}/AcuSupport/AcuScripts"
       state: directory
       mode: '0775'
   - name: Create CustomerPrograms
     file:
-      path: "/home/support/AcuSupport/CustomerPrograms"
+      path: "/home/{{ myUsername }}/AcuSupport/CustomerPrograms"
       state: directory
       mode: '0775'
   - name: Create etc
     file:
-      path: "/home/support/AcuSupport/etc"
+      path: "/home/{{ myUsername }}/AcuSupport/etc"
       state: directory
       mode: '0775'
   - name: Download setenv.sh
     get_url:
       url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/setenv.sh
-      dest: /home/support/AcuSupport/AcuScripts/setenv.sh
+      dest: /home/{{ myUsername }}/AcuSupport/AcuScripts/setenv.sh
       mode: '0775'
   - name: Download startacu.sh
     get_url:
       url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/startacu.sh
-      dest: /home/support/AcuSupport/AcuScripts/startacu.sh
+      dest: /home/{{ myUsername }}/AcuSupport/AcuScripts/startacu.sh
       mode: '0775'
+  - name: Download a_srvcfg
+    get_url:
+      url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/a_srvcfg
+      dest: /home/{{ myUsername }}/AcuSupport/etc/a_srvcfg
+      mode: '0775'
+  - name: Download acurcl.cfg
+    get_url:
+      url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.cfg
+      dest: /home/{{ myUsername }}/AcuSupport/etc/acurcl.cfg
+      mode: '0775'
+  - name: Download acurcl.ini
+    get_url:
+      url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.ini
+      dest: /home/{{ myUsername }}/AcuSupport/etc/acurcl.ini
+      mode: '0775'
+  - name: Download boomerang.cfg
+    get_url:
+      url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/boomerang.cfg
+      dest: /home/{{ myUsername }}/AcuSupport/etc/boomerang.cfg
+      mode: '0775'
+  - name: Download cblconfig
+    get_url:
+      url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/cblconfig
+      dest: /home/{{ myUsername }}/AcuSupport/etc/cblconfig
+      mode: '0775'
+  - name: Download fillCombo.js
+    get_url:
+      url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/fillCombo.js
+      dest: /home/{{ myUsername }}/AcuSupport/etc/fillCombo.js
+      mode: '0775'
+  - name: Download gateway.conf
+    get_url:
+      url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/gateway.conf
+      dest: /home/{{ myUsername }}/AcuSupport/etc/gateway.conf
+      mode: '0775'
+  - name: Download gateway.toml
+    get_url:
+      url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/gateway.toml
+      dest: /home/{{ myUsername }}/AcuSupport/etc/gateway.toml
+      mode: '0775'
+  - name: Download TCPtuning.conf
+    get_url:
+      url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/TCPtuning.conf
+      dest: /home/{{ myUsername }}/AcuSupport/etc/TCPtuning.conf
+      mode: '0775'
+  - name: Create MFSupport
+    file:
+      path: "/home/{{ myUsername }}/MFSupport"
+      state: directory
+      mode: '0775'
+  - name: Create MFScripts
+    file:
+      path: "/home/{{ myUsername }}/MFSupport/MFScripts"
+      state: directory
+      mode: '0775'
+  - name: Create MFSamples
+    file:
+      path: "/home/{{ myUsername }}/MFSupport/MFSamples"
+      state: directory
+      mode: '0775'
+  - name: Create MFInstallers
+    file:
+      path: "/home/{{ myUsername }}/MFSupport/MFInstallers"
+      state: directory
+      mode: '0775'
+  - name: Create MFDataFiles
+    file:
+      path: "/home/{{ myUsername }}/MFSupport/MFDataFiles"
+      state: directory
+      mode: '0775'
+  - name: Add a line to .bashrc
+    lineinfile:
+      path: /home/{{ myUsername }}/.bashrc
+      line: if [[ -t 0 && $- = *i* ]]; then stty -ixon; fi
+      create: yes
+    become: true

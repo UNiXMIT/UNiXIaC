@@ -21,20 +21,11 @@ resource "aws_instance" "computer" {
     Owner   = var.instance.owner
   }
 
-# Setup hosts file for Ansible
-  provisioner "local-exec" {
-    command = "echo '${local.vmname} ansible_host=${aws_instance.computer.public_ip} ansible_port=22 ansible_user=${var.instance.ssh_user} ansible_ssh_private_key_file=${var.instance.pemfile}' > hosts"
-  }
-
   provisioner "remote-exec" {
     inline = [
       "sudo sed -i -E \"s/#?AllowTcpForwarding no/AllowTcpForwarding yes/\" /etc/ssh/sshd_config",
       "sudo sed -i -E \"s/#?PasswordAuthentication no/PasswordAuthentication yes/\" /etc/ssh/sshd_config",
-      "sudo bash -c 'echo \"%wheel ALL=(ALL) NOPASSWD: ALL\" >> /etc/sudoers'",
-      "sudo service sshd restart",
-      "sudo setenforce 0",
-      "sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config",
-      "sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm"
+      "sudo bash -c 'echo \"%wheel ALL=(ALL) NOPASSWD: ALL\" >> /etc/sudoers'"
     ]
 
     connection {
@@ -48,29 +39,16 @@ resource "aws_instance" "computer" {
 # Ansible Playbooks
   provisioner "local-exec" {
     command = <<-EOT
+              echo '${local.vmname} ansible_host=${aws_instance.computer.public_ip} ansible_port=22 ansible_user=${var.instance.ssh_user} ansible_ssh_private_key_file=${var.instance.pemfile}' > hostsMain
+              echo '${local.vmname} ansible_host=${aws_instance.computer.public_ip} ansible_port=22 ansible_user=${var.username} ansible_password=${var.password}' > hostsSupport
               ansible-playbook -i hosts knownHosts.yml
+              ansible-playbook -i hosts system.yml
               ansible-playbook -i hosts users.yml -e "myUsername=${var.username} myPassword=${var.password}"
               ansible-playbook -i hosts software.yml
-    EOT
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "echo \"if [[ -t 0 && $- = *i* ]]; then stty -ixon; fi\" >> /home/${var.username}/.bashrc",
-    ]
-
-    connection {
-      type        = "ssh"
-      host        = aws_instance.computer.public_ip
-      user        = var.username
-      password    = var.password
-    }
-  }
-
-  provisioner "local-exec" {
-    command = <<-EOT
-              echo '${local.vmname} ansible_host=${aws_instance.computer.public_ip} ansible_port=22 ansible_user=${var.username} ansible_password=${var.password}' > hosts
-              ansible-playbook -i hosts createFilesDir.yml -e "myUsername=${var.username} myPassword=${var.password}"
+              ansible-playbook -i hostsSupport createFilesDir.yml -e "myUsername=${var.username}"
+              ansible-playbook -i hostsSupport motd.yml
+              ansible-playbook -i hostsSupport cron.yml -e "myUsername=${var.username}"
+              ansible-playbook -i hostsSupport reboot.yml
     EOT
   }
 

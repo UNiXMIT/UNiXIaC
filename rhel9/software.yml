@@ -1,6 +1,11 @@
 - hosts: all
   become: true
   tasks:
+  - name: Install EPEL
+    dnf:
+      name:
+        - https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+      state: present
   - name: Package installation
     dnf:
       name:
@@ -24,4 +29,4 @@
         - tcpdump
         - ed
         - glibc-devel.i686
-      state: latest
+      state: present
