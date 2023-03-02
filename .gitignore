@@ -1,4 +1,5 @@
 support.pem
+pfsso-0.9.4.zip
 */.terraform/
 */.terraform.lock.hcl
 */hosts
