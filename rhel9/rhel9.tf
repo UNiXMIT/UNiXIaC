@@ -16,7 +16,7 @@ resource "aws_instance" "computer" {
 
   tags = {
     Name    = local.vmname
-    prod0   = var.image.ami
+    prod0   = var.image.name
     Created = "${formatdate("YYYYMMDDhhmmss", timestamp())}"
     Owner   = var.instance.owner
   }
