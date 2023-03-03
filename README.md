@@ -26,8 +26,8 @@ sudo dnf install ansible sshpass -y
 python3 -m pip install passlib  
 ```
 ### Support PEM 
-support.pem located in ~/.ssh 
-sudo chmod 600 ~/.ssh/support.pem
+support.pem located in ~/.ssh  
+sudo chmod 600 ~/.ssh/support.pem  
 ### Scripts Executable 
 ```
 sudo chmod +x *.sh
