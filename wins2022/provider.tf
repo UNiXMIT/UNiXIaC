@@ -1,12 +1,12 @@
 provider "aws" {
-  profile = var.instance.securuityprofile
+  profile = var.instance.securityprofile
   region  = var.instance.awsregion
 }
 
 terraform {
   required_providers {
     aws = {
-      version = "~> 4.56.0"
+      version = "~> 4.57.0"
       source = "hashicorp/aws"
     }
     external = {

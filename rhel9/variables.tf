@@ -24,7 +24,7 @@ variable "instance" {
   description = "instance parameters"
   type        = map(string)
   default = {
-    securuityprofile = "848105473048_Fed_COBOL2_Compute"
+    securityprofile  = "848105473048_Fed_COBOL2_Compute"
     awsregion        = "eu-west-2"
     type             = "t3.xlarge"
     root_disk_size   = "120"
