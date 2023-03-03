@@ -28,7 +28,7 @@ variable "instance" {
     awsregion        = "eu-west-2"
     type             = "t3.xlarge"
     root_disk_size   = "120"
-    volume_type      = "gp2"
+    volume_type      = "gp3"
     az               = "eu-west-2c"
     sg               = "MTURNER"
     ssh_user         = "ec2-user"
