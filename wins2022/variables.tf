@@ -16,7 +16,7 @@ variable "username" {
 
 variable "password" {
   type = string
-  default = "Unidos30"
+  default = "myPassword"
   sensitive   = true
 }
 
@@ -34,6 +34,5 @@ variable "instance" {
     ssh_user         = "ec2-user"
     ssh_key_name     = "support"
     pemfile          = "~/.ssh/support.pem"
-    owner            = "martin.turner@microfocus.com"
   }
 }

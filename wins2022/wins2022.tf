@@ -18,7 +18,7 @@ resource "aws_instance" "computer" {
     Name    = local.vmname
     prod0   = var.image.name
     Created = "${formatdate("YYYYMMDDhhmmss", timestamp())}"
-    Owner   = var.instance.owner
+    Owner   = var.corpid
   }
 
   # Setup Ansible for Windows Host

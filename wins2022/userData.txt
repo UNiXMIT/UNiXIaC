@@ -1,7 +1,0 @@
-<script>
-curl -s -o \Users\Public\Documents\setup.cmd "https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/AcuScripts/setup.cmd"
-call \Users\Public\Documents\setup.cmd
-:: choco install visualstudio2017professional
-:: choco install visualstudio2019professional
-:: choco install visualstudio2022professional
-</script>
