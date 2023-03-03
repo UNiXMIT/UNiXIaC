@@ -1,5 +1,5 @@
 provider "aws" {
-  # profile = var.instance.securityprofile
+  profile = var.instance.securityprofile
   region  = var.instance.awsregion
 }
 
