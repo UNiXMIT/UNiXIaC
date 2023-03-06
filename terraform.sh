@@ -18,7 +18,7 @@ elif [ $ACTION = "destroy" ]; then
 elif [ $ACTION = "create" ]; then
     terraform -chdir=$2 init
     terraform -chdir=$2 plan
-    terraform -chdir=$2 apply -auto-approve -var username=$TFUSER -var password=$TFPASS
+    terraform -chdir=$2 apply -auto-approve -var username=$TFUSR -var password=$TFPASS
 else
     echo "Invalid Action specified!"
     echo "Usage: terraform.sh create rhel9 username password"
