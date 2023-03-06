@@ -1,7 +1,7 @@
 provider "aws" {
   profile = var.instance.securityprofile
   region  = var.instance.awsregion
-  shared_credentials_file = "~/.aws/creds"
+  shared_credentials_file = "~/.aws/credentials"
 }
 
 terraform {
