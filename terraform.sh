@@ -6,8 +6,9 @@ export TFPASS=$4
 export TFPATH="$(dirname -- "${BASH_SOURCE[0]}")"
 
 cd $TFPATH
-./sso.sh
 git pull
+chmod +x *.sh
+./sso.sh
 if [ -z "$INSTANCE" ] || [ -z "$ACTION" ]; then
     echo "No Action or Instance specified!"
     echo "Usage: terraform.sh create rhel9 username password"
