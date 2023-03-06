@@ -1,3 +1,5 @@
 #!/bin/bash
-export PATH=/home/support/.local/bin:$PATH
-pfsso -r 848105473048 -s 1 -2 TOTP
+export AWSEXP=$(echo $(( ($(date +%s) - $(stat ~/.aws/credentials -c %Y)) / 60 )))
+if [ $AWSEXP -ge 60 ]; then
+    pfsso -s 1 -2 ask
+fi
