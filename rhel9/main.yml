@@ -11,7 +11,7 @@
         security-group: '{{ securityGroup }}'
       region: '{{ awsRegion }}'
       availability_zone: '{{ availabilityZone }}'
-      awsProfile: '{{ awsProfile }}'
+      aws_profile: '{{ awsProfile }}'
       instance_type: '{{ instanceType }}'
       count: '{{ vmCount }}'
       volumes:
