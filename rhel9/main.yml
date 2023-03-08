@@ -1,6 +1,5 @@
 ---
 - hosts: local
-  become: yes
   tasks:
   - name: Create AWS EC2 instance
     ec2_instance:
@@ -46,7 +45,7 @@
       format: OpenSSH
 
   - name: Add instance to known_hosts
-    local_action: shell ssh-keyscan {{ ec2.instances[0].public_ip_address }} >> /etc/ssh/ssh_known_hosts
+    local_action: shell ssh-keyscan {{ ec2.instances[0].public_ip_address }} >> ~/.ssh/known_hosts
 
   - name: SSH
     local_action:
@@ -101,7 +100,6 @@
     reboot:
 
 - hosts: local
-  gather_facts: no
   tasks:
   - name: AWS EC2 Instance Created and Setup
     debug:
