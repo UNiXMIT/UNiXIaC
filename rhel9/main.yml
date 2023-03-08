@@ -44,10 +44,12 @@
       privatekey_path: '{{ keyLocation }}'
       format: OpenSSH
 
-  - name: Add public keys to known_hosts
-    known_hosts: 
-      name: {{ ec2.instances[0].public_ip_address  }}
-      key: "{{ lookup('file', '/tmp/support.pub') }}"
+  - name: Ensure servers are present in known_hosts file
+    known_hosts:
+      name: "{{ ec2.instances[0].public_ip_address }}"
+      state: present
+      key: "{{ lookup('pipe', 'ssh-keyscan {{ ec2.instances[0].public_ip_address }}') }}"
+      hash_host: true
 
   - name: SSH
     local_action:
