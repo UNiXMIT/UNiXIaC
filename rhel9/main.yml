@@ -37,19 +37,6 @@
        ansible_user: '{{ ansibleUser }}'
        ansible_ssh_private_key_file: '{{ keyLocation }}'
        groups: awsEC2
-  
-  - name: Generate an OpenSSL public key
-    openssl_publickey:
-      path: /tmp/support.pub
-      privatekey_path: '{{ keyLocation }}'
-      format: OpenSSH
-
-  - name: Setup Known Hosts
-    delegate_to: localhost
-    known_hosts:
-      key: "{{ lookup('pipe', 'ssh-keyscan -trsa ' + ec2.instances[0].public_ip_address) }}"
-      name: "{{ imageName }}"
-      state: present
 
   - name: SSH
     local_action:
