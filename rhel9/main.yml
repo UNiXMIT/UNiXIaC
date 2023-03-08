@@ -46,7 +46,7 @@
 
   - name: Add public keys to known_hosts
     known_hosts: 
-      name: github.com 
+      name: {{ ec2.instances[0].public_ip_address  }}
       key: "{{ lookup('file', '/tmp/support.pub') }}"
 
   - name: SSH
