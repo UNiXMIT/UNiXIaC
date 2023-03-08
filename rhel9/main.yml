@@ -44,18 +44,18 @@
       privatekey_path: '{{ keyLocation }}'
       format: OpenSSH
 
-  - name: Scan for SSH host keys.
+  - name: Scan for SSH host keys
     local_action:
       module: shell
       cmd: 'ssh-keyscan {{ ec2.instances[0].public_ip_address }} 2>/dev/null'
     changed_when: False
     register: ssh_scan
 
-  - name: Update known_hosts.
+  - name: Update known_hosts
     local_action:
       module: known_hosts
       key: "{{ item }}"
-      name: "{{ imageName }}"
+      name: "{{ ec2.instances[0].public_ip_address }}"
     with_items: "{{ ssh_scan.stdout_lines }}"
 
   - name: SSH
