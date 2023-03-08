@@ -44,7 +44,7 @@
       privatekey_path: '{{ keyLocation }}'
       format: OpenSSH
 
-  - name: Ensure servers are present in known_hosts file
+  - name: Add instance to known_hosts
     known_hosts:
       name: "{{ ec2.instances[0].public_ip_address }}"
       state: present
