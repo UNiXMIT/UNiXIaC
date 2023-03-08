@@ -50,7 +50,7 @@
       dest: ~/.ssh/known_hosts
       create: yes
       state: present
-      line: "{{ lookup('pipe', 'ssh-keyscan -trsa -p' + ec2.instances[0].public_ip_address) }}"
+      line: "{{ lookup('pipe', 'ssh-keyscan -trsa ' + ec2.instances[0].public_ip_address) }}"
 
   - name: SSH
     local_action:
