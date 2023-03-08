@@ -14,7 +14,5 @@
   "deviceName": "/dev/sda1",
   "volumeType": "gp3",
   "volumeSize": 120,
-  "awsAccessKey": "xxxx",
-  "awsSecretKey": "xxxxxx",
-  "awsSessionToken": "xxxxxxxx"
+  "aws_profile": "848105473048_Fed_COBOL2_Compute"
 }
