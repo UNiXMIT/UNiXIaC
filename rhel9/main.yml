@@ -45,7 +45,7 @@
       format: OpenSSH
 
   - name: Add instance to known_hosts
-    local_action: shell ssh-keyscan {{ ec2.instances[0].public_ip_address }} >> ~/.ssh/known_hosts
+    local_action: shell ssh-keyscan {{ ec2.instances[0].public_ip_address }} >> /etc/ssh/ssh_known_hosts
 
   - name: SSH
     local_action:
