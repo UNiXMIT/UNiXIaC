@@ -1,6 +1,9 @@
 ---
 - hosts: local
   tasks:
+    - name: AWS SSO
+      shell: /home/support/sso.sh
+
   - name: Create AWS EC2 instance
     ec2_instance:
       name: '{{ imageName }}'
