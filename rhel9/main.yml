@@ -1,6 +1,5 @@
 ---
 - hosts: local
-  gather_facts: no
   tasks:
   - name: Create AWS EC2 instance
     ec2_instance:
@@ -57,7 +56,6 @@
       timeout: 120
 
 - hosts: awsEC2
-  gather_facts: no
   become: yes
   tasks:
   - name: Modify OS Config
@@ -65,35 +63,30 @@
         file: system.yml
 
 - hosts: awsEC2
-  gather_facts: no
   become: yes
   tasks: 
   - name: Add Users
     import_tasks: users.yml
 
 - hosts: awsEC2
-  gather_facts: no
   become: yes
   tasks:
   - name: Install Software
     import_tasks: software.yml
 
 - hosts: awsEC2
-  gather_facts: no
   become: yes
   tasks:
   - name: Create Support Files and Directories
     import_tasks: createFilesDir.yml
 
 - hosts: awsEC2
-  gather_facts: no
   become: yes
   tasks:
   - name: Create MOTD
     import_tasks: motd.yml
 
 - hosts: awsEC2
-  gather_facts: no
   become: yes
   tasks:
   - name: Add CRON Jobs
