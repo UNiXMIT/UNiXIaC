@@ -1,17 +1,12 @@
----
-- hosts: all
-  gather_facts: yes
-  become: true
-  tasks:
-  - name: Load TCPtuning.conf at boot
-    cron:
-      name: TCP Tuning
-      special_time: reboot
-      job: "sysctl -p /home/{{ myUsername }}/AcuSupport/etc/TCPtuning.conf"
-  - name: Auto ShutDown
-    cron:
-      name: Auto ShutDown
-      minute: "0"
-      hour: "18"
-      job: "shutdown -h now"
-      disabled: true
+- name: Load TCPtuning.conf at boot
+  cron:
+    name: TCP Tuning
+    special_time: reboot
+    job: "sysctl -p /home/{{ myUsername }}/AcuSupport/etc/TCPtuning.conf"
+- name: Auto ShutDown
+  cron:
+    name: Auto ShutDown
+    minute: "0"
+    hour: "18"
+    job: "shutdown -h now"
+    disabled: true

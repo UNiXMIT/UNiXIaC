@@ -1,0 +1,110 @@
+---
+- hosts: local
+  tasks:
+  - name: Create AWS EC2 instance
+    ec2_instance:
+      name: '{{ imageName }}'
+      image_id: '{{ awsAMI }}'
+      key_name: '{{ keyName }}'
+      network:  
+        assign_public_ip: yes
+        security-group: '{{ securityGroup }}'
+      region: '{{ awsRegion }}'
+      availability_zone: '{{ availabilityZone }}'
+      aws_access_key: '{{ awsAccessKey }}'
+      aws_secret_key: '{{ awsSecretKey }}'
+      session_token: '{{ awsSessionToken }}'
+      instance_type: '{{ instanceType }}'
+      count: '{{ vmCount }}'
+      volumes:
+      - device_name: '{{ deviceName }}'
+        ebs:
+         volume_type: '{{ volumeType }}'
+         volume_size: '{{ volumeSize }}'
+      state: running
+      wait: true
+    register: ec2
+  
+  - name: Wait 10 seconds for public IP
+    pause:
+      seconds: 10
+
+  - name: Add Host to awsEC2 Group 
+    add_host: 
+       hostname: '{{ imageName }}'
+       ansible_host: '{{ ec2.instances[0].public_ip_address }}'
+       ansible_port: 22
+       ansible_user: '{{ ansibleUser }}'
+       ansible_ssh_private_key_file: '{{ keyLocation }}'
+       groups: awsEC2
+  
+  - name: Generate an OpenSSL public key
+    openssl_publickey:
+      path: /tmp/support.pub
+      privatekey_path: '{{ keyLocation }}'
+      format: OpenSSH
+
+  - name: SSH
+    local_action:
+      module: wait_for
+      host: '{{ ec2.instances[0].public_ip_address }}'
+      port: 22
+      delay: 10
+      timeout: 120
+
+- hosts: awsEC2
+  become: yes
+  tasks:
+  - name: Modify OS Config
+    import_tasks: 
+        file: system.yml
+
+- hosts: awsEC2
+  become: yes
+  tasks: 
+  - name: Add Users
+    import_tasks: users.yml
+
+- hosts: awsEC2
+  become: yes
+  tasks:
+  - name: Install Software
+    import_tasks: software.yml
+
+- hosts: awsEC2
+  become: yes
+  # vars: 
+  #   myUsername: support
+  tasks:
+  - name: Create Support Files and Directories
+    import_tasks: createFilesDir.yml
+
+- hosts: awsEC2
+  become: yes
+  tasks:
+  - name: Create MOTD
+    import_tasks: motd.yml
+
+- hosts: awsEC2
+  # vars: 
+  #   myUsername: support
+  become: yes
+  tasks:
+  - name: Add CRON Jobs
+    import_tasks: cron.yml
+
+- hosts: awsEC2
+  gather_facts: no
+  become: yes
+  tasks:
+  - name: Reboot EC2 Instance
+    reboot:
+
+- hosts: local
+  tasks:
+  - name: AWS EC2 Instance Created and Setup
+    debug:
+      msg: 
+      - 'AWS IMAGE  - {{ imageName }}'
+      - 'Public IP  - {{ ec2.instances[0].public_ip_address }}'
+      - 'Private IP - {{ ec2.instances[0].private_ip_address }}'

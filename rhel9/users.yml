@@ -1,16 +1,16 @@
----
-- name: User management
-  hosts: all
-  become: true
-  tasks:
-    - name: Add new user '{{ myUsername }}'
-      user:
-        name: "{{ myUsername }}"
-        password: "{{ myPassword | password_hash('sha512') }}"
-        groups: wheel
-        append: yes
-    - name: Change root password
-      user:
-        name: admin
-        update_password: always
-        password: "{{ myPassword | password_hash('sha512') }}"
+- name: Add new user '{{ myUsername }}'
+  user:
+    name: "{{ myUsername }}"
+    password: "{{ myPassword | password_hash('sha512') }}"
+    groups: wheel
+    append: yes
+- name: Change root password
+  user:
+    name: admin
+    update_password: always
+    password: "{{ myPassword | password_hash('sha512') }}"
+- name: Add Authorized Key for '{{ myUsername }}'
+  authorized_key:
+    user: '{{ myUsername }}'
+    state: present
+    key: "{{ lookup('file', '/tmp/support.pub') }}"

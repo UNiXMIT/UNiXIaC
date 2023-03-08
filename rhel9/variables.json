@@ -1,0 +1,20 @@
+{
+  "myUsername": "support",
+  "myPassword": "myStrongPassword",
+  "ansibleUser": "ec2-user",
+  "imageName": "MTURNER-RHEL9",
+  "awsAMI": "ami-05c96317a6278cfaa",
+  "keyName": "support",
+  "keyLocation": "~/.ssh/support.pem",
+  "securityGroup": "MTURNER",
+  "awsRegion": "eu-west-2",
+  "availabilityZone": "eu-west-2a",
+  "instanceType": "t3.xlarge",
+  "vmCount": 1,
+  "deviceName": "/dev/sda1",
+  "volumeType": "gp3",
+  "volumeSize": 120,
+  "awsAccessKey": "xxxx",
+  "awsSecretKey": "xxxxxx",
+  "awsSessionToken": "xxxxxxxx"
+}

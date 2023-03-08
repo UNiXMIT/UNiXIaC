@@ -1,33 +1,28 @@
----
-- hosts: all
-  gather_facts: yes
-  become: true
-  tasks:
-  - name: Delete original MOTD
-    file:
-      path: /etc/motd
-      state: absent
-  - name: Create new MOTD
-    copy:
-      dest: "/etc/motd"
-      content: |
-        ****************************************************************************************************
+- name: Delete original MOTD
+  file:
+    path: /etc/motd
+    state: absent
+- name: Create new MOTD
+  copy:
+    dest: "/etc/motd"
+    content: |
+      ****************************************************************************************************
 
-            {{ ansible_distribution }} {{ ansible_distribution_version}}
+          {{ ansible_distribution }} {{ ansible_distribution_version}}
 
-            AcuCOBOL
-              Set Environment:
-                . setenv.sh (-h for usage)
+          AcuCOBOL
+            Set Environment:
+              . setenv.sh (-h for usage)
                 
-                startacu.sh (-h for usage)
+              startacu.sh (-h for usage)
 
-            MFCOBOL
-              Set Environment:
-                . setenvmf.sh
+          MFCOBOL
+            Set Environment:
+              . setenvmf.sh
 
-                startmf.sh (-h for usage)
+              startmf.sh (-h for usage)
 
-              Install Options:
-                -skipsafenet -skipautopass -IacceptEULA -ESadminID=support -il=/home/products/esXXpuXX
+            Install Options:
+              -skipsafenet -skipautopass -IacceptEULA -ESadminID=support -il=/home/products/esXXpuXX
 
-        ****************************************************************************************************
+      ****************************************************************************************************
