@@ -55,7 +55,7 @@
     local_action:
       module: known_hosts
       key: "{{ item }}"
-      name: "{{ ec2.instances[0].public_ip_address }}"
+      name: "{{ imageName }}"
     with_items: "{{ ssh_scan.stdout_lines }}"
 
   - name: SSH
