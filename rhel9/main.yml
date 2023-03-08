@@ -11,9 +11,7 @@
         security-group: '{{ securityGroup }}'
       region: '{{ awsRegion }}'
       availability_zone: '{{ availabilityZone }}'
-      aws_access_key: '{{ awsAccessKey }}'
-      aws_secret_key: '{{ awsSecretKey }}'
-      session_token: '{{ awsSessionToken }}'
+      awsProfile: '{{ awsProfile }}'
       instance_type: '{{ instanceType }}'
       count: '{{ vmCount }}'
       volumes:
