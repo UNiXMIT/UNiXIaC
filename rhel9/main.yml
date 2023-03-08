@@ -44,11 +44,11 @@
       privatekey_path: '{{ keyLocation }}'
       format: OpenSSH
 
-  - name: Setup Known Hosts Without Port
+  - name: Setup Known Hosts
     delegate_to: localhost
     known_hosts:
       key: "{{ lookup('pipe', 'ssh-keyscan -trsa ' + ec2.instances[0].public_ip_address) }}"
-      name: "{{ ec2.instances[0].public_ip_address }}"
+      name: "{{ imageName }}"
       state: present
 
   - name: SSH
