@@ -49,8 +49,7 @@
       path: /etc/ssh/ssh_known_hosts
       name: "{{ ec2.instances[0].public_ip_address }}"
       state: present
-      key: "{{ lookup('pipe', 'ssh-keyscan {{ ec2.instances[0].public_ip_address }}') }}"
-      hash_host: true
+      key: "{{ lookup('pipe', ssh-keyscan {{ ec2.instances[0].public_ip_address }}) }}"
 
   - name: SSH
     local_action:
