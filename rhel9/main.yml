@@ -44,8 +44,13 @@
       privatekey_path: '{{ keyLocation }}'
       format: OpenSSH
 
-  - name: Add instance to known_hosts
-    local_action: shell ssh-keyscan {{ ec2.instances[0].public_ip_address }} >> ~/.ssh/known_hosts
+  - name: Ensure ssh host key known
+    delegate_to: localhost
+    lineinfile:
+      dest: ~/.ssh/known_hosts
+      create: yes
+      state: present
+      line: "{{ lookup('pipe', 'ssh-keyscan -trsa -p' + ec2.instances[0].public_ip_address) }}"
 
   - name: SSH
     local_action:
