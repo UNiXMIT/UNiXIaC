@@ -1,7 +1,0 @@
----
-- hosts: all
-  gather_facts: no
-  become: true
-  tasks:
-  - name: Reboot VM
-    reboot:

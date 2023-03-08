@@ -1,7 +1,0 @@
-privateKeyName  = "support"
-privateKeyFile  = "~/.ssh/support.pem"
-corpID          = "MTURNER"
-awsAMI          = "ami-05c96317a6278cfaa"
-username        = "support"
-password        = "myStrongPassword"
-availZone       = "eu-west-2c"
