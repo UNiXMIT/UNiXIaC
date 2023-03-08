@@ -44,6 +44,11 @@
       privatekey_path: '{{ keyLocation }}'
       format: OpenSSH
 
+  - name: Add public keys of all inventory hosts to known_hosts
+    known_hosts: 
+      name: github.com 
+      key: "{{ lookup('file', '/tmp/support.pub') }}"
+
   - name: SSH
     local_action:
       module: wait_for
