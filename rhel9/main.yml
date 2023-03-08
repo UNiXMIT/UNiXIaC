@@ -47,8 +47,8 @@
   - name: Setup Known Hosts Without Port
     delegate_to: localhost
     known_hosts:
-      key: "{{ lookup('pipe', 'ssh-keyscan -trsa ' + inventory_hostname) }}"
-      name: "{{ inventory_hostname }}"
+      key: "{{ lookup('pipe', 'ssh-keyscan -trsa ' + ec2.instances[0].public_ip_address) }}"
+      name: "{{ ec2.instances[0].public_ip_address }}"
       state: present
 
   - name: SSH
