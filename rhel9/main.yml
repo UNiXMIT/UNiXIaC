@@ -44,19 +44,12 @@
       privatekey_path: '{{ keyLocation }}'
       format: OpenSSH
 
-  - name: Scan for SSH host keys
-    local_action:
-      module: shell
-      cmd: 'ssh-keyscan {{ ec2.instances[0].public_ip_address }} 2>/dev/null'
-    changed_when: False
-    register: ssh_scan
-
-  - name: Update known_hosts
-    local_action:
-      module: known_hosts
-      key: "{{ item }}"
-      name: "{{ imageName }}"
-    with_items: "{{ ssh_scan.stdout_lines }}"
+  - name: Setup Known Hosts Without Port
+    delegate_to: localhost
+    known_hosts:
+      key: "{{ lookup('pipe', 'ssh-keyscan -trsa ' + inventory_hostname) }}"
+      name: "{{ inventory_hostname }}"
+      state: present
 
   - name: SSH
     local_action:
