@@ -27,6 +27,7 @@
   - name: Destroy AWS EC2 instance
     ec2_instance:
       state: absent
+      aws_profile: '{{ awsProfile }}'
       region: '{{ awsRegion }}'
       filters:
         name: '{{ imageName }}'
