@@ -110,7 +110,7 @@
     when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
 
 - hosts: awsEC2
-  gather_facts: no
+  gather_facts: yes
   become: yes
   tasks:
   - name: Create MOTD
