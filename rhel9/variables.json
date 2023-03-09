@@ -14,5 +14,6 @@
   "deviceName": "/dev/sda1",
   "volumeType": "gp3",
   "volumeSize": 120,
-  "awsProfile": "848105473048_Fed_COBOL2_Compute"
+  "awsProfile": "848105473048_Fed_COBOL2_Compute",
+  "awsState": "create"
 }

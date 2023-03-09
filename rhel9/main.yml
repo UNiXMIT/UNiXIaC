@@ -1,9 +1,6 @@
 ---
 - hosts: local
   tasks:
-  - name: AWS SSO
-    shell: /home/support/sso.sh
-
   - name: Create AWS EC2 instance
     ec2_instance:
       name: '{{ imageName }}'
@@ -25,10 +22,24 @@
       state: running
       wait: true
     register: ec2
+    when: awsState == "create"
+
+  - pause:
+      prompt: "Type 'yes' to destroy all instances named '{{ imageName }}' "
+    when: awsState == "destroy"
+    register: awsDestroy
+
+  - name: Destroy AWS EC2 instance
+    ec2_instance:
+      state: absent
+      filters:
+        name: '{{ imageName }}'
+    when: awsState == "destroy" and awsDestroy == "yes"
   
   - name: Wait 10 seconds for public IP
     pause:
       seconds: 10
+    when: awsState == "create"
 
   - name: Add Host to awsEC2 Group 
     add_host: 
@@ -38,6 +49,7 @@
        ansible_user: '{{ ansibleUser }}'
        ansible_ssh_private_key_file: '{{ keyLocation }}'
        groups: awsEC2
+    when: awsState == "create"
 
   - name: SSH
     local_action:
@@ -46,6 +58,7 @@
       port: 22
       delay: 10
       timeout: 120
+    when: awsState == "create"
 
 - hosts: awsEC2
   become: yes
@@ -53,36 +66,42 @@
   - name: Modify OS Config
     import_tasks: 
         file: system.yml
+    when: awsState == "create"
 
 - hosts: awsEC2
   become: yes
   tasks: 
   - name: Add Users
     import_tasks: users.yml
+    when: awsState == "create"
 
 - hosts: awsEC2
   become: yes
   tasks:
   - name: Install Software
     import_tasks: software.yml
+    when: awsState == "create"
 
 - hosts: awsEC2
   become: yes
   tasks:
   - name: Create Support Files and Directories
     import_tasks: createFilesDir.yml
+    when: awsState == "create"
 
 - hosts: awsEC2
   become: yes
   tasks:
   - name: Create MOTD
     import_tasks: motd.yml
+    when: awsState == "create"
 
 - hosts: awsEC2
   become: yes
   tasks:
   - name: Add CRON Jobs
     import_tasks: cron.yml
+    when: awsState == "create"
 
 - hosts: awsEC2
   gather_facts: no
@@ -90,6 +109,7 @@
   tasks:
   - name: Reboot EC2 Instance
     reboot:
+    when: awsState == "create"
 
 - hosts: local
   tasks:
@@ -99,3 +119,4 @@
       - 'AWS IMAGE  - {{ imageName }}'
       - 'Public IP  - {{ ec2.instances[0].public_ip_address }}'
       - 'Private IP - {{ ec2.instances[0].private_ip_address }}'
+    when: awsState == "create"
