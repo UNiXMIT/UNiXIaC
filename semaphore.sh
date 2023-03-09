@@ -1,4 +1,7 @@
 #!/bin/bash
+# Install Intructions
+# sudo (apt/yum/zypper) install -y curl podman
+# sudo curl -s https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/semaphore.sh | bash
 podman pull rockylinux:9
 podman run -itd --name semaphore -p 8181:3000 rockylinux:9
 podman exec -it semaphore bash -c "dnf epel-release -y"
