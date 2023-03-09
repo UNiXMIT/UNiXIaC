@@ -14,5 +14,5 @@ podman cp pfsso*.zip semaphore:/home/semaphore
 podman cp support.pem semaphore:/home/semaphore/.ssh
 podman exec -it semaphore bash -c "cd /home/semaphore && unzip pfsso*.zip"
 podman exec -it semaphore bash -c "cd /home/semaphore/pfsso-0.9.4 && python3 -m pip install --upgrade ."
-podman exec -it semaphore bash -c "wget -P /usr/bin https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/sso.sh"
-podman exec -it semaphore bash -c "chmod +x /usr/bin/sso.sh"
+podman exec -it semaphore bash -c "wget -P /home/semaphore https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/sso.sh"
+podman exec -it semaphore bash -c "chmod +x /home/semaphore/sso.sh"
