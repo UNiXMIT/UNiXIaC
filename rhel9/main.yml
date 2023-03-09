@@ -1,6 +1,5 @@
 ---
 - hosts: local
-  gather_facts: no
   tasks:
   - name: Create AWS EC2 instance
     ec2_instance:
