@@ -27,6 +27,7 @@
   - name: Destroy AWS EC2 instance
     ec2_instance:
       state: absent
+      region: '{{ awsRegion }}'
       filters:
         name: '{{ imageName }}'
     when: awsState == "destroy" or awsState == 'Destroy' or awsState == 'DESTROY'
