@@ -26,11 +26,23 @@
 
   - name: Destroy AWS EC2 instance
     ec2_instance:
-      state: absent
-      aws_profile: '{{ awsProfile }}'
+      name: '{{ imageName }}'
+      image_id: '{{ awsAMI }}'
+      key_name: '{{ keyName }}'
+      network:  
+        assign_public_ip: yes
+        security-group: '{{ securityGroup }}'
       region: '{{ awsRegion }}'
-      filters:
-        name: '{{ imageName }}'
+      availability_zone: '{{ availabilityZone }}'
+      aws_profile: '{{ awsProfile }}'
+      instance_type: '{{ instanceType }}'
+      count: '{{ vmCount }}'
+      volumes:
+      - device_name: '{{ deviceName }}'
+        ebs:
+         volume_type: '{{ volumeType }}'
+         volume_size: '{{ volumeSize }}'
+      state: absent
     when: awsState == "destroy" or awsState == 'Destroy' or awsState == 'DESTROY'
   
   - name: Wait 10 seconds for public IP
