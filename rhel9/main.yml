@@ -60,6 +60,12 @@
        ansible_ssh_private_key_file: '{{ keyLocation }}'
        groups: awsEC2
     when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+  
+  - name: Generate an OpenSSL public key
+    openssl_publickey:
+      path: /tmp/support.pub
+      privatekey_path: '{{ keyLocation }}'
+      format: OpenSSH
 
   - name: SSH
     local_action:
