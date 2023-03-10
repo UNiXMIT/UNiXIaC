@@ -49,9 +49,9 @@
       state: absent
     when: awsState == "destroy" or awsState == 'Destroy' or awsState == 'DESTROY'
   
-  - name: Wait 10 seconds for public IP
+  - name: Wait 3 Minutes for public IP and AAP Setup
     pause:
-      seconds: 10
+      minutes: 3
     when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
 
   - name: Add Host to awsEC2 Group 
@@ -59,7 +59,6 @@
        hostname: '{{ imageName }}'
        ansible_host: '{{ ec2.instances[0].public_ip_address }}'
        ansible_user: '{{ ansibleUser }}'
-       ansible_ssh_private_key_file: '{{ keyLocation }}'
        ansible_connection: winrm
        ansible_winrm_server_cert_validation: ignore
        groups: awsEC2
