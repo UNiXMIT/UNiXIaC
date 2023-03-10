@@ -56,7 +56,7 @@
     add_host: 
        hostname: '{{ imageName }}'
        ansible_host: '{{ ec2.instances[0].public_ip_address }}'
-       ansible_user: '{{ ansibleUser }}'
+       ansible_user: 'administrator'
        ansible_connection: winrm
        ansible_winrm_transport: basic
        ansible_winrm_server_cert_validation: ignore
@@ -66,7 +66,6 @@
 
 - hosts: awsEC2
   gather_facts: no
-  become: yes
   tasks:
   - name: Modify OS Config
     import_tasks: 
