@@ -5,7 +5,8 @@
     password_never_expires: true
     state: present
     groups:
-      - users, administrators 
+      - Users
+      - Administrators 
     groups_action: add
 - name: "Disable Windows Firewall"
   win_firewall:
