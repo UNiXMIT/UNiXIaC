@@ -58,9 +58,10 @@
     add_host: 
        hostname: '{{ imageName }}'
        ansible_host: '{{ ec2.instances[0].public_ip_address }}'
-       ansible_port: 22
        ansible_user: '{{ ansibleUser }}'
        ansible_ssh_private_key_file: '{{ keyLocation }}'
+       ansible_connection: winrm
+       ansible_winrm_server_cert_validation: ignore
        groups: awsEC2
     when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
 

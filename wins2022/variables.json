@@ -15,7 +15,5 @@
   "volumeType": "gp3",
   "volumeSize": 120,
   "awsProfile": "848105473048_Fed_COBOL2_Compute",
-  "ansible_connection": "ssh",
-  "ansible_shell_type": "cmd",
   "awsState": "create"
 }
