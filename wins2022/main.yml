@@ -1,0 +1,73 @@
+---
+- hosts: local
+  gather_facts: no
+  tasks:
+  - name: Create AWS EC2 instance
+    ec2_instance:
+      name: '{{ imageName }}'
+      image_id: '{{ awsAMI }}'
+      key_name: '{{ keyName }}'
+      network:  
+        assign_public_ip: yes
+        security-group: '{{ securityGroup }}'
+      region: '{{ awsRegion }}'
+      availability_zone: '{{ availabilityZone }}'
+      aws_profile: '{{ awsProfile }}'
+      instance_type: '{{ instanceType }}'
+      count: '{{ vmCount }}'
+      volumes:
+      - device_name: '{{ deviceName }}'
+        ebs:
+         volume_type: '{{ volumeType }}'
+         volume_size: '{{ volumeSize }}'
+      state: running
+      wait: true
+    register: ec2
+    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+
+  - name: Destroy AWS EC2 instance
+    ec2_instance:
+      name: '{{ imageName }}'
+      image_id: '{{ awsAMI }}'
+      key_name: '{{ keyName }}'
+      network:  
+        assign_public_ip: yes
+        security-group: '{{ securityGroup }}'
+      region: '{{ awsRegion }}'
+      availability_zone: '{{ availabilityZone }}'
+      aws_profile: '{{ awsProfile }}'
+      instance_type: '{{ instanceType }}'
+      count: '{{ vmCount }}'
+      volumes:
+      - device_name: '{{ deviceName }}'
+        ebs:
+         volume_type: '{{ volumeType }}'
+         volume_size: '{{ volumeSize }}'
+      state: absent
+    when: awsState == "destroy" or awsState == 'Destroy' or awsState == 'DESTROY'
+  
+  - name: Wait 10 seconds for public IP
+    pause:
+      seconds: 10
+    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+
+  - name: Add Host to awsEC2 Group 
+    add_host: 
+       hostname: '{{ imageName }}'
+       ansible_host: '{{ ec2.instances[0].public_ip_address }}'
+       ansible_port: 22
+       ansible_user: '{{ ansibleUser }}'
+       ansible_ssh_private_key_file: '{{ keyLocation }}'
+       groups: awsEC2
+    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+
+- hosts: local
+  gather_facts: no
+  tasks:
+  - name: AWS EC2 Instance Created and Setup
+    debug:
+      msg: 
+      - 'AWS IMAGE  - {{ imageName }}'
+      - 'Public IP  - {{ ec2.instances[0].public_ip_address }}'
+      - 'Private IP - {{ ec2.instances[0].private_ip_address }}'
+    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
