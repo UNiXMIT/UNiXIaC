@@ -6,7 +6,7 @@
     ec2_instance:
       tower_callback:
         windows: true
-        # set_password: '{{ myPassword }}'
+        set_password: '{{ myPassword }}'
       name: '{{ imageName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
