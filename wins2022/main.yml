@@ -22,7 +22,7 @@
          volume_size: '{{ volumeSize }}'
       state: running
       wait: true
-      user_data: {{lookup('file', 'userData.txt') }}"
+      user_data: "{{lookup('file', 'userData.txt') }}"
     register: ec2
     when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
 
