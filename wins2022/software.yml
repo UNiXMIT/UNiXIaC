@@ -7,20 +7,20 @@
     - vcredist140
     - 7zip
     - winscp
-    - dotnet
-    - windows-sdk-10.1
-    - microsoft-build-tools
-    - office365business
-    - microsoft-windows-terminal
-    - revo-uninstaller
-    - lockhunter
-    - adobereader
-    - insomnia-rest-api-client
-    - linkshellextension
-    - dotpeek
-    - tinytask
-    - speedtest
-    - clumsy
+    # - dotnet
+    # - windows-sdk-10.1
+    # - microsoft-build-tools
+    # - office365business
+    # - microsoft-windows-terminal
+    # - revo-uninstaller
+    # - lockhunter
+    # - adobereader
+    # - insomnia-rest-api-client
+    # - linkshellextension
+    # - dotpeek
+    # - tinytask
+    # - speedtest
+    # - clumsy
     state: present
 - name: Install VSCode
   win_chocolatey:
