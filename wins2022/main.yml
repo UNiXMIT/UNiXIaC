@@ -49,9 +49,9 @@
       state: absent
     when: awsState == "destroy" or awsState == 'Destroy' or awsState == 'DESTROY'
   
-  - name: Wait 3 Minutes for public IP and AAP Setup
+  - name: Wait 30 seconds for public IP and AAP Setup
     pause:
-      minutes: 3
+      seconds: 30
     when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
 
   - name: Add Host to awsEC2 Group 
