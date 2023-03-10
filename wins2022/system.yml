@@ -8,7 +8,7 @@
       - Users
       - Administrators 
     groups_action: add
-- name: "Disable Windows Firewall"
+- name: Disable Windows Firewall
   win_firewall:
     state: disabled
     profiles:
