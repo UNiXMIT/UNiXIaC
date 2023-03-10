@@ -59,7 +59,7 @@
        hostname: '{{ imageName }}'
        ansible_host: '{{ ec2.instances[0].public_ip_address }}'
        ansible_user: administrator
-       ansible_pass: '{{ myPassword }}'
+       ansible_password: '{{ myPassword }}'
        ansible_connection: winrm
        ansible_winrm_transport: basic
        ansible_winrm_server_cert_validation: ignore
