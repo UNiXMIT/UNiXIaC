@@ -1,0 +1,72 @@
+- name: Create Admin User '{{ myUsername }}'
+  ansible.windows.win_user:
+    name: '{{ myUsername }}'
+    password: '{{ myPassword }}'
+    password_never_expires: true
+    state: present
+    groups:
+      - users, administrators 
+    groups_action: add
+- name: "Disable Windows Firewall"
+  win_firewall:
+    state: disabled
+    profiles:
+    - Domain
+    - Private
+    - Public
+- name: Install OpenSSH Service
+  win_chocolatey:
+    name: openssh
+    package_params: /SSHServerFeature
+    state: present
+- name: Disable UAC
+  win_regedit:
+    path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    name: EnableLUA
+    data: 0
+    type: dword
+- name: Show File Extensions
+  win_regedit:
+    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    name: HideFilesExt 
+    data: 0
+    type: dword
+- name: ExtractMSI
+  win_regedit:
+    path: HKCR:\Msi.Package\shell\extractMSI\command
+    data: 'msiexec /a \"%1\" /qb TARGETDIR=\"%1 Contents\"'
+    type: string
+- name: AcuSilent MSI Install Option 1
+  win_regedit:
+    path: HKCR:\Msi.Package\shell\runas
+    data: 'AcuSilent'
+    type: string
+- name: AcuSilent MSI Install Option 2
+  win_regedit:
+    path: HKCR:\Msi.Package\shell\runas\command
+    data: 'msiexec /i \"%1\" ADDLOCAL=ALL WINDOWSVERSION=PostWindows7 /qb'
+    type: string
+- name: Defer Feature Updates
+  win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+    name: DeferFeatureUpdates 
+    data: 1
+    type: dword
+- name: Defer Feature Updates for 90 Days
+  win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+    name: DeferFeatureUpdatesPeriodInDays  
+    data: 90
+    type: dword
+- name: Defer Quality Updates
+  win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+    name: DeferQualityUpdates  
+    data: 1
+    type: dword
+- name: Defer Quality Updates for 30 Days
+  win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate
+    name: DeferQualityUpdatesPeriodInDays  
+    data: 1
+    type: dword

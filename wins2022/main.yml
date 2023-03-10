@@ -4,6 +4,9 @@
   tasks:
   - name: Create AWS EC2 instance
     ec2_instance:
+      aap_callback:
+        windows: true
+        set_password: '{{ myPassword }}'
       name: '{{ imageName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
@@ -59,6 +62,14 @@
        ansible_user: '{{ ansibleUser }}'
        ansible_ssh_private_key_file: '{{ keyLocation }}'
        groups: awsEC2
+    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+
+- hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Modify OS Config
+    import_tasks: 
+        file: system.yml
     when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
 
 - hosts: local
