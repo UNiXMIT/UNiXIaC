@@ -5,35 +5,4 @@ $urla = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/script
 $file = "$env:temp\ConfigureRemotingForAnsible.ps1"
 (New-Object -TypeName System.Net.WebClient).DownloadFile($urla, $file)
 powershell.exe -ExecutionPolicy ByPass -File $file
-
-# Create user and add them to Administrators and Remote Desktop Users groups
-New-LocalUser ${myUsername} -Password (ConvertTo-SecureString -AsPlainText ${myPassword} -Force) -FullName ${myUsername}
-Add-LocalGroupMember -Group "Administrators" -Member ${myUsername} -ErrorAction stop
-Add-LocalGroupMember -Group "Remote Desktop Users" -Member ${myUsername} -ErrorAction stop
-
-# The following steps are outlined in the Ansible documentation.
-# https://docs.ansible.com/ansible/latest/user_guide/windows_setup.html
-
-# Upgrade PowerShell & .NET framework
-$urlps = "https://raw.githubusercontent.com/jborean93/ansible-windows/master/scripts/Upgrade-PowerShell.ps1"
-$fileps = "$env:temp\Upgrade-PowerShell.ps1"
-(New-Object -TypeName System.Net.WebClient).DownloadFile($urlps, $fileps)
-Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force
-# Version can be 3.0, 4.0 or 5.1
-&$fileps -Version 5.1 -Username ${myUsername} -Password (ConvertTo-SecureString -AsPlainText ${var.password} -Force)
-
-# Optional but good security practice, you can set the execution policy back to the default.
-# ('Restricted' for Windows clients, or 'RemoteSigned' for Windows servers)
-# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force
-
-# Remove auto-logon and set the execution policy back to the default
-$reg_winlogon_path = "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Winlogon"
-Set-ItemProperty -Path $reg_winlogon_path -Name AutoAdminLogon -Value 0
-Remove-ItemProperty -Path $reg_winlogon_path -Name DefaultUserName -ErrorAction SilentlyContinue
-Remove-ItemProperty -Path $reg_winlogon_path -Name DefaultPassword -ErrorAction SilentlyContinue
-
-# Configure WinRM service so Ansible can connect
-# Setup WinRM Listener
-winrm quickconfig -transport:https
-
 </powershell>
