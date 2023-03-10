@@ -60,7 +60,9 @@
        ansible_host: '{{ ec2.instances[0].public_ip_address }}'
        ansible_user: '{{ ansibleUser }}'
        ansible_connection: winrm
+       ansible_winrm_transport: basic
        ansible_winrm_server_cert_validation: ignore
+       ansible_port: 5986
        groups: awsEC2
     when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
 
