@@ -1,0 +1,33 @@
+- name: Package Installation
+  win_chocolatey:
+    name: 
+    - googlechrome
+    - procmon
+    - procexp
+    - vcredist140
+    - 7zip
+    - winscp
+    - dotnet
+    - windows-sdk-10.1
+    - microsoft-build-tools
+    - office365business
+    - microsoft-windows-terminal
+    - revo-uninstaller
+    - lockhunter
+    - adobereader
+    - insomnia-rest-api-client
+    - linkshellextension
+    - dotpeek
+    - tinytask
+    - speedtest
+    - clumsy
+    state: present
+- name: Install VSCode
+  win_chocolatey:
+    name: vscode
+    package_params: /NoDesktopIcon
+    state: present
+- name: Install Visual Studio 2022
+  win_chocolatey:
+    name: visualstudio2022professional
+    install_args: --wait --quiet --add Microsoft.Net.Component.4.5.TargetingPack --add Microsoft.Net.Component.4.5.2.TargetingPack --add Microsoft.VisualStudio.Component.Debugger.JustInTime --add Microsoft.VisualStudio.Component.GraphDocument --add Microsoft.VisualStudio.Component.NuGet --add Microsoft.VisualStudio.Component.DockerTools --add Microsoft.VisualStudio.Component.VisualStudioData --add Microsoft.VisualStudio.Component.Web --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.Azure --add Microsoft.VisualStudio.Component.Wcf.Tooling --add Microsoft.VisualStudio.Component.SQL.SSDT --add Microsoft.VisualStudio.Workload.NetCoreTools --downloadThenInstall"

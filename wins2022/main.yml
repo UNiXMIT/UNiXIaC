@@ -75,6 +75,14 @@
         file: system.yml
     when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
 
+- hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Install Software
+    import_tasks: 
+        file: software.yml
+    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+
 - hosts: local
   gather_facts: no
   tasks:
