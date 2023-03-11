@@ -56,8 +56,8 @@
 
   - name: Add Host to awsEC2 Group 
     add_host: 
-       hostname: '{{ imageName }}'
-       ansible_host: '{{ ec2.instances[0].public_ip_address }}'
+      #  hostname: '{{ imageName }}'
+       hostname: '{{ item.public_ip_address }}'
        ansible_user: '{{ ansibleUser }}'
        ansible_password: '{{ myPassword }}'
        ansible_connection: winrm
@@ -65,6 +65,7 @@
        ansible_winrm_server_cert_validation: ignore
        ansible_port: 5986
        groups: awsEC2
+    loop: '{{ ec2.instances }}'
     when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
 
 - hosts: awsEC2
@@ -90,6 +91,7 @@
     debug:
       msg: 
       - 'AWS IMAGE  - {{ imageName }}'
-      - 'Public IP  - {{ ec2.instances[0].public_ip_address }}'
-      - 'Private IP - {{ ec2.instances[0].private_ip_address }}'
+      - 'Public IP  - {{ item.public_ip_address }}'
+      - 'Private IP - {{ item.private_ip_address }}'
+    loop: '{{ ec2.instances }}'
     when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
