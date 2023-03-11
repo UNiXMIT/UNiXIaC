@@ -90,7 +90,7 @@
   - name: AWS EC2 Instance Created and Setup
     debug:
       msg: 
-      - 'AWS IMAGE  - {{ imageName }}'
+      - 'AWS ID     - {{ item.instance_id }}'
       - 'Public IP  - {{ item.public_ip_address }}'
       - 'Private IP - {{ item.private_ip_address }}'
     loop: '{{ ec2.instances }}'
