@@ -53,12 +53,12 @@
 
   - name: Add Host to awsEC2 Group 
     add_host: 
-       hostname: '{{ imageName }}'
-       ansible_host: '{{ ec2.instances[0].public_ip_address }}'
+       hostname: '{{ item.public_ip_address }}'
        ansible_port: 22
        ansible_user: '{{ ansibleUser }}'
        ansible_ssh_private_key_file: '{{ keyLocation }}'
        groups: awsEC2
+    loop: '{{ ec2.instances }}'
     when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
   
   - name: Generate an OpenSSL public key
@@ -70,10 +70,11 @@
   - name: SSH
     local_action:
       module: wait_for
-      host: '{{ ec2.instances[0].public_ip_address }}'
+      host: '{{ item.public_ip_address }}'
       port: 22
       delay: 10
       timeout: 120
+    loop: '{{ ec2.instances }}'
     when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
 
 - hosts: awsEC2
@@ -139,7 +140,8 @@
   - name: AWS EC2 Instance Created and Setup
     debug:
       msg: 
-      - 'AWS IMAGE  - {{ imageName }}'
-      - 'Public IP  - {{ ec2.instances[0].public_ip_address }}'
-      - 'Private IP - {{ ec2.instances[0].private_ip_address }}'
+      - 'AWS ID     - {{ item.instance_id }}'
+      - 'Public IP  - {{ item.public_ip_address }}'
+      - 'Private IP - {{ item.private_ip_address }}'
+    loop: '{{ ec2.instances }}'
     when: awsState == "create" or awsState == "Create" or awsState == "CREATE"

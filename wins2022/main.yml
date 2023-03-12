@@ -56,7 +56,6 @@
 
   - name: Add Host to awsEC2 Group 
     add_host: 
-      #  hostname: '{{ imageName }}'
        hostname: '{{ item.public_ip_address }}'
        ansible_user: '{{ ansibleUser }}'
        ansible_password: '{{ myPassword }}'
@@ -82,6 +81,13 @@
   - name: Install Software
     import_tasks: 
         file: software.yml
+    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+
+- hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Reboot EC2 Instance
+    win_reboot:
     when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
 
 - hosts: local
