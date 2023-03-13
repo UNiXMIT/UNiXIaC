@@ -85,3 +85,4 @@
     password: '{{ myPassword }}'
     run_level: highest
     state: present
+    enabled: no
