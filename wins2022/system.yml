@@ -81,7 +81,7 @@
     triggers:
     - type: daily
       start_boundary: '2023-01-01T18:00:00'
-    username: '{{ administrator }}'
+    username: '{{ ansibleUser }}'
     password: '{{ myPassword }}'
     run_level: highest
     state: present
