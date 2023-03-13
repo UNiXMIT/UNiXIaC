@@ -1,0 +1,10 @@
+- name: Create Admin User '{{ myUsername }}'
+  ansible.windows.win_user:
+    name: '{{ myUsername }}'
+    password: '{{ myPassword }}'
+    password_never_expires: true
+    state: present
+    groups:
+      - Users
+      - Administrators 
+    groups_action: add

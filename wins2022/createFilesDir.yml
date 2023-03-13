@@ -1,0 +1,172 @@
+- name: Create temp
+  win_file:
+    path: C:\temp
+    state: directory
+
+- name: Everyone permissions on temp
+  win_acl:
+    user: Everyone
+    path: C:\temp
+    type: allow
+    rights: FullControl
+
+- name: Create etc
+  win_file:
+    path: C:\etc
+    state: directory
+
+- name: Everyone permissions on etc
+  win_acl:
+    user: Everyone
+    path: C:\etc
+    type: allow
+    rights: FullControl
+
+- name: Create AcuSupport
+  win_file:
+    path: C:\AcuSupport
+    state: directory
+
+- name: Everyone permissions on AcuSupport
+  win_acl:
+    user: Everyone
+    path: C:\AcuSupport
+    type: allow
+    rights: FullControl
+
+- name: Create AcuResources
+  win_file:
+    path: C:\AcuResources
+    state: directory
+
+- name: Everyone permissions on AcuResources
+  win_acl:
+    user: Everyone
+    path: C:\AcuResources
+    type: allow
+    rights: FullControl
+
+- name: Create AcuDataFiles
+  win_file:
+    path: C:\AcuDataFiles
+    state: directory
+
+- name: Everyone permissions on AcuDataFiles
+  win_acl:
+    user: Everyone
+    path: C:\AcuDataFiles
+    type: allow
+    rights: FullControl
+
+- name: Create AcuSamples
+  win_file:
+    path: C:\AcuSamples
+    state: directory
+
+- name: Everyone permissions on AcuSamples
+  win_acl:
+    user: Everyone
+    path: C:\AcuSamples
+    type: allow
+    rights: FullControl
+
+- name: Create AcuScripts
+  win_file:
+    path: C:\AcuScripts
+    state: directory
+
+- name: Everyone permissions on AcuScripts
+  win_acl:
+    user: Everyone
+    path: C:\AcuScripts
+    type: allow
+    rights: FullControl
+
+- name: Create .vscode
+  win_file:
+    path: C:\AcuScripts\.vscode
+    state: directory
+
+- name: Everyone permissions on .vscode
+  win_acl:
+    user: Everyone
+    path: C:\AcuScripts\.vscode
+    type: allow
+    rights: FullControl
+
+- name: Create AcuLogs
+  win_file:
+    path: C:\AcuLogs
+    state: directory
+
+- name: Everyone permissions on AcuLogs
+  win_acl:
+    user: Everyone
+    path: C:\AcuLogs
+    type: allow
+    rights: FullControl
+
+- name: Set AcuScripts on PATH
+  win_path:
+    name: PATH
+    elements: C:\AcuScripts
+
+- name: Download setenv.cmd
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/AcuScripts/setenv.cmd
+    dest: C:\AcuScripts\setenv.cmd
+
+- name: Download settings.json
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/AcuScripts/vscode/settings.json
+    dest: C:\AcuScripts\.vscode\settings.json
+  
+- name: Download tasks.json
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/AcuScripts/vscode/tasks.json
+    dest: C:\AcuScripts\.vscode\tasks.json
+
+- name: Download AcuThin-AutoUpdate.cfg
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/AcuThin-AutoUpdate.cfg
+    dest: C:\etc\AcuThin-AutoUpdate.cfg
+
+- name: Download a_srvcfg
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/a_srvcfg
+    dest: C:\etc\a_srvcfg
+
+- name: Download acurcl.cfg
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/acurcl.cfg
+    dest: C:\etc\acurcl.cfg
+
+- name: Download acurcl.ini
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/acurcl.ini
+    dest: C:\etc\acurcl.ini
+
+- name: Download boomerang.cfg
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/boomerang.cfg
+    dest: C:\etc\boomerang.cfg
+
+- name: Download cblconfi
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/cblconfi
+    dest: C:\etc\cblconfi
+
+- name: Download fillCombo.js
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/fillCombo.js
+    dest: C:\etc\fillCombo.js
+
+- name: Download gateway.conf
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/gateway.conf
+    dest: C:\etc\gateway.conf
+
+- name: Download gateway.toml
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/gateway.toml
+    dest: C:\etc\gateway.toml

@@ -78,9 +78,25 @@
 - hosts: awsEC2
   gather_facts: no
   tasks:
+  - name: Add Users
+    import_tasks: 
+        file: users.yml
+    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+
+- hosts: awsEC2
+  gather_facts: no
+  tasks:
   - name: Install Software
     import_tasks: 
         file: software.yml
+    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+
+- hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Create Support Files and Directories
+    import_tasks: 
+        file: createFilesDir.yml
     when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
 
 - hosts: awsEC2
