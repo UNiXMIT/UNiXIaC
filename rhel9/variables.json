@@ -1,6 +1,6 @@
 {
   "myUsername": "support",
-  "myPassword": "myStrongPassword",
+  "myPassword": "strongPassword",
   "ansibleUser": "ec2-user",
   "imageName": "MTURNER-RHEL9",
   "awsAMI": "ami-05c96317a6278cfaa",

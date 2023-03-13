@@ -1,35 +1,21 @@
 # UNiXIaC
+## Install Intructions
+```
+sudo (apt/yum/zypper) install -y curl podman  
+curl -s https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/semaphore.sh | bash  
+```
+**NOTE:** pfsso*.zip and support.pem must located be in the current working directory before executing semaphore.sh.  
 
-- [Prerequisites](#prerequisites)
-- [Instances](#instances)
+## SSO
+Trigger the SSO process using:
+```
+podman exec -it semaphore bash -c "/root/sso.sh"
+```
+Credentials will last for 1 hour.  
 
-## Prerequisites
-### Python3 and pip
-```
-sudo dnf install python3 python3-pip -y  
-```
-### PFSSO 
-```
-python3 -m pip install --upgrade .
-```
-https://github.houston.softwaregrp.net/HPE-SW-SaaS/pfsso-python  
+## Ansible Semaphore - https://www.ansible-semaphore.com
 
-### Ansible   
+You can access the Semaphore Web UI with:
 ```
-sudo dnf install ansible -y  
-python3 -m pip install boto3  
+http://ServerIP:8181  
 ```
-
-### Support PEM 
-``` 
-sudo chmod 600 ~/.ssh/support.pem  
-```
-
-### Scripts Executable 
-```
-sudo chmod +x *.sh
-```
-
-## Instances
-- Linux
-  - RHEL 9

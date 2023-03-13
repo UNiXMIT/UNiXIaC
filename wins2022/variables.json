@@ -1,6 +1,6 @@
 {
   "myUsername": "support",
-  "myPassword": "myStrongPassword",
+  "myPassword": "strongPassword",
   "ansibleUser": "administrator",
   "imageName": "MTURNER-WINS2022",
   "awsAMI": "ami-01e91a8e71e619d87",
