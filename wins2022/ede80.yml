@@ -1,0 +1,9 @@
+- name: Copy EDE 8.0 Installer to EC2 Instance
+  win_copy:
+    src: /products/ede_80.exe
+    dest: C:\temp\
+
+- name: Install EDE 8.0
+  win_package:
+    path: C:\temp\ede_80.exe
+    state: present

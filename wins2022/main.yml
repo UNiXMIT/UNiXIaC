@@ -98,6 +98,15 @@
     import_tasks: 
         file: vs2022.yml
     tags: vs2022
+    register: vs2022
+
+- hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Install VSCode + Extensions
+    import_tasks: 
+        file: vscode.yml
+    tags: default
 
 - hosts: awsEC2
   gather_facts: no
@@ -106,6 +115,23 @@
     import_tasks: 
         file: createFilesDir.yml
     tags: default
+
+- hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Install EDVS2022 8.0
+    import_tasks: 
+        file: edvs2022_80.yml
+    tags: edvs2022_80
+    when: vs2022 is changed
+
+- hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Install EDE 8.0
+    import_tasks: 
+        file: ede80.yml
+    tags: ede80
 
 - hosts: awsEC2
   gather_facts: no

@@ -22,9 +22,3 @@
     # - speedtest
     # - clumsy
     state: present
-
-- name: Install VSCode
-  win_chocolatey:
-    name: vscode
-    package_params: /NoDesktopIcon
-    state: present

@@ -1,0 +1,27 @@
+- name: Install VSCode
+  win_chocolatey:
+    name: vscode
+    package_params: /NoDesktopIcon
+    state: present
+
+- name: VSCode One Dark Pro Theme Extension
+  win_command:
+    cmd: '"C:\Program Files\Microsoft VS Code\bin\code" --install-extension zhuangtongfa.material-theme'
+
+- name: VSCode COBOL Extension
+  win_command:
+    cmd: '"C:\Program Files\Microsoft VS Code\bin\code" --install-extension bitlang.cobol'
+
+- name: VSCode Micro Focus Enterprise Extension
+  win_command:
+    cmd: '"C:\Program Files\Microsoft VS Code\bin\code" --install-extension micro-focus-amc.mfenterprise'
+
+- name: Download VSCode Settings 
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/settings.json
+    dest: 'C:\Users\{{ myUsername }}\AppData\Roaming\Code\User\settings.json'
+
+- name: Download VSCode KeyBindings
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/keybindings.json
+    dest: 'C:\Users\{{ myUsername }}\AppData\Roaming\Code\User\keybindings.json'

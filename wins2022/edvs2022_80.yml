@@ -1,0 +1,9 @@
+- name: Copy EDVS2022 8.0 Installer to EC2 Instance
+  win_copy:
+    src: /products/edvs2022_80.exe
+    dest: C:\temp\
+
+- name: Install EDVS2022 8.0
+  win_package:
+    path: C:\temp\edvs2022_80.exe
+    state: present
