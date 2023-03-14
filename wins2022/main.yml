@@ -26,7 +26,7 @@
       state: running
       wait: true
     register: ec2
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
 
   - name: Destroy AWS EC2 instance
     ec2_instance:
@@ -47,12 +47,12 @@
          volume_type: '{{ volumeType }}'
          volume_size: '{{ volumeSize }}'
       state: absent
-    when: awsState == "destroy" or awsState == 'Destroy' or awsState == 'DESTROY'
+      tags: destroy
   
   - name: Wait 120 seconds for public IP and AAP Setup
     pause:
       seconds: 120
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
 
   - name: Add Host to awsEC2 Group 
     add_host: 
@@ -65,7 +65,7 @@
        ansible_port: 5986
        groups: awsEC2
     loop: '{{ ec2.instances }}'
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
 
 - hosts: awsEC2
   gather_facts: no
@@ -73,7 +73,7 @@
   - name: Modify OS Config
     import_tasks: 
         file: system.yml
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
 
 - hosts: awsEC2
   gather_facts: no
@@ -81,7 +81,7 @@
   - name: Add Users
     import_tasks: 
         file: users.yml
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
 
 - hosts: awsEC2
   gather_facts: no
@@ -89,7 +89,15 @@
   - name: Install Software
     import_tasks: 
         file: software.yml
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
+
+- hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Install Visual Studio 2022
+    import_tasks: 
+        file: vs2022.yml
+    tags: vs2022
 
 - hosts: awsEC2
   gather_facts: no
@@ -97,14 +105,14 @@
   - name: Create Support Files and Directories
     import_tasks: 
         file: createFilesDir.yml
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
 
 - hosts: awsEC2
   gather_facts: no
   tasks:
   - name: Reboot EC2 Instance
     win_reboot:
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+  tags: default
 
 - hosts: local
   gather_facts: no
@@ -116,4 +124,4 @@
       - 'Public IP  - {{ item.public_ip_address }}'
       - 'Private IP - {{ item.private_ip_address }}'
     loop: '{{ ec2.instances }}'
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
