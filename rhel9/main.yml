@@ -23,7 +23,7 @@
       state: running
       wait: true
     register: ec2
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
 
   - name: Destroy AWS EC2 instance
     ec2_instance:
@@ -44,12 +44,12 @@
          volume_type: '{{ volumeType }}'
          volume_size: '{{ volumeSize }}'
       state: absent
-    when: awsState == "destroy" or awsState == 'Destroy' or awsState == 'DESTROY'
+    tags: destroy
   
   - name: Wait 10 seconds for public IP
     pause:
       seconds: 10
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
 
   - name: Add Host to awsEC2 Group 
     add_host: 
@@ -59,7 +59,7 @@
        ansible_ssh_private_key_file: '{{ keyLocation }}'
        groups: awsEC2
     loop: '{{ ec2.instances }}'
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
   
   - name: Generate an OpenSSL public key
     openssl_publickey:
@@ -75,7 +75,7 @@
       delay: 10
       timeout: 120
     loop: '{{ ec2.instances }}'
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
 
 - hosts: awsEC2
   gather_facts: no
@@ -84,7 +84,7 @@
   - name: Modify OS Config
     import_tasks: 
         file: system.yml
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
 
 - hosts: awsEC2
   gather_facts: no
@@ -92,7 +92,7 @@
   tasks: 
   - name: Add Users
     import_tasks: users.yml
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
 
 - hosts: awsEC2
   gather_facts: no
@@ -100,7 +100,7 @@
   tasks:
   - name: Install Software
     import_tasks: software.yml
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
 
 - hosts: awsEC2
   gather_facts: no
@@ -108,7 +108,7 @@
   tasks:
   - name: Create Support Files and Directories
     import_tasks: createFilesDir.yml
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
 
 - hosts: awsEC2
   gather_facts: yes
@@ -116,7 +116,7 @@
   tasks:
   - name: Create MOTD
     import_tasks: motd.yml
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
 
 - hosts: awsEC2
   gather_facts: no
@@ -124,7 +124,7 @@
   tasks:
   - name: Add CRON Jobs
     import_tasks: cron.yml
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
 
 - hosts: awsEC2
   gather_facts: no
@@ -132,7 +132,7 @@
   tasks:
   - name: Reboot EC2 Instance
     reboot:
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
 
 - hosts: local
   gather_facts: no
@@ -144,4 +144,4 @@
       - 'Public IP  - {{ item.public_ip_address }}'
       - 'Private IP - {{ item.private_ip_address }}'
     loop: '{{ ec2.instances }}'
-    when: awsState == "create" or awsState == "Create" or awsState == "CREATE"
+    tags: default
