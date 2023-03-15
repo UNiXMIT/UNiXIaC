@@ -1,0 +1,10 @@
+- name: Copy extend 10.5.0 Installer to EC2 Instance
+  win_copy:
+    src: /products/extend(R) Version 10.5.0 x64.msi
+    dest: C:\temp\
+
+- name: Install extend 10.5.0
+  win_package:
+    path: C:\temp\extend(R) Version 10.5.0 x64.msi
+    state: present
+    arguments: ADDLOCAL=ALL WINDOWSVERSION=PostWindows7 /qb

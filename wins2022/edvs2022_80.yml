@@ -7,3 +7,4 @@
   win_package:
     path: C:\temp\edvs2022_80.exe
     state: present
+    arguments: /passive

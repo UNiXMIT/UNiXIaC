@@ -102,6 +102,11 @@
 
 - hosts: awsEC2
   gather_facts: no
+  become: yes
+  become_user: '{{ myUsername }}'
+  become_flags: logon_type=interactive logon_flags=with_profile
+  vars:
+    ansible_become_pass: '{{ myPassword }}'
   tasks:
   - name: Install VSCode + Extensions
     import_tasks: 
@@ -132,6 +137,14 @@
     import_tasks: 
         file: ede80.yml
     tags: ede80
+
+- hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Install extend 10.5.0
+    import_tasks: 
+        file: extend1050.yml
+    tags: extend1050
 
 - hosts: awsEC2
   gather_facts: no

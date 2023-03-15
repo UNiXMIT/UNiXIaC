@@ -7,3 +7,4 @@
   win_package:
     path: C:\temp\ede_80.exe
     state: present
+    arguments: /passive
