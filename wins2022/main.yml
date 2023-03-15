@@ -104,6 +104,7 @@
   gather_facts: no
   become: yes
   become_user: '{{ myUsername }}'
+  become_method: runas
   become_flags: logon_type=interactive logon_flags=with_profile
   vars:
     ansible_become_pass: '{{ myPassword }}'
