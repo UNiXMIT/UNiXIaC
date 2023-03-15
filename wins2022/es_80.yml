@@ -1,0 +1,10 @@
+- name: Copy ES 8.0 Installer to EC2 Instance
+  win_copy:
+    src: /products/es_80.exe
+    dest: C:\temp\
+
+- name: Install ES 8.0
+  win_package:
+    path: C:\temp\es_80.exe
+    state: present
+    arguments: /passive

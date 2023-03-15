@@ -134,8 +134,16 @@
   tasks:
   - name: Install EDE 8.0
     import_tasks: 
-        file: ede80.yml
+        file: ede_80.yml
     tags: ede80
+
+- hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Install ES 8.0
+    import_tasks: 
+        file: es_80.yml
+    tags: es80
 
 - hosts: awsEC2
   gather_facts: no
