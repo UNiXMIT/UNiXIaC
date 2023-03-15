@@ -6,15 +6,15 @@
 
 - name: VSCode One Dark Pro Theme Extension
   win_command:
-    cmd: '"C:\Program Files\Microsoft VS Code\bin\code" --install-extension zhuangtongfa.material-theme'
+    cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension zhuangtongfa.material-theme'
 
 - name: VSCode COBOL Extension
   win_command:
-    cmd: '"C:\Program Files\Microsoft VS Code\bin\code" --install-extension bitlang.cobol'
+    cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension bitlang.cobol'
 
 - name: VSCode Micro Focus Enterprise Extension
   win_command:
-    cmd: '"C:\Program Files\Microsoft VS Code\bin\code" --install-extension micro-focus-amc.mfenterprise'
+    cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension micro-focus-amc.mfenterprise'
 
 - name: Download VSCode Settings 
   win_get_url:
