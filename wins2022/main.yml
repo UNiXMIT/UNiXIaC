@@ -99,6 +99,8 @@
         file: vs2022.yml
     tags: vs2022
     register: vs2022
+  - debug:
+      msg: "{{ vs2022 }}"
 
 - hosts: awsEC2
   gather_facts: no
