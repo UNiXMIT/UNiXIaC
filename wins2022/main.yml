@@ -98,9 +98,6 @@
     import_tasks: 
         file: vs2022.yml
     tags: vs2022
-    register: vs2022
-  - debug:
-      msg: "{{ vs2022 }}"
 
 - hosts: awsEC2
   gather_facts: no
@@ -131,7 +128,6 @@
     import_tasks: 
         file: edvs2022_80.yml
     tags: edvs2022_80
-    when: vs2022 is changed
 
 - hosts: awsEC2
   gather_facts: no

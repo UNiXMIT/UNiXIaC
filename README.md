@@ -25,7 +25,7 @@ http://ServerIP:8181
 - default
 - destroy
 - vs2022
-  - edvs2022_80
+- edvs2022_80
 - ede80
 - extend1050
 
