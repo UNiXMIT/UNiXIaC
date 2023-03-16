@@ -111,6 +111,22 @@
     tags: default
 
 - hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Install ES 8.0
+    import_tasks: 
+        file: es_80.yml
+    tags: es80
+
+- hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Install extend 10.5.0
+    import_tasks: 
+        file: extend1050.yml
+    tags: extend1050
+
+- hosts: awsEC2
   gather_facts: yes
   become: yes
   tasks:

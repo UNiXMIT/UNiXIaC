@@ -4,7 +4,7 @@
 sudo (apt/yum/zypper) install -y curl podman  
 curl -s https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/semaphore.sh | bash  
 ```
-**NOTE:** pfsso*.zip and support.pem must located be in the current working directory before executing semaphore.sh.  
+**NOTE:** pfsso*.zip and support.pem must be located in the current working directory before executing semaphore.sh.  
 
 ## SSO
 Trigger the SSO process using:
@@ -39,3 +39,5 @@ http://ServerIP:8181
 ##### RHEL9
 - default
 - destroy
+- es80
+- extend1050

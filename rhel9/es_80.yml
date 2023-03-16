@@ -1,0 +1,9 @@
+- name: Copy ES 8.0 Installer to EC2 Instance
+  copy:
+    src: /products/setup_ent_server_8.0_redhat_x86_64
+    dest: "/home/{{ myUsername }}/MFSupport/MFInstallers/setup_ent_server_8.0_redhat_x86_64"
+    owner: support 
+    group: support
+    mode: '0775'
+- name: Install ES 8.0
+  command: "/home/{{ myUsername }}/MFSupport/MFInstallers/setup_ent_server_8.0_redhat_x86_64 -IacceptEULA -ESadminID={{ myUsername }} -il=/home/products/es80"
