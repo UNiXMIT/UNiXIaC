@@ -21,4 +21,5 @@
       - tcpdump
       - ed
       - glibc-devel.i686
+      - tmux
     state: present
