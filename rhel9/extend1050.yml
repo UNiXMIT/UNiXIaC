@@ -13,4 +13,4 @@
     mode: '0775'
     
 - name: Install extend 10.5.0
-  command: "printf 'y\n/home/products/acu1050shx64\n' | /home/products/test/setup_acucob1050pmk59shACU"
+  command: "printf 'y\n/home/products/acu1050shx64\n' | /home/products/acu1050shx64/setup_acucob1050pmk59shACU"
