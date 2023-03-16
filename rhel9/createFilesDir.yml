@@ -123,14 +123,14 @@
     path: "/home/products"
     state: directory
     mode: '0777'
-- name: Recursively Change Ownership of home/{{ myUsername }} Directories
+- name: Recursively Change Ownership of /home/{{ myUsername }} Directories
   file:
     path: /home/{{ myUsername }}
     state: directory
     recurse: yes
     owner: support
     group: support
-- name: Change Ownership of home/products Directory
+- name: Change Ownership of /home/products Directory
   file:
     path: /home/products
     state: directory
