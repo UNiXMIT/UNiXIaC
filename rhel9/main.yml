@@ -121,6 +121,7 @@
 
 - hosts: awsEC2
   gather_facts: no
+  become: yes
   tasks:
   - name: Install extend 10.5.0
     import_tasks: 

@@ -4,6 +4,6 @@
     dest: "/home/{{ myUsername }}/MFSupport/MFInstallers/setup_ent_server_8.0_patchupdate03_312109_redhat_x86_64"
     owner: support 
     group: support
-    mode: '0777'
+    mode: '0775'
 - name: Install ES 8.0 PU 3
   command: "/home/{{ myUsername }}/MFSupport/MFInstallers/setup_ent_server_8.0_patchupdate03_312109_redhat_x86_64 -IacceptEULA -ESadminID={{ myUsername }} -il=/home/products/es80PU3"
