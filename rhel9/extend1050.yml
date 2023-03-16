@@ -11,4 +11,4 @@
     group: support
     mode: '0775'
 - name: Install extend 10.5.0
-  command: "/home/products/acu1050shx64 -EULA -d /home/products/acu1050shx64/"
+  command: "/home/products/acu1050shx64/setup_acucob1050pmk59shACU -EULA -d /home/products/acu1050shx64/"
