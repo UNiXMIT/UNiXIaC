@@ -120,17 +120,17 @@
     mode: '0775'
 - name: Download setupmf.sh
   get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/MFScripts/linux/setupmf.sh
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setupmf.sh
     dest: /home/{{ myUsername }}/MFSupport/MFScripts/setupmf.sh
     mode: '0775'
 - name: Download startmf.sh
   get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/MFScripts/linux/startmf.sh
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/startmf.sh
     dest: /home/{{ myUsername }}/MFSupport/MFScripts/startmf.sh
     mode: '0775'
 - name: Download setenvmf.sh
   get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/MFScripts/linux/setenvmf.sh
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setenvmf.sh
     dest: /home/{{ myUsername }}/MFSupport/MFScripts/setenvmf.sh
     mode: '0775'
 - name: Create Products
