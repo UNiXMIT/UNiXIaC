@@ -3,6 +3,7 @@
     path: /home/products/acu1050shx64
     state: directory
     mode: '0775'
+    
 # Currently doesn't work as the extend installer doesn't work non-interactively
 # - name: Copy extend 10.5.0 Installer to EC2 Instance
 #   copy:
