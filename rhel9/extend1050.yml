@@ -1,14 +1,28 @@
 - name: Create extend 10.5.0 directory
   file:
-    path: "/home/products/acu1050shx64"
+    path: /home/products/acu1050shx64
     state: directory
     mode: '0775'
-- name: Copy extend 10.5.0 Installer to EC2 Instance
+# Currently doesn't work as the extend installer doesn't work non-interactively
+# - name: Copy extend 10.5.0 Installer to EC2 Instance
+#   copy:
+#     src: /products/setup_acucob1050pmk59shACU
+#     dest: /home/products/acu1050shx64/setup_acucob1050pmk59shACU
+#     owner: support 
+#     group: support
+#     mode: '0775'
+# - name: Install extend 10.5.0
+#   command: "/home/products/acu1050shx64/setup_acucob1050pmk59shACU -EULA -d /home/products/acu1050shx64/"
+
+# WORKAROUND
+- name: Copy extend 10.5.0 Archive to EC2 Instance
   copy:
-    src: /products/setup_acucob1050pmk59shACU
-    dest: "/home/products/acu1050shx64/setup_acucob1050pmk59shACU"
+    src: /products/acu1050shx64.tar.gz
+    dest: /home/products/acu1050shx64/acu1050shx64.tar.gz
     owner: support 
     group: support
     mode: '0775'
-- name: Install extend 10.5.0
-  command: "/home/products/acu1050shx64/setup_acucob1050pmk59shACU -EULA -d /home/products/acu1050shx64/"
+- name: Extract extend 10.5.0
+  unarchive:
+    src: /home/products/acu1050shx64/acu1050shx64.tar.gz
+    dest: /home/products/acu1050shx64
