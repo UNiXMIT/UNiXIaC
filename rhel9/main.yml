@@ -112,6 +112,7 @@
 
 - hosts: awsEC2
   gather_facts: no
+  become: yes
   tasks:
   - name: Install ES 8.0
     import_tasks: 
