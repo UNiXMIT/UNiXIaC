@@ -114,7 +114,7 @@
   gather_facts: no
   become: yes
   tasks:
-  - name: Install ES 8.0
+  - name: Install ES 8.0 PU 3
     import_tasks: 
         file: es_80.yml
     tags: es80
