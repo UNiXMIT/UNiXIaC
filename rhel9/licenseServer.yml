@@ -1,6 +1,0 @@
-- name: Add License Server
-  lineinfile:
-    path: /var/microfocuslicensing/bin/ces.ini
-    state: present
-    regexp: '^lshost'
-    line: 'lshost = {{ licenseServer }}'

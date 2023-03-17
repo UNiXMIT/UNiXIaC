@@ -32,12 +32,8 @@ http://ServerIP:8181
 - destroy
 - vs2022
   - edvs2022_80
-    - jcled
 - ede80
-  - jcled
 - es80
-  - jcles
-  - licenseMF
 - extend1050
 
 ### Linux
@@ -45,6 +41,4 @@ http://ServerIP:8181
 - default
 - destroy
 - es80
-  - jcles
-  - licenseMF
 - extend1050

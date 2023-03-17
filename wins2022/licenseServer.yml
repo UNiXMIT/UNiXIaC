@@ -1,5 +1,0 @@
-- name: Add License Server
-  win_lineinfile:
-    path: C:\ProgramData\Micro Focus\ces.ini
-    regex: '^lshost'
-    line: 'lshost = {{ licenseServer }}'

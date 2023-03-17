@@ -123,24 +123,6 @@
   gather_facts: no
   become: yes
   tasks:
-  - name: License MF Products
-    import_tasks: 
-        file: licenseServer.yml
-    tags: licenseMF
-
-- hosts: awsEC2
-  gather_facts: no
-  become: yes
-  tasks:
-  - name: Setup JCL ES Region
-    import_tasks: 
-        file: jcl_es.yml
-    tags: jcles
-
-- hosts: awsEC2
-  gather_facts: no
-  become: yes
-  tasks:
   - name: Install extend 10.5.0
     import_tasks: 
         file: extend1050.yml

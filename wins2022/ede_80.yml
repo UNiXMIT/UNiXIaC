@@ -8,3 +8,14 @@
     path: C:\temp\ede_80.exe
     state: present
     arguments: /passive
+
+- name: Add License Server
+  win_lineinfile:
+    path: C:\ProgramData\Micro Focus\ces.ini
+    regex: '^lshost'
+    line: 'lshost = {{ licenseServer }}'
+
+- name: Import JCL Region
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml'
+    chdir: C:\MFSamples\JCL
