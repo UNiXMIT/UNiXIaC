@@ -3,13 +3,6 @@
     path: C:\MFSamples\JCL
     state: directory
 
-- name: Everyone permissions on JCL
-  win_acl:
-    user: Everyone
-    path: C:\MFSamples\JCL
-    type: allow
-    rights: FullControl
-
 - name: Download JCL.xml
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.xml
@@ -24,6 +17,13 @@
   win_unzip:
     src: C:\MFSamples\JCL\JCL.zip
     dest: C:\MFSamples\JCL
+
+- name: Everyone permissions on JCL
+  win_acl:
+    user: Everyone
+    path: C:\MFSamples\JCL
+    type: allow
+    rights: FullControl
 
 - name: Import JCL Region
   win_command:
