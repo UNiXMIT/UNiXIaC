@@ -1,5 +1,5 @@
 - name: Execute Optimise Script
-  win_powershell:
+  ansible.windows.win_powershell:
     script: |
       function Optimize-PowershellAssemblies {
         # NGEN powershell assembly, improves startup time of powershell by 10x
