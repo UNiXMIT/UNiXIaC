@@ -37,7 +37,7 @@ http://ServerIP:8181
   - jcled
 - es80
   - jcles
-- licenseMF
+  - licenseMF
 - extend1050
 
 ### Linux
@@ -46,4 +46,5 @@ http://ServerIP:8181
 - destroy
 - es80
   - jcles
+  - licenseMF
 - extend1050
