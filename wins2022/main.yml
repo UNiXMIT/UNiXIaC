@@ -155,10 +155,6 @@
 
 - hosts: awsEC2
   gather_facts: no
-  become: yes
-  become_user: '{{ myUsername }}'
-  become_method: runas
-  become_flags: logon_type=interactive logon_flags=with_profile
   tasks:
   - name: Setup JCL ES Region
     import_tasks: 
@@ -167,10 +163,6 @@
 
 - hosts: awsEC2
   gather_facts: no
-  become: yes
-  become_user: '{{ myUsername }}'
-  become_method: runas
-  become_flags: logon_type=interactive logon_flags=with_profile
   tasks:
   - name: Setup JCL ED Region
     import_tasks: 
