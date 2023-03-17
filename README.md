@@ -34,6 +34,7 @@ http://ServerIP:8181
   - edvs2022_80
 - ede80
 - es80
+  - jcl
 - extend1050
 
 ### Linux

@@ -25,7 +25,7 @@
     src: C:\MFSamples\JCL\JCL.zip
     dest: C:\MFSamples\JCL
 
-- name: Import JCL region
+- name: Import JCL Region
   win_command:
     argv:
     - C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe
