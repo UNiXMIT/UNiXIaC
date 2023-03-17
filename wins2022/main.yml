@@ -156,6 +156,14 @@
 - hosts: awsEC2
   gather_facts: no
   tasks:
+  - name: License MF Products
+    import_tasks: 
+        file: licenseServer.yml
+    tags: licenseMF
+
+- hosts: awsEC2
+  gather_facts: no
+  tasks:
   - name: Setup JCL ES Region
     import_tasks: 
         file: jcl_es.yml

@@ -37,6 +37,7 @@ http://ServerIP:8181
   - jcled
 - es80
   - jcles
+- licenseMF
 - extend1050
 
 ### Linux
