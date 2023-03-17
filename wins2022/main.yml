@@ -49,9 +49,9 @@
       state: absent
     tags: destroy
   
-  - name: Wait 120 seconds for public IP and AAP Setup
+  - name: Wait 60 seconds for public IP and AAP Setup
     pause:
-      seconds: 120
+      seconds: 60
     tags: default
 
   - name: Add Host to awsEC2 Group 
