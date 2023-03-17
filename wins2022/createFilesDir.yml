@@ -170,3 +170,27 @@
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/gateway.toml
     dest: C:\etc\gateway.toml
+
+- name: Create MFSamples
+  win_file:
+    path: C:\MFSamples
+    state: directory
+
+- name: Everyone permissions on MFSamples
+  win_acl:
+    user: Everyone
+    path: C:\MFSamples
+    type: allow
+    rights: FullControl
+
+- name: Create MFDataFiles
+  win_file:
+    path: C:\MFDataFiles
+    state: directory
+
+- name: Everyone permissions on MFDataFiles
+  win_acl:
+    user: Everyone
+    path: C:\MFDataFiles
+    type: allow
+    rights: FullControl

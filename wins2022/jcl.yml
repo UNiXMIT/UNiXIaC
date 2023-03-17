@@ -1,0 +1,34 @@
+- name: Create JCL
+  win_file:
+    path: C:\MFSamples\JCL
+    state: directory
+
+- name: Everyone permissions on JCL
+  win_acl:
+    user: Everyone
+    path: C:\MFSamples\JCL
+    type: allow
+    rights: FullControl
+
+- name: Download JCL.xml
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.xml
+    dest: C:\MFSamples\JCL
+
+- name: Download JCL.zip
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.zip
+    dest: C:\MFSamples\JCL\JCL.zip
+
+- name: Unzip JCL.zip
+  win_unzip:
+    src: C:\MFSamples\JCL\JCL.zip
+    dest: C:\MFSamples\JCL
+
+- name: Import JCL region
+  win_command:
+    argv:
+    - C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe
+    - -g 5
+    - C:\MFSamples\JCL\JCL.xml
+    chdir: C:\MFSamples\JCL
