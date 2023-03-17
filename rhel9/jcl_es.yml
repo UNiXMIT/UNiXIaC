@@ -33,3 +33,11 @@
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
     dest: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml
     mode: '0775'
+
+- name: Change Ownership JCL
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/JCL"
+    state: directory
+    recurse: yes
+    owner: support
+    group: support

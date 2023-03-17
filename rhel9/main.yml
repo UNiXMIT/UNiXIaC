@@ -121,6 +121,7 @@
 
 - hosts: awsEC2
   gather_facts: no
+  become: yes
   tasks:
   - name: Setup JCL ES Region
     import_tasks: 
