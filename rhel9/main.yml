@@ -121,6 +121,7 @@
 
 - hosts: awsEC2
   gather_facts: no
+  become: yes
   tasks:
   - name: License MF Products
     import_tasks: 
