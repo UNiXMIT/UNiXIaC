@@ -32,9 +32,11 @@ http://ServerIP:8181
 - destroy
 - vs2022
   - edvs2022_80
+    - jcled
 - ede80
+  - jcled
 - es80
-  - jcl
+  - jcles
 - extend1050
 
 ### Linux

@@ -148,10 +148,18 @@
 - hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Setup JCL Region
+  - name: Setup JCL ES Region
     import_tasks: 
-        file: jcl.yml
-    tags: jcl
+        file: jcl_es.yml
+    tags: jcles
+
+- hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Setup JCL ED Region
+    import_tasks: 
+        file: jcl_ed.yml
+    tags: jcled
 
 - hosts: awsEC2
   gather_facts: no
