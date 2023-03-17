@@ -1,0 +1,8 @@
+- name: Download optimise.ps1
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/wins2022/optimise.ps1
+    dest: C:\Users\Public\Documents\optimise.ps1
+
+- name: Execute Optimise Script
+  win_command:
+    cmd: 'C:\Users\Public\Documents\optimise.ps1'

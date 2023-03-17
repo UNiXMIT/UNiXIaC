@@ -70,6 +70,14 @@
 - hosts: awsEC2
   gather_facts: no
   tasks:
+  - name: Optimise Ansible on Windows
+    import_tasks: 
+        file: optimise.yml
+    tags: default
+
+- hosts: awsEC2
+  gather_facts: no
+  tasks:
   - name: Modify OS Config
     import_tasks: 
         file: system.yml
