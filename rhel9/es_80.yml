@@ -15,3 +15,12 @@
     state: present
     regexp: '^lshost'
     line: 'lshost = {{ licenseServer }}'
+
+- name: Start MFDS
+  command: tmux new -d -s mfds ". /home/products/es80PU3/bin/cobsetenv && /home/products/es80PU3/bin/mfds"
+
+- name: Start ESCWA
+  command: tmux new -d -s escwa /home/products/es80PU3/bin/escwa --BasicConfig.MfRequestedEndpoint="tcp:*:10086" --write=true
+
+- name: Import JCL Region
+  command: /home/products/es80PU3/bin/mfds -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml
