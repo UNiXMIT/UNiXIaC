@@ -1,0 +1,35 @@
+- name: Create JCL
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/JCL"
+    state: directory
+    mode: '0775'
+
+- name: Create catalog
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/JCL/catalog"
+    state: directory
+    mode: '0775'
+
+- name: Create dataset
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/JCL/dataset"
+    state: directory
+    mode: '0775'
+
+- name: Create loadlib
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/JCL/loadlib"
+    state: directory
+    mode: '0775'
+
+- name: Create system
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/JCL/system"
+    state: directory
+    mode: '0775'
+
+- name: Download JCL.xml
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
+    dest: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml
+    mode: '0775'

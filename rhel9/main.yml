@@ -121,6 +121,14 @@
 
 - hosts: awsEC2
   gather_facts: no
+  tasks:
+  - name: Setup JCL ES Region
+    import_tasks: 
+        file: jcl_es.yml
+    tags: jcles
+
+- hosts: awsEC2
+  gather_facts: no
   become: yes
   tasks:
   - name: Install extend 10.5.0
