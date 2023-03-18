@@ -113,6 +113,8 @@
 - hosts: awsEC2
   gather_facts: no
   become: yes
+  vars:
+    installPath: /home/products/es80PU3
   tasks:
   - name: Install ES 8.0 PU 3
     import_tasks: 
