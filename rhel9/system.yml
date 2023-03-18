@@ -14,8 +14,8 @@
   lineinfile:
     path: /etc/sudoers
     state: present
-    regexp: '^%WHEEL ALL='
-    line: '%WHEEL ALL=(ALL) NOPASSWD: ALL'
+    regexp: '^%wheel ALL='
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
 - name: Restart SSH
   service:
     name: sshd
