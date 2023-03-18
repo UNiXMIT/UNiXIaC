@@ -19,14 +19,14 @@
 - name: Start MFDS
   command: tmux new -d -s mfds ". /home/products/es80PU3/bin/cobsetenv && /home/products/es80PU3/bin/mfds"
   environment: 
-    cobdir: /home/products/es80PU3
+    COBDIR: /home/products/es80PU3
 
 - name: Start ESCWA
   command: tmux new -d -s escwa /home/products/es80PU3/bin/escwa --BasicConfig.MfRequestedEndpoint="tcp:*:10086" --write=true
   environment: 
-    cobdir: /home/products/es80PU3
+    COBDIR: /home/products/es80PU3
 
 - name: Import JCL Region
   command: /home/products/es80PU3/bin/mfds -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml
   environment: 
-    cobdir: /home/products/es80PU3
+    COBDIR: /home/products/es80PU3
