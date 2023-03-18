@@ -19,14 +19,14 @@
 - name: Start MFDS
   command: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv && {{ installPath }}/bin/mfds"
   environment: 
-    COBDIR: {{ installPath }}
+    COBDIR: '{{ installPath }}'
 
 - name: Start ESCWA
   command: tmux new -d -s escwa {{ installPath }}/bin/escwa --BasicConfig.MfRequestedEndpoint="tcp:*:10086" --write=true
   environment: 
-    COBDIR: {{ installPath }}
+    COBDIR: '{{ installPath }}'
 
 - name: Import JCL Region
-  command: {{ installPath }}/bin/mfds -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml
+  command: '{{ installPath }}/bin/mfds -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'
   environment: 
-    COBDIR: {{ installPath }}
+    COBDIR: '{{ installPath }}'
