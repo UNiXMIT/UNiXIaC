@@ -2,7 +2,7 @@
   ansible.builtin.expect:
     command: /root/sso.sh
     responses:
-      email: '{{ ssoEmail }}'
-      password: '{{ ssoPassword }}'
-      token: '{{ ssoToken }}'
+      SSO Email: '{{ ssoEmail }}'
+      SSO Password: '{{ ssoPassword }}'
+      TOTP Authenticator Code: '{{ ssoToken }}'
   # no_log: true
