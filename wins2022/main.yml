@@ -177,11 +177,10 @@
     import_tasks: extend1050.yml
   tags: extend1050
 
-- name: Reboot EC2 Instance
-  hosts: awsEC2
+- hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Reboot
+  - name: Reboot EC2 Instance
     win_reboot:
   tags: default
 
