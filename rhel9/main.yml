@@ -4,7 +4,7 @@
   tasks:
     import_tasks: 
         file: sso.yml
-    tags: [ default, destroy ]
+  tags: [ default, destroy ]
 
 - name: AWS EC2 Management
   hosts: local
@@ -74,6 +74,7 @@
       path: /tmp/support.pub
       privatekey_path: '{{ keyLocation }}'
       format: OpenSSH
+    tags: default
 
   - name: SSH Check
     local_action:
@@ -92,7 +93,7 @@
   tasks:
     import_tasks: 
         file: system.yml
-    tags: default
+  tags: default
 
 - name: Add Users
   hosts: awsEC2
@@ -100,7 +101,7 @@
   become: yes
   tasks: 
     import_tasks: users.yml
-    tags: default
+  tags: default
 
 - name: Install Software
   hosts: awsEC2
@@ -108,7 +109,7 @@
   become: yes
   tasks:
     import_tasks: software.yml
-    tags: default
+  tags: default
 
 - name: Create Support Files and Directories
   hosts: awsEC2
@@ -116,7 +117,7 @@
   become: yes
   tasks:
     import_tasks: createFilesDir.yml
-    tags: default
+  tags: default
 
 - name: Install ES 8.0 PU 3
   hosts: awsEC2
@@ -127,7 +128,7 @@
   tasks:
     import_tasks: 
         file: es_80.yml
-    tags: es80
+  tags: es80
 
 - name: Install extend 10.5.0
   hosts: awsEC2
@@ -144,7 +145,7 @@
   become: yes
   tasks:
     import_tasks: motd.yml
-    tags: default
+  tags: default
 
 - name: Add CRON Jobs
   hosts: awsEC2
@@ -152,7 +153,7 @@
   become: yes
   tasks:
     import_tasks: cron.yml
-    tags: default
+  tags: default
 
 - name: Reboot EC2 Instance
   hosts: awsEC2
@@ -160,7 +161,7 @@
   become: yes
   tasks:
     reboot:
-    tags: default
+  tags: default
 
 - name: AWS EC2 Instance Created and Setup
   hosts: local
@@ -172,4 +173,4 @@
       - 'Public IP  - {{ item.public_ip_address }}'
       - 'Private IP - {{ item.private_ip_address }}'
     loop: '{{ ec2.instances }}'
-    tags: default
+  tags: default
