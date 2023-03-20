@@ -19,3 +19,4 @@ podman exec -it semaphore bash -c "python3 -m pip install --upgrade /root/pfsso*
 podman exec -it semaphore bash -c "wget -P /root https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/sso.sh"
 podman exec -it semaphore bash -c "chmod +x /root/sso.sh"
 podman exec -it semaphore bash -c "mkdir /products"
+echo alias sso="podman exec -it semaphore bash -c \"/root/sso.sh\"" >> ~/.bashrc
