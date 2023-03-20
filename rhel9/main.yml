@@ -5,7 +5,7 @@
   - name: SSO 2FA
     import_tasks: 
         file: sso.yml
-    tags: default
+    tags: [ default, destroy ]
 
 - hosts: local
   gather_facts: no

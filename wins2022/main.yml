@@ -5,7 +5,7 @@
   - name: SSO 2FA
     import_tasks: 
         file: sso.yml
-    tags: default
+    tags: [ default, destroy ]
 
 - hosts: local
   gather_facts: no
@@ -55,7 +55,7 @@
          volume_type: '{{ volumeType }}'
          volume_size: '{{ volumeSize }}'
       state: absent
-    tags: destroy
+    tags: [ default, destroy ]
   
   - name: Wait 60 seconds for public IP and AAP Setup
     pause:
