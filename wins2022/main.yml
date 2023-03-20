@@ -161,14 +161,6 @@
     import_tasks: es_80.yml
   tags: es80
 
-- name: License MF Products
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import licenseServer.yml
-    import_tasks: licenseServer.yml
-  tags: licenseMF
-
 - name: Install extend 10.5.0
   hosts: awsEC2
   gather_facts: no
