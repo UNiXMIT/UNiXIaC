@@ -5,4 +5,4 @@
       email: '{{ ssoEmail }}'
       password: '{{ ssoPassword }}'
       token: '{{ ssoToken }}'
-  no_log: true
+  # no_log: true
