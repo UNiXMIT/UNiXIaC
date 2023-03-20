@@ -125,7 +125,7 @@
   vars:
     ansible_become_pass: '{{ myPassword }}'
   tasks:
-  -name: Import vscode.yml
+  - name: Import vscode.yml
     import_tasks: vscode.yml
   tags: default
 
@@ -177,10 +177,10 @@
     import_tasks: extend1050.yml
   tags: extend1050
 
-- hosts: awsEC2
+- name: Reboot EC2 Instance
+  hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Reboot EC2 Instance
     win_reboot:
   tags: default
 

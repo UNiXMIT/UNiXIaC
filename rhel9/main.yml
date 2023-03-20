@@ -165,6 +165,7 @@
   gather_facts: no
   become: yes
   tasks:
+  - name: Reboot
     reboot:
   tags: default
 
