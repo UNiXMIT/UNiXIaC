@@ -2,6 +2,14 @@
 - hosts: local
   gather_facts: no
   tasks:
+  - name: SSO 2FA
+    import_tasks: 
+        file: sso.yml
+    tags: default
+
+- hosts: local
+  gather_facts: no
+  tasks:
   - name: Create AWS EC2 instance
     ec2_instance:
       tower_callback:
