@@ -2,8 +2,8 @@
   hosts: local
   gather_facts: no
   tasks:
-    import_tasks: 
-        file: sso.yml
+  - name: Import sso.yml
+    import_tasks: sso.yml
   tags: [ default, destroy ]
 
 - name: AWS EC2 Management
@@ -91,8 +91,8 @@
   gather_facts: no
   become: yes
   tasks:
-    import_tasks: 
-        file: system.yml
+  - name: Import system.yml
+    import_tasks: system.yml
   tags: default
 
 - name: Add Users
@@ -100,6 +100,7 @@
   gather_facts: no
   become: yes
   tasks: 
+  - name: Import users.yml
     import_tasks: users.yml
   tags: default
 
@@ -108,6 +109,7 @@
   gather_facts: no
   become: yes
   tasks:
+  - name: Import software.yml
     import_tasks: software.yml
   tags: default
 
@@ -116,6 +118,7 @@
   gather_facts: no
   become: yes
   tasks:
+  - name: Import createFilesDir.yml
     import_tasks: createFilesDir.yml
   tags: default
 
@@ -126,8 +129,8 @@
   vars:
     installPath: /home/products/es80PU3
   tasks:
-    import_tasks: 
-        file: es_80.yml
+  - name: Import es_80.yml
+    import_tasks: es_80.yml
   tags: es80
 
 - name: Install extend 10.5.0
@@ -135,15 +138,16 @@
   gather_facts: no
   become: yes
   tasks:
-    import_tasks: 
-        file: extend1050.yml
-    tags: extend1050
+  - name: Import extend1050.yml
+    import_tasks: extend1050.yml
+  tags: extend1050
 
 - name: Create MOTD
   hosts: awsEC2
   gather_facts: yes
   become: yes
   tasks:
+  - name: Import motd.yml
     import_tasks: motd.yml
   tags: default
 
@@ -152,6 +156,7 @@
   gather_facts: no
   become: yes
   tasks:
+  - name: Import cron.yml
     import_tasks: cron.yml
   tags: default
 

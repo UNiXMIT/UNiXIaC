@@ -2,8 +2,8 @@
   hosts: local
   gather_facts: no
   tasks:
-    import_tasks: 
-        file: sso.yml
+  - name: Import sso.yml
+    import_tasks: sso.yml
   tags: [ default, destroy ]
 
 - name: AWS EC2 Management
@@ -79,40 +79,40 @@
   hosts: awsEC2
   gather_facts: no
   tasks:
-    import_tasks: 
-        file: optimise.yml
+  - name: Import optimise.yml
+    import_tasks: optimise.yml
   tags: default
 
 - name: Modify OS Config
   hosts: awsEC2
   gather_facts: no
   tasks:
-    import_tasks: 
-        file: system.yml
+  - name: Import system.yml
+    import_tasks: system.yml
   tags: default
 
 - name: Add Users
   hosts: awsEC2
   gather_facts: no
   tasks:
-    import_tasks: 
-        file: users.yml
+  - name: Import users.yml
+    import_tasks: users.yml
   tags: default
 
 - name: Install Software
   hosts: awsEC2
   gather_facts: no
   tasks:
-    import_tasks: 
-        file: software.yml
+  - name: Import software.yml
+    import_tasks: software.yml
   tags: default
 
 - name: Install Visual Studio 2022
   hosts: awsEC2
   gather_facts: no
   tasks:
-    import_tasks: 
-        file: vs2022.yml
+  - name: Import vs2022.yml 
+    import_tasks: vs2022.yml
   tags: vs2022
 
 - name: Install VSCode + Extensions
@@ -125,62 +125,63 @@
   vars:
     ansible_become_pass: '{{ myPassword }}'
   tasks:
-    import_tasks: 
-        file: vscode.yml
+  -name: Import vscode.yml
+    import_tasks: vscode.yml
   tags: default
 
 - name: Create Support Files and Directories
   hosts: awsEC2
   gather_facts: no
   tasks:
-    import_tasks: 
-        file: createFilesDir.yml
+  - name: Import createFilesDir.yml
+    import_tasks: createFilesDir.yml
   tags: default
 
 - name: Install EDVS2022 8.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-    import_tasks: 
-        file: edvs2022_80.yml
+  - name: Import edvs2022_80.yml
+    import_tasks: edvs2022_80.yml
   tags: edvs2022_80
 
 - name: Install EDE 8.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-    import_tasks: 
-        file: ede_80.yml
+  - name: Import ede_80.yml
+    import_tasks: ede_80.yml
   tags: ede80
 
 - name: Install ES 8.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-    import_tasks: 
-        file: es_80.yml
+  - name: Import es_80.yml
+    import_tasks: es_80.yml
   tags: es80
 
 - name: License MF Products
   hosts: awsEC2
   gather_facts: no
   tasks:
-    import_tasks: 
-        file: licenseServer.yml
+  - name: Import licenseServer.yml
+    import_tasks: licenseServer.yml
   tags: licenseMF
 
 - name: Install extend 10.5.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-    import_tasks: 
-        file: extend1050.yml
+  - name: Import extend1050.yml
+    import_tasks: extend1050.yml
   tags: extend1050
 
 - name: Reboot EC2 Instance
   hosts: awsEC2
   gather_facts: no
   tasks:
+  - name: Reboot
     win_reboot:
   tags: default
 
