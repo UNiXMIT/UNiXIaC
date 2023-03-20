@@ -55,7 +55,7 @@
          volume_type: '{{ volumeType }}'
          volume_size: '{{ volumeSize }}'
       state: absent
-    tags: [ default, destroy ]
+    tags: destroy
   
   - name: Wait 60 seconds for public IP and AAP Setup
     pause:
