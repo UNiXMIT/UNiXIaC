@@ -21,11 +21,6 @@
   environment: 
     COBDIR: '{{ installPath }}'
 
-- name: Start ESCWA
-  command: tmux new -d -s escwa {{ installPath }}/bin/escwa --BasicConfig.MfRequestedEndpoint="tcp:*:10086" --write=true
-  environment: 
-    COBDIR: '{{ installPath }}'
-
 - name: Import JCL Region
   command: '{{ installPath }}/bin/mfds -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'
   environment: 
