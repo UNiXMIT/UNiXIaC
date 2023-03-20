@@ -181,6 +181,7 @@
   hosts: awsEC2
   gather_facts: no
   tasks:
+  - name: Reboot
     win_reboot:
   tags: default
 
@@ -188,6 +189,7 @@
   hosts: local
   gather_facts: no
   tasks:
+  - name: AWS EC2 Information
     debug:
       msg: 
       - 'AWS ID     - {{ item.instance_id }}'
