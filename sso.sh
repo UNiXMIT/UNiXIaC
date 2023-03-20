@@ -1,2 +1,2 @@
 #!/bin/bash
-pfsso -a -s 1 -2 ask
+pfsso -a -2 ask
