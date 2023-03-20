@@ -15,5 +15,8 @@
   "volumeType": "gp3",
   "volumeSize": 120,
   "awsProfile": "848105473048_Fed_COBOL2_Compute",
-  "licenseServer": "domain.com"
+  "licenseServer": "domain.com",
+  "ssoEmail": "email@domain.com",
+  "ssoPassword": "strongPassword",
+  "ssoToken": "XXXXXX"
 }
