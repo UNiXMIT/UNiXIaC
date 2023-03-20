@@ -1,13 +1,13 @@
----
-- hosts: local
+- name: SSO 2FA
+  hosts: local
   gather_facts: no
   tasks:
-  - name: SSO 2FA
     import_tasks: 
         file: sso.yml
     tags: [ default, destroy ]
 
-- hosts: local
+- name: AWS EC2 Management
+  hosts: local
   gather_facts: no
   tasks:
   - name: Create AWS EC2 instance
@@ -75,7 +75,7 @@
       privatekey_path: '{{ keyLocation }}'
       format: OpenSSH
 
-  - name: SSH
+  - name: SSH Check
     local_action:
       module: wait_for
       host: '{{ item.public_ip_address }}'
@@ -85,87 +85,87 @@
     loop: '{{ ec2.instances }}'
     tags: default
 
-- hosts: awsEC2
+- name: Modify OS Config
+  hosts: awsEC2
   gather_facts: no
   become: yes
   tasks:
-  - name: Modify OS Config
     import_tasks: 
         file: system.yml
     tags: default
 
-- hosts: awsEC2
+- name: Add Users
+  hosts: awsEC2
   gather_facts: no
   become: yes
   tasks: 
-  - name: Add Users
     import_tasks: users.yml
     tags: default
 
-- hosts: awsEC2
+- name: Install Software
+  hosts: awsEC2
   gather_facts: no
   become: yes
   tasks:
-  - name: Install Software
     import_tasks: software.yml
     tags: default
 
-- hosts: awsEC2
+- name: Create Support Files and Directories
+  hosts: awsEC2
   gather_facts: no
   become: yes
   tasks:
-  - name: Create Support Files and Directories
     import_tasks: createFilesDir.yml
     tags: default
 
-- hosts: awsEC2
+- name: Install ES 8.0 PU 3
+  hosts: awsEC2
   gather_facts: no
   become: yes
   vars:
     installPath: /home/products/es80PU3
   tasks:
-  - name: Install ES 8.0 PU 3
     import_tasks: 
         file: es_80.yml
     tags: es80
 
-- hosts: awsEC2
+- name: Install extend 10.5.0
+  hosts: awsEC2
   gather_facts: no
   become: yes
   tasks:
-  - name: Install extend 10.5.0
     import_tasks: 
         file: extend1050.yml
     tags: extend1050
 
-- hosts: awsEC2
+- name: Create MOTD
+  hosts: awsEC2
   gather_facts: yes
   become: yes
   tasks:
-  - name: Create MOTD
     import_tasks: motd.yml
     tags: default
 
-- hosts: awsEC2
+- name: Add CRON Jobs
+  hosts: awsEC2
   gather_facts: no
   become: yes
   tasks:
-  - name: Add CRON Jobs
     import_tasks: cron.yml
     tags: default
 
-- hosts: awsEC2
+- name: Reboot EC2 Instance
+  hosts: awsEC2
   gather_facts: no
   become: yes
   tasks:
-  - name: Reboot EC2 Instance
     reboot:
     tags: default
 
-- hosts: local
+- name: AWS EC2 Instance Created and Setup
+  hosts: local
   gather_facts: no
   tasks:
-  - name: AWS EC2 Instance Created and Setup
     debug:
       msg: 
       - 'AWS ID     - {{ item.instance_id }}'

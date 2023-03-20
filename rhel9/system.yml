@@ -4,37 +4,45 @@
     regexp: "^PasswordAuthentication"
     line: "PasswordAuthentication yes"
     state: present
+
 - name: Allow TCP Forwarding
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: "^AllowTcpForwarding"
     line: "AllowTcpForwarding yes"
     state: present
+
 - name: Modify the sudoers file
   lineinfile:
     path: /etc/sudoers
     state: present
     regexp: '^%wheel ALL='
     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+
 - name: Restart SSH
   service:
     name: sshd
     state: restarted
+
 - name: Disable SELinux
   selinux:
     state: disabled
+
 - name: Restart SSH
   service:
     name: sshd
     state: restarted
+
 - name: Install EPEL key 
   rpm_key:
     state: present
     key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
+
 - name: Install EPEL
   dnf:
     name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm'
     state: present
+
 - name: Create profile.sh
   copy:
     dest: "/etc/profile.d/profile.sh"
@@ -45,11 +53,13 @@
       [ -d \"/opt/microfocus/EnterpriseDeveloper/bin\" ] && . /opt/microfocus/EnterpriseDeveloper/bin/cobsetenv
       export PATH=$PATH:~/AcuSupport/AcuScripts:~/MFSupport/MFScripts
       export TERM=xterm
+
 - name: Make profile.sh executable
   file:
     path: "/etc/profile.d/profile.sh"
     state: touch
     mode: 0775
+    
 - name: Add a line to .bashrc
   lineinfile:
     path: /home/{{ myUsername }}/.bashrc

@@ -1,13 +1,13 @@
----
-- hosts: local
+- name: SSO 2FA
+  hosts: local
   gather_facts: no
   tasks:
-  - name: SSO 2FA
     import_tasks: 
         file: sso.yml
     tags: [ default, destroy ]
 
-- hosts: local
+- name: AWS EC2 Management
+  hosts: local
   gather_facts: no
   tasks:
   - name: Create AWS EC2 instance
@@ -75,47 +75,48 @@
     loop: '{{ ec2.instances }}'
     tags: default
 
-- hosts: awsEC2
+- name: Optimise Ansible on Windows
+  hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Optimise Ansible on Windows
     import_tasks: 
         file: optimise.yml
     tags: default
 
-- hosts: awsEC2
+- name: Modify OS Config
+  hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Modify OS Config
     import_tasks: 
         file: system.yml
     tags: default
 
-- hosts: awsEC2
+- name: Add Users
+  hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Add Users
     import_tasks: 
         file: users.yml
     tags: default
 
-- hosts: awsEC2
+- name: Install Software
+  hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Install Software
     import_tasks: 
         file: software.yml
     tags: default
 
-- hosts: awsEC2
+- name: Install Visual Studio 2022
+  hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Install Visual Studio 2022
     import_tasks: 
         file: vs2022.yml
     tags: vs2022
 
-- hosts: awsEC2
+- name: Install VSCode + Extensions
+  hosts: awsEC2
   gather_facts: no
   become: yes
   become_user: '{{ myUsername }}'
@@ -124,70 +125,69 @@
   vars:
     ansible_become_pass: '{{ myPassword }}'
   tasks:
-  - name: Install VSCode + Extensions
     import_tasks: 
         file: vscode.yml
     tags: default
 
-- hosts: awsEC2
+- name: Create Support Files and Directories
+  hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Create Support Files and Directories
     import_tasks: 
         file: createFilesDir.yml
     tags: default
 
-- hosts: awsEC2
+- name: Install EDVS2022 8.0
+  hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Install EDVS2022 8.0
     import_tasks: 
         file: edvs2022_80.yml
     tags: edvs2022_80
 
-- hosts: awsEC2
+- name: Install EDE 8.0
+  hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Install EDE 8.0
     import_tasks: 
         file: ede_80.yml
     tags: ede80
 
-- hosts: awsEC2
+- name: Install ES 8.0
+  hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Install ES 8.0
     import_tasks: 
         file: es_80.yml
     tags: es80
 
-- hosts: awsEC2
+- name: License MF Products
+  hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: License MF Products
     import_tasks: 
         file: licenseServer.yml
     tags: licenseMF
 
-- hosts: awsEC2
+- name: Install extend 10.5.0
+  hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Install extend 10.5.0
     import_tasks: 
         file: extend1050.yml
     tags: extend1050
 
-- hosts: awsEC2
+- name: Reboot EC2 Instance
+  hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Reboot EC2 Instance
     win_reboot:
   tags: default
 
-- hosts: local
+- name: AWS EC2 Instance Created and Setup
+  hosts: local
   gather_facts: no
   tasks:
-  - name: AWS EC2 Instance Created and Setup
     debug:
       msg: 
       - 'AWS ID     - {{ item.instance_id }}'

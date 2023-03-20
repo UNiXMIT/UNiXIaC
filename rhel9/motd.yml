@@ -2,6 +2,7 @@
   file:
     path: /etc/motd
     state: absent
+    
 - name: Create new MOTD
   copy:
     dest: "/etc/motd"
