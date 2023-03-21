@@ -113,7 +113,9 @@
   tasks:
   - name: Import vs2022.yml 
     import_tasks: vs2022.yml
-  tags: vs2022
+  tags:
+    - vs2022
+    - edvs2022_80
 
 - name: Install VSCode + Extensions
   hosts: awsEC2

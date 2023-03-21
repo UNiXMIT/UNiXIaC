@@ -7,9 +7,9 @@ curl -s https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/semaphore.sh | ba
 **NOTE:** pfsso*.zip and support.pem must be located in the current working directory before executing semaphore.sh.  
 
 ## SSO
-Trigger the SSO process using:
+Trigger the SSO process using the alias:
 ```
-podman exec -it semaphore bash -c "/root/sso.sh"
+sso
 ```
 Credentials will last for 1 hour.  
 
