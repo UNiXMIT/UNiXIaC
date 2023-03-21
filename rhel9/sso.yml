@@ -1,7 +1,5 @@
 - name: SmartPhonePush Authentication
   ansible.builtin.expect:
-    vars:
-      ansible_command_timeout: 60
     command: pfsso -a -2 "SmartPhonePush"
     responses:
       SSO Email: '{{ ssoEmail }}'
