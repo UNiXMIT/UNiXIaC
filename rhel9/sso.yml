@@ -1,6 +1,6 @@
 - name: TOTP Authentication
   ansible.builtin.expect:
-    command: pfsso -a -2 "TOTP"
+    command: pfsso -a -2 TOTP
     responses:
       SSO Email: '{{ ssoEmail }}'
       SSO Password: '{{ ssoPassword }}'
