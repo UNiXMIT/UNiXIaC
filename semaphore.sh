@@ -17,7 +17,5 @@ podman cp support.pem semaphore:/root/.ssh
 podman exec -it semaphore bash -c "chmod 600 /root/.ssh/support.pem"
 podman exec -it semaphore bash -c "cd /root && unzip pfsso*.zip"
 podman exec -it semaphore bash -c "python3 -m pip install --upgrade /root/pfsso*/"
-podman exec -it semaphore bash -c "wget -P /root https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/sso.sh"
-podman exec -it semaphore bash -c "chmod +x /root/sso.sh"
 podman exec -it semaphore bash -c "mkdir /products"
-echo alias sso="podman exec -it semaphore bash -c \"/root/sso.sh\"" >> ~/.bashrc
+echo alias sso="podman exec -it semaphore bash -c \"pfsso -a -2 ask\"" >> ~/.bashrc
