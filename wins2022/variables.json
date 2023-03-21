@@ -18,5 +18,6 @@
   "licenseServer": "domain.com",
   "ssoEmail": "email@domain.com",
   "ssoPassword": "strongPassword",
+  "ssoMethod": "1",
   "ssoToken": "XXXXXX"
 }
