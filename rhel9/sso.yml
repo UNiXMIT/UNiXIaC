@@ -1,11 +1,3 @@
-- name: SmartPhonePush Authentication
-  ansible.builtin.expect:
-    command: pfsso -a -2 "SmartPhonePush"
-    responses:
-      SSO Email: '{{ ssoEmail }}'
-      SSO Password: '{{ ssoPassword }}'
-  when: ssoMethod == "SmartPhonePush"
-
 - name: TOTP Authentication
   ansible.builtin.expect:
     command: pfsso -a -2 "TOTP"
@@ -13,4 +5,3 @@
       SSO Email: '{{ ssoEmail }}'
       SSO Password: '{{ ssoPassword }}'
       TOTP Authenticator Code: '{{ ssoToken }}'
-  when: ssoMethod == "TOTP"

@@ -1,6 +1,6 @@
-- name: Initiate SSO for AWS Credentials
+- name: TOTP Authentication
   ansible.builtin.expect:
-    command: /root/sso.sh
+    command: pfsso -a -2 "TOTP"
     responses:
       SSO Email: '{{ ssoEmail }}'
       SSO Password: '{{ ssoPassword }}'
