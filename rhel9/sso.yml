@@ -4,7 +4,7 @@
     responses:
       SSO Email: '{{ ssoEmail }}'
       SSO Password: '{{ ssoPassword }}'
-  when: ssoMethod == "1"
+  when: ssoMethod == "SmartPhonePush"
 
 - name: TOTP Authentication
   ansible.builtin.expect:
@@ -13,4 +13,4 @@
       SSO Email: '{{ ssoEmail }}'
       SSO Password: '{{ ssoPassword }}'
       TOTP Authenticator Code: '{{ ssoToken }}'
-  when: ssoMethod == "2"
+  when: ssoMethod == "TOTP"
