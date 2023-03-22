@@ -2,6 +2,8 @@
   file:
     path: /home/products/acu1050shx64
     state: directory
+    owner: support 
+    group: support
     mode: '0775'
     
 - name: Copy extend 10.5.0 Installer to EC2 Instance
