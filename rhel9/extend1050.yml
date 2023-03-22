@@ -14,6 +14,8 @@
     
 - name: Install extend 10.5.0
   command: "printf 'y\n/home/products/acu1050shx64\n' | /home/products/acu1050shx64/setup_acucob1050pmk59shACU"
+  chdir: /home/products/acu1050shx64
 
 - name: Activate Licenses
   command: "printf '{{ extendCode }}\n{{ extendKey }}\n' | /home/products/acu1050shx64/bin/activator"
+  chdir: /home/products/acu1050shx64/bin
