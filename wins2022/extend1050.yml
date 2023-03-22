@@ -8,3 +8,13 @@
     path: C:\temp\extend(R) Version 10.5.0 x64.msi
     state: present
     arguments: ADDLOCAL=ALL WINDOWSVERSION=PostWindows7 /qb
+
+- name: Activate 32 bit Licenses
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\extend 10.5.0\AcuGT\bin\activator.exe" /PCODE={{ extendCode86 }} /PKEY={{ extendKey86 }}'
+    chdir: C:\Program Files (x86)\Micro Focus\extend 10.5.0\AcuGT\bin
+
+- name: Activate 64 bit Licenses
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\extend 10.5.0\AcuGT\bin\activator.exe" /PCODE={{ extendCode64 }} /PKEY={{ extendKey64 }}'
+    chdir: C:\Program Files (x86)\Micro Focus\extend 10.5.0\AcuGT\bin
