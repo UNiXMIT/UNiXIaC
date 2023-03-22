@@ -4,8 +4,8 @@
     password: "{{ myPassword | password_hash('sha512') }}"
     groups: wheel
     append: yes
+    
 - name: Change root password
-
   user:
     name: admin
     update_password: always
