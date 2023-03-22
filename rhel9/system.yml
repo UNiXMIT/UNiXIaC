@@ -61,13 +61,3 @@
     line: if [[ -t 0 && $- = *i* ]]; then stty -ixon; fi
     create: yes
   become: true
-
-- name: Install pip3
-  dnf: 
-    name: python3-pip
-    state: present
-
-- name: Install pexpect
-  pip:
-    name: pexpect
-    state: present
