@@ -3,7 +3,9 @@
 # sudo (apt/yum/zypper) install -y curl podman
 # curl -s https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/semaphore.sh | bash
 podman pull rockylinux:9
-podman run -itd --name semaphore -p 8181:3000 rockylinux:9
+sudo mkdir -m 775 /home/semaphore
+sudo chown support:support /home/semaphore
+podman run -itd --name semaphore -v /home/semaphore:/products -p 8181:3000 rockylinux:9
 podman exec -it semaphore bash -c "dnf epel-release -y"
 podman exec -it semaphore bash -c "dnf install ansible wget git python3 python3-pip tmux unzip python-winrm -y"
 podman exec -it semaphore bash -c "python3 -m pip install boto3"
@@ -17,5 +19,4 @@ podman cp support.pem semaphore:/root/.ssh
 podman exec -it semaphore bash -c "chmod 600 /root/.ssh/support.pem"
 podman exec -it semaphore bash -c "cd /root && unzip pfsso*.zip"
 podman exec -it semaphore bash -c "python3 -m pip install --upgrade /root/pfsso*/"
-podman exec -it semaphore bash -c "mkdir /products"
 echo alias sso="podman exec -it semaphore bash -c \"pfsso -a -2 ask\"" >> ~/.bashrc
