@@ -2,7 +2,7 @@
   hosts: local
   tasks:
     debug:
-      msg: '{{ semaphore_vars }}' 
+      msg: '{{ semaphore_vars.task_details.username }}' 
 
 - name: SSO 2FA
   hosts: local
