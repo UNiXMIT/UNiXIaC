@@ -1,6 +1,5 @@
 - name: 'Print Semaphore Variables'
-  run_once: true
-  delegate_to: localhost
+  hosts: local
   debug:
     var: semaphore_vars
 
