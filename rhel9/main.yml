@@ -5,7 +5,7 @@
     debug:
       msg: 
       - 'USERNAME    - {{ semaphore_vars.task_details.username }}'
-  tags: default
+  tags: destroy
 
 - name: SSO 2FA
   hosts: local
