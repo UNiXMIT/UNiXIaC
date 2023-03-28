@@ -4,7 +4,7 @@
   - name: Semaphore
     debug:
       msg: 
-      - 'USERNAME    - {{ semaphore_vars.task_details.username }}'
+      - 'USERNAME    - {{ semaphore_vars.task_details.name }}'
   tags: destroy
 
 - name: SSO 2FA
@@ -21,7 +21,7 @@
   tasks:
   - name: Create AWS EC2 instance
     ec2_instance:
-      name: '{{ imageName }}'
+      name: '{{ semaphore_vars.task_details.name }}-{{ imageName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
       network:  
