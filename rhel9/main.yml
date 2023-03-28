@@ -1,10 +1,11 @@
-- name: 'Print Semaphore Variables'
+- name: Print Semaphore
   hosts: local
   tasks:
+  - name: Semaphore
     debug:
-      var: semaphore_vars
-    run_once: true
-    delegate_to: localhost
+      msg: 
+      - 'USERNAME    - {{ semaphore_vars.task_details.username }}'
+  tags: default
 
 - name: SSO 2FA
   hosts: local
