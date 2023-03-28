@@ -2,7 +2,7 @@
   hosts: local
   tasks:
     debug:
-      var: semaphore_vars
+      msg: semaphore_vars
 
 - name: SSO 2FA
   hosts: local
