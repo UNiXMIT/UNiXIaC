@@ -2,8 +2,9 @@
   hosts: local
   tasks:
     debug:
-      msg: '{{ semaphore_vars.task_details}}' 
-  run_once: true
+      var: semaphore_vars
+    run_once: true
+    delegate_to: localhost
 
 - name: SSO 2FA
   hosts: local
