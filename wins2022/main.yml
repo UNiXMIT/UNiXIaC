@@ -15,7 +15,7 @@
       tower_callback:
         windows: true
         set_password: '{{ myPassword }}'
-      name: '{{ imageName }}'
+      name: '{{ semaphore_vars.task_details.username }}-{{ imageName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
       network:  

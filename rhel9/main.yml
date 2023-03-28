@@ -1,12 +1,3 @@
-- name: Print Semaphore
-  hosts: local
-  tasks:
-  - name: Semaphore
-    debug:
-      msg: 
-      - 'USERNAME    - {{ semaphore_vars.task_details.name }}'
-  tags: destroy
-
 - name: SSO 2FA
   hosts: local
   gather_facts: no
@@ -21,7 +12,7 @@
   tasks:
   - name: Create AWS EC2 instance
     ec2_instance:
-      name: '{{ semaphore_vars.task_details.name }}-{{ imageName }}'
+      name: '{{ semaphore_vars.task_details.username }}-{{ imageName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
       network:  

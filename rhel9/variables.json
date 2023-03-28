@@ -2,7 +2,7 @@
   "myUsername": "support",
   "myPassword": "strongPassword",
   "ansibleUser": "ec2-user",
-  "imageName": "MTURNER-RHEL9",
+  "imageName": "RHEL9",
   "awsAMI": "ami-05c96317a6278cfaa",
   "keyName": "support",
   "keyLocation": "~/.ssh/support.pem",

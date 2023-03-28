@@ -2,7 +2,7 @@
   "myUsername": "support",
   "myPassword": "strongPassword",
   "ansibleUser": "administrator",
-  "imageName": "MTURNER-WINS2022",
+  "imageName": "WINS2022",
   "awsAMI": "ami-01e91a8e71e619d87",
   "keyName": "support",
   "keyLocation": "~/.ssh/support.pem",
