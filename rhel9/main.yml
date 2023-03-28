@@ -1,3 +1,9 @@
+- name: 'Print Semaphore Variables'
+  run_once: true
+  delegate_to: localhost
+  debug:
+    var: semaphore_vars
+
 - name: SSO 2FA
   hosts: local
   gather_facts: no
