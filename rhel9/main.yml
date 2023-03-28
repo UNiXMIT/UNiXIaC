@@ -1,7 +1,8 @@
 - name: 'Print Semaphore Variables'
   hosts: local
-  debug:
-    var: semaphore_vars
+  tasks:
+    debug:
+      var: semaphore_vars
 
 - name: SSO 2FA
   hosts: local
