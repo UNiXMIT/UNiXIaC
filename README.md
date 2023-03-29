@@ -32,11 +32,14 @@ http://ServerIP:8181
 - destroy
 - vs2019
   - edvs2019_70
+    - edvs2019_70pu15
 - vs2022
   - edvs2022_80
 - ede70
+  - ede70pu15
 - ede80
 - es70
+  - es70pu15
 - es80
 - extend1050
 

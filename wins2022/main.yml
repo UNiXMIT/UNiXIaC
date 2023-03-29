@@ -115,7 +115,6 @@
     import_tasks: vs2019.yml
   tags:
     - vs2019
-    - edvs2019_70
 
 - name: Install Visual Studio 2022
   hosts: awsEC2
@@ -125,7 +124,6 @@
     import_tasks: vs2022.yml
   tags:
     - vs2022
-    - edvs2022_80
 
 - name: Install VSCode + Extensions
   hosts: awsEC2
