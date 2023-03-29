@@ -6,23 +6,17 @@ curl -s https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/semaphore.sh | ba
 ```
 **NOTE:** pfsso*.zip and support.pem must be located in the current working directory before executing semaphore.sh.  
 
-## SSO
-Trigger the SSO process using the alias:
-```
-sso
-```
-Credentials will last for 1 hour.  
-
 ## Products
-Product installers should be copied into the /products directory of the container i.e.  
+Product installers should be copied into the following directory on the host machine where podman is installed.  
+
 ```
-podman cp installer.exe containerName:/products
+/home/semaphore
 ```
 
 ## Ansible Semaphore - https://www.ansible-semaphore.com
 You can access the Semaphore Web UI with:
 ```
-http://ServerIP:8181  
+http://serverIP:8181  
 ```
 
 ## Tags
