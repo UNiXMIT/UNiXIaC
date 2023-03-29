@@ -30,9 +30,13 @@ http://ServerIP:8181
 ##### WINS2022
 - default
 - destroy
+- vs2019
+  - edvs2019_70
 - vs2022
   - edvs2022_80
+- ede70
 - ede80
+- es70
 - es80
 - extend1050
 

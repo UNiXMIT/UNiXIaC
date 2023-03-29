@@ -1,0 +1,21 @@
+- name: Copy ES 7.0 Installer to EC2 Instance
+  win_copy:
+    src: /products/es_70.exe
+    dest: C:\temp\
+
+- name: Install ES 7.0
+  win_package:
+    path: C:\temp\es_70.exe
+    state: present
+    arguments: /passive
+
+- name: Add License Server
+  win_lineinfile:
+    path: C:\ProgramData\Micro Focus\ces.ini
+    regex: '^lshost'
+    line: 'lshost = {{ licenseServer }}'
+
+- name: Import JCL Region
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml'
+    chdir: C:\MFSamples\JCL

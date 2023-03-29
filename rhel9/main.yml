@@ -12,7 +12,7 @@
   tasks:
   - name: Create AWS EC2 instance
     ec2_instance:
-      name: '{{ semaphore_vars.task_details.username }}-{{ imageName }}'
+      name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
       network:  

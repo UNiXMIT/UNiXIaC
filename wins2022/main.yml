@@ -15,7 +15,7 @@
       tower_callback:
         windows: true
         set_password: '{{ myPassword }}'
-      name: '{{ semaphore_vars.task_details.username }}-{{ imageName }}'
+      name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
       network:  
@@ -107,6 +107,16 @@
     import_tasks: software.yml
   tags: default
 
+- name: Install Visual Studio 2019
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import vs2019.yml 
+    import_tasks: vs2019.yml
+  tags:
+    - vs2019
+    - edvs2019_70
+
 - name: Install Visual Studio 2022
   hosts: awsEC2
   gather_facts: no
@@ -139,6 +149,14 @@
     import_tasks: createFilesDir.yml
   tags: default
 
+- name: Install EDVS2019 7.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import edvs2019_70.yml
+    import_tasks: edvs2019_70.yml
+  tags: edvs2019_70
+
 - name: Install EDVS2022 8.0
   hosts: awsEC2
   gather_facts: no
@@ -147,6 +165,14 @@
     import_tasks: edvs2022_80.yml
   tags: edvs2022_80
 
+- name: Install EDE 7.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import ede_70.yml
+    import_tasks: ede_70.yml
+  tags: ede70
+
 - name: Install EDE 8.0
   hosts: awsEC2
   gather_facts: no
@@ -154,6 +180,14 @@
   - name: Import ede_80.yml
     import_tasks: ede_80.yml
   tags: ede80
+
+- name: Install ES 7.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import es_70.yml
+    import_tasks: es_70.yml
+  tags: es70
 
 - name: Install ES 8.0
   hosts: awsEC2
