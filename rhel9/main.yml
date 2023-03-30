@@ -122,15 +122,15 @@
     import_tasks: createFilesDir.yml
   tags: default
 
-- name: Install ES 8.0 PU 3
+- name: Install ES 8.0
   hosts: awsEC2
   gather_facts: no
   become: yes
   vars:
-    installPath: /home/products/es80PU3
+    installPath: /home/products/es80
   tasks:
-  - name: Import es_80.yml
-    import_tasks: es_80.yml
+  - name: Import es80.yml
+    import_tasks: es80.yml
   tags: es80
 
 - name: Install extend 10.5.0

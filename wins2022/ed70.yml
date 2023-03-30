@@ -28,7 +28,7 @@
 
 - name: Import JCL Region
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml'
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml'
     chdir: C:\MFSamples\JCL
 
 - name: Copy EDVS2019 7.0 PU 15 Installer to EC2 Instance
