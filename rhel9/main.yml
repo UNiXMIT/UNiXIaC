@@ -17,9 +17,9 @@
       key_name: '{{ keyName }}'
       network:  
         assign_public_ip: yes
-        security-group: '{{ securityGroup }}'
+      security_group: '{{ securityGroup }}'
       region: '{{ awsRegion }}'
-      availability_zone: '{{ availabilityZone }}'
+      vpc_id: '{{ vpcID }}'
       aws_profile: '{{ awsProfile }}'
       instance_type: '{{ instanceType }}'
       count: '{{ vmCount }}'
@@ -40,9 +40,9 @@
       key_name: '{{ keyName }}'
       network:  
         assign_public_ip: yes
-        security-group: '{{ securityGroup }}'
+      security_group: '{{ securityGroup }}'
       region: '{{ awsRegion }}'
-      availability_zone: '{{ availabilityZone }}'
+      vpc_id: '{{ vpcID }}'
       aws_profile: '{{ awsProfile }}'
       instance_type: '{{ instanceType }}'
       count: '{{ vmCount }}'
