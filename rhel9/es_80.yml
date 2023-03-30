@@ -1,4 +1,4 @@
-- name: Copy ES 8.0 PU 3 Installer to EC2 Instance
+- name: Copy ES 8.0 PU 5 Installer to EC2 Instance
   copy:
     src: /products/setup_ent_server_8.0_patchupdate05_318651_redhat_x86_64
     dest: "/home/{{ myUsername }}/MFSupport/MFInstallers/setup_ent_server_8.0_patchupdate05_318651_redhat_x86_64"
@@ -6,7 +6,7 @@
     group: support
     mode: '0775'
 
-- name: Install ES 8.0 PU 3
+- name: Install ES 8.0 PU 5
   command: "/home/{{ myUsername }}/MFSupport/MFInstallers/setup_ent_server_8.0_patchupdate05_318651_redhat_x86_64 -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}"
 
 - name: Add License Server
