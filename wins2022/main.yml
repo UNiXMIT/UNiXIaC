@@ -147,77 +147,29 @@
     import_tasks: createFilesDir.yml
   tags: default
 
-- name: Install EDVS2019 7.0
+- name: Install ED 7.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import edvs2019_70.yml
-    import_tasks: edvs2019_70.yml
-  tags: edvs2019_70
+  - name: Import ed70.yml
+    import_tasks: ed70.yml
+  tags: ed70
 
-- name: Install EDVS2022 8.0
+- name: Install ED 8.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import edvs2022_80.yml
-    import_tasks: edvs2022_80.yml
-  tags: edvs2022_80
+  - name: Import ed80.yml
+    import_tasks: ed80.yml
+  tags: ed80
 
-- name: Install EDVS2022 9.0
+- name: Install ED 9.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import edvs2022_90.yml
-    import_tasks: edvs2022_90.yml
-  tags: edvs2022_90
-
-- name: Install EDE 7.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import ede_70.yml
-    import_tasks: ede_70.yml
-  tags: ede70
-
-- name: Install EDE 8.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import ede_80.yml
-    import_tasks: ede_80.yml
-  tags: ede80
-
-- name: Install EDE 9.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import ede_90.yml
-    import_tasks: ede_90.yml
-  tags: ede90
-
-- name: Install ES 7.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import es_70.yml
-    import_tasks: es_70.yml
-  tags: es70
-
-- name: Install ES 8.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import es_80.yml
-    import_tasks: es_80.yml
-  tags: es80
-
-- name: Install ES 9.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import es_90.yml
-    import_tasks: es_90.yml
-  tags: es90
+  - name: Import ed90.yml
+    import_tasks: ed90.yml
+  tags: ed90
 
 - name: Install extend 10.5.0
   hosts: awsEC2

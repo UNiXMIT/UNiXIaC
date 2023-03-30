@@ -9,6 +9,17 @@
     state: present
     arguments: /passive
 
+- name: Copy EDE 7.0 Installer to EC2 Instance
+  win_copy:
+    src: /products/ede_70.exe
+    dest: C:\temp\
+
+- name: Install EDE 7.0
+  win_package:
+    path: C:\temp\ede_70.exe
+    state: present
+    arguments: /passive
+
 - name: Add License Server
   win_lineinfile:
     path: C:\ProgramData\Micro Focus\ces.ini
@@ -17,18 +28,31 @@
 
 - name: Import JCL Region
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml'
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml'
     chdir: C:\MFSamples\JCL
 
 - name: Copy EDVS2019 7.0 PU 15 Installer to EC2 Instance
   win_copy:
     src: /products/edvs2019_70_pu15_315341.exe
     dest: C:\temp\
-  tags: edvs2019_70pu15
+  tags: ed70pu15
 
 - name: Install EDVS2019 7.0 PU 15
   win_package:
     path: C:\temp\edvs2019_70_pu15_315341.exe
     state: present
     arguments: /passive
-  tags: edvs2019_70pu15
+  tags: ed70pu15
+
+- name: Copy EDE 7.0 PU 15 Installer to EC2 Instance
+  win_copy:
+    src: /products/ede_70_pu15_315321.exe
+    dest: C:\temp\
+  tags: ed70pu15
+
+- name: Install EDE 7.0 PU 15
+  win_package:
+    path: C:\temp\ede_70_pu15_315321.exe
+    state: present
+    arguments: /passive
+  tags: ed70pu15

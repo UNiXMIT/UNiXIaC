@@ -6,7 +6,7 @@
   "awsAMI": "ami-05c96317a6278cfaa",
   "keyName": "support",
   "keyLocation": "~/.ssh/support.pem",
-  "securityGroup": "MTURNER",
+  "securityGroup": "sg-0a02b789816fa3b0b",
   "awsRegion": "eu-west-2",
   "availabilityZone": "eu-west-2a",
   "instanceType": "t3.xlarge",
