@@ -1,9 +1,3 @@
-vmCount
-VM Count
-Create how many instances?
-Integer
-Required
-
 ssoEmail
 SSO Email
 Email address to be used for SSO authentication
@@ -26,3 +20,9 @@ ssoToken
 SSO Token
 Auth Token - Required if using TOTP
 Integer
+
+vmCount
+VM Count
+Create how many instances?
+Integer
+Required
