@@ -19,7 +19,7 @@
         assign_public_ip: yes
       security_group: '{{ securityGroup }}'
       region: '{{ awsRegion }}'
-      vpc_id: '{{ vpcID }}'
+      availability_zone: '{{ availabilityZone }}'
       aws_profile: '{{ awsProfile }}'
       instance_type: '{{ instanceType }}'
       count: '{{ vmCount }}'
@@ -42,7 +42,7 @@
         assign_public_ip: yes
       security_group: '{{ securityGroup }}'
       region: '{{ awsRegion }}'
-      vpc_id: '{{ vpcID }}'
+      availability_zone: '{{ availabilityZone }}'
       aws_profile: '{{ awsProfile }}'
       instance_type: '{{ instanceType }}'
       count: '{{ vmCount }}'

@@ -8,7 +8,7 @@
   "keyLocation": "~/.ssh/support.pem",
   "securityGroup": "sg-0a02b789816fa3b0b",
   "awsRegion": "eu-west-2",
-  "vpcID": "vpc-6e7f1d06",
+  "availabilityZone": "eu-west-2a",
   "instanceType": "t3.xlarge",
   "vmCount": 1,
   "deviceName": "/dev/sda1",
