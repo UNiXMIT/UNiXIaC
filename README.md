@@ -29,12 +29,15 @@ http://serverIP:8181
     - edvs2019_70pu15
 - vs2022
   - edvs2022_80
+  - edvs2022_90
 - ede70
   - ede70pu15
 - ede80
+- ede90
 - es70
   - es70pu15
 - es80
+- es90
 - extend1050
 
 ### Linux

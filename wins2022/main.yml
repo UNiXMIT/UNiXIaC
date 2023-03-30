@@ -163,6 +163,14 @@
     import_tasks: edvs2022_80.yml
   tags: edvs2022_80
 
+- name: Install EDVS2022 9.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import edvs2022_90.yml
+    import_tasks: edvs2022_90.yml
+  tags: edvs2022_90
+
 - name: Install EDE 7.0
   hosts: awsEC2
   gather_facts: no
@@ -179,6 +187,14 @@
     import_tasks: ede_80.yml
   tags: ede80
 
+- name: Install EDE 9.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import ede_90.yml
+    import_tasks: ede_90.yml
+  tags: ede90
+
 - name: Install ES 7.0
   hosts: awsEC2
   gather_facts: no
@@ -194,6 +210,14 @@
   - name: Import es_80.yml
     import_tasks: es_80.yml
   tags: es80
+
+- name: Install ES 9.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import es_90.yml
+    import_tasks: es_90.yml
+  tags: es90
 
 - name: Install extend 10.5.0
   hosts: awsEC2
