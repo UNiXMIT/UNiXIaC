@@ -22,4 +22,5 @@
       - ed
       - glibc-devel.i686
       - tmux
+      - openconnect
     state: present

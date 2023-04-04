@@ -1,0 +1,15 @@
+- name: Copy PulseVPN Installer to EC2 Instance
+  win_copy:
+    src: /products/ps-pulse-win-9.1r15.0-b15819-64bitinstaller.msi
+    dest: C:\temp\
+
+- name: Copy PulseVPN Config File to EC2 Instance
+  win_copy:
+    src: /products/MFIPulseVPN.pulsepreconfig
+    dest: C:\temp\
+
+- name: Install PulseVPN
+  win_package:
+    path: C:\temp\ps-pulse-win-9.1r15.0-b15819-64bitinstaller.msi
+    state: present
+    arguments: CONFIGFILE=C:\temp\MFIPulseVPN.pulsepreconfig /qb
