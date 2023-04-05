@@ -122,7 +122,7 @@
     import_tasks: createFilesDir.yml
   tags: default
 
-- name: Install ES 8.0
+- name: Install ED 8.0
   hosts: awsEC2
   gather_facts: no
   become: yes
@@ -131,7 +131,7 @@
   tasks:
   - name: Import es80.yml
     import_tasks: es80.yml
-  tags: es80
+  tags: ed80
 
 - name: Install extend 10.5.0
   hosts: awsEC2

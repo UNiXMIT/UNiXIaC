@@ -36,5 +36,5 @@ http://serverIP:8181
 ##### RHEL9
 - default
 - destroy
-- es80
+- ed80
 - extend1050
