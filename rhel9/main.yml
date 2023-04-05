@@ -127,10 +127,10 @@
   gather_facts: no
   become: yes
   vars:
-    installPath: /home/products/es80
+    installPath: /home/products/ed80
   tasks:
-  - name: Import es80.yml
-    import_tasks: es80.yml
+  - name: Import ed80.yml
+    import_tasks: ed80.yml
   tags: ed80
 
 - name: Install extend 10.5.0
