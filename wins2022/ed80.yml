@@ -64,3 +64,29 @@
   ansible.windows.win_service:
     name: escwa
     state: started
+
+- name: Copy EDVS2022 8.0 PU 5 Installer to EC2 Instance
+  win_copy:
+    src: /products/edvs2022_80_pu05_318648.exe
+    dest: C:\temp\
+  tags: ed80pu5
+
+- name: Install EDVS2022 8.0 PU 5
+  win_package:
+    path: C:\temp\edvs2022_80_pu05_318648.exe
+    state: present
+    arguments: /passive
+  tags: ed80pu5
+
+- name: Copy EDE 8.0 PU 5 Installer to EC2 Instance
+  win_copy:
+    src: /products/ede_80_pu05_318643.exe
+    dest: C:\temp\
+  tags: ed80pu5
+
+- name: Install EDE 8.0 PU 5
+  win_package:
+    path: C:\temp\ede_80_pu05_318643.exe
+    state: present
+    arguments: /passive
+  tags: ed80pu5

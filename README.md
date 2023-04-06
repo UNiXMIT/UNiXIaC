@@ -29,6 +29,7 @@ http://serverIP:8181
     - ed70pu15
 - vs2022
   - ed80
+    - ed80pu5
   - ed90
 - extend1050
 
