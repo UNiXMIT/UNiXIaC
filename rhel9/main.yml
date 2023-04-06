@@ -133,6 +133,17 @@
     import_tasks: ed80.yml
   tags: ed80
 
+- name: Install ED 9.0
+  hosts: awsEC2
+  gather_facts: no
+  become: yes
+  vars:
+    installPath: /home/products/ed90
+  tasks:
+  - name: Import ed90.yml
+    import_tasks: ed90.yml
+  tags: ed90
+
 - name: Install extend 10.5.0
   hosts: awsEC2
   gather_facts: no
