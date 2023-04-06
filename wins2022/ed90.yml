@@ -55,11 +55,10 @@
     state: stopped
 
 - name: Enable ESCWA Listen All
-  win_regedit:
-    path: HKLM:\SYSTEM\CurrentControlSet\Services\escwa
-    name: imagePath  
-    data: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\escwa.exe" -s --BasicConfig.MfRequestedEndpoint="tcp:*:10086" --write=true'
-    type: expandstring
+  community.windows.win_lineinfile:
+    path: C:\ProgramData\Micro Focus\Enterprise Developer\ESCWA\commonwebadmin.json
+    regex: '^MfRequestedEndpoint'
+    line: '"MfRequestedEndpoint" : "tcp:*:10086",'
 
 - name: Start ESCWA Service
   ansible.windows.win_service:
