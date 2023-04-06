@@ -17,7 +17,7 @@
     line: 'lshost = {{ licenseServer }}'
 
 - name: Start MFDS
-  command: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv && {{ installPath }}/bin/mfds"
+  command: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv && {{ installPath }}/bin/mfds --UI-on && {{ installPath }}/bin/mfds --listen-all && {{ installPath }}/bin/mfds"
   environment: 
     COBDIR: '{{ installPath }}'
 

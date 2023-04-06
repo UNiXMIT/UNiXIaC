@@ -30,6 +30,41 @@
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml'
     chdir: C:\MFSamples\JCL
+  
+- name: Stop MFDS Service
+  ansible.windows.win_service:
+    name: mf_CCITCP2
+    state: stopped
+
+- name: Enable ESMAC UI
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" --UI-on'
+
+- name: Enable ESMAC Listen All
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" --listen-all'
+
+- name: Start MFDS Service
+  ansible.windows.win_service:
+    name: mf_CCITCP2
+    state: started
+
+- name: Stop ESCWA Service
+  ansible.windows.win_service:
+    name: escwa
+    state: stopped
+
+- name: Enable ESCWA Listen All
+  win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Services\escwa
+    name: imagePath  
+    data: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\escwa.exe" -s --BasicConfig.MfRequestedEndpoint="tcp:*:10086" --write=true'
+    type: expandstring
+
+- name: Start ESCWA Service
+  ansible.windows.win_service:
+    name: escwa
+    state: started
 
 - name: Copy EDVS2019 7.0 PU 15 Installer to EC2 Instance
   win_copy:
