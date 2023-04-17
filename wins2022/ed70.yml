@@ -10,7 +10,7 @@
 
 - name: Register Workaround DLL
   win_command: 
-    cmd: C:\Windows\System32\regsvr32 C:\ProgramData\Microsoft\VisualStudio\Setup\x86\Microsoft.VisualStudio.Setup.Configuration.Native.dll
+    cmd: regsvr32 /s C:\ProgramData\Microsoft\VisualStudio\Setup\x86\Microsoft.VisualStudio.Setup.Configuration.Native.dll
     chdir: C:\ProgramData\Microsoft\VisualStudio\Setup\x86
 
 - name: Install EDVS2019 7.0
