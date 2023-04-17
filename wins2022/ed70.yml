@@ -2,78 +2,93 @@
   win_copy:
     src: /products/edvs2019_70.exe
     dest: C:\temp\
+  tags: ed70
 
 - name: Workaround for Install Issue 'Installing EDVS2019_70.exe, a blank window pops up and then disappears' - https://portal.microfocus.com/s/article/KM000004846
   win_copy:
     src: /products/Microsoft.VisualStudio.Setup.Configuration.Native.dll
     dest: C:\ProgramData\Microsoft\VisualStudio\Setup\x86\
+  tags: ed70
 
 - name: Register Workaround DLL
   win_command: 
     cmd: regsvr32 /s C:\ProgramData\Microsoft\VisualStudio\Setup\x86\Microsoft.VisualStudio.Setup.Configuration.Native.dll
     chdir: C:\ProgramData\Microsoft\VisualStudio\Setup\x86
+  tags: ed70
 
 - name: Install EDVS2019 7.0
   win_package:
     path: C:\temp\edvs2019_70.exe
     state: present
     arguments: /passive
+  tags: ed70
 
 - name: Copy EDE 7.0 Installer to EC2 Instance
   win_copy:
     src: /products/ede_70.exe
     dest: C:\temp\
+  tags: ed70
 
 - name: Install EDE 7.0
   win_package:
     path: C:\temp\ede_70.exe
     state: present
     arguments: /passive
+  tags: ed70
 
 - name: Add License Server
   win_lineinfile:
     path: C:\ProgramData\Micro Focus\ces.ini
     regex: '^lshost'
     line: 'lshost = {{ licenseServer }}'
+  tags: ed70
 
 - name: Import JCL Region
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml'
     chdir: C:\MFSamples\JCL
+  tags: ed70
   
 - name: Stop MFDS Service
   ansible.windows.win_service:
     name: mf_CCITCP2
     state: stopped
+  tags: ed70
 
 - name: Enable ESMAC UI
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" --UI-on'
+  tags: ed70
 
 - name: Enable ESMAC Listen All
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" --listen-all'
+  tags: ed70
 
 - name: Start MFDS Service
   ansible.windows.win_service:
     name: mf_CCITCP2
     state: started
+  tags: ed70
 
 - name: Stop ESCWA Service
   ansible.windows.win_service:
     name: escwa
     state: stopped
+  tags: ed70
 
 - name: Enable ESCWA Listen All
   community.windows.win_lineinfile:
     path: C:\ProgramData\Micro Focus\Enterprise Developer\ESCWA\commonwebadmin.json
     regex: 'MfRequestedEndpoint'
     line: '    "MfRequestedEndpoint" : "tcp:*:10086",'
+  tags: ed70
 
 - name: Start ESCWA Service
   ansible.windows.win_service:
     name: escwa
     state: started
+  tags: ed70
 
 - name: Copy EDVS2019 7.0 PU 15 Installer to EC2 Instance
   win_copy:

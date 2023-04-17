@@ -161,7 +161,6 @@
   tasks:
   - name: Import ed70.yml
     import_tasks: ed70.yml
-  tags: ed70
 
 - name: Install ED 8.0
   hosts: awsEC2
