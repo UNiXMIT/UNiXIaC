@@ -2,65 +2,78 @@
   win_copy:
     src: /products/edvs2022_90.exe
     dest: C:\temp\
+  tags: ed90
 
 - name: Install EDVS2022 9.0
   win_package:
     path: C:\temp\edvs2022_90.exe
     state: present
     arguments: /passive
+  tags: ed90
 
 - name: Copy EDE 9.0 Installer to EC2 Instance
   win_copy:
     src: /products/ede_90.exe
     dest: C:\temp\
+  tags: ed90
 
 - name: Install EDE 9.0
   win_package:
     path: C:\temp\ede_90.exe
     state: present
     arguments: /passive
+  tags: ed90
 
 - name: Add License Server
   win_lineinfile:
     path: C:\ProgramData\Micro Focus\ces.ini
     regex: '^lshost'
     line: 'lshost = {{ licenseServer }}'
+  tags: ed90
 
 - name: Import JCL Region
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml'
     chdir: C:\MFSamples\JCL
+  tags: ed90
 
 - name: Stop MFDS Service
   ansible.windows.win_service:
     name: mf_CCITCP2
     state: stopped
+  tags: ed90
 
 - name: Enable ESMAC UI
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" --UI-on'
+  tags: ed90
 
 - name: Enable ESMAC Listen All
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" --listen-all'
+  tags: ed90
 
 - name: Start MFDS Service
   ansible.windows.win_service:
     name: mf_CCITCP2
     state: started
+  tags: ed90
 
 - name: Stop ESCWA Service
   ansible.windows.win_service:
     name: escwa
     state: stopped
+  tags: ed90
 
 - name: Enable ESCWA Listen All
   community.windows.win_lineinfile:
     path: C:\ProgramData\Micro Focus\Enterprise Developer\ESCWA\commonwebadmin.json
     regex: 'MfRequestedEndpoint'
     line: '    "MfRequestedEndpoint" : "tcp:*:10086",'
+  tags: ed90
 
 - name: Start ESCWA Service
   ansible.windows.win_service:
     name: escwa
     state: started
+  tags: ed90
