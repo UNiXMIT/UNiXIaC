@@ -3,6 +3,16 @@
     src: /products/edvs2019_70.exe
     dest: C:\temp\
 
+- name: Workaround for Install Issue 'Installing EDVS2019_70.exe, a blank window pops up and then disappears' - https://portal.microfocus.com/s/article/KM000004846
+  win_copy:
+    src: /products/Microsoft.VisualStudio.Setup.Configuration.Native.dll
+    dest: C:\ProgramData\Microsoft\VisualStudio\Setup\x86\
+
+- name: Register Workaround DLL
+  win_command: 
+    cmd: 'regsvr32 C:\ProgramData\Microsoft\VisualStudio\Setup\x86\Microsoft.VisualStudio.Setup.Configuration.Native.dll'
+    chdir: C:\ProgramData\Microsoft\VisualStudio\Setup\x86
+
 - name: Install EDVS2019 7.0
   win_package:
     path: C:\temp\edvs2019_70.exe
