@@ -20,7 +20,7 @@
   win_package:
     path: C:\temp\edvs2019_70.exe
     state: present
-    arguments: /passive
+    arguments: /passive RumbaCheckbox=1 /log C:\temp\edvs2019_70.log
   tags: ed70
 
 - name: Copy EDE 7.0 Installer to EC2 Instance
@@ -33,7 +33,7 @@
   win_package:
     path: C:\temp\ede_70.exe
     state: present
-    arguments: /passive
+    arguments: /passive RumbaCheckbox=1 /log C:\temp\ede_70.log
   tags: ed70
 
 - name: Add License Server
@@ -100,7 +100,7 @@
   win_package:
     path: C:\temp\edvs2019_70_pu15_315341.exe
     state: present
-    arguments: /passive
+    arguments: /passive RumbaCheckbox=1 /log C:\temp\edvs2019_70_pu15.log
   tags: ed70pu15
 
 - name: Copy EDE 7.0 PU 15 Installer to EC2 Instance
@@ -113,5 +113,5 @@
   win_package:
     path: C:\temp\ede_70_pu15_315321.exe
     state: present
-    arguments: /passive
+    arguments: /passive RumbaCheckbox=1 /log C:\temp\ede_70_pu15.log
   tags: ed70pu15
