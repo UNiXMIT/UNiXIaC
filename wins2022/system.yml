@@ -80,12 +80,12 @@
       arguments: shutdown -s -f -t 0
     triggers:
     - type: daily
-      start_boundary: '2023-01-01T18:00:00'
+      start_boundary: '2023-01-01T20:00:00'
     username: '{{ ansibleUser }}'
     password: '{{ myPassword }}'
     run_level: highest
     state: present
-    enabled: no
+    enabled: yes
   
 - name: Disable IE ESC for Administrators
   win_regedit:
