@@ -23,9 +23,28 @@
     dest: C:\temp\
   tags: ed70
 
+# - name: Workaround for Install Issue 'Installing EDVS2019_70.exe, a blank window pops up and then disappears' - https://portal.microfocus.com/s/article/KM000004846
+#   win_copy:
+#     src: /products/Microsoft.VisualStudio.Setup.Configuration.Native.dll
+#     dest: C:\ProgramData\Microsoft\VisualStudio\Setup\x86\
+#   tags: ed70
+
+- name: Get Microsoft.VisualStudio.Setup.Configuration.Native.dll Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/70/edvs2019_70.exe
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: ed70
+
 - name: Workaround for Install Issue 'Installing EDVS2019_70.exe, a blank window pops up and then disappears' - https://portal.microfocus.com/s/article/KM000004846
-  win_copy:
-    src: /products/Microsoft.VisualStudio.Setup.Configuration.Native.dll
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
     dest: C:\ProgramData\Microsoft\VisualStudio\Setup\x86\
   tags: ed70
 

@@ -1,11 +1,45 @@
-- name: Copy PulseVPN Installer to EC2 Instance
-  win_copy:
-    src: /products/ps-pulse-win-9.1r15.0-b15819-64bitinstaller.msi
+# - name: Copy PulseVPN Installer to EC2 Instance
+#   win_copy:
+#     src: /products/ps-pulse-win-9.1r15.0-b15819-64bitinstaller.msi
+#     dest: C:\temp\
+
+- name: Get PulseVPN Installer Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: PulseVPN/ps-pulse-win-9.1r15.0-b15819-64bitinstaller.msi
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+
+- name: Download PulseVPN Installer
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
     dest: C:\temp\
 
-- name: Copy PulseVPN Config File to EC2 Instance
-  win_copy:
-    src: /products/MFIPulseVPN.pulsepreconfig
+# - name: Copy PulseVPN Config File to EC2 Instance
+#   win_copy:
+#     src: /products/MFIPulseVPN.pulsepreconfig
+#     dest: C:\temp\
+
+- name: Get PulseVPN Config File Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: PulseVPN/MFIPulseVPN.pulsepreconfig
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+
+- name: Download PulseVPN Config File
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
     dest: C:\temp\
 
 - name: Install PulseVPN
