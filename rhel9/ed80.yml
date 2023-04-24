@@ -1,10 +1,20 @@
-- name: Copy ED 8.0 Installer to EC2 Instance
-  copy:
-    src: /products/setup_entdev_8.0_patchupdate05_318651_redhat_x86_64
+- name: Get ED 8.0 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/80/setup_entdev_8.0_patchupdate05_318651_redhat_x86_64
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+
+- name: Download ED 8.0 Installer
+  ansible.builtin.get_url:
+    url: '{{ s3.url }}'
     dest: "/home/{{ myUsername }}/MFSupport/MFInstallers/setup_entdev_8.0_patchupdate05_318651_redhat_x86_64"
-    owner: support 
-    group: support
-    mode: '0775'
+    mode: 0775
 
 - name: Install ED 8.0
   command: "/home/{{ myUsername }}/MFSupport/MFInstallers/setup_entdev_8.0_patchupdate05_318651_redhat_x86_64 -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}"
