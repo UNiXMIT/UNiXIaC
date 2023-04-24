@@ -1,6 +1,25 @@
-- name: Copy EDVS2019 7.0 Installer to EC2 Instance
-  win_copy:
-    src: /products/edvs2019_70.exe
+# - name: Copy EDVS2019 7.0 Installer to EC2 Instance
+#   win_copy:
+#     src: /products/edvs2019_70.exe
+#     dest: C:\temp\
+#   tags: ed70
+
+- name: Get EDVS2019 7.0 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/70/edvs2019_70.exe
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: ed70
+
+- name: Download EDVS2019 7.0 Installer
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
     dest: C:\temp\
   tags: ed70
 
@@ -23,9 +42,28 @@
     arguments: /passive RumbaCheckbox=1 /log C:\temp\edvs2019_70.log
   tags: ed70
 
-- name: Copy EDE 7.0 Installer to EC2 Instance
-  win_copy:
-    src: /products/ede_70.exe
+# - name: Copy EDE 7.0 Installer to EC2 Instance
+#   win_copy:
+#     src: /products/ede_70.exe
+#     dest: C:\temp\
+#   tags: ed70
+
+- name: Get EDE 7.0 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/70/ede_70.exe
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: ed70
+
+- name: Download EDE 7.0 Installer
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
     dest: C:\temp\
   tags: ed70
 
@@ -90,9 +128,28 @@
     state: started
   tags: ed70
 
-- name: Copy EDVS2019 7.0 PU 15 Installer to EC2 Instance
-  win_copy:
-    src: /products/edvs2019_70_pu15_315341.exe
+# - name: Copy EDVS2019 7.0 PU 15 Installer to EC2 Instance
+#   win_copy:
+#     src: /products/edvs2019_70_pu15_315341.exe
+#     dest: C:\temp\
+#   tags: ed70pu15
+
+- name: Get EDVS2019 7.0 PU 15 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/70/edvs2019_70_pu15_315341.exe
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: ed70pu15
+
+- name: Download EDVS2019 7.0 PU 15 Installer
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
     dest: C:\temp\
   tags: ed70pu15
 
@@ -103,9 +160,28 @@
     arguments: /passive RumbaCheckbox=1 /log C:\temp\edvs2019_70_pu15.log
   tags: ed70pu15
 
-- name: Copy EDE 7.0 PU 15 Installer to EC2 Instance
-  win_copy:
-    src: /products/ede_70_pu15_315321.exe
+# - name: Copy EDE 7.0 PU 15 Installer to EC2 Instance
+#   win_copy:
+#     src: /products/ede_70_pu15_315321.exe
+#     dest: C:\temp\
+#   tags: ed70pu15
+
+- name: Get EDE 7.0 PU 15 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/70/ede_70_pu15_315321.exe
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: ed70pu15
+
+- name: Download EDE 7.0 PU 15 Installer
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
     dest: C:\temp\
   tags: ed70pu15
 

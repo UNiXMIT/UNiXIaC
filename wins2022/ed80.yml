@@ -1,6 +1,25 @@
-- name: Copy EDVS2022 8.0 Installer to EC2 Instance
-  win_copy:
-    src: /products/edvs2022_80.exe
+# - name: Copy EDVS2022 8.0 Installer to EC2 Instance
+#   win_copy:
+#     src: /products/edvs2022_80.exe
+#     dest: C:\temp\
+#   tags: ed80
+
+- name: Get EDVS2022 8.0 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/80/edvs2022_80.exe
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: ed80
+
+- name: Download EDVS2022 8.0 Installer
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
     dest: C:\temp\
   tags: ed80
 
@@ -11,9 +30,28 @@
     arguments: /passive
   tags: ed80
 
-- name: Copy EDE 8.0 Installer to EC2 Instance
-  win_copy:
-    src: /products/ede_80.exe
+# - name: Copy EDE 8.0 Installer to EC2 Instance
+#   win_copy:
+#     src: /products/ede_80.exe
+#     dest: C:\temp\
+#   tags: ed80
+
+- name: Get EDE 8.0 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/80/ede_80.exe
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: ed80
+
+- name: Download EDE 8.0 Installer
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
     dest: C:\temp\
   tags: ed80
 
@@ -78,9 +116,28 @@
     state: started
   tags: ed80
 
-- name: Copy EDVS2022 8.0 PU 5 Installer to EC2 Instance
-  win_copy:
-    src: /products/edvs2022_80_pu05_318648.exe
+# - name: Copy EDVS2022 8.0 PU 5 Installer to EC2 Instance
+#   win_copy:
+#     src: /products/edvs2022_80_pu05_318648.exe
+#     dest: C:\temp\
+#   tags: ed80pu5
+
+- name: Get EDVS2022 8.0 PU 5 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/80/edvs2022_80_pu05_318648.exe
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: ed80pu5
+
+- name: Download EDVS2022 8.0 PU 5 Installer
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
     dest: C:\temp\
   tags: ed80pu5
 
@@ -91,9 +148,28 @@
     arguments: /passive
   tags: ed80pu5
 
-- name: Copy EDE 8.0 PU 5 Installer to EC2 Instance
-  win_copy:
-    src: /products/ede_80_pu05_318643.exe
+# - name: Copy EDE 8.0 PU 5 Installer to EC2 Instance
+#   win_copy:
+#     src: /products/ede_80_pu05_318643.exe
+#     dest: C:\temp\
+#   tags: ed80pu5
+
+- name: Get EDE 8.0 PU 5 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/80/ede_80_pu05_318643.exe
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: ed80pu5
+
+- name: Download EDE 8.0 PU 5 Installer
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
     dest: C:\temp\
   tags: ed80pu5
 
