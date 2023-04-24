@@ -13,7 +13,7 @@
 - name: Download ED 9.0 Installer
   ansible.builtin.get_url:
     url: '{{ s3.url }}'
-    dest: "/home/{{ myUsername }}/MFSupport/MFInstallers/setup_entdev_9.0_redhat_x86_64"
+    dest: "/home/{{ myUsername }}/MFSupport/MFInstallers/"
     mode: 0775
 
 - name: Install ED 9.0

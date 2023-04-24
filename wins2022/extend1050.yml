@@ -1,6 +1,23 @@
-- name: Copy extend 10.5.0 Installer to EC2 Instance
-  win_copy:
-    src: /products/extend(R) Version 10.5.0 x64.msi
+# - name: Copy extend 10.5.0 Installer to EC2 Instance
+#   win_copy:
+#     src: /products/extend(R) Version 10.5.0 x64.msi
+#     dest: C:\temp\
+
+- name: Get extend 10.5.0 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: AcuCOBOL/1050/PU1/extend(R) Version 10.5.0 x64.msi
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+
+- name: Download extend 10.5.0 Installer
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
     dest: C:\temp\
 
 - name: Install extend 10.5.0

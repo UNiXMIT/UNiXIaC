@@ -21,7 +21,7 @@
 - name: Download extend 10.5.0 Installer
   ansible.builtin.get_url:
     url: '{{ s3.url }}'
-    dest: /home/products/acu1050shx64/setup_acucob1050pmk59shACU
+    dest: /home/products/acu1050shx64/
     mode: 0775
     
 - name: Install extend 10.5.0
