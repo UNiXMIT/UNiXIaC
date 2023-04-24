@@ -20,7 +20,7 @@
 
 - name: Download extend 10.5.0 Installer
   ansible.builtin.get_url:
-    url: "s3.url"
+    url: '{{ s3.url }}'
     dest: /home/products/acu1050shx64/setup_acucob1050pmk59shACU
     mode: 0775
     
