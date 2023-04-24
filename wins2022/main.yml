@@ -43,7 +43,7 @@
       key_name: '{{ keyName }}'
       network:  
         assign_public_ip: yes
-        security-group: '{{ securityGroup }}'
+      security_group: '{{ securityGroup }}'
       region: '{{ awsRegion }}'
       availability_zone: '{{ availabilityZone }}'
       aws_profile: '{{ awsProfile }}'
@@ -57,9 +57,9 @@
       state: absent
     tags: destroy
   
-  - name: Wait 100 seconds for public IP and AAP Setup
+  - name: Wait 60 seconds for public IP and AAP Setup
     pause:
-      seconds: 100
+      seconds: 60
     tags: default
 
   - name: Add Host to awsEC2 Group 
