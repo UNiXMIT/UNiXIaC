@@ -1,5 +1,6 @@
 - name: S3 Management
   hosts: local
+  tasks:
   - name: Get extend 10.5.0 Download URL from S3
     amazon.aws.s3_object:
       profile: '{{ awsProfile }}'
@@ -16,6 +17,7 @@
 
 - name: extend 10.5.0
   hosts: awsEC2
+  tasks:
   - name: Create extend 10.5.0 directory
     file:
       path: /home/products/acu1050shx64
