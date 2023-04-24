@@ -145,6 +145,7 @@
   tags: ed90
 
 - name: Install extend 10.5.0
+  hosts: awsEC2
   gather_facts: no
   become: yes
   tasks:
