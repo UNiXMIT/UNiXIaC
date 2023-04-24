@@ -61,6 +61,11 @@
     pause:
       seconds: 60
     tags: default
+  
+  - name: debug
+    debug: msg="{{ item.public_ip_address }}"
+    loop: '{{ ec2.instances }}'
+    tags: default
 
   - name: Add Host to awsEC2 Group 
     add_host: 
