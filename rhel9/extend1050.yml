@@ -1,4 +1,5 @@
 - name: Create extend 10.5.0 directory
+  hosts: awsEC2
   file:
     path: /home/products/acu1050shx64
     state: directory
@@ -6,16 +7,40 @@
     group: support
     mode: '0775'
     
-- name: Copy extend 10.5.0 Installer to EC2 Instance
-  copy:
-    src: /products/setup_acucob1050pmk59shACU
+# - name: Copy extend 10.5.0 Installer to EC2 Instance
+#   copy:
+#     src: /products/setup_acucob1050pmk59shACU
+#     dest: /home/products/acu1050shx64/setup_acucob1050pmk59shACU
+#     owner: support 
+#     group: support
+#     mode: '0775'
+
+- name: Get extend 10.5.0 Download URL from S3
+  hosts: local 
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: AcuCOBOL/1050/PU1/setup_acucob1050pmk59shACU
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+
+- name: Set S3 URL Variable
+  hosts: local
+  set_fact: S3URL={{ s3.url }}
+
+- name: Download extend 10.5.0 Installer
+  hosts: awsEC2 
+  ansible.builtin.get_url:
+    url: "{{ hostvars['local'].S3URL }}"
     dest: /home/products/acu1050shx64/setup_acucob1050pmk59shACU
-    owner: support 
-    group: support
-    mode: '0775'
     
 - name: Install extend 10.5.0
+  hosts: awsEC2
   shell: "printf 'y\n/home/products/acu1050shx64\n' | /home/products/acu1050shx64/setup_acucob1050pmk59shACU"
 
 - name: Activate Licenses
+  hosts: awsEC2
   shell: "printf '{{ extendCode }}\n{{ extendKey }}\n' | /home/products/acu1050shx64/bin/activator"
