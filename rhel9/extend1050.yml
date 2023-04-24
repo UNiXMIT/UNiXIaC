@@ -1,3 +1,11 @@
+- name: Create extend 10.5.0 directory
+  file:
+    path: /home/products/acu1050shx64
+    state: directory
+    owner: support 
+    group: support
+    mode: '0775'
+
 - name: Get extend 10.5.0 Download URL from S3
   amazon.aws.s3_object:
     profile: '{{ awsProfile }}'
@@ -10,21 +18,9 @@
   register: s3
   delegate_to: localhost
 
-- name: Set S3 URL Variable
-  set_fact: S3URL={{ s3.url }}
-  delegate_to: localhost
-
-- name: Create extend 10.5.0 directory
-  file:
-    path: /home/products/acu1050shx64
-    state: directory
-    owner: support 
-    group: support
-    mode: '0775'
-
 - name: Download extend 10.5.0 Installer
   ansible.builtin.get_url:
-    url: "{{ hostvars['localhost'].S3URL }}"
+    url: "s3.url"
     dest: /home/products/acu1050shx64/setup_acucob1050pmk59shACU
     
 - name: Install extend 10.5.0
