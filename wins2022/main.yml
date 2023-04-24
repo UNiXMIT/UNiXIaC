@@ -12,7 +12,7 @@
   tasks:
   - name: Create AWS EC2 instance
     ec2_instance:
-      tower_callback:
+      aap_callback:
         windows: true
         set_password: '{{ myPassword }}'
       name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
@@ -60,11 +60,6 @@
   - name: Wait 60 seconds for public IP and AAP Setup
     pause:
       seconds: 60
-    tags: default
-  
-  - name: debug
-    debug: msg="{{ item.public_ip_address }}"
-    loop: '{{ ec2.instances }}'
     tags: default
 
   - name: Add Host to awsEC2 Group 
