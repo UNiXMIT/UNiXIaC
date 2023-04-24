@@ -27,7 +27,7 @@
   win_package:
     path: C:\temp\edvs2022_80.exe
     state: present
-    arguments: /passive
+    arguments: /passive RumbaCheckbox=1 /log C:\temp\edvs2022_80.log
   tags: ed80
 
 # - name: Copy EDE 8.0 Installer to EC2 Instance
@@ -59,7 +59,7 @@
   win_package:
     path: C:\temp\ede_80.exe
     state: present
-    arguments: /passive
+    arguments: /passive RumbaCheckbox=1 /log C:\temp\ede_80.log
   tags: ed80
 
 - name: Add License Server
@@ -145,7 +145,7 @@
   win_package:
     path: C:\temp\edvs2022_80_pu05_318648.exe
     state: present
-    arguments: /passive
+    arguments: /passive RumbaCheckbox=1 /log C:\temp\edvs2022_80_pu5.log
   tags: ed80pu5
 
 # - name: Copy EDE 8.0 PU 5 Installer to EC2 Instance
@@ -177,5 +177,5 @@
   win_package:
     path: C:\temp\ede_80_pu05_318643.exe
     state: present
-    arguments: /passive
+    arguments: /passive RumbaCheckbox=1 /log C:\temp\ede_80_pu5.log
   tags: ed80pu5

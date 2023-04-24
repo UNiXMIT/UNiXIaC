@@ -27,7 +27,7 @@
   win_package:
     path: C:\temp\edvs2022_90.exe
     state: present
-    arguments: /passive
+    arguments: /passive RumbaCheckbox=1 /log C:\temp\edvs2022_90.log
   tags: ed90
 
 # - name: Copy EDE 9.0 Installer to EC2 Instance
@@ -59,7 +59,7 @@
   win_package:
     path: C:\temp\ede_90.exe
     state: present
-    arguments: /passive
+    arguments: /passive RumbaCheckbox=1 /log C:\temp\ede_90.log
   tags: ed90
 
 - name: Add License Server
