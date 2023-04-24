@@ -1,5 +1,5 @@
 - name: SSO 2FA
-  hosts: local
+  hosts: localhost
   gather_facts: no
   tasks:
   - name: Import sso.yml
@@ -7,7 +7,7 @@
   tags: [ default, destroy ]
 
 - name: AWS EC2 Management
-  hosts: local
+  hosts: localhost
   gather_facts: no
   tasks:
   - name: Create AWS EC2 instance
