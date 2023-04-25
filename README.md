@@ -26,11 +26,15 @@ http://serverIP:8181
 - vs2019
   - ed70
     - ed70pu15
+    - ed70pu16
+    - ed70pu17
 - vs2022
   - ed80
     - ed80pu5
+    - ed80pu6
   - ed90
 - extend1050
+  - extend1050pu1
 
 ### Linux
 ##### RHEL9
@@ -38,3 +42,4 @@ http://serverIP:8181
 - ed80
 - ed90
 - extend1050
+- extend1050pu1
