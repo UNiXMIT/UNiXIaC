@@ -4,7 +4,7 @@
   tasks:
   - name: Import sso.yml
     import_tasks: sso.yml
-  tags: [ default, destroy ]
+  tags: default
 
 - name: AWS EC2 Management
   hosts: local
@@ -32,27 +32,6 @@
       wait: true
     register: ec2initial
     tags: default
-
-  - name: Destroy AWS EC2 instance
-    amazon.aws.ec2_instance:
-      name: '{{ imageName }}'
-      image_id: '{{ awsAMI }}'
-      key_name: '{{ keyName }}'
-      network:  
-        assign_public_ip: yes
-      security_group: '{{ securityGroup }}'
-      region: '{{ awsRegion }}'
-      availability_zone: '{{ availabilityZone }}'
-      aws_profile: '{{ awsProfile }}'
-      instance_type: '{{ instanceType }}'
-      count: '{{ vmCount }}'
-      volumes:
-      - device_name: '{{ deviceName }}'
-        ebs:
-         volume_type: '{{ volumeType }}'
-         volume_size: '{{ volumeSize }}'
-      state: absent
-    tags: destroy
   
   - name: Wait 10 seconds for public IP
     pause:
@@ -63,8 +42,9 @@
     amazon.aws.ec2_instance_info:
       profile: '{{ awsProfile }}'
       region: '{{ awsRegion }}'
-      instance_ids: '{{ ec2inital.changed_ids }}'
+      instance_ids: '{{ ec2initial.changed_ids }}'
     register: ec2
+    tags: default
 
   - name: Add Host to awsEC2 Group 
     add_host: 

@@ -23,7 +23,6 @@ http://serverIP:8181
 ### Windows
 ##### WINS2022
 - default
-- destroy
 - vs2019
   - ed70
     - ed70pu15
@@ -36,6 +35,5 @@ http://serverIP:8181
 ### Linux
 ##### RHEL9
 - default
-- destroy
 - ed80
 - extend1050
