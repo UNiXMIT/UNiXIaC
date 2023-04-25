@@ -18,7 +18,7 @@
 - name: Download PulseVPN Installer
   ansible.windows.win_get_url:
     url: '{{ s3.url }}'
-    dest: C:\temp\
+    dest: C:\Users\Public\Downloads
 
 # - name: Copy PulseVPN Config File to EC2 Instance
 #   win_copy:
@@ -40,10 +40,10 @@
 - name: Download PulseVPN Config File
   ansible.windows.win_get_url:
     url: '{{ s3.url }}'
-    dest: C:\temp\
+    dest: C:\Users\Public\Downloads
 
 - name: Install PulseVPN
   win_package:
-    path: C:\temp\ps-pulse-win-9.1r15.0-b15819-64bitinstaller.msi
+    path: C:\Users\Public\Downloads\ps-pulse-win-9.1r15.0-b15819-64bitinstaller.msi
     state: present
-    arguments: CONFIGFILE=C:\temp\MFIPulseVPN.pulsepreconfig /qb
+    arguments: CONFIGFILE=C:\Users\Public\Downloads\MFIPulseVPN.pulsepreconfig /qb
