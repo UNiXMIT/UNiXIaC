@@ -11,7 +11,7 @@
   gather_facts: no
   tasks:
   - name: Create AWS EC2 instance
-    ec2_instance:
+    amazon.aws.ec2_instance:
       name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
@@ -30,11 +30,11 @@
          volume_size: '{{ volumeSize }}'
       state: running
       wait: true
-    register: ec2
+    register: ec2initial
     tags: default
 
   - name: Destroy AWS EC2 instance
-    ec2_instance:
+    amazon.aws.ec2_instance:
       name: '{{ imageName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
@@ -58,6 +58,13 @@
     pause:
       seconds: 10
     tags: default
+
+  - name: Gather Information About Created Instances
+    amazon.aws.ec2_instance_info
+      profile: '{{ awsProfile }}'
+      region: '{{ awsRegion }}'
+      instance_ids: '{{ ec2inital.changed_ids }}'
+    register: ec2
 
   - name: Add Host to awsEC2 Group 
     add_host: 
