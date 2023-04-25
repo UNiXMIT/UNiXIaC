@@ -33,9 +33,9 @@
     register: ec2initial
     tags: default
   
-  - name: Wait 10 seconds for public IP
+  - name: Wait 30 seconds for public IP
     pause:
-      seconds: 10
+      seconds: 30
     tags: default
 
   - name: Gather Information About Created Instances
