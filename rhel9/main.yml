@@ -60,7 +60,7 @@
     tags: default
 
   - name: Gather Information About Created Instances
-    amazon.aws.ec2_instance_info
+    amazon.aws.ec2_instance_info:
       profile: '{{ awsProfile }}'
       region: '{{ awsRegion }}'
       instance_ids: '{{ ec2inital.changed_ids }}'
