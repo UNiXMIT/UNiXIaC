@@ -36,4 +36,5 @@ http://serverIP:8181
 ##### RHEL9
 - default
 - ed80
+- ed90
 - extend1050
