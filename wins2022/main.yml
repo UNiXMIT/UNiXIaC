@@ -17,7 +17,6 @@
       aap_callback:
         windows: true
         set_password: '{{ myPassword }}'
-      # name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
@@ -44,14 +43,6 @@
       seconds: 60
     tags: default
 
-  # - name: Gather Information About Created Instances
-  #   amazon.aws.ec2_instance_info:
-  #     profile: '{{ awsProfile }}'
-  #     region: '{{ awsRegion }}'
-  #     instance_ids: '{{ ec2initial.changed_ids }}'
-  #   register: ec2
-  #   tags: default
-
   - name: Add Host to awsEC2 Group 
     add_host: 
        hostname: '{{ item.public_ip_address }}'
@@ -71,21 +62,21 @@
       region: '{{ awsRegion }}'
       resource: '{{ item }}'
       tags:
-        Name:
-      state: absent
-    loop: '{{ ec2.instance_ids }}'
-    tags: default
-
-  - name: Rename AWS EC2 instance
-    amazon.aws.ec2_tag:
-      aws_profile: '{{ awsProfile }}'
-      region: '{{ awsRegion }}'
-      resource: '{{ item }}'
-      tags:
         Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
       state: present
     loop: '{{ ec2.instance_ids }}'
     tags: default
+
+  # - name: Rename AWS EC2 instance
+  #   amazon.aws.ec2_tag:
+  #     aws_profile: '{{ awsProfile }}'
+  #     region: '{{ awsRegion }}'
+  #     resource: '{{ item }}'
+  #     tags:
+  #       Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
+  #     state: present
+  #   loop: '{{ ec2.instance_ids }}'
+  #   tags: default
 
 - name: Optimise Ansible on Windows
   hosts: awsEC2
