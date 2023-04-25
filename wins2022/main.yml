@@ -68,6 +68,7 @@
       region: '{{ awsRegion }}'
       instance_ids: '{{ ec2initial.changed_ids }}'
     register: ec2
+    tags: default
 
   - name: Add Host to awsEC2 Group 
     add_host: 
