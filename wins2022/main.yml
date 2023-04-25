@@ -62,10 +62,6 @@
       seconds: 60
     tags: default
 
-  - name: Refresh Inventory
-    ansible.builtin.meta: refresh_inventory
-    tags: default
-
   - name: Add Host to awsEC2 Group 
     add_host: 
        hostname: '{{ item.public_ip_address }}'
