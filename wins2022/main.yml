@@ -69,7 +69,7 @@
     amazon.aws.ec2_instance:
       name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
       filters:
-        name: '{{ tempName }}'
+        tag:Name: '{{ tempName }}'
       region: '{{ awsRegion }}'
       availability_zone: '{{ availabilityZone }}'
       aws_profile: '{{ awsProfile }}'
