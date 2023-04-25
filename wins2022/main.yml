@@ -18,7 +18,7 @@
         windows: true
         set_password: '{{ myPassword }}'
       # name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
-      name: {{ tempName }}
+      name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
       network:  
