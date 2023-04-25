@@ -33,7 +33,7 @@
          volume_size: '{{ volumeSize }}'
       state: running
       wait: true
-    register: ec2inital
+    register: ec2initial
     tags: default
 
   - name: Destroy AWS EC2 instance
@@ -66,7 +66,7 @@
     amazon.aws.ec2_instance_info:
       profile: '{{ awsProfile }}'
       region: '{{ awsRegion }}'
-      instance_ids: '{{ ec2inital.changed_ids }}'
+      instance_ids: '{{ ec2initial.changed_ids }}'
     register: ec2
 
   - name: Add Host to awsEC2 Group 
