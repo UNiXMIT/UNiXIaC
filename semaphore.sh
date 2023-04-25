@@ -3,11 +3,10 @@
 # sudo (apt/yum/zypper) install -y curl podman
 # curl -s https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/semaphore.sh | bash
 podman pull rockylinux:9
-sudo mkdir -m 775 /home/semaphore
-sudo chown support:support /home/semaphore
-podman run -itd --name semaphore -v /home/semaphore:/products -p 8181:3000 rockylinux:9
+podman run -itd --name semaphore -p 8181:3000 rockylinux:9
 podman exec -it semaphore bash -c "dnf epel-release -y"
 podman exec -it semaphore bash -c "dnf install ansible wget git python3 python3-pip tmux unzip python-winrm -y"
+podman exec -it semaphore bash -c "ansible-galaxy collection install amazon.aws"
 podman exec -it semaphore bash -c "python3 -m pip install boto3"
 podman exec -it semaphore bash -c "python3 -m pip install pexpect"
 podman exec -it semaphore bash -c "wget -P /root https://github.com/ansible-semaphore/semaphore/releases/download/v2.8.75/semaphore_2.8.77_linux_amd64.rpm"
