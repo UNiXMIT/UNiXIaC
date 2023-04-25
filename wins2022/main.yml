@@ -70,6 +70,9 @@
       name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
       filters:
         name: '{{ tempName }}'
+      region: '{{ awsRegion }}'
+      availability_zone: '{{ availabilityZone }}'
+      aws_profile: '{{ awsProfile }}'
     tags: default
 
 - name: Optimise Ansible on Windows
