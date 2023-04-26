@@ -1,8 +1,3 @@
-# - name: Copy PulseVPN Installer to EC2 Instance
-#   win_copy:
-#     src: /products/ps-pulse-win-9.1r15.0-b15819-64bitinstaller.msi
-#     dest: C:\temp\
-
 - name: Get PulseVPN Installer Download URL from S3
   amazon.aws.s3_object:
     profile: '{{ awsProfile }}'
@@ -19,11 +14,6 @@
   ansible.windows.win_get_url:
     url: '{{ s3.url }}'
     dest: C:\Users\Public\Downloads
-
-# - name: Copy PulseVPN Config File to EC2 Instance
-#   win_copy:
-#     src: /products/MFIPulseVPN.pulsepreconfig
-#     dest: C:\temp\
 
 - name: Get PulseVPN Config File Download URL from S3
   amazon.aws.s3_object:

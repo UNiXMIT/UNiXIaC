@@ -1,9 +1,3 @@
-# - name: Copy EDVS2022 9.0 Installer to EC2 Instance
-#   win_copy:
-#     src: /products/edvs2022_90.exe
-#     dest: C:\temp\
-#   tags: ed90
-
 - name: Get EDVS2022 9.0 Download URL from S3
   amazon.aws.s3_object:
     profile: '{{ awsProfile }}'
@@ -29,12 +23,6 @@
     state: present
     arguments: /passive RumbaCheckbox=1 /log C:\temp\edvs2022_90.log
   tags: ed90
-
-# - name: Copy EDE 9.0 Installer to EC2 Instance
-#   win_copy:
-#     src: /products/ede_90.exe
-#     dest: C:\temp\
-#   tags: ed90
 
 - name: Get EDE 9.0 Download URL from S3
   amazon.aws.s3_object:

@@ -1,9 +1,3 @@
-# - name: Copy EDVS2019 7.0 Installer to EC2 Instance
-#   win_copy:
-#     src: /products/edvs2019_70.exe
-#     dest: C:\temp\
-#   tags: ed70
-
 - name: Get EDVS2019 7.0 Download URL from S3
   amazon.aws.s3_object:
     profile: '{{ awsProfile }}'
@@ -22,12 +16,6 @@
     url: '{{ s3.url }}'
     dest: C:\temp\
   tags: ed70
-
-# - name: Workaround for Install Issue 'Installing EDVS2019_70.exe, a blank window pops up and then disappears' - https://portal.microfocus.com/s/article/KM000004846
-#   win_copy:
-#     src: /products/Microsoft.VisualStudio.Setup.Configuration.Native.dll
-#     dest: C:\ProgramData\Microsoft\VisualStudio\Setup\x86\
-#   tags: ed70
 
 - name: Get Microsoft.VisualStudio.Setup.Configuration.Native.dll Download URL from S3
   amazon.aws.s3_object:
@@ -60,12 +48,6 @@
     state: present
     arguments: /passive RumbaCheckbox=1 /log C:\temp\edvs2019_70.log
   tags: ed70
-
-# - name: Copy EDE 7.0 Installer to EC2 Instance
-#   win_copy:
-#     src: /products/ede_70.exe
-#     dest: C:\temp\
-#   tags: ed70
 
 - name: Get EDE 7.0 Download URL from S3
   amazon.aws.s3_object:
@@ -147,12 +129,6 @@
     state: started
   tags: ed70
 
-# - name: Copy EDVS2019 7.0 PU 15 Installer to EC2 Instance
-#   win_copy:
-#     src: /products/edvs2019_70_pu15_315341.exe
-#     dest: C:\temp\
-#   tags: ed70pu15
-
 - name: Get EDVS2019 7.0 PU 15 Download URL from S3
   amazon.aws.s3_object:
     profile: '{{ awsProfile }}'
@@ -178,12 +154,6 @@
     state: present
     arguments: /passive RumbaCheckbox=1 /log C:\temp\edvs2019_70_pu15.log
   tags: ed70pu15
-
-# - name: Copy EDE 7.0 PU 15 Installer to EC2 Instance
-#   win_copy:
-#     src: /products/ede_70_pu15_315321.exe
-#     dest: C:\temp\
-#   tags: ed70pu15
 
 - name: Get EDE 7.0 PU 15 Download URL from S3
   amazon.aws.s3_object:

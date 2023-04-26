@@ -1,8 +1,3 @@
-# - name: Copy extend 10.5.0 Installer to EC2 Instance
-#   win_copy:
-#     src: /products/extend(R) Version 10.5.0 x64.msi
-#     dest: C:\temp\
-
 - name: Get extend 10.5.0 Download URL from S3
   amazon.aws.s3_object:
     profile: '{{ awsProfile }}'

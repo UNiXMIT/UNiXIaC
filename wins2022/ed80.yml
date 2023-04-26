@@ -1,9 +1,3 @@
-# - name: Copy EDVS2022 8.0 Installer to EC2 Instance
-#   win_copy:
-#     src: /products/edvs2022_80.exe
-#     dest: C:\temp\
-#   tags: ed80
-
 - name: Get EDVS2022 8.0 Download URL from S3
   amazon.aws.s3_object:
     profile: '{{ awsProfile }}'
@@ -29,12 +23,6 @@
     state: present
     arguments: /passive RumbaCheckbox=1 /log C:\temp\edvs2022_80.log
   tags: ed80
-
-# - name: Copy EDE 8.0 Installer to EC2 Instance
-#   win_copy:
-#     src: /products/ede_80.exe
-#     dest: C:\temp\
-#   tags: ed80
 
 - name: Get EDE 8.0 Download URL from S3
   amazon.aws.s3_object:
@@ -116,12 +104,6 @@
     state: started
   tags: ed80
 
-# - name: Copy EDVS2022 8.0 PU 5 Installer to EC2 Instance
-#   win_copy:
-#     src: /products/edvs2022_80_pu05_318648.exe
-#     dest: C:\temp\
-#   tags: ed80pu5
-
 - name: Get EDVS2022 8.0 PU 5 Download URL from S3
   amazon.aws.s3_object:
     profile: '{{ awsProfile }}'
@@ -147,12 +129,6 @@
     state: present
     arguments: /passive RumbaCheckbox=1 /log C:\temp\edvs2022_80_pu5.log
   tags: ed80pu5
-
-# - name: Copy EDE 8.0 PU 5 Installer to EC2 Instance
-#   win_copy:
-#     src: /products/ede_80_pu05_318643.exe
-#     dest: C:\temp\
-#   tags: ed80pu5
 
 - name: Get EDE 8.0 PU 5 Download URL from S3
   amazon.aws.s3_object:
