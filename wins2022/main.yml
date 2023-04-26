@@ -1,3 +1,11 @@
+- name: Debug Semaphore variables
+  hosts: local
+  gather_facts: no
+  tasks:
+  - name: Semaphore email
+    debug: msg="{{ semaphore_vars }}" 
+  tags: default
+  
 - name: SSO 2FA
   hosts: local
   gather_facts: no
