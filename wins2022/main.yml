@@ -51,6 +51,7 @@
       ansible_connection: psrp
       ansible_psrp_cert_validation: ignore
       ansible_psrp_protocol: http
+      ansible_psrp_auth: ntlm
       groups: awsEC2
     loop: '{{ ec2.instances }}'
     tags: default
