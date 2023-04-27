@@ -68,13 +68,13 @@
     loop: '{{ ec2.instance_ids }}'
     tags: default
 
-- name: Optimise Ansible on Windows
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import optimise.yml
-    import_tasks: optimise.yml
-  tags: default
+# - name: Optimise Ansible on Windows
+#   hosts: awsEC2
+#   gather_facts: no
+#   tasks:
+#   - name: Import optimise.yml
+#     import_tasks: optimise.yml
+#   tags: default
 
 - name: Modify OS Config
   hosts: awsEC2
