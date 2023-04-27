@@ -14,7 +14,7 @@
   tasks:
   - name: Create AWS EC2 instance
     amazon.aws.ec2_instance:
-      tower_callback:
+      aap_callback:
         windows: true
         set_password: '{{ myPassword }}'
       name: '{{ tempName }}'
@@ -51,7 +51,7 @@
       ansible_connection: winrm
       ansible_winrm_transport: basic
       ansible_winrm_server_cert_validation: ignore
-      ansible_port: 5986
+      ansible_port: 5985
       groups: awsEC2
     loop: '{{ ec2.instances }}'
     tags: default
