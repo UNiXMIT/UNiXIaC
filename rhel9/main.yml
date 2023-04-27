@@ -42,7 +42,7 @@
 
   - name: Add Host to awsEC2 Group 
     add_host: 
-       hostname: '{{ item.private_ip_address }}'
+       hostname: '{{ item.public_ip_address }}'
        ansible_port: 22
        ansible_user: '{{ ansibleUser }}'
        ansible_ssh_private_key_file: '{{ keyLocation }}'
@@ -72,7 +72,7 @@
   - name: SSH Check
     local_action:
       module: wait_for
-      host: '{{ item.private_ip_address }}'
+      host: '{{ item.public_ip_address }}'
       port: 22
       delay: 10
       timeout: 120
@@ -182,6 +182,6 @@
       msg: 
       - 'AWS ID     - {{ item.instance_id }}'
       - 'Public IP  - {{ item.public_ip_address }}'
-      - 'Private IP - {{ item.private_ip_address }}'
+      - 'Private IP - {{ item.public_ip_address }}'
     loop: '{{ ec2.instances }}'
   tags: default

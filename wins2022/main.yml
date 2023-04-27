@@ -14,7 +14,7 @@
   tasks:
   - name: Create AWS EC2 instance
     amazon.aws.ec2_instance:
-      aap_callback:
+      tower_callback:
         windows: true
         set_password: '{{ myPassword }}'
       name: '{{ tempName }}'
@@ -45,13 +45,13 @@
 
   - name: Add Host to awsEC2 Group 
     add_host: 
-      hostname: '{{ item.private_ip_address }}'
+      hostname: '{{ item.public_ip_address }}'
       ansible_user: '{{ ansibleUser }}'
       ansible_password: '{{ myPassword }}'
       ansible_connection: psrp
+      ansible_psrp_auth: negotiate
       ansible_psrp_cert_validation: ignore
-      ansible_psrp_protocol: http
-      ansible_psrp_auth: ntlm
+      # ansible_psrp_protocol: http
       groups: awsEC2
     loop: '{{ ec2.instances }}'
     tags: default
