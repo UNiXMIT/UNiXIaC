@@ -48,10 +48,11 @@
       hostname: '{{ item.public_ip_address }}'
       ansible_user: '{{ ansibleUser }}'
       ansible_password: '{{ myPassword }}'
-      ansible_connection: psrp
-      ansible_psrp_auth: negotiate
-      ansible_psrp_cert_validation: ignore
-      # ansible_psrp_protocol: http
+      ansible_connection: winrm
+      ansible_winrm_transport: ntlm
+      ansible_winrm_server_cert_validation: ignore
+      ansible_port: 5986
+      groups: awsEC2
       groups: awsEC2
     loop: '{{ ec2.instances }}'
     tags: default
@@ -68,13 +69,13 @@
     loop: '{{ ec2.instance_ids }}'
     tags: default
 
-# - name: Optimise Ansible on Windows
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import optimise.yml
-#     import_tasks: optimise.yml
-#   tags: default
+- name: Optimise Ansible on Windows
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import optimise.yml
+    import_tasks: optimise.yml
+  tags: default
 
 - name: Modify OS Config
   hosts: awsEC2
