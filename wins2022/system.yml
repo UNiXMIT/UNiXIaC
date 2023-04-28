@@ -76,8 +76,8 @@
   win_scheduled_task:
     name: AutoShutdown
     actions:
-    - path: C:\
-      arguments: shutdown -s -f -t 0
+    - path: shutdown
+      arguments: /s /f /t 0
     triggers:
     - type: daily
       start_boundary: '2023-01-01T20:00:00'
