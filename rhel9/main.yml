@@ -70,11 +70,9 @@
     tags: default
 
   - name: SSH Check
-    local_action:
-      module: wait_for
+    ansible.builtin.wait_for:
       host: '{{ item.public_ip_address }}'
       port: 22
-      delay: 10
       timeout: 120
     loop: '{{ ec2.instances }}'
     tags: default
