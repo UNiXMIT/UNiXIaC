@@ -19,7 +19,7 @@
       key_name: '{{ keyName }}'
       network:  
         assign_public_ip: yes
-      security_group: '{{ securityGroup }}'
+      security_groups: '{{ securityGroups }}'
       region: '{{ awsRegion }}'
       availability_zone: '{{ availabilityZone }}'
       aws_profile: '{{ awsProfile }}'

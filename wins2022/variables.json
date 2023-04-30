@@ -6,7 +6,7 @@
   "awsAMI": "ami-01e91a8e71e619d87",
   "keyName": "support",
   "keyLocation": "~/.ssh/support.pem",
-  "securityGroup": "sg-0a02b789816fa3b0b",
+  "securityGroups": "[sg-XXXXXX,sg-XXXXXX]",
   "awsRegion": "eu-west-2",
   "availabilityZone": "eu-west-2a",
   "instanceType": "t3.xlarge",
