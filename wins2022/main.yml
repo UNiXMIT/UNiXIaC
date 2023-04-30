@@ -38,14 +38,14 @@
     register: ec2
     tags: default
   
-  # - name: Wait 60 seconds for public IP and AAP Setup
-  #   pause:
-  #     seconds: 60
-  #   tags: default
+  - name: Wait 60 seconds for public IP and AAP Setup
+    pause:
+      seconds: 60
+    tags: default
 
   - name: Add Host to awsEC2 Group 
     add_host: 
-      hostname: '{{ item.private_ip_address }}'
+      hostname: '{{ item.public_ip_address }}'
       ansible_user: '{{ ansibleUser }}'
       ansible_password: '{{ myPassword }}'
       ansible_connection: psrp
