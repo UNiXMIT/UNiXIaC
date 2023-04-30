@@ -48,10 +48,8 @@
       hostname: '{{ item.public_ip_address }}'
       ansible_user: '{{ ansibleUser }}'
       ansible_password: '{{ myPassword }}'
-      ansible_connection: winrm
-      ansible_winrm_transport: ntlm
-      ansible_winrm_server_cert_validation: ignore
-      ansible_port: 5986
+      ansible_connection: psrp
+      ansible_psrp_cert_validation: ignore
       groups: awsEC2
     loop: '{{ ec2.instances }}'
     tags: default
