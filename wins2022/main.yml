@@ -38,9 +38,9 @@
     register: ec2
     tags: default
   
-  - name: Wait 120 seconds for public IP and AAP Setup
+  - name: Wait 60 seconds for public IP and AAP Setup
     pause:
-      seconds: 120
+      seconds: 60
     tags: default
 
   - name: Add Host to awsEC2 Group 
@@ -49,7 +49,7 @@
       ansible_user: '{{ ansibleUser }}'
       ansible_password: '{{ myPassword }}'
       ansible_connection: winrm
-      ansible_winrm_transport: basic
+      ansible_winrm_transport: ntlm
       ansible_winrm_server_cert_validation: ignore
       ansible_port: 5986
       groups: awsEC2
