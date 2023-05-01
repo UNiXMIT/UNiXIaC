@@ -27,9 +27,9 @@ else
     wget https://github.com/ansible-semaphore/semaphore/releases/download/v2.8.75/semaphore_2.8.77_linux_amd64.rpm
     dnf install semaphore*.rpm
     semaphore setup
-    tmux new -d -s semaphore semaphore server --config config.json"
+    tmux new -d -s semaphore semaphore server --config config.json
     cp support.pem ~/.ssh/support.pem
     chmod 600 ~/.ssh/support.pem
     unzip pfsso*.zip
-    python3 -m pip install --upgrade pfsso*/
+    python3 -m pip install --upgrade ${PWD}/pfsso*/
 fi
