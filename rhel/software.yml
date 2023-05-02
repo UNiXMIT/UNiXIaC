@@ -24,3 +24,10 @@
       - tmux
       - openconnect
     state: present
+  tags: default
+
+- name: rhel<=8 Package installation
+  dnf:
+    name: spax
+    state: present
+  tags: rhel<=8

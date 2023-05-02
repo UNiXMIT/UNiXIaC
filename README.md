@@ -21,7 +21,7 @@ http://serverIP:8181
 
 ## Tags
 ### Windows
-##### WINS2022
+
 - default
 - vs2019
   - ed70
@@ -37,8 +37,9 @@ http://serverIP:8181
   - extend1050pu1
 
 ### Linux
-##### RHEL9
+##### RHEL
 - default
+- rhel<=8
 - ed80
 - ed90
 - extend1050
