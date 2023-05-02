@@ -13,7 +13,7 @@
 
 - name: Set extend 10.5.0 Install Path
   set_fact:
-    installPath: /home/products/acu1050shx64
+    installPath: /home/products/acu1050shx64/
   tags: extend1050
 
 - name: Get extend 10.5.0 PU 1 Download URL from S3
@@ -27,13 +27,11 @@
     sig_v4: true
   register: s3
   delegate_to: localhost
-  vars:
-    installPath: /home/products/acu1050shx64pu1
   tags: extend1050pu1
 
 - name: Set extend 10.5.0 PU 1 Install Path
   set_fact:
-    installPath: /home/products/acu1050shx64pu1
+    installPath: /home/products/acu1050shx64pu1/
   tags: extend1050pu1
 
 # - name: Create extend 10.5.0 directory
