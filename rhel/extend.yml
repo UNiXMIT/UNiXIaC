@@ -9,6 +9,8 @@
     sig_v4: true
   register: s3
   delegate_to: localhost
+  vars:
+    installerName: setup_acucob1050pmk59shACU
   tags: extend1050
 
 - name: Set extend 10.5.0 Install Path
@@ -27,6 +29,8 @@
     sig_v4: true
   register: s3
   delegate_to: localhost
+  vars:
+    installerName: setup_acucob1050pmk59shACU
   tags: extend1050pu1
 
 - name: Set extend 10.5.0 PU 1 Install Path
@@ -34,14 +38,14 @@
     installPath: /home/products/acu1050shx64pu1/
   tags: extend1050pu1
 
-# - name: Create extend 10.5.0 directory
-#   file:
-#     path: '{{ installPath }}'
-#     state: directory
-#     owner: support 
-#     group: support
-#     mode: '0775'
-#   tags: extend
+- name: Create extend directory
+  file:
+    path: '{{ installPath }}'
+    state: directory
+    owner: support 
+    group: support
+    mode: '0775'
+  tags: extend
 
 - name: Download extend Installer
   ansible.builtin.get_url:
@@ -52,7 +56,7 @@
   tags: extend
     
 - name: Install extend
-  shell: "printf 'y\n{{ installPath }}\n' | {{ installPath }}/setup_acucob1050pmk59shACU"
+  shell: "printf 'y\n{{ installPath }}\n' | {{ installPath }}/{{ installerName }}"
   tags: extend
 
 - name: Activate Licenses
