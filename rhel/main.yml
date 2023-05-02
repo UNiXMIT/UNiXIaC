@@ -123,7 +123,6 @@
 - name: Install extend
   hosts: awsEC2
   gather_facts: no
-  become: yes
   tasks:
   - name: Import extend.yml
     import_tasks: extend.yml

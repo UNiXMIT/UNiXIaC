@@ -42,6 +42,7 @@
     url: '{{ s3.url }}'
     dest: '{{ installPath }}'
     mode: 0775
+  become: yes
   tags: extend
     
 - name: Install extend
