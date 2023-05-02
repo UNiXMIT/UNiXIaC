@@ -112,7 +112,7 @@
     import_tasks: createFilesDir.yml
   tags: default
 
-- name: Install ED 8.0
+- name: Install ED
   hosts: awsEC2
   gather_facts: no
   become: yes
@@ -120,13 +120,13 @@
   - name: Import ed.yml
     import_tasks: ed.yml
 
-- name: Install extend 10.5.0
+- name: Install extend
   hosts: awsEC2
   gather_facts: no
   become: yes
   tasks:
-  - name: Import extend1050.yml
-    import_tasks: extend1050.yml
+  - name: Import extend.yml
+    import_tasks: extend.yml
 
 - name: Create MOTD
   hosts: awsEC2

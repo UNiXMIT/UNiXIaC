@@ -1,3 +1,8 @@
+- name: Set ED 8.0 PU 5 Install path
+  set_fact:
+    installPath: /home/products/ed80pu5
+  tags: ed80pu5
+
 - name: Get ED 8.0 PU 5 Download URL from S3
   amazon.aws.s3_object:
     profile: '{{ awsProfile }}'
@@ -9,9 +14,12 @@
     sig_v4: true
   register: s3
   delegate_to: localhost
-  vars:
-    installPath: /home/products/ed80pu5
   tags: ed80pu5
+
+- name: Set ED 9.0 Install path
+  set_fact:
+    installPath: /home/products/ed90
+  tags: ed90
 
 - name: Get ED 9.0 Download URL from S3
   amazon.aws.s3_object:
@@ -24,8 +32,6 @@
     sig_v4: true
   register: s3
   delegate_to: localhost
-  vars:
-    installPath: /home/products/ed90
   tags: ed90
 
 - name: Download ED Installer

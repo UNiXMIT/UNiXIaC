@@ -44,5 +44,6 @@ http://serverIP:8181
   - ed80
   - ed80pu5
   - ed90
-- extend1050
-- extend1050pu1
+- extend
+  - extend1050
+  - extend1050pu1
