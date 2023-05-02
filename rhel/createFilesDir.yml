@@ -207,13 +207,13 @@
     path: /home/{{ myUsername }}
     state: directory
     recurse: yes
-    owner: support
-    group: support
+    owner: '{{ myUsername }}'
+    group: '{{ myUsername }}'
     
 - name: Change Ownership of /home/products Directory
   file:
     path: /home/products
     state: directory
     recurse: yes
-    owner: support
-    group: support
+    owner: '{{ myUsername }}'
+    group: '{{ myUsername }}'

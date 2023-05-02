@@ -40,8 +40,8 @@
   file:
     path: '{{ installPath }}'
     state: directory
-    owner: support 
-    group: support
+    owner: '{{ myUsername }}'
+    group: '{{ myUsername }}'
     mode: '0775'
   become: yes
   tags: extend
@@ -50,7 +50,10 @@
   ansible.builtin.get_url:
     url: '{{ s3.url }}'
     dest: '{{ installPath }}'
+    owner: '{{ myUsername }}' 
+    group: '{{ myUsername }}'
     mode: 0775
+  become: yes
   tags: extend
     
 - name: Install extend
