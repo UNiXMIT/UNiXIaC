@@ -121,7 +121,6 @@
   tasks:
   - name: Import ed80.yml
     import_tasks: ed80.yml
-  tags: ed80
 
 - name: Install ED 9.0
   hosts: awsEC2
@@ -132,7 +131,6 @@
   tasks:
   - name: Import ed90.yml
     import_tasks: ed90.yml
-  tags: ed90
 
 - name: Install extend 10.5.0
   hosts: awsEC2
@@ -141,7 +139,6 @@
   tasks:
   - name: Import extend1050.yml
     import_tasks: extend1050.yml
-  tags: extend1050
 
 - name: Create MOTD
   hosts: awsEC2

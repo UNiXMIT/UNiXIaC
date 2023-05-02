@@ -9,15 +9,18 @@
     sig_v4: true
   register: s3
   delegate_to: localhost
+  tags: ed90
 
 - name: Download ED 9.0 Installer
   ansible.builtin.get_url:
     url: '{{ s3.url }}'
     dest: "/home/{{ myUsername }}/MFSupport/MFInstallers/"
     mode: 0775
+  tags: ed90
 
 - name: Install ED 9.0
   command: "/home/{{ myUsername }}/MFSupport/MFInstallers/setup_entdev_9.0_redhat_x86_64 -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}"
+  tags: ed90
 
 - name: Add License Server
   lineinfile:
@@ -25,13 +28,16 @@
     state: present
     regexp: '^lshost'
     line: 'lshost = {{ licenseServer }}'
+  tags: ed90
 
 - name: Start MFDS
   command: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv && {{ installPath }}/bin/mfds --UI-on && {{ installPath }}/bin/mfds --listen-all && {{ installPath }}/bin/mfds"
   environment: 
     COBDIR: '{{ installPath }}'
+  tags: ed90
 
 - name: Import JCL Region
   command: '{{ installPath }}/bin/mfds -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'
   environment: 
     COBDIR: '{{ installPath }}'
+  tags: ed90
