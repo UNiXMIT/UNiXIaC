@@ -9,6 +9,8 @@
     sig_v4: true
   register: s3
   delegate_to: localhost
+  vars:
+    installPath: /home/products/ed80pu5
   tags: ed80pu5
 
 - name: Get ED 9.0 Download URL from S3
@@ -22,6 +24,8 @@
     sig_v4: true
   register: s3
   delegate_to: localhost
+  vars:
+    installPath: /home/products/ed90
   tags: ed90
 
 - name: Download ED Installer
