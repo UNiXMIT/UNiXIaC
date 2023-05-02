@@ -43,6 +43,7 @@
     owner: '{{ myUsername }}' 
     group: '{{ myUsername }}'
     mode: 0775
+  become: yes
   tags: ed
 
 - name: Install ED
