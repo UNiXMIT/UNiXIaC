@@ -9,7 +9,10 @@
     sig_v4: true
   register: s3
   delegate_to: localhost
-  vars:
+  tags: ed80pu5
+
+- name: Set ED 8.0 PU 5 Install Path
+  set_fact:
     installPath: /home/products/ed80pu5
   tags: ed80pu5
 
@@ -28,6 +31,11 @@
     installPath: /home/products/ed90
   tags: ed90
 
+- name: Set ED 9.0 Install Path
+  set_fact:
+    installPath: /home/products/ed90
+  tags: ed90
+
 - name: Download ED Installer
   ansible.builtin.get_url:
     url: '{{ s3.url }}'
@@ -37,6 +45,7 @@
 
 - name: Install ED
   command: "/home/{{ myUsername }}/MFSupport/MFInstallers/setup_entdev_* -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}"
+  become: yes
   tags: ed
 
 - name: Add License Server

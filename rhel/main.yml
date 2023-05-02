@@ -115,7 +115,6 @@
 - name: Install ED
   hosts: awsEC2
   gather_facts: no
-  become: yes
   tasks:
   - name: Import ed.yml
     import_tasks: ed.yml

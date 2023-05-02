@@ -45,6 +45,7 @@
     owner: support 
     group: support
     mode: '0775'
+  become: yes
   tags: extend
 
 - name: Download extend Installer
