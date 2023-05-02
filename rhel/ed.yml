@@ -1,4 +1,4 @@
-- name: Get ED 8.0 Download URL from S3
+- name: Get ED 8.0 PU 5 Download URL from S3
   amazon.aws.s3_object:
     profile: '{{ awsProfile }}'
     bucket: mturner
@@ -9,18 +9,31 @@
     sig_v4: true
   register: s3
   delegate_to: localhost
-  tags: ed80
+  tags: ed80pu5
 
-- name: Download ED 8.0 Installer
+- name: Get ED 9.0 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/90/setup_entdev_9.0_redhat_x86_64
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: ed90
+
+- name: Download ED Installer
   ansible.builtin.get_url:
     url: '{{ s3.url }}'
     dest: "/home/{{ myUsername }}/MFSupport/MFInstallers/"
     mode: 0775
-  tags: ed80
+  tags: ed
 
-- name: Install ED 8.0
-  command: "/home/{{ myUsername }}/MFSupport/MFInstallers/setup_entdev_8.0_patchupdate05_318651_redhat_x86_64 -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}"
-  tags: ed80
+- name: Install ED
+  command: "/home/{{ myUsername }}/MFSupport/MFInstallers/setup_entdev_* -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}"
+  tags: ed
 
 - name: Add License Server
   lineinfile:
@@ -28,16 +41,16 @@
     state: present
     regexp: '^lshost'
     line: 'lshost = {{ licenseServer }}'
-  tags: ed80
+  tags: ed
 
 - name: Start MFDS
   command: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv && {{ installPath }}/bin/mfds --UI-on && {{ installPath }}/bin/mfds --listen-all && {{ installPath }}/bin/mfds"
   environment: 
     COBDIR: '{{ installPath }}'
-  tags: ed80
+  tags: ed
 
 - name: Import JCL Region
   command: '{{ installPath }}/bin/mfds -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'
   environment: 
     COBDIR: '{{ installPath }}'
-  tags: ed80
+  tags: ed
