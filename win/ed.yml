@@ -1,0 +1,157 @@
+- name: Get EDVS2022 8.0 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/80/edvs2022_80.exe
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: ed80
+
+- name: Download EDVS2022 8.0 Installer
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
+    dest: C:\temp\
+  tags: ed80
+
+- name: Install EDVS2022 8.0
+  win_package:
+    path: C:\temp\edvs2022_80.exe
+    state: present
+    arguments: /passive RumbaCheckbox=1 /log C:\temp\edvs2022_80.log
+  tags: ed80
+
+- name: Get EDE 8.0 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/80/ede_80.exe
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: ed80
+
+- name: Download EDE 8.0 Installer
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
+    dest: C:\temp\
+  tags: ed80
+
+- name: Install EDE 8.0
+  win_package:
+    path: C:\temp\ede_80.exe
+    state: present
+    arguments: /passive RumbaCheckbox=1 /log C:\temp\ede_80.log
+  tags: ed80
+
+- name: Add License Server
+  win_lineinfile:
+    path: C:\ProgramData\Micro Focus\ces.ini
+    regex: '^lshost'
+    line: 'lshost = {{ licenseServer }}'
+  tags: ed80
+
+- name: Import JCL Region
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml'
+    chdir: C:\MFSamples\JCL
+  tags: ed80
+
+- name: Stop MFDS Service
+  ansible.windows.win_service:
+    name: mf_CCITCP2
+    state: stopped
+  tags: ed80
+
+- name: Enable ESMAC UI
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" --UI-on'
+  tags: ed80
+
+- name: Enable ESMAC Listen All
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" --listen-all'
+  tags: ed80
+
+- name: Start MFDS Service
+  ansible.windows.win_service:
+    name: mf_CCITCP2
+    state: started
+  tags: ed80
+
+- name: Stop ESCWA Service
+  ansible.windows.win_service:
+    name: escwa
+    state: stopped
+  tags: ed80
+
+- name: Enable ESCWA Listen All
+  community.windows.win_lineinfile:
+    path: C:\ProgramData\Micro Focus\Enterprise Developer\ESCWA\commonwebadmin.json
+    regex: 'MfRequestedEndpoint'
+    line: '    "MfRequestedEndpoint" : "tcp:*:10086",'
+  tags: ed80
+
+- name: Start ESCWA Service
+  ansible.windows.win_service:
+    name: escwa
+    state: started
+  tags: ed80
+
+- name: Get EDVS2022 8.0 PU 5 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/80/edvs2022_80_pu05_318648.exe
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: ed80pu5
+
+- name: Download EDVS2022 8.0 PU 5 Installer
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
+    dest: C:\temp\
+  tags: ed80pu5
+
+- name: Install EDVS2022 8.0 PU 5
+  win_package:
+    path: C:\temp\edvs2022_80_pu05_318648.exe
+    state: present
+    arguments: /passive RumbaCheckbox=1 /log C:\temp\edvs2022_80_pu5.log
+  tags: ed80pu5
+
+- name: Get EDE 8.0 PU 5 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/80/ede_80_pu05_318643.exe
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: ed80pu5
+
+- name: Download EDE 8.0 PU 5 Installer
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
+    dest: C:\temp\
+  tags: ed80pu5
+
+- name: Install EDE 8.0 PU 5
+  win_package:
+    path: C:\temp\ede_80_pu05_318643.exe
+    state: present
+    arguments: /passive RumbaCheckbox=1 /log C:\temp\ede_80_pu5.log
+  tags: ed80pu5

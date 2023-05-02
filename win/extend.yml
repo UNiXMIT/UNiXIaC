@@ -1,0 +1,62 @@
+- name: Get extend 10.5.0 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: AcuCOBOL/1050/extend(R) Version 10.5.0 x64.msi
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: extend1050
+
+- name: Set extend 10.5.0 Facts
+  set_fact:
+    installPath: C:\Program Files (x86)\Micro Focus\extend 10.5.0
+    installerName: extend(R) Version 10.5.0 x64.msi
+  tags: extend1050
+
+- name: Get extend 10.5.0 PU 1 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: AcuCOBOL/1050/PU1/extend(R) Version 10.5.0 x64.msi
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: extend1050pu1
+
+- name: Set extend 10.5.0 PU 1 Facts
+  set_fact:
+    installPath: C:\Program Files (x86)\Micro Focus\extend 10.5.0
+    installerName: extend(R) Version 10.5.0 x64.msi
+  tags: extend1050pu1
+
+- name: Download extend Installer
+  ansible.windows.win_get_url:
+    url: '{{ s3.url }}'
+    dest: C:\temp\
+  tags: extend
+
+- name: Install extend
+  win_package:
+    path: C:\temp\{{ installerName }}
+    state: present
+    arguments: ADDLOCAL=ALL WINDOWSVERSION=PostWindows7 /qb
+  tags: extend
+
+- name: Activate 32 bit Licenses
+  win_command:
+    cmd: '"{{ installPath }}\AcuGT\bin\activator.exe" /PCODE={{ extendCode86 }} /PKEY={{ extendKey86 }}'
+    chdir: '{{ installPath }}\AcuGT\bin'
+  tags: extend
+
+- name: Activate 64 bit Licenses
+  win_command:
+    cmd: '"{{ installPath }}\AcuGT\bin\activator.exe" /PCODE={{ extendCode64 }} /PKEY={{ extendKey64 }}'
+    chdir: '{{ installPath }}\AcuGT\bin'
+  tags: extend
