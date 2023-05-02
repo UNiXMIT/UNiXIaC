@@ -22,7 +22,7 @@
       key_name: '{{ keyName }}'
       network:  
         assign_public_ip: yes
-      security_group: '{{ securityGroup }}'
+      security_groups: '{{ securityGroups }}'
       region: '{{ awsRegion }}'
       availability_zone: '{{ availabilityZone }}'
       aws_profile: '{{ awsProfile }}'
@@ -38,9 +38,9 @@
     register: ec2
     tags: default
   
-  - name: Wait 60 seconds for public IP and AAP Setup
+  - name: Wait 30 seconds for public IP and AAP Setup
     pause:
-      seconds: 60
+      seconds: 30
     tags: default
 
   - name: Add Host to awsEC2 Group 
@@ -66,6 +66,14 @@
         Owner: '{{ ssoEmail }}'
       state: present
     loop: '{{ ec2.instance_ids }}'
+    tags: default
+
+  - name: WinRM Check
+    ansible.builtin.wait_for:
+      host: '{{ item.public_ip_address }}'
+      port: 5986
+      timeout: 120
+    loop: '{{ ec2.instances }}'
     tags: default
 
 - name: Optimise Ansible on Windows
@@ -192,8 +200,9 @@
   - name: AWS EC2 Information
     debug:
       msg: 
-      - 'AWS ID     - {{ item.instance_id }}'
-      - 'Public IP  - {{ item.public_ip_address }}'
-      - 'Private IP - {{ item.private_ip_address }}'
+      - 'Instance Name   - {{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
+      - 'AWS ID          - {{ item.instance_id }}'
+      - 'Public IP       - {{ item.public_ip_address }}'
+      - 'Private IP      - {{ item.private_ip_address }}'
     loop: '{{ ec2.instances }}'
   tags: default

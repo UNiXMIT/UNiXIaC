@@ -19,7 +19,7 @@
       key_name: '{{ keyName }}'
       network:  
         assign_public_ip: yes
-      security_group: '{{ securityGroup }}'
+      security_groups: '{{ securityGroups }}'
       region: '{{ awsRegion }}'
       availability_zone: '{{ availabilityZone }}'
       aws_profile: '{{ awsProfile }}'
@@ -70,11 +70,9 @@
     tags: default
 
   - name: SSH Check
-    local_action:
-      module: wait_for
+    ansible.builtin.wait_for:
       host: '{{ item.public_ip_address }}'
       port: 22
-      delay: 10
       timeout: 120
     loop: '{{ ec2.instances }}'
     tags: default
@@ -180,8 +178,9 @@
   - name: AWS EC2 Information
     debug:
       msg: 
-      - 'AWS ID     - {{ item.instance_id }}'
-      - 'Public IP  - {{ item.public_ip_address }}'
-      - 'Private IP - {{ item.public_ip_address }}'
+      - 'Instance Name   - {{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
+      - 'AWS ID          - {{ item.instance_id }}'
+      - 'Public IP       - {{ item.public_ip_address }}'
+      - 'Private IP      - {{ item.private_ip_address }}'
     loop: '{{ ec2.instances }}'
   tags: default
