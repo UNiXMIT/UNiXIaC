@@ -61,5 +61,5 @@
   tags: extend
 
 - name: Activate Licenses
-  shell: "printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}/bin/activator"
+  shell: "printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator"
   tags: extend
