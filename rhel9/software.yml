@@ -25,3 +25,4 @@
       - tmux
       - openconnect
     state: present
+    skip_broken: true
