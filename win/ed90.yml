@@ -1,51 +1,53 @@
-- name: Get EDVS2022 9.0 Download URL from S3
-  amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: ED/90/edvs2022_90.exe
-    region: '{{ awsRegion }}'
-    expiry: 4000
-    sig_v4: true
-  register: s3
-  delegate_to: localhost
-  tags: ed90
+- name: ED 9.0
+  block:
+    - name: Set Facts
+      set_fact:
+        installerNameEDVS: edvs2022_90.exe
+        installerNameEDE: ede_90.exe
 
-- name: Download EDVS2022 9.0 Installer
-  ansible.windows.win_get_url:
-    url: '{{ s3.url }}'
-    dest: C:\temp\
-  tags: ed90
+    - name: Get EDVS Download URL from S3
+      amazon.aws.s3_object:
+        profile: '{{ awsProfile }}'
+        bucket: mturner
+        mode: geturl
+        object: ED/90/{{ installerNameEDVS }}
+        region: '{{ awsRegion }}'
+        expiry: 4000
+        sig_v4: true
+      register: s3
+      delegate_to: localhost
 
-- name: Install EDVS2022 9.0
-  win_package:
-    path: C:\temp\edvs2022_90.exe
-    state: present
-    arguments: /passive RumbaCheckbox=1 /log C:\temp\edvs2022_90.log
-  tags: ed90
+    - name: Download EDVS Installer
+      ansible.windows.win_get_url:
+        url: '{{ s3.url }}'
+        dest: C:\temp\
 
-- name: Get EDE 9.0 Download URL from S3
-  amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: ED/90/ede_90.exe
-    region: '{{ awsRegion }}'
-    expiry: 4000
-    sig_v4: true
-  register: s3
-  delegate_to: localhost
-  tags: ed90
+    - name: Install EDVS
+      win_package:
+        path: C:\temp\{{ installerNameEDVS }}
+        state: present
+        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDVS }}.log
 
-- name: Download EDE 9.0 Installer
-  ansible.windows.win_get_url:
-    url: '{{ s3.url }}'
-    dest: C:\temp\
-  tags: ed90
+    - name: Get EDE Download URL from S3
+      amazon.aws.s3_object:
+        profile: '{{ awsProfile }}'
+        bucket: mturner
+        mode: geturl
+        object: ED/90/{{ installerNameEDE }}
+        region: '{{ awsRegion }}'
+        expiry: 4000
+        sig_v4: true
+      register: s3
+      delegate_to: localhost
 
-- name: Install EDE 9.0
-  win_package:
-    path: C:\temp\ede_90.exe
-    state: present
-    arguments: /passive RumbaCheckbox=1 /log C:\temp\ede_90.log
+    - name: Download EDE Installer
+      ansible.windows.win_get_url:
+        url: '{{ s3.url }}'
+        dest: C:\temp\
+
+    - name: Install EDE
+      win_package:
+        path: C:\temp\{{ installerNameEDE }}
+        state: present
+        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDE }}.log
   tags: ed90

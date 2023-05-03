@@ -1,39 +1,39 @@
-- name: Get extend 10.5.0 Download URL from S3
-  amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: AcuCOBOL/1050/setup_acucob1050pmk59shACU
-    region: '{{ awsRegion }}'
-    expiry: 4000
-    sig_v4: true
-  register: s3
-  delegate_to: localhost
-  tags: extend1050
-
 - name: Set extend 10.5.0 Facts
   set_fact:
     installPath: /home/products/acu1050shx64/
     installerName: setup_acucob1050pmk59shACU
   tags: extend1050
 
+- name: Get extend 10.5.0 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: AcuCOBOL/1050/{{ installerName }}
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: extend1050
+
 # PU1
+
+- name: Set extend 10.5.0 PU 1 Facts
+  set_fact:
+    installPath: /home/products/acu1050shx64pu1/
+    installerName: setup_acucob1050pmk59shACU
+  tags: extend1050pu1
 
 - name: Get extend 10.5.0 PU 1 Download URL from S3
   amazon.aws.s3_object:
     profile: '{{ awsProfile }}'
     bucket: mturner
     mode: geturl
-    object: AcuCOBOL/1050/PU1/setup_acucob1050pmk59shACU
+    object: AcuCOBOL/1050/PU1/{{ installerName }}
     region: '{{ awsRegion }}'
     expiry: 4000
     sig_v4: true
   register: s3
   delegate_to: localhost
-  tags: extend1050pu1
-
-- name: Set extend 10.5.0 PU 1 Facts
-  set_fact:
-    installPath: /home/products/acu1050shx64pu1/
-    installerName: setup_acucob1050pmk59shACU
   tags: extend1050pu1

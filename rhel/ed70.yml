@@ -1,38 +1,25 @@
 # PU15
 
-- name: Get ED 7.0 PU 15 Download URL from S3
-  amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: ED/70/setup_entdev_7.0_patchupdate15_315223_redhat_x86_64
-    region: '{{ awsRegion }}'
-    expiry: 4000
-    sig_v4: true
-  register: s3
-  delegate_to: localhost
-  tags: ed70pu15
-
 - name: Set ED 7.0 PU 15 Facts
   set_fact:
     installPath: /home/products/ed70pu15
     installerName: setup_entdev_7.0_patchupdate15_315223_redhat_x86_64
   tags: ed70pu15
 
-# PU16
-
-- name: Get ED 7.0 PU 16 Download URL from S3
+- name: Get ED 7.0 PU 15 Download URL from S3
   amazon.aws.s3_object:
     profile: '{{ awsProfile }}'
     bucket: mturner
     mode: geturl
-    object: ED/70/setup_entdev_7.0_patchupdate16_317960_redhat_x86_64
+    object: ED/70/{{ installerName }}
     region: '{{ awsRegion }}'
     expiry: 4000
     sig_v4: true
   register: s3
   delegate_to: localhost
-  tags: ed70pu16
+  tags: ed70pu15
+
+# PU16
 
 - name: Set ED 7.0 PU 16 Facts
   set_fact:
@@ -40,23 +27,36 @@
     installerName: setup_entdev_7.0_patchupdate16_317960_redhat_x86_64
   tags: ed70pu16
 
+- name: Get ED 7.0 PU 16 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/70/{{ installerName }}
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+  tags: ed70pu16
+
 # PU17
+
+- name: Set ED 7.0 PU 17 Facts
+  set_fact:
+    installPath: /home/products/ed70pu17
+    installerName: setup_entdev_7.0_patchupdate17_320924_redhat_x86_64
+  tags: ed70pu17
 
 - name: Get ED 7.0 PU 17 Download URL from S3
   amazon.aws.s3_object:
     profile: '{{ awsProfile }}'
     bucket: mturner
     mode: geturl
-    object: ED/70/setup_entdev_7.0_patchupdate17_320924_redhat_x86_64
+    object: ED/70/{{ installerName }}
     region: '{{ awsRegion }}'
     expiry: 4000
     sig_v4: true
   register: s3
   delegate_to: localhost
-  tags: ed70pu17
-
-- name: Set ED 7.0 PU 17 Facts
-  set_fact:
-    installPath: /home/products/ed70pu17
-    installerName: setup_entdev_7.0_patchupdate17_320924_redhat_x86_64
   tags: ed70pu17

@@ -1,39 +1,41 @@
-- name: Get extend 10.5.0 Download URL from S3
-  amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: AcuCOBOL/1050/extend(R) Version 10.5.0 x64.msi
-    region: '{{ awsRegion }}'
-    expiry: 4000
-    sig_v4: true
-  register: s3
-  delegate_to: localhost
-  tags: extend1050
+- name: extend 10.5.0
+  block:
+    - name: Get extend Download URL from S3
+      set_fact:
+        installPath: C:\Program Files (x86)\Micro Focus\extend 10.5.0
+        installerName: extend(R) Version 10.5.0 x64.msi
 
-- name: Set extend 10.5.0 Facts
-  set_fact:
-    installPath: C:\Program Files (x86)\Micro Focus\extend 10.5.0
-    installerName: extend(R) Version 10.5.0 x64.msi
+    - name: Set extend Facts
+      amazon.aws.s3_object:
+        profile: '{{ awsProfile }}'
+        bucket: mturner
+        mode: geturl
+        object: AcuCOBOL/1050/{{ installerName }}
+        region: '{{ awsRegion }}'
+        expiry: 4000
+        sig_v4: true
+      register: s3
+      delegate_to: localhost
   tags: extend1050
 
 # PU1
 
-- name: Get extend 10.5.0 PU 1 Download URL from S3
-  amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: AcuCOBOL/1050/PU1/extend(R) Version 10.5.0 x64.msi
-    region: '{{ awsRegion }}'
-    expiry: 4000
-    sig_v4: true
-  register: s3
-  delegate_to: localhost
-  tags: extend1050pu1
+- name: extend 10.5.0 PU 1
+  block:
+    - name: Get extend Download URL from S3
+      set_fact:
+        installPath: C:\Program Files (x86)\Micro Focus\extend 10.5.0
+        installerName: extend(R) Version 10.5.0 x64.msi
 
-- name: Set extend 10.5.0 PU 1 Facts
-  set_fact:
-    installPath: C:\Program Files (x86)\Micro Focus\extend 10.5.0
-    installerName: extend(R) Version 10.5.0 x64.msi
+    - name: Set extend Facts
+      amazon.aws.s3_object:
+        profile: '{{ awsProfile }}'
+        bucket: mturner
+        mode: geturl
+        object: AcuCOBOL/1050/PU1/{{ installerName }}
+        region: '{{ awsRegion }}'
+        expiry: 4000
+        sig_v4: true
+      register: s3
+      delegate_to: localhost
   tags: extend1050pu1
