@@ -1,18 +1,19 @@
-- name: Set ED 9.0 Facts
-  set_fact:
-    installPath: /home/products/ed90
-    installerName: setup_entdev_9.0_redhat_x86_64
-  tags: ed90
+- name: ED 9.0
+  block:
+    - name: Set Facts
+      set_fact:
+        installPath: /home/products/ed90
+        installerName: setup_entdev_9.0_redhat_x86_64
 
-- name: Get ED 9.0 Download URL from S3
-  amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: ED/90/{{ installerName }}
-    region: '{{ awsRegion }}'
-    expiry: 4000
-    sig_v4: true
-  register: s3
-  delegate_to: localhost
+    - name: Get ED Download URL from S3
+      amazon.aws.s3_object:
+        profile: '{{ awsProfile }}'
+        bucket: mturner
+        mode: geturl
+        object: ED/90/{{ installerName }}
+        region: '{{ awsRegion }}'
+        expiry: 4000
+        sig_v4: true
+      register: s3
+      delegate_to: localhost
   tags: ed90

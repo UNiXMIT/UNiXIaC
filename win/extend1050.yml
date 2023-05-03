@@ -1,11 +1,11 @@
 - name: extend 10.5.0
   block:
-    - name: Get extend Download URL from S3
+    - name: Set Facts
       set_fact:
         installPath: C:\Program Files (x86)\Micro Focus\extend 10.5.0
         installerName: extend(R) Version 10.5.0 x64.msi
 
-    - name: Set extend Facts
+    - name: Get extend Download URL from S3
       amazon.aws.s3_object:
         profile: '{{ awsProfile }}'
         bucket: mturner
@@ -22,12 +22,12 @@
 
 - name: extend 10.5.0 PU 1
   block:
-    - name: Get extend Download URL from S3
+    - name: Set Facts
       set_fact:
         installPath: C:\Program Files (x86)\Micro Focus\extend 10.5.0
         installerName: extend(R) Version 10.5.0 x64.msi
 
-    - name: Set extend Facts
+    - name: Get extend Download URL from S3
       amazon.aws.s3_object:
         profile: '{{ awsProfile }}'
         bucket: mturner
