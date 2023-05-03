@@ -1,41 +1,3 @@
-- name: Get ED 8.0 PU 5 Download URL from S3
-  amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: ED/80/setup_entdev_8.0_patchupdate05_318651_redhat_x86_64
-    region: '{{ awsRegion }}'
-    expiry: 4000
-    sig_v4: true
-  register: s3
-  delegate_to: localhost
-  tags: ed80pu5
-
-- name: Set ED 8.0 PU 5 Facts
-  set_fact:
-    installPath: /home/products/ed80pu5
-    installerName: setup_entdev_8.0_patchupdate05_318651_redhat_x86_64
-  tags: ed80pu5
-
-- name: Get ED 9.0 Download URL from S3
-  amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: ED/90/setup_entdev_9.0_redhat_x86_64
-    region: '{{ awsRegion }}'
-    expiry: 4000
-    sig_v4: true
-  register: s3
-  delegate_to: localhost
-  tags: ed90
-
-- name: Set ED 9.0 Facts
-  set_fact:
-    installPath: /home/products/ed90
-    installerName: setup_entdev_9.0_redhat_x86_64
-  tags: ed90
-
 - name: Download ED Installer
   ansible.builtin.get_url:
     url: '{{ s3.url }}'
@@ -44,12 +6,10 @@
     group: '{{ myUsername }}'
     mode: 0775
   become: yes
-  tags: ed
 
 - name: Install ED
   command: "/home/{{ myUsername }}/MFSupport/MFInstallers/{{ installerName }} -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}"
   become: yes
-  tags: ed
 
 - name: Add License Server
   lineinfile:
@@ -58,18 +18,15 @@
     regexp: '^lshost'
     line: 'lshost = {{ licenseServer }}'
   become: yes
-  tags: ed
 
 - name: Start MFDS
   command: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv && {{ installPath }}/bin/mfds --UI-on && {{ installPath }}/bin/mfds --listen-all && {{ installPath }}/bin/mfds"
   environment: 
     COBDIR: '{{ installPath }}'
   become: yes
-  tags: ed
 
 - name: Import JCL Region
   command: '{{ installPath }}/bin/mfds -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'
   environment: 
     COBDIR: '{{ installPath }}'
   become: yes
-  tags: ed

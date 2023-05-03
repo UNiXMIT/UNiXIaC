@@ -1,41 +1,3 @@
-- name: Get extend 10.5.0 Download URL from S3
-  amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: AcuCOBOL/1050/setup_acucob1050pmk59shACU
-    region: '{{ awsRegion }}'
-    expiry: 4000
-    sig_v4: true
-  register: s3
-  delegate_to: localhost
-  tags: extend1050
-
-- name: Set extend 10.5.0 Facts
-  set_fact:
-    installPath: /home/products/acu1050shx64/
-    installerName: setup_acucob1050pmk59shACU
-  tags: extend1050
-
-- name: Get extend 10.5.0 PU 1 Download URL from S3
-  amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: AcuCOBOL/1050/PU1/setup_acucob1050pmk59shACU
-    region: '{{ awsRegion }}'
-    expiry: 4000
-    sig_v4: true
-  register: s3
-  delegate_to: localhost
-  tags: extend1050pu1
-
-- name: Set extend 10.5.0 PU 1 Facts
-  set_fact:
-    installPath: /home/products/acu1050shx64pu1/
-    installerName: setup_acucob1050pmk59shACU
-  tags: extend1050pu1
-
 - name: Create extend directory
   file:
     path: '{{ installPath }}'
@@ -44,7 +6,6 @@
     group: '{{ myUsername }}'
     mode: '0775'
   become: yes
-  tags: extend
 
 - name: Download extend Installer
   ansible.builtin.get_url:
@@ -54,12 +15,9 @@
     group: '{{ myUsername }}'
     mode: 0775
   become: yes
-  tags: extend
     
 - name: Install extend
   shell: "printf 'y\n{{ installPath }}\n' | {{ installPath }}/{{ installerName }}"
-  tags: extend
 
 - name: Activate Licenses
   shell: "printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator"
-  tags: extend
