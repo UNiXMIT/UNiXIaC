@@ -1,3 +1,27 @@
+- name: Install EPEL 8 key 
+  rpm_key:
+    state: present
+    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8
+  tags: rhel<=8
+
+- name: Install EPEL 8
+  dnf:
+    name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm'
+    state: present
+  tags: rhel<=8
+
+- name: Install EPEL 9 key 
+  rpm_key:
+    state: present
+    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
+  tags: rhel>=9
+
+- name: Install EPEL 9
+  dnf:
+    name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm'
+    state: present
+  tags: rhel>=9
+
 - name: Package installation
   dnf:
     name:
