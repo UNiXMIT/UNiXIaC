@@ -7,7 +7,6 @@
         S3Prefix: ED/80/
   tags: ed80
 
-# PU5
 - name: ED 8.0 PU 5
   block:
     - name: Set Facts
@@ -15,8 +14,6 @@
         installerNameEDVSPU: edvs2022_80_pu05_318648.exe
         installerNameEDEPU: ede_80_pu05_318643.exe
   tags: ed80pu5
-
-# PU6
 
 - name: ED 8.0 PU 6
   block:

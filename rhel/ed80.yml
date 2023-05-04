@@ -1,26 +1,11 @@
-# PU5
-
 - name: ED 8.0 PU 5
   block:
     - name: Set Facts
       set_fact:
         installPath: /home/products/ed80pu5
         installerName: setup_entdev_8.0_patchupdate05_318651_redhat_x86_64
-
-    - name: Get ED Download URL from S3
-      amazon.aws.s3_object:
-        profile: '{{ awsProfile }}'
-        bucket: mturner
-        mode: geturl
-        object: ED/80/{{ installerName }}
-        region: '{{ awsRegion }}'
-        expiry: 4000
-        sig_v4: true
-      register: s3
-      delegate_to: localhost
+        S3Prefix: ED/80/
   tags: ed80pu5
-
-# PU6
 
 - name: ED 8.0 PU 6
   block:
@@ -28,16 +13,5 @@
       set_fact:
         installPath: /home/products/ed80pu6
         installerName: setup_entdev_8.0_patchupdate06_321063_redhat_x86_64
-
-    - name: Get ED Download URL from S3
-      amazon.aws.s3_object:
-        profile: '{{ awsProfile }}'
-        bucket: mturner
-        mode: geturl
-        object: ED/80/{{ installerName }}
-        region: '{{ awsRegion }}'
-        expiry: 4000
-        sig_v4: true
-      register: s3
-      delegate_to: localhost
+        S3Prefix: ED/80/
   tags: ed80pu6

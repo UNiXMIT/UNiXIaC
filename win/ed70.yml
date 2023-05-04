@@ -29,8 +29,6 @@
         chdir: C:\ProgramData\Microsoft\VisualStudio\Setup\x86
   tags: ed70
 
-# PU15
-
 - name: ED 70 PU 15
   block:
     - name: Set Facts
@@ -39,8 +37,6 @@
         installerNameEDEPU: ede_70_pu15_315321.exe
   tags: ed70pu15
 
-# PU16
-
 - name: ED 7.0 PU 16
   block:
     - name: Set Facts
@@ -48,8 +44,6 @@
         installerNameEDVSPU: edvs2019_70_pu16_318123.exe
         installerNameEDEPU: ede_70_pu16_318103.exe
   tags: ed70pu16
-
-# PU17
 
 - name: ED 7.0 PU 17
   block:

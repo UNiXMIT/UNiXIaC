@@ -24,12 +24,12 @@
       register: s3ede
       delegate_to: localhost
 
-    - name: Download {{ installerNameEDVS }} Installer
+    - name: Download {{ installerNameEDVS }}
       ansible.windows.win_get_url:
         url: '{{ s3edvs.url }}'
         dest: C:\temp\
     
-    - name: Download {{ installerNameEDE }} Installer
+    - name: Download {{ installerNameEDE }}
       ansible.windows.win_get_url:
         url: '{{ s3ede.url }}'
         dest: C:\temp\
@@ -61,12 +61,12 @@
       register: s3edepu
       delegate_to: localhost
       
-    - name: Download {{ installerNameEDVSPU }} Installer
+    - name: Download {{ installerNameEDVSPU }}
       ansible.windows.win_get_url:
         url: '{{ s3edvspu.url }}'
         dest: C:\temp\
     
-    - name: Download {{ installerNameEDEPU }} Installer
+    - name: Download {{ installerNameEDEPU }}
       ansible.windows.win_get_url:
         url: '{{ s3edepu.url }}'
         dest: C:\temp\

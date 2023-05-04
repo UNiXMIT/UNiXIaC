@@ -4,16 +4,5 @@
       set_fact:
         installPath: /home/products/ed90
         installerName: setup_entdev_9.0_redhat_x86_64
-
-    - name: Get ED Download URL from S3
-      amazon.aws.s3_object:
-        profile: '{{ awsProfile }}'
-        bucket: mturner
-        mode: geturl
-        object: ED/90/{{ installerName }}
-        region: '{{ awsRegion }}'
-        expiry: 4000
-        sig_v4: true
-      register: s3
-      delegate_to: localhost
+        S3Prefix: ED/90/
   tags: ed90

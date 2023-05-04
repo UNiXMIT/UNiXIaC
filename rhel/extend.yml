@@ -7,7 +7,19 @@
     mode: '0775'
   become: yes
 
-- name: Download extend Installer
+- name: Get {{ installerName }} Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: '{{ S3Prefix }}{{ installerName }}'
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+
+- name: Download {{ installerName }}
   ansible.builtin.get_url:
     url: '{{ s3.url }}'
     dest: '{{ installPath }}'
@@ -16,7 +28,7 @@
     mode: 0775
   become: yes
     
-- name: Install extend
+- name: Install {{ installerName }}
   shell: "printf 'y\n{{ installPath }}\n' | {{ installPath }}/{{ installerName }}"
 
 - name: Activate Licenses

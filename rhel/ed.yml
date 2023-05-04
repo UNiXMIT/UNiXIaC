@@ -1,4 +1,16 @@
-- name: Download ED Installer
+- name: Get {{ installerName }} Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: '{{ S3Prefix }}{{ installerName }}'
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+
+- name: Download {{ installerName }}
   ansible.builtin.get_url:
     url: '{{ s3.url }}'
     dest: "/home/{{ myUsername }}/MFSupport/MFInstallers/"
@@ -7,7 +19,7 @@
     mode: 0775
   become: yes
 
-- name: Install ED
+- name: Install {{ installerName }}
   command: "/home/{{ myUsername }}/MFSupport/MFInstallers/{{ installerName }} -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}"
   become: yes
 

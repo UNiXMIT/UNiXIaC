@@ -7,8 +7,6 @@
         S3Prefix: AcuCOBOL/1050/
   tags: extend1050
 
-# PU1
-
 - name: extend 10.5.0 PU 1
   block:
     - name: Set Facts

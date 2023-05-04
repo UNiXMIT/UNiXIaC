@@ -10,7 +10,7 @@
   register: s3
   delegate_to: localhost
 
-- name: Download {{ installerName }} Installer
+- name: Download {{ installerName }}
   ansible.windows.win_get_url:
     url: '{{ s3.url }}'
     dest: C:\temp\
