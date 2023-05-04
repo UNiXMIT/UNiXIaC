@@ -1,9 +1,21 @@
-- name: Download extend Installer
+- name: Get {{ installerName }} Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: '{{ S3Prefix }}{{ installerName }}'
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+
+- name: Download {{ installerName }} Installer
   ansible.windows.win_get_url:
     url: '{{ s3.url }}'
     dest: C:\temp\
 
-- name: Install extend
+- name: Install {{ installerName }}
   win_package:
     path: C:\temp\{{ installerName }}
     state: present

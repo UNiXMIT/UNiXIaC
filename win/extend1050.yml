@@ -4,18 +4,7 @@
       set_fact:
         installPath: C:\Program Files (x86)\Micro Focus\extend 10.5.0
         installerName: extend(R) Version 10.5.0 x64.msi
-
-    - name: Get extend Download URL from S3
-      amazon.aws.s3_object:
-        profile: '{{ awsProfile }}'
-        bucket: mturner
-        mode: geturl
-        object: AcuCOBOL/1050/{{ installerName }}
-        region: '{{ awsRegion }}'
-        expiry: 4000
-        sig_v4: true
-      register: s3
-      delegate_to: localhost
+        S3Prefix: AcuCOBOL/1050/
   tags: extend1050
 
 # PU1
@@ -26,16 +15,5 @@
       set_fact:
         installPath: C:\Program Files (x86)\Micro Focus\extend 10.5.0
         installerName: extend(R) Version 10.5.0 x64.msi
-
-    - name: Get extend Download URL from S3
-      amazon.aws.s3_object:
-        profile: '{{ awsProfile }}'
-        bucket: mturner
-        mode: geturl
-        object: AcuCOBOL/1050/PU1/{{ installerName }}
-        region: '{{ awsRegion }}'
-        expiry: 4000
-        sig_v4: true
-      register: s3
-      delegate_to: localhost
+        S3Prefix: AcuCOBOL/1050/PU1/
   tags: extend1050pu1

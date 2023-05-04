@@ -22,14 +22,16 @@ If Sempahore is setup in a container the port to use is 8181.
 - vs2019
   - ed
     - ed70
-      - ed70pu15
-      - ed70pu16
-      - ed70pu17
+      - edpu
+        - ed70pu15
+        - ed70pu16
+        - ed70pu17
 - vs2022
   - ed 
     - ed80
-      - ed80pu5
-      - ed80pu6
+      - edpu
+        - ed80pu5
+        - ed80pu6
     - ed90
 - extend
   - extend1050

@@ -4,30 +4,14 @@
       set_fact:
         installerNameEDVS: edvs2019_70.exe
         installerNameEDE: ede_70.exe
-
-    - name: Get EDVS Download URL from S3
-      amazon.aws.s3_object:
-        profile: '{{ awsProfile }}'
-        bucket: mturner
-        mode: geturl
-        object: ED/70/{{ installerNameEDVS }}
-        region: '{{ awsRegion }}'
-        expiry: 4000
-        sig_v4: true
-      register: s3
-      delegate_to: localhost
-
-    - name: Download EDVS Installer
-      ansible.windows.win_get_url:
-        url: '{{ s3.url }}'
-        dest: C:\temp\
+        S3Prefix: ED/70/
 
     - name: Get Microsoft.VisualStudio.Setup.Configuration.Native.dll Download URL from S3
       amazon.aws.s3_object:
         profile: '{{ awsProfile }}'
         bucket: mturner
         mode: geturl
-        object: ED/70/Microsoft.VisualStudio.Setup.Configuration.Native.dll
+        object: '{{ S3Prefix }}Microsoft.VisualStudio.Setup.Configuration.Native.dll'
         region: '{{ awsRegion }}'
         expiry: 4000
         sig_v4: true
@@ -43,35 +27,6 @@
       win_command: 
         cmd: regsvr32 /s C:\ProgramData\Microsoft\VisualStudio\Setup\x86\Microsoft.VisualStudio.Setup.Configuration.Native.dll
         chdir: C:\ProgramData\Microsoft\VisualStudio\Setup\x86
-
-    - name: Install EDVS
-      win_package:
-        path: C:\temp\{{ installerNameEDVS }}
-        state: present
-        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDVS }}.log
-
-    - name: Get EDE Download URL from S3
-      amazon.aws.s3_object:
-        profile: '{{ awsProfile }}'
-        bucket: mturner
-        mode: geturl
-        object: ED/70/{{ installerNameEDE }}
-        region: '{{ awsRegion }}'
-        expiry: 4000
-        sig_v4: true
-      register: s3
-      delegate_to: localhost
-
-    - name: Download EDE Installer
-      ansible.windows.win_get_url:
-        url: '{{ s3.url }}'
-        dest: C:\temp\
-
-    - name: Install EDE
-      win_package:
-        path: C:\temp\{{ installerNameEDE }}
-        state: present
-        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDE }}.log
   tags: ed70
 
 # PU15
@@ -80,54 +35,8 @@
   block:
     - name: Set Facts
       set_fact:
-        installerNameEDVS: edvs2019_70_pu15_315341.exe
-        installerNameEDE: ede_70_pu15_315321.exe
-
-    - name: Get EDVS Download URL from S3
-      amazon.aws.s3_object:
-        profile: '{{ awsProfile }}'
-        bucket: mturner
-        mode: geturl
-        object: ED/70/{{ installerNameEDVS }}
-        region: '{{ awsRegion }}'
-        expiry: 4000
-        sig_v4: true
-      register: s3
-      delegate_to: localhost
-
-    - name: Download EDVS Installer
-      ansible.windows.win_get_url:
-        url: '{{ s3.url }}'
-        dest: C:\temp\
-
-    - name: Install EDVS
-      win_package:
-        path: C:\temp\{{ installerNameEDVS }}
-        state: present
-        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDVS }}.log
-
-    - name: Get EDE Download URL from S3
-      amazon.aws.s3_object:
-        profile: '{{ awsProfile }}'
-        bucket: mturner
-        mode: geturl
-        object: ED/70/{{ installerNameEDE }}
-        region: '{{ awsRegion }}'
-        expiry: 4000
-        sig_v4: true
-      register: s3
-      delegate_to: localhost
-
-    - name: Download EDE Installer
-      ansible.windows.win_get_url:
-        url: '{{ s3.url }}'
-        dest: C:\temp\
-
-    - name: Install EDE
-      win_package:
-        path: C:\temp\{{ installerNameEDE }}
-        state: present
-        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDE }}.log
+        installerNameEDVSPU: edvs2019_70_pu15_315341.exe
+        installerNameEDEPU: ede_70_pu15_315321.exe
   tags: ed70pu15
 
 # PU16
@@ -136,54 +45,8 @@
   block:
     - name: Set Facts
       set_fact:
-        installerNameEDVS: edvs2019_70_pu16_318123.exe
-        installerNameEDE: ede_70_pu16_318103.exe
-
-    - name: Get EDVS Download URL from S3
-      amazon.aws.s3_object:
-        profile: '{{ awsProfile }}'
-        bucket: mturner
-        mode: geturl
-        object: ED/70/{{ installerNameEDVS }}
-        region: '{{ awsRegion }}'
-        expiry: 4000
-        sig_v4: true
-      register: s3
-      delegate_to: localhost
-
-    - name: Download EDVSInstaller
-      ansible.windows.win_get_url:
-        url: '{{ s3.url }}'
-        dest: C:\temp\
-
-    - name: Install EDVS
-      win_package:
-        path: C:\temp\{{ installerNameEDVS }}
-        state: present
-        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDVS }}.log
-
-    - name: Get EDE Download URL from S3
-      amazon.aws.s3_object:
-        profile: '{{ awsProfile }}'
-        bucket: mturner
-        mode: geturl
-        object: ED/70/{{ installerNameEDE }}
-        region: '{{ awsRegion }}'
-        expiry: 4000
-        sig_v4: true
-      register: s3
-      delegate_to: localhost
-
-    - name: Download EDE Installer
-      ansible.windows.win_get_url:
-        url: '{{ s3.url }}'
-        dest: C:\temp\
-
-    - name: Install EDE
-      win_package:
-        path: C:\temp\{{ installerNameEDE }}
-        state: present
-        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDE }}.log
+        installerNameEDVSPU: edvs2019_70_pu16_318123.exe
+        installerNameEDEPU: ede_70_pu16_318103.exe
   tags: ed70pu16
 
 # PU17
@@ -194,50 +57,4 @@
       set_fact:
         installerNameEDVS: edvs2019_70_pu17_320927.exe
         installerNameEDE: ede_70_pu17_320926.exe
-
-    - name: Get EDVS Download URL from S3
-      amazon.aws.s3_object:
-        profile: '{{ awsProfile }}'
-        bucket: mturner
-        mode: geturl
-        object: ED/70/{{ installerNameEDVS }}
-        region: '{{ awsRegion }}'
-        expiry: 4000
-        sig_v4: true
-      register: s3
-      delegate_to: localhost
-
-    - name: Download EDVS Installer
-      ansible.windows.win_get_url:
-        url: '{{ s3.url }}'
-        dest: C:\temp\
-
-    - name: Install EDVS
-      win_package:
-        path: C:\temp\{{ installerNameEDVS }}
-        state: present
-        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDVS }}.log
-
-    - name: Get EDE Download URL from S3
-      amazon.aws.s3_object:
-        profile: '{{ awsProfile }}'
-        bucket: mturner
-        mode: geturl
-        object: ED/70/{{ installerNameEDE }}
-        region: '{{ awsRegion }}'
-        expiry: 4000
-        sig_v4: true
-      register: s3
-      delegate_to: localhost
-
-    - name: Download EDE Installer
-      ansible.windows.win_get_url:
-        url: '{{ s3.url }}'
-        dest: C:\temp\
-
-    - name: Install EDE
-      win_package:
-        path: C:\temp\{{ installerNameEDE }}
-        state: present
-        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDE }}.log
   tags: ed70pu17

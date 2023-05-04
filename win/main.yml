@@ -183,7 +183,6 @@
   tasks:
   - name: Import ed.yml
     import_tasks: ed.yml
-  tags: ed
 
 - name: extend 10.5.0
   hosts: awsEC2
