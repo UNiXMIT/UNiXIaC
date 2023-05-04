@@ -39,6 +39,7 @@ If Sempahore is setup in a container the port to use is 8181.
 ##### RHEL
 - default
 - rhel<=8
+- rhel>=9
 - ed
   - ed70pu15
   - ed70pu16
