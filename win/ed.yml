@@ -78,13 +78,13 @@
       win_package:
         path: C:\temp\{{ installerNameEDVS }}
         state: present
-        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDVS }}.log
+        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDVS }}.log /norestart
     
     - name: Install {{ installerNameEDE }}
       win_package:
         path: C:\temp\{{ installerNameEDE }}
         state: present
-        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDE }}.log
+        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDE }}.log /norestart
   tags: ed
 
 - name: Install ED PU
@@ -93,13 +93,13 @@
       win_package:
         path: C:\temp\{{ installerNameEDVSPU }}
         state: present
-        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDVSPU }}.log
+        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDVSPU }}.log /norestart
     
     - name: Install {{ installerNameEDEPU }}
       win_package:
         path: C:\temp\{{ installerNameEDEPU }}
         state: present
-        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDEPU }}.log
+        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDEPU }}.log /norestart
   tags: edpu
 
 - name: Add License Server
