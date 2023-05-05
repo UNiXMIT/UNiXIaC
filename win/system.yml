@@ -112,15 +112,12 @@
   win_regedit:
       path: HKLM:\SOFTWARE\Microsoft\Windows\WindowsUpdate
       name: ActiveHoursStart
-      data: 2
+      data: 1
       type: dword
 
 - name: Active Hours End
   win_regedit:
       path: HKLM:\SOFTWARE\Microsoft\Windows\WindowsUpdate
       name: ActiveHoursEnd
-      data: 3
+      data: 4
       type: dword
-
-- name: Reboot
-  win_reboot:
