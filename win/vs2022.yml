@@ -12,4 +12,4 @@
       VS: 'Visual Studio Professional 2022'
     state: present
   loop: '{{ ec2.instance_ids }}'
-  delegate_to: localhost
+  delegate_to: local
