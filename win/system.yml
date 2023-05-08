@@ -83,6 +83,7 @@
       start_boundary: '2023-01-01T20:00:00'
     username: '{{ ansibleUser }}'
     password: '{{ myPassword }}'
+    logon_type: password
     run_level: highest
     state: present
     enabled: yes
