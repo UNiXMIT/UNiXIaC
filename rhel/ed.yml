@@ -27,7 +27,7 @@
     tags:
       ED: '{{ installerName }}'
     state: present
-  loop: '{{ ec2.instance_ids }}'
+  loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
   delegate_to: localhost
 
 - name: Install {{ installerName }}

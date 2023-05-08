@@ -81,7 +81,7 @@
       EDVS: '{{ installerNameEDVS }}'
       EDE: '{{ installerNameEDE }}'
     state: present
-  loop: '{{ ec2.instance_ids }}'
+  loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
   delegate_to: localhost
   tags: ed
 
@@ -94,7 +94,7 @@
       EDVSPU: '{{ installerNameEDVSPU }}'
       EDEPU: '{{ installerNameEDEPU }}'
     state: present
-  loop: '{{ ec2.instance_ids }}'
+  loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
   delegate_to: localhost
   tags: edpu
 
