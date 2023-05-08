@@ -19,6 +19,17 @@
     mode: 0775
   become: yes
 
+- name: Add ED Tags
+  amazon.aws.ec2_tag:
+    aws_profile: '{{ awsProfile }}'
+    region: '{{ awsRegion }}'
+    resource: '{{ item }}'
+    tags:
+      ED: '{{ installerName }}'
+    state: present
+  loop: '{{ ec2.instance_ids }}'
+  delegate_to: localhost
+
 - name: Install {{ installerName }}
   command: "/home/{{ myUsername }}/MFSupport/MFInstallers/{{ installerName }} -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}"
   become: yes

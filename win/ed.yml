@@ -72,6 +72,32 @@
         dest: C:\temp\
   tags: edpu
 
+- name: Add ED Tags
+  amazon.aws.ec2_tag:
+    aws_profile: '{{ awsProfile }}'
+    region: '{{ awsRegion }}'
+    resource: '{{ item }}'
+    tags:
+      EDVS: '{{ installerNameEDVS }}'
+      EDE: '{{ installerNameEDE }}'
+    state: present
+  loop: '{{ ec2.instance_ids }}'
+  delegate_to: localhost
+  tags: ed
+
+- name: Add ED PU Tags
+  amazon.aws.ec2_tag:
+    aws_profile: '{{ awsProfile }}'
+    region: '{{ awsRegion }}'
+    resource: '{{ item }}'
+    tags:
+      EDVSPU: '{{ installerNameEDVSPU }}'
+      EDEPU: '{{ installerNameEDEPU }}'
+    state: present
+  loop: '{{ ec2.instance_ids }}'
+  delegate_to: localhost
+  tags: edpu
+
 - name: Install ED 
   block:
     - name: Install {{ installerNameEDVS }}

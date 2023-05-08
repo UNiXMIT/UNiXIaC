@@ -15,6 +15,17 @@
     url: '{{ s3.url }}'
     dest: C:\temp\
 
+- name: Add extend Tags
+  amazon.aws.ec2_tag:
+    aws_profile: '{{ awsProfile }}'
+    region: '{{ awsRegion }}'
+    resource: '{{ item }}'
+    tags:
+      extend: '{{ installerName }}'
+    state: present
+  loop: '{{ ec2.instance_ids }}'
+  delegate_to: localhost
+
 - name: Install {{ installerName }}
   win_package:
     path: C:\temp\{{ installerName }}

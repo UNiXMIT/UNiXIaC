@@ -27,6 +27,17 @@
     group: '{{ myUsername }}'
     mode: 0775
   become: yes
+
+- name: Add extend Tags
+  amazon.aws.ec2_tag:
+    aws_profile: '{{ awsProfile }}'
+    region: '{{ awsRegion }}'
+    resource: '{{ item }}'
+    tags:
+      extend: '{{ installerName }}'
+    state: present
+  loop: '{{ ec2.instance_ids }}'
+  delegate_to: localhost
     
 - name: Install {{ installerName }}
   shell: "printf 'y\n{{ installPath }}\n' | {{ installPath }}/{{ installerName }}"
