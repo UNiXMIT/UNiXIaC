@@ -11,5 +11,5 @@
     tags:
       VS: 'Visual Studio Professional 2019'
     state: present
-  loop: "{{ hostvars['local'].ec2.instance_ids }}"
+  loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
   delegate_to: localhost
