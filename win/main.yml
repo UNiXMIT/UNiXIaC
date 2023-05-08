@@ -119,23 +119,12 @@
     import_tasks: vpn.yml
   tags: default
 
-- name: Install Visual Studio 2019
+- name: Install Visual Studio
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import vs2019.yml 
-    import_tasks: vs2019.yml
-  tags:
-    - vs2019
-
-- name: Install Visual Studio 2022
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import vs2022.yml 
-    import_tasks: vs2022.yml
-  tags:
-    - vs2022
+  - name: Import vs.yml 
+    import_tasks: vs.yml
 
 - name: Install VSCode + Extensions
   hosts: awsEC2
