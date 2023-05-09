@@ -1,17 +1,13 @@
 - name: extend 10.5.0
-  block:
-    - name: Set Facts
-      set_fact:
-        installPath: C:\Program Files (x86)\Micro Focus\extend 10.5.0
-        installerName: extend(R) Version 10.5.0 x64.msi
-        S3Prefix: AcuCOBOL/1050/
+  set_fact:
+    installPath: C:\Program Files (x86)\Micro Focus\extend 10.5.0
+    installerName: extend(R) Version 10.5.0 x64.msi
+    S3Prefix: AcuCOBOL/1050/
   tags: extend1050
 
 - name: extend 10.5.0 PU 1
-  block:
-    - name: Set Facts
-      set_fact:
-        installPath: C:\Program Files (x86)\Micro Focus\extend 10.5.0
-        installerName: extend(R) Version 10.5.0 x64.msi
-        S3Prefix: AcuCOBOL/1050/PU1/
+  set_fact:
+    installPath: C:\Program Files (x86)\Micro Focus\extend 10.5.0
+    installerName: extend(R) Version 10.5.0 x64.msi
+    S3Prefix: AcuCOBOL/1050/PU1/
   tags: extend1050pu1

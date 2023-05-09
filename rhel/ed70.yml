@@ -1,26 +1,20 @@
 - name: ED 7.0 PU 15
-  block: 
-    - name: Set Facts
-      set_fact:
-        installPath: /home/products/ed70pu15
-        installerName: setup_entdev_7.0_patchupdate15_315223_redhat_x86_64
-        S3Prefix: ED/70/
+  set_fact:
+    installPath: /home/products/ed70pu15
+    installerName: setup_entdev_7.0_patchupdate15_315223_redhat_x86_64
+    S3Prefix: ED/70/
   tags: ed70pu15
 
 - name: ED 7.0 PU 16
-  block:
-    - name: Set Facts
-      set_fact:
-        installPath: /home/products/ed70pu16
-        installerName: setup_entdev_7.0_patchupdate16_317960_redhat_x86_64
-        S3Prefix: ED/70/
+  set_fact:
+    installPath: /home/products/ed70pu16
+    installerName: setup_entdev_7.0_patchupdate16_317960_redhat_x86_64
+    S3Prefix: ED/70/
   tags: ed70pu16
 
 - name: ED 7.0 PU 17
-  block:
-    - name: Set Facts
-      set_fact:
-        installPath: /home/products/ed70pu17
-        installerName: setup_entdev_7.0_patchupdate17_320924_redhat_x86_64
-        S3Prefix: ED/70/
+  set_fact:
+    installPath: /home/products/ed70pu17
+    installerName: setup_entdev_7.0_patchupdate17_320924_redhat_x86_64
+    S3Prefix: ED/70/
   tags: ed70pu17

@@ -1,24 +1,18 @@
 - name: ED 8.0
-  block: 
-    - name: Set Facts
-      set_fact:
-        installerNameEDVS: edvs2022_80.exe
-        installerNameEDE: ede_80.exe
-        S3Prefix: ED/80/
+  set_fact:
+    installerNameEDVS: edvs2022_80.exe
+    installerNameEDE: ede_80.exe
+    S3Prefix: ED/80/
   tags: ed80
 
 - name: ED 8.0 PU 5
-  block:
-    - name: Set Facts
-      set_fact:
-        installerNameEDVSPU: edvs2022_80_pu05_318648.exe
-        installerNameEDEPU: ede_80_pu05_318643.exe
+  set_fact:
+    installerNameEDVSPU: edvs2022_80_pu05_318648.exe
+    installerNameEDEPU: ede_80_pu05_318643.exe
   tags: ed80pu5
 
 - name: ED 8.0 PU 6
-  block:
-    - name: Set Facts
-      set_fact:
-        installerNameEDVSPU: edvs2022_80_pu06_321069.exe
-        installerNameEDEPU: ede_80_pu06_321065.exe
+  set_fact:
+    installerNameEDVSPU: edvs2022_80_pu06_321069.exe
+    installerNameEDEPU: ede_80_pu06_321065.exe
   tags: ed80pu6
