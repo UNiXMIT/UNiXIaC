@@ -22,3 +22,4 @@
     # - speedtest
     # - clumsy
     state: present
+  ignore_errors: true
