@@ -9,5 +9,5 @@
     name: Auto ShutDown
     minute: "0"
     hour: "20"
-    job: "shutdown -h now"
+    job: "/sbin/shutdown -h now"
     disabled: false
