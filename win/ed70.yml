@@ -43,6 +43,6 @@
 
 - name: ED 7.0 PU 17
   set_fact:
-    installerNameEDVS: edvs2019_70_pu17_320927.exe
-    installerNameEDE: ede_70_pu17_320926.exe
+    installerNameEDVSPU: edvs2019_70_pu17_320927.exe
+    installerNameEDEPU: ede_70_pu17_320926.exe
   tags: ed70pu17
