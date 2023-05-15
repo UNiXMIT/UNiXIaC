@@ -26,6 +26,7 @@ If Sempahore is setup in a container the port to use is 8181.
         - ed70pu15
         - ed70pu16
         - ed70pu17
+        - ed70pu18
 - vs2022
   - ed 
     - ed80
@@ -46,6 +47,7 @@ If Sempahore is setup in a container the port to use is 8181.
   - ed70pu15
   - ed70pu16
   - ed70pu17
+  - ed70pu18
   - ed80pu5
   - ed80pu6
   - ed90
