@@ -21,7 +21,7 @@
 
 - name: ED 7.0 PU 18
   set_fact:
-    installPath: /home/products/ed70pu17
+    installPath: /home/products/ed70pu18
     installerName: setup_entdev_7.0_patchupdate18_322466_redhat_x86_64
     S3Prefix: ED/70/
   tags: ed70pu18
