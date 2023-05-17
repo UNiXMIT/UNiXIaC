@@ -34,10 +34,52 @@
 
 - name: Activate 32 bit Licenses
   win_command:
-    cmd: '"{{ installPath }}\AcuGT\bin\activator.exe" /PCODE={{ extendCode86 }} /PKEY={{ extendKey86 }}'
-    chdir: '{{ installPath }}\AcuGT\bin'
+    cmd: '"{{ installPath32 }}\AcuGT\bin\activator.exe" /PCODE={{ extendCode86 }} /PKEY={{ extendKey86 }}'
+    chdir: '{{ installPath32 }}\AcuGT\bin'
 
 - name: Activate 64 bit Licenses
   win_command:
-    cmd: '"{{ installPath }}\AcuGT\bin\activator.exe" /PCODE={{ extendCode64 }} /PKEY={{ extendKey64 }}'
-    chdir: '{{ installPath }}\AcuGT\bin'
+    cmd: '"{{ installPath32 }}\AcuGT\bin\activator.exe" /PCODE={{ extendCode64 }} /PKEY={{ extendKey64 }}'
+    chdir: '{{ installPath32 }}\AcuGT\bin'
+
+- name: Admin rights for AcuRCL 32 bit
+  win_regedit:
+    path: HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
+    name: '{{ installPath32 }}\acurcl.exe'
+    data: '~ RUNASADMIN'
+    type: string
+
+- name: Admin rights for AcuRCL 64 bit
+  win_regedit:
+    path: HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
+    name: '{{ installPath64 }}\acurcl.exe'
+    data: '~ RUNASADMIN'
+    type: string
+  
+- name: Admin rights for ATW 32 bit
+  win_regedit:
+    path: HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
+    name: '{{ installPath32 }}\AcuToWeb.exe'
+    data: '~ RUNASADMIN'
+    type: string
+
+- name: Admin rights for ATW 64 bit
+  win_regedit:
+    path: HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
+    name: '{{ installPath64 }}\AcuToWeb.exe'
+    data: '~ RUNASADMIN'
+    type: string
+
+- name: Admin rights for AcuServe 32 bit
+  win_regedit:
+    path: HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
+    name: '{{ installPath32 }}\acuserve.exe'
+    data: '~ RUNASADMIN'
+    type: string
+
+- name: Admin rights for AcuServe 64 bit
+  win_regedit:
+    path: HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
+    name: '{{ installPath64 }}\acuserve.exe'
+    data: '~ RUNASADMIN'
+    type: string
