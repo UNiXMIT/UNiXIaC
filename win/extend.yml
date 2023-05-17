@@ -44,42 +44,42 @@
 
 - name: Admin rights for AcuRCL 32 bit
   win_regedit:
-    path: HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
+    path: HKCU:\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
     name: '{{ installPath32 }}\acurcl.exe'
     data: '~ RUNASADMIN'
     type: string
 
 - name: Admin rights for AcuRCL 64 bit
   win_regedit:
-    path: HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
+    path: HKCU:\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
     name: '{{ installPath64 }}\acurcl.exe'
     data: '~ RUNASADMIN'
     type: string
   
 - name: Admin rights for ATW 32 bit
   win_regedit:
-    path: HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
+    path: HKCU:\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
     name: '{{ installPath32 }}\AcuToWeb.exe'
     data: '~ RUNASADMIN'
     type: string
 
 - name: Admin rights for ATW 64 bit
   win_regedit:
-    path: HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
+    path: HKCU:\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
     name: '{{ installPath64 }}\AcuToWeb.exe'
     data: '~ RUNASADMIN'
     type: string
 
 - name: Admin rights for AcuServe 32 bit
   win_regedit:
-    path: HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
+    path: HKCU:\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
     name: '{{ installPath32 }}\acuserve.exe'
     data: '~ RUNASADMIN'
     type: string
 
 - name: Admin rights for AcuServe 64 bit
   win_regedit:
-    path: HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
+    path: HKCU:\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers
     name: '{{ installPath64 }}\acuserve.exe'
     data: '~ RUNASADMIN'
     type: string
