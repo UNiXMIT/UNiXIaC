@@ -3,7 +3,7 @@
   "myPassword": "strongPassword",
   "ansibleUser": "ec2-user",
   "imageName": "RHEL9",
-  "awsAMI": "ami-05c96317a6278cfaa",
+  "awsAMI": "ami-07fb9d5c721566c65",
   "keyName": "support",
   "keyLocation": "~/.ssh/support.pem",
   "securityGroups": "['sg-XXXXXX','sg-XXXXXX']",
