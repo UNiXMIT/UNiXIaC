@@ -56,4 +56,9 @@ checkContainerRuntime() {
 
 checkContainerRuntime
 
-"${CONTAINER_RUNTIME}" run -itd --name SEMAPHORE -p 8181:3000 -dit mf/semaphore
+"${CONTAINER_RUNTIME}" run -itd --name SEMAPHORE -p 8080:80 mf/semaphore
+sleep 10
+podman exec -it SEMAPHORE "semaphore setup"
+podman exec -it SEMAPHORE "systemctl daemon-reload"
+podman exec -it SEMAPHORE "systemctl start semaphore"
+podman exec -it SEMAPHORE "systemctl enable semaphore"
