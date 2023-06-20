@@ -109,6 +109,7 @@ podman logs SEMAPHORE
       - edpu
         - ed80pu5
         - ed80pu6
+        - ed80pu7
     - ed90
 - extend
   - extend1050
@@ -126,6 +127,7 @@ podman logs SEMAPHORE
   - ed70pu18
   - ed80pu5
   - ed80pu6
+  - ed80pu7
   - ed90
 - extend
   - extend1050
