@@ -36,7 +36,7 @@ podman exec -it -u 0 SEMAPHORE dnf update nginx
 ## Generate SSH Key for GitHub authentication
 Execute the following command, substituting in your GitHub email address.  
 ```
-ssh-keygen -t ed25519 -C "your_email@example.com"
+podman exec -it -u 0 SEMAPHORE ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 This creates a new SSH key, using the provided email as a label.  
 
@@ -48,12 +48,12 @@ When you're prompted to "Enter a file in which to save the key", you can press E
 
 Ensure the ssh-agent is running.  
 ```
-eval "$(ssh-agent -s)"
+podman exec -it -u 0 SEMAPHORE eval "$(ssh-agent -s)"
 ```
 
 Add your SSH private key to the ssh-agent.  
 ```
-ssh-add ~/.ssh/id_ed25519
+podman exec -it -u 0 SEMAPHORE ssh-add ~/.ssh/id_ed25519
 ```
 
 Add the SSH public key to your account on GitHub  - https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account  
