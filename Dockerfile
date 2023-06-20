@@ -13,8 +13,8 @@ RUN dnf install epel-release -y; \
     chmod +x /usr/bin/systemctl; \
     ansible-galaxy collection install amazon.aws; \
     python3 -m pip install boto3 pexpect pypsrp pywinrm; \
-    wget -P /root https://github.com/ansible-semaphore/semaphore/releases/download/v2.8.90/semaphore_2.8.90_linux_amd64.rpm; \
-    dnf install /root/semaphore*.rpm -y; \
+    wget -O /root/semaphore.rpm https://github.com/ansible-semaphore/semaphore/releases/download/v2.8.90/semaphore_2.8.90_linux_amd64.rpm; \
+    dnf install /root/semaphore.rpm -y; \
     chmod 600 /root/.ssh/support.pem; \
     cd /root && unzip pfsso*.zip; \
     python3 -m pip install --upgrade /root/pfsso*/; \ 
@@ -26,7 +26,7 @@ RUN dnf install epel-release -y; \
     mkdir /var/www; \
     chmod +x /root/entrypoint.sh
 COPY semaphoreBasic.conf /etc/nginx/conf.d/semaphoreBasic.conf
-COPY semaphoreTLS.conf /etc/nginx/conf.d/.semaphoreTLS.conf
+# COPY semaphoreTLS.conf /etc/nginx/conf.d/semaphoreTLS.conf
 # COPY cert.pem /etc/nginx/certs/cert.pem
 # COPY key.pem /etc/nginx/certs/key.pem
 ENTRYPOINT [ "/root/entrypoint.sh" ]
