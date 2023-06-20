@@ -58,19 +58,17 @@ This creates a new SSH key, using the provided email as a label.
 
 When you're prompted to "Enter a file in which to save the key", you can press Enter to accept the default file location. Please note that if you created SSH keys previously, ssh-keygen may ask you to rewrite another key, in which case we recommend creating a custom-named SSH key. To do so, type the default file location and replace id_ssh_keyname with your custom key name.  
 
-> Enter a file in which to save the key (/home/YOU/.ssh/ALGORITHM):[Press enter]
-
-Ensure the ssh-agent is running.  
-```
-podman exec -it -u 0 SEMAPHORE eval "$(ssh-agent -s)"
-```
+> Enter a file in which to save the key (/home/YOU/.ssh/ALGORITHM):[Press enter]  
 
 Add your SSH private key to the ssh-agent.  
 ```
-podman exec -it -u 0 SEMAPHORE ssh-add ~/.ssh/id_ed25519
+podman exec -it -u 0 SEMAPHORE ssh-agent ssh-add /root/.ssh/id_ed25519
 ```
 
 Add the SSH public key to your account on GitHub  - https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account  
+```
+podman exec -it -u 0 SEMAPHORE cat /root/.ssh/id_ed25519.pub
+```
 
 **SOURCE:** https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=linux  
 

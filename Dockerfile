@@ -24,6 +24,7 @@ RUN dnf install epel-release -y; \
     mv /etc/nginx/conf.d/no-ssl.default.conf /etc/nginx/conf.d/.no-ssl.default.conf; \
     mkdir /etc/nginx/certs; \
     mkdir /var/www; \
+    rm -rf /root/.ssh && mkdir /root/.ssh; \
     chmod +x /root/entrypoint.sh
 COPY semaphoreBasic.conf /etc/nginx/conf.d/semaphoreBasic.conf
 # COPY semaphoreTLS.conf /etc/nginx/conf.d/semaphoreTLS.conf
