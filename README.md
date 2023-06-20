@@ -1,4 +1,16 @@
 # UNiXIaC
+- [Prerequisites](#prerequisites)
+- [Install Instructions](#install-instructions)
+- [Ansible Semaphore](#ansible-semaphore)
+- [Update Semaphore/NGiNX](#update-semaphorenginx)
+- [Generate SSH Key](#generate-ssh-key)
+- [Update TLS Certificate/Key](#update-tls-certificatekey)
+- [Backup Semaphore](#backup-semaphore)
+- [Check Semaphore Logs](#check-semaphore-logs)
+- [Tags](#tags)
+  - [Windows](#windows)
+  - [Linux](#linux)  
+
 ## Prerequisites
 Install Podman (or Docker).  
 ```
@@ -13,7 +25,8 @@ dnf install podman -y
 **NOTE:** pfsso*.zip, support.pem, semaphore.service, entrypoint.sh, semaphoreBasic.conf,  config.json and database.boltdb must be located in the current working directory before executing build.sh  
 **NOTE2:** If enabling TLS, un-comment the 3 COPY lines in the Dockerfile and comment out the COPY on line 28. Make sure that semaphoreTLS.conf, cert.pem amd key.pem are located in the current working directory before executing build.sh  
 
-## Ansible Semaphore - https://www.ansible-semaphore.com
+## Ansible Semaphore
+#### https://www.ansible-semaphore.com
 You can access the non-TSL Semaphore Web UI with:
 ```
 http://serverIP:8080
@@ -33,7 +46,8 @@ podman exec -it -u 0 SEMAPHORE dnf install /root/semaphore.rpm -y
 podman exec -it -u 0 SEMAPHORE dnf update nginx
 ```
 
-## Generate SSH Key for GitHub authentication
+## Generate SSH Key
+Generate a SSH Key for GitHub authentication.  
 Execute the following command, substituting in your GitHub email address.  
 ```
 podman exec -it -u 0 SEMAPHORE ssh-keygen -t ed25519 -C "your_email@example.com"
