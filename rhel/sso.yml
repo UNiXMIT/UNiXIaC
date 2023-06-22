@@ -13,4 +13,4 @@
       SSO Email: '{{ ssoEmail }}'
       SSO Password: '{{ ssoPassword }}'
       TOTP Authenticator Code: '{{ ssoToken }}'
-  when: ssoMethod | default("1")  == "2"
+  when: ssoMethod | default("1") == "2"
