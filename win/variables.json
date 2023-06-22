@@ -3,7 +3,7 @@
   "myPassword": "strongPassword",
   "ansibleUser": "administrator",
   "imageName": "WINS2022",
-  "awsAMI": "ami-01438d6029c106183",
+  "awsAMI": "ami-0ff61b5c37564aecb",
   "keyName": "support",
   "keyLocation": "~/.ssh/support.pem",
   "securityGroups": "['sg-XXXXXX','sg-XXXXXX']",
