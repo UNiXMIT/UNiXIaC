@@ -14,7 +14,6 @@ ssoMethod
 SSO Method
 1=SmartPhonePush 2=TOTP
 Integer
-Required
 
 ssoToken
 SSO Token
@@ -25,4 +24,3 @@ vmCount
 VM Count
 Create how many instances?
 Integer
-Required
