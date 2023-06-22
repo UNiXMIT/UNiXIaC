@@ -4,7 +4,7 @@
     responses:
       SSO Email: '{{ ssoEmail }}'
       SSO Password: '{{ ssoPassword }}'
-  when: ssoMethod | default(1) == "1"
+  when: ssoMethod | default("1") == "1"
 
 - name: TOTP Authentication
   ansible.builtin.expect:
