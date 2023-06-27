@@ -77,6 +77,7 @@ podman logs SEMAPHORE
         - ed70pu16
         - ed70pu17
         - ed70pu18
+        - ed70pu19
 - vs2022
   - ed 
     - ed80
@@ -99,6 +100,7 @@ podman logs SEMAPHORE
   - ed70pu16
   - ed70pu17
   - ed70pu18
+  - ed70pu19
   - ed80pu5
   - ed80pu6
   - ed80pu7
