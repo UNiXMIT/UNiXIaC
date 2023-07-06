@@ -1,5 +1,6 @@
 # UNiXIaC
 - [Prerequisites](#prerequisites)
+- [Minimum AWS EC2 Instance requirements](#minimum-aws-ec2-instance-requirements)
 - [Install Instructions](#install-instructions)
 - [Ansible Semaphore](#ansible-semaphore)
 - [Update Semaphore/NGiNX](#update-semaphorenginx)
@@ -16,6 +17,10 @@ Install Podman (or Docker).
 ```
 dnf install podman -y
 ```
+
+## Minimum AWS EC2 Instance requirements
+t3.micro  
+20GB SSD  
 
 ## Install Instructions
 ```
