@@ -20,9 +20,8 @@
       #   set_password: '{{ myPassword }}'
       user_data: |
                   <powershell>
-                  $UserAccount = Get-LocalUser -Name "admin"
-                  $UserAccount | Set-LocalUser -Password {{ myPassword }}
-                  Enable-PSRemoting
+                  net user administrator {{ myPassword }}
+                  Enable-PSRemoting -Force
                   </powershell>
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
