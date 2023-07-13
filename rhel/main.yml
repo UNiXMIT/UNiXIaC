@@ -35,15 +35,10 @@
       wait: true
     register: ec2
     tags: default
-  
-  - name: Wait 30 seconds for public IP
-    pause:
-      seconds: 30
-    tags: default
 
   - name: Add Host to awsEC2 Group 
     add_host: 
-       hostname: '{{ item.public_ip_address }}'
+       hostname: '{{ item.private_ip_address }}'
        ansible_port: 22
        ansible_user: '{{ ansibleUser }}'
        ansible_ssh_private_key_file: '{{ keyLocation }}'
@@ -73,7 +68,7 @@
 
   - name: SSH Check
     ansible.builtin.wait_for:
-      host: '{{ item.public_ip_address }}'
+      host: '{{ item.private_ip_address }}'
       port: 22
       timeout: 120
     loop: '{{ ec2.instances }}'
