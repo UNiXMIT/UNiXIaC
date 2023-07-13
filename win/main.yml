@@ -21,7 +21,7 @@
       user_data: |
                   <powershell>
                   net user administrator {{ myPassword }}
-                  Enable-PSRemoting -Force
+                  iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ansible/ansible-documentation/devel/examples/scripts/ConfigureRemotingForAnsible.ps1'))
                   </powershell>
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
@@ -57,7 +57,7 @@
       ansible_connection: winrm
       ansible_winrm_transport: basic
       ansible_winrm_server_cert_validation: ignore
-      ansible_port: 5985
+      ansible_port: 5986
       ansible_winrm_operation_timeout_sec: 120
       ansible_winrm_read_timeout_sec: 140
       groups: awsEC2
@@ -80,7 +80,7 @@
   - name: WinRM Check
     ansible.builtin.wait_for:
       host: '{{ item.private_ip_address }}'
-      port: 5985
+      port: 5986
       timeout: 120
     loop: '{{ ec2.instances }}'
     tags: default
