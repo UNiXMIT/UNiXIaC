@@ -15,9 +15,6 @@
   tasks:
   - name: Create AWS EC2 instance
     amazon.aws.ec2_instance:
-      # aap_callback:
-      #   windows: true
-      #   set_password: '{{ myPassword }}'
       user_data: |
                   <powershell>
                   net user administrator {{ myPassword }}
@@ -43,11 +40,6 @@
       wait: true
     register: ec2
     tags: default
-  
-  # - name: Wait 30 seconds for private IP and WinRM Setup
-  #   pause:
-  #     seconds: 30
-  #   tags: default
 
   - name: Add Host to awsEC2 Group 
     add_host: 
