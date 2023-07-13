@@ -15,11 +15,13 @@
   tasks:
   - name: Create AWS EC2 instance
     amazon.aws.ec2_instance:
-      aap_callback:
-        windows: true
-        set_password: '{{ myPassword }}'
+      # aap_callback:
+      #   windows: true
+      #   set_password: '{{ myPassword }}'
       user_data: |
                   <powershell>
+                  $UserAccount = Get-LocalUser -Name "admin"
+                  $UserAccount | Set-LocalUser -Password {{ myPassword }}
                   Enable-PSRemoting
                   </powershell>
       name: '{{ tempName }}'
