@@ -16,10 +16,10 @@
   - name: Create AWS EC2 instance
     amazon.aws.ec2_instance:
       user_data: |
-                  <powershell>
-                  net user administrator {{ myPassword }}
-                  iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ansible/ansible-documentation/devel/examples/scripts/ConfigureRemotingForAnsible.ps1'))
-                  </powershell>
+        <powershell>
+        net user administrator {{ myPassword }}
+        iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ansible/ansible-documentation/devel/examples/scrConfigureRemotingForAnsible.ps1'))
+        </powershell>
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
