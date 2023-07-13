@@ -95,6 +95,7 @@
   tasks: 
   - name: Import users.yml
     import_tasks: users.yml
+  no_log: True
   tags: default
 
 - name: Install Software

@@ -39,6 +39,7 @@
       state: running
       wait: true
     register: ec2
+    no_log: True
     tags: default
 
   - name: Add Host to awsEC2 Group 
@@ -54,6 +55,7 @@
       ansible_winrm_read_timeout_sec: 140
       groups: awsEC2
     loop: '{{ ec2.instances }}'
+    no_log: True
     tags: default
 
   - name: Rename AWS EC2 instance
@@ -99,6 +101,7 @@
   tasks:
   - name: Import users.yml
     import_tasks: users.yml
+  no_log: True
   tags: default
 
 - name: Install Software
@@ -136,6 +139,7 @@
   tasks:
   - name: Import vscode.yml
     import_tasks: vscode.yml
+  no_log: True
   tags: default
 
 - name: Create Support Files and Directories
