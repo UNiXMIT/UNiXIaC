@@ -150,6 +150,7 @@
 - name: Enable ESMAC UI
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" --UI-on'
+  ignore_errors: yes
   tags: ed
 
 - name: Enable ESMAC Listen All
