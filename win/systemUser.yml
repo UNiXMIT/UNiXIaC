@@ -1,0 +1,13 @@
+- name: Show Hidden Files/Folders
+  win_regedit:
+    path: HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    name: Hidden 
+    data: 1
+    type: dword
+
+- name: Show File Extensions
+  win_regedit:
+    path: HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    name: HideFileExt
+    data: 0
+    type: dword
