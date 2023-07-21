@@ -1,3 +1,7 @@
+- name: Set timezone to Europe/London
+  community.general.timezone:
+    name: Europe/London
+
 - name: Allow SSH password authentication
   lineinfile:
     dest: /etc/ssh/sshd_config
