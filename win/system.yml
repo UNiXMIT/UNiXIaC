@@ -23,10 +23,24 @@
     data: 0
     type: dword
 
+- name: Show Hidden Files/Folders NOHIDDEN
+  win_regedit:
+    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\Hidden\NOHIDDEN
+    name: CheckedValue 
+    data: 2
+    type: dword
+
+- name: Show Hidden Files/Folders SHOWALL
+  win_regedit:
+    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\Hidden\SHOWALL
+    name: CheckedValue 
+    data: 1
+    type: dword
+
 - name: Show File Extensions
   win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
-    name: HideFilesExt 
+    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\HideFileExt
+    name: CheckedValue 
     data: 0
     type: dword
 
