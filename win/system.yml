@@ -23,41 +23,6 @@
     data: 0
     type: dword
 
-- name: Show Hidden Files/Folders NOHIDDEN CheckedValue
-  win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\Hidden\NOHIDDEN
-    name: CheckedValue 
-    data: 2
-    type: dword
-
-- name: Show Hidden Files/Folders NOHIDDEN DefaultValue
-  win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\Hidden\NOHIDDEN
-    name: DefaultValue 
-    data: 2
-    type: dword
-
-- name: Show Hidden Files/Folders SHOWALL CheckedValue
-  win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\Hidden\SHOWALL
-    name: CheckedValue 
-    data: 1
-    type: dword
-  
-- name: Show Hidden Files/Folders SHOWALL DefaultValue
-  win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\Hidden\SHOWALL
-    name: DefaultValue 
-    data: 2
-    type: dword
-
-- name: Show File Extensions
-  win_regedit:
-    path: HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\Folder\HideFileExt
-    name: CheckedValue 
-    data: 1
-    type: dword
-
 - name: ExtractMSI
   win_regedit:
     path: HKCR:\Msi.Package\shell\extractMSI\command

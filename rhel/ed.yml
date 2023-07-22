@@ -43,15 +43,13 @@
   become: yes
 
 - name: Start MFDS
-  command: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv && {{ installPath }}/bin/mfds --UI-on && {{ installPath }}/bin/mfds --listen-all && {{ installPath }}/bin/mfds"
+  command: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv && {{ installPath }}/bin/mfds --UI-on ; {{ installPath }}/bin/mfds --listen-all && {{ installPath }}/bin/mfds"
   environment: 
     COBDIR: '{{ installPath }}'
-  ignore_errors: yes
   become: yes
 
 - name: Import JCL Region
   command: '{{ installPath }}/bin/mfds -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'
   environment: 
     COBDIR: '{{ installPath }}'
-  ignore_errors: yes
   become: yes
