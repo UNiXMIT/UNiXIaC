@@ -32,3 +32,10 @@
     installerName: setup_entdev_7.0_patchupdate19_324233_redhat_x86_64
     S3Prefix: ED/70/
   tags: ed70pu19
+
+- name: ED 7.0 PU 20
+  set_fact:
+    installPath: /home/products/ed70pu20
+    installerName: setup_entdev_7.0_patchupdate20_328613_redhat_x86_64
+    S3Prefix: ED/70/
+  tags: ed70pu20

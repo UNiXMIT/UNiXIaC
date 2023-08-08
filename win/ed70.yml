@@ -58,3 +58,10 @@
     installerNameEDVSPU: edvs2019_70_pu19_324237.exe
     installerNameEDEPU: ede_70_pu19_324235.exe
   tags: ed70pu19
+
+- name: ED 7.0 PU 20
+  set_fact:
+    installerNameEDVSPU: edvs2019_70_pu20_328617.exe
+    installerNameEDEPU: ede_70_pu20_328615.exe
+  tags: ed70pu20
+
