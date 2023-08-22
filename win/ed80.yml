@@ -27,4 +27,10 @@
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu08_324745.exe
     installerNameEDEPU: ede_80_pu08_324719.exe
-  tags: ed80pu8
+  tags: ed80pu8#
+
+- name: ED 8.0 PU 9
+  set_fact:
+    installerNameEDVSPU: edvs2022_80_pu09_328369.exe
+    installerNameEDEPU: ede_80_pu09_328365.exe
+  tags: ed80pu9
