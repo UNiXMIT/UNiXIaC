@@ -1,7 +1,8 @@
 - name: Package Installation
   win_chocolatey:
     name: 
-    - googlechrome
+    # - googlechrome
+    - firefox
     - procmon
     - procexp
     - vcredist140
