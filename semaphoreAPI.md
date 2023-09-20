@@ -1,5 +1,5 @@
 # Semaphore API
-### Login
+## Login
 POST /api/auth/login  
 ```
 {
@@ -19,7 +19,7 @@ curl --request POST \
   }'
 ```
 
-### Get Template
+## Get Template
 GET /api/project/{project_id}/templates/{template_id}  
 
 cURL Example:  
@@ -29,7 +29,7 @@ curl --request GET \
   -c cookies.txt -b cookies.txt
 ``` 
 
-### Create Template
+## Create Template
 POST /api/project/{project_id}/templates  
 ```
 {
@@ -87,7 +87,7 @@ curl --request POST \
 }'
 ```
 
-### Logout
+## Logout
 POST /api/auth/logout  
 
 cURL Example:  
