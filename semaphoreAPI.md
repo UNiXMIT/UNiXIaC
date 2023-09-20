@@ -63,27 +63,27 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   -c cookies.txt -b cookies.txt \
   --data '{
-  "project_id": 1,
-  "inventory_id": 1,
-  "repository_id": 1,
-  "environment_id": 1,
-  "view_id": 1,
-  "name": "Test",
-  "playbook": "test.yml",
-  "arguments": "[]",
-  "description": "Hello, World!",
-  "allow_override_args_in_task": false,
-  "limit": "",
-  "suppress_success_alerts": true,
-  "survey_vars": [
-    {
-      "name": "string",
-      "title": "string",
-      "description": "string",
-      "type": "String => \"\", Integer => \"int\"",
-      "required": true
-    }
-  ]
+    "project_id": 1,
+    "inventory_id": 1,
+    "repository_id": 1,
+    "environment_id": 1,
+    "view_id": 1,
+    "name": "Test",
+    "playbook": "test.yml",
+    "arguments": "[]",
+    "description": "Hello, World!",
+    "allow_override_args_in_task": false,
+    "limit": "",
+    "suppress_success_alerts": true,
+    "survey_vars": [
+      {
+        "name": "string",
+        "title": "string",
+        "description": "string",
+        "type": "String => \"\", Integer => \"int\"",
+        "required": true
+      }
+    ]
 }'
 ```
 
