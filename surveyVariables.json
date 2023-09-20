@@ -1,0 +1,39 @@
+{
+    "survey_vars": [
+		{
+			"name": "ssoEmail",
+			"title": "SSO Email",
+			"required": true,
+			"type": "",
+			"description": "Email address to be used for SSO authentication"
+		},
+		{
+			"name": "ssoPassword",
+			"title": "SSO Password",
+			"required": true,
+			"type": "",
+			"description": "Password to be used for SSO authentication"
+		},
+		{
+			"name": "ssoMethod",
+			"title": "SSO Method",
+			"required": false,
+			"type": "int",
+			"description": "1=SmartPhonePush 2=TOTP (default=1)"
+		},
+		{
+			"name": "ssoToken",
+			"title": "SSO Token",
+			"required": false,
+			"type": "int",
+			"description": "Auth Token - Required if using TOTP"
+		},
+		{
+			"name": "vmCount",
+			"title": "VM Count",
+			"required": false,
+			"type": "int",
+			"description": "Create how many instances? (default=1)"
+		}
+	]
+}
