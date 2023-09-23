@@ -12,7 +12,6 @@
   package:
     name:
       - '@Development tools'
-      - libnsl
       - podman
       - buildah
       - unixODBC
@@ -34,7 +33,12 @@
       - tmux
       - openconnect
     state: present
-  ignore_errors: true
+  
+- name: RHEL>=8 Package installation
+  package:
+    name: libnsl
+    state: present
+  when: ansible_facts['distribution_major_version'] | int >= 8
 
 - name: RHEL<=8 Package installation
   package:
