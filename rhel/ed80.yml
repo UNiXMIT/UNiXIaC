@@ -26,9 +26,16 @@
     S3Prefix: ED/80/
   tags: ed80pu8
 
-- name: ED 8.0 PU 8
+- name: ED 8.0 PU 9
   set_fact:
     installPath: /home/products/ed80pu9
     installerName: setup_entdev_8.0_patchupdate09_328363_redhat_x86_64
     S3Prefix: ED/80/
-  tags: ed80pu8
+  tags: ed80pu9
+
+- name: ED 8.0 PU 10
+  set_fact:
+    installPath: /home/products/ed80pu10
+    installerName: setup_entdev_8.0_patchupdate10_330750_redhat_x86_64
+    S3Prefix: ED/80/
+  tags: ed80pu10

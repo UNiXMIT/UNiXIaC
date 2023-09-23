@@ -10,3 +10,9 @@
     installerNameEDVSPU: edvs2022_90_pu01_328657.exe
     installerNameEDEPU: ede_90_pu01_328657.exe
   tags: ed90pu1
+
+- name: ED 9.0 PU 2
+  set_fact:
+    installerNameEDVSPU: 
+    installerNameEDEPU: 
+  tags: ed90pu2

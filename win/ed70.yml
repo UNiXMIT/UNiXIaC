@@ -65,3 +65,8 @@
     installerNameEDEPU: ede_70_pu20_328615.exe
   tags: ed70pu20
 
+- name: ED 7.0 PU 21
+  set_fact:
+    installerNameEDVSPU: 
+    installerNameEDEPU: 
+  tags: ed70pu21

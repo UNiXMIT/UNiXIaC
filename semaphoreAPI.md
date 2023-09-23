@@ -84,7 +84,65 @@ curl --request POST \
         "required": true
       }
     ]
-}'
+  }'
+```
+## Update Template  
+PUT /project/{project_id}/templates/{template_id}
+```
+{
+  "project_id": 1,
+  "inventory_id": 1,
+  "repository_id": 1,
+  "environment_id": 1,
+  "view_id": 1,
+  "name": "Test",
+  "playbook": "test.yml",
+  "arguments": "[]",
+  "description": "Hello, World!",
+  "allow_override_args_in_task": false,
+  "limit": "",
+  "suppress_success_alerts": true,
+  "survey_vars": [
+    {
+      "name": "string",
+      "title": "string",
+      "description": "string",
+      "type": "String => \"\", Integer => \"int\"",
+      "required": true
+    }
+  ]
+}
+```
+
+cURL Example: 
+```
+curl --request PUT \
+  --url https://domain.com/api/project/{project_id}/templates/{template_id} \
+  --header 'Content-Type: application/json' \
+  -c cookies.txt -b cookies.txt \
+  --data '{
+    "project_id": 1,
+    "inventory_id": 1,
+    "repository_id": 1,
+    "environment_id": 1,
+    "view_id": 1,
+    "name": "Test",
+    "playbook": "test.yml",
+    "arguments": "[]",
+    "description": "Hello, World!",
+    "allow_override_args_in_task": false,
+    "limit": "",
+    "suppress_success_alerts": true,
+    "survey_vars": [
+      {
+        "name": "string",
+        "title": "string",
+        "description": "string",
+        "type": "String => \"\", Integer => \"int\"",
+        "required": true
+      }
+    ]
+  }'
 ```
 
 ## Logout
