@@ -20,7 +20,6 @@
       - java-11-openjdk
       - htop
       - libstdc++.i686
-      - libxcrypt.i686
       - ncurses-libs-6.1-9.20180224.el8.i686
       - libaio-devel
       - glibc.i686
@@ -38,6 +37,7 @@
       - libnsl
       - podman
       - buildah
+      - libxcrypt.i686
     state: present
   when: ansible_facts['distribution_major_version'] | int >= 8
 
