@@ -12,8 +12,6 @@
   package:
     name:
       - '@Development tools'
-      - podman
-      - buildah
       - unixODBC
       - wget
       - curl
@@ -36,7 +34,10 @@
   
 - name: RHEL>=8 Package installation
   package:
-    name: libnsl
+    name: 
+      - libnsl
+      - podman
+      - buildah
     state: present
   when: ansible_facts['distribution_major_version'] | int >= 8
 
