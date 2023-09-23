@@ -107,8 +107,6 @@ podman logs SEMAPHORE
 ### Linux
 ##### RHEL
 - default
-- rhel<=8
-- rhel>=9
 - ed
   - ed60
   - ed70pu15

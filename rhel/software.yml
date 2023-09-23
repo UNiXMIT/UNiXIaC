@@ -35,7 +35,7 @@
       - openconnect
     state: present
 
-- name: rhel<=8 Package installation
+- name: RHEL<=8 Package installation
   dnf:
     name: spax
     state: present
