@@ -34,6 +34,7 @@
       - tmux
       - openconnect
     state: present
+  ignore_errors: true
 
 - name: RHEL<=8 Package installation
   package:
