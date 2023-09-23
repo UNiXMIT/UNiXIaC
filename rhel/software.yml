@@ -4,12 +4,12 @@
     key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}
 
 - name: Install EPEL
-  dnf:
+  package:
     name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm'
     state: present
 
 - name: Package installation
-  dnf:
+  package:
     name:
       - '@Development tools'
       - libnsl
@@ -36,7 +36,7 @@
     state: present
 
 - name: RHEL<=8 Package installation
-  dnf:
+  package:
     name: spax
     state: present
   when: ansible_facts['distribution_major_version'] | int <= 8
