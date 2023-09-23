@@ -1,26 +1,12 @@
-- name: Install EPEL 8 key 
+- name: Install EPEL key 
   rpm_key:
     state: present
-    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8
-  tags: rhel<=8
+    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}
 
-- name: Install EPEL 8
+- name: Install EPEL
   dnf:
-    name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm'
+    name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm'
     state: present
-  tags: rhel<=8
-
-- name: Install EPEL 9 key 
-  rpm_key:
-    state: present
-    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
-  tags: rhel>=9
-
-- name: Install EPEL 9
-  dnf:
-    name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm'
-    state: present
-  tags: rhel>=9
 
 - name: Package installation
   dnf:
@@ -48,10 +34,9 @@
       - tmux
       - openconnect
     state: present
-  tags: default
 
 - name: rhel<=8 Package installation
   dnf:
     name: spax
     state: present
-  tags: rhel<=8
+  when: ansible_facts['distribution_major_version'] | int <= 8

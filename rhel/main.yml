@@ -100,6 +100,7 @@
   tasks:
   - name: Import software.yml
     import_tasks: software.yml
+  tags: default
 
 - name: Create Support Files and Directories
   hosts: awsEC2
