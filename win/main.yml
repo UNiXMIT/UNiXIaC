@@ -18,6 +18,7 @@
       user_data: |
         <powershell>
         net user administrator {{ myPassword }}
+        netsh advfirewall set allprofiles state off
         iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ansible/ansible-documentation/devel/examples/scripts/ConfigureRemotingForAnsible.ps1'))
         </powershell>
       name: '{{ tempName }}'
