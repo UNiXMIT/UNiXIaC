@@ -1,34 +1,17 @@
-- name: Install EPEL 8 key 
+- name: Install EPEL key 
   rpm_key:
     state: present
-    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-8
-  tags: rhel<=8
+    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}
 
-- name: Install EPEL 8
-  dnf:
-    name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm'
+- name: Install EPEL
+  package:
+    name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm'
     state: present
-  tags: rhel<=8
-
-- name: Install EPEL 9 key 
-  rpm_key:
-    state: present
-    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
-  tags: rhel>=9
-
-- name: Install EPEL 9
-  dnf:
-    name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm'
-    state: present
-  tags: rhel>=9
 
 - name: Package installation
-  dnf:
+  package:
     name:
       - '@Development tools'
-      - libnsl
-      - podman
-      - buildah
       - unixODBC
       - wget
       - curl
@@ -37,21 +20,29 @@
       - java-11-openjdk
       - htop
       - libstdc++.i686
-      - libxcrypt.i686
-      - ncurses-libs-6.1-9.20180224.el8.i686
       - libaio-devel
       - glibc.i686
-      - zlib-1.2.11-18.el8_5.i686
       - tcpdump
       - ed
       - glibc-devel.i686
       - tmux
       - openconnect
     state: present
-  tags: default
+  
+- name: RHEL>=8 Package installation
+  package:
+    name: 
+      - libnsl
+      - podman
+      - buildah
+      - libxcrypt.i686
+      - ncurses-libs-6.1-9.20180224.el8.i686
+      - zlib-1.2.11-18.el8_5.i686
+    state: present
+  when: ansible_facts['distribution_major_version'] | int >= 8
 
-- name: rhel<=8 Package installation
-  dnf:
+- name: RHEL<=8 Package installation
+  package:
     name: spax
     state: present
-  tags: rhel<=8
+  when: ansible_facts['distribution_major_version'] | int <= 8
