@@ -44,7 +44,7 @@
 
   - name: Add Host to awsEC2 Group 
     add_host: 
-      hostname: '{{ item.public_ip_address }}'
+      hostname: '{{ item.private_ip_address }}'
       ansible_user: '{{ ansibleUser }}'
       ansible_password: '{{ myPassword }}'
       ansible_connection: winrm
@@ -73,7 +73,7 @@
 
   - name: WinRM Check
     ansible.builtin.wait_for:
-      host: '{{ item.public_ip_address }}'
+      host: '{{ item.private_ip_address }}'
       port: 5986
       timeout: 120
     loop: '{{ ec2.instances }}'
