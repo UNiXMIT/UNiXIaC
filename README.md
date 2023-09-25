@@ -76,6 +76,8 @@ podman logs SEMAPHORE
 - default
 - vs2019
   - ed
+    - ed50
+    - ed60
     - ed70
       - edpu
         - ed70pu15
@@ -85,7 +87,6 @@ podman logs SEMAPHORE
         - ed70pu19
         - ed70pu20
         - ed70pu21
-    - ed60
 - vs2022
   - ed 
     - ed80
@@ -108,6 +109,7 @@ podman logs SEMAPHORE
 ##### RHEL
 - default
 - ed
+  - ed50
   - ed60
   - ed70pu15
   - ed70pu16

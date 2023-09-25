@@ -1,0 +1,30 @@
+- name: ED 5.0
+  block:
+    - name: Set Facts
+      set_fact:
+        installerNameEDVS: edvs2019_50.exe
+        installerNameEDE: ede_50.exe
+        S3Prefix: ED/50/
+
+    - name: Get Microsoft.VisualStudio.Setup.Configuration.Native.dll Download URL from S3
+      amazon.aws.s3_object:
+        profile: '{{ awsProfile }}'
+        bucket: mturner
+        mode: geturl
+        object: '{{ S3Prefix }}Microsoft.VisualStudio.Setup.Configuration.Native.dll'
+        region: '{{ awsRegion }}'
+        expiry: 4000
+        sig_v4: true
+      register: s3
+      delegate_to: localhost
+
+    - name: Workaround for Install Issue 'Installing EDVS2019_70.exe, a blank window pops up and then disappears' - https://portal.microfocus.com/s/article/KM000004846
+      ansible.windows.win_get_url:
+        url: '{{ s3.url }}'
+        dest: C:\ProgramData\Microsoft\VisualStudio\Setup\x86\
+
+    - name: Register Workaround DLL
+      win_command: 
+        cmd: regsvr32 /s C:\ProgramData\Microsoft\VisualStudio\Setup\x86\Microsoft.VisualStudio.Setup.Configuration.Native.dll
+        chdir: C:\ProgramData\Microsoft\VisualStudio\Setup\x86
+  tags: ed50
