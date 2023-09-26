@@ -18,7 +18,6 @@
       user_data: |
         <powershell>
         net user administrator {{ myPassword }}
-        netsh advfirewall set allprofiles state off
         iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ansible/ansible-documentation/devel/examples/scripts/ConfigureRemotingForAnsible.ps1'))
         </powershell>
       name: '{{ tempName }}'
@@ -76,7 +75,7 @@
     ansible.builtin.wait_for:
       host: '{{ item.public_ip_address }}'
       port: 5986
-      timeout: 240
+      timeout: 300
     loop: '{{ ec2.instances }}'
     tags: default
 
