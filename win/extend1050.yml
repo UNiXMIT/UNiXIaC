@@ -4,6 +4,10 @@
     installPath64: C:\Program Files\Micro Focus\extend 10.5.0
     installerName: extend(R) Version 10.5.0 x64.msi
     S3Prefix: AcuCOBOL/1050/
+    extendCode86: {{ extend1050Code86 }}
+    extendKey86: {{ extend1050Key86 }}
+    extendCode64: {{ extend1050Code64 }}
+    extendKey64: {{ extend1050Keye64 }}
   tags: extend1050
 
 - name: extend 10.5.0 PU 1
@@ -12,4 +16,8 @@
     installPath64: C:\Program Files\Micro Focus\extend 10.5.0
     installerName: extend(R) Version 10.5.0 x64.msi
     S3Prefix: AcuCOBOL/1050/PU1/
+    extendCode86: {{ extend1050Code86 }}
+    extendKey86: {{ extend1050Key86 }}
+    extendCode64: {{ extend1050Code64 }}
+    extendKey64: {{ extend1050Keye64 }}
   tags: extend1050pu1
