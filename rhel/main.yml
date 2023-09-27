@@ -154,6 +154,13 @@
     import_tasks: ed.yml
   tags: ed
 
+- name: extend 10.4.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import extend1040.yml
+    import_tasks: extend1040.yml
+
 - name: extend 10.5.0
   hosts: awsEC2
   gather_facts: no
