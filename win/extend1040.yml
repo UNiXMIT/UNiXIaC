@@ -4,10 +4,10 @@
     installPath64: C:\Program Files\Micro Focus\extend 10.4.0
     installerName: extend(R) Version 10.4.0 x64.msi
     S3Prefix: AcuCOBOL/1040/
-    extendCode86: {{ extend1040Code86 }}
-    extendKey86: {{ extend1040Key86 }}
-    extendCode64: {{ extend1040Code64 }}
-    extendKey64: {{ extend1040Key64 }}
+    extendCode86: '{{ extend1040Code86 }}'
+    extendKey86: '{{ extend1040Key86 }}'
+    extendCode64: '{{ extend1040Code64 }}'
+    extendKey64: '{{ extend1040Key64 }}'
   tags: extend1040
 
 - name: extend 10.4.1

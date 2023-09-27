@@ -5,8 +5,8 @@
         installPath: /home/products/acu1050shx64/
         installerName: setup_acucob1050pmk59shACU
         S3Prefix: AcuCOBOL/1050/
-        extendCode: {{ extend1050Code}}
-        extendKey: {{ extend1050Key}}
+        extendCode: '{{ extend1050Code }}'
+        extendKey: '{{ extend1050Key }}'
   tags: extend1050
 
 - name: extend 10.5.0 PU 1
@@ -16,6 +16,6 @@
         installPath: /home/products/acu1050shx64pu1/
         installerName: setup_acucob1050pmk59shACU
         S3Prefix: AcuCOBOL/1050/PU1/
-        extendCode: {{ extend1050Code}}
-        extendKey: {{ extend1050Key}}
+        extendCode: '{{ extend1050Code }}'
+        extendKey: '{{ extend1050Key }}'
   tags: extend1050pu1
