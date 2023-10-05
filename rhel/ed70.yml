@@ -43,6 +43,6 @@
 - name: ED 7.0 PU 21
   set_fact:
     installPath: /home/products/ed70pu21
-    installerName: 
+    installerName: setup_entdev_7.0_patchupdate21_330878_redhat_x86_64
     S3Prefix: ED/70/
   tags: ed70pu21

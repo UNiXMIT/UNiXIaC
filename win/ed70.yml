@@ -67,6 +67,6 @@
 
 - name: ED 7.0 PU 21
   set_fact:
-    installerNameEDVSPU: 
-    installerNameEDEPU: 
+    installerNameEDVSPU: edvs2019_70_pu21_330882.exe
+    installerNameEDEPU: ede_70_pu21_330880.exe
   tags: ed70pu21
