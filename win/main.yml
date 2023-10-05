@@ -75,7 +75,7 @@
     ansible.builtin.wait_for:
       host: '{{ item.public_ip_address }}'
       port: 5985
-      timeout: 300
+      timeout: 600
     loop: '{{ ec2.instances }}'
     tags: default
 
