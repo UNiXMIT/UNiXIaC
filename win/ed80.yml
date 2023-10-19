@@ -43,6 +43,6 @@
 
 - name: ED 8.0 PU 11
   set_fact:
-    installerNameEDVSPU: 
-    installerNameEDEPU: 
+    installerNameEDVSPU: ede_80_pu11_331770
+    installerNameEDEPU: edvs2022_80_pu11_331774.exe
   tags: ed80pu11

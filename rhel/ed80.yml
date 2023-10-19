@@ -43,6 +43,6 @@
 - name: ED 8.0 PU 11
   set_fact:
     installPath: /home/products/ed80pu11
-    installerName: 
+    installerName: setup_entdev_8.0_patchupdate11_331768_redhat_x86_64
     S3Prefix: ED/80/
   tags: ed80pu11
