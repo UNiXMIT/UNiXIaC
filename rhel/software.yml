@@ -27,6 +27,7 @@
       - glibc-devel.i686
       - tmux
       - openconnect
+      - jq
     state: present
 
 - name: RHEL<=7 Package installation

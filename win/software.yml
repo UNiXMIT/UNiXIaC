@@ -9,6 +9,7 @@
     - 7zip
     - winscp
     - notepadplusplus
+    - jq
     # - dotnet
     # - windows-sdk-10.1
     # - microsoft-build-tools
