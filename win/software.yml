@@ -9,8 +9,6 @@
     - 7zip
     - winscp
     - notepadplusplus
-    - wsl2
-    - podman-cli
     # - dotnet
     # - windows-sdk-10.1
     # - microsoft-build-tools
