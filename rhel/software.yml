@@ -12,7 +12,7 @@
   package:
     name:
       - '@Development tools'
-      - unixODBC
+      - unixODBC-devel
       - wget
       - curl
       - cronie
