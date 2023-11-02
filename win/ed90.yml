@@ -19,6 +19,6 @@
 
 - name: ED 9.0 PU 3
   set_fact:
-    installerNameEDVSPU: 
-    installerNameEDEPU: 
+    installerNameEDVSPU: edvs2022_90_pu03_332285.exe
+    installerNameEDEPU: ede_90_pu03_332285.exe
   tags: ed90pu3
