@@ -39,7 +39,7 @@
 
 - name: Install {{ installerName }}
   shell: dnf install -y /tmp/unixODBC-2.3.11-1.rh.x86_64.rpm
-  when: ansible_facts['distribution_major_version'] | int = 9
+  when: ansible_facts['distribution_major_version'] | int == 9
 
 - name: RHEL<=7 Package installation
   package:
