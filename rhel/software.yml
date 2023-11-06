@@ -35,7 +35,7 @@
     url: https://packages.microsoft.com/rhel/9/prod/Packages/u/unixODBC-2.3.11-1.rh.x86_64.rpm
     dest: /tmp/unixODBC-2.3.11-1.rh.x86_64.rpm
     mode: '0775'
-  when: ansible_facts['distribution_major_version'] | int = 9
+  when: ansible_facts['distribution_major_version'] | int == 9
 
 - name: Install {{ installerName }}
   shell: dnf install -y /tmp/unixODBC-2.3.11-1.rh.x86_64.rpm
