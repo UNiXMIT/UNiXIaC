@@ -12,7 +12,7 @@
   package:
     name:
       - '@Development tools'
-      - unixODBC-devel
+      - unixODBC
       - wget
       - curl
       - cronie
@@ -29,6 +29,17 @@
       - openconnect
       - jq
     state: present
+
+- name: Download unixODBC-devel RPM for 9
+  get_url:
+    url: https://packages.microsoft.com/rhel/9/prod/Packages/u/unixODBC-2.3.11-1.rh.x86_64.rpm
+    dest: /tmp/unixODBC-2.3.11-1.rh.x86_64.rpm
+    mode: '0775'
+  when: ansible_facts['distribution_major_version'] | int = 9
+
+- name: Install {{ installerName }}
+  shell: dnf install /tmp/unixODBC-2.3.11-1.rh.x86_64.rpm
+  when: ansible_facts['distribution_major_version'] | int = 9
 
 - name: RHEL<=7 Package installation
   package:
