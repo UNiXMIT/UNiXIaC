@@ -221,3 +221,30 @@
     path: C:\MFDataFiles
     type: allow
     rights: FullControl
+  
+- name: Create MFScripts
+  win_file:
+    path: C:\MFScripts
+    state: directory
+
+- name: Everyone permissions on MFScripts
+  win_acl:
+    user: Everyone
+    path: C:\MFScripts
+    type: allow
+    rights: FullControl
+
+- name: Set MFScripts on PATH
+  win_path:
+    name: PATH
+    elements: C:\MFScripts
+
+- name: Download FormatDumps.cmd
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/FormatDumps.cmd
+    dest: C:\MFScripts\FormatDumps.cmd
+
+- name: Download AutoPAC.cmd
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/AutoPAC.cmd
+    dest: C:\MFScripts\AutoPAC.cmd

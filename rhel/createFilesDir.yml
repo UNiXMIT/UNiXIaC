@@ -159,6 +159,18 @@
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setenvmf.sh
     dest: /home/{{ myUsername }}/MFSupport/MFScripts/setenvmf.sh
     mode: '0775'
+  
+- name: Download formatdumps.sh
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/formatdumps.sh
+    dest: /home/{{ myUsername }}/MFSupport/MFScripts/formatdumps.sh
+    mode: '0775'
+
+- name: Download autopac.sh
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/autopac.sh
+    dest: /home/{{ myUsername }}/MFSupport/MFScripts/autopac.sh
+    mode: '0775'
 
 - name: Create JCL
   file:
