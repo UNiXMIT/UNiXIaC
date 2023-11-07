@@ -182,3 +182,11 @@
     name: escwa
     state: started
   tags: ed
+
+- name: Start HACloud Service
+  ansible.windows.win_service:
+    name: mfhacloud
+    start_mode: auto
+    state: started
+  tags: ed
+  when: ansible_facts['EDVer'] | int >= 9

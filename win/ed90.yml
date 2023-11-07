@@ -3,6 +3,7 @@
     installerNameEDVS: edvs2022_90.exe
     installerNameEDE: ede_90.exe
     S3Prefix: ED/90/
+    EDVer: 9
   tags: ed90
 
 - name: ED 9.0 PU 1
