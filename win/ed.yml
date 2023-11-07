@@ -189,4 +189,4 @@
     start_mode: auto
     state: started
   tags: ed
-  when: ansible_facts['EDVer'] | int >= 9
+  ignore_errors: true
