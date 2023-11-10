@@ -17,6 +17,7 @@
     amazon.aws.ec2_instance:
       user_data: |
         #!/bin/bash
+        echo "{{ ansibleUser }}:{{ myPassword }}" | sudo chpasswd
         sed -i -E 's/#?PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
         systemctl restart sshd
       name: '{{ tempName }}'
@@ -45,7 +46,7 @@
        hostname: '{{ item.public_ip_address }}'
        ansible_port: 22
        ansible_user: '{{ ansibleUser }}'
-       ansible_ssh_private_key_file: '{{ keyLocation }}'
+       ansible_passsword: '{{  }}'
        groups: awsEC2
     loop: '{{ ec2.instances }}'
     tags: default
