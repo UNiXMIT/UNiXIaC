@@ -10,7 +10,7 @@ runOptions=(
 -e SEMAPHORE_ADMIN=admin
 -e SEMAPHORE_ADMIN_PASSWORD=strongPassword123
 -e SEMAPHORE_ADMIN_EMAIL=admin@localhost
--p 3001:3000
+-p 3000:3000
 )
 
 checkContainerRuntime() {
