@@ -1,17 +1,3 @@
-# BUILD
-## podman build --tag mf/semaphore -f Dockerfile
-
-# RUN
-## podman run -p 3000:3000 --name semaphore \
-##     -v /home/support/semaphore/config:/etc/semaphore \
-##     -v /home/support/semaphore/db:/var/lib/semaphore \
-##     -e SEMAPHORE_DB_DIALECT=bolt \
-##     -e SEMAPHORE_ADMIN=admin \
-##     -e SEMAPHORE_ADMIN_PASSWORD=strongPassword123 \
-##     -e SEMAPHORE_ADMIN_NAME=Admin \
-##     -e SEMAPHORE_ADMIN_EMAIL=admin@localhost \
-##     -d mf/semaphore
-
 FROM semaphoreui/semaphore:latest
 USER root
 RUN apk add --no-cache python3 py3-pip

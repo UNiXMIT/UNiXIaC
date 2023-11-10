@@ -26,24 +26,11 @@ t3.micro
 Standard_B2ls_v2  
 20GB SSD  
 
-## Install Instructions
+## Install/Update Instructions
 ```
-podman build --tag mf/semaphore -f Dockerfile
+semaphore.sh
 ```
 **NOTE:** Dockerfile, pfsso*.zip and support.pem must be located in the current working directory before starting the build. 
-
-## Start Semaphore
-```
-podman run -p 3000:3000 --name semaphore \
-    -v /home/support/semaphore/config:/etc/semaphore \
-    -v /home/support/semaphore/db:/var/lib/semaphore \
-    -e SEMAPHORE_DB_DIALECT=bolt \
-    -e SEMAPHORE_ADMIN=admin \
-    -e SEMAPHORE_ADMIN_PASSWORD=strongPassword123 \
-    -e SEMAPHORE_ADMIN_NAME=Admin \
-    -e SEMAPHORE_ADMIN_EMAIL=admin@localhost \
-    -d mf/semaphore
-```
 
 ## Ansible Semaphore
 #### https://www.ansible-semaphore.com
@@ -52,25 +39,8 @@ You can access the Semaphore Web UI with:
 http://serverIP:3000
 ```
 
-## Update Semaphore/NGiNX
-```
-podman stop semaphore
-podman rm semaphore
-podman build --tag mf/semaphore -f Dockerfile
-podman start semaphore
-podman run -p 3000:3000 --name semaphore \
-    -v /home/support/semaphore/config:/etc/semaphore \
-    -v /home/support/semaphore/db:/var/lib/semaphore \
-    -e SEMAPHORE_DB_DIALECT=bolt \
-    -e SEMAPHORE_ADMIN=admin \
-    -e SEMAPHORE_ADMIN_PASSWORD=strongPassword123 \
-    -e SEMAPHORE_ADMIN_NAME=Admin \
-    -e SEMAPHORE_ADMIN_EMAIL=admin@localhost \
-    -d mf/semaphore
-```
-
 ## Backup Semaphore
-The Semaphore config and database.boltdb file are mapped onto the host in the following loccations:
+The Semaphore config and database.boltdb file are mapped onto the host in the following locations:
 ```
 /home/support/semaphore/config/config.json
 /home/support/semaphore/db/database.boltdb
@@ -78,7 +48,7 @@ The Semaphore config and database.boltdb file are mapped onto the host in the fo
 
 ## Check Semaphore Logs
 ```
-podman logs SEMAPHORE
+podman logs semaphore
 ```
 
 ## Tags
