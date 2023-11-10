@@ -1,33 +1,25 @@
-FROM rockylinux:9
-EXPOSE 80 443
-COPY pfsso*.zip /root
-COPY support.pem /root/.ssh
-COPY semaphore.service /etc/systemd/system/semaphore.service
-COPY config.json /root
-COPY database.boltdb /root
-COPY entrypoint.sh /root
-RUN dnf install epel-release -y; \
-    dnf install ansible wget git python3 python3-pip tmux unzip python-winrm nginx git -y; \
-    dnf clean all; \
-    curl -o /usr/bin/systemctl https://raw.githubusercontent.com/gdraheim/docker-systemctl-replacement/master/files/docker/systemctl3.py; \
-    chmod +x /usr/bin/systemctl; \
-    ansible-galaxy collection install amazon.aws; \
-    python3 -m pip install boto3 pexpect pypsrp pywinrm; \
-    wget -O /root/semaphore.rpm https://github.com/ansible-semaphore/semaphore/releases/download/v2.8.90/semaphore_2.8.90_linux_amd64.rpm; \
-    dnf install /root/semaphore.rpm -y; \
-    chmod 600 /root/.ssh/support.pem; \
-    cd /root && unzip pfsso*.zip; \
-    python3 -m pip install --upgrade /root/pfsso*/; \ 
-    mv /etc/nginx /etc/nginxOriginal; \
-    cd /etc && git clone https://github.com/h5bp/server-configs-nginx.git nginx; \
-    sed -i 's/www-data/nginx/g' /etc/nginx/nginx.conf; \
-    mv /etc/nginx/conf.d/no-ssl.default.conf /etc/nginx/conf.d/.no-ssl.default.conf; \
-    mkdir /etc/nginx/certs; \
-    mkdir /var/www; \
-    rm -rf /root/.ssh && mkdir /root/.ssh; \
-    chmod +x /root/entrypoint.sh
-COPY semaphoreBasic.conf /etc/nginx/conf.d/semaphoreBasic.conf
-# COPY semaphoreTLS.conf /etc/nginx/conf.d/semaphoreTLS.conf
-# COPY cert.pem /etc/nginx/certs/cert.pem
-# COPY key.pem /etc/nginx/certs/key.pem
-ENTRYPOINT [ "/root/entrypoint.sh" ]
+# BUILD
+## podman build --tag mf/semaphore -f Dockerfile
+
+# RUN
+## podman run -p 3001:3000 --name semaphore \
+##     -v /home/support/semaphore/config:/etc/semaphore \
+##     -v /home/support/semaphore/db:/var/lib/semaphore \
+##     -e SEMAPHORE_DB_DIALECT=bolt \
+##     -e SEMAPHORE_ADMIN=admin \
+##     -e SEMAPHORE_ADMIN_PASSWORD=strongPassword123 \
+##     -e SEMAPHORE_ADMIN_NAME=Admin \
+##     -e SEMAPHORE_ADMIN_EMAIL=admin@localhost \
+##     -d mf/semaphore
+
+FROM semaphoreui/semaphore:latest
+USER root
+RUN apk add --no-cache python3 py3-pip
+RUN pip install boto3 pexpect pypsrp pywinrm
+RUN ansible-galaxy collection install amazon.aws
+COPY pfsso*.zip /home/semaphore
+RUN cd /home/semaphore && unzip pfsso*.zip; \
+    pip install --upgrade /home/semaphore/pfsso*/
+USER semaphore
+RUN mkdir -m 700 /home/semaphore/.ssh
+COPY --chmod=0600 support.pem /home/semaphore/.ssh
