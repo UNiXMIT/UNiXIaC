@@ -28,6 +28,9 @@ Standard_B2ls_v2
 
 ## Install/Update Instructions
 ```
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/Dockerfile
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/semaphore.sh
+chmod +x semaphore.sh
 semaphore.sh
 ```
 **NOTE:** Dockerfile, pfsso*.zip and support.pem must be located in the current working directory before starting the build. 
