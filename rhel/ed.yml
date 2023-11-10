@@ -47,12 +47,14 @@
     url: '{{ SafenetFile }}'
     dest: /var/microfocuslicensing/bin/lservrc.net
     mode: '0775'
+  become: yes
 
 - name: Install AutoPass License File
   get_url:
     url: '{{ AutoPassFile }}'
     dest: /var/microfocuslicensing/bin/LicFile.txt
     mode: '0775'
+  become: yes
 
 - name: Start MFDS
   command: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv && {{ installPath }}/bin/mfds --UI-on ; {{ installPath }}/bin/mfds --listen-all && {{ installPath }}/bin/mfds"
