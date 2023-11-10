@@ -46,10 +46,10 @@
     state: directory
     mode: '0775'
 
-- name: Download setenv.sh
+- name: Download setenvacu.sh
   get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/setenv.sh
-    dest: /home/{{ myUsername }}/AcuSupport/AcuScripts/setenv.sh
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/setenvacu.sh
+    dest: /home/{{ myUsername }}/AcuSupport/AcuScripts/setenvacu.sh
     mode: '0775'
 
 - name: Download startacu.sh

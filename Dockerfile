@@ -1,4 +1,5 @@
 FROM semaphoreui/semaphore:latest
+EXPOSE 3000
 USER root
 RUN apk add --no-cache python3 py3-pip
 RUN pip install boto3 pexpect pypsrp pywinrm

@@ -13,7 +13,7 @@
 
           AcuCOBOL
             Set Environment:
-              . setenv.sh (-h for usage)
+              . setenvacu.sh (-h for usage)
                 
               startacu.sh (-h for usage)
 
