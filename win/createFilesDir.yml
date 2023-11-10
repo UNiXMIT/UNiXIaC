@@ -111,10 +111,10 @@
     name: PATH
     elements: C:\AcuScripts
 
-- name: Download setenv.cmd
+- name: Download setenvacu.cmd
   win_get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/AcuScripts/setenv.cmd
-    dest: C:\AcuScripts\setenv.cmd
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/AcuScripts/setenvacu.cmd
+    dest: C:\AcuScripts\setenvacu.cmd
 
 - name: Download settings.json
   win_get_url:
@@ -238,6 +238,11 @@
   win_path:
     name: PATH
     elements: C:\MFScripts
+  
+- name: Download setenvmf.cmd
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/setenvmf.cmd
+    dest: C:\MFScripts\setenvmf.cmd
 
 - name: Download FormatDumps.cmd
   win_get_url:
