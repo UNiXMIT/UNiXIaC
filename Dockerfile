@@ -22,4 +22,4 @@ RUN cd /home/semaphore && unzip pfsso*.zip; \
     pip install --upgrade /home/semaphore/pfsso*/
 USER semaphore
 RUN mkdir -m 700 /home/semaphore/.ssh
-COPY --chmod=0600 support.pem /home/semaphore/.ssh
+COPY --chown=semaphore:root --chmod=0600 support.pem /home/semaphore/.ssh

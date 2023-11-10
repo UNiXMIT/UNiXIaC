@@ -15,6 +15,10 @@
   tasks:
   - name: Create AWS EC2 instance
     amazon.aws.ec2_instance:
+      user_data: |
+        #!/bin/bash
+        sed -i -E 's/#?PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+        systemctl restart sshd
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
