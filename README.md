@@ -17,52 +17,63 @@ Install Podman (or Docker).
 ```
 dnf install podman -y
 ```
-
-## Minimum AWS EC2 Instance requirements
+## Cloud Environment
+### Minimum AWS EC2 Instance requirements
 t3.micro  
+20GB SSD  
+
+### Minimum Azure EC2 Instance requirements
+Standard_B2ls_v2  
 20GB SSD  
 
 ## Install Instructions
 ```
-
-./run.sh
+podman build --tag mf/semaphore -f Dockerfile
 ```
-**NOTE:** pfsso*.zip, support.pem, semaphore.service, entrypoint.sh, semaphoreBasic.conf,  config.json and database.boltdb must be located in the current working directory before executing build.sh  
-**NOTE2:** If enabling TLS, un-comment the 3 COPY lines in the Dockerfile and comment out the COPY on line 28. Make sure that semaphoreTLS.conf, cert.pem amd key.pem are located in the current working directory before executing build.sh  
+**NOTE:** Dockerfile, pfsso*.zip and support.pem must be located in the current working directory before starting the build. 
+
+## Start Semaphore
+```
+podman run -p 3000:3000 --name semaphore \
+    -v /home/support/semaphore/config:/etc/semaphore \
+    -v /home/support/semaphore/db:/var/lib/semaphore \
+    -e SEMAPHORE_DB_DIALECT=bolt \
+    -e SEMAPHORE_ADMIN=admin \
+    -e SEMAPHORE_ADMIN_PASSWORD=strongPassword123 \
+    -e SEMAPHORE_ADMIN_NAME=Admin \
+    -e SEMAPHORE_ADMIN_EMAIL=admin@localhost \
+    -d mf/semaphore
+```
 
 ## Ansible Semaphore
 #### https://www.ansible-semaphore.com
-You can access the non-TSL Semaphore Web UI with:
+You can access the Semaphore Web UI with:
 ```
-http://serverIP:8080
-```
-and TLS enabled Semaphore Web UI with:
-```
-https://serverHostname:8081
+http://serverIP:3000
 ```
 
 ## Update Semaphore/NGiNX
 ```
-podman exec -it -u 0 SEMAPHORE rm -rf /root/semaphore.rpm
-podman exec -it -u 0 SEMAPHORE wget -O /root/semaphore.rpm https://github.com/ansible-semaphore/semaphore/releases/download/v2.8.90/semaphore_2.8.90_linux_amd64.rpm
-podman exec -it -u 0 SEMAPHORE dnf install /root/semaphore.rpm -y
-```
-```
-podman exec -it -u 0 SEMAPHORE dnf update nginx
-```
-
-## Update TLS Certificate/Key
-Generate the new cert/key and place them in the current directory before executing the following commands:  
-```
-podman cp cert.pem SEMAPHORE:/etc/nginx/certs/cert.pem
-podman cp cert.pem SEMAPHORE:/etc/nginx/certs/key.pem
-podman exec -it -u 0 SEMAPHORE /usr/bin/systemctl reload nginx
+podman stop semaphore
+podman rm semaphore
+podman build --tag mf/semaphore -f Dockerfile
+podman start semaphore
+podman run -p 3000:3000 --name semaphore \
+    -v /home/support/semaphore/config:/etc/semaphore \
+    -v /home/support/semaphore/db:/var/lib/semaphore \
+    -e SEMAPHORE_DB_DIALECT=bolt \
+    -e SEMAPHORE_ADMIN=admin \
+    -e SEMAPHORE_ADMIN_PASSWORD=strongPassword123 \
+    -e SEMAPHORE_ADMIN_NAME=Admin \
+    -e SEMAPHORE_ADMIN_EMAIL=admin@localhost \
+    -d mf/semaphore
 ```
 
 ## Backup Semaphore
+The Semaphore config and database.boltdb file are mapped onto the host in the following loccations:
 ```
-podman cp SEMAPHORE:/root/config.json /home/support/config.json
-podman cp SEMAPHORE:/root/database.boltdb /home/support/database.boltdb
+/home/support/semaphore/config/config.json
+/home/support/semaphore/db/database.boltdb
 ```
 
 ## Check Semaphore Logs

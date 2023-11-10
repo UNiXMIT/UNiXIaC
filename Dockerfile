@@ -2,7 +2,7 @@
 ## podman build --tag mf/semaphore -f Dockerfile
 
 # RUN
-## podman run -p 3001:3000 --name semaphore \
+## podman run -p 3000:3000 --name semaphore \
 ##     -v /home/support/semaphore/config:/etc/semaphore \
 ##     -v /home/support/semaphore/db:/var/lib/semaphore \
 ##     -e SEMAPHORE_DB_DIALECT=bolt \
