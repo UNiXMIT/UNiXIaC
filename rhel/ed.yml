@@ -34,13 +34,25 @@
   command: "/home/{{ myUsername }}/MFSupport/MFInstallers/{{ installerName }} -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}"
   become: yes
 
-- name: Add License Server
-  lineinfile:
-    path: /var/microfocuslicensing/bin/ces.ini
-    state: present
-    regexp: '^lshost'
-    line: 'lshost = {{ licenseServer }}'
-  become: yes
+# - name: Add License Server
+#   lineinfile:
+#     path: /var/microfocuslicensing/bin/ces.ini
+#     state: present
+#     regexp: '^lshost'
+#     line: 'lshost = {{ licenseServer }}'
+#   become: yes
+
+- name: Install Safenet License File
+  get_url:
+    url: '{{ SafenetFile }}'
+    dest: /var/microfocuslicensing/bin/lservrc.net
+    mode: '0775'
+
+- name: Install AutoPass License File
+  get_url:
+    url: '{{ AutoPassFile }}'
+    dest: /var/microfocuslicensing/bin/LicFile.txt
+    mode: '0775'
 
 - name: Start MFDS
   command: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv && {{ installPath }}/bin/mfds --UI-on ; {{ installPath }}/bin/mfds --listen-all && {{ installPath }}/bin/mfds"

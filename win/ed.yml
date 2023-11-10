@@ -128,11 +128,23 @@
         arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDEPU }}.log /norestart
   tags: edpu
 
-- name: Add License Server
-  win_lineinfile:
-    path: C:\ProgramData\Micro Focus\ces.ini
-    regex: '^lshost'
-    line: 'lshost = {{ licenseServer }}'
+# - name: Add License Server
+#   win_lineinfile:
+#     path: C:\ProgramData\Micro Focus\ces.ini
+#     regex: '^lshost'
+#     line: 'lshost = {{ licenseServer }}'
+#   tags: ed
+
+- name: Install Safenet License File
+  win_get_url: 
+    url: '{{ SafenetFile }}'
+    dest: C:\ProgramData\Micro Focus\lservrc.net
+  tags: ed
+
+- name: Install AutoPass License File
+  win_get_url: 
+    url: '{{ AutoPassFile }}'
+    dest: C:\ProgramData\Micro Focus\LicFile.txt
   tags: ed
 
 - name: Import JCL Region

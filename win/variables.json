@@ -15,6 +15,8 @@
   "volumeSize": 120,
   "awsProfile": "848105473048_Fed_COBOL2_Compute",
   "licenseServer": "domain.com",
+  "SafenetFile": "https://domain.com/lservrc.net",
+  "AutoPassFile": "https://domain.com/LicFile.txt",
   "extend1050Code86": "XXXXXXXX",
   "extend1050Key86": "XXXXXX",
   "extend1050Code64": "XXXXXXXX",
