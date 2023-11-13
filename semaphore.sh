@@ -15,7 +15,7 @@ runOptions=(
 --health-interval 1m
 --health-timeout 2s
 --health-retries 5
---health-start-period 5m
+--health-start-period 1m
 )
 
 checkContainerRuntime() {
