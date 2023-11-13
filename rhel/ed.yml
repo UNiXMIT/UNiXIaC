@@ -52,7 +52,7 @@
 - name: Install AutoPass License File
   get_url:
     url: '{{ AutoPassFile }}'
-    dest: /var/microfocuslicensing/bin/LicFile.txt
+    dest: /opt/microfocus/licensing/autopass/clientdetails/data/LicFile.txt
     mode: '0775'
   become: yes
 
