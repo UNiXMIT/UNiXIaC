@@ -11,6 +11,11 @@ runOptions=(
 -e SEMAPHORE_ADMIN_PASSWORD=strongPassword123
 -e SEMAPHORE_ADMIN_EMAIL=admin@localhost
 -p 3000:3000
+--health-cmd "curl -sf http://domain.com:3000/api/auth/login  || exit 1"
+--health-interval 1m
+--health-timeout 2s
+--health-retries 5
+--health-start-period 5m
 )
 
 checkContainerRuntime() {
