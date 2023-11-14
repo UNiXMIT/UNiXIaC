@@ -19,3 +19,14 @@
         extendCode: '{{ extend1050Code }}'
         extendKey: '{{ extend1050Key }}'
   tags: extend1050pu1
+
+- name: extend 10.5.1
+  block:
+    - name: Set Facts
+      set_fact:
+        installPath: /home/products/acu1051shx64/
+        installerName: setup_acucob1051pmk59shACU
+        S3Prefix: AcuCOBOL/1051/
+        extendCode: '{{ extend1050Code }}'
+        extendKey: '{{ extend1050Key }}'
+  tags: extend1051
