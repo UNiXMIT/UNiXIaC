@@ -26,7 +26,7 @@
   set_fact:
     installPath32: C:\Program Files (x86)\Micro Focus\extend 10.5.1
     installPath64: C:\Program Files\Micro Focus\extend 10.5.1
-    installerName: extend(R) Version 10.5.1 x64.msi
+    installerName: extend_Version_10.5.1_x64.msi
     S3Prefix: AcuCOBOL/1051/
     extendCode86: '{{ extend1050Code86 }}'
     extendKey86: '{{ extend1050Key86 }}'
