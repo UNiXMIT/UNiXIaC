@@ -1,4 +1,4 @@
-- name: 'Get {{ installerName }} Download URL from S3'
+- name: Get {{ installerName }} Download URL from S3
   amazon.aws.s3_object:
     profile: '{{ awsProfile }}'
     bucket: mturner
