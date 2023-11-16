@@ -45,6 +45,7 @@
     responses: 
       License Agreement: y
       Installation directory: '{{ installPath }}'
+    echo: true
 
 - name: Activate Licenses
   ansible.builtin.expect:
@@ -52,3 +53,4 @@
     responses: 
       product code: '{{ extendCode }}'
       product key: '{{ extendKey }}'
+    echo: true
