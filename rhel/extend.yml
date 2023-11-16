@@ -43,8 +43,8 @@
   ansible.builtin.expect:
     command: '{{ installPath }}{{ installerName }}'
     responses: 
-      'Do you agree to the terms of the License Agreement? (y/n): ': y
-      'Installation directory [.]: ': '{{ installPath }}'
+      License Agreement: y
+      Installation directory: '{{ installPath }}'
 
 - name: Activate Licenses
   ansible.builtin.expect:
