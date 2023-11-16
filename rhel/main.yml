@@ -217,13 +217,6 @@
     loop: '{{ ec2.instances }}'
   tags: default
 
-- name: Debug
-  hosts: local
-  gather_facts: True
-  tasks:
-  - name: Output updatedEC2
-    ansible.builtin.debug: var=updatedEC2
-
 - name: AWS EC2 Instance Created and Setup
   hosts: local
   gather_facts: no
@@ -235,7 +228,7 @@
       - 'AWS ID          - {{ item.instance_id }}'
       - 'Public IP       - {{ item.public_ip_address }}'
       - 'Private IP      - {{ item.private_ip_address }}'
-    loop: '{{ updatedEC2 }}'
+    loop: '{{ updatedEC2.instances }}'
     tags: default
 
   - name: WebAPI Notification
@@ -246,5 +239,5 @@
       body:
         username: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Build Complete'
         content: 'Public IP - {{ item.public_ip_address }} \n Tags - {{ item.tags }}'
-    loop: '{{ updatedEC2 }}'
+    loop: '{{ updatedEC2.instances }}'
     tags: default
