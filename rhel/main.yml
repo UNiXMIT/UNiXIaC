@@ -205,7 +205,7 @@
 
 - name : EC2 Instance Data
   hosts: local
-  gather_facts: True
+  gather_facts: yes
   tasks:
   - name: Refresh EC2 Instance Data
     amazon.aws.ec2_instance_info:
@@ -219,7 +219,7 @@
 
 - name: AWS EC2 Instance Created and Setup
   hosts: local
-  gather_facts: no
+  gather_facts: yes
   tasks:
   - name: Display AWS EC2 Information
     debug:
