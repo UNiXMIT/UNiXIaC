@@ -239,5 +239,5 @@
       body:
         username: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Build Complete'
         content: 'Public IP - {{ item.public_ip_address }} \n Tags - {{ item.tags }}'
-    loop: '{{ updatedEC2.iresults }}'
+    loop: '{{ updatedEC2.results }}'
     tags: default
