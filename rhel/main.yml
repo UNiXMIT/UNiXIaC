@@ -230,7 +230,7 @@
 
   - name: WebAPI Notification
     ansible.builtin.uri:
-      url: '{{  webAPI }}''
+      url: '{{  webAPI }}'
       method: POST
       body_format: json
       body:
