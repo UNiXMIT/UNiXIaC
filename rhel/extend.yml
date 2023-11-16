@@ -43,14 +43,16 @@
   ansible.builtin.expect:
     command: '{{ installPath }}{{ installerName }}'
     responses: 
-      (?i)License Agreement: 'y'
-      (?i)Installation directory: '/home/products/acu1050shx64/'
+      Question:
+        - 'y\n'
+        - '{{ installPath }}\n'
     echo: true
 
 - name: Activate Licenses
   ansible.builtin.expect:
     command: '{{ installPath }}bin/activator'
     responses: 
-      (?i)product code: '{{ extendCode }}'
-      (?i)product key: '{{ extendKey }}'
+      Question:
+        - '{{ extendCode }}\n'
+        - '{{ extendKey }}\n'
     echo: true
