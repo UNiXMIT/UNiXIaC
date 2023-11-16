@@ -238,16 +238,44 @@
     win_reboot:
   tags: default
 
+- name : EC2 Instance Data
+  hosts: local
+  gather_facts: no
+  tasks:
+  - name: Refresh EC2 Instance Data
+    amazon.aws.ec2_instance_info:
+      aws_profile: '{{ awsProfile }}'
+      region: '{{ awsRegion }}'
+      instance_ids: '{{ ec2.instance_ids }}'
+      region: '{{ awsRegion }}'
+    register: updatedEC2
+  tags: default
+
 - name: AWS EC2 Instance Created and Setup
   hosts: local
   gather_facts: no
   tasks:
-  - name: AWS EC2 Information
+  - name: WebAPI Notification
+    ansible.builtin.uri:
+      url: '{{ webAPI }}'
+      method: POST
+      body_format: json
+      body:
+        username: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Build Complete'
+        content: 'Public IP - {{ item.public_ip_address }} Tags - {{ item.tags }}'
+      status_code:
+          - 200
+          - 202
+          - 204
+    loop: '{{ updatedEC2.instances }}'
+    tags: default
+    
+  - name: Display AWS EC2 Information
     debug:
       msg: 
       - 'Instance Name   - {{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
       - 'AWS ID          - {{ item.instance_id }}'
       - 'Public IP       - {{ item.public_ip_address }}'
       - 'Private IP      - {{ item.private_ip_address }}'
-    loop: '{{ ec2.instances }}'
-  tags: default
+    loop: '{{ updatedEC2.instances }}'
+    tags: default

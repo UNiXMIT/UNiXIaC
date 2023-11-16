@@ -220,19 +220,9 @@
   hosts: local
   gather_facts: no
   tasks:
-  - name: Display AWS EC2 Information
-    debug:
-      msg: 
-      - 'Instance Name   - {{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
-      - 'AWS ID          - {{ item.instance_id }}'
-      - 'Public IP       - {{ item.public_ip_address }}'
-      - 'Private IP      - {{ item.private_ip_address }}'
-    loop: '{{ updatedEC2.instances }}'
-    tags: default
-
   - name: WebAPI Notification
     ansible.builtin.uri:
-      url: '{{  webAPI }}'
+      url: '{{ webAPI }}'
       method: POST
       body_format: json
       body:
@@ -242,5 +232,15 @@
           - 200
           - 202
           - 204
+    loop: '{{ updatedEC2.instances }}'
+    tags: default
+    
+  - name: Display AWS EC2 Information
+    debug:
+      msg: 
+      - 'Instance Name   - {{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
+      - 'AWS ID          - {{ item.instance_id }}'
+      - 'Public IP       - {{ item.public_ip_address }}'
+      - 'Private IP      - {{ item.private_ip_address }}'
     loop: '{{ updatedEC2.instances }}'
     tags: default
