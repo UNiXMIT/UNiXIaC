@@ -208,11 +208,12 @@
   gather_facts: True
   tasks:
   - name: Refresh EC2 Instance Data
-    amazon.aws.ec2_instance_facts:
+    amazon.aws.ec2_instance_info:
       instance_ids: '{{ item.instance_id }}'
       region: '{{ awsRegion }}'
     register: updatedEC2
     loop: '{{ ec2.instances }}'
+  tags: default
 
 - name: AWS EC2 Instance Created and Setup
   hosts: local
