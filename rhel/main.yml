@@ -218,7 +218,7 @@
   tags: default
 
 - name: Debug EC2 Variable
-  debug: var=updatedEC2
+  ansible.builtin.debug: var=updatedEC2
 
 - name: AWS EC2 Instance Created and Setup
   hosts: local
