@@ -216,13 +216,6 @@
     register: updatedEC2
   tags: default
 
-- name: Debug
-  hosts: local
-  gather_facts: no
-  tasks:
-  - name: Output updatedEC2
-    ansible.builtin.debug: var=updatedEC2
-
 - name: AWS EC2 Instance Created and Setup
   hosts: local
   gather_facts: no
@@ -244,6 +237,7 @@
       body_format: json
       body:
         username: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Build Complete'
-        content: 'Public IP - {{ item.public_ip_address }} \n Tags - {{ item.tags }}'
+        content: 'Public IP - {{ item.public_ip_address }} Tags - {{ item.tags }}'
+      status_code: [200, 202, 204]
     loop: '{{ updatedEC2.instances }}'
     tags: default
