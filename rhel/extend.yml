@@ -43,14 +43,14 @@
   ansible.builtin.expect:
     command: '{{ installPath }}{{ installerName }}'
     responses: 
-      License Agreement: y
-      Installation directory: '{{ installPath }}'
+      (?i)License Agreement: y
+      (?i)Installation directory: '{{ installPath }}'
     echo: true
 
 - name: Activate Licenses
   ansible.builtin.expect:
     command: '{{ installPath }}bin/activator'
     responses: 
-      product code: '{{ extendCode }}'
-      product key: '{{ extendKey }}'
+      (?i)product code: '{{ extendCode }}'
+      (?i)product key: '{{ extendKey }}'
     echo: true
