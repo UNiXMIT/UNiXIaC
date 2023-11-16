@@ -39,12 +39,21 @@
   loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
   delegate_to: localhost
 
+# - name: Install {{ installerName }}
+#   ansible.builtin.expect:
+#     command: '{{ installPath }}{{ installerName }}'
+#     responses: 
+#       (?i)License Agreement: y
+#       (?i)Installation directory: '{{ installPath }}'
+#     echo: true
+
 - name: Install {{ installerName }}
   ansible.builtin.expect:
     command: '{{ installPath }}{{ installerName }}'
     responses: 
-      (?i)License Agreement: y
-      (?i)Installation directory: '{{ installPath }}'
+      Question:
+        - y
+        - '{{ installPath }}'
     echo: true
 
 - name: Activate Licenses
