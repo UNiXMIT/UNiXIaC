@@ -28,6 +28,8 @@
       - tmux
       - openconnect
       - jq
+      - python3
+      - python3-pip
     state: present
 
 - name: Download unixODBC-devel RPM for 9
@@ -67,3 +69,8 @@
 
 - name: Enable Podman Socket
   ansible.builtin.shell: systemctl enable --now podman.socket
+
+- name: Install pexpect
+  pip:
+    name: pexpect
+    state: present
