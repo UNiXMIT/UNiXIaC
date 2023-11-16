@@ -226,6 +226,8 @@
       - 'Public IP       - {{ item.public_ip_address }}'
       - 'Private IP      - {{ item.private_ip_address }}'
     loop: '{{ updatedEC2.instances }}'
+    tags: default
+
   - name: WebAPI Notification
     ansible.builtin.uri:
       url: '{{  webAPI }}''
@@ -235,4 +237,4 @@
         username: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Build Complete'
         content: 'Public IP - {{ item.public_ip_address }} \n Tags - {{ item.tags }}''
     loop: '{{ updatedEC2.instances }}'
-  tags: default
+    tags: default
