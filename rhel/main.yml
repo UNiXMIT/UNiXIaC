@@ -211,10 +211,9 @@
     amazon.aws.ec2_instance_info:
       aws_profile: '{{ awsProfile }}'
       region: '{{ awsRegion }}'
-      instance_ids: '{{ item.instance_id }}'
+      instance_ids: '{{ ec2.instance_ids }}'
       region: '{{ awsRegion }}'
     register: updatedEC2
-    loop: '{{ ec2.instances }}'
   tags: default
 
 - name: Debug
@@ -222,7 +221,7 @@
   gather_facts: no
   tasks:
   - name: Output updatedEC2
-    ansible.builtin.debug: var=updatedEC2.results
+    ansible.builtin.debug: var=updatedEC2
 
 - name: AWS EC2 Instance Created and Setup
   hosts: local
@@ -235,7 +234,7 @@
       - 'AWS ID          - {{ item.instance_id }}'
       - 'Public IP       - {{ item.public_ip_address }}'
       - 'Private IP      - {{ item.private_ip_address }}'
-    loop: '{{ updatedEC2.results }}'
+    loop: '{{ updatedEC2.instances }}'
     tags: default
 
   - name: WebAPI Notification
@@ -246,5 +245,5 @@
       body:
         username: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Build Complete'
         content: 'Public IP - {{ item.public_ip_address }} \n Tags - {{ item.tags }}'
-    loop: '{{ updatedEC2.results }}'
+    loop: '{{ updatedEC2.instances }}'
     tags: default
