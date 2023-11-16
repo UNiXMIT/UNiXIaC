@@ -208,11 +208,10 @@
   gather_facts: True
   tasks:
   - name: Refresh EC2 Instance Data
-    - ec2_metadata_facts:
-    - ec2_instance_facts:
-        instance_ids: '{{ item.instance_id }}'
-        region: '{{ awsRegion }}'
-      register: updatedEC2
+    amazon.aws.ec2_instance_facts:
+      instance_ids: '{{ item.instance_id }}'
+      region: '{{ awsRegion }}'
+    register: updatedEC2
     loop: '{{ ec2.instances }}'
 
 - name: AWS EC2 Instance Created and Setup
@@ -234,6 +233,6 @@
       body_format: json
       body:
         username: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Build Complete'
-        content: 'Public IP - {{ item.public_ip_address }}' \n Tags - {{ item.tags }}
+        content: 'Public IP - {{ item.public_ip_address }} \n Tags - {{ item.tags }}''
     loop: '{{ updatedEC2.instances }}'
   tags: default
