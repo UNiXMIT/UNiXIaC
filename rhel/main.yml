@@ -205,7 +205,7 @@
 
 - name : EC2 Instance Data
   hosts: local
-  gather_facts: yes
+  gather_facts: no
   tasks:
   - name: Refresh EC2 Instance Data
     amazon.aws.ec2_instance_info:
@@ -217,9 +217,16 @@
     loop: '{{ ec2.instances }}'
   tags: default
 
+- name: Debug
+  hosts: local
+  gather_facts: no
+  tasks:
+  - name: Output updatedEC2
+    ansible.builtin.debug: var=updatedEC2.results
+
 - name: AWS EC2 Instance Created and Setup
   hosts: local
-  gather_facts: yes
+  gather_facts: no
   tasks:
   - name: Display AWS EC2 Information
     debug:
