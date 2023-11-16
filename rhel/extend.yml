@@ -50,5 +50,5 @@
   ansible.builtin.expect:
     command: '{{ installPath }}bin/activator'
     responses: 
-      'Enter the product code \[\]:': '{{ extendCode }}'
-      'Enter the product key \[\]:': '{{ extendKey }}'
+      product code: '{{ extendCode }}'
+      product key: '{{ extendKey }}'
