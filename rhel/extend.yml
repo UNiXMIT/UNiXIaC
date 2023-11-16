@@ -43,8 +43,12 @@
   ansible.builtin.expect:
     command: '{{ installPath }}{{ installerName }}'
     responses: 
-      'Do you agree to the terms of the License Agreement\? \(y/n\):': y
-      'Installation directory \[\.\]:': '{{ installPath }}'
+      'Do you agree to the terms of the License Agreement? (y/n): ': y
+      'Installation directory [.]: ': '{{ installPath }}'
 
 - name: Activate Licenses
-  ansible.builtin.shell: printf "{{ extendCode }}\n{{ extendKey }}\n" | {{ installPath }}bin/activator
+  ansible.builtin.expect:
+    command: '{{ installPath }}bin/activator'
+    responses: 
+      'Enter the product code \[\]:': '{{ extendCode }}'
+      'Enter the product key \[\]:': '{{ extendKey }}'
