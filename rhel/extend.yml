@@ -44,7 +44,7 @@
     command: '{{ installPath }}{{ installerName }}'
     responses: 
       (?i)License Agreement: 'y'
-      (?i)Installation directory: '{{ installPath }}'
+      (?i)Installation directory: '/home/products/acu1050shx64/'
     echo: true
 
 - name: Activate Licenses
