@@ -40,7 +40,7 @@
   delegate_to: localhost
     
 - name: Install {{ installerName }}
-  ansible.builtin.shell: printf 'y\n{{ installPath }}\n' | {{ installPath }}/{{ installerName }}
+  ansible.builtin.shell: printf "y\n{{ installPath }}\n" | {{ installPath }}/{{ installerName }}
 
 - name: Activate Licenses
-  ansible.builtin.shell: printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator
+  ansible.builtin.shell: printf "{{ extendCode }}\n{{ extendKey }}\n" | {{ installPath }}bin/activator
