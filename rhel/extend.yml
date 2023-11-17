@@ -42,7 +42,7 @@
 - name: Install {{ installerName }}
   command: tmux new -d -s extend "printf 'y\n{{ installPath }}\n' | {{ installPath }}{{ installerName }}"
 
-- name: Pause for 10 seconds
+- name: Wait for extend Install
   ansible.builtin.pause:
     seconds: 10
 
