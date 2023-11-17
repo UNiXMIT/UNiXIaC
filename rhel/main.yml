@@ -1,262 +1,264 @@
 - name: RHEL
-  block:
-    - name: SSO 2FA
-      hosts: local
-      gather_facts: no
-      tasks:
-      - name: Import sso.yml
-        import_tasks: sso.yml
-      no_log: True
-      tags: default
+  tasks:
+    - name: main
+      block:
+        - name: SSO 2FA
+          hosts: local
+          gather_facts: no
+          tasks:
+          - name: Import sso.yml
+            import_tasks: sso.yml
+          no_log: True
+          tags: default
 
-    - name: AWS EC2 Management
-      hosts: local
-      vars:
-        tempName: SEM-{{ 2048 | random }}
-      gather_facts: no
-      tasks:
-      - name: Create AWS EC2 instance
-        amazon.aws.ec2_instance:
-          name: '{{ tempName }}'
-          image_id: '{{ awsAMI }}'
-          key_name: '{{ keyName }}'
-          network:  
-            assign_public_ip: yes
-          security_groups: '{{ securityGroups }}'
-          region: 
-          availability_zone: '{{ availabilityZone }}'
-          aws_profile: '{{ awsProfile }}'
-          instance_type: '{{ instanceType }}'
-          count: '{{ vmCount | default(1) }}'
-          volumes:
-          - device_name: '{{ deviceName }}'
-            ebs:
-            volume_type: '{{ volumeType }}'
-            volume_size: '{{ volumeSize }}'
-          state: running
-          wait: true
-        register: ec2
-        tags: default
+        - name: AWS EC2 Management
+          hosts: local
+          vars:
+            tempName: SEM-{{ 2048 | random }}
+          gather_facts: no
+          tasks:
+          - name: Create AWS EC2 instance
+            amazon.aws.ec2_instance:
+              name: '{{ tempName }}'
+              image_id: '{{ awsAMI }}'
+              key_name: '{{ keyName }}'
+              network:  
+                assign_public_ip: yes
+              security_groups: '{{ securityGroups }}'
+              region: 
+              availability_zone: '{{ availabilityZone }}'
+              aws_profile: '{{ awsProfile }}'
+              instance_type: '{{ instanceType }}'
+              count: '{{ vmCount | default(1) }}'
+              volumes:
+              - device_name: '{{ deviceName }}'
+                ebs:
+                volume_type: '{{ volumeType }}'
+                volume_size: '{{ volumeSize }}'
+              state: running
+              wait: true
+            register: ec2
+            tags: default
 
-      - name: Add Host to awsEC2 Group 
-        add_host: 
-          hostname: '{{ item.public_ip_address }}'
-          ansible_port: 22
-          ansible_user: '{{ ansibleUser }}'
-          ansible_ssh_private_key_file: '{{ keyLocation }}'
-          groups: awsEC2
-        loop: '{{ ec2.instances }}'
-        tags: default
-      
-      - name: Rename AWS EC2 instance
-        amazon.aws.ec2_tag:
-          aws_profile: '{{ awsProfile }}'
-          region: '{{ awsRegion }}'
-          resource: '{{ item }}'
-          tags:
-            Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
-            Owner: '{{ ssoEmail }}'
-            OS: '{{ imageName }}'
-          state: present
-        loop: '{{ ec2.instance_ids }}'
-        tags: default
-      
-      - name: Generate an OpenSSL public key
-        openssl_publickey:
-          path: /tmp/support.pub
-          privatekey_path: '{{ keyLocation }}'
-          format: OpenSSH
-        tags: default
+          - name: Add Host to awsEC2 Group 
+            add_host: 
+              hostname: '{{ item.public_ip_address }}'
+              ansible_port: 22
+              ansible_user: '{{ ansibleUser }}'
+              ansible_ssh_private_key_file: '{{ keyLocation }}'
+              groups: awsEC2
+            loop: '{{ ec2.instances }}'
+            tags: default
+          
+          - name: Rename AWS EC2 instance
+            amazon.aws.ec2_tag:
+              aws_profile: '{{ awsProfile }}'
+              region: '{{ awsRegion }}'
+              resource: '{{ item }}'
+              tags:
+                Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
+                Owner: '{{ ssoEmail }}'
+                OS: '{{ imageName }}'
+              state: present
+            loop: '{{ ec2.instance_ids }}'
+            tags: default
+          
+          - name: Generate an OpenSSL public key
+            openssl_publickey:
+              path: /tmp/support.pub
+              privatekey_path: '{{ keyLocation }}'
+              format: OpenSSH
+            tags: default
 
-      - name: SSH Check
-        ansible.builtin.wait_for:
-          host: '{{ item.public_ip_address }}'
-          port: 22
-          timeout: 120
-        loop: '{{ ec2.instances }}'
-        tags: default
+          - name: SSH Check
+            ansible.builtin.wait_for:
+              host: '{{ item.public_ip_address }}'
+              port: 22
+              timeout: 120
+            loop: '{{ ec2.instances }}'
+            tags: default
 
-    - name: Modify OS Config
-      hosts: awsEC2
-      gather_facts: no
-      become: yes
-      tasks:
-      - name: Import system.yml
-        import_tasks: system.yml
-      tags: default
+        - name: Modify OS Config
+          hosts: awsEC2
+          gather_facts: no
+          become: yes
+          tasks:
+          - name: Import system.yml
+            import_tasks: system.yml
+          tags: default
 
-    - name: Add Users
-      hosts: awsEC2
-      gather_facts: no
-      become: yes
-      tasks: 
-      - name: Import users.yml
-        import_tasks: users.yml
-      no_log: True
-      tags: default
+        - name: Add Users
+          hosts: awsEC2
+          gather_facts: no
+          become: yes
+          tasks: 
+          - name: Import users.yml
+            import_tasks: users.yml
+          no_log: True
+          tags: default
 
-    - name: Install Software
-      hosts: awsEC2
-      gather_facts: yes
-      become: yes
-      tasks:
-      - name: Import software.yml
-        import_tasks: software.yml
-      tags: default
+        - name: Install Software
+          hosts: awsEC2
+          gather_facts: yes
+          become: yes
+          tasks:
+          - name: Import software.yml
+            import_tasks: software.yml
+          tags: default
 
-    - name: Create Support Files and Directories
-      hosts: awsEC2
-      gather_facts: no
-      become: yes
-      tasks:
-      - name: Import createFilesDir.yml
-        import_tasks: createFilesDir.yml
-      tags: default
+        - name: Create Support Files and Directories
+          hosts: awsEC2
+          gather_facts: no
+          become: yes
+          tasks:
+          - name: Import createFilesDir.yml
+            import_tasks: createFilesDir.yml
+          tags: default
 
-    - name: ED 5.0
-      hosts: awsEC2
-      gather_facts: no
-      tasks:
-      - name: Import ed50.yml
-        import_tasks: ed50.yml
+        - name: ED 5.0
+          hosts: awsEC2
+          gather_facts: no
+          tasks:
+          - name: Import ed50.yml
+            import_tasks: ed50.yml
 
-    - name: ED 6.0
-      hosts: awsEC2
-      gather_facts: no
-      tasks:
-      - name: Import ed60.yml
-        import_tasks: ed60.yml
+        - name: ED 6.0
+          hosts: awsEC2
+          gather_facts: no
+          tasks:
+          - name: Import ed60.yml
+            import_tasks: ed60.yml
 
-    - name: ED 7.0
-      hosts: awsEC2
-      gather_facts: no
-      tasks:
-      - name: Import ed70.yml
-        import_tasks: ed70.yml
+        - name: ED 7.0
+          hosts: awsEC2
+          gather_facts: no
+          tasks:
+          - name: Import ed70.yml
+            import_tasks: ed70.yml
 
-    - name: ED 8.0
-      hosts: awsEC2
-      gather_facts: no
-      tasks:
-      - name: Import ed80.yml
-        import_tasks: ed80.yml
-      
-    - name: ED 9.0
-      hosts: awsEC2
-      gather_facts: no
-      tasks:
-      - name: Import ed90.yml
-        import_tasks: ed90.yml
+        - name: ED 8.0
+          hosts: awsEC2
+          gather_facts: no
+          tasks:
+          - name: Import ed80.yml
+            import_tasks: ed80.yml
+          
+        - name: ED 9.0
+          hosts: awsEC2
+          gather_facts: no
+          tasks:
+          - name: Import ed90.yml
+            import_tasks: ed90.yml
 
-    - name: Install ED
-      hosts: awsEC2
-      gather_facts: no
-      tasks:
-      - name: Import ed.yml
-        import_tasks: ed.yml
-      tags: ed
+        - name: Install ED
+          hosts: awsEC2
+          gather_facts: no
+          tasks:
+          - name: Import ed.yml
+            import_tasks: ed.yml
+          tags: ed
 
-    - name: extend 10.4.0
-      hosts: awsEC2
-      gather_facts: no
-      tasks:
-      - name: Import extend1040.yml
-        import_tasks: extend1040.yml
+        - name: extend 10.4.0
+          hosts: awsEC2
+          gather_facts: no
+          tasks:
+          - name: Import extend1040.yml
+            import_tasks: extend1040.yml
 
-    - name: extend 10.5.0
-      hosts: awsEC2
-      gather_facts: no
-      tasks:
-      - name: Import extend1050.yml
-        import_tasks: extend1050.yml
+        - name: extend 10.5.0
+          hosts: awsEC2
+          gather_facts: no
+          tasks:
+          - name: Import extend1050.yml
+            import_tasks: extend1050.yml
 
-    - name: Install extend
-      hosts: awsEC2
-      gather_facts: no
-      tasks:
-      - name: Import extend.yml
-        import_tasks: extend.yml
-      tags: extend
+        - name: Install extend
+          hosts: awsEC2
+          gather_facts: no
+          tasks:
+          - name: Import extend.yml
+            import_tasks: extend.yml
+          tags: extend
 
-    - name: Create MOTD
-      hosts: awsEC2
-      gather_facts: yes
-      become: yes
-      tasks:
-      - name: Import motd.yml
-        import_tasks: motd.yml
-      tags: default
+        - name: Create MOTD
+          hosts: awsEC2
+          gather_facts: yes
+          become: yes
+          tasks:
+          - name: Import motd.yml
+            import_tasks: motd.yml
+          tags: default
 
-    - name: Add CRON Jobs
-      hosts: awsEC2
-      gather_facts: no
-      become: yes
-      tasks:
-      - name: Import cron.yml
-        import_tasks: cron.yml
-      tags: default
+        - name: Add CRON Jobs
+          hosts: awsEC2
+          gather_facts: no
+          become: yes
+          tasks:
+          - name: Import cron.yml
+            import_tasks: cron.yml
+          tags: default
 
-    - name: Reboot EC2 Instance
-      hosts: awsEC2
-      gather_facts: no
-      become: yes
-      tasks:
-      - name: Reboot
-        reboot:
-      tags: default
+        - name: Reboot EC2 Instance
+          hosts: awsEC2
+          gather_facts: no
+          become: yes
+          tasks:
+          - name: Reboot
+            reboot:
+          tags: default
 
-    - name : EC2 Instance Data
-      hosts: local
-      gather_facts: no
-      tasks:
-      - name: Refresh EC2 Instance Data
-        amazon.aws.ec2_instance_info:
-          aws_profile: '{{ awsProfile }}'
-          region: '{{ awsRegion }}'
-          instance_ids: '{{ ec2.instance_ids }}'
-        register: updatedEC2
-      tags: default
+        - name : EC2 Instance Data
+          hosts: local
+          gather_facts: no
+          tasks:
+          - name: Refresh EC2 Instance Data
+            amazon.aws.ec2_instance_info:
+              aws_profile: '{{ awsProfile }}'
+              region: '{{ awsRegion }}'
+              instance_ids: '{{ ec2.instance_ids }}'
+            register: updatedEC2
+          tags: default
 
-    - name: AWS EC2 Instance Created and Setup
-      hosts: local
-      gather_facts: no
-      tasks:
-      - name: WebAPI Notification
-        ansible.builtin.uri:
-          url: '{{ webAPI }}'
-          method: POST
-          body_format: json
-          body:
-            username: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Build Complete'
-            content: 'Public IP - {{ item.public_ip_address }} Tags - {{ item.tags }}'
-          status_code:
-              - 200
-              - 202
-              - 204
-        loop: '{{ updatedEC2.instances }}'
-        tags: default
-        
-      - name: Display AWS EC2 Information
-        debug:
-          msg: 
-          - 'Instance Name   - {{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
-          - 'AWS ID          - {{ item.instance_id }}'
-          - 'Public IP       - {{ item.public_ip_address }}'
-          - 'Private IP      - {{ item.private_ip_address }}'
-        loop: '{{ updatedEC2.instances }}'
-        tags: default
-  rescue:
-    - name: RHEL FAIL
-      ansible.builtin.uri:
-        url: '{{ webAPI }}'
-        method: POST
-        body_format: json
-        body:
-          username: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Build Failed'
-          content: 'Build failed on {{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Task: {{ ansible_failed_task.name }} Action: {{ ansible_failed_task.action }} Error Message: {{ ansible_failed_result | to_nice_json }}'
-        status_code:
-            - 200
-            - 202
-            - 204
-      loop: '{{ updatedEC2.instances }}'
-      tags: default
+        - name: AWS EC2 Instance Created and Setup
+          hosts: local
+          gather_facts: no
+          tasks:
+          - name: WebAPI Notification
+            ansible.builtin.uri:
+              url: '{{ webAPI }}'
+              method: POST
+              body_format: json
+              body:
+                username: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Build Complete'
+                content: 'Public IP - {{ item.public_ip_address }} Tags - {{ item.tags }}'
+              status_code:
+                  - 200
+                  - 202
+                  - 204
+            loop: '{{ updatedEC2.instances }}'
+            tags: default
+            
+          - name: Display AWS EC2 Information
+            debug:
+              msg: 
+              - 'Instance Name   - {{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
+              - 'AWS ID          - {{ item.instance_id }}'
+              - 'Public IP       - {{ item.public_ip_address }}'
+              - 'Private IP      - {{ item.private_ip_address }}'
+            loop: '{{ updatedEC2.instances }}'
+            tags: default
+      rescue:
+        - name: RHEL FAIL
+          ansible.builtin.uri:
+            url: '{{ webAPI }}'
+            method: POST
+            body_format: json
+            body:
+              username: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Build Failed'
+              content: 'Build failed on {{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Task: {{ ansible_failed_task.name }} Action: {{ ansible_failed_task.action }} Error Message: {{ ansible_failed_result | to_nice_json }}'
+            status_code:
+                - 200
+                - 202
+                - 204
+          loop: '{{ updatedEC2.instances }}'
+          tags: default
