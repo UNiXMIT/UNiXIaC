@@ -55,6 +55,8 @@
 - name: Install {{ installerName }}
   shell: |
     spawn {{ installPath }}{{ installerName }}
+    expect "y/n"
+    send "y\r"
   args:
     executable: /usr/bin/expect
 
