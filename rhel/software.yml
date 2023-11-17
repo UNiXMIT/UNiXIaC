@@ -39,7 +39,7 @@
     mode: '0775'
   when: ansible_facts['distribution_major_version'] | int == 9
 
-- name: Install {{ installerName }}
+- name: Install unixODBC-devel RPM for 9
   ansible.builtin.shell: dnf install -y /tmp/unixODBC-2.3.11-1.rh.x86_64.rpm
   when: ansible_facts['distribution_major_version'] | int == 9
 
