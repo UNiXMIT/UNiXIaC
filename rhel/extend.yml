@@ -40,11 +40,8 @@
   delegate_to: localhost
     
 - name: Install {{ installerName }}
-  shell: printf 'y\n.\n' | ./setup*
-  args:
-    chdir: '{{ installPath }}'
+  shell: printf 'y\n{{ installPath }}\n' | {{ installPath }}{{ installerName }}
   become: yes
 
 - name: Activate Licenses
   shell: printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator
-  become: yes
