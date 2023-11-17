@@ -45,3 +45,4 @@
 
 - name: Activate Licenses
   shell: printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator
+  become: yes
