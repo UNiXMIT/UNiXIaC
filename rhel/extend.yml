@@ -40,25 +40,11 @@
   delegate_to: localhost
     
 - name: Install {{ installerName }}
-  command: "printf 'y\n.\n' | {{ installPath }}{{ installerName }}"
-  args:
-    chdir: '{{ installPath }}'
+  command: tmux new -d -s extend "printf 'y\n{{ installPath }}\n' | {{ installPath }}{{ installerName }}"
 
-# - name: Install {{ installerName }}
-#   shell: "{{ installPath }}{{ installerName }} -IacceptEULA -d {{ installPath }}"
-  
-# - name: Install {{ installerName }}
-#   shell: |
-#     spawn {{ installPath }}{{ installerName }}
-#     expect "y/n"
-#     send "y\r"
-#     expect "Installation directory"
-#     send "\r"
-#     expect eof
-#     exit 0
-#   args:
-#     executable: /usr/bin/expect
-#     chdir: '{{ installPath }}'
+- name: Pause for 10 seconds
+  ansible.builtin.pause:
+    seconds: 10
 
 - name: Activate Licenses
   command: printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator
