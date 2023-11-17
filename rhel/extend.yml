@@ -43,6 +43,8 @@
   shell: printf 'y\n.\n' | ./setup*
   args:
     chdir: '{{ installPath }}'
+  become: yes
 
 - name: Activate Licenses
   shell: printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator
+  become: yes
