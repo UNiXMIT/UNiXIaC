@@ -58,7 +58,7 @@
     expect "y/n"
     send "y\r"
     expect "Installation directory"
-    send "{{ installPath \r"
+    send "{{ installPath }}\r"
     expect eof
     exit 0
   args:
