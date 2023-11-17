@@ -52,7 +52,7 @@
 #     expect eof
 #     exit 0"
 
-- name: Install "{{ installerName }}"
+- name: Install Acu
   shell: |
     spawn {{ installPath }}{{ installerName }}
     expect "y/n"
