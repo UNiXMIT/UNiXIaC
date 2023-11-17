@@ -39,9 +39,28 @@
   loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
   delegate_to: localhost
     
-- name: Install {{ installerName }}
-  shell: "{{ installPath }}{{ installerName }} -IacceptEULA -d {{ installPath }}"
+# - name: Install {{ installerName }}
+#   shell: "printf 'y\n.\n' | {{ installPath }}{{ installerName }}"
+#     args:
+#       chdir: '{{ installPath }}'
 
+# - name: Install {{ installerName }}
+#   shell: "{{ installPath }}{{ installerName }} -IacceptEULA -d {{ installPath }}"
+  
+- name: Install {{ installerName }}
+  shell: |
+    spawn {{ installPath }}{{ installerName }}
+    expect "y/n"
+    send "y\r"
+    expect "Installation directory"
+    send "\r"
+    expect "The product has been extracted in the current directory."
+    send "\r"
+    expect eof
+    exit 0
+  args:
+    executable: /usr/bin/expect
+    chdir: '{{ installPath }}'
 
 - name: Activate Licenses
   shell: "printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator"
