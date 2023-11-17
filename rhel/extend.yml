@@ -25,7 +25,7 @@
     dest: '{{ installPath }}'
     owner: '{{ myUsername }}' 
     group: '{{ myUsername }}'
-    mode: 0775
+    mode: '0775'
   become: yes
 
 - name: Add extend Tags
