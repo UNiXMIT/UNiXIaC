@@ -212,7 +212,6 @@
       aws_profile: '{{ awsProfile }}'
       region: '{{ awsRegion }}'
       instance_ids: '{{ ec2.instance_ids }}'
-      region: '{{ awsRegion }}'
     register: updatedEC2
   tags: default
 
