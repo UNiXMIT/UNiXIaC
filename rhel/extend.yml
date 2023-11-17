@@ -28,6 +28,15 @@
     mode: 0775
   become: yes
 
+- name: Download install script
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/install.exp
+    dest: '{{ installPath }}'
+    owner: '{{ myUsername }}' 
+    group: '{{ myUsername }}'
+    mode: 0775
+  become: yes
+
 - name: Add extend Tags
   amazon.aws.ec2_tag:
     aws_profile: '{{ awsProfile }}'
@@ -44,8 +53,8 @@
 #     args:
 #       chdir: '{{ installPath }}'
 
-- name: Install {{ installerName }}
-  shell: "{{ installPath }}{{ installerName }} -IacceptEULA -d {{ installPath }} && sleep 10"
+# - name: Install {{ installerName }}
+#   shell: "{{ installPath }}{{ installerName }} -IacceptEULA -d {{ installPath }} && sleep 10"
   
 # - name: Install {{ installerName }}
 #   shell: |
@@ -62,5 +71,10 @@
 #     executable: /usr/bin/expect
 #     chdir: '{{ installPath }}'
 
+- name: Install {{ installerName }}
+  shell: expect install.exp
+  args:
+    chdir: '{{ installPath }}'
+
 - name: Activate Licenses
-  shell: "printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator"
+  shell: printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator
