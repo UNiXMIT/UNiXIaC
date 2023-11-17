@@ -52,9 +52,9 @@
 #     expect eof
 #     exit 0"
 
-- name: Install {{ installerName }}
+- name: Install "{{ installerName }}"
   shell: |
-    spawn "{{ installPath }}{{ installerName }}"
+    spawn {{ installPath }}{{ installerName }}
     expect "y/n"
     send "y\r"
     expect "Installation directory"
