@@ -194,14 +194,14 @@
     import_tasks: cron.yml
   tags: default
 
-- name: Reboot EC2 Instance
-  hosts: awsEC2
-  gather_facts: no
-  become: yes
-  tasks:
-  - name: Reboot
-    reboot:
-  tags: default
+# - name: Reboot EC2 Instance
+#   hosts: awsEC2
+#   gather_facts: no
+#   become: yes
+#   tasks:
+#   - name: Reboot
+#     reboot:
+#   tags: default
 
 - name : EC2 Instance Data
   hosts: local

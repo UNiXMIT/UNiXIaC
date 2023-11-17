@@ -40,11 +40,11 @@
   delegate_to: localhost
     
 - name: Install {{ installerName }}
-  command: tmux new -d -s extend "printf 'y\n{{ installPath }}\n' | {{ installPath }}{{ installerName }}"
+  shell: tmux new -d -s extend "printf 'y\n{{ installPath }}\n' | {{ installPath }}{{ installerName }}"
 
 - name: Wait for extend Install
   ansible.builtin.pause:
     seconds: 10
 
 - name: Activate Licenses
-  command: printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator
+  shell: printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator
