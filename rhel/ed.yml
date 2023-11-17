@@ -16,7 +16,7 @@
     dest: "/home/{{ myUsername }}/MFSupport/MFInstallers/"
     owner: '{{ myUsername }}' 
     group: '{{ myUsername }}'
-    mode: 0775
+    mode: '0775'
   become: yes
 
 - name: Add ED Tags
