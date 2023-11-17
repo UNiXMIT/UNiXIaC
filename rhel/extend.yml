@@ -28,15 +28,6 @@
     mode: 0775
   become: yes
 
-- name: Download install script
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/install.exp
-    dest: '{{ installPath }}'
-    owner: '{{ myUsername }}' 
-    group: '{{ myUsername }}'
-    mode: 0775
-  become: yes
-
 - name: Add extend Tags
   amazon.aws.ec2_tag:
     aws_profile: '{{ awsProfile }}'
@@ -48,13 +39,13 @@
   loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
   delegate_to: localhost
     
-# - name: Install {{ installerName }}
-#   shell: "printf 'y\n.\n' | {{ installPath }}{{ installerName }}"
-#     args:
-#       chdir: '{{ installPath }}'
+- name: Install {{ installerName }}
+  command: "printf 'y\n.\n' | {{ installPath }}{{ installerName }}"
+  args:
+    chdir: '{{ installPath }}'
 
 # - name: Install {{ installerName }}
-#   shell: "{{ installPath }}{{ installerName }} -IacceptEULA -d {{ installPath }} && sleep 10"
+#   shell: "{{ installPath }}{{ installerName }} -IacceptEULA -d {{ installPath }}"
   
 # - name: Install {{ installerName }}
 #   shell: |
@@ -63,18 +54,11 @@
 #     send "y\r"
 #     expect "Installation directory"
 #     send "\r"
-#     expect "The product has been extracted in the current directory."
-#     send "\r"
 #     expect eof
 #     exit 0
 #   args:
 #     executable: /usr/bin/expect
 #     chdir: '{{ installPath }}'
 
-- name: Install {{ installerName }}
-  shell: expect install.exp
-  args:
-    chdir: '{{ installPath }}'
-
 - name: Activate Licenses
-  shell: printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator
+  command: printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator
