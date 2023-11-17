@@ -42,14 +42,37 @@
 # - name: Install {{ installerName }}
 #   shell: "printf 'y\n{{ installPath }}\n' | {{ installPath }}{{ installerName }} && sleep 10"
 
+# - name: Install {{ installerName }}
+#   shell: |
+#     expect -c "spawn {{ installPath }}{{ installerName }}; \
+#     expect -re \"y/n\"; \
+#     send \"y\r\"; \
+#     expect -re \"Installation directory\"; \
+#     send \"{{ installPath }}\r\"; \
+#     expect eof
+#     exit 0"
+
 - name: Install {{ installerName }}
   shell: |
-    expect -c "spawn {{ installPath }}{{ installerName }}; \
-    expect -re \"y/n\"; \
-    send \"y\r\"; \
-    expect -re \"Installation directory\"; \
-    send \"{{ installPath }}\r\"; \
-    expect eof"
+    spawn {{ installPath }}{{ installerName }}
+    expect "y/n"
+    send "y\r"
+    expect "Installation directory"
+    send "{{ installPath }}\r\"
+    expect eof
+    exit 0
+  args:
+    executable: /usr/bin/expect
+
+# - name: Activate Licenses
+#   shell: "printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator && sleep 5"
 
 - name: Activate Licenses
-  shell: "printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator && sleep 5"
+  shell: |
+    expect -c "spawn {{ installPath }}bin/activator; \
+    expect -re \"Enter the product code\"; \
+    send \"{{ extendCode }}\r\"; \
+    expect -re \"Enter the product key\"; \
+    send \"{{ extendKey }}\r\"; \
+    expect eof
+    exit 0"
