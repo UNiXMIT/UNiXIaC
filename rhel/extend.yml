@@ -25,7 +25,7 @@
     dest: '{{ installPath }}'
     owner: '{{ myUsername }}' 
     group: '{{ myUsername }}'
-    mode: '0775'
+    mode: 0775
   become: yes
 
 - name: Add extend Tags
@@ -39,40 +39,9 @@
   loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
   delegate_to: localhost
     
-# - name: Install {{ installerName }}
-#   shell: "printf 'y\n{{ installPath }}\n' | {{ installPath }}{{ installerName }} && sleep 10"
-
-# - name: Install {{ installerName }}
-#   shell: |
-#     expect -c "spawn {{ installPath }}{{ installerName }}; \
-#     expect -re \"y/n\"; \
-#     send \"y\r\"; \
-#     expect -re \"Installation directory\"; \
-#     send \"{{ installPath }}\r\"; \
-#     expect eof
-#     exit 0"
-
 - name: Install {{ installerName }}
-  shell: |
-    spawn {{ installPath }}{{ installerName }}
-    expect "y/n"
-    send "y\r"
-    expect "Installation directory"
-    send "{{ installPath }}\r"
-    expect eof
-    exit 0
-  args:
-    executable: /usr/bin/expect
+  shell: "{{ installPath }}{{ installerName }} -IacceptEULA -d {{ installPath }}"
 
-# - name: Activate Licenses
-#   shell: "printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator && sleep 5"
 
 - name: Activate Licenses
-  shell: |
-    expect -c "spawn {{ installPath }}bin/activator; \
-    expect -re \"Enter the product code\"; \
-    send \"{{ extendCode }}\r\"; \
-    expect -re \"Enter the product key\"; \
-    send \"{{ extendKey }}\r\"; \
-    expect eof
-    exit 0"
+  shell: "printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator"
