@@ -39,17 +39,17 @@
   loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
   delegate_to: localhost
     
-- name: Install {{ installerName }}
-  shell: "printf 'y\n{{ installPath }}\n' | {{ installPath }}{{ installerName }} && sleep 10"
-
 # - name: Install {{ installerName }}
-#   shell: |
-#     expect -c "spawn {{ installPath }}{{ installerName }}; \
-#     expect -re \"y/n\"; \
-#     send \"y\r\"; \
-#     expect -re \"Installation directory\"; \
-#     send \"{{ installPath }}\r\"; \
-#     expect eof"
+#   shell: "printf 'y\n{{ installPath }}\n' | {{ installPath }}{{ installerName }} && sleep 10"
+
+- name: Install {{ installerName }}
+  shell: |
+    expect -c "spawn {{ installPath }}{{ installerName }}; \
+    expect -re \"y/n\"; \
+    send \"y\r\"; \
+    expect -re \"Installation directory\"; \
+    send \"{{ installPath }}\r\"; \
+    expect eof"
 
 - name: Activate Licenses
   shell: "printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator && sleep 5"

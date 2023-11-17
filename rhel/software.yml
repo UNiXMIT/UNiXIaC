@@ -30,6 +30,7 @@
       - jq
       - python3
       - python3-pip
+      - expect
     state: present
 
 - name: Download unixODBC-devel RPM for 9
