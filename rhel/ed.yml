@@ -61,6 +61,5 @@
   become: yes
 
 - name: Import JCL Region
-  command: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'
+  command: sudo tmux new -d -s import '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'
   become: yes
-  become_user: root
