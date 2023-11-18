@@ -63,4 +63,3 @@
 - name: Import JCL Region
   command: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'
   become_user: '{{ myUsername }}'
-  become_password: '{{ myPassword }}'
