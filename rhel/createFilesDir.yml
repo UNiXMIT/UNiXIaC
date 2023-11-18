@@ -206,7 +206,7 @@
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
     dest: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml
-    mode: '0777'
+    mode: '0775'
 
 - name: Create Products
   file:
