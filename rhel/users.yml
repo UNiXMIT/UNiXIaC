@@ -1,3 +1,9 @@
+- name: Modify '{{ ansibleUser }}' user
+  user:
+    name: "{{ ansibleUser }}"
+    groups: wheel
+    append: yes
+
 - name: Add new user '{{ myUsername }}'
   user:
     name: "{{ myUsername }}"

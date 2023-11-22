@@ -25,7 +25,7 @@
     dest: '{{ installPath }}'
     owner: '{{ myUsername }}' 
     group: '{{ myUsername }}'
-    mode: 0775
+    mode: '0775'
   become: yes
 
 - name: Add extend Tags
@@ -40,25 +40,9 @@
   delegate_to: localhost
     
 - name: Install {{ installerName }}
-  command: "printf 'y\n.\n' | {{ installPath }}{{ installerName }}"
-  args:
-    chdir: '{{ installPath }}'
-
-# - name: Install {{ installerName }}
-#   shell: "{{ installPath }}{{ installerName }} -IacceptEULA -d {{ installPath }}"
-  
-# - name: Install {{ installerName }}
-#   shell: |
-#     spawn {{ installPath }}{{ installerName }}
-#     expect "y/n"
-#     send "y\r"
-#     expect "Installation directory"
-#     send "\r"
-#     expect eof
-#     exit 0
-#   args:
-#     executable: /usr/bin/expect
-#     chdir: '{{ installPath }}'
+  shell: printf 'y\n{{ installPath }}\n' | {{ installPath }}{{ installerName }}
+  become: yes
 
 - name: Activate Licenses
-  command: printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator
+  shell: printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator
+  become: yes

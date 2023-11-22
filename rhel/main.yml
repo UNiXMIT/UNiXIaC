@@ -226,7 +226,7 @@
       body_format: json
       body:
         username: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Build Complete'
-        content: 'Public IP - {{ item.public_ip_address }} Tags - {{ item.tags }}'
+        content: 'Public IP - {{ item.public_ip_address }} // Tags - {{ item.tags }}'
       status_code:
           - 200
           - 202

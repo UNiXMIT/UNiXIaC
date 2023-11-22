@@ -16,7 +16,7 @@
     dest: "/home/{{ myUsername }}/MFSupport/MFInstallers/"
     owner: '{{ myUsername }}' 
     group: '{{ myUsername }}'
-    mode: 0775
+    mode: '0775'
   become: yes
 
 - name: Add ED Tags
@@ -57,13 +57,9 @@
   become: yes
 
 - name: Start MFDS
-  command: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv && {{ installPath }}/bin/mfds64 --UI-on ; {{ installPath }}/bin/mfds64 --listen-all && {{ installPath }}/bin/mfds64"
-  environment: 
-    COBDIR: '{{ installPath }}'
+  command: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 --UI-on ; {{ installPath }}/bin/mfds64 --listen-all ; {{ installPath }}/bin/mfds64"
   become: yes
 
 - name: Import JCL Region
-  command: '. {{ installPath }}/bin/cobsetenv && {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'
-  environment: 
-    COBDIR: '{{ installPath }}'
+  command: sudo -- bash -c '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'
   become: yes
