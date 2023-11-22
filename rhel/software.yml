@@ -71,7 +71,24 @@
 - name: Enable Podman Socket
   ansible.builtin.shell: systemctl enable --now podman.socket
 
-- name: Install pexpect
-  pip:
-    name: pexpect
+- name: Download MSSQL ODBC Driver Repo
+  get_url:
+    url: https://packages.microsoft.com/config/rhel/{{ ansible_distribution_major_version }}/prod.repo
+    dest: /etc/yum.repos.d/mssql-release.repo
+    mode: '0775'
+
+- name: Install MSSQL ODBC Driver
+  environment:
+    ACCEPT_EULA: "Y"
+  package:
+    name: 
+      - msodbcsql17 
+      - mssql-tools
     state: present
+
+- name: Set MSSQL Tools on PATH
+  copy:
+    dest: /etc/profile.d/mssql.sh
+    content: |
+      #!/bin/bash
+      export PATH="$PATH:/opt/mssql-tools/bin"
