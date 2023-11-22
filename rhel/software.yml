@@ -33,16 +33,17 @@
       - expect
     state: present
 
-- name: Download unixODBC-devel RPM for 9
-  get_url:
-    url: https://packages.microsoft.com/rhel/9/prod/Packages/u/unixODBC-2.3.11-1.rh.x86_64.rpm
-    dest: /tmp/unixODBC-2.3.11-1.rh.x86_64.rpm
-    mode: '0775'
-  when: ansible_facts['distribution_major_version'] | int == 9
+- name: Install unixODBC-devel on RHEL>=8
+  ansible.builtin.dnf:
+    name: https://packages.microsoft.com/rhel/{{ ansible_distribution_major_version }}/prod/Packages/u/unixODBC-2.3.11-1.rh.x86_64.rpm
+    state: present
+  when: ansible_facts['distribution_major_version'] | int >= 8
 
-- name: Install unixODBC-devel RPM for 9
-  ansible.builtin.shell: dnf install -y /tmp/unixODBC-2.3.11-1.rh.x86_64.rpm
-  when: ansible_facts['distribution_major_version'] | int == 9
+- name: Install unixODBC-devel on RHEL<=7
+  ansible.builtin.yum:
+    name: https://packages.microsoft.com/rhel/{{ ansible_distribution_major_version }}/prod/Packages/u/unixODBC-2.3.11-1.rh.x86_64.rpm
+    state: present
+  when: ansible_facts['distribution_major_version'] | int <= 7
 
 - name: RHEL<=7 Package installation
   package:
