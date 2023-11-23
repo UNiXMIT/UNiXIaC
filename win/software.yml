@@ -10,11 +10,11 @@
     - winscp
     - notepadplusplus
     - jq
+    - microsoft-windows-terminal
     # - dotnet
-    # - windows-sdk-10.1
-    # - microsoft-build-tools
+    # - windows-sdk-11-version-22h2-all
+    # - visualstudio2017buildtools
     # - office365business
-    # - microsoft-windows-terminal
     # - revo-uninstaller
     # - lockhunter
     # - adobereader
