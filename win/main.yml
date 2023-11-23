@@ -107,6 +107,7 @@
 - name: Install Software
   hosts: awsEC2
   gather_facts: no
+  become: yes
   tasks:
   - name: Import software.yml
     import_tasks: software.yml
