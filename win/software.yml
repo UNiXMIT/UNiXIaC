@@ -31,6 +31,7 @@
   ansible.windows.win_powershell:
     script: |
       $msTermVer = "1.18.3181.0"
-      Invoke-WebRequest -Uri https://github.com/microsoft/terminal/releases/download/v$msTermVer/Microsoft.WindowsTerminal_$msTermVer_x64.zip -outfile C:\Users\Public\Documents\Microsoft.WindowsTerminal.zip
+      $msTermURL = "https://github.com/microsoft/terminal/releases/download/v${msTermVer}/Microsoft.WindowsTerminal_${msTermVer}_x64.zip"
+      Invoke-WebRequest -Uri $msTermURL -outfile C:\Users\Public\Documents\Microsoft.WindowsTerminal.zip
       Expand-Archive -LiteralPath C:\Users\Public\Documents\Microsoft.WindowsTerminal.zip -DestinationPath C:\Users\Public\Documents
-      setx /m PATH "$env:PATH;C:\Users\Public\Documents\terminal-$msTermVer"
+      setx /m PATH "$env:PATH;C:\Users\Public\Documents\terminal-${msTermVer}"
