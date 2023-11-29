@@ -165,7 +165,6 @@
     import_tasks: createFilesDir.yml
   tags: default
 
-
 - name: Install ED 5.0
   hosts: awsEC2
   gather_facts: no
@@ -207,6 +206,14 @@
   tasks:
   - name: Import ed.yml
     import_tasks: ed.yml
+
+- name: Setup ADLDS
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import adlds.yml
+    import_tasks: adlds.yml
+  tags: adlds
 
 - name: extend 10.4.0
   hosts: awsEC2

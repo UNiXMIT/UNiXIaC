@@ -61,8 +61,11 @@ podman logs semaphore
 - vs2019
   - ed
     - ed50
+      - adlds
     - ed60
+      - adlds
     - ed70
+      - adlds
       - edpu
         - ed70pu15
         - ed70pu16
@@ -71,9 +74,11 @@ podman logs semaphore
         - ed70pu19
         - ed70pu20
         - ed70pu21
+    - adlds
 - vs2022
   - ed 
     - ed80
+      - adlds
       - edpu
         - ed80pu5
         - ed80pu6
@@ -83,6 +88,7 @@ podman logs semaphore
         - ed80pu10
         - ed80pu11
     - ed90
+      - adlds
       - edpu
         - ed90pu1
         - ed90pu2

@@ -1,0 +1,26 @@
+- name: Install ADLDS and ADSI Edit
+  ansible.windows.win_feature:
+    name: 
+    - ADLDS
+    - RSAT-ADDS
+    state: present
+
+- name: Download adlds.txt
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/ES/adlds.txt
+    dest: C:\MFScripts\adlds.txt
+
+- name: Configure ADLDS
+  win_command:
+    cmd: 'C:\Windows\ADAM\adaminstall.exe /answer:adlds.txt'
+    chdir: 'C:\MFScripts'
+
+- name: Configure ADLDS for MF
+  win_command:
+    cmd: 'es-ldap-setup.cmd -'
+    chdir: 'C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin'
+
+- name: Change MFReader password
+  ansible.windows.win_powershell:
+    script: |
+      Set-ADAccountPassword -Server localhost -Identity 'CN=MFReader,CN=ADAM Users,CN=Micro Focus,CN=Program Data,DC=local' -NewPassword (ConvertTo-SecureString -AsPlainText '{{ myPassword }}' -Force) -Reset
