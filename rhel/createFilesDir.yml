@@ -196,12 +196,6 @@
     state: directory
     mode: '0775'
 
-- name: Create system
-  file:
-    path: "/home/{{ myUsername }}/MFSupport/MFSamples/JCL/system"
-    state: directory
-    mode: '0775'
-
 - name: Download JCL.xml
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
