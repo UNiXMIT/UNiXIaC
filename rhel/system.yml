@@ -54,7 +54,7 @@
     create: yes
   become: true
 
-  - name: Add a line to .bash_profile
+- name: Add a line to .bash_profile
   lineinfile:
     path: /home/{{ myUsername }}/.bash_profile
     line: export PS1="$PS1\[\e]1337;CurrentDir="'$(pwd)\a\]'
