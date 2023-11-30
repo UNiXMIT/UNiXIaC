@@ -15,9 +15,15 @@
     cmd: 'C:\Windows\ADAM\adaminstall.exe /answer:adlds.txt'
     chdir: 'C:\MFScripts'
 
+- name: Remove all 'pause' from es-ldap-setup.cmd
+  ansible.windows.win_powershell:
+    script: |
+      (Get-Content es-ldap-setup.cmd) -Replace 'pause', ' ' | Set-Content es-ldap-setup.cmd
+    chdir: C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin
+
 - name: Configure ADLDS for MF
   win_command:
-    cmd: 'es-ldap-setup.cmd -'
+    cmd: es-ldap-setup.cmd administrator {{ myPassword }} "CN=Micro Focus,CN=Program Data,DC=local" localhost:389
     chdir: 'C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin'
 
 - name: Change MFReader password
@@ -29,7 +35,7 @@
   ansible.windows.win_uri:
     url: http://localhost:10086/server/v1/config/esm
     method: POST
-    content-type: application/json
+    content_type: application/json
     body: '{"Name": "ADLDS", "Module": "mdlap_esm", "ConnectionPath": "localhost:389", "AuthorizedID": "CN=MFReader,CN=ADAM Users,CN=Micro Focus,CN=Program Data,DC=local", "Password": "strongPassword123", "Enabled": true, "CacheLimit": 1024, "CacheTTL": 600, "Config": "[LDAP]\nBASE=CN=Micro Focus,CN=Program Data,DC=local\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nMode=MF-hash\n\n[Trace]\nModify=y\nRule=y\nGroups=y\nSearch=y\nBind=n\nTrace1=verify:*:debug\nTrace2=auth:*:*:**:debug", "Description": "ADLDS ESM"}'
     headers:
       accept: application/json
