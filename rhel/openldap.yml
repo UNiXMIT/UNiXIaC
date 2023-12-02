@@ -45,8 +45,8 @@
     ldapadd -Y EXTERNAL -H ldapi:/// -f /openldap/schema/backend.ldif > /dev/null 2>&1
     sudo systemctl stop slapd
     cp /etc/openldap/schema/* /openldap/schema/
-    if [[ -f "$COBDIR/bin/mfds" ]]; then
-        $COBDIR/bin/mfds -l "dc=secldap,dc=com" 2 /openldap/schema/mfds.schema > /dev/null 2>&1
+    if [[ -f "{{ installPath }}/bin/mfds" ]]; then
+        {{ installPath }}/bin/mfds -l "dc=secldap,dc=com" 2 /openldap/schema/mfds.schema > /dev/null 2>&1
     elif [[ ! -f "/openldap/schema/mfds.schema" ]]; then
         printf "mfds and /openldap/schema/mfds.schema not found.\n"
         exit 1
@@ -64,14 +64,14 @@
     rm -rf /openldap/log/*
     ldapadd -v -D "cn=Manager,dc=secldap,dc=com" -w $SLAPPASS -f /openldap/schema/top.ldif -H ldapi:/// > log/top.log
     ldapadd -v -D "cn=Manager,dc=secldap,dc=com" -w $SLAPPASS -f /openldap/schema/mf-containers.ldif -H ldapi:/// > log/mf-containers.log
-    if [[ -f "$COBDIR/bin/mfds" ]]; then
-        $COBDIR/bin/mfds -e "cn=Micro Focus,dc=secldap,dc=com" "cn=Enterprise Server Users" "cn=Enterprise Server User Groups" "cn=Enterprise Server Resources" 2 "/openldap/schema/mfds-users.ldif" > /dev/null 2>&1
+    if [[ -f "{{ installPath }}/bin/mfds" ]]; then
+        {{ installPath }}/bin/mfds -e "cn=Micro Focus,dc=secldap,dc=com" "cn=Enterprise Server Users" "cn=Enterprise Server User Groups" "cn=Enterprise Server Resources" 2 "/openldap/schema/mfds-users.ldif" > /dev/null 2>&1
     elif [[ ! -f "/openldap/schema/mfds-users.ldif" ]]; then
         printf "mfds and /openldap/schema/mfds-users.ldif not found.\n"
         exit 2
     fi
     ldapadd -v -D "cn=Manager,dc=secldap,dc=com" -w $SLAPPASS -f /openldap/schema/mfds-users.ldif -H ldapi:/// -c > log/mfds-users.log
-    sed 's/DC=X/CN=Micro Focus,dc=secldap,dc=com/' $COBDIR/etc/es_default_ldap_openldap.ldif > /openldap/schema/es_default_ldap_openldap.ldif
+    sed 's/DC=X/CN=Micro Focus,dc=secldap,dc=com/' {{ installPath }}/etc/es_default_ldap_openldap.ldif > /openldap/schema/es_default_ldap_openldap.ldif
     sed -i '/,Data/d' /openldap/schema/es_default_ldap_openldap.ldif
     ldapadd -v -D "cn=Manager,dc=secldap,dc=com" -w $SLAPPASS -f /openldap/schema/es_default_ldap_openldap.ldif -H ldapi:/// -c > log/es_default_ldap_openldap.ldifes_default_ldap_openldap.ldif
     ldapsearch -H ldapi:/// -x -b "cn=subschema" -s base + > log/schema.log
