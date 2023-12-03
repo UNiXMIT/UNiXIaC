@@ -24,7 +24,7 @@
             groups: {{ myUsername }}, adm, wheel
         runcmd:
           - sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
-          - service ssh restart
+          - service sshd restart
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
