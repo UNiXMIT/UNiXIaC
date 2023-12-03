@@ -33,7 +33,14 @@
 - name: Install {{ installerName }}
   command: "/home/{{ myUsername }}/MFSupport/MFInstallers/{{ installerName }} -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}"
   become: yes
-  become_user: '{{ myUsername }}'
+
+- name: Change Ownership of ED Directory
+  file:
+    path: '{{ installPath }}'
+    state: directory
+    recurse: yes
+    owner: '{{ myUsername }}'
+    group: '{{ myUsername }}'
 
 # - name: Add License Server
 #   lineinfile:
@@ -64,4 +71,3 @@
 - name: Import JCL Region
   command: '{{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'
   become: yes
-  become_user: '{{ myUsername }}'

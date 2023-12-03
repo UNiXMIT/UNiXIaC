@@ -43,6 +43,14 @@
   shell: printf 'y\n{{ installPath }}\n' | {{ installPath }}{{ installerName }}
   become: yes
 
+- name: Change Ownership of extend Directory
+  file:
+    path: '{{ installPath }}'
+    state: directory
+    recurse: yes
+    owner: '{{ myUsername }}'
+    group: '{{ myUsername }}'
+
 - name: Activate Licenses
   shell: printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator
   become: yes
