@@ -50,6 +50,7 @@
     recurse: yes
     owner: '{{ myUsername }}'
     group: '{{ myUsername }}'
+  become: yes
 
 - name: Activate Licenses
   shell: printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator
