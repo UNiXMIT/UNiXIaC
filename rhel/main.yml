@@ -19,7 +19,7 @@
         #cloud-config
         users:
           - name: {{ myUsername }}
-            passwd: {{ myPassword | password_hash('sha512') }}
+            passwd: {{ myPassword }}
             sudo: ALL=(ALL) NOPASSWD:ALL
             shell: /bin/bash
             groups: {{ myUsername }}, adm, wheel
