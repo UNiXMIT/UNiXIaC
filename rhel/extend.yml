@@ -26,7 +26,6 @@
     owner: '{{ myUsername }}' 
     group: '{{ myUsername }}'
     mode: '0775'
-  become: yes
 
 - name: Add extend Tags
   amazon.aws.ec2_tag:
@@ -41,17 +40,6 @@
     
 - name: Install {{ installerName }}
   shell: printf 'y\n{{ installPath }}\n' | {{ installPath }}{{ installerName }}
-  become: yes
-
-- name: Change Ownership of extend Directory
-  file:
-    path: '{{ installPath }}'
-    state: directory
-    recurse: yes
-    owner: '{{ myUsername }}'
-    group: '{{ myUsername }}'
-  become: yes
 
 - name: Activate Licenses
   shell: printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator
-  become: yes

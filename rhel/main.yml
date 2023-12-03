@@ -15,6 +15,16 @@
   tasks:
   - name: Create AWS EC2 instance
     amazon.aws.ec2_instance:
+      user_data: |
+        #cloud-config
+        users:
+          - name: {{ myUsername }}
+            passwd: {{ myPassword }}
+            sudo: ALL=(ALL) NOPASSWD:ALL
+            groups: {{ myUsername }}, adm, wheel
+        runcmd:
+          - sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+          - service ssh restart
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
@@ -34,14 +44,15 @@
       state: running
       wait: true
     register: ec2
+    no_log: True
     tags: default
 
   - name: Add Host to awsEC2 Group 
     add_host: 
        hostname: '{{ item.public_ip_address }}'
        ansible_port: 22
-       ansible_user: '{{ ansibleUser }}'
-       ansible_ssh_private_key_file: '{{ keyLocation }}'
+       ansible_user: '{{ myUsername }}'
+       ansible_password: '{{ myPassword }}'
        groups: awsEC2
     loop: '{{ ec2.instances }}'
     tags: default
@@ -57,13 +68,6 @@
         OS: '{{ imageName }}'
       state: present
     loop: '{{ ec2.instance_ids }}'
-    tags: default
-  
-  - name: Generate an OpenSSL public key
-    openssl_publickey:
-      path: /tmp/support.pub
-      privatekey_path: '{{ keyLocation }}'
-      format: OpenSSH
     tags: default
 
   - name: SSH Check
@@ -81,16 +85,6 @@
   tasks:
   - name: Import system.yml
     import_tasks: system.yml
-  tags: default
-
-- name: Add Users
-  hosts: awsEC2
-  gather_facts: no
-  become: yes
-  tasks: 
-  - name: Import users.yml
-    import_tasks: users.yml
-  no_log: True
   tags: default
 
 - name: Install Software

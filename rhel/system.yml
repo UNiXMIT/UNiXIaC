@@ -1,13 +1,12 @@
+- name: Change root password
+  user:
+    name: root
+    update_password: always
+    password: "{{ myPassword | password_hash('sha512') }}"
+
 - name: Set timezone to Europe/London
   community.general.timezone:
     name: Europe/London
-
-- name: Allow SSH password authentication
-  lineinfile:
-    dest: /etc/ssh/sshd_config
-    regexp: "^PasswordAuthentication"
-    line: "PasswordAuthentication yes"
-    state: present
 
 - name: Allow TCP Forwarding
   lineinfile:

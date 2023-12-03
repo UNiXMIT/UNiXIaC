@@ -17,7 +17,6 @@
     owner: '{{ myUsername }}' 
     group: '{{ myUsername }}'
     mode: '0775'
-  become: yes
 
 - name: Add ED Tags
   amazon.aws.ec2_tag:
@@ -32,16 +31,6 @@
 
 - name: Install {{ installerName }}
   command: "/home/{{ myUsername }}/MFSupport/MFInstallers/{{ installerName }} -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}"
-  become: yes
-
-- name: Change Ownership of ED Directory
-  file:
-    path: '{{ installPath }}'
-    state: directory
-    recurse: yes
-    owner: '{{ myUsername }}'
-    group: '{{ myUsername }}'
-  become: yes
 
 # - name: Add License Server
 #   lineinfile:
@@ -69,12 +58,5 @@
   command: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 --UI-on ; {{ installPath }}/bin/mfds64 --listen-all ; {{ installPath }}/bin/mfds64"
   become: yes
 
-- name: Download JCL.xml
-  get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
-    dest: /tmp/JCL.xml
-    mode: '0777'
-
 - name: Import JCL Region
-  command: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /tmp/JCL.xml'
-  become: yes
+  command: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'
