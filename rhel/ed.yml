@@ -34,7 +34,6 @@
   command: "/home/{{ myUsername }}/MFSupport/MFInstallers/{{ installerName }} -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}"
   become: yes
   become_user: '{{ myUsername }}'
-  become_password: '{{ myPassword }}'
 
 # - name: Add License Server
 #   lineinfile:
