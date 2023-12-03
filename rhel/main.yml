@@ -17,12 +17,13 @@
     amazon.aws.ec2_instance:
       user_data: |
         #cloud-config
+        ssh_pwauth: True
         users:
           - name: {{ myUsername }}
             passwd: {{ myPassword }}
             sudo: ALL=(ALL) NOPASSWD:ALL
+            shell: /bin/bash
             groups: {{ myUsername }}, adm, wheel
-        ssh_pwauth: True
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
