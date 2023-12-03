@@ -24,6 +24,8 @@
             sudo: ALL=(ALL) NOPASSWD:ALL
             shell: /bin/bash
             groups: {{ myUsername }}, adm, wheel
+        runcmd:
+          - service sshd restart
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
