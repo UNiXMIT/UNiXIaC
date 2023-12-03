@@ -62,4 +62,3 @@
 
 - name: Import JCL Region
   command: sudo -- bash -c '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml SYSAD SYSAD'
-  become: yes
