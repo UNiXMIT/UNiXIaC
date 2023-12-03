@@ -19,11 +19,12 @@
         #cloud-config
         users:
           - name: {{ myUsername }}
-            passwd: {{ myPassword }}
+            passwd: {{ myPassword | password_hash('sha512') }}
             sudo: ALL=(ALL) NOPASSWD:ALL
             shell: /bin/bash
             groups: {{ myUsername }}, adm, wheel
-            ssh_pwauth: True
+            ssh_pwauth: true
+            lock_passwd: false
         runcmd:
           - sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
           - service sshd restart
