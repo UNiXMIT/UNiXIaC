@@ -66,4 +66,3 @@
   command: '{{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'
   become: yes
   become_user: '{{ myUsername }}'
-  become_password: '{{ myPassword }}'
