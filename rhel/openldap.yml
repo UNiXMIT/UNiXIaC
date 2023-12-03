@@ -81,7 +81,7 @@
 #     url: http://localhost:10086/server/v1/config/esm
 #     method: POST
 #     body_format: json
-#     body: '{"Name": "ADLDS", "Module": "mldap_esm", "ConnectionPath": "localhost:389", "AuthorizedID": "CN=MFReader,CN=ADAM Users,CN=Micro Focus,CN=Program Data,DC=local", "Password": "strongPassword123", "Enabled": true, "CacheLimit": 1024, "CacheTTL": 600, "Config": "[LDAP]\nBASE=cn=Micro Focus,dc=secldap,dc=com\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nMode=MF-hash\n\n[Trace]\nModify=y\nRule=y\nGroups=y\nSearch=y\nBind=n\nTrace1=verify:*:debug\nTrace2=auth:*:*:**:debug", "Description": "ADLDS ESM"}'
+#     body: '{"Name": "OpenLDAP", "Module": "mldap_esm", "ConnectionPath": "localhost:389", "AuthorizedID": "CN=MFReader,CN=ADAM Users,CN=Micro Focus,CN=Program Data,DC=local", "Password": "strongPassword123", "Enabled": true, "CacheLimit": 1024, "CacheTTL": 600, "Config": "[LDAP]\nBASE=cn=Micro Focus,dc=secldap,dc=com\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nMode=MF-hash\n\n[Trace]\nModify=y\nRule=y\nGroups=y\nSearch=y\nBind=n\nTrace1=verify:*:debug\nTrace2=auth:*:*:**:debug", "Description": "OpenLDAP ESM"}'
 #     headers:
 #       accept: application/json
 #       X-Requested-With: API
@@ -92,7 +92,7 @@
 #     url: http://localhost:10086/native/v1/security/127.0.0.1/86/esm
 #     method: POST
 #     body_format: json
-#     body: '{"CN": "ADLDS", "description": "ADLDS ESM", "mfESMModule": "mldap_esm", "mfESMConnectionPath": "localhost:389", "mfESMID": "CN=MFReader,CN=ADAM Users,CN=Micro Focus,CN=Program Data,DC=local", "mfESMPwd": "strongPassword123", "mfESMStatus": "Enabled", "mfESMCacheLimit": 1024, "mfESMCacheTTL": 600, "mfConfig": "[LDAP]\nBASE=cn=Micro Focus,dc=secldap,dc=com\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nMode=MF-hash\n\n[Trace]\nModify=y\nRule=y\nGroups=y\nSearch=y\nBind=n\nTrace1=verify:*:debug\nTrace2=auth:*:*:**:debug", "Description": "ADLDS ESM"}'
+#     body: '{"CN": "OpenLDAP", "description": "ADLDS ESM", "mfESMModule": "mldap_esm", "mfESMConnectionPath": "localhost:389", "mfESMID": "CN=MFReader,CN=ADAM Users,CN=Micro Focus,CN=Program Data,DC=local", "mfESMPwd": "strongPassword123", "mfESMStatus": "Enabled", "mfESMCacheLimit": 1024, "mfESMCacheTTL": 600, "mfConfig": "[LDAP]\nBASE=cn=Micro Focus,dc=secldap,dc=com\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nMode=MF-hash\n\n[Trace]\nModify=y\nRule=y\nGroups=y\nSearch=y\nBind=n\nTrace1=verify:*:debug\nTrace2=auth:*:*:**:debug", "Description": "OpenLDAP ESM"}'
 #     headers:
 #       accept: application/json
 #       X-Requested-With: API
