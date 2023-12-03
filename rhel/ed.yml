@@ -73,8 +73,7 @@
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
     dest: /tmp/JCL.xml
-    mode: '0775'
-  become: yes
+    mode: '0777'
 
 - name: Import JCL Region
   command: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /tmp/JCL.xml'
