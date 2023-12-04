@@ -58,8 +58,12 @@
   become: yes
 
 - name: Start MFDS
-  shell: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 --UI-on ; {{ installPath }}/bin/mfds64 --listen-all ; {{ installPath }}/bin/mfds64"
+  shell: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv && {{ installPath }}/bin/mfds64"
   become: yes
+
+- name: Pause for 10 seconds
+  ansible.builtin.pause:
+    seconds: 10
 
 - name: Import JCL Region
   shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'
