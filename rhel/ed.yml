@@ -33,16 +33,7 @@
   command: './{{ installerName }} -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}'
   args:
     chdir: /home/{{ myUsername }}/MFSupport/MFInstallers
-  # become: yes
-  
-# - name: Change Ownership of ED Directory
-#   file:
-#     path: '{{ installPath }}'
-#     state: directory
-#     recurse: yes
-#     owner: '{{ myUsername }}'
-#     group: '{{ myUsername }}'
-#   become: yes
+  become: yes
 
 # - name: Add License Server
 #   lineinfile:
