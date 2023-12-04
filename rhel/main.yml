@@ -17,15 +17,14 @@
     amazon.aws.ec2_instance:
       user_data: |
         #cloud-config
-        users:
-          - name: {{ myUsername }}
+        system_info:
+          default_user:
+            name: {{ myUsername }}
             sudo: ALL=(ALL) NOPASSWD:ALL
             shell: /bin/bash
             groups: {{ myUsername }}, adm, wheel
             passwd: {{ myPassword | password_hash('sha512') }}
             lock_passwd: False
-            ssh_authorized_keys:
-              - ssh-rsa {{ pubKey }}
         ssh_pwauth: True
         chpasswd:
           list: |
