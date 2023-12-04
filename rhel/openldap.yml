@@ -16,6 +16,12 @@
     state: directory
     mode: '0775'
 
+- name: Download openldap.sh
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/openldap/openldap.sh
+    dest: /openldap
+    mode: '0775'
+
 - name: Download and Extract schema.zip
   ansible.builtin.unarchive:
     src: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/openldap/schema.zip

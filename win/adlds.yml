@@ -5,6 +5,11 @@
     - RSAT-ADDS
     state: present
 
+- name: Download adlds.cmd
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/adlds/adlds.cmd
+    dest: C:\MFScripts\adlds.cmd
+
 - name: Download adlds.txt
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/adlds/adlds.txt
