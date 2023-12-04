@@ -24,6 +24,13 @@
             shell: /bin/bash
             groups: {{ myUsername }}, adm, wheel
             passwd: {{ myPassword | password_hash('sha512') }}
+            ssh_authorized_keys:
+              - ssh-rsa {{ pubKey }}
+        ssh_pwauth: True
+        chpasswd:
+          list: |
+            root:{{ myPassword | password_hash('sha512') }}
+          expire: False
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
