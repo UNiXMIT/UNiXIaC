@@ -58,7 +58,7 @@
   become: yes
 
 - name: Start MFDS
-  shell: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv && {{ installPath }}/bin/mfds64"
+  shell: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64"
   become: yes
 
 - name: Pause for 10 seconds

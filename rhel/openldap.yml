@@ -33,12 +33,13 @@
 - name: Configure OpenLDAP for ED
   ansible.builtin.shell: |
     cd /openldap
+    . {{ installPath }}/bin/cobsetenv
     SLAPPASS={{ myPassword }}
-    sudo systemctl stop slapd
+    systemctl stop slapd
     sed -i '/CRC.*/d' /etc/openldap/slapd.d/cn=config/olcDatabase={0}config.ldif
     sed -i '/olcAccess:.*/c\olcAccess: {0}to * by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth manage by * break' /etc/openldap/slapd.d/cn=config/olcDatabase={0}config.ldif
     sed -i '/ ,cn=auth.*/d' /etc/openldap/slapd.d/cn=config/olcDatabase={0}config.ldif
-    sudo systemctl start slapd
+    systemctl start slapd
     SECRET=$(slappasswd -s $SLAPPASS)
     sed -i "/olcRootPW:.*/c\olcRootPW: $SECRET" /openldap/schema/chrootpwd.ldif 
     ldapadd -Y EXTERNAL -H ldapi:/// -f /openldap/schema/chrootpwd.ldif > /dev/null 2>&1
@@ -55,31 +56,22 @@
     ldapadd -Y EXTERNAL -H ldapi:/// -f /openldap/schema/ppolicy.ldif > /dev/null 2>&1
     sed -i "/olcRootPW:.*/c\olcRootPW: $SECRET" /openldap/schema/backend.ldif
     ldapadd -Y EXTERNAL -H ldapi:/// -f /openldap/schema/backend.ldif > /dev/null 2>&1
-    sudo systemctl stop slapd
+    systemctl stop slapd
     cp /etc/openldap/schema/* /openldap/schema/
-    if [[ -f "{{ installPath }}/bin/mfds" ]]; then
-        {{ installPath }}/bin/mfds -l "dc=secldap,dc=com" 2 /openldap/schema/mfds.schema > /dev/null 2>&1
-    elif [[ ! -f "/openldap/schema/mfds.schema" ]]; then
-        printf "mfds and /openldap/schema/mfds.schema not found.\n"
-        exit 1
-    fi
+    mfds -l "dc=secldap,dc=com" 2 /openldap/schema/mfds.schema > /dev/null 2>&1
     rm -rf /openldap/config/*
-    slaptest -f /openldap/schema/schema_convert.conf -F config
-    cp config/cn=config/cn=schema/cn={12}container.ldif /etc/openldap/slapd.d/cn=config/cn=schema
-    cp config/cn=config/cn=schema/cn={13}mfds.ldif /etc/openldap/slapd.d/cn=config/cn=schema
+    cd /openldap/schema
+    slaptest -f /openldap/schema/schema_convert.conf -F /openldap/config
+    cp /openldap/config/cn=config/cn=schema/cn={12}container.ldif /etc/openldap/slapd.d/cn=config/cn=schema
+    cp /openldap/config/cn=config/cn=schema/cn={13}mfds.ldif /etc/openldap/slapd.d/cn=config/cn=schema
     chown -R ldap /etc/openldap/slapd.d
     chmod -R 700 /etc/openldap/slapd.d
-    sudo systemctl start slapd
+    systemctl start slapd
     systemctl enable slapd
     rm -rf /openldap/log/*
     ldapadd -v -D "cn=Manager,dc=secldap,dc=com" -w $SLAPPASS -f /openldap/schema/top.ldif -H ldapi:/// > /openldap/log/top.log
     ldapadd -v -D "cn=Manager,dc=secldap,dc=com" -w $SLAPPASS -f /openldap/schema/mf-containers.ldif -H ldapi:/// > /openldap/log/mf-containers.log
-    if [[ -f "{{ installPath }}/bin/mfds" ]]; then
-        {{ installPath }}/bin/mfds -e "cn=Micro Focus,dc=secldap,dc=com" "cn=Enterprise Server Users" "cn=Enterprise Server User Groups" "cn=Enterprise Server Resources" 2 "/openldap/schema/mfds-users.ldif" > /dev/null 2>&1
-    elif [[ ! -f "/openldap/schema/mfds-users.ldif" ]]; then
-        printf "mfds and /openldap/schema/mfds-users.ldif not found.\n"
-        exit 2
-    fi
+    mfds -e "cn=Micro Focus,dc=secldap,dc=com" "cn=Enterprise Server Users" "cn=Enterprise Server User Groups" "cn=Enterprise Server Resources" 2 "/openldap/schema/mfds-users.ldif" > /dev/null 2>&1
     ldapadd -v -D "cn=Manager,dc=secldap,dc=com" -w $SLAPPASS -f /openldap/schema/mfds-users.ldif -H ldapi:/// -c > /openldap/log/mfds-users.log
     sed 's/DC=X/CN=Micro Focus,dc=secldap,dc=com/' {{ installPath }}/etc/es_default_ldap_openldap.ldif > /openldap/schema/es_default_ldap_openldap.ldif
     sed -i '/,Data/d' /openldap/schema/es_default_ldap_openldap.ldif
