@@ -7,7 +7,7 @@
 
 - name: Download adlds.txt
   win_get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/ES/adlds.txt
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/adlds/adlds.txt
     dest: C:\MFScripts\adlds.txt
 
 - name: Configure ADLDS
