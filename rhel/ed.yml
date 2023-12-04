@@ -30,7 +30,7 @@
   delegate_to: localhost
 
 - name: Install {{ installerName }}
-  command: ./{{ installerName }} -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}
+  command: './{{ installerName }} -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}'
   chdir: /home/{{ myUsername }}/MFSupport/MFInstallers
   # become: yes
   
