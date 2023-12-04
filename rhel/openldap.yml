@@ -79,7 +79,7 @@
     ldapsearch -H ldapi:/// -x -b "cn=subschema" -s base + > /openldap/log/schema.log
 
 - name: Start ESCWA
-  shell: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/escwa"
+  shell: tmux new -d -s escwa ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/escwa"
 
 - name: Pause for 10 seconds
   ansible.builtin.pause:
