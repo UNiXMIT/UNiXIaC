@@ -89,7 +89,7 @@
   ansible.builtin.uri:
     url: http://localhost:10086/server/v1/config/esm
     method: POST
-    body_format: json
+    # body_format: json
     body: |
       {
         "Name": "OpenLDAP",
@@ -104,6 +104,7 @@
         "Description": "OpenLDAP ESM"
       }
     headers:
+      content_type: application/json
       accept: application/json
       X-Requested-With: API
       Origin: http://localhost:10086
@@ -112,7 +113,7 @@
   ansible.builtin.uri:
     url: http://localhost:10086/native/v1/security/127.0.0.1/86/esm
     method: POST
-    body_format: json
+    # body_format: json
     body: |
       {
         "CN": "OpenLDAP",
@@ -127,6 +128,7 @@
         "mfConfig": "[LDAP]\nBASE=cn=Micro Focus,dc=secldap,dc=com\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nMode=MF-hash\n\n[Trace]\nModify=y\nRule=y\nGroups=y\nSearch=y\nBind=n\nTrace1=verify:*:debug\nTrace2=auth:*:*:**:debug"
       }
     headers:
+      Content-Type: application/json
       accept: application/json
       X-Requested-With: API
       Origin: http://localhost:10086
