@@ -1,11 +1,11 @@
 - name: Change root password
   user:
-    name: admin
+    name: root
     update_password: always
     password: "{{ myPassword | password_hash('sha512') }}"
 
 - name: Change {{ myUsername }} password
   user:
-    name: {{ myUsername }}
+    name: '{{ myUsername }}''
     update_password: always
     password: "{{ myPassword | password_hash('sha512') }}"
