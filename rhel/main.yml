@@ -20,13 +20,6 @@
         system_info:
           default_user:
             name: {{ myUsername }}
-            sudo: ALL=(ALL) NOPASSWD:ALL
-            shell: /bin/bash
-            groups: {{ myUsername }}, adm, wheel
-            passwd: {{ myPassword | password_hash('sha512') }}
-            ssh_authorized_keys:
-              - ssh-rsa {{ pubKey }}
-        ssh_pwauth: True
         chpasswd:
           list: |
             root:{{ myPassword | password_hash('sha512') }}
