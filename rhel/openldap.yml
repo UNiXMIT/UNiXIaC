@@ -4,6 +4,18 @@
     state: directory
     mode: '0775'
 
+- name: Create /openldap/config
+  file:
+    path: /openldap/config
+    state: directory
+    mode: '0775'
+
+- name: Create /openldap/log
+  file:
+    path: /openldap/log
+    state: directory
+    mode: '0775'
+
 - name: Download and Extract schema.zip
   ansible.builtin.unarchive:
     src: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/openldap/schema.zip
@@ -51,7 +63,6 @@
         printf "mfds and /openldap/schema/mfds.schema not found.\n"
         exit 1
     fi
-    mkdir /openldap/config
     rm -rf /openldap/config/*
     slaptest -f /openldap/schema/schema_convert.conf -F config
     cp config/cn=config/cn=schema/cn={12}container.ldif /etc/openldap/slapd.d/cn=config/cn=schema
@@ -60,7 +71,6 @@
     chmod -R 700 /etc/openldap/slapd.d
     sudo systemctl start slapd
     systemctl enable slapd
-    mkdir /openldap/log
     rm -rf /openldap/log/*
     ldapadd -v -D "cn=Manager,dc=secldap,dc=com" -w $SLAPPASS -f /openldap/schema/top.ldif -H ldapi:/// > /openldap/log/top.log
     ldapadd -v -D "cn=Manager,dc=secldap,dc=com" -w $SLAPPASS -f /openldap/schema/mf-containers.ldif -H ldapi:/// > /openldap/log/mf-containers.log
