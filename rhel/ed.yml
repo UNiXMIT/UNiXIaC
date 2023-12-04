@@ -30,7 +30,18 @@
   delegate_to: localhost
 
 - name: Install {{ installerName }}
-  command: "/home/{{ myUsername }}/MFSupport/MFInstallers/{{ installerName }} -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}"
+  command: ./{{ installerName }} -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}
+  chdir: /home/{{ myUsername }}/MFSupport/MFInstallers
+  # become: yes
+  
+# - name: Change Ownership of ED Directory
+#   file:
+#     path: '{{ installPath }}'
+#     state: directory
+#     recurse: yes
+#     owner: '{{ myUsername }}'
+#     group: '{{ myUsername }}'
+#   become: yes
 
 # - name: Add License Server
 #   lineinfile:

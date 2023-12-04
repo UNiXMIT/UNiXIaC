@@ -2,6 +2,13 @@
   community.general.timezone:
     name: Europe/London
 
+- name: Allow SSH password authentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PasswordAuthentication"
+    line: "PasswordAuthentication yes"
+    state: present
+
 - name: Allow TCP Forwarding
   lineinfile:
     dest: /etc/ssh/sshd_config

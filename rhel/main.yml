@@ -20,10 +20,6 @@
         system_info:
           default_user:
             name: {{ myUsername }}
-        chpasswd:
-          list: |
-            root:{{ myPassword | password_hash('sha512') }}
-          expire: False
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
@@ -84,6 +80,16 @@
   tasks:
   - name: Import system.yml
     import_tasks: system.yml
+  tags: default
+
+- name: Manage Users
+  hosts: awsEC2
+  gather_facts: no
+  become: yes
+  tasks: 
+  - name: Import users.yml
+    import_tasks: users.yml
+  no_log: True
   tags: default
 
 - name: Install Software
