@@ -6,6 +6,6 @@
 
 - name: Change {{ myUsername }} password
   user:
-    name: '{{ myUsername }}''
+    name: '{{ myUsername }}'
     update_password: always
     password: "{{ myPassword | password_hash('sha512') }}"
