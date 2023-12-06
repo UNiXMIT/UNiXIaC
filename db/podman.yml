@@ -2,6 +2,7 @@
   vars: 
     DBNAME: MSSQL
     DBUSER: SA
+    DBPORT: 1433
   containers.podman.podman_container:
     name: mssql
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -30,6 +31,7 @@
     tags:
       DB: '{{ DBNAME }}'
       DB_USER: '{{ DBUSER }}'
+      DB_PORT: '{{ DBPORT }}'
     state: present
   loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
   delegate_to: localhost
