@@ -28,7 +28,7 @@
     DBPORT: 1433
   tags: mssql
 
-- name: Add MSSQL Tags
+- name: Add DB Tags
   amazon.aws.ec2_tag:
     aws_profile: '{{ awsProfile }}'
     region: '{{ awsRegion }}'
