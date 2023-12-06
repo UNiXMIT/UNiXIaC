@@ -130,7 +130,7 @@
 
 - name: AWS EC2 Instance Created and Setup
   hosts: local
-  gather_facts: no
+  gather_facts: yes
   tasks:
   - name: WebAPI Notification
     ansible.builtin.uri:
