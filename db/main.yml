@@ -156,6 +156,6 @@
       - 'Public DNS      - {{ item.public_dns_name }}'
       - 'Private IP      - {{ item.private_ip_address }}'
       - 'Private DNS     - {{ item.private_dns_name }}'
-      - "FACTS - {{ groups['awsEC2'] | map('extract',hostvars) }}"
+      - "FACTS - {{ groups['awsEC2'] | map(attribute='DBNAME') | list }}"
     loop: '{{ updatedEC2.instances }}'
     tags: default
