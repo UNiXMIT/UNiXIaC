@@ -139,7 +139,7 @@
       body_format: json
       body:
         username: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Build Complete'
-        content: "Public IP - {{ item.public_ip_address }} \nPublic DNS - {{ item.public_dns_name }} // DB Name - {{ hostvars[item.public_ip_address].DBNAME }} // DB User - {{ hostvars[item.public_ip_address].DBUSER }} // DB Port - {{ hostvars[item.public_ip_address].DBPORT }}"
+        content: "Public IP - {{ item.public_ip_address }} \nPublic DNS - {{ item.public_dns_name }} \nDB Name - {{ hostvars[item.public_ip_address].DBNAME }} \nDB User - {{ hostvars[item.public_ip_address].DBUSER }} \nDB Port - {{ hostvars[item.public_ip_address].DBPORT }}"
       status_code:
           - 200
           - 202
