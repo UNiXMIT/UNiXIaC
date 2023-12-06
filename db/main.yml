@@ -60,7 +60,6 @@
       tags:
         Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
         Owner: '{{ ssoEmail }}'
-        OS: '{{ imageName }}'
       state: present
     loop: '{{ ec2.instance_ids }}'
     tags: default
@@ -140,7 +139,7 @@
       body_format: json
       body:
         username: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Build Complete'
-        content: 'Public IP - {{ item.public_ip_address }} // Public DNS - {{ item.public_dns_name }} // Tags - {{ item.tags }}'
+        content: 'Public IP - {{ item.public_ip_address }} // Public DNS - {{ item.public_dns_name }} // DB - {{ DBNAME }} // DB USER - {{ DBUSER }} // DB PORT - {{ DBPORT }}'
       status_code:
           - 200
           - 202
@@ -156,6 +155,9 @@
       - 'Public IP       - {{ item.public_ip_address }}'
       - 'Public DNS      - {{ item.public_dns_name }}'
       - 'Private IP      - {{ item.private_ip_address }}'
-      - 'Private DNS      - {{ item.private_dns_name }}'
+      - 'Private DNS     - {{ item.private_dns_name }}'
+      - 'DB              - {{ DBNAME }}'
+      - 'DB USER         - {{ DBUSER }}'
+      - 'DB PORT         - {{ DBPORT }}'
     loop: '{{ updatedEC2.instances }}'
     tags: default

@@ -250,6 +250,6 @@
       - 'Public IP       - {{ item.public_ip_address }}'
       - 'Public DNS      - {{ item.public_dns_name }}'
       - 'Private IP      - {{ item.private_ip_address }}'
-      - 'Private DNS      - {{ item.private_dns_name }}'
+      - 'Private DNS     - {{ item.private_dns_name }}'
     loop: '{{ updatedEC2.instances }}'
     tags: default
