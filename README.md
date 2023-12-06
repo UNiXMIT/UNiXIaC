@@ -133,3 +133,7 @@ podman logs semaphore
   - extend1050
   - extend1050pu1
   - extend1051
+
+### Databases
+- default
+  - mssql

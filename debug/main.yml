@@ -156,8 +156,8 @@
       - 'Public DNS      - {{ item.public_dns_name }}'
       - 'Private IP      - {{ item.private_ip_address }}'
       - 'Private DNS     - {{ item.private_dns_name }}'
-      - 'DB              - {{ ansible_facts["awsEC2"].DBNAME }}'
-      - 'DB USER         - {{ ansible_facts["awsEC2"].DBUSER }}'
-      - 'DB PORT         - {{ ansible_facts["awsEC2"].DBPORT }}'
+      - "DB              - {{ hostvars['awsEC2'].DBNAME }}"
+      - "DB USER         - {{ hostvars['awsEC2'].DBUSER }}"
+      - "DB PORT         - {{ hostvars['awsEC2'].DBPORT }}"
     loop: '{{ updatedEC2.instances }}'
     tags: default
