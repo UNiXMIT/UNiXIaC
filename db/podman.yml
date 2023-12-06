@@ -1,0 +1,36 @@
+- name: Create MSSQL
+  vars: 
+    DBNAME: MSSQL
+    DBUSER: SA
+  containers.podman.podman_container:
+    name: mssql
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    state: started
+    restart_policy: "yes"
+    ports: 1433:1433
+    env:
+      SA_PASSWORD: '{{ myPassword }}'
+      ACCEPT_EULA: 'Y'
+      MSSQL_COLLATION: 'SQL_Latin1_General_CP1_CI_AS'
+    healthcheck: '/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P {{ myPassword }} -Q "SELECT 1" -b -o /dev/null'
+    healthcheck_failure_action: "restart"
+    healthcheck_interval: "10s"
+    healthcheck_retries: 10
+    healthcheck_start_period: "10s"
+    healthcheck_timeout: "3s"
+    log_opt:
+      max_size: 50mb
+  tags: mssql
+
+- name: Add DB Tags
+  amazon.aws.ec2_tag:
+    aws_profile: '{{ awsProfile }}'
+    region: '{{ awsRegion }}'
+    resource: '{{ item }}'
+    tags:
+      DB: '{{ DBNAME }}'
+      DB_USER: '{{ DBUSER }}'
+    state: present
+  loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
+  delegate_to: localhost
+  tags: default

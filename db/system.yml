@@ -1,0 +1,33 @@
+- name: Set timezone to Europe/London
+  community.general.timezone:
+    name: Europe/London
+
+- name: Allow SSH password authentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PasswordAuthentication"
+    line: "PasswordAuthentication yes"
+    state: present
+
+- name: Allow TCP Forwarding
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^AllowTcpForwarding"
+    line: "AllowTcpForwarding yes"
+    state: present
+
+- name: Modify the sudoers file
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^%wheel ALL='
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+
+- name: Disable SELinux
+  selinux:
+    state: disabled
+
+- name: Restart SSH
+  service:
+    name: sshd
+    state: restarted
