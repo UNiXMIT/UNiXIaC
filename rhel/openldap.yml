@@ -81,7 +81,7 @@
     ldapadd -v -D "cn=Manager,dc=secldap,dc=com" -w $SLAPPASS -f /openldap/schema/mfds-users.ldif -H ldapi:/// -c > /openldap/log/mfds-users.log
     sed 's/DC=X/CN=Micro Focus,dc=secldap,dc=com/' {{ installPath }}/etc/es_default_ldap_openldap.ldf > /openldap/schema/es_default_ldap_openldap.ldif
     sed -i '/,Data/d' /openldap/schema/es_default_ldap_openldap.ldif
-    ldapadd -v -D "cn=Manager,dc=secldap,dc=com" -w $SLAPPASS -f /openldap/schema/es_default_ldap_openldap.ldif -H ldapi:/// -c > /openldap/log/es_default_ldap_openldap.ldifes_default_ldap_openldap.ldif
+    ldapadd -v -D "cn=Manager,dc=secldap,dc=com" -w $SLAPPASS -f /openldap/schema/es_default_ldap_openldap.ldif -H ldapi:/// -c > /openldap/log/es_default_ldap_openldap.log
     ldapsearch -H ldapi:/// -x -b "cn=subschema" -s base + > /openldap/log/schema.log
 
 - name: Start ESCWA
