@@ -139,7 +139,7 @@
       body_format: json
       body:
         username: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Build Complete'
-        content: "Public IP - {{ item.public_ip_address }} // Public DNS - {{ item.public_dns_name }} // DB - {{ hostvars['awsEC2'].['ansible_facts'].DBNAME }} // DB USER - {{ hostvars['awsEC2'].['ansible_facts'].DBUSER }} // DB PORT - {{ hostvars['awsEC2'].['ansible_facts'].DBPORT }}"
+        content: "Public IP - {{ item.public_ip_address }} // Public DNS - {{ item.public_dns_name }} // DB - {{ hostvars['awsEC2']['ansible_facts'].DBNAME }} // DB USER - {{ hostvars['awsEC2']['ansible_facts'].DBUSER }} // DB PORT - {{ hostvars['awsEC2']['ansible_facts'].DBPORT }}"
       status_code:
           - 200
           - 202
