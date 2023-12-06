@@ -156,6 +156,6 @@
       - 'Public DNS      - {{ item.public_dns_name }}'
       - 'Private IP      - {{ item.private_ip_address }}'
       - 'Private DNS     - {{ item.private_dns_name }}'
-      - 'Semaphore Vars  - {{ semaphore_vars }} '
+      - 'FACTS - {{ hostvars["awsEC2"] }}'
     loop: '{{ updatedEC2.instances }}'
     tags: default
