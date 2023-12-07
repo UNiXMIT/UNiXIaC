@@ -142,3 +142,6 @@ podman logs semaphore
   - postgres
   - mq
   - redis
+  - mysql
+  - informix
+  - sybase

@@ -140,6 +140,71 @@
     DBPORT: 1414
   tags: mq
 
+- name: Create MySQL
+  containers.podman.podman_container:
+    name: mysql
+    image: docker.io/postgres:latest
+    state: started
+    restart_policy: "always"
+    detach: true
+    interactive: true
+    ports: 3306:3306
+    env:
+      MYSQL_ROOT_PASSWORD: '{{ myPassword }}'
+      MYSQL_DATABASE: '{{ myUsername }}'
+      MYSQL_USER: '{{ myUsername }}'
+      MYSQL_PASSWORD: '{{ myPassword }}'
+  become: yes
+  tags: mysql
+
+- name: Set MySQL Facts
+  set_fact:
+    DBNAME: MySQL Server 8 Community Edition 
+    DBUSER: support
+    DBPORT: 3306
+  tags: mysql
+
+- name: Create Informix
+  containers.podman.podman_container:
+    name: informix
+    image: icr.io/informix/informix-developer-database:latest
+    state: started
+    restart_policy: "always"
+    detach: true
+    interactive: true
+    hostname: ifx
+    ports: 9088:9088
+    env:
+      LICENSE: accept
+  become: yes
+  tags: informix
+
+- name: Set Informix Facts
+  set_fact:
+    DBNAME: Informix 14.10 Developer Edition  
+    DBUSER: informix
+    DBPORT: 9088
+  tags: informix
+
+- name: Create Sybase
+  containers.podman.podman_container:
+    name: sybase
+    image: docker.io/datagrip/sybase:latest
+    state: started
+    restart_policy: "always"
+    detach: true
+    interactive: true
+    ports: 5000:5000
+  become: yes
+  tags: sybase
+
+- name: Set Sybase Facts
+  set_fact:
+    DBNAME: Sybase 16.2
+    DBUSER: sa
+    DBPORT: 5000
+  tags: sybase
+
 - name: Add DB Tags
   amazon.aws.ec2_tag:
     aws_profile: '{{ awsProfile }}'
