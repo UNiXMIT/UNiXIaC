@@ -66,7 +66,7 @@
     dest: /etc/yum.repos.d/mssql-release.repo
     mode: '0775'
 
-- name: Install MSSQL ODBC Driver
+- name: Install MSSQL ODBC Driver 17
   environment:
     ACCEPT_EULA: "Y"
   package:
@@ -85,4 +85,9 @@
 - name: Install unixODBC-devel
   package:
     name: unixODBC-devel
+    state: present
+
+- name: Install Oracle Instant Client 19.19.0.0.0
+  package: 
+    name: https://download.oracle.com/otn_software/linux/instantclient/1919000/oracle-instantclient19.19-basic-19.19.0.0.0-1.el9.x86_64.rpm
     state: present
