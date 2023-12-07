@@ -12,15 +12,12 @@
     - jq
     - cascadiamono
     - ntop.portable
-    # - microsoft-windows-terminal
     # - dotnet
     # - windows-sdk-11-version-22h2-all
     # - visualstudio2017buildtools
     # - office365business
-    # - revo-uninstaller
-    # - lockhunter
+    # - powertoys
     # - adobereader
-    # - insomnia-rest-api-client
     # - linkshellextension
     # - dotpeek
     # - tinytask
