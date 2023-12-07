@@ -88,28 +88,28 @@
     state: present
 
 - name: Install Oracle Instant Client RHEL9
-  yum: 
+  dnf: 
     name: https://download.oracle.com/otn_software/linux/instantclient/1919000/oracle-instantclient19.19-basic-19.19.0.0.0-1.el9.x86_64.rpm
     state: present
     disable_gpg_check: yes
   when: ansible_facts['distribution_major_version'] | int == 9
 
 - name: Install Oracle Instant Client ODBC RHEL9
-  yum: 
+  dnf: 
     name: https://download.oracle.com/otn_software/linux/instantclient/1919000/oracle-instantclient19.19-odbc-19.19.0.0.0-1.el9.x86_64.rpm
     state: present
     disable_gpg_check: yes
   when: ansible_facts['distribution_major_version'] | int == 9
 
 - name: Install Oracle Instant Client RHEL8
-  yum: 
+  dnf: 
     name: https://download.oracle.com/otn_software/linux/instantclient/2112000/oracle-instantclient-basic-21.12.0.0.0-1.el8.x86_64.rpm
     state: present
     disable_gpg_check: yes
   when: ansible_facts['distribution_major_version'] | int == 8
 
 - name: Install Oracle Instant Client ODBC RHEL8
-  yum: 
+  dnf: 
     name: https://download.oracle.com/otn_software/linux/instantclient/2112000/oracle-instantclient-odbc-21.12.0.0.0-1.el8.x86_64.rpm
     state: present
     disable_gpg_check: yes
