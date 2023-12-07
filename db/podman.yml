@@ -24,6 +24,7 @@
 - name: Set MSSQL Facts
   set_fact:
     DBNAME: SQL Server 2022
+    DBSHORT: MSSQL
     DBUSER: sa
     DBPORT: 1433
   tags: mssql
@@ -46,6 +47,7 @@
 - name: Set Oracle Facts
   set_fact:
     DBNAME: Oracle 23c Free
+    DBSHORT: ORACLE
     DBUSER: sys
     DBPORT: 1521
   tags: oracle
@@ -70,6 +72,7 @@
 - name: Set DB2 Facts
   set_fact:
     DBNAME: DB2 11.5 Community Edition 
+    DBSHORT: DB2
     DBUSER: support
     DBPORT: 50000
   tags: db2
@@ -93,6 +96,7 @@
 - name: Set PostgreSQL Facts
   set_fact:
     DBNAME: PostgreSQL 16.1  
+    DBSHORT: POSTGRES
     DBUSER: support
     DBPORT: 5432
   tags: postgres
@@ -112,6 +116,7 @@
 - name: Set Redis Facts
   set_fact:
     DBNAME: Redis 7.2.3  
+    DBSHORT: REDIS
     DBUSER: N/A
     DBPORT: 6379
   tags: redis
@@ -136,6 +141,7 @@
 - name: Set IBM MQ Facts
   set_fact:
     DBNAME: IBM MQ 9.3  
+    DBSHORT: MQ
     DBUSER: QM1
     DBPORT: 1414
   tags: mq
@@ -160,6 +166,7 @@
 - name: Set MySQL Facts
   set_fact:
     DBNAME: MySQL Server 8 Community Edition 
+    DBSHORT: MYSQL
     DBUSER: support
     DBPORT: 3306
   tags: mysql
@@ -182,6 +189,7 @@
 - name: Set Informix Facts
   set_fact:
     DBNAME: Informix 14.10 Developer Edition  
+    DBSHORT: INFORMIX
     DBUSER: informix
     DBPORT: 9088
   tags: informix
@@ -201,20 +209,10 @@
 - name: Set Sybase Facts
   set_fact:
     DBNAME: Sybase 16.2
+    DBSHORT: SYBASE
     DBUSER: sa
     DBPORT: 5000
   tags: sybase
-
-- name: Append AWS EC2 instance name
-  amazon.aws.ec2_tag:
-    aws_profile: '{{ awsProfile }}'
-    region: '{{ awsRegion }}'
-    resource: '{{ item }}'
-    tags:
-      Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ DBNAME }}'
-    state: present
-  loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
-  delegate_to: localhost
 
 - name: Add DB Tags
   amazon.aws.ec2_tag:
@@ -222,6 +220,7 @@
     region: '{{ awsRegion }}'
     resource: '{{ item }}'
     tags:
+      Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ DBSHORT }}'
       DB: '{{ DBNAME }}'
       DB_USER: '{{ DBUSER }}'
       DB_PORT: '{{ DBPORT }}'

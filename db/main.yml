@@ -138,7 +138,7 @@
       method: POST
       body_format: json
       body:
-        username: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Build Complete'
+        username: "{{ item.tags['Name'] }} Build Complete"
         content: "Public IP - {{ item.public_ip_address }} \nPublic DNS - {{ item.public_dns_name }} \nDB Name - {{ hostvars[item.public_ip_address].DBNAME }} \nDB User - {{ hostvars[item.public_ip_address].DBUSER }} \nDB Port - {{ hostvars[item.public_ip_address].DBPORT }}"
       status_code:
           - 200
@@ -150,7 +150,7 @@
   - name: Display AWS EC2 Information
     debug:
       msg: 
-      - 'Instance Name   - {{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
+      - "Instance Name   - {{ item.tags['Name'] }}"
       - 'AWS ID          - {{ item.instance_id }}'
       - 'Public IP       - {{ item.public_ip_address }}'
       - 'Public DNS      - {{ item.public_dns_name }}'
