@@ -24,9 +24,121 @@
 - name: Set MSSQL Facts
   set_fact:
     DBNAME: SQL Server 2022
-    DBUSER: SA
+    DBUSER: sa
     DBPORT: 1433
   tags: mssql
+
+- name: Create Oracle
+  containers.podman.podman_container:
+    name: oracle
+    image: container-registry.oracle.com/database/free:latest
+    state: started
+    restart_policy: "always"
+    detach: true
+    interactive: true
+    ports: 1521:1521
+    env:
+      ORACLE_PWD: '{{ myPassword }}'
+      ORACLE_CHARACTERSET: 'AL32UTF8'
+  become: yes
+  tags: oracle
+
+- name: Set Oracle Facts
+  set_fact:
+    DBNAME: Oracle 23c Free
+    DBUSER: sys
+    DBPORT: 1521
+  tags: oracle
+
+- name: Create DB2
+  containers.podman.podman_container:
+    name: db2
+    image: icr.io/db2_community/db2:latest
+    state: started
+    restart_policy: "always"
+    detach: true
+    interactive: true
+    ports: 50000:50000
+    env:
+      LICENSE: accept
+      DB2INSTANCE: '{{ myUsername }}'
+      DB2INST1_PASSWORD: '{{ myPassword }}'
+      DBNAME: '{{ myUsername }}'
+  become: yes
+  tags: db2
+
+- name: Set DB2 Facts
+  set_fact:
+    DBNAME: DB2 11.5 Community Edition 
+    DBUSER: support
+    DBPORT: 50000
+  tags: db2
+
+- name: Create PostgreSQL
+  containers.podman.podman_container:
+    name: postgres
+    image: docker.io/postgres:latest
+    state: started
+    restart_policy: "always"
+    detach: true
+    interactive: true
+    ports: 5432:5432
+    env:
+      POSTGRES_USER: '{{ myUsername }}'
+      POSTGRES_PASSWORD: '{{ myPassword }}'
+      POSTGRES_DB: '{{ myUsername }}'
+  become: yes
+  tags: postgres
+
+- name: Set PostgreSQL Facts
+  set_fact:
+    DBNAME: PostgreSQL 16.1  
+    DBUSER: support
+    DBPORT: 5432
+  tags: postgres
+
+- name: Create Redis
+  containers.podman.podman_container:
+    name: redis
+    image: docker.io/redis:latest
+    state: started
+    restart_policy: "always"
+    detach: true
+    interactive: true
+    ports: 6379:6379
+  become: yes
+  tags: redis
+
+- name: Set Redis Facts
+  set_fact:
+    DBNAME: Redis 7.2.3  
+    DBUSER: N/A
+    DBPORT: 6379
+  tags: redis
+
+- name: Create IBM MQ
+  containers.podman.podman_container:
+    name: mq
+    image: icr.io/ibm-messaging/mq:latest
+    state: started
+    restart_policy: "always"
+    detach: true
+    interactive: true
+    ports: 1414:1414
+    env:
+      LICENSE: accept
+      MQ_QMGR_NAME: QM1
+      MQ_ADMIN_PASSWORD: '{{ myPassword }}'
+      MQ_APP_PASSWORD: '{{ myPassword }}'
+  become: yes
+  tags: mq
+
+- name: Set IBM MQ Facts
+  set_fact:
+    DBNAME: IBM MQ 9.3  
+    DBUSER: QM1
+    DBPORT: 1414
+  tags: mq
 
 - name: Add DB Tags
   amazon.aws.ec2_tag:

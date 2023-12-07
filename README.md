@@ -137,3 +137,8 @@ podman logs semaphore
 ### Databases
 - default
   - mssql
+  - oracle
+  - db2
+  - postgres
+  - mq
+  - redis
