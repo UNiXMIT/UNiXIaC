@@ -8,11 +8,16 @@
     name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm'
     state: present
 
+- name: Enable CRB
+    yum_repository:
+      name: crb
+      enabled: yes
+
 - name: Package installation
   package:
     name:
       - '@Development tools'
-      - unixODBC
+      - unixODBC-devel
       - wget
       - curl
       - cronie
@@ -81,11 +86,6 @@
     content: |
       #!/bin/bash
       export PATH="$PATH:/opt/mssql-tools/bin"
-
-- name: Install unixODBC-devel
-  package:
-    name: unixODBC-devel
-    state: present
 
 - name: Install Oracle Instant Client RHEL9
   dnf: 
