@@ -3,6 +3,7 @@
     installPath: /home/products/ed70pu15
     installerName: setup_entdev_7.0_patchupdate15_315223_redhat_x86_64
     S3Prefix: ED/70/
+    productName: ED70PU15
   tags: ed70pu15
 
 - name: ED 7.0 PU 16
@@ -10,6 +11,7 @@
     installPath: /home/products/ed70pu16
     installerName: setup_entdev_7.0_patchupdate16_317960_redhat_x86_64
     S3Prefix: ED/70/
+    productName: ED70PU16
   tags: ed70pu16
 
 - name: ED 7.0 PU 17
@@ -17,6 +19,7 @@
     installPath: /home/products/ed70pu17
     installerName: setup_entdev_7.0_patchupdate17_320924_redhat_x86_64
     S3Prefix: ED/70/
+    productName: ED70PU17
   tags: ed70pu17
 
 - name: ED 7.0 PU 18
@@ -24,6 +27,7 @@
     installPath: /home/products/ed70pu18
     installerName: setup_entdev_7.0_patchupdate18_322466_redhat_x86_64
     S3Prefix: ED/70/
+    productName: ED70PU18
   tags: ed70pu18
 
 - name: ED 7.0 PU 19
@@ -31,6 +35,7 @@
     installPath: /home/products/ed70pu19
     installerName: setup_entdev_7.0_patchupdate19_324233_redhat_x86_64
     S3Prefix: ED/70/
+    productName: ED70PU19
   tags: ed70pu19
 
 - name: ED 7.0 PU 20
@@ -38,6 +43,7 @@
     installPath: /home/products/ed70pu20
     installerName: setup_entdev_7.0_patchupdate20_328613_redhat_x86_64
     S3Prefix: ED/70/
+    productName: ED70PU20
   tags: ed70pu20
 
 - name: ED 7.0 PU 21
@@ -45,6 +51,7 @@
     installPath: /home/products/ed70pu21
     installerName: setup_entdev_7.0_patchupdate21_330878_redhat_x86_64
     S3Prefix: ED/70/
+    productName: ED70PU21
   tags: ed70pu21
 
 - name: ED 7.0 PU 22
@@ -52,4 +59,5 @@
     installPath: /home/products/ed70pu22
     installerName: 
     S3Prefix: ED/70/
+    productName: ED70PU22
   tags: ed70pu22

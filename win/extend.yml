@@ -15,6 +15,17 @@
     url: '{{ s3.url }}'
     dest: C:\temp\
 
+- name: Append AWS EC2 instance name
+  amazon.aws.ec2_tag:
+    aws_profile: '{{ awsProfile }}'
+    region: '{{ awsRegion }}'
+    resource: '{{ item }}'
+    tags:
+      Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ productName }}'
+    state: present
+  loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
+  delegate_to: localhost
+
 - name: Add extend Tags
   amazon.aws.ec2_tag:
     aws_profile: '{{ awsProfile }}'

@@ -5,6 +5,7 @@
         installerNameEDVS: edvs2019_70.exe
         installerNameEDE: ede_70.exe
         S3Prefix: ED/70/
+        productName: ED70
 
     - name: Get Microsoft.VisualStudio.Setup.Configuration.Native.dll Download URL from S3
       amazon.aws.s3_object:
@@ -33,46 +34,54 @@
   set_fact:
     installerNameEDVSPU: edvs2019_70_pu15_315341.exe
     installerNameEDEPU: ede_70_pu15_315321.exe
+    productName: ED70PU15
   tags: ed70pu15
 
 - name: ED 7.0 PU 16
   set_fact:
     installerNameEDVSPU: edvs2019_70_pu16_318123.exe
     installerNameEDEPU: ede_70_pu16_318103.exe
+    productName: ED70PU16
   tags: ed70pu16
 
 - name: ED 7.0 PU 17
   set_fact:
     installerNameEDVSPU: edvs2019_70_pu17_320927.exe
     installerNameEDEPU: ede_70_pu17_320926.exe
+    productName: ED70PU17
   tags: ed70pu17
 
 - name: ED 7.0 PU 18
   set_fact:
     installerNameEDVSPU: edvs2019_70_pu18_322470.exe
     installerNameEDEPU: ede_70_pu18_322467.exe
+    productName: ED70PU18
   tags: ed70pu18
 
 - name: ED 7.0 PU 19
   set_fact:
     installerNameEDVSPU: edvs2019_70_pu19_324237.exe
     installerNameEDEPU: ede_70_pu19_324235.exe
+    productName: ED70PU19
   tags: ed70pu19
 
 - name: ED 7.0 PU 20
   set_fact:
     installerNameEDVSPU: edvs2019_70_pu20_328617.exe
     installerNameEDEPU: ede_70_pu20_328615.exe
+    productName: ED70PU20
   tags: ed70pu20
 
 - name: ED 7.0 PU 21
   set_fact:
     installerNameEDVSPU: edvs2019_70_pu21_330882.exe
     installerNameEDEPU: ede_70_pu21_330880.exe
+    productName: ED70PU21
   tags: ed70pu21
 
 - name: ED 7.0 PU 22
   set_fact:
     installerNameEDVSPU: 
     installerNameEDEPU: 
+    productName: ED70PU22
   tags: ed70pu22

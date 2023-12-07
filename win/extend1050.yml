@@ -8,6 +8,7 @@
     extendKey86: '{{ extend1050Key86 }}'
     extendCode64: '{{ extend1050Code64 }}'
     extendKey64: '{{ extend1050Key64 }}'
+    productName: extend1050
   tags: extend1050
 
 - name: extend 10.5.0 PU 1
@@ -20,6 +21,7 @@
     extendKey86: '{{ extend1050Key86 }}'
     extendCode64: '{{ extend1050Code64 }}'
     extendKey64: '{{ extend1050Key64 }}'
+    productName: extend1050PU1
   tags: extend1050pu1
 
 - name: extend 10.5.1
@@ -32,4 +34,5 @@
     extendKey86: '{{ extend1050Key86 }}'
     extendCode64: '{{ extend1050Code64 }}'
     extendKey64: '{{ extend1050Key64 }}'
+    productName: extend1051
   tags: extend1051

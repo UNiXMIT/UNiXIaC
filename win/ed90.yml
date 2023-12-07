@@ -3,22 +3,26 @@
     installerNameEDVS: edvs2022_90.exe
     installerNameEDE: ede_90.exe
     S3Prefix: ED/90/
+    productName: ED90
   tags: ed90
 
 - name: ED 9.0 PU 1
   set_fact:
     installerNameEDVSPU: edvs2022_90_pu01_328657.exe
     installerNameEDEPU: ede_90_pu01_328657.exe
+    productName: ED90PU1
   tags: ed90pu1
 
 - name: ED 9.0 PU 2
   set_fact:
     installerNameEDVSPU: edvs2022_90_pu02_330829.exe
     installerNameEDEPU: ede_90_pu02_330829.exe
+    productName: ED90PU2
   tags: ed90pu2
 
 - name: ED 9.0 PU 3
   set_fact:
     installerNameEDVSPU: edvs2022_90_pu03_332285.exe
     installerNameEDEPU: ede_90_pu03_332285.exe
+    productName: ED90PU3
   tags: ed90pu3

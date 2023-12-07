@@ -3,52 +3,61 @@
     installerNameEDVS: edvs2022_80.exe
     installerNameEDE: ede_80.exe
     S3Prefix: ED/80/
+    productName: ED80
   tags: ed80
 
 - name: ED 8.0 PU 5
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu05_318648.exe
     installerNameEDEPU: ede_80_pu05_318643.exe
+    productName: ED80PU5
   tags: ed80pu5
 
 - name: ED 8.0 PU 6
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu06_321069.exe
     installerNameEDEPU: ede_80_pu06_321065.exe
+    productName: ED80PU6
   tags: ed80pu6
 
 - name: ED 8.0 PU 7
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu07_323535.exe
     installerNameEDEPU: ede_80_pu07_323531.exe
+    productName: ED80PU7
   tags: ed80pu7
 
 - name: ED 8.0 PU 8
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu08_324745.exe
     installerNameEDEPU: ede_80_pu08_324719.exe
-  tags: ed80pu8#
+    productName: ED80PU8
+  tags: ed80pu8
 
 - name: ED 8.0 PU 9
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu09_328369.exe
     installerNameEDEPU: ede_80_pu09_328365.exe
+    productName: ED80PU9
   tags: ed80pu9
 
 - name: ED 8.0 PU 10
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu10_330756.exe
     installerNameEDEPU: ede_80_pu10_330752.exe
+    productName: ED80PU10
   tags: ed80pu10
 
 - name: ED 8.0 PU 11
   set_fact:
     installerNameEDVSPU: ede_80_pu11_331770.exe
     installerNameEDEPU: edvs2022_80_pu11_331774.exe
+    productName: ED80PU11
   tags: ed80pu11
 
 - name: ED 8.0 PU 12
   set_fact:
     installerNameEDVSPU: ede_80_pu12_336862.exe
     installerNameEDEPU: edvs2022_80_pu12_336866.exe
+    productName: ED80PU12
   tags: ed80pu12

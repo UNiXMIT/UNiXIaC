@@ -3,4 +3,5 @@
     installPath: /home/products/ed60
     installerName: setup_entdev_6.0_redhat_x86_64
     S3Prefix: ED/60/
+    productName: ED60
   tags: ed60

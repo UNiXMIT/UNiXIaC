@@ -7,6 +7,7 @@
         S3Prefix: AcuCOBOL/1050/
         extendCode: '{{ extend1050Code }}'
         extendKey: '{{ extend1050Key }}'
+        productName: extend1050
   tags: extend1050
 
 - name: extend 10.5.0 PU 1
@@ -18,6 +19,7 @@
         S3Prefix: AcuCOBOL/1050/PU1/
         extendCode: '{{ extend1050Code }}'
         extendKey: '{{ extend1050Key }}'
+        productName: extend1050PU1
   tags: extend1050pu1
 
 - name: extend 10.5.1
@@ -29,4 +31,5 @@
         S3Prefix: AcuCOBOL/1051/
         extendCode: '{{ extend1050Code }}'
         extendKey: '{{ extend1050Key }}'
+        productName: extend1051
   tags: extend1051

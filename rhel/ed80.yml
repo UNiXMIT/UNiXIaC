@@ -3,6 +3,7 @@
     installPath: /home/products/ed80pu5
     installerName: setup_entdev_8.0_patchupdate05_318651_redhat_x86_64
     S3Prefix: ED/80/
+    productName: ED80PU5
   tags: ed80pu5
 
 - name: ED 8.0 PU 6
@@ -10,6 +11,7 @@
     installPath: /home/products/ed80pu6
     installerName: setup_entdev_8.0_patchupdate06_321063_redhat_x86_64
     S3Prefix: ED/80/
+    productName: ED80PU6
   tags: ed80pu6
 
 - name: ED 8.0 PU 7
@@ -17,6 +19,7 @@
     installPath: /home/products/ed80pu7
     installerName: setup_entdev_8.0_patchupdate07_323529_redhat_x86_64
     S3Prefix: ED/80/
+    productName: ED80PU7
   tags: ed80pu7
 
 - name: ED 8.0 PU 8
@@ -24,6 +27,7 @@
     installPath: /home/products/ed80pu8
     installerName: setup_entdev_8.0_patchupdate08_324515_redhat_x86_64
     S3Prefix: ED/80/
+    productName: ED80PU8
   tags: ed80pu8
 
 - name: ED 8.0 PU 9
@@ -31,6 +35,7 @@
     installPath: /home/products/ed80pu9
     installerName: setup_entdev_8.0_patchupdate09_328363_redhat_x86_64
     S3Prefix: ED/80/
+    productName: ED80PU9
   tags: ed80pu9
 
 - name: ED 8.0 PU 10
@@ -38,6 +43,7 @@
     installPath: /home/products/ed80pu10
     installerName: setup_entdev_8.0_patchupdate10_330750_redhat_x86_64
     S3Prefix: ED/80/
+    productName: ED80PU10
   tags: ed80pu10
 
 - name: ED 8.0 PU 11
@@ -45,6 +51,7 @@
     installPath: /home/products/ed80pu11
     installerName: setup_entdev_8.0_patchupdate11_331768_redhat_x86_64
     S3Prefix: ED/80/
+    productName: ED80PU11
   tags: ed80pu11
 
 - name: ED 8.0 PU 12
@@ -52,4 +59,5 @@
     installPath: /home/products/ed80pu12
     installerName: setup_entdev_8.0_patchupdate12_336860_redhat_x86_64
     S3Prefix: ED/80/
+    productName: ED80PU12
   tags: ed80pu12
