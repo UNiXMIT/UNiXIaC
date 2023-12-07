@@ -268,7 +268,7 @@
       body_format: json
       body:
         username: "{{ item.tags['Name'] }} Build Complete"
-        content: "Public IP - {{ item.public_ip_address }} \nPublic DNS - {{ item.public_dns_name }} \nTags - {{ item.tags }}"
+        content: "Public IP - {{ item.public_ip_address }} \nPublic DNS - {{ item.public_dns_name }}"
       status_code:
           - 200
           - 202
