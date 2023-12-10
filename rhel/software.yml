@@ -8,10 +8,8 @@
     name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm'
     state: present
 
-- name: Enable crb repo
-  community.general.rhsm_repository:
-    name: 'codeready-builder-for-rhel-{{ ansible_distribution_major_version }}-x86_64-rpms'
-    state: enabled
+- name: Enable CRB
+  shell: 'subscription-manager repos --enable codeready-builder-for-rhel-{{ ansible_distribution_major_version }}-x86_64-rpms'
 
 - name: Package installation
   package:
