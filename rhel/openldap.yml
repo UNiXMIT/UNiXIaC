@@ -138,4 +138,4 @@
       Origin: http://localhost:10086
 
 - name: Add OpenLDAP password to MF Vault
-  shell: '{{ installPath }}/bin/mfsecretsadmin write Microfocus/OPENLDAP/SLAPPASS {{ myPassword }}'
+  shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfsecretsadmin write Microfocus/OPENLDAP/SLAPPASS {{ myPassword }}'
