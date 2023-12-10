@@ -9,9 +9,9 @@
     state: present
 
 - name: Enable CRB
-    yum_repository:
-      name: crb
-      enabled: yes
+  yum_repository:
+    name: crb
+    enabled: yes
 
 - name: Package installation
   package:
