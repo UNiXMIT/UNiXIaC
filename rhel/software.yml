@@ -8,8 +8,21 @@
     name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm'
     state: present
 
-- name: Enable CRB
-  shell: 'subscription-manager repos --enable codeready-builder-for-rhel-{{ ansible_distribution_major_version }}-x86_64-rpms'
+- name: Install MSSQL ODBC Driver 17
+  environment:
+    ACCEPT_EULA: "Y"
+  package:
+    name: 
+      - msodbcsql17 
+      - mssql-tools
+    state: present
+
+- name: Set MSSQL Tools on PATH
+  copy:
+    dest: /etc/profile.d/mssql.sh
+    content: |
+      #!/bin/bash
+      export PATH="$PATH:/opt/mssql-tools/bin"
 
 - name: Package installation
   package:
@@ -68,22 +81,6 @@
     url: https://packages.microsoft.com/config/rhel/{{ ansible_distribution_major_version }}/prod.repo
     dest: /etc/yum.repos.d/mssql-release.repo
     mode: '0775'
-
-- name: Install MSSQL ODBC Driver 17
-  environment:
-    ACCEPT_EULA: "Y"
-  package:
-    name: 
-      - msodbcsql17 
-      - mssql-tools
-    state: present
-
-- name: Set MSSQL Tools on PATH
-  copy:
-    dest: /etc/profile.d/mssql.sh
-    content: |
-      #!/bin/bash
-      export PATH="$PATH:/opt/mssql-tools/bin"
 
 - name: Install Oracle Instant Client RHEL9
   dnf: 
