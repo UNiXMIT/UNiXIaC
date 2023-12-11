@@ -102,7 +102,7 @@
         "Module": "mldap_esm",
         "ConnectionPath": "localhost:389",
         "AuthorizedID": "cn=Manager,dc=secldap,dc=com",
-        "Password": "mfsecret:Microfocus/OPENLDAP/SLAPPASS",
+        "Password": "{{ myPassword }}",
         "Enabled": true,
         "CacheLimit": 1024,
         "CacheTTL": 600,
@@ -126,7 +126,7 @@
         "mfESMModule": "mldap_esm",
         "mfESMConnectionPath": "localhost:389",
         "mfESMID": "cn=Manager,dc=secldap,dc=com",
-        "mfESMPwd": "mfsecret:Microfocus/OPENLDAP/SLAPPASS",
+        "mfESMPwd": "{{ myPassword }}",
         "mfESMStatus": "Enabled",
         "mfESMCacheLimit": 1024,
         "mfESMCacheTTL": 600,
@@ -137,5 +137,5 @@
       X-Requested-With: API
       Origin: http://localhost:10086
 
-- name: Add OpenLDAP password to MF Vault
-  shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfsecretsadmin write Microfocus/OPENLDAP/SLAPPASS {{ myPassword }}'
+# - name: Add OpenLDAP password to MF Vault
+#   shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfsecretsadmin write Microfocus/OPENLDAP/SLAPPASS {{ myPassword }}'

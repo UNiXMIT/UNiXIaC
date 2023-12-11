@@ -61,7 +61,15 @@
 
 - name: Add ADLDS ESCWA Security Entry
   win_command:
-    cmd: 'curl -s -X POST -H "Content-Type: application/json" -H "accept: application/json" -H "X-Requested-With: API" -H "Origin: http://localhost:10086" http://localhost:10086/server/v1/config/esm -d "{\"Name\": \"ADLDS\", \"Module\": \"mldap_esm\", \"ConnectionPath\": \"localhost:389\", \"AuthorizedID\": \"CN=MFReader,CN=ADAM Users,CN=Micro Focus,CN=Program Data,DC=local\", \"Password\": \"mfsecret:Microfocus/ADLDS/SLAPPASS\", \"Enabled\": true, \"CacheLimit\": 1024, \"CacheTTL\": 600, \"Config\": \"[LDAP]\nBASE=CN=Micro Focus,CN=Program Data,DC=local\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nMode=MF-hash\n\n[Trace]\nModify=y\nRule=y\nGroups=y\nSearch=y\nBind=n\nTrace1=verify:*:debug\nTrace2=auth:*:*:**:debug\", \"Description\": \"ADLDS ESM\"}"'
+    cmd: |
+    curl -X POST ^
+    -H "Content-Type: application/json" ^
+    -H "accept: application/json" ^
+    -H "X-Requested-With: API" ^
+    -H "Origin: http://localhost:10086" ^
+    http://localhost:10086/server/v1/config/esm ^
+    -d "{\"Name\": \"ADLDS\", \"Module\": \"mldap_esm\", \"ConnectionPath\": \"localhost:389\", \"AuthorizedID\": \"CN=MFReader,CN=ADAM Users,CN=Micro Focus,CN=Program Data,DC=local\", \"Password\": \"{{ myPassword }}\", \"Enabled\": true, \"CacheLimit\": 1024, \"CacheTTL\": 600, \"Config\": \"[LDAP]\nBASE=CN=Micro Focus,CN=Program Data,DC=local\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nMode=MF-hash\n\n[Trace]\nModify=y\nRule=y\nGroups=y\nSearch=y\nBind=n\nTrace1=verify:*:debug\nTrace2=auth:*:*:**:debug\", \"Description\": \"ADLDS ESM\"}"
+
 
 # - name: Add ADLDS MFDS Security Entry
 #   ansible.windows.win_uri:
@@ -88,8 +96,15 @@
 
 - name: Add ADLDS MFDS Security Entry
   win_command:
-    cmd: 'curl -s -X POST -H "Content-Type: application/json" -H "accept: application/json" -H "X-Requested-With: API" -H "Origin: http://localhost:10086/native/v1/security/127.0.0.1/86/esm" -d "{\"CN\": \"ADLDS\", \"description\": \"ADLDS ESM\", \"mfESMModule\": \"mldap_esm\", \"mfESMConnectionPath\": \"localhost:389\", \"mfESMID\": \"CN=MFReader,CN=ADAM Users,CN=Micro Focus,CN=Program Data,DC=local\", \"mfESMPwd\": \"mfsecret:Microfocus/ADLDS/SLAPPASS\", \"mfESMStatus": \"Enabled\", \"mfESMCacheLimit\": 1024, \"mfESMCacheTTL\": 600, \"mfConfig\": \"[LDAP]\nBASE=CN=Micro Focus,CN=Program Data,DC=local\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nMode=MF-hash\n\n[Trace]\nModify=y\nRule=y\nGroups=y\nSearch=y\nBind=n\nTrace1=verify:*:debug\nTrace2=auth:*:*:**:debug\"}"'
+    cmd: |
+    curl -X POST ^
+    -H "Content-Type: application/json" ^
+    -H "Accept: application/json" ^
+    -H "X-Requested-With: API" ^
+    -H "Origin: http://localhost:10086" ^
+    http://localhost:10086/native/v1/security/127.0.0.1/86/esm ^
+    -d "{\"CN\": \"ADLDS\", \"description\": \"ADLDS ESM\", \"mfESMModule\": \"mldap_esm\", \"mfESMConnectionPath\": \"localhost:389\", \"mfESMID\": \"CN=MFReader,CN=ADAM Users,CN=Micro Focus,CN=Program Data,DC=local\", \"mfESMPwd\": \"{{ myPassword }}\", \"mfESMStatus\": \"Enabled\", \"mfESMCacheLimit\": 1024, \"mfESMCacheTTL\": 600, \"mfConfig\": \"[LDAP]\\nBASE=CN=Micro Focus,CN=Program Data,DC=local\\nuser class=microfocus-MFDS-User\\nuser container=CN=Enterprise Server Users\\ngroup container=CN=Enterprise Server User Groups\\nresource container=CN=Enterprise Server Resources\\n\\n[Operation]\\nset login count=yes\\nsignon attempts=3\\n\\n[Verify]\\nMode=MF-hash\\n\\n[Trace]\\nModify=y\\nRule=y\\nGroups=y\\nSearch=y\\nBind=n\\nTrace1=verify:*:debug\\nTrace2=auth:*:*:**:debug\"}"
 
-- name: Add ADLDS password to MF Vault
-  win_command:
-    cmd: '""C:\Program Files (x86)\Micro Focus\Enterprise Developer\setupenv.bat" && "C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfsecretsadmin.exe" write Microfocus/ADLDS/SLAPPASS {{ myPassword }}'
+# - name: Add ADLDS password to MF Vault
+#   win_command:
+#     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfsecretsadmin" write Microfocus/ADLDS/SLAPPASS {{ myPassword }}'
