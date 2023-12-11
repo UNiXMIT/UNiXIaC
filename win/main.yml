@@ -249,6 +249,21 @@
   hosts: local
   gather_facts: no
   tasks: 
+  - name: WebAPI Notification
+    ansible.builtin.uri:
+      url: '{{ webAPI }}'
+      method: POST
+      body_format: json
+      body:
+        username: "{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ productName }} Build Complete"
+        content: "Public IP - {{ item.public_ip_address }} \nPublic DNS - {{ item.public_dns_name }}"
+      status_code:
+          - 200
+          - 202
+          - 204
+    loop: '{{ updatedEC2.instances }}'
+    tags: default
+
   - name: Display AWS EC2 Information
     debug:
       msg: 
