@@ -84,4 +84,4 @@
 
 - name: Add ADLDS password to MF Vault
   win_command:
-    cmd: 'C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfsecretsadmin write Microfocus/ADLDS/SLAPPASS {{ myPassword }}'
+    cmd: '""C:\Program Files (x86)\Micro Focus\Enterprise Developer\setupenv.bat" && "C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfsecretsadmin.exe" write Microfocus/ADLDS/SLAPPASS {{ myPassword }}'
