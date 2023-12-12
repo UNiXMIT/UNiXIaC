@@ -53,6 +53,7 @@
       - python3
       - python3-pip
       - expect
+      - postgresql-odbc
     state: present
 
 - name: RHEL<=7 Package installation

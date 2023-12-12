@@ -12,6 +12,7 @@
     - jq
     - cascadiamono
     - ntop.portable
+    - psqlodbc
     # - dotnet
     # - windows-sdk-11-version-22h2-all
     # - visualstudio2017buildtools
