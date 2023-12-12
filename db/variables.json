@@ -11,7 +11,7 @@
   "instanceType": "t3.xlarge",
   "deviceName": "/dev/sda1",
   "volumeType": "gp3",
-  "volumeSize": 120,
+  "volumeSize": 60,
   "awsProfile": "848105473048_Fed_COBOL2_Compute",
   "vmCount": 1,
   "ssoEmail": "email@domain.com",
