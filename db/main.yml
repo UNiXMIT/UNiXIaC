@@ -116,18 +116,6 @@
     import_tasks: cron.yml
   tags: default
 
-- name : EC2 Instance Data
-  hosts: local
-  gather_facts: no
-  tasks:
-  - name: Refresh EC2 Instance Data
-    amazon.aws.ec2_instance_info:
-      aws_profile: '{{ awsProfile }}'
-      region: '{{ awsRegion }}'
-      instance_ids: '{{ ec2.instance_ids }}'
-    register: updatedEC2
-  tags: default
-
 - name: AWS EC2 Instance Created and Setup
   hosts: local
   gather_facts: no
@@ -138,13 +126,13 @@
       method: POST
       body_format: json
       body:
-        username: "{{ item.tags['Name'] }} Build Complete"
+        username: "{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ hostvars[item.public_ip_address].DBSHORT }} Build Complete"
         content: "Public IP - {{ item.public_ip_address }} \nPublic DNS - {{ item.public_dns_name }} \nDB Name - {{ hostvars[item.public_ip_address].DBNAME }} \nDB User - {{ hostvars[item.public_ip_address].DBUSER }} \nDB Port - {{ hostvars[item.public_ip_address].DBPORT }}"
       status_code:
           - 200
           - 202
           - 204
-    loop: '{{ updatedEC2.instances }}'
+    loop: '{{ ec2.instances }}'
     tags: default
     
   - name: Display AWS EC2 Information
@@ -159,5 +147,5 @@
       - "DB Name         - {{ hostvars[item.public_ip_address].DBNAME }}"
       - "DB User         - {{ hostvars[item.public_ip_address].DBUSER }}"
       - "DB Port         - {{ hostvars[item.public_ip_address].DBPORT }}"
-    loop: '{{ updatedEC2.instances }}'
+    loop: '{{ ec.instances }}'
     tags: default
