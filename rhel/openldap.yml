@@ -83,6 +83,8 @@
     sed -i '/,Data/d' /openldap/schema/es_default_ldap_openldap.ldif
     ldapadd -v -D "cn=Manager,dc=secldap,dc=com" -w $SLAPPASS -f /openldap/schema/es_default_ldap_openldap.ldif -H ldapi:/// -c > /openldap/log/es_default_ldap_openldap.log
     ldapsearch -H ldapi:/// -x -b "cn=subschema" -s base + > /openldap/log/schema.log
+    curl -s -o /openldap/newpasswd.sh https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/openldap/newpasswd.sh
+    chmod +x /openldap/newpasswd.sh
 
 - name: Start ESCWA
   shell: tmux new -d -s escwa ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/escwa"
