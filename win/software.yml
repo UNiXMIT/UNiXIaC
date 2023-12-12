@@ -112,23 +112,23 @@
 
 - name: Create DB2
   win_file:
-    path: C:\DB2
+    path: C:\db2cli
     state: directory
 
 - name: Create DB2 32
   win_file:
-    path: C:\DB2\32
+    path: C:\db2cli\32
     state: directory
 
 - name: Create DB2 64
   win_file:
-    path: C:\DB2\64
+    path: C:\db2cli\64
     state: directory
 
 - name: Everyone permissions on DB2
   win_acl:
     user: Everyone
-    path: C:\DB2
+    path: C:\db2cli
     type: allow
     rights: FullControl
 
