@@ -36,3 +36,4 @@
   ansible.builtin.unarchive:
     src: /home/{{ myUsername }}/db2/v11.5.9_linuxx64_odbc_cli.tar.gz
     dest: /home/{{ myUsername }}/db2
+    remote_src: yes
