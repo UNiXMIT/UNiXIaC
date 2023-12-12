@@ -1,3 +1,7 @@
+- name: Set Facts
+  set_fact:
+    DBSHORT: 
+
 - name: Install EPEL key 
   rpm_key:
     state: present

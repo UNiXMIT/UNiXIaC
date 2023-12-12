@@ -1,3 +1,7 @@
+- name: Set Facts
+  set_fact:
+    productName: 
+
 - name: Package Installation
   win_chocolatey:
     name: 
