@@ -58,6 +58,7 @@
       - python3-pip
       - expect
       - postgresql-odbc
+      - net-tools
     state: present
 
 - name: RHEL<=7 Package installation
