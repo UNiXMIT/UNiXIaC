@@ -1,6 +1,7 @@
 ## Ansible Semaphore Documentation
 
 - [AWS Instance Creation](#aws-instance-creation)
+    - [Additional Details](#additional-details)
 - [Supported Products](#supported-os--products)
 
 ### AWS Instance Creation
@@ -23,6 +24,7 @@ Once the Task has completed and is marked as a 'Success', scroll to the very bot
 > **NOTE:** If a task fails, check the Task console to see where it has failed. If it failed on SSO authentication try again or check that 2FA is still working elswhere.  
 > If it failed elsewhere in the script, report the issue (includng the Task number) to an admin to check the problem.  
 
+#### Additional Details
 Windows EC2 instances are accesible via RDP using the 'support' user and the usual password.  
 Linux EC2 Instances are accessible via SSH using the 'support' user and the usual password.  
 If in doubt, try the usual password or contact an admin.  
@@ -30,7 +32,7 @@ If in doubt, try the usual password or contact an admin.
 Instances are created with a 120GB SSD, 4vCPUs, 16GiB Memory and 3.1 GHz Clock Speed (t3.xlarge).  
 Instances are created with your username, OS and products name as Instance name.  
 Tags are added to the instance to show what pruducts have been installed and what installers were used.  
-Instances are all set to shutdown at 8pm GMT to encourage users not to leave instances running for no reason. If a instance really needs to stay on longer, the auto shutdown can be disabled from wither the task scheduler (Windows) or the root cron job (Linux).  
+Instances are all set to shutdown at 8pm GMT to encourage users not to leave instances running for no reason. If a instance really needs to stay on longer, the auto shutdown can be disabled from either the task scheduler (Windows) or the root cron job (Linux).  
 
 ### Supported OS / Products
 #### Windows Server 2022
@@ -56,7 +58,8 @@ Instances are all set to shutdown at 8pm GMT to encourage users not to leave ins
 ED and AcuCOBOL-GT extend are all licensed, ready to use.  
 
 #### Security
-ED 7.0, 8.0 and 9.0 tasks will also install and setup ADLDS/OpenLDAP (depending on OS). The connection details are automatically added into ESCWA using the API.  
+ED 7.0, 8.0 and 9.0 tasks will also install and setup ADLDS (Windows) OpenLDAP (Linux).  
+The connection details are automatically added into ESCWA using the API.  
 
 #### ODBC Drivers/Libraries
 - SQL Server ODBC
