@@ -16,7 +16,7 @@
     - SSO Token - Valid authentication token to use for TOTP.  
     - VM Count - Number of duplicate EC2 instances to create (default=1).  
 
-> **NOTE:** Unless you are creating and testing new Tasks, there is no need to check any of the checkboxes at the bottom.  
+    > **NOTE:** Unless you are creating and testing new Tasks, there is no need to check any of the checkboxes at the bottom.  
 
 5. A Task Console window will appear, while the EC2 instance is being created.  
    You can safely close the browser now, or leave it open to monitor its creation.  If you want to come back to the task later to check progress, take note of the Task number. When you return, open the Dashboard and click on the 'History' tab. The find your Task and click the Task number to re-open the Task console.  
