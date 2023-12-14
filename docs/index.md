@@ -62,6 +62,16 @@ ED and AcuCOBOL-GT extend are all licensed, ready to use.
 ED 7.0, 8.0 and 9.0 tasks will also install and setup ADLDS (Windows) OpenLDAP (Linux).  
 The connection details are automatically added into ESCWA using the API.  
 
+##### ADLDS
+BASE DN - CN=Micro Focus,CN=Program Data,DC=local  
+Authorized ID - CN=MFReader,CN=ADAM Users,CN=Micro Focus,CN=Program Data,DC=local  
+LDAP URL - ldap://localhost:389  
+
+##### OpenLDAP
+BASE DN - cn=Micro Focus,dc=secldap,dc=com   
+Authorized ID - cn=Manager,dc=secldap,dc=com  
+LDAP URL - ldap://localhost:389  
+
 #### ODBC Drivers/Libraries
 - SQL Server ODBC
 - Oracle Instant Client
