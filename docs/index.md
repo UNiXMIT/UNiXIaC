@@ -1,10 +1,10 @@
-## Ansible Semaphore Documentation
+# Ansible Semaphore Documentation
 
 - [AWS Instance Creation](#aws-instance-creation)
     - [Additional Details](#additional-details)
 - [Supported Products](#supported-os--products)
 
-### AWS Instance Creation
+## AWS Instance Creation
 1. After logging in, navigate to the 'Task Templates' in the nav bar on the leftbhand side.  
 2. Along the top you will see a list of OS versions to filter tasks by OS. There is also a 'DB' filter for databases.  
 
@@ -26,7 +26,7 @@
 > **NOTE:** If a task fails, check the Task console to see where it has failed. If it failed on SSO authentication try again or check that 2FA is still working elswhere.  
 > If it failed elsewhere in the script, report the issue (includng the Task number) to an admin to check the problem.  
 
-#### Additional Details
+### Additional Details
 - Windows EC2 instances are accesible via RDP using the 'support' user and the usual password.  
 - Linux EC2 Instances are accessible via SSH using the 'support' user and the usual password.  
 > **NOTE:** If in doubt, try the usual password or contact an admin.  
@@ -35,54 +35,54 @@
 - Tags are added to the instance to show what pruducts have been installed and what installers were used.  
 - Instances are all set to shutdown at 8pm GMT to encourage users not to leave instances running for no reason. If a instance really needs to stay on longer, the auto shutdown can be disabled from either the task scheduler (Windows) or the root cron job (Linux).  
 
-### Supported OS / Products
-#### Windows Server 2022
+## Supported OS / Products
+### Windows Server 2022
 - ED 6.0, 7.0, 8.0 and 9.0   
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
 
-#### Windows Server 2019
+### Windows Server 2019
 - ED 5.0  
 
-#### RHEL 9
+### RHEL 9
 - ED 7.0, 8.0 and 9.0  
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
 
-#### RHEL 8
+### RHEL 8
 - ED 6.0 and 7.0  
 
-#### RHEL 7
+### RHEL 7
 - ED 5.0
 
 > **NOTE:** Patch Updates will be added as they become GA.  
 
-#### Licenses
+### Licenses
 ED and AcuCOBOL-GT extend are all licensed, ready to use.  
 
-#### Security
+### Security
 ED 7.0, 8.0 and 9.0 tasks will also install and setup ADLDS (Windows) OpenLDAP (Linux).  
 The connection details are automatically added into ESCWA using the API.  
 
-##### ADLDS
+#### ADLDS
 BASE DN - CN=Micro Focus,CN=Program Data,DC=local  
 Authorized ID - CN=MFReader,CN=ADAM Users,CN=Micro Focus,CN=Program Data,DC=local  
 LDAP URL - ldap://localhost:389  
 
-##### OpenLDAP
+#### OpenLDAP
 BASE DN - cn=Micro Focus,dc=secldap,dc=com   
 Authorized ID - cn=Manager,dc=secldap,dc=com  
 LDAP URL - ldap://localhost:389  
 
-#### ODBC Drivers/Libraries
+### ODBC Drivers/Libraries
 - SQL Server ODBC
 - Oracle Instant Client
 - PostgreSQL ODBC
 - DB2 (for XA and ODBC) 
 
-#### VPN
+### VPN
 - PulseVPN (Windows)
 - OpenConnect (Linux)
 
-#### Databases
+### Databases
 - DB2 11.5 Community Edition  
 - IBM MQ 9.3 
 - Informix 14.10 Developer Edition 
