@@ -29,3 +29,11 @@
     S3Prefix: ED/90/
     productName: ED90PU3
   tags: ed90pu3
+
+- name: ED 9.0 PU 4
+  set_fact:
+    installPath: /home/products/ed90pu4
+    installerName: setup_entdev_9.0_patchupdate04_339842_redhat_x86_64
+    S3Prefix: ED/90/
+    productName: ED90PU4
+  tags: ed90pu4

@@ -94,6 +94,7 @@ podman logs semaphore
         - ed90pu1
         - ed90pu2
         - ed90pu3
+        - ed90pu4
 - extend
   - extend1040
   - extend1041
@@ -126,6 +127,7 @@ podman logs semaphore
   - ed90pu1
   - ed90pu2
   - ed90pu3
+  - ed90pu4
   - openldap
 - extend
   - extend1040
