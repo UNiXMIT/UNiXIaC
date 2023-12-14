@@ -20,7 +20,7 @@ You will now see a pop-up window showing 5 entry fields. Only the first 2, SSO E
 You will now see a Task Console window while the EC2 instance is being created.  
 You can safely close the browser now, or leave it open to monitor its creation.  If you want to come back to the task later to check progress, take note of the Task number. When you return, open the Dashboard and click on the 'History' tab. The find your Task and click the Task number to re-open the Task console.  
 Once the Task has completed and is marked as a 'Success', scroll to the very bottom of the Task console an you will see the EC2 Instance details like public IP/DNS and database connection information.  
-> **NOTE**: If a task fails, check the Task console to see where it has failed. If it failed on SSO authentication try again or check that 2FA is still working elswhere.  
+> **NOTE:** If a task fails, check the Task console to see where it has failed. If it failed on SSO authentication try again or check that 2FA is still working elswhere.  
 > If it failed elsewhere in the script, report the issue (includng the Task number) to an admin to check the problem.  
 
 Windows EC2 instances are accesible via RDP using the 'support' user and the usual password.  
@@ -50,7 +50,7 @@ Instances are all set to shutdown at 8pm GMT to encourage users not to leave ins
 #### RHEL 7
 - ED 5.0
 
-> **NOTE**: Patch Updates will be added as they become GA.  
+> **NOTE:** Patch Updates will be added as they become GA.  
 
 #### Licenses
 ED and AcuCOBOL-GT extend are all licensed, ready to use.  
