@@ -5,23 +5,31 @@
 - [Supported Products](#supported-os--products)
 
 ## AWS Instance Creation
-1. After logging in, navigate to the 'Task Templates' in the nav bar on the leftbhand side.  
+1. After logging in, navigate to the 'Task Templates' in the nav bar on the left hand side.   
+![1](images/1.png)  
+
 2. Along the top you will see a list of OS versions to filter tasks by OS. There is also a 'DB' filter for databases.  
+![2](images/2.png)  
 
 3. To start a task, click the 'RUN' button on the right side of the rown for the Task you want to execute.  
+![3](images/3.png)  
+
 4. You will now see a pop-up window showing 5 entry fields. Only the first 2, SSO Email and password, are required fields.  
     - SSO Email - Email to authenticate with Pulse VPN.  
     - SSO Password - Password to Authenticate with Pulse VPN.  
     - SSO Method - SSO Authentication method to use. 1=SmartPhonePush 2=TOTP (default=1).  
     - SSO Token - Valid authentication token to use for TOTP.  
     - VM Count - Number of duplicate EC2 instances to create (default=1).  
+![4](images/4.png)  
 
     > **NOTE:** Unless you are creating and testing new Tasks, there is no need to check any of the checkboxes at the bottom.  
 
 5. A Task Console window will appear, while the EC2 instance is being created.  
    You can safely close the browser now, or leave it open to monitor its creation.  If you want to come back to the task later to check progress, take note of the Task number. When you return, open the Dashboard and click on the 'History' tab. The find your Task and click the Task number to re-open the Task console.  
+![5](images/5.png)
 
 6. Once the Task has completed and is marked as a 'Success', scroll to the very bottom of the Task console an you will see the EC2 Instance details like public IP/DNS and database connection information.  
+![6](images/6.png)
 
 > **NOTE:** If a task fails, check the Task console to see where it has failed. If it failed on SSO authentication try again or check that 2FA is still working elswhere.  
 > If it failed elsewhere in the script, report the issue (includng the Task number) to an admin to check the problem.  
