@@ -147,5 +147,5 @@
       - "DB Name         - {{ hostvars[item.public_ip_address].DBNAME }}"
       - "DB User         - {{ hostvars[item.public_ip_address].DBUSER }}"
       - "DB Port         - {{ hostvars[item.public_ip_address].DBPORT }}"
-    loop: '{{ ec.instances }}'
+    loop: '{{ ec2.instances }}'
     tags: default
