@@ -12,10 +12,6 @@
     name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm'
     state: present
 
-- name: Enable CRB "Code Ready Builder" for RHEL 9
-  shell: dnf config-manager --set-enabled crb
-  when: ansible_facts['distribution_major_version'] | int == 9
-
 - name: Install CentOS RPM Key for RHEL 8 
   rpm_key:
     state: present
