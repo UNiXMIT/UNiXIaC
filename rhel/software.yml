@@ -12,17 +12,17 @@
     name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm'
     state: present
 
-- name: Install CentOS Repo Key for RHEL 8 
+- name: Install CentOS RPM Key for RHEL 8 
   rpm_key:
     state: present
     key: https://www.centos.org/keys/RPM-GPG-KEY-CentOS-Official
   when: ansible_facts['distribution_major_version'] | int == 8
 
-- name: Install CentOS Repo GPG Keys for RHEL 8
-  dnf:
-    state: present
-    name: 'http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-8-6.el8.noarch.rpm'
-  when: ansible_facts['distribution_major_version'] | int == 8
+# - name: Install CentOS GPG Keys RPM for RHEL 8
+#   dnf:
+#     state: present
+#     name: 'http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-8-6.el8.noarch.rpm'
+#   when: ansible_facts['distribution_major_version'] | int == 8
 
 - name: Install CentOS Repo for RHEL 8
   dnf:
@@ -110,44 +110,43 @@
 - name: Enable Podman Socket
   ansible.builtin.shell: systemctl enable --now podman.socket
 
+- name: Install Oracle RPM Key 
+  rpm_key:
+    state: present
+    key: https://yum.oracle.com/RPM-GPG-KEY-oracle-ol{{ ansible_distribution_major_version }}
+
 - name: Install Oracle Instant Client RHEL9
   dnf: 
     name: https://download.oracle.com/otn_software/linux/instantclient/1919000/oracle-instantclient19.19-basic-19.19.0.0.0-1.el9.x86_64.rpm
     state: present
-    disable_gpg_check: yes
   when: ansible_facts['distribution_major_version'] | int == 9
 
 - name: Install Oracle Instant Client ODBC RHEL9
   dnf: 
     name: https://download.oracle.com/otn_software/linux/instantclient/1919000/oracle-instantclient19.19-odbc-19.19.0.0.0-1.el9.x86_64.rpm
     state: present
-    disable_gpg_check: yes
   when: ansible_facts['distribution_major_version'] | int == 9
 
 - name: Install Oracle Instant Client RHEL8
   dnf: 
     name: https://download.oracle.com/otn_software/linux/instantclient/2112000/oracle-instantclient-basic-21.12.0.0.0-1.el8.x86_64.rpm
     state: present
-    disable_gpg_check: yes
   when: ansible_facts['distribution_major_version'] | int == 8
 
 - name: Install Oracle Instant Client ODBC RHEL8
   dnf: 
     name: https://download.oracle.com/otn_software/linux/instantclient/2112000/oracle-instantclient-odbc-21.12.0.0.0-1.el8.x86_64.rpm
     state: present
-    disable_gpg_check: yes
   when: ansible_facts['distribution_major_version'] | int == 8
 
 - name: Install Oracle Instant Client RHEL7
   yum: 
     name: https://download.oracle.com/otn_software/linux/instantclient/2112000/oracle-instantclient-basic-21.12.0.0.0-1.x86_64.rpm
     state: present
-    disable_gpg_check: yes
   when: ansible_facts['distribution_major_version'] | int == 7
 
 - name: Install Oracle Instant Client ODBC RHEL7
   yum: 
     name: https://download.oracle.com/otn_software/linux/instantclient/2112000/oracle-instantclient-odbc-21.12.0.0.0-1.x86_64.rpm
     state: present
-    disable_gpg_check: yes
   when: ansible_facts['distribution_major_version'] | int == 7
