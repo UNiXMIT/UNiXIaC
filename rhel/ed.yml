@@ -43,14 +43,20 @@
     mode: '0775'
 
 - name: Download SafeNet License
-  ansible.windows.win_get_url:
+  ansible.builtin.get_url:
     url: '{{ s3sn.url }}'
     dest: /tmp
+    owner: '{{ myUsername }}' 
+    group: '{{ myUsername }}'
+    mode: '0775'
 
 - name: Download AutoPass License
-  ansible.windows.win_get_url:
+  ansible.builtin.get_url:
     url: '{{ s3ap.url }}'
     dest: /tmp
+    owner: '{{ myUsername }}' 
+    group: '{{ myUsername }}'
+    mode: '0775'
 
 - name: Add ED Tags
   amazon.aws.ec2_tag:

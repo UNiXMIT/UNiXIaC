@@ -175,11 +175,12 @@
 #     url: '{{ SafenetFile }}'
 #     dest: C:\ProgramData\Micro Focus\lservrc.net
 #   tags: ed
-
+  
 - name: Install Safenet License File
-  win_command:
-    cmd: 'move lservrc.net C:\ProgramData\Micro Focus\lservrc.net'
-    chdir: C:\temp
+  ansible.windows.win_copy:
+    src: C:\temp\lservrc.net
+    dest: C:\ProgramData\Micro Focus\lservrc.net
+    remote_src: true
   tags: ed
 
 # - name: Install AutoPass License File
@@ -189,9 +190,10 @@
 #   tags: ed
 
 - name: Install AutoPass License File
-  win_command:
-    cmd: 'move LicFile.txt C:\ProgramData\Micro Focus\LicFile.txt'
-    chdir: C:\temp
+  ansible.windows.win_copy:
+    src: C:\temp\LicFile.txt
+    dest: C:\ProgramData\Micro Focus\LicFile.txt
+    remote_src: true
   tags: ed
 
 - name: Import JCL Region
