@@ -43,9 +43,4 @@
   shell: printf 'y\n{{ installPath }}\n' | {{ installPath }}{{ installerName }}
 
 - name: Activate Licenses
-  shell: printf '{{ extendCode }}\n{{ extendKey }}\n' | {{ installPath }}bin/activator
-
-- name: Display AWS EC2 Information
-  debug:
-    msg: 
-    - '{{ s3 }}'
+  shell: printf '{{ s3.tags.CODE }}\n{{ s3.tags.KEY }}\n' | {{ installPath }}bin/activator
