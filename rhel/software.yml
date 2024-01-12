@@ -87,6 +87,7 @@
 
 - name: Enable Podman Socket
   ansible.builtin.shell: systemctl enable --now podman.socket
+  when: ansible_facts['distribution_major_version'] | int >= 8
 
 - name: Install Oracle Instant Client RHEL9
   dnf: 
