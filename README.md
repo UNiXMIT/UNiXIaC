@@ -88,6 +88,7 @@ podman logs semaphore
         - ed80pu10
         - ed80pu11
         - ed80pu12
+        - ed80pu13
     - ed90
       - adlds
       - edpu
@@ -123,6 +124,7 @@ podman logs semaphore
   - ed80pu10
   - ed80pu11
   - ed80pu12
+  - ed80pu13
   - ed90
   - ed90pu1
   - ed90pu2

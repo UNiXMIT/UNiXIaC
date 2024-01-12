@@ -12,6 +12,28 @@
     name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm'
     state: present
 
+- name: Install CentOS RPM Key for RHEL 8 
+  rpm_key:
+    state: present
+    key: https://www.centos.org/keys/RPM-GPG-KEY-CentOS-Official
+  when: ansible_facts['distribution_major_version'] | int == 8
+
+- name: Install CentOS GPG Keys RPM for RHEL 8
+  dnf:
+    state: present
+    name: 'http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-8-6.el8.noarch.rpm'
+  when: ansible_facts['distribution_major_version'] | int == 8
+
+- name: Install CentOS Repo for RHEL 8
+  dnf:
+    name: 'http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-stream-repos-8-6.el8.noarch.rpm'
+    state: present
+  when: ansible_facts['distribution_major_version'] | int == 8
+
+- name: Enable powertools for RHEL 8
+  shell: dnf config-manager --set-enabled powertools
+  when: ansible_facts['distribution_major_version'] | int == 8
+
 - name: Download MSSQL ODBC Driver Repo
   get_url:
     url: https://packages.microsoft.com/config/rhel/{{ ansible_distribution_major_version }}/prod.repo
@@ -88,6 +110,11 @@
 - name: Enable Podman Socket
   ansible.builtin.shell: systemctl enable --now podman.socket
   when: ansible_facts['distribution_major_version'] | int >= 8
+
+- name: Install Oracle RPM Key 
+  rpm_key:
+    state: present
+    key: https://yum.oracle.com/RPM-GPG-KEY-oracle-ol{{ ansible_distribution_major_version }}
 
 - name: Install Oracle Instant Client RHEL9
   dnf: 

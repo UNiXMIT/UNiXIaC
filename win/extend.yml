@@ -35,12 +35,12 @@
 
 - name: Activate 32 bit Licenses
   win_command:
-    cmd: '"{{ installPath32 }}\AcuGT\bin\activator.exe" /PCODE={{ extendCode86 }} /PKEY={{ extendKey86 }}'
+    cmd: '"{{ installPath32 }}\AcuGT\bin\activator.exe" /PCODE={{ s3.tags.CODE86 }} /PKEY={{ s3.tags.KEY86 }}'
     chdir: '{{ installPath32 }}\AcuGT\bin'
 
 - name: Activate 64 bit Licenses
   win_command:
-    cmd: '"{{ installPath32 }}\AcuGT\bin\activator.exe" /PCODE={{ extendCode64 }} /PKEY={{ extendKey64 }}'
+    cmd: '"{{ installPath32 }}\AcuGT\bin\activator.exe" /PCODE={{ s3.tags.CODE64 }} /PKEY={{ s3.tags.KEY64 }}'
     chdir: '{{ installPath32 }}\AcuGT\bin'
 
 - name: Admin rights for AcuRCL 32 bit

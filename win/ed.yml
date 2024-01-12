@@ -24,6 +24,30 @@
       register: s3ede
       delegate_to: localhost
 
+    - name: Get SafeNet License Download URL from S3
+      amazon.aws.s3_object:
+        profile: '{{ awsProfile }}'
+        bucket: mturner
+        mode: geturl
+        object: ED/Licenses/lservrc.net
+        region: '{{ awsRegion }}'
+        expiry: 4000
+        sig_v4: true
+      register: s3sn
+      delegate_to: localhost
+    
+    - name: Get AutoPass License Download URL from S3
+      amazon.aws.s3_object:
+        profile: '{{ awsProfile }}'
+        bucket: mturner
+        mode: geturl
+        object: ED/Licenses/LicFile.txt
+        region: '{{ awsRegion }}'
+        expiry: 4000
+        sig_v4: true
+      register: s3ap
+      delegate_to: localhost
+
     - name: Download {{ installerNameEDVS }}
       ansible.windows.win_get_url:
         url: '{{ s3edvs.url }}'
@@ -32,6 +56,16 @@
     - name: Download {{ installerNameEDE }}
       ansible.windows.win_get_url:
         url: '{{ s3ede.url }}'
+        dest: C:\temp\
+    
+    - name: Download SafeNet License
+      ansible.windows.win_get_url:
+        url: '{{ s3sn.url }}'
+        dest: C:\temp\
+    
+    - name: Download AutoPass License
+      ansible.windows.win_get_url:
+        url: '{{ s3ap.url }}'
         dest: C:\temp\
   tags: ed
 
@@ -136,16 +170,30 @@
 #     line: 'lshost = {{ licenseServer }}'
 #   tags: ed
 
+# - name: Install Safenet License File
+#   win_get_url: 
+#     url: '{{ SafenetFile }}'
+#     dest: C:\ProgramData\Micro Focus\lservrc.net
+#   tags: ed
+  
 - name: Install Safenet License File
-  win_get_url: 
-    url: '{{ SafenetFile }}'
+  ansible.windows.win_copy:
+    src: C:\temp\lservrc.net
     dest: C:\ProgramData\Micro Focus\lservrc.net
+    remote_src: true
   tags: ed
 
+# - name: Install AutoPass License File
+#   win_get_url: 
+#     url: '{{ AutoPassFile }}'
+#     dest: C:\ProgramData\Micro Focus\LicFile.txt
+#   tags: ed
+
 - name: Install AutoPass License File
-  win_get_url: 
-    url: '{{ AutoPassFile }}'
+  ansible.windows.win_copy:
+    src: C:\temp\LicFile.txt
     dest: C:\ProgramData\Micro Focus\LicFile.txt
+    remote_src: true
   tags: ed
 
 - name: Import JCL Region

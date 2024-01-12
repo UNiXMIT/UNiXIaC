@@ -5,8 +5,6 @@
         installPath: /home/products/acu1040shx64/
         installerName: setup_acucob1040pmk59shACU
         S3Prefix: AcuCOBOL/1040/
-        extendCode: '{{ extend1040Code }}'
-        extendKey: '{{ extend1040Key }}'
         productName: extend1040
   tags: extend1040
 
@@ -17,7 +15,5 @@
         installPath: /home/products/acu1041shx64/
         installerName: setup_acucob1041pmk59shACU
         S3Prefix: AcuCOBOL/1041/
-        extendCode: '{{ extend1040Code }}'
-        extendKey: '{{ extend1040Key }}'
         productName: extend1041
   tags: extend1041
