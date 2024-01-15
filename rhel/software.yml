@@ -69,10 +69,12 @@
       - htop
       - libstdc++.i686
       - libaio-devel
+      - glibc-devel
+      - glibc-devel.i686
+      - glibc
       - glibc.i686
       - tcpdump
       - ed
-      - glibc-devel.i686
       - tmux
       - openconnect
       - jq
@@ -82,12 +84,6 @@
       - postgresql-odbc
       - net-tools
     state: present
-
-- name: RHEL<=7 Package installation
-  package:
-    name: glibc-devel
-    state: present
-  when: ansible_facts['distribution_major_version'] | int <= 7
 
 - name: RHEL<=8 Package installation
   package:
