@@ -11,7 +11,7 @@
 2. Along the top you will see a list of OS versions to filter tasks by OS. There is also a 'DB' filter for databases.  
 ![2](images/2.png)  
 
-3. To start a task, click the 'RUN' button on the right side of the rown for the Task you want to execute.  
+3. To start a task, click the 'RUN' button on the right side of the row for the Task you want to execute.  
 ![3](images/3.png)  
 
 4. You will now see a pop-up window showing 5 entry fields. Only the first 2, SSO Email and password, are required fields.  
@@ -25,22 +25,22 @@
     > **NOTE:** Unless you are creating and testing new Tasks, there is no need to check any of the checkboxes at the bottom.  
 
 5. A Task Console window will appear, while the EC2 instance is being created.  
-   You can safely close the browser now, or leave it open to monitor its creation.  If you want to come back to the task later to check progress, take note of the Task number. When you return, open the Dashboard and click on the 'History' tab. The find your Task and click the Task number to re-open the Task console.  
+   You can safely close the browser now or leave it open to monitor its creation.  If you want to come back to the task later to check progress, take note of the Task number. When you return, open the Dashboard and click on the 'History' tab. The find your Task and click the Task number to re-open the Task console.  
 ![5](images/5.png)
 
 6. Once the Task has completed and is marked as a 'Success', scroll to the very bottom of the Task console an you will see the EC2 Instance details like public IP/DNS and database connection information.  
 ![6](images/6.png)
 
-> **NOTE:** If a task fails, check the Task console to see where it has failed. If it failed on SSO authentication try again or check that 2FA is still working elswhere.  
-> If it failed elsewhere in the script, report the issue (includng the Task number) to an admin to check the problem.  
+> **NOTE:** If a task fails, check the Task console to see where it has failed. If it failed on SSO authentication try again or check that 2FA is still working elsewhere.  
+> If it failed elsewhere in the script, report the issue (including the Task number) to an admin to check the problem.  
 
 ### Additional Details
-- Windows EC2 instances are accesible via RDP using the 'support' user and the usual password.  
+- Windows EC2 instances are accessible via RDP using the 'support' user and the usual password.  
 - Linux EC2 Instances are accessible via SSH using the 'support' user and the usual password.  
 > **NOTE:** If in doubt, try the usual password or contact an admin.  
 - Instances are created with a 120GB SSD, 4vCPUs, 16GiB Memory and 3.1 GHz Clock Speed (t3.xlarge).  
 - Instances are created with your username, OS and products name as Instance name.  
-- Tags are added to the instance to show what pruducts have been installed and what installers were used.  
+- Tags are added to the instance to show what products have been installed and what installers were used.  
 - Instances are all set to shutdown at 8pm GMT to encourage users not to leave instances running for no reason. If a instance really needs to stay on longer, the auto shutdown can be disabled from either the task scheduler (Windows) or the root cron job (Linux).  
 
 ## Supported OS / Products
