@@ -1,0 +1,8 @@
+- name: ES 6.0
+  block:
+    - name: Set Facts
+      set_fact:
+        installerNameES: es_60.exe
+        S3Prefix: ED/60/
+        productName: ES60
+  tags: es60

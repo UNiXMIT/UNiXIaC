@@ -1,0 +1,60 @@
+- name: ES 8.0
+  set_fact:
+    installerNameES: es_80.exe
+    S3Prefix: ED/80/
+    productName: ES80
+  tags: es80
+
+- name: ES 8.0 PU 5
+  set_fact:
+    installerNameESPU: es_80_pu05_318643.exe
+    productName: ES80PU5
+  tags: es80pu5
+
+- name: ES 8.0 PU 6
+  set_fact:
+    installerNameESPU: es_80_pu06_321065.exe
+    productName: ES80PU6
+  tags: es80pu6
+
+- name: ES 8.0 PU 7
+  set_fact:
+    installerNameESPU: es_80_pu07_323531.exe
+    productName: ES80PU7
+  tags: es80pu7
+
+- name: ES 8.0 PU 8
+  set_fact:
+    installerNameESPU: es_80_pu08_324719.exe
+    productName: ES80PU8
+  tags: es80pu8
+
+- name: ES 8.0 PU 9
+  set_fact:
+    installerNameESPU: es_80_pu09_328365.exe
+    productName: ES80PU9
+  tags: es80pu9
+
+- name: ES 8.0 PU 10
+  set_fact:
+    installerNameESPU: es_80_pu10_330752.exe
+    productName: ES80PU10
+  tags: es80pu10
+
+- name: ES 8.0 PU 11
+  set_fact:
+    installerNameESPU: es_80_pu11_331770.exe
+    productName: ES80PU11
+  tags: es80pu11
+
+- name: ES 8.0 PU 12
+  set_fact:
+    installerNameESPU: es_80_pu12_336862.exe
+    productName: ES80PU12
+  tags: es80pu12
+
+- name: ES 8.0 PU 13
+  set_fact:
+    installerNameESPU: es_80_pu13_340020.exe
+    productName: ES80PU13
+  tags: es80pu13

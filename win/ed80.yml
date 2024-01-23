@@ -50,15 +50,15 @@
 
 - name: ED 8.0 PU 11
   set_fact:
-    installerNameEDVSPU: ede_80_pu11_331770.exe
-    installerNameEDEPU: edvs2022_80_pu11_331774.exe
+    installerNameEDVSPU: edvs2022_80_pu11_331774.exe
+    installerNameEDEPU: ede_80_pu11_331770.exe
     productName: ED80PU11
   tags: ed80pu11
 
 - name: ED 8.0 PU 12
   set_fact:
-    installerNameEDVSPU: ede_80_pu12_336862.exe
-    installerNameEDEPU: edvs2022_80_pu12_336866.exe
+    installerNameEDVSPU: edvs2022_80_pu12_336866.exe
+    installerNameEDEPU: ede_80_pu12_336862.exe
     productName: ED80PU12
   tags: ed80pu12
 

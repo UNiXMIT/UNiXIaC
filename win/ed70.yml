@@ -81,7 +81,7 @@
 
 - name: ED 7.0 PU 22
   set_fact:
-    installerNameEDVSPU: edvs2019_70_pu22_337406
+    installerNameEDVSPU: edvs2019_70_pu22_337406.exe
     installerNameEDEPU: ede_70_pu22_337404.exe
     productName: ED70PU22
   tags: ed70pu22

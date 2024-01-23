@@ -1,0 +1,56 @@
+- name: ES 7.0
+  block:
+    - name: Set Facts
+      set_fact:
+        installerNameES: es_70.exe
+        S3Prefix: ED/70/
+        productName: ES70
+  tags: es70
+
+- name: ES 70 PU 15
+  set_fact:
+    installerNameEDVSPU: es_70_pu15_315321.exe
+    productName: ES70PU15
+  tags: es70pu15
+
+- name: ES 7.0 PU 16
+  set_fact:
+    installerNameEDVSPU: es_70_pu16_318103.exe
+    productName: ES70PU16
+  tags: es70pu16
+
+- name: ES 7.0 PU 17
+  set_fact:
+    installerNameEDVSPU: es_70_pu17_320926.exe
+    productName: ES70PU17
+  tags: es70pu17
+
+- name: ES 7.0 PU 18
+  set_fact:
+    installerNameEDVSPU: es_70_pu18_322467.exe
+    productName: ES70PU18
+  tags: es70pu18
+
+- name: ES 7.0 PU 19
+  set_fact:
+    installerNameEDVSPU: es_70_pu19_324235.exe
+    productName: ES70PU19
+  tags: es70pu19
+
+- name: ES 7.0 PU 20
+  set_fact:
+    installerNameEDVSPU: es_70_pu20_328615.exe
+    productName: ES70PU20
+  tags: es70pu20
+
+- name: ES 7.0 PU 21
+  set_fact:
+    installerNameEDVSPU: es_70_pu21_330880.exe
+    productName: ES70PU21
+  tags: es70pu21
+
+- name: ES 7.0 PU 22
+  set_fact:
+    installerNameEDVSPU: es_70_pu22_337404.exe
+    productName: ES70PU22
+  tags: es70pu22
