@@ -197,5 +197,5 @@
   tags: es
 
 - name: Create Symlink for ES <<===>> ED
-  win_shell: mklink /D "C:\Program Files (x86)\Micro Focus\Enterprise Developer" "C:\Program Files (x86)\Micro Focus\Enterprise Server"
+  win_command: cmd.exe /k mklink /d "C:\Program Files (x86)\Micro Focus\Enterprise Developer" "C:\Program Files (x86)\Micro Focus\Enterprise Server"
   tags: es
