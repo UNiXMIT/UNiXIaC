@@ -185,7 +185,7 @@
 
 - name: Enable ESCWA Listen All
   community.windows.win_lineinfile:
-    path: C:\ProgramData\Micro Focus\Enterprise Server\ESCWA\commonwebadmin.json
+    path: C:\ProgramData\Micro Focus\Enterprise Developer\ESCWA\commonwebadmin.json
     regex: 'MfRequestedEndpoint'
     line: '    "MfRequestedEndpoint" : "tcp:*:10086",'
   tags: es
