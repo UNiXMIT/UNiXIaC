@@ -83,6 +83,7 @@
       - expect
       - postgresql-odbc
       - net-tools
+      - lsof
     state: present
 
 - name: RHEL<=8 Package installation
