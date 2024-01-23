@@ -207,6 +207,48 @@
   - name: Import ed.yml
     import_tasks: ed.yml
 
+- name: Install ES 5.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import es50.yml
+    import_tasks: es50.yml
+
+- name: Install ES 6.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import es60.yml
+    import_tasks: es60.yml
+
+- name: Install ES 7.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import es70.yml
+    import_tasks: es70.yml
+
+- name: Install ES 8.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import es80.yml
+    import_tasks: es80.yml
+
+- name: Install ES 9.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import es90.yml
+    import_tasks: es90.yml
+
+- name: Setup ES
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import es.yml
+    import_tasks: es.yml
+
 - name: Setup ADLDS
   hosts: awsEC2
   gather_facts: no

@@ -67,9 +67,11 @@
     path: /etc/security/limits.conf
     line: '* hard nofile 50000' 
     state: present
+  become: true
 
 - name: Increase Soft nofile Limit
   ansible.builtin.lineinfile:
     path: /etc/security/limits.conf
     line: '* soft nofile 50000' 
     state: present
+  become: true
