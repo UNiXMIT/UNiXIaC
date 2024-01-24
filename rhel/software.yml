@@ -65,7 +65,6 @@
       - curl
       - cronie
       - dos2unix
-      - java-11-openjdk
       - htop
       - libstdc++.i686
       - libaio-devel
@@ -86,6 +85,12 @@
       - lsof
     state: present
 
+- name: RHEL<=7 Package installation
+  package:
+    name: java-11-openjdk
+    state: present
+  when: ansible_facts['distribution_major_version'] | int <= 7
+
 - name: RHEL<=8 Package installation
   package:
     name: spax
@@ -95,6 +100,7 @@
 - name: RHEL>=8 Package installation
   package:
     name: 
+      - java-latest-openjdk
       - libnsl
       - podman
       - buildah
