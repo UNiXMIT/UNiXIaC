@@ -1,4 +1,4 @@
-# UNiXIaC
+# [UNiXIaC](https://github.com/UNiXMIT/UNiXIaC)
 - [Prerequisites](#prerequisites)
 - [Minimum AWS EC2 Instance requirements](#minimum-aws-ec2-instance-requirements)
 - [Install Instructions](#install-instructions)
