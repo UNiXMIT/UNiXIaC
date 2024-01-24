@@ -17,6 +17,7 @@
     - cascadiamono
     - ntop.portable
     - psqlodbc
+    - openjdk
     # - dotnet
     # - windows-sdk-11-version-22h2-all
     # - visualstudio2017buildtools
