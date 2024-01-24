@@ -31,6 +31,8 @@ Standard_B2ls_v2
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/Dockerfile
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/semaphore.sh
 chmod +x semaphore.sh
+mkdir /home/support/semaphore/config
+mkdir /home/support/semaphore/db
 semaphore.sh
 ```
 **NOTE:** Dockerfile, pfsso*.zip and support.pem must be located in the current working directory before starting the build. 
