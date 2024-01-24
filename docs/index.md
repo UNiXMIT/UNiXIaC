@@ -15,8 +15,8 @@
 ![3](images/3.png)  
 
 4. You will now see a pop-up window showing 5 entry fields. Only the first 2, SSO Email and password, are required fields.  
-    - SSO Email - Email to authenticate with Pulse VPN.  
-    - SSO Password - Password to Authenticate with Pulse VPN.  
+    - SSO Email - Micro Focus Email to authenticate with Pulse VPN.  
+    - SSO Password - Micro Focus Password to Authenticate with Pulse VPN.  
     - SSO Method - SSO Authentication method to use. 1=SmartPhonePush 2=TOTP (default=1).  
     - SSO Token - Valid authentication token to use for TOTP.  
     - VM Count - Number of duplicate EC2 instances to create (default=1).  
