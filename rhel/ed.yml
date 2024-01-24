@@ -103,7 +103,7 @@
 #   become: yes
 
 - name: Install AutoPass License File
-  shell: mv /tmp/LicFile.txt /var/microfocuslicensing/bin/LicFile.txt
+  shell: mv /tmp/LicFile.txt /opt/microfocus/licensing/autopass/clientdetails/data/LicFile.txt
   become: yes
 
 - name: Start MFDS
