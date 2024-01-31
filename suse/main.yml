@@ -109,14 +109,14 @@
 #     import_tasks: db2.yml
 #   tags: default
 
-# - name: Create Support Files and Directories
-#   hosts: awsEC2
-#   gather_facts: no
-#   become: yes
-#   tasks:
-#   - name: Import createFilesDir.yml
-#     import_tasks: createFilesDir.yml
-#   tags: default
+- name: Create Support Files and Directories
+  hosts: awsEC2
+  gather_facts: no
+  become: yes
+  tasks:
+  - name: Import createFilesDir.yml
+    import_tasks: createFilesDir.yml
+  tags: default
 
 # - name: ED 5.0
 #   hosts: awsEC2
@@ -192,14 +192,14 @@
 #     import_tasks: extend.yml
 #   tags: extend
 
-# - name: Create MOTD
-#   hosts: awsEC2
-#   gather_facts: yes
-#   become: yes
-#   tasks:
-#   - name: Import motd.yml
-#     import_tasks: motd.yml
-#   tags: default
+- name: Create MOTD
+  hosts: awsEC2
+  gather_facts: yes
+  become: yes
+  tasks:
+  - name: Import motd.yml
+    import_tasks: motd.yml
+  tags: default
 
 # - name: Add CRON Jobs
 #   hosts: awsEC2

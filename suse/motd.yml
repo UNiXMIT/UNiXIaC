@@ -1,0 +1,29 @@
+- name: Delete original MOTD
+  file:
+    path: /etc/motd
+    state: absent
+    
+- name: Create new MOTD
+  copy:
+    dest: "/etc/motd"
+    content: |
+      ****************************************************************************************************
+
+          {{ ansible_distribution }} {{ ansible_distribution_version}}
+
+          AcuCOBOL
+            Set Environment:
+              . setenvacu.sh (-h for usage)
+                
+              startacu.sh (-h for usage)
+
+          MFCOBOL
+            Set Environment:
+              . setenvmf.sh
+
+              startmf.sh (-h for usage)
+
+            Install Options:
+              -skipsafenet -skipautopass -IacceptEULA -ESadminID={{ myUsername }} -il=/home/products/edXXpuXX
+
+      ****************************************************************************************************
