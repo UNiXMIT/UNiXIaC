@@ -2,16 +2,16 @@
   set_fact:
     productName: 
 
-- name: Update all packages
-  community.general.zypper:
-    name: '*'
-    state: latest
+# - name: Update all packages
+#   community.general.zypper:
+#     name: '*'
+#     state: latest
   
-- name: Apply all available patches
-  community.general.zypper:
-    name: '*'
-    state: latest
-    type: patch
+# - name: Apply all available patches
+#   community.general.zypper:
+#     name: '*'
+#     state: latest
+#     type: patch
 
 - name: Install Base Development
   community.general.zypper:
