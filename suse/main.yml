@@ -82,15 +82,15 @@
     import_tasks: system.yml
   tags: default
 
-# - name: Manage Users
-#   hosts: awsEC2
-#   gather_facts: no
-#   become: yes
-#   tasks: 
-#   - name: Import users.yml
-#     import_tasks: users.yml
-#   no_log: True
-#   tags: default
+- name: Manage Users
+  hosts: awsEC2
+  gather_facts: no
+  become: yes
+  tasks: 
+  - name: Import users.yml
+    import_tasks: users.yml
+  no_log: True
+  tags: default
 
 # - name: Install Software
 #   hosts: awsEC2
@@ -219,33 +219,33 @@
 #     reboot:
 #   tags: default
 
-- name: AWS EC2 Instance Created and Setup
-  hosts: local
-  gather_facts: no
-  tasks:
-  - name: WebAPI Notification
-    ansible.builtin.uri:
-      url: '{{ webAPI }}'
-      method: POST
-      body_format: json
-      body:
-        username: "{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ hostvars[item.public_ip_address].productName }} Build Complete"
-        content: "Public IP - {{ item.public_ip_address }} \nPublic DNS - {{ item.public_dns_name }}"
-      status_code:
-          - 200
-          - 202
-          - 204
-    loop: '{{ ec2.instances }}'
-    tags: default
+# - name: AWS EC2 Instance Created and Setup
+#   hosts: local
+#   gather_facts: no
+#   tasks:
+#   - name: WebAPI Notification
+#     ansible.builtin.uri:
+#       url: '{{ webAPI }}'
+#       method: POST
+#       body_format: json
+#       body:
+#         username: "{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ hostvars[item.public_ip_address].productName }} Build Complete"
+#         content: "Public IP - {{ item.public_ip_address }} \nPublic DNS - {{ item.public_dns_name }}"
+#       status_code:
+#           - 200
+#           - 202
+#           - 204
+#     loop: '{{ ec2.instances }}'
+#     tags: default
     
-  - name: Display AWS EC2 Information
-    debug:
-      msg: 
-      - "Instance Name   - {{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ hostvars[item.public_ip_address].productName }}"
-      - 'AWS ID          - {{ item.instance_id }}'
-      - 'Public IP       - {{ item.public_ip_address }}'
-      - 'Public DNS      - {{ item.public_dns_name }}'
-      - 'Private IP      - {{ item.private_ip_address }}'
-      - 'Private DNS     - {{ item.private_dns_name }}'
-    loop: '{{ ec2.instances }}'
-    tags: default
+#   - name: Display AWS EC2 Information
+#     debug:
+#       msg: 
+#       - "Instance Name   - {{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ hostvars[item.public_ip_address].productName }}"
+#       - 'AWS ID          - {{ item.instance_id }}'
+#       - 'Public IP       - {{ item.public_ip_address }}'
+#       - 'Public DNS      - {{ item.public_dns_name }}'
+#       - 'Private IP      - {{ item.private_ip_address }}'
+#       - 'Private DNS     - {{ item.private_dns_name }}'
+#     loop: '{{ ec2.instances }}'
+#     tags: default
