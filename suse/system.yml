@@ -22,10 +22,6 @@
     state: present
     line: '%users ALL=(ALL) NOPASSWD: ALL'
 
-- name: Disable SELinux
-  selinux:
-    state: disabled
-
 - name: Restart SSH
   service:
     name: sshd
