@@ -24,11 +24,21 @@
     type: pattern
     state: present
 
-- name: Add a OpenSUSE repo and add its gpg key
+- name: Add a OpenSUSE Utilities repo and add its gpg key
   community.general.zypper_repository:
     repo: 'https://download.opensuse.org/repositories/utilities/15.5/utilities.repo'
     auto_import_keys: true
 
+- name: Add a OpenSUSE Base System repo and add its gpg key
+  community.general.zypper_repository:
+    repo: 'https://download.opensuse.org/repositories/Base:/System/standard/Base:System.repo'
+    auto_import_keys: true  
+
+- name: Add a OpenSUSE Network repo and add its gpg key
+  community.general.zypper_repository:
+    repo: 'https://download.opensuse.org/repositories/network/15.5/network.repo'
+    auto_import_keys: true
+  
 - name: Package installation
   community.general.zypper:
     name: 
@@ -65,6 +75,7 @@
       - libz1-32bit
       - java-17-openjdk
     state: present
+    update_cache: true
 
 - name: Enable Podman Socket
   ansible.builtin.shell: systemctl enable --now podman.socket
