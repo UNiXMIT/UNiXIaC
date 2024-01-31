@@ -2,9 +2,9 @@
   set_fact:
     productName: 
 
-- name: Pause for 60 seconds
+- name: Pause for 30 seconds
   ansible.builtin.pause:
-    seconds: 60
+    seconds: 30
 
 - name: Update all packages
   community.general.zypper:
@@ -24,20 +24,20 @@
     type: pattern
     state: present
 
-- name: Add a OpenSUSE Utilities repo and add its gpg key
+- name: Add a OpenSUSE repo and add its gpg key
   community.general.zypper_repository:
-    repo: 'https://download.opensuse.org/repositories/utilities/15.5/utilities.repo'
+    repo: 'https://download.opensuse.org/repositories/openSUSE:/Leap:/16.0/standard/openSUSE:Leap:16.0.repo'
     auto_import_keys: true
 
-- name: Add a OpenSUSE Base System repo and add its gpg key
-  community.general.zypper_repository:
-    repo: 'https://download.opensuse.org/repositories/Base:/System/standard/Base:System.repo'
-    auto_import_keys: true  
-
-# - name: Add a OpenSUSE Network repo and add its gpg key
+# - name: Add a OpenSUSE Base System repo and add its gpg key
 #   community.general.zypper_repository:
-#     repo: 'https://download.opensuse.org/repositories/network/15.5/network.repo'
-#     auto_import_keys: true
+#     repo: 'https://download.opensuse.org/repositories/Base:/System/standard/Base:System.repo'
+#     auto_import_keys: true  
+
+# # - name: Add a OpenSUSE Network repo and add its gpg key
+# #   community.general.zypper_repository:
+# #     repo: 'https://download.opensuse.org/repositories/network/15.5/network.repo'
+# #     auto_import_keys: true
 
 - name: Add MSSQL ODBC Driver Repo
   community.general.zypper_repository:
@@ -52,7 +52,7 @@
       - curl
       - cronie
       - dos2unix
-      - htop
+      # - htop
       - libaio-devel
       - libaio-devel-32bit
       - glibc-devel
