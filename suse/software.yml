@@ -2,22 +2,22 @@
   set_fact:
     productName: 
 
-# - name: Update all packages
-#   community.general.zypper:
-#     name: '*'
-#     state: latest
+- name: Update all packages
+  community.general.zypper:
+    name: '*'
+    state: latest
+    update_cache: true
   
-# - name: Apply all available patches
-#   community.general.zypper:
-#     name: '*'
-#     state: latest
-#     type: patch
+- name: Apply all available patches
+  community.general.zypper:
+    name: '*'
+    state: latest
+    type: patch
 
 - name: Install Base Development
   community.general.zypper:
     name: devel_basis
     type: pattern
-    update_cache: true
     state: present
 
 - name: Add a OpenSUSE repo and add its gpg key
