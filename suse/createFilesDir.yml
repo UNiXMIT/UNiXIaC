@@ -220,7 +220,7 @@
     state: directory
     recurse: yes
     owner: '{{ myUsername }}'
-    group: '{{ myUsername }}'
+    group: users
     
 - name: Change Ownership of /home/products Directory
   file:
@@ -228,4 +228,4 @@
     state: directory
     recurse: yes
     owner: '{{ myUsername }}'
-    group: '{{ myUsername }}'
+    group: users
