@@ -2,6 +2,10 @@
   set_fact:
     productName: 
 
+- name: Pause for 120 seconds
+  ansible.builtin.pause:
+    seconds: 120
+
 - name: Update all packages
   community.general.zypper:
     name: '*'
