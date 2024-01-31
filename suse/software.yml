@@ -1,0 +1,66 @@
+- name: Set Facts
+  set_fact:
+    productName: 
+
+- name: Update all packages
+  community.general.zypper:
+    name: '*'
+    state: latest
+  
+- name: Apply all available patches
+  community.general.zypper:
+    name: '*'
+    state: latest
+    type: patch
+
+- name: Install Base Development
+  community.general.zypper:
+    name: devel_basis
+    type: pattern
+    update_cache: true
+    state: present
+
+- name: Add a OpenSUSE repo and add its gpg key
+  community.general.zypper_repository:
+    repo: 'https://download.opensuse.org/repositories/utilities/15.5/utilities.repo'
+    auto_import_keys: true
+
+- name: Package installation
+  community.general.zypper:
+    name: 
+      - unixODBC-devel
+      - wget
+      - curl
+      - cronie
+      - dos2unix
+      - htop
+      - libaio-devel
+      - libaio-devel-32bit
+      - glibc-devel
+      - glibc-devel-32bit
+      - glibc
+      - glibc-32bit
+      - tcpdump
+      - ed
+      - tmux
+      # - openconnect
+      - jq
+      - python3
+      - python3-pip
+      - expect
+      - postgresql
+      - net-tools
+      - lsof
+      - podman
+      - buildah
+      - spax
+      - libcrypt1-32bit
+      - libncurses5-32bit
+      - libstdc++6-32bit
+      - libgcc_s1-32bit
+      - libz1-32bit
+      - java-17-openjdk
+    state: present
+
+- name: Enable Podman Socket
+  ansible.builtin.shell: systemctl enable --now podman.socket
