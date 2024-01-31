@@ -1,0 +1,22 @@
+{
+  "myUsername": "support",
+  "myPassword": "strongPassword",
+  "imageName": "SUSE15",
+  "awsAMI": "ami-098a2dc4bca638593",
+  "keyName": "support",
+  "keyLocation": "~/.ssh/support.pem",
+  "securityGroups": "['sg-XXXXXX','sg-XXXXXX']",
+  "awsRegion": "eu-west-2",
+  "availabilityZone": "eu-west-2a",
+  "instanceType": "t3.xlarge",
+  "deviceName": "/dev/sda1",
+  "volumeType": "gp3",
+  "volumeSize": 120,
+  "awsProfile": "848105473048_Fed_COBOL2_Compute",
+  "vmCount": 1,
+  "ssoEmail": "email@domain.com",
+  "ssoPassword": "strongPassword",
+  "ssoMethod": "1",
+  "ssoToken": "XXXXXX",
+  "webAPI": "https://WebAPI.com/"
+}

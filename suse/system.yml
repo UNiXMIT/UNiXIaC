@@ -1,0 +1,76 @@
+- name: Set timezone to Europe/London
+  community.general.timezone:
+    name: Europe/London
+
+- name: Allow SSH password authentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PasswordAuthentication"
+    line: "PasswordAuthentication yes"
+    state: present
+
+- name: Allow TCP Forwarding
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^AllowTcpForwarding"
+    line: "AllowTcpForwarding yes"
+    state: present
+
+- name: Modify the sudoers file
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    line: '%users ALL=(ALL) NOPASSWD: ALL'
+
+- name: Disable SELinux
+  selinux:
+    state: disabled
+
+- name: Restart SSH
+  service:
+    name: sshd
+    state: restarted
+
+- name: Create profile.sh
+  copy:
+    dest: "/etc/profile.d/profile.sh"
+    content: |
+      #!/bin/bash
+      [ -d \"/opt/microfocus/EnterpriseDeveloper/bin\" ] && . /opt/microfocus/EnterpriseDeveloper/bin/cobsetenv
+      export PATH=$PATH:~/AcuSupport/AcuScripts:~/MFSupport/MFScripts:~/DB2/odbc_cli/clidriver/bin
+      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/DB2/odbc_cli/clidriver/lib
+      export TERM=xterm
+
+- name: Make profile.sh executable
+  file:
+    path: "/etc/profile.d/profile.sh"
+    state: touch
+    mode: 0775
+    
+- name: Add a line to .bashrc
+  lineinfile:
+    path: /home/{{ myUsername }}/.bashrc
+    line: if [[ -t 0 && $- = *i* ]]; then stty -ixon; fi
+    create: yes
+  become: true
+
+- name: Add a line to .bash_profile
+  lineinfile:
+    path: /home/{{ myUsername }}/.bash_profile
+    line: export PS1="$PS1\[\e]1337;CurrentDir="'$(pwd)\a\]'
+    create: yes
+  become: true
+
+- name: Increase Hard nofile Limit
+  ansible.builtin.lineinfile:
+    path: /etc/security/limits.conf
+    line: '* hard nofile 50000' 
+    state: present
+  become: true
+
+- name: Increase Soft nofile Limit
+  ansible.builtin.lineinfile:
+    path: /etc/security/limits.conf
+    line: '* soft nofile 50000' 
+    state: present
+  become: true
