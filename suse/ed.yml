@@ -1,0 +1,118 @@
+- name: Get {{ installerName }} Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: '{{ S3Prefix }}{{ installerName }}'
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+
+- name: Get SafeNet License Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/Licenses/lservrc.net
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3sn
+  delegate_to: localhost
+    
+- name: Get AutoPass License Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: ED/Licenses/LicFile.txt
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3ap
+  delegate_to: localhost
+
+- name: Download {{ installerName }}
+  ansible.builtin.get_url:
+    url: '{{ s3.url }}'
+    dest: "/home/{{ myUsername }}/MFSupport/MFInstallers/"
+    owner: '{{ myUsername }}' 
+    group: '{{ myUsername }}'
+    mode: '0775'
+
+- name: Download SafeNet License
+  ansible.builtin.get_url:
+    url: '{{ s3sn.url }}'
+    dest: /tmp
+    owner: '{{ myUsername }}' 
+    group: '{{ myUsername }}'
+    mode: '0775'
+
+- name: Download AutoPass License
+  ansible.builtin.get_url:
+    url: '{{ s3ap.url }}'
+    dest: /tmp
+    owner: '{{ myUsername }}' 
+    group: '{{ myUsername }}'
+    mode: '0775'
+
+- name: Add ED Tags
+  amazon.aws.ec2_tag:
+    aws_profile: '{{ awsProfile }}'
+    region: '{{ awsRegion }}'
+    resource: '{{ item }}'
+    tags:
+      Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ productName }}'
+      ED: '{{ installerName }}'
+    state: present
+  loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
+  delegate_to: localhost
+
+- name: Install {{ installerName }}
+  command: './{{ installerName }} -IacceptEULA -ESadminID={{ myUsername }} -il={{ installPath }}'
+  args:
+    chdir: /home/{{ myUsername }}/MFSupport/MFInstallers
+  become: yes
+
+# - name: Add License Server
+#   lineinfile:
+#     path: /var/microfocuslicensing/bin/ces.ini
+#     state: present
+#     regexp: '^lshost'
+#     line: 'lshost = {{ licenseServer }}'
+#   become: yes
+
+# - name: Install Safenet License File
+#   get_url:
+#     url: '{{ SafenetFile }}'
+#     dest: /var/microfocuslicensing/bin/lservrc.net
+#     mode: '0775'
+#   become: yes
+
+- name: Install Safenet License File
+  shell: mv /tmp/lservrc.net /var/microfocuslicensing/bin/lservrc.net
+  become: yes
+
+# - name: Install AutoPass License File
+#   get_url:
+#     url: '{{ AutoPassFile }}'
+#     dest: /opt/microfocus/licensing/autopass/clientdetails/data/LicFile.txt
+#     mode: '0775'
+#   become: yes
+
+- name: Install AutoPass License File
+  shell: mv /tmp/LicFile.txt /opt/microfocus/licensing/autopass/clientdetails/data/LicFile.txt
+  become: yes
+
+- name: Start MFDS
+  shell: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64"
+  become: yes
+
+- name: Pause for 10 seconds
+  ansible.builtin.pause:
+    seconds: 10
+
+- name: Import JCL Region
+  shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'

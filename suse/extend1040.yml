@@ -1,0 +1,19 @@
+- name: extend 10.4.0
+  block:
+    - name: Set Facts
+      set_fact:
+        installPath: /home/products/acu1040shx64/
+        installerName: setup_acucob1040pmk59shACU
+        S3Prefix: AcuCOBOL/1040/
+        productName: extend1040
+  tags: extend1040
+
+- name: extend 10.4.1
+  block:
+    - name: Set Facts
+      set_fact:
+        installPath: /home/products/acu1041shx64/
+        installerName: setup_acucob1041pmk59shACU
+        S3Prefix: AcuCOBOL/1041/
+        productName: extend1041
+  tags: extend1041

@@ -57,6 +57,7 @@
     name: db2
     image: icr.io/db2_community/db2:latest
     state: started
+    privileged: true
     restart_policy: "always"
     detach: true
     interactive: true
