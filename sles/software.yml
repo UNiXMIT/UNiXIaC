@@ -74,6 +74,7 @@
       - mssql-tools
     state: present
     update_cache: true
+    disable_recommends: false
 
 - name: Set MSSQL Tools on PATH
   copy:
