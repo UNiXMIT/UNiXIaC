@@ -3,7 +3,7 @@
     path: '{{ installPath }}'
     state: directory
     owner: '{{ myUsername }}'
-    group: '{{ myUsername }}'
+    group: users
     mode: '0775'
   become: yes
 
@@ -24,7 +24,7 @@
     url: '{{ s3.url }}'
     dest: '{{ installPath }}'
     owner: '{{ myUsername }}' 
-    group: '{{ myUsername }}'
+    group: users
     mode: '0775'
 
 - name: Add extend Tags

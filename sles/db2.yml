@@ -22,14 +22,14 @@
     state: directory
     recurse: yes
     owner: '{{ myUsername }}'
-    group: '{{ myUsername }}'
+    group: users
 
 - name: Download DB2 ODBC Driver
   ansible.builtin.get_url:
     url: '{{ s3.url }}'
     dest: "/home/{{ myUsername }}/DB2"
     owner: '{{ myUsername }}' 
-    group: '{{ myUsername }}'
+    group: users
     mode: '0775'
 
 - name: Extract DB2 ODBC Driver

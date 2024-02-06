@@ -1,7 +1,7 @@
 - name: ED 9.0
   set_fact:
     installPath: /home/products/ed90
-    installerName: setup_entdev_9.0_redhat_x86_64
+    installerName: setup_entdev_9.0_suse_x64
     S3Prefix: ED/90/
     productName: ED90
   tags: ed90
@@ -9,7 +9,7 @@
 - name: ED 9.0 PU 1
   set_fact:
     installPath: /home/products/ed90pu1
-    installerName: setup_entdev_9.0_patchupdate01_328659_redhat_x86_64
+    installerName: setup_entdev_9.0_patchupdate01_328659_suse_x64
     S3Prefix: ED/90/
     productName: ED90PU1
   tags: ed90pu1
@@ -17,7 +17,7 @@
 - name: ED 9.0 PU 2
   set_fact:
     installPath: /home/products/ed90pu2
-    installerName: setup_entdev_9.0_patchupdate02_330827_redhat_x86_64
+    installerName: setup_entdev_9.0_patchupdate02_330827_suse_x64
     S3Prefix: ED/90/
     productName: ED90PU2
   tags: ed90pu2
@@ -25,7 +25,7 @@
 - name: ED 9.0 PU 3
   set_fact:
     installPath: /home/products/ed90pu3
-    installerName: setup_entdev_9.0_patchupdate03_332283_redhat_x86_64
+    installerName: setup_entdev_9.0_patchupdate03_332283_suse_x64
     S3Prefix: ED/90/
     productName: ED90PU3
   tags: ed90pu3
@@ -33,7 +33,7 @@
 - name: ED 9.0 PU 4
   set_fact:
     installPath: /home/products/ed90pu4
-    installerName: setup_entdev_9.0_patchupdate04_339842_redhat_x86_64
+    installerName: setup_entdev_9.0_patchupdate04_339842_suse_x64
     S3Prefix: ED/90/
     productName: ED90PU4
   tags: ed90pu4

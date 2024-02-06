@@ -39,7 +39,7 @@
     url: '{{ s3.url }}'
     dest: "/home/{{ myUsername }}/MFSupport/MFInstallers/"
     owner: '{{ myUsername }}' 
-    group: '{{ myUsername }}'
+    group: users
     mode: '0775'
 
 - name: Download SafeNet License
@@ -47,7 +47,7 @@
     url: '{{ s3sn.url }}'
     dest: /tmp
     owner: '{{ myUsername }}' 
-    group: '{{ myUsername }}'
+    group: users
     mode: '0775'
 
 - name: Download AutoPass License
@@ -55,7 +55,7 @@
     url: '{{ s3ap.url }}'
     dest: /tmp
     owner: '{{ myUsername }}' 
-    group: '{{ myUsername }}'
+    group: users
     mode: '0775'
 
 - name: Add ED Tags
