@@ -20,12 +20,7 @@
   lineinfile:
     path: /etc/sudoers
     state: present
-    regexp: '^%wheel ALL='
-    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
-
-- name: Disable SELinux
-  selinux:
-    state: disabled
+    line: '{{ myUsername }} ALL=(ALL) NOPASSWD: ALL'
 
 - name: Restart SSH
   service:

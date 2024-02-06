@@ -2,52 +2,36 @@
   set_fact:
     productName: 
 
-- name: Install EPEL key 
-  rpm_key:
-    state: present
-    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}
+- name: Update APT Cache
+  ansible.builtin.apt:
+    update_cache: yes
 
-- name: Install EPEL
-  package:
-    name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm'
-    state: present
+- name: Update all packages to their latest version
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
 
-- name: Install CentOS RPM Key for RHEL 8 
-  rpm_key:
-    state: present
-    key: https://www.centos.org/keys/RPM-GPG-KEY-CentOS-Official
-  when: ansible_facts['distribution_major_version'] | int == 8
-
-- name: Install CentOS GPG Keys RPM for RHEL 8
-  dnf:
-    state: present
-    name: 'http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-8-6.el8.noarch.rpm'
-  when: ansible_facts['distribution_major_version'] | int == 8
-
-- name: Install CentOS Repo for RHEL 8
-  dnf:
-    name: 'http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-stream-repos-8-6.el8.noarch.rpm'
-    state: present
-  when: ansible_facts['distribution_major_version'] | int == 8
-
-- name: Enable powertools for RHEL 8
-  shell: dnf config-manager --set-enabled powertools
-  when: ansible_facts['distribution_major_version'] | int == 8
+- name: Download MSSQL ODBC Driver Key
+  get_url:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    dest: /etc/apt/trusted.gpg.d/microsoft.asc
+    mode: '0775'
 
 - name: Download MSSQL ODBC Driver Repo
   get_url:
-    url: https://packages.microsoft.com/config/rhel/{{ ansible_distribution_major_version }}/prod.repo
-    dest: /etc/yum.repos.d/mssql-release.repo
+    url: https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list
+    dest: /etc/apt/sources.list.d/mssql-release.list
     mode: '0775'
 
 - name: Install MSSQL ODBC Driver 17
   environment:
     ACCEPT_EULA: "Y"
-  package:
+  ansible.builtin.apt:
     name: 
       - msodbcsql17 
       - mssql-tools
     state: present
+    update_cache: true
 
 - name: Set MSSQL Tools on PATH
   copy:
@@ -56,22 +40,26 @@
       #!/bin/bash
       export PATH="$PATH:/opt/mssql-tools/bin"
 
+- name: Add i386 architecture
+  command: dpkg --add-architecture i386
+
 - name: Package installation
   ansible.builtin.apt:
     name:
-      - '@Development tools'
-      - unixODBC-devel
+      - build-essential
+      - default-jdk
+      - unixodbc-dev
       - wget
       - curl
-      - cronie
+      - cron
       - dos2unix
       - htop
-      - libstdc++.i686
-      - libaio-devel
-      - glibc-devel
-      - glibc-devel.i686
-      - glibc
-      - glibc.i686
+      - lib32stdc++6
+      - libaio-dev
+      - libncurses5
+      - apt-file 
+      - zlib1g:i386
+      - libgc1 
       - tcpdump
       - ed
       - tmux
@@ -80,83 +68,16 @@
       - python3
       - python3-pip
       - expect
-      - postgresql-odbc
+      - odbc-postgresql
       - net-tools
       - lsof
-    state: present
-
-- name: RHEL<=7 Package installation
-  package:
-    name: java-11-openjdk
-    state: present
-  when: ansible_facts['distribution_major_version'] | int <= 7
-
-- name: RHEL<=8 Package installation
-  package:
-    name: spax
-    state: present
-  when: ansible_facts['distribution_major_version'] | int <= 8
-  
-- name: RHEL>=8 Package installation
-  package:
-    name: 
-      - java-latest-openjdk
-      - libnsl
+      - spax
       - podman
       - buildah
-      - libxcrypt.i686
-      - ncurses-libs-6.1-9.20180224.el8.i686
-      - zlib-1.2.11-18.el8_5.i686
     state: present
-  when: ansible_facts['distribution_major_version'] | int >= 8
+  
+- name: Update apt-file
+  command: apt-file update
 
 - name: Enable Podman Socket
   ansible.builtin.shell: systemctl enable --now podman.socket
-  when: ansible_facts['distribution_major_version'] | int >= 8
-
-- name: Install Oracle RPM Key 
-  rpm_key:
-    state: present
-    key: https://yum.oracle.com/RPM-GPG-KEY-oracle-ol{{ ansible_distribution_major_version }}
-
-- name: Install Oracle Instant Client RHEL9
-  dnf: 
-    name: https://download.oracle.com/otn_software/linux/instantclient/1919000/oracle-instantclient19.19-basic-19.19.0.0.0-1.el9.x86_64.rpm
-    state: present
-    disable_gpg_check: yes
-  when: ansible_facts['distribution_major_version'] | int == 9
-
-- name: Install Oracle Instant Client ODBC RHEL9
-  dnf: 
-    name: https://download.oracle.com/otn_software/linux/instantclient/1919000/oracle-instantclient19.19-odbc-19.19.0.0.0-1.el9.x86_64.rpm
-    state: present
-    disable_gpg_check: yes
-  when: ansible_facts['distribution_major_version'] | int == 9
-
-- name: Install Oracle Instant Client RHEL8
-  dnf: 
-    name: https://download.oracle.com/otn_software/linux/instantclient/2112000/oracle-instantclient-basic-21.12.0.0.0-1.el8.x86_64.rpm
-    state: present
-    disable_gpg_check: yes
-  when: ansible_facts['distribution_major_version'] | int == 8
-
-- name: Install Oracle Instant Client ODBC RHEL8
-  dnf: 
-    name: https://download.oracle.com/otn_software/linux/instantclient/2112000/oracle-instantclient-odbc-21.12.0.0.0-1.el8.x86_64.rpm
-    state: present
-    disable_gpg_check: yes
-  when: ansible_facts['distribution_major_version'] | int == 8
-
-- name: Install Oracle Instant Client RHEL7
-  yum: 
-    name: https://download.oracle.com/otn_software/linux/instantclient/2112000/oracle-instantclient-basic-21.12.0.0.0-1.x86_64.rpm
-    state: present
-    disable_gpg_check: yes
-  when: ansible_facts['distribution_major_version'] | int == 7
-
-- name: Install Oracle Instant Client ODBC RHEL7
-  yum: 
-    name: https://download.oracle.com/otn_software/linux/instantclient/2112000/oracle-instantclient-odbc-21.12.0.0.0-1.x86_64.rpm
-    state: present
-    disable_gpg_check: yes
-  when: ansible_facts['distribution_major_version'] | int == 7

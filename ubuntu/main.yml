@@ -73,33 +73,33 @@
     loop: '{{ ec2.instances }}'
     tags: default
 
-# - name: Modify OS Config
-#   hosts: awsEC2
-#   gather_facts: no
-#   become: yes
-#   tasks:
-#   - name: Import system.yml
-#     import_tasks: system.yml
-#   tags: default
+- name: Modify OS Config
+  hosts: awsEC2
+  gather_facts: no
+  become: yes
+  tasks:
+  - name: Import system.yml
+    import_tasks: system.yml
+  tags: default
 
-# - name: Manage Users
-#   hosts: awsEC2
-#   gather_facts: no
-#   become: yes
-#   tasks: 
-#   - name: Import users.yml
-#     import_tasks: users.yml
-#   no_log: True
-#   tags: default
+- name: Manage Users
+  hosts: awsEC2
+  gather_facts: no
+  become: yes
+  tasks: 
+  - name: Import users.yml
+    import_tasks: users.yml
+  no_log: True
+  tags: default
 
-# - name: Install Software
-#   hosts: awsEC2
-#   gather_facts: yes
-#   become: yes
-#   tasks:
-#   - name: Import software.yml
-#     import_tasks: software.yml
-#   tags: default
+- name: Install Software
+  hosts: awsEC2
+  gather_facts: yes
+  become: yes
+  tasks:
+  - name: Import software.yml
+    import_tasks: software.yml
+  tags: default
 
 # - name: Install DB2 ODBC Drivers
 #   hosts: awsEC2
