@@ -62,6 +62,14 @@
 ### RHEL 7
 - ED 5.0
 
+### SLES 15
+- ED 9.0
+- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
+
+### Ubuntu 22.04
+- ED 9.0
+- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
+
 > **NOTE:** Patch Updates will be added as they become GA.  
 
 ### Licenses
