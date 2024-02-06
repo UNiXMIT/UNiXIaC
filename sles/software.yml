@@ -56,13 +56,6 @@
       - lsof
       - spax
       - java-17-openjdk
-    state: present
-    update_cache: true
-    disable_recommends: false
-
-- name: Dependency installation
-  community.general.zypper:
-    name:
       - libaio-devel
       - libaio-devel-32bit
       - glibc-devel
@@ -74,19 +67,16 @@
       - libstdc++6-32bit
       - libgcc_s1-32bit
       - libz1-32bit
-    state: present
-    disable_recommends: false
-
-- name: Extras installation
-  community.general.zypper:
-    name:
       - podman
       - buildah
       - openconnect
     state: present
+    update_cache: true
     disable_recommends: false
 
-- name: MSSQL Package installation
+- name: Install MSSQL ODBC Driver 17
+  environment:
+    ACCEPT_EULA: "Y"
   community.general.zypper:
     name:
       - msodbcsql17
