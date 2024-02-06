@@ -27,13 +27,21 @@
 - name: Download DB2 ODBC Driver
   ansible.builtin.get_url:
     url: '{{ s3.url }}'
-    dest: "/home/{{ myUsername }}/db2"
+    dest: "/tmp"
     owner: '{{ myUsername }}' 
     group: users
     mode: '0775'
 
 - name: Extract DB2 ODBC Driver
   ansible.builtin.unarchive:
-    src: /home/{{ myUsername }}/db2/v11.5.9_linuxx64_odbc_cli.tar.gz
+    src: /tmp/v11.5.9_linuxx64_odbc_cli.tar.gz
     dest: /home/{{ myUsername }}/db2
     remote_src: yes
+
+- name: Set DB2 on PATH and LD_LIBRARY_PATH
+  copy:
+    dest: /etc/profile.d/db2.sh
+    content: |
+      #!/bin/bash
+      export PATH="$PATH:/home/{{ myUsername }}/db2/odbc_cli/clidriver/bin"
+      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/{{ myUsername }}/db2/odbc_cli/clidriver/lib"
