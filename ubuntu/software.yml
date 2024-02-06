@@ -76,6 +76,7 @@
       - pax-utils
       - podman
       - buildah
+      - unzip
     state: present
   
 - name: Update apt-file

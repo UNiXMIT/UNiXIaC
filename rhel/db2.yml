@@ -37,3 +37,11 @@
     src: /home/{{ myUsername }}/db2/v11.5.9_linuxx64_odbc_cli.tar.gz
     dest: /home/{{ myUsername }}/db2
     remote_src: yes
+
+- name: Set DB2 on PATH and LD_LIBRARY_PATH
+  copy:
+    dest: /etc/profile.d/db2.sh
+    content: |
+      #!/bin/bash
+      export PATH="$PATH:/home/{{ myUsername }}/db2"
+      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/{{ myUsername }}/db2"

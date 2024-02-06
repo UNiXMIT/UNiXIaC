@@ -28,7 +28,7 @@
     dest: /home/{{ myUsername }}/oracle
     remote_src: yes
 
-- name: Set Oracle Instant Client on PATH
+- name: Set Oracle Instant Client on PATH and LD_LIBRARY_PATH
   copy:
     dest: /etc/profile.d/oracle.sh
     content: |
