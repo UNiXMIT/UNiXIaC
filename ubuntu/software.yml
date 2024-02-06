@@ -19,7 +19,7 @@
 
 - name: Download MSSQL ODBC Driver Repo
   get_url:
-    url: https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list
+    url: https://packages.microsoft.com/config/ubuntu/{{ ansible_distribution_version }}/prod.list
     dest: /etc/apt/sources.list.d/mssql-release.list
     mode: '0775'
 
