@@ -2,6 +2,9 @@
   set_fact:
     productName: 
 
+- name: Add i386 architecture
+  command: dpkg --add-architecture i386
+
 - name: Update APT Cache
   ansible.builtin.apt:
     update_cache: yes
@@ -40,9 +43,6 @@
       #!/bin/bash
       export PATH="$PATH:/opt/mssql-tools/bin"
 
-- name: Add i386 architecture
-  command: dpkg --add-architecture i386
-
 - name: Package installation
   ansible.builtin.apt:
     name:
@@ -55,10 +55,12 @@
       - dos2unix
       - htop
       - lib32stdc++6
+      - libstdc++6:i386
       - libaio-dev
       - libncurses5
       - apt-file 
       - zlib1g:i386
+      - libc6:i386
       - libgc1 
       - tcpdump
       - ed
