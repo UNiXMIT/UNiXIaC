@@ -43,3 +43,4 @@
       #!/bin/bash
       export PATH="$PATH:/home/{{ myUsername }}/oracle/instantclient_21_13"
       export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/{{ myUsername }}/oracle/instantclient_21_13"
+  become: yes

@@ -41,3 +41,4 @@
       #!/bin/bash
       export PATH="$PATH:/home/{{ myUsername }}/db2/odbc_cli/clidriver/bin"
       export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/{{ myUsername }}/db2/odbc_cli/clidriver/lib"
+  become: yes
