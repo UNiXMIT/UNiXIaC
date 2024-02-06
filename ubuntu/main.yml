@@ -101,6 +101,14 @@
     import_tasks: software.yml
   tags: default
 
+- name: Install Oracle Instant Client
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import oracle.yml
+    import_tasks: oracle.yml
+  tags: default
+
 - name: Install DB2 ODBC Drivers
   hosts: awsEC2
   gather_facts: no
@@ -118,65 +126,65 @@
     import_tasks: createFilesDir.yml
   tags: default
 
-# - name: ED 7.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import ed70.yml
-#     import_tasks: ed70.yml
+- name: ED 7.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import ed70.yml
+    import_tasks: ed70.yml
 
-# - name: ED 8.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import ed80.yml
-#     import_tasks: ed80.yml
+- name: ED 8.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import ed80.yml
+    import_tasks: ed80.yml
   
-# - name: ED 9.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import ed90.yml
-#     import_tasks: ed90.yml
+- name: ED 9.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import ed90.yml
+    import_tasks: ed90.yml
 
-# - name: Install ED
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import ed.yml
-#     import_tasks: ed.yml
-#   tags: ed
+- name: Install ED
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import ed.yml
+    import_tasks: ed.yml
+  tags: ed
 
-# - name: Setup OpenLDAP
-#   hosts: awsEC2
-#   gather_facts: yes
-#   become: yes
-#   tasks:
-#   - name: Import openldap.yml
-#     import_tasks: openldap.yml
-#   tags: openldap
+- name: Setup OpenLDAP
+  hosts: awsEC2
+  gather_facts: yes
+  become: yes
+  tasks:
+  - name: Import openldap.yml
+    import_tasks: openldap.yml
+  tags: openldap
 
-# - name: extend 10.4.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import extend1040.yml
-#     import_tasks: extend1040.yml
+- name: extend 10.4.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import extend1040.yml
+    import_tasks: extend1040.yml
 
-# - name: extend 10.5.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import extend1050.yml
-#     import_tasks: extend1050.yml
+- name: extend 10.5.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import extend1050.yml
+    import_tasks: extend1050.yml
 
-# - name: Install extend
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import extend.yml
-#     import_tasks: extend.yml
-#   tags: extend
+- name: Install extend
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import extend.yml
+    import_tasks: extend.yml
+  tags: extend
 
 - name: Create MOTD
   hosts: awsEC2

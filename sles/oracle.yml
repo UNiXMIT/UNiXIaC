@@ -1,0 +1,37 @@
+- name: Create ORACLE
+  file:
+    path: "/home/{{ myUsername }}/oracle"
+    state: directory
+    mode: '0775'
+
+- name: Download Oracle Instant Client Basic Package
+  get_url:
+    url: https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip
+    dest: /tmp
+    mode: '0775'
+
+- name: Extract Oracle Instant Client Basic Package
+  ansible.builtin.unarchive:
+    src: /tmp/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip
+    dest: /home/{{ myUsername }}/oracle
+    remote_src: yes
+
+- name: Download Oracle Instant Client ODBC Package
+  get_url:
+    url: https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-odbc-linux.x64-21.13.0.0.0dbru.zip
+    dest: /tmp
+    mode: '0775'
+
+- name: Extract Oracle Instant Client Basic Package
+  ansible.builtin.unarchive:
+    src: /tmp/instantclient-odbc-linux.x64-21.13.0.0.0dbru.zip
+    dest: /home/{{ myUsername }}/oracle
+    remote_src: yes
+
+- name: Set Oracle Instant Client on PATH
+  copy:
+    dest: /etc/profile.d/oracle.sh
+    content: |
+      #!/bin/bash
+      export PATH="$PATH:/home/{{ myUsername }}/oracle/instantclient_21_13"
+      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/{{ myUsername }}/oracle/instantclient_21_13"

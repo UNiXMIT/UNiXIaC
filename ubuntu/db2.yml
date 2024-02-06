@@ -12,13 +12,13 @@
 
 - name: Create DB2
   file:
-    path: "/home/{{ myUsername }}/DB2"
+    path: "/home/{{ myUsername }}/db2"
     state: directory
     mode: '0775'
 
 - name: Change Ownership of /home/products/DB2 Directory
   file:
-    path: /home/{{ myUsername }}/DB2 
+    path: /home/{{ myUsername }}/db2 
     state: directory
     recurse: yes
     owner: '{{ myUsername }}'
@@ -27,13 +27,13 @@
 - name: Download DB2 ODBC Driver
   ansible.builtin.get_url:
     url: '{{ s3.url }}'
-    dest: "/home/{{ myUsername }}/DB2"
+    dest: "/home/{{ myUsername }}/db2"
     owner: '{{ myUsername }}' 
     group: '{{ myUsername }}'
     mode: '0775'
 
 - name: Extract DB2 ODBC Driver
   ansible.builtin.unarchive:
-    src: /home/{{ myUsername }}/DB2/v11.5.9_linuxx64_odbc_cli.tar.gz
-    dest: /home/{{ myUsername }}/DB2
+    src: /home/{{ myUsername }}/db2/v11.5.9_linuxx64_odbc_cli.tar.gz
+    dest: /home/{{ myUsername }}/db2
     remote_src: yes

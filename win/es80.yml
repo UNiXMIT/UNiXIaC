@@ -58,3 +58,9 @@
     installerNameESPU: es_80_pu13_340020.exe
     productName: ES80PU13
   tags: es80pu13
+
+- name: ES 8.0 PU 14
+  set_fact:
+    installerNameESPU: es_80_pu14_342019.exe
+    productName: ES80PU14
+  tags: es80pu14

@@ -101,6 +101,14 @@
     import_tasks: software.yml
   tags: default
 
+- name: Install Oracle Instant Client
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import oracle.yml
+    import_tasks: oracle.yml
+  tags: default
+
 - name: Install DB2 ODBC Drivers
   hosts: awsEC2
   gather_facts: no

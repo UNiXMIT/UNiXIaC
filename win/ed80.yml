@@ -68,3 +68,10 @@
     installerNameEDEPU: ede_80_pu13_340020.exe
     productName: ED80PU13
   tags: ed80pu13
+
+- name: ED 8.0 PU 14
+  set_fact:
+    installerNameEDVSPU: edvs2022_80_pu14_342023.exe
+    installerNameEDEPU: ede_80_pu14_342019.exe
+    productName: ED80PU14
+  tags: ed80pu14
