@@ -1,0 +1,39 @@
+- name: Get DB2 ODBC Driver Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: DB2/v11.5.9_linuxx64_odbc_cli.tar.gz
+    region: '{{ awsRegion }}'
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+
+- name: Create DB2
+  file:
+    path: "/home/{{ myUsername }}/DB2"
+    state: directory
+    mode: '0775'
+
+- name: Change Ownership of /home/products/DB2 Directory
+  file:
+    path: /home/{{ myUsername }}/DB2 
+    state: directory
+    recurse: yes
+    owner: '{{ myUsername }}'
+    group: '{{ myUsername }}'
+
+- name: Download DB2 ODBC Driver
+  ansible.builtin.get_url:
+    url: '{{ s3.url }}'
+    dest: "/home/{{ myUsername }}/DB2"
+    owner: '{{ myUsername }}' 
+    group: '{{ myUsername }}'
+    mode: '0775'
+
+- name: Extract DB2 ODBC Driver
+  ansible.builtin.unarchive:
+    src: /home/{{ myUsername }}/DB2/v11.5.9_linuxx64_odbc_cli.tar.gz
+    dest: /home/{{ myUsername }}/DB2
+    remote_src: yes

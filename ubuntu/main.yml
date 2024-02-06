@@ -101,22 +101,22 @@
     import_tasks: software.yml
   tags: default
 
-# - name: Install DB2 ODBC Drivers
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import db2.yml
-#     import_tasks: db2.yml
-#   tags: default
+- name: Install DB2 ODBC Drivers
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import db2.yml
+    import_tasks: db2.yml
+  tags: default
 
-# - name: Create Support Files and Directories
-#   hosts: awsEC2
-#   gather_facts: no
-#   become: yes
-#   tasks:
-#   - name: Import createFilesDir.yml
-#     import_tasks: createFilesDir.yml
-#   tags: default
+- name: Create Support Files and Directories
+  hosts: awsEC2
+  gather_facts: no
+  become: yes
+  tasks:
+  - name: Import createFilesDir.yml
+    import_tasks: createFilesDir.yml
+  tags: default
 
 # - name: ED 7.0
 #   hosts: awsEC2

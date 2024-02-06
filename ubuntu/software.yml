@@ -73,7 +73,7 @@
       - odbc-postgresql
       - net-tools
       - lsof
-      - spax
+      - pax-utils
       - podman
       - buildah
     state: present
