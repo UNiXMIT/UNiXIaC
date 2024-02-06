@@ -1,8 +1,5 @@
 - name: Disable original MOTD
-  file:
-    path: /etc/update-motd.d/*
-    state: absent
-    mode: '0664'
+  command: chmod -x /etc/update-motd.d/*
     
 - name: Create new MOTD
   copy:
