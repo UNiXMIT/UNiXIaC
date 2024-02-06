@@ -35,7 +35,6 @@
       - openldap2-client
       - openssl
     state: present
-    disable_recommends: false
 
 - name: Configure OpenLDAP for ED
   ansible.builtin.shell: |

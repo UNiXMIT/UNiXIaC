@@ -72,7 +72,6 @@
       - openconnect
     state: present
     update_cache: true
-    disable_recommends: false
 
 - name: Install MSSQL ODBC Driver 17
   environment:
@@ -82,7 +81,6 @@
       - msodbcsql17
       - mssql-tools
     state: present
-    disable_recommends: false
 
 - name: Set MSSQL Tools on PATH
   copy:
