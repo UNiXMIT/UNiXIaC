@@ -10,19 +10,13 @@
   register: s3
   delegate_to: localhost
 
-- name: Create DB2
+- name: Create db2
   file:
     path: "/home/{{ myUsername }}/db2"
     state: directory
-    mode: '0775'
-
-- name: Change Ownership of /home/products/DB2 Directory
-  file:
-    path: /home/{{ myUsername }}/db2 
-    state: directory
-    recurse: yes
     owner: '{{ myUsername }}'
     group: users
+    mode: '0775'
 
 - name: Download DB2 ODBC Driver
   ansible.builtin.get_url:
@@ -36,6 +30,8 @@
   ansible.builtin.unarchive:
     src: /tmp/v11.5.9_linuxx64_odbc_cli.tar.gz
     dest: /home/{{ myUsername }}/db2
+    owner: '{{ myUsername }}'
+    group: users
     remote_src: yes
 
 - name: Set DB2 on PATH and LD_LIBRARY_PATH
