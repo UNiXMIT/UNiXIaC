@@ -33,8 +33,7 @@
     content: |
       #!/bin/bash
       [ -d \"/opt/microfocus/EnterpriseDeveloper/bin\" ] && . /opt/microfocus/EnterpriseDeveloper/bin/cobsetenv
-      export PATH=$PATH:~/AcuSupport/AcuScripts:~/MFSupport/MFScripts:~/DB2/odbc_cli/clidriver/bin
-      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/DB2/odbc_cli/clidriver/lib
+      export PATH=$PATH:~/AcuSupport/AcuScripts:~/MFSupport/MFScripts
       export TERM=xterm
 
 - name: Make profile.sh executable
