@@ -1,5 +1,5 @@
 - name: Disable original MOTD
-  command: chmod -x /etc/update-motd.d/*
+  ansible.builtin.shell: chmod -x /etc/update-motd.d/*
     
 - name: Create new MOTD
   copy:
