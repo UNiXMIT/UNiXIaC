@@ -29,10 +29,10 @@
     remote_src: yes
 
 - name: Install OpenLDAP
-  package:
+  ansible.builtin.apt:
     name:
-      - openldap-servers
-      - openldap-clients
+      - slapd
+      - ldap-utils
       - openssl
     state: present
 
