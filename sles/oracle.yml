@@ -44,4 +44,4 @@
 - name: Setup Oracle Instant Client ODBC Driver and DSN
   ansible.builtin.shell: |
     chmod +x /opt/oracle/instantclient_21_13/odbc_update_ini.sh
-    /opt/oracle/instantclient_21_13/odbc_update_ini.sh / /opt/oracle/instantclient_21_13 "Oracle 21 ODBC driver" Oracle /etc/odbc.ini
+    /opt/oracle/instantclient_21_13/odbc_update_ini.sh / /opt/oracle/instantclient_21_13 "Oracle 21 ODBC driver" Oracle /etc/unixODBC/odbc.ini

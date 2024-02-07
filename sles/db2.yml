@@ -47,3 +47,16 @@
       export PATH="$PATH:/opt/db2/odbc_cli/clidriver/bin"
       export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/db2/odbc_cli/clidriver/lib"
   become: yes
+
+- name: Add DB2 driver in odbcinst.ini
+  ansible.builtin.blockinfile:
+    path: /etc/unixODBC/odbcinst.ini
+    append_newline: true
+    prepend_newline: true
+    block: |
+      [DB2]
+      Description = DB2 Driver
+      Driver = /opt/db2/odbc_cli/clidriver/lib/libdb2o.so
+      fileusage=1
+      dontdlclose=1
+  become: yes
