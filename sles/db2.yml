@@ -14,19 +14,22 @@
   file:
     path: "/opt/db2"
     state: directory
-    mode: '0755'    
+    mode: '0755' 
+  become: yes   
 
 - name: Download DB2 ODBC Driver
   ansible.builtin.get_url:
     url: '{{ s3.url }}'
     dest: "/opt/db2"
     mode: '0755'
+  become: yes
 
 - name: Extract DB2 ODBC Driver
   ansible.builtin.unarchive:
     src: /opt/db2/v11.5.9_linuxx64_odbc_cli.tar.gz
     dest: /opt/db2
     remote_src: yes
+  become: yes
 
 - name: Change Ownership of /opt/db2 Directory
   file:
@@ -34,6 +37,7 @@
     state: directory
     recurse: yes
     mode: '0755'
+  become: yes
 
 - name: Set DB2 on PATH and LD_LIBRARY_PATH
   copy:
@@ -42,3 +46,4 @@
       #!/bin/bash
       export PATH="$PATH:/opt/db2/odbc_cli/clidriver/bin"
       export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/db2/odbc_cli/clidriver/lib"
+  become: yes

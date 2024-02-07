@@ -113,7 +113,6 @@
 - name: Install DB2 ODBC Drivers
   hosts: awsEC2
   gather_facts: no
-  become: yes
   tasks:
   - name: Import db2.yml
     import_tasks: db2.yml
