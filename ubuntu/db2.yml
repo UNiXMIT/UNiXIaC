@@ -51,8 +51,6 @@
 - name: Add DB2 driver in odbcinst.ini
   ansible.builtin.blockinfile:
     path: /etc/odbcinst.ini
-    append_newline: true
-    prepend_newline: true
     block: |
       [DB2]
       Description = DB2 Driver
