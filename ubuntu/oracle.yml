@@ -1,46 +1,47 @@
 - name: Create oracle
   file:
-    path: "/home/{{ myUsername }}/oracle"
+    path: /opt/oracle
     state: directory
-    owner: '{{ myUsername }}'
-    group: '{{ myUsername }}'
-    mode: '0775'
+    mode: '0755'
 
 - name: Download Oracle Instant Client Basic Package
   get_url:
     url: https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip
-    dest: /tmp
-    owner: '{{ myUsername }}'
-    group: '{{ myUsername }}'
-    mode: '0775'
+    dest: /opt/oracle
 
 - name: Extract Oracle Instant Client Basic Package
   ansible.builtin.unarchive:
-    src: /tmp/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip
-    dest: /home/{{ myUsername }}/oracle
-    owner: '{{ myUsername }}' 
-    group: '{{ myUsername }}'
+    src: /opt/oracle/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip
+    dest: /opt/oracle
     remote_src: yes
 
 - name: Download Oracle Instant Client ODBC Package
   get_url:
     url: https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-odbc-linux.x64-21.13.0.0.0dbru.zip
-    dest: /tmp
-    mode: '0775'
+    dest: /opt/oracle
 
 - name: Extract Oracle Instant Client ODBC Package
   ansible.builtin.unarchive:
-    src: /tmp/instantclient-odbc-linux.x64-21.13.0.0.0dbru.zip
-    dest: /home/{{ myUsername }}/oracle
-    owner: '{{ myUsername }}' 
-    group: '{{ myUsername }}'
+    src: /opt/oracle/instantclient-odbc-linux.x64-21.13.0.0.0dbru.zip
+    dest: /opt/oracle
     remote_src: yes
+
+- name: Change Ownership of /opt/oracle Directory
+  file:
+    path: /opt/oracle
+    state: directory
+    recurse: yes
+    mode: '0755'
 
 - name: Set Oracle Instant Client on PATH and LD_LIBRARY_PATH
   copy:
     dest: /etc/profile.d/oracle.sh
     content: |
       #!/bin/bash
-      export PATH="$PATH:/home/{{ myUsername }}/oracle/instantclient_21_13"
-      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/home/{{ myUsername }}/oracle/instantclient_21_13"
-  become: yes
+      export PATH="$PATH:/opt/oracle/instantclient_21_13"
+      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/oracle/instantclient_21_13"
+
+- name: Setup Oracle Instant Client ODBC Driver and DSN
+  command: |
+    chmod +x /opt/oracle/instantclient_21_13/odbc_update_ini.sh
+    /opt/oracle/instantclient_21_13/odbc_update_ini.sh / /opt/oracle/instantclient_21_13 "Oracle 21 ODBC driver" Oracle /etc/odbc.ini
