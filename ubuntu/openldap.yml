@@ -42,36 +42,36 @@
     . {{ installPath }}/bin/cobsetenv
     SLAPPASS={{ myPassword }}
     systemctl stop slapd
-    sed -i '/CRC.*/d' /etc/openldap/slapd.d/cn=config/olcDatabase={0}config.ldif
-    sed -i '/olcAccess:.*/c\olcAccess: {0}to * by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth manage by * break' /etc/openldap/slapd.d/cn=config/olcDatabase={0}config.ldif
-    sed -i '/ ,cn=auth.*/d' /etc/openldap/slapd.d/cn=config/olcDatabase={0}config.ldif
+    sed -i '/CRC.*/d' /etc/ldap/slapd.d/cn=config/olcDatabase={0}config.ldif
+    sed -i '/olcAccess:.*/c\olcAccess: {0}to * by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth manage by * break' /etc/ldap/slapd.d/cn=config/olcDatabase={0}config.ldif
+    sed -i '/ ,cn=auth.*/d' /etc/ldap/slapd.d/cn=config/olcDatabase={0}config.ldif
     systemctl start slapd
     SECRET=$(slappasswd -s $SLAPPASS)
     sed -i "/olcRootPW:.*/c\olcRootPW: $SECRET" /openldap/schema/chrootpwd.ldif 
     ldapadd -Y EXTERNAL -H ldapi:/// -f /openldap/schema/chrootpwd.ldif > /dev/null 2>&1
-    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/corba.ldif > /dev/null 2>&1
-    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif > /dev/null 2>&1
-    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/duaconf.ldif > /dev/null 2>&1
-    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/dyngroup.ldif > /dev/null 2>&1
-    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif > /dev/null 2>&1
-    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/java.ldif > /dev/null 2>&1
-    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/misc.ldif > /dev/null 2>&1
-    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif > /dev/null 2>&1
-    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/openldap.ldif > /dev/null 2>&1
-    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/collective.ldif > /dev/null 2>&1
+    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/corba.ldif > /dev/null 2>&1
+    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/cosine.ldif > /dev/null 2>&1
+    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/duaconf.ldif > /dev/null 2>&1
+    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/dyngroup.ldif > /dev/null 2>&1
+    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/inetorgperson.ldif > /dev/null 2>&1
+    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/java.ldif > /dev/null 2>&1
+    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/misc.ldif > /dev/null 2>&1
+    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/nis.ldif > /dev/null 2>&1
+    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/openldap.ldif > /dev/null 2>&1
+    ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/collective.ldif > /dev/null 2>&1
     ldapadd -Y EXTERNAL -H ldapi:/// -f /openldap/schema/ppolicy.ldif > /dev/null 2>&1
     sed -i "/olcRootPW:.*/c\olcRootPW: $SECRET" /openldap/schema/backend.ldif
     ldapadd -Y EXTERNAL -H ldapi:/// -f /openldap/schema/backend.ldif > /dev/null 2>&1
     systemctl stop slapd
-    cp /etc/openldap/schema/* /openldap/schema/
+    cp /etc/ldap/schema/* /openldap/schema/
     mfds -l "dc=secldap,dc=com" 2 /openldap/schema/mfds.schema > /dev/null 2>&1
     rm -rf /openldap/config/*
     cd /openldap/schema
     slaptest -f /openldap/schema/schema_convert.conf -F /openldap/config
-    cp /openldap/config/cn=config/cn=schema/cn={12}container.ldif /etc/openldap/slapd.d/cn=config/cn=schema
-    cp /openldap/config/cn=config/cn=schema/cn={13}mfds.ldif /etc/openldap/slapd.d/cn=config/cn=schema
-    chown -R ldap /etc/openldap/slapd.d
-    chmod -R 700 /etc/openldap/slapd.d
+    cp /openldap/config/cn=config/cn=schema/cn={12}container.ldif /etc/ldap/slapd.d/cn=config/cn=schema
+    cp /openldap/config/cn=config/cn=schema/cn={13}mfds.ldif /etc/ldap/slapd.d/cn=config/cn=schema
+    chown -R openldap /etc/ldap/slapd.d
+    chmod -R 700 /etc/ldap/slapd.d
     systemctl start slapd
     systemctl enable slapd
     rm -rf /openldap/log/*
