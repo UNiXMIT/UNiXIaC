@@ -52,9 +52,22 @@
   ansible.builtin.blockinfile:
     path: /etc/unixODBC/odbcinst.ini
     block: |
-      [DB2]
+      [DB2 ODBC Driver]
       Description = DB2 Driver
       Driver = /opt/db2/odbc_cli/clidriver/lib/libdb2o.so
       fileusage=1
       dontdlclose=1
+  become: yes
+
+- name: Add DB2 DSN in odbc.ini
+  ansible.builtin.blockinfile:
+    path: /etc/unixODBC/odbc.ini
+    block: |
+      [db2]
+      Driver = /opt/db2/odbc_cli/clidriver/lib/libdb2o.so
+      Database = support
+      Server = localhost
+      Port = 50000
+      UID = {{ myUsername }}
+      PWD = {{ myPassword }}
   become: yes
