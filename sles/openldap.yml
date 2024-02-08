@@ -5,8 +5,9 @@
     mode: '0775'
 
 - name: Create OpenLDAP for ES Container
-  shell: /tmp/openldap.sh
-  chdir: /tmp
+  ansible.builtin.command: /tmp/openldap.sh
+  args:
+    chdir: /tmp
 
 - name: Auto Start OpenLDAP Container
   cron:
