@@ -38,8 +38,8 @@
 ### Additional Details
 - Windows EC2 instances are accessible via RDP using the 'support' user and the usual password.  
 - Linux EC2 Instances are accessible via SSH using the 'support' user and the usual password. 
-- The DB tasks create services in Podman containers, running on RHEL EC2 Instances. They are meant for quick deployment of a service for testing, then they can be removed.   
 > **NOTE:** If in doubt, try the usual password or contact an admin.  
+- The DB tasks create services in Podman containers, running on RHEL EC2 Instances. They are meant for quick deployment of a service for testing, then they can be removed.   
 - Instances are created with a 120GB SSD, 4vCPUs, 16GiB Memory and 3.1 GHz Clock Speed (t3.xlarge).  
 - Instances are created with your username, OS and products name as Instance name.  
 - Tags are added to the instance to show what products have been installed and what installers were used.  
