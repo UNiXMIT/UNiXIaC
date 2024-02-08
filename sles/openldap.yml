@@ -6,6 +6,7 @@
 
 - name: Create OpenLDAP for ES Container
   shell: /tmp/openldap.sh
+  chdir: /tmp
 
 - name: Auto Start OpenLDAP Container
   cron:
