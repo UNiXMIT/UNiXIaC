@@ -16,4 +16,4 @@
   cron:
     name: Podman AutoStart
     special_time: reboot
-    job: "/usr/bin/podman start --all"
+    job: "/usr/bin/sudo /usr/bin/podman start --all"
