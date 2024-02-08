@@ -223,8 +223,9 @@
   tags: openldap
 
 - name: Create OpenLDAP for ES Container
-  shell: /tmp/openldap.sh
-  tags: openldap
+  ansible.builtin.command: /tmp/openldap.sh
+  args:
+    chdir: /tmp
 
 - name: Set OpenLDAP Facts
   set_fact:
