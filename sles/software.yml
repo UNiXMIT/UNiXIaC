@@ -34,6 +34,11 @@
   community.general.zypper_repository:
     repo: 'https://packages.microsoft.com/config/sles/15/prod.repo'
     auto_import_keys: true
+
+- name: Uninstall default Docker
+  community.general.zypper:
+    name: docker
+    state: absent
   
 - name: Package installation
   community.general.zypper:

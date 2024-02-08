@@ -11,7 +11,7 @@
   cron:
     name: OpenLDAP
     special_time: reboot
-    job: "/bin/podman start openldap"
+    job: "/usr/bin/podman start openldap"
 
 - name: Start ESCWA
   shell: tmux new -d -s escwa ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/escwa"
