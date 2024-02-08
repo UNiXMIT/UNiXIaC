@@ -215,6 +215,32 @@
     DBPORT: 5000
   tags: sybase
 
+- name: Download OpenLDAP for ES Script
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/openldap/podman.sh
+    dest: /tmp/openldap.sh
+    mode: '0775'
+  tags: openldap
+
+- name: Create OpenLDAP for ES Container
+  shell: /tmp/openldap.sh
+  tags: openldap
+
+- name: Set OpenLDAP Facts
+  set_fact:
+    DBNAME: OpenLDAP 2.6
+    DBSHORT: OpenLDAP
+    DBUSER: "cn=Manager,dc=secldap,dc=com / BASE: cn=Micro Focus,dc=secldap,dc=com"
+    DBPORT: 1389
+  tags: openldap
+
+- name: Auto Start Containers
+  cron:
+    name: Podman AutoStart
+    special_time: reboot
+    job: "/usr/bin/podman start --all"
+  tags: openldap
+
 - name: Add DB Tags
   amazon.aws.ec2_tag:
     aws_profile: '{{ awsProfile }}'

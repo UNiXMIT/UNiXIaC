@@ -109,3 +109,4 @@ LDAP URL - ldap://localhost:389
 - Redis 7 
 - SQL Server 2022 
 - Sybase 16.2 
+- OpenLDAP for ES
