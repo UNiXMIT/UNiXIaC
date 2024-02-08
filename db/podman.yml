@@ -226,6 +226,7 @@
   ansible.builtin.command: /tmp/openldap.sh
   args:
     chdir: /tmp
+  tags: openldap
 
 - name: Set OpenLDAP Facts
   set_fact:
@@ -233,13 +234,6 @@
     DBSHORT: OpenLDAP
     DBUSER: "cn=Manager,dc=secldap,dc=com / BASE: cn=Micro Focus,dc=secldap,dc=com"
     DBPORT: 1389
-  tags: openldap
-
-- name: Auto Start Containers
-  cron:
-    name: Podman AutoStart
-    special_time: reboot
-    job: "/usr/bin/podman start --all"
   tags: openldap
 
 - name: Add DB Tags

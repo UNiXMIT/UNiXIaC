@@ -14,6 +14,6 @@
 
 - name: Start Podman Containers at Boot
   cron:
-    name: Podman Autostart
+    name: Podman AutoStart
     special_time: reboot
-    job: "podman start --all"
+    job: "/usr/bin/podman start --all"
