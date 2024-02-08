@@ -9,7 +9,7 @@
 1. After logging in, navigate to the 'Task Templates' in the nav bar on the left hand side.   
 ![1](images/1.png)  
 
-2. Along the top you will see a list of OS versions to filter tasks by OS. There is also a 'DB' filter for databases.  
+2. Along the top you will see a list of OS versions to filter tasks by OS. There is also a 'DB' filter for databases and other services.  
 ![2](images/2.png)  
 
 3. To start a task, click the 'RUN' button on the right side of the row for the Task you want to execute.  
@@ -37,7 +37,8 @@
 
 ### Additional Details
 - Windows EC2 instances are accessible via RDP using the 'support' user and the usual password.  
-- Linux EC2 Instances are accessible via SSH using the 'support' user and the usual password.  
+- Linux EC2 Instances are accessible via SSH using the 'support' user and the usual password. 
+- The DB tasks create services in Podman containers, running on RHEL EC2 Instances. They are meant for quick deployment of a service for testing, then they can be removed.   
 > **NOTE:** If in doubt, try the usual password or contact an admin.  
 - Instances are created with a 120GB SSD, 4vCPUs, 16GiB Memory and 3.1 GHz Clock Speed (t3.xlarge).  
 - Instances are created with your username, OS and products name as Instance name.  
