@@ -61,3 +61,11 @@
     S3Prefix: ED/70/
     productName: ED70PU22
   tags: ed70pu22
+
+- name: ED 7.0 PU 23
+  set_fact:
+    installPath: /home/products/ed70pu23
+    installerName: setup_entdev_7.0_patchupdate23_342759_redhat_x86_64
+    S3Prefix: ED/70/
+    productName: ED70PU23
+  tags: ed70pu23

@@ -54,3 +54,9 @@
     installerNameEDVSPU: es_70_pu22_337404.exe
     productName: ES70PU22
   tags: es70pu22
+
+- name: ES 7.0 PU 23
+  set_fact:
+    installerNameEDVSPU: es_70_pu23_342480.exe
+    productName: ES70PU23
+  tags: es70pu23

@@ -85,3 +85,10 @@
     installerNameEDEPU: ede_70_pu22_337404.exe
     productName: ED70PU22
   tags: ed70pu22
+
+- name: ED 7.0 PU 23
+  set_fact:
+    installerNameEDVSPU: edvs2019_70_pu23_342482.exe
+    installerNameEDEPU: ede_70_pu23_342480.exe
+    productName: ED70PU23
+  tags: ed70pu23
