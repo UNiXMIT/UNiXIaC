@@ -16,6 +16,13 @@
     line: "AllowTcpForwarding yes"
     state: present
 
+- name: Allow X11 Forwarding
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^X11Forwarding"
+    line: "X11Forwarding yes"
+    state: present
+
 - name: Modify the sudoers file
   lineinfile:
     path: /etc/sudoers
