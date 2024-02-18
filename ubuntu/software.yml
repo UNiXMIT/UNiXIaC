@@ -77,6 +77,7 @@
       - podman
       - buildah
       - unzip
+      - libgtk-3-0
     state: present
   
 - name: Update apt-file

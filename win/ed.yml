@@ -225,6 +225,10 @@
     state: started
   tags: ed
 
+- name: Pause for 10 seconds
+  ansible.builtin.pause:
+    seconds: 10
+
 - name: Stop ESCWA Service
   ansible.windows.win_service:
     name: escwa
