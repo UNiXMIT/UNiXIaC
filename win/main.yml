@@ -51,7 +51,7 @@
       hostname: '{{ item.public_ip_address }}'
       ansible_user: '{{ ansibleUser }}'
       ansible_password: '{{ myPassword }}'
-      ansible_connection: winrm
+      ansible_connection: psrp
       ansible_winrm_transport: credssp
       ansible_winrm_server_cert_validation: ignore
       ansible_port: 5986
@@ -89,7 +89,7 @@
   tasks:
   - name: Import optimise.yml
     import_tasks: optimise.yml
-  tags: default
+  tags: ignore
 
 - name: Modify OS Config
   hosts: awsEC2
