@@ -51,7 +51,7 @@
       hostname: '{{ item.public_ip_address }}'
       ansible_user: '{{ ansibleUser }}'
       ansible_password: '{{ myPassword }}'
-      ansible_connection: psrp
+      ansible_connection: winrm
       ansible_winrm_transport: credssp
       ansible_psrp_auth: credssp
       ansible_winrm_server_cert_validation: ignore
