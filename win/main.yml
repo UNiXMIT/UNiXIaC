@@ -18,7 +18,11 @@
       user_data: |
         <powershell>
         net user administrator {{ myPassword }}
-        iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/win/ConfigureRemotingForAnsible.ps1'))
+        $url = "https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/win/ConfigureRemotingForAnsible.ps1"
+        $file = "$env:temp\ConfigureRemotingForAnsible.ps1"
+        Invoke-Webrequest $url -OutFile $file
+        sleep 2
+        $file -EnableCredSSP -DisableBasicAuth
         </powershell>
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
@@ -48,7 +52,7 @@
       ansible_user: '{{ ansibleUser }}'
       ansible_password: '{{ myPassword }}'
       ansible_connection: winrm
-      ansible_winrm_transport: basic
+      ansible_winrm_transport: credssp
       ansible_winrm_server_cert_validation: ignore
       ansible_port: 5986
       ansible_winrm_operation_timeout_sec: 120
