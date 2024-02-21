@@ -76,6 +76,11 @@
       - buildah
       - openconnect
       - unzip
+      - xauth
+      - libgtk-3-0
+      - gtk3-tools
+      - libjasper4
+      - libnotify-tools
     state: present
     update_cache: true
 

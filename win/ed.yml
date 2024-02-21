@@ -195,12 +195,6 @@
     dest: C:\ProgramData\Micro Focus\LicFile.txt
     remote_src: true
   tags: ed
-
-- name: Import JCL Region
-  win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml'
-    chdir: C:\MFSamples\JCL
-  tags: ed
   
 - name: Stop MFDS Service
   ansible.windows.win_service:
@@ -223,6 +217,16 @@
   ansible.windows.win_service:
     name: mf_CCITCP2
     state: started
+  tags: ed
+
+- name: Pause for 10 seconds
+  ansible.builtin.pause:
+    seconds: 10
+
+- name: Import JCL Region
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml'
+    chdir: C:\MFSamples\JCL
   tags: ed
 
 - name: Stop ESCWA Service
