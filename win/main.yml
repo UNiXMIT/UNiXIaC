@@ -93,7 +93,7 @@
   tasks:
   - name: Import optimise.yml
     import_tasks: optimise.yml
-  tags: ignore
+  tags: default
 
 - name: Modify OS Config
   hosts: awsEC2
