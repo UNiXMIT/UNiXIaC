@@ -22,7 +22,7 @@
         $file = "$env:temp\ConfigureRemotingForAnsible.ps1"
         Invoke-Webrequest $url -OutFile $file
         sleep 2
-        $file -EnableCredSSP -DisableBasicAuth
+        powershell.exe -ExecutionPolicy ByPass -File $file -EnableCredSSP -DisableBasicAuth
         </powershell>
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
@@ -54,7 +54,6 @@
       ansible_connection: winrm
       ansible_winrm_transport: credssp
       ansible_winrm_server_cert_validation: ignore
-      ansible_winrm_message_encryption: auto
       ansible_port: 5986
       ansible_winrm_operation_timeout_sec: 120
       ansible_winrm_read_timeout_sec: 140
