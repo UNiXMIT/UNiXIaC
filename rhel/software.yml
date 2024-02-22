@@ -85,6 +85,7 @@
       - lsof
       - xterm
       - xauth
+      - libxcrypt-compat
     state: present
 
 - name: RHEL<=7 Package installation
