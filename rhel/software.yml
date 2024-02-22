@@ -114,6 +114,7 @@
     name: 
       - java-17-openjdk
       - libnsl
+      - libnsl.i686
       - podman
       - buildah
       - libxcrypt.i686
