@@ -168,7 +168,7 @@
   set_fact:
     DBNAME: MySQL Server 8 Community Edition 
     DBSHORT: MYSQL
-    DBUSER: support
+    DBUSER: '{{ myUsername }}'
     DBPORT: 3306
   tags: mysql
 
@@ -198,12 +198,15 @@
 - name: Create Sybase
   containers.podman.podman_container:
     name: sybase
-    image: docker.io/datagrip/sybase:latest
+    image: superbeeeeeee/docker-sybase:latest
     state: started
     restart_policy: "always"
     detach: true
     interactive: true
     ports: 5000:5000
+    env:
+      SA_PASSWORD: '{{ myPassword }}'
+      DATABASE: '{{ myUsername }}'
   become: yes
   tags: sybase
 
