@@ -26,7 +26,7 @@
 - name: ExtractMSI
   win_regedit:
     path: HKCR:\Msi.Package\shell\extractMSI\command
-    data: 'msiexec /a \"%1\" /qb TARGETDIR=\"%1 Contents\"'
+    data: 'msiexec /a "%1" /qb TARGETDIR=\"%1 Contents\"'
     type: string
 
 - name: AcuSilent MSI Install Option 1
