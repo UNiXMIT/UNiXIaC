@@ -38,7 +38,7 @@
 - name: AcuSilent MSI Install Option 2
   win_regedit:
     path: HKCR:\Msi.Package\shell\runas\command
-    data: 'msiexec /i \"%1\" ADDLOCAL=ALL WINDOWSVERSION=PostWindows7 /qb'
+    data: 'msiexec /i "%1" ADDLOCAL=ALL WINDOWSVERSION=PostWindows7 /qb'
     type: string
 
 - name: Defer Feature Updates
