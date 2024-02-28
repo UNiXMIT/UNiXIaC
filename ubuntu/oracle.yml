@@ -26,6 +26,17 @@
     dest: /opt/oracle
     remote_src: yes
 
+- name: Download Oracle Instant Client SQLPlus Package
+  get_url:
+    url: https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-sqlplus-linux.x64-21.13.0.0.0dbru.zip
+    dest: /opt/oracle
+
+- name: Extract Oracle Instant Client SQLPlus Package
+  ansible.builtin.unarchive:
+    src: /opt/oracle/instantclient-odbc-linux.x64-21.13.0.0.0dbru.zip
+    dest: /opt/oracle
+    remote_src: yes
+
 - name: Change Ownership of /opt/oracle Directory
   file:
     path: /opt/oracle
