@@ -67,6 +67,11 @@
       DB2INSTANCE: '{{ myUsername }}'
       DB2INST1_PASSWORD: '{{ myPassword }}'
       DBNAME: '{{ myUsername }}'
+    healthcheck: '/opt/ibm/db2/*/bin/db2gcf -s'
+    healthcheck_interval: "30s"
+    healthcheck_retries: 5
+    healthcheck_start_period: "120s"
+    healthcheck_timeout: "10s"
   become: yes
   tags: db2
 
@@ -91,6 +96,11 @@
       POSTGRES_USER: '{{ myUsername }}'
       POSTGRES_PASSWORD: '{{ myPassword }}'
       POSTGRES_DB: '{{ myUsername }}'
+    healthcheck: 'pg_isready -d db_prod'
+    healthcheck_interval: "30s"
+    healthcheck_retries: 5
+    healthcheck_start_period: "80s"
+    healthcheck_timeout: "10s"
   become: yes
   tags: postgres
 
@@ -111,6 +121,11 @@
     detach: true
     interactive: true
     ports: 6379:6379
+    healthcheck: 'redis-cli ping || exit 1'
+    healthcheck_interval: "10s"
+    healthcheck_retries: 10
+    healthcheck_start_period: "10s"
+    healthcheck_timeout: "3s"
   become: yes
   tags: redis
 
@@ -136,6 +151,11 @@
       MQ_QMGR_NAME: QM1
       MQ_ADMIN_PASSWORD: '{{ myPassword }}'
       MQ_APP_PASSWORD: '{{ myPassword }}'
+    healthcheck: '/usr/local/bin/chkmqhealthy || exit 1'
+    healthcheck_interval: "1m"
+    healthcheck_retries: 3
+    healthcheck_start_period: "60s"
+    healthcheck_timeout: "30s"
   become: yes
   tags: mq
 
@@ -150,7 +170,7 @@
 - name: Create MySQL
   containers.podman.podman_container:
     name: mysql
-    image: docker.io/postgres:latest
+    image: container-registry.oracle.com/mysql/community-server:latest
     state: started
     restart_policy: "always"
     detach: true
@@ -161,6 +181,11 @@
       MYSQL_DATABASE: '{{ myUsername }}'
       MYSQL_USER: '{{ myUsername }}'
       MYSQL_PASSWORD: '{{ myPassword }}'
+    healthcheck: 'mysqladmin ping'
+    healthcheck_interval: "10s"
+    healthcheck_retries: 3
+    healthcheck_start_period: "30s"
+    healthcheck_timeout: "10s"
   become: yes
   tags: mysql
 
