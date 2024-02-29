@@ -18,6 +18,7 @@
     - ntop.portable
     - psqlodbc
     - openjdk
+    - python
     # - dotnet
     # - windows-sdk-11-version-22h2-all
     # - visualstudio2017buildtools
