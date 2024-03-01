@@ -117,8 +117,10 @@
       - libnsl.i686
       - podman
       - buildah
+      - libxcrypt
       - libxcrypt.i686
       - libxcrypt-compat
+      - libxcrypt-compat.i686
       - ncurses-libs-6.1-9.20180224.el8.i686
       - zlib-1.2.11-18.el8_5.i686
       - webkit2gtk3
