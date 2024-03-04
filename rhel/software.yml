@@ -119,12 +119,18 @@
       - buildah
       - libxcrypt
       - libxcrypt.i686
-      - libxcrypt-compat
-      - libxcrypt-compat.i686
       - ncurses-libs-6.1-9.20180224.el8.i686
       - zlib.i686
       - webkit2gtk3
       - PackageKit-gtk3-module
+    state: present
+  when: ansible_facts['distribution_major_version'] | int >= 8
+
+- name: RHEL>=9 Package installation
+  package:
+    name: 
+      - libxcrypt-compat
+      - libxcrypt-compat.i686
     state: present
   when: ansible_facts['distribution_major_version'] | int >= 8
 
