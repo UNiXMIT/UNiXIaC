@@ -115,8 +115,6 @@
       - java-17-openjdk
       - libnsl
       - libnsl.i686
-      - podman
-      - buildah
       - libxcrypt
       - libxcrypt.i686
       - ncurses-libs-6.1-9.20180224.el8.i686
@@ -129,6 +127,8 @@
 - name: RHEL>=9 Package installation
   package:
     name: 
+      - podman
+      - buildah
       - libxcrypt-compat
       - libxcrypt-compat.i686
     state: present
