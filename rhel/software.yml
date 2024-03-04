@@ -72,7 +72,6 @@
       - glibc-devel.i686
       - glibc
       - glibc.i686
-      - libgcc.i686
       - tcpdump
       - ed
       - tmux
@@ -118,6 +117,7 @@
       - libnsl.i686
       - libxcrypt
       - libxcrypt.i686
+      - libgcc.i686
       - ncurses-libs-6.1-9.20180224.el8.i686
       - zlib.i686
       - webkit2gtk3
