@@ -72,6 +72,7 @@
       - glibc-devel.i686
       - glibc
       - glibc.i686
+      - libgcc.i686
       - tcpdump
       - ed
       - tmux
