@@ -13,7 +13,7 @@
 - name: Download {{ installerName }}
   ansible.windows.win_get_url:
     url: '{{ s3.url }}'
-    dest: C:\temp\
+    dest: C:\AcuInstallers
 
 - name: Add extend Tags
   amazon.aws.ec2_tag:
@@ -29,7 +29,7 @@
 
 - name: Install {{ installerName }}
   win_package:
-    path: C:\temp\{{ installerName }}
+    path: C:\AcuInstallers\{{ installerName }}
     state: present
     arguments: ADDLOCAL=ALL WINDOWSVERSION=PostWindows7 /qb
 

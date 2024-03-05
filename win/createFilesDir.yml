@@ -70,6 +70,18 @@
     type: allow
     rights: FullControl
 
+- name: Create AcuInstallers
+  win_file:
+    path: C:\AcuInstallers
+    state: directory
+
+- name: Everyone permissions on AcuInstallers
+  win_acl:
+    user: Everyone
+    path: C:\AcuInstallers
+    type: allow
+    rights: FullControl
+
 - name: Create AcuScripts
   win_file:
     path: C:\AcuScripts
