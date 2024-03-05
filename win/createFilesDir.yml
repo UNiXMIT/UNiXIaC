@@ -221,6 +221,18 @@
     path: C:\MFDataFiles
     type: allow
     rights: FullControl
+
+- name: Create MFInstallers
+  win_file:
+    path: C:\MFInstallers
+    state: directory
+
+- name: Everyone permissions on MFInstallers
+  win_acl:
+    user: Everyone
+    path: C:\MFInstallers
+    type: allow
+    rights: FullControl
   
 - name: Create MFScripts
   win_file:

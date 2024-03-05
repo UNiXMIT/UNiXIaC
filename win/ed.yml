@@ -51,22 +51,22 @@
     - name: Download {{ installerNameEDVS }}
       ansible.windows.win_get_url:
         url: '{{ s3edvs.url }}'
-        dest: C:\temp\
+        dest: C:\MFInstallers\
     
     - name: Download {{ installerNameEDE }}
       ansible.windows.win_get_url:
         url: '{{ s3ede.url }}'
-        dest: C:\temp\
+        dest: C:\MFInstallers\
     
     - name: Download SafeNet License
       ansible.windows.win_get_url:
         url: '{{ s3sn.url }}'
-        dest: C:\temp\
+        dest: C:\MFInstallers\
     
     - name: Download AutoPass License
       ansible.windows.win_get_url:
         url: '{{ s3ap.url }}'
-        dest: C:\temp\
+        dest: C:\MFInstallers\
   tags: ed
 
 - name: Download ED PU 
@@ -98,12 +98,12 @@
     - name: Download {{ installerNameEDVSPU }}
       ansible.windows.win_get_url:
         url: '{{ s3edvspu.url }}'
-        dest: C:\temp\
+        dest: C:\MFInstallers\
     
     - name: Download {{ installerNameEDEPU }}
       ansible.windows.win_get_url:
         url: '{{ s3edepu.url }}'
-        dest: C:\temp\
+        dest: C:\MFInstallers\
   tags: edpu
 
 - name: Add ED Tags
@@ -137,30 +137,30 @@
   block:
     - name: Install {{ installerNameEDVS }}
       win_package:
-        path: C:\temp\{{ installerNameEDVS }}
+        path: C:\MFInstallers\{{ installerNameEDVS }}
         state: present
-        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDVS }}.log /norestart
+        arguments: /passive RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDVS }}.log /norestart
     
     - name: Install {{ installerNameEDE }}
       win_package:
-        path: C:\temp\{{ installerNameEDE }}
+        path: C:\MFInstallers\{{ installerNameEDE }}
         state: present
-        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDE }}.log /norestart
+        arguments: /passive RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDE }}.log /norestart
   tags: ed
 
 - name: Install ED PU
   block:
     - name: Install {{ installerNameEDVSPU }}
       win_package:
-        path: C:\temp\{{ installerNameEDVSPU }}
+        path: C:\MFInstallers\{{ installerNameEDVSPU }}
         state: present
-        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDVSPU }}.log /norestart
+        arguments: /passive RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDVSPU }}.log /norestart
     
     - name: Install {{ installerNameEDEPU }}
       win_package:
-        path: C:\temp\{{ installerNameEDEPU }}
+        path: C:\MFInstallers\{{ installerNameEDEPU }}
         state: present
-        arguments: /passive RumbaCheckbox=1 /log C:\temp\{{ installerNameEDEPU }}.log /norestart
+        arguments: /passive RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDEPU }}.log /norestart
   tags: edpu
 
 # - name: Add License Server
@@ -178,7 +178,7 @@
   
 - name: Install Safenet License File
   ansible.windows.win_copy:
-    src: C:\temp\lservrc.net
+    src: C:\MFInstallers\lservrc.net
     dest: C:\ProgramData\Micro Focus\lservrc.net
     remote_src: true
   tags: ed
@@ -191,7 +191,7 @@
 
 - name: Install AutoPass License File
   ansible.windows.win_copy:
-    src: C:\temp\LicFile.txt
+    src: C:\MFInstallers\LicFile.txt
     dest: C:\ProgramData\Micro Focus\LicFile.txt
     remote_src: true
   tags: ed
