@@ -63,7 +63,7 @@
 
 - name: Create oracle.sql
   copy:
-    dest: "/tmp"
+    dest: "/tmp/oracle.sql"
     content: |
       ALTER SESSION SET "_ORACLE_SCRIPT"=true;
       CREATE USER {{ myUsername }} IDENTIFIED BY {{ myPassword }};
@@ -82,7 +82,7 @@
   set_fact:
     DBNAME: Oracle 23c Free
     DBSHORT: ORACLE
-    DBUSER: '{{ myUsername }}'
+    DBUSER: '{{ myUsername }} / SID - FREE'
     DBPORT: 1521
   tags: oracle
 
