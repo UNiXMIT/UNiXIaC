@@ -2,7 +2,7 @@
   set_fact:
     installPath: /home/products/ed80pu5
     installerName: setup_entdev_8.0_patchupdate05_318651_redhat_x86_64
-    S3Prefix: ED/80/
+    S3Prefix: ED/80/PU5/
     productName: ED80PU5
   tags: ed80pu5
 
@@ -10,7 +10,7 @@
   set_fact:
     installPath: /home/products/ed80pu6
     installerName: setup_entdev_8.0_patchupdate06_321063_redhat_x86_64
-    S3Prefix: ED/80/
+    S3Prefix: ED/80/PU6/
     productName: ED80PU6
   tags: ed80pu6
 
@@ -18,7 +18,7 @@
   set_fact:
     installPath: /home/products/ed80pu7
     installerName: setup_entdev_8.0_patchupdate07_323529_redhat_x86_64
-    S3Prefix: ED/80/
+    S3Prefix: ED/80/PU7/
     productName: ED80PU7
   tags: ed80pu7
 
@@ -26,7 +26,7 @@
   set_fact:
     installPath: /home/products/ed80pu8
     installerName: setup_entdev_8.0_patchupdate08_324515_redhat_x86_64
-    S3Prefix: ED/80/
+    S3Prefix: ED/80/PU8/
     productName: ED80PU8
   tags: ed80pu8
 
@@ -34,7 +34,7 @@
   set_fact:
     installPath: /home/products/ed80pu9
     installerName: setup_entdev_8.0_patchupdate09_328363_redhat_x86_64
-    S3Prefix: ED/80/
+    S3Prefix: ED/80/PU9/
     productName: ED80PU9
   tags: ed80pu9
 
@@ -42,7 +42,7 @@
   set_fact:
     installPath: /home/products/ed80pu10
     installerName: setup_entdev_8.0_patchupdate10_330750_redhat_x86_64
-    S3Prefix: ED/80/
+    S3Prefix: ED/80/PU10/
     productName: ED80PU10
   tags: ed80pu10
 
@@ -50,7 +50,7 @@
   set_fact:
     installPath: /home/products/ed80pu11
     installerName: setup_entdev_8.0_patchupdate11_331768_redhat_x86_64
-    S3Prefix: ED/80/
+    S3Prefix: ED/80/PU11/
     productName: ED80PU11
   tags: ed80pu11
 
@@ -58,7 +58,7 @@
   set_fact:
     installPath: /home/products/ed80pu12
     installerName: setup_entdev_8.0_patchupdate12_336860_redhat_x86_64
-    S3Prefix: ED/80/
+    S3Prefix: ED/80/PU12/
     productName: ED80PU12
   tags: ed80pu12
 
@@ -66,7 +66,7 @@
   set_fact:
     installPath: /home/products/ed80pu13
     installerName: setup_entdev_8.0_patchupdate13_340839_redhat_x86_64
-    S3Prefix: ED/80/
+    S3Prefix: ED/80/PU13/
     productName: ED80PU13
   tags: ed80pu13
 
@@ -74,6 +74,6 @@
   set_fact:
     installPath: /home/products/ed80pu14
     installerName: setup_entdev_8.0_patchupdate14_342017_redhat_x86_64
-    S3Prefix: ED/80/
+    S3Prefix: ED/80/PU14/
     productName: ED80PU14
   tags: ed80pu14

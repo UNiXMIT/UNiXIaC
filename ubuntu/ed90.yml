@@ -2,7 +2,7 @@
   set_fact:
     installPath: /home/products/ed90
     installerName: setup_entdev_9.0_ubuntu_x64
-    S3Prefix: ED/90/
+    S3Prefix: ED/90/GA/
     productName: ED90
   tags: ed90
 
@@ -10,7 +10,7 @@
   set_fact:
     installPath: /home/products/ed90pu1
     installerName: setup_entdev_9.0_patchupdate01_328659_ubuntu_x64
-    S3Prefix: ED/90/
+    S3Prefix: ED/90/PU1/
     productName: ED90PU1
   tags: ed90pu1
 
@@ -18,7 +18,7 @@
   set_fact:
     installPath: /home/products/ed90pu2
     installerName: setup_entdev_9.0_patchupdate02_330827_ubuntu_x64
-    S3Prefix: ED/90/
+    S3Prefix: ED/90/PU2/
     productName: ED90PU2
   tags: ed90pu2
 
@@ -26,7 +26,7 @@
   set_fact:
     installPath: /home/products/ed90pu3
     installerName: setup_entdev_9.0_patchupdate03_332283_ubuntu_x64
-    S3Prefix: ED/90/
+    S3Prefix: ED/90/PU3/
     productName: ED90PU3
   tags: ed90pu3
 
@@ -34,7 +34,7 @@
   set_fact:
     installPath: /home/products/ed90pu4
     installerName: setup_entdev_9.0_patchupdate04_339842_ubuntu_x64
-    S3Prefix: ED/90/
+    S3Prefix: ED/90/PU4/
     productName: ED90PU4
   tags: ed90pu4
 
@@ -42,7 +42,7 @@
   set_fact:
     installPath: /home/products/ed90pu5
     installerName: setup_entdev_9.0_patchupdate05_342652_ubuntu_x64
-    S3Prefix: ED/90/
+    S3Prefix: ED/90/PU5/
     productName: ED90PU5
   tags: ed90pu5
 
@@ -50,6 +50,6 @@
   set_fact:
     installPath: /home/products/ed90pu6
     installerName: setup_entdev_9.0_patchupdate06_346108_ubuntu_x64
-    S3Prefix: ED/90/
+    S3Prefix: ED/90/PU6/
     productName: ED90PU6
   tags: ed90pu6

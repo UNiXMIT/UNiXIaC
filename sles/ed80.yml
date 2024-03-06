@@ -2,6 +2,6 @@
   set_fact:
     installPath: /home/products/ed80pu14
     installerName: setup_entdev_8.0_patchupdate14_342017_suse_x64
-    S3Prefix: ED/80/
+    S3Prefix: ED/80/PU14/
     productName: ED80PU14
   tags: ed80pu14

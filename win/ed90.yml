@@ -2,7 +2,7 @@
   set_fact:
     installerNameEDVS: edvs2022_90.exe
     installerNameEDE: ede_90.exe
-    S3Prefix: ED/90/
+    S3Prefix: ED/90/GA/
     productName: ED90
   tags: ed90
 
@@ -10,6 +10,7 @@
   set_fact:
     installerNameEDVSPU: edvs2022_90_pu01_328657.exe
     installerNameEDEPU: ede_90_pu01_328657.exe
+    S3PrefixPU: ED/90/PU1/
     productName: ED90PU1
   tags: ed90pu1
 
@@ -17,6 +18,7 @@
   set_fact:
     installerNameEDVSPU: edvs2022_90_pu02_330829.exe
     installerNameEDEPU: ede_90_pu02_330829.exe
+    S3PrefixPU: ED/90/PU2/
     productName: ED90PU2
   tags: ed90pu2
 
@@ -24,6 +26,7 @@
   set_fact:
     installerNameEDVSPU: edvs2022_90_pu03_332285.exe
     installerNameEDEPU: ede_90_pu03_332285.exe
+    S3PrefixPU: ED/90/PU3/
     productName: ED90PU3
   tags: ed90pu3
 
@@ -31,6 +34,7 @@
   set_fact:
     installerNameEDVSPU: edvs2022_90_pu04_339676.exe
     installerNameEDEPU: ede_90_pu04_339676.exe
+    S3PrefixPU: ED/90/PU4/
     productName: ED90PU4
   tags: ed90pu4
 
@@ -38,6 +42,7 @@
   set_fact:
     installerNameEDVSPU: edvs2022_90_pu05_342650.exe
     installerNameEDEPU: ede_90_pu05_342650.exe
+    S3PrefixPU: ED/90/PU5/
     productName: ED90PU5
   tags: ed90pu5
 
@@ -45,5 +50,6 @@
   set_fact:
     installerNameEDVSPU: edvs2022_90_pu06_346110.exe
     installerNameEDEPU: ede_90_pu06_346110.exe
+    S3PrefixPU: ED/90/PU6/
     productName: ED90PU6
   tags: ed90pu6

@@ -2,7 +2,7 @@
   set_fact:
     installerNameEDVS: edvs2022_80.exe
     installerNameEDE: ede_80.exe
-    S3Prefix: ED/80/
+    S3Prefix: ED/80/GA/
     productName: ED80
   tags: ed80
 
@@ -10,6 +10,7 @@
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu05_318648.exe
     installerNameEDEPU: ede_80_pu05_318643.exe
+    S3PrefixPU: ED/80/PU5/
     productName: ED80PU5
   tags: ed80pu5
 
@@ -17,6 +18,7 @@
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu06_321069.exe
     installerNameEDEPU: ede_80_pu06_321065.exe
+    S3PrefixPU: ED/80/PU6/
     productName: ED80PU6
   tags: ed80pu6
 
@@ -24,6 +26,7 @@
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu07_323535.exe
     installerNameEDEPU: ede_80_pu07_323531.exe
+    S3PrefixPU: ED/80/PU7/
     productName: ED80PU7
   tags: ed80pu7
 
@@ -31,6 +34,7 @@
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu08_324745.exe
     installerNameEDEPU: ede_80_pu08_324719.exe
+    S3PrefixPU: ED/80/PU8/
     productName: ED80PU8
   tags: ed80pu8
 
@@ -38,6 +42,7 @@
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu09_328369.exe
     installerNameEDEPU: ede_80_pu09_328365.exe
+    S3PrefixPU: ED/80/PU9/
     productName: ED80PU9
   tags: ed80pu9
 
@@ -45,6 +50,7 @@
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu10_330756.exe
     installerNameEDEPU: ede_80_pu10_330752.exe
+    S3PrefixPU: ED/80/PU10/
     productName: ED80PU10
   tags: ed80pu10
 
@@ -52,6 +58,7 @@
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu11_331774.exe
     installerNameEDEPU: ede_80_pu11_331770.exe
+    S3PrefixPU: ED/80/PU11/
     productName: ED80PU11
   tags: ed80pu11
 
@@ -59,6 +66,7 @@
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu12_336866.exe
     installerNameEDEPU: ede_80_pu12_336862.exe
+    S3PrefixPU: ED/80/PU12/
     productName: ED80PU12
   tags: ed80pu12
 
@@ -66,6 +74,7 @@
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu13_340024.exe
     installerNameEDEPU: ede_80_pu13_340020.exe
+    S3PrefixPU: ED/80/PU13/
     productName: ED80PU13
   tags: ed80pu13
 
@@ -73,5 +82,6 @@
   set_fact:
     installerNameEDVSPU: edvs2022_80_pu14_342023.exe
     installerNameEDEPU: ede_80_pu14_342019.exe
+    S3PrefixPU: ED/80/PU14/
     productName: ED80PU14
   tags: ed80pu14

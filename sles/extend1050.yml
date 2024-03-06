@@ -4,7 +4,7 @@
       set_fact:
         installPath: /home/products/acu1050shx64/
         installerName: setup_acucob1050pmk59shACU
-        S3Prefix: AcuCOBOL/1050/
+        S3Prefix: AcuCOBOL/1050/GA/
         productName: extend1050
   tags: extend1050
 
@@ -24,6 +24,6 @@
       set_fact:
         installPath: /home/products/acu1051shx64/
         installerName: setup_acucob1051pmk59shACU
-        S3Prefix: AcuCOBOL/1051/
+        S3Prefix: AcuCOBOL/1051/GA/
         productName: extend1051
   tags: extend1051

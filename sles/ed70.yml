@@ -2,7 +2,7 @@
   set_fact:
     installPath: /home/products/ed70pu22
     installerName: setup_entdev_7.0_patchupdate22_337402_suse_x64
-    S3Prefix: ED/70/
+    S3Prefix: ED/70/PU22/
     productName: ED70PU22
   tags: ed70pu22
 
@@ -10,6 +10,6 @@
   set_fact:
     installPath: /home/products/ed70pu23
     installerName: setup_entdev_7.0_patchupdate23_342759_suse_x64
-    S3Prefix: ED/70/
+    S3Prefix: ED/70/PU23/
     productName: ED70PU23
   tags: ed70pu23
