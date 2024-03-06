@@ -56,9 +56,9 @@
   become: yes
   tags: oracle
 
-- name: Pause for 30 seconds
+- name: Pause for 60 seconds
   ansible.builtin.pause:
-    seconds: 30
+    seconds: 60
   tags: oracle
 
 - name: Create oracle.sql
@@ -79,7 +79,7 @@
 - name: Modify Oracle
   containers.podman.podman_container_exec:
     name: oracle
-    command: sqlplus sys/{{ myPassword }}@//localhost:1521/FREE as sysdba < /tmp/oracle.sql
+    command: 'sqlplus sys/{{ myPassword }}@//localhost:1521/FREE as sysdba < /tmp/oracle.sql'
   become: yes
   tags: oracle
 
