@@ -40,3 +40,10 @@
     installerNameEDEPU: ede_90_pu05_342650.exe
     productName: ED90PU5
   tags: ed90pu5
+
+- name: ED 9.0 PU 6
+  set_fact:
+    installerNameEDVSPU: edvs2022_90_pu06_346110.exe
+    installerNameEDEPU: ede_90_pu06_346110.exe
+    productName: ED90PU6
+  tags: ed90pu6

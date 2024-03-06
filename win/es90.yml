@@ -34,3 +34,9 @@
     installerNameESPU: es_90_pu05_342650.exe
     productName: ES90PU5
   tags: es90pu5
+
+- name: ES 9.0 PU 6
+  set_fact:
+    installerNameESPU: es_90_pu06_346110.exe
+    productName: ES90PU6
+  tags: es90pu6
