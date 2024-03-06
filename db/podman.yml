@@ -41,6 +41,17 @@
     DBPORT: 1433
   tags: mssql
 
+- name: Create /home/oracle/oracle.sql
+  copy:
+    dest: "/home/oracle/oracle.sql"
+    content: |
+      ALTER SESSION SET "_ORACLE_SCRIPT"=true;
+      CREATE USER {{ myUsername }} IDENTIFIED BY {{ myPassword }};
+      GRANT ALL PRIVILEGES TO {{ myUsername }};
+      EXIT;
+  become: yes
+  tags: oracle
+
 - name: Create Oracle
   containers.podman.podman_container:
     name: oracle
@@ -50,36 +61,27 @@
     detach: true
     interactive: true
     ports: 1521:1521
+    volume: /home/oracle:/opt/oracle/scripts/setup
     env:
       ORACLE_PWD: '{{ myPassword }}'
       ORACLE_CHARACTERSET: 'AL32UTF8'
   become: yes
   tags: oracle
 
-- name: Pause for 60 seconds
-  ansible.builtin.pause:
-    seconds: 60
-  tags: oracle
+# - name: Pause for 60 seconds
+#   ansible.builtin.pause:
+#     seconds: 60
+#   tags: oracle
 
-- name: Create oracle.sql
-  copy:
-    dest: "/tmp/oracle.sql"
-    content: |
-      ALTER SESSION SET "_ORACLE_SCRIPT"=true;
-      CREATE USER {{ myUsername }} IDENTIFIED BY {{ myPassword }};
-      GRANT ALL PRIVILEGES TO {{ myUsername }};
-      EXIT;
-  tags: oracle
+# - name: Copy oracle.sql to container
+#   ansible.builtin.command: 'podman cp /tmp/oracle.sql oracle:/tmp/oracle.sql'
+#   become: yes
+#   tags: oracle
 
-- name: Copy oracle.sql to container
-  ansible.builtin.command: 'podman cp /tmp/oracle.sql oracle:/tmp/oracle.sql'
-  become: yes
-  tags: oracle
-
-- name: Modify Oracle
-  ansible.builtin.command: 'podman exec -it oracle sqlplus sys/{{ myPassword }}@//localhost:1521/FREE as sysdba < /tmp/oracle.sql'
-  become: yes
-  tags: oracle
+# - name: Modify Oracle
+#   ansible.builtin.command: 'podman exec -it oracle sqlplus sys/{{ myPassword }}@//localhost:1521/FREE as sysdba < /tmp/oracle.sql'
+#   become: yes
+#   tags: oracle
 
 - name: Set Oracle Facts
   set_fact:
