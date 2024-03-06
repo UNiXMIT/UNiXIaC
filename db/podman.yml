@@ -61,27 +61,12 @@
     detach: true
     interactive: true
     ports: 1521:1521
-    volume: /home/{{ myUsername }}:/opt/oracle/scripts/setup
+    volume: /home/{{ myUsername }}:/opt/oracle/scripts/startup
     env:
       ORACLE_PWD: '{{ myPassword }}'
       ORACLE_CHARACTERSET: 'AL32UTF8'
   become: yes
   tags: oracle
-
-# - name: Pause for 60 seconds
-#   ansible.builtin.pause:
-#     seconds: 60
-#   tags: oracle
-
-# - name: Copy oracle.sql to container
-#   ansible.builtin.command: 'podman cp /tmp/oracle.sql oracle:/tmp/oracle.sql'
-#   become: yes
-#   tags: oracle
-
-# - name: Modify Oracle
-#   ansible.builtin.command: 'podman exec -it oracle sqlplus sys/{{ myPassword }}@//localhost:1521/FREE as sysdba < /tmp/oracle.sql'
-#   become: yes
-#   tags: oracle
 
 - name: Set Oracle Facts
   set_fact:
