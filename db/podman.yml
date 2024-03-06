@@ -61,7 +61,7 @@
     detach: true
     interactive: true
     ports: 1521:1521
-    volume: /home/{{ myUsername }}:/opt/oracle/scripts/startup
+    volume: /home/{{ myUsername }}:/opt/oracle/scripts/startup:ro
     env:
       ORACLE_PWD: '{{ myPassword }}'
       ORACLE_CHARACTERSET: 'AL32UTF8'
