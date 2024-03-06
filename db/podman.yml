@@ -77,10 +77,7 @@
   tags: oracle
 
 - name: Modify Oracle
-  containers.podman.podman_container_exec:
-    name: oracle
-    command: 'sqlplus sys/{{ myPassword }}@//localhost:1521/FREE as sysdba < /tmp/oracle.sql'
-    tty: true
+  ansible.builtin.command: 'podman exec -it oracle sqlplus sys/{{ myPassword }}@//localhost:1521/FREE as sysdba < /tmp/oracle.sql'
   become: yes
   tags: oracle
 
