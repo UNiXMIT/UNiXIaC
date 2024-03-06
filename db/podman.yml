@@ -64,7 +64,13 @@
 - name: Modify Oracle
   containers.podman.podman_container_exec:
     name: oracle
-    command: sqlplus sys/{{ myPassword }}@//localhost:1521/FREE as sysdba <<EOF ALTER SESSION SET "_ORACLE_SCRIPT"=true; CREATE USER {{ myUsername }} IDENTIFIED BY {{ myPassword }}; GRANT ALL PRIVILEGES TO {{ myUsername }}; EXIT; EOF
+    command: |
+      sqlplus sys/{{ myPassword }}@//localhost:1521/FREE as sysdba <<EOF
+      ALTER SESSION SET "_ORACLE_SCRIPT"=true;
+      CREATE USER {{ myUsername }} IDENTIFIED BY {{ myPassword }};
+      GRANT ALL PRIVILEGES TO {{ myUsername }};
+      EXIT;
+      EOF
   become: yes
   tags: oracle
 
