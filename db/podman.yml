@@ -21,11 +21,22 @@
   become: yes
   tags: mssql
 
+- name: Modify MSSQL
+  containers.podman.podman_container_exec:
+    name: mssql
+    command: |
+      /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ myPassword }} -Q "CREATE DATABASE {{ myUsername }}; \
+      CREATE LOGIN {{ myUsername }} WITH PASSWORD={{ myPassword }}, DEFAULT_DATABASE={{ myUsername }}; \
+      ALTER SERVER ROLE sysadmin ADD MEMBER {{ myUsername }}; \
+      CREATE USER {{ myUsername }} FOR LOGIN {{ myUsername }}; \
+      ALTER USER {{ myUsername }} WITH DEFAULT_SCHEMA=dbo; \
+      ALTER ROLE db_owner ADD MEMBER {{ myUsername }}"
+
 - name: Set MSSQL Facts
   set_fact:
     DBNAME: SQL Server 2022
     DBSHORT: MSSQL
-    DBUSER: sa
+    DBUSER: '{{ myUsername }}'
     DBPORT: 1433
   tags: mssql
 
@@ -44,11 +55,22 @@
   become: yes
   tags: oracle
 
+- name: Modify Oracle
+  containers.podman.podman_container_exec:
+    name: oracle
+    command: |
+      sqlplus sys/{{ myPassword }}@//localhost:1521/FREE as sysdba <<EOF
+      ALTER SESSION SET "_ORACLE_SCRIPT"=true;
+      CREATE USER {{ myUsername }} IDENTIFIED BY {{ myPassword }};
+      GRANT ALL PRIVILEGES TO {{ myUsername }};
+      EXIT;
+      EOF
+
 - name: Set Oracle Facts
   set_fact:
     DBNAME: Oracle 23c Free
     DBSHORT: ORACLE
-    DBUSER: sys
+    DBUSER: '{{ myUsername }}'
     DBPORT: 1521
   tags: oracle
 
@@ -79,7 +101,7 @@
   set_fact:
     DBNAME: DB2 11.5 Community Edition 
     DBSHORT: DB2
-    DBUSER: support
+    DBUSER: '{{ myUsername }}'
     DBPORT: 50000
   tags: db2
 
@@ -108,7 +130,7 @@
   set_fact:
     DBNAME: PostgreSQL 16.1  
     DBSHORT: POSTGRES
-    DBUSER: support
+    DBUSER: '{{ myUsername }}'
     DBPORT: 5432
   tags: postgres
 
