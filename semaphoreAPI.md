@@ -3,18 +3,18 @@
 POST /api/auth/login  
 ```
 {
-  "auth": "email@domain.com",
+  "auth": "email@example.com",
   "password": "strongPassword123"
 }
 ```
 cURL Example:  
 ```
 curl --request POST \
-  --url https://domain.com.com/api/auth/login \
+  --url https://example.com.com/api/auth/login \
   --header 'Content-Type: application/json' \
   -c cookies.txt -b cookies.txt \
   --data '{
-    "auth": "email@domain.com",
+    "auth": "email@example.com",
     "password": "strongPassword123"
   }'
 ```
@@ -25,7 +25,7 @@ GET /api/project/{project_id}/templates/{template_id}
 cURL Example:  
 ```
 curl --request GET \
-  --url https://domain.com/api/project/{project_id}/templates/{template_id} \
+  --url https://example.com/api/project/{project_id}/templates/{template_id} \
   -c cookies.txt -b cookies.txt
 ``` 
 
@@ -59,7 +59,7 @@ POST /api/project/{project_id}/templates
 cURL Example:  
 ```
 curl --request POST \
-  --url https://domain.com/api/project/{project_id}/templates \
+  --url https://example.com/api/project/{project_id}/templates \
   --header 'Content-Type: application/json' \
   -c cookies.txt -b cookies.txt \
   --data '{
@@ -117,7 +117,7 @@ PUT /project/{project_id}/templates/{template_id}
 cURL Example: 
 ```
 curl --request PUT \
-  --url https://domain.com/api/project/{project_id}/templates/{template_id} \
+  --url https://example.com/api/project/{project_id}/templates/{template_id} \
   --header 'Content-Type: application/json' \
   -c cookies.txt -b cookies.txt \
   --data '{
@@ -145,12 +145,22 @@ curl --request PUT \
   }'
 ```
 
+## Delete Task
+DELETE /project/{project_id}/tasks/{task_id}
+
+cURL Example:  
+```
+curl --request DELETE \
+  --url https://example.com/project/{project_id}/tasks/{task_id} \
+  -c cookies.txt -b cookies.txt
+```
+
 ## Logout
 POST /api/auth/logout  
 
 cURL Example:  
 ```
 curl --request POST \
-  --url https://domain.com/api/auth/logout \
+  --url https://example.com/api/auth/logout \
   -c cookies.txt -b cookies.txt
 ```

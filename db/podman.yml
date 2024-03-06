@@ -24,6 +24,7 @@
 - name: Pause for 30 seconds
   ansible.builtin.pause:
     seconds: 30
+  tags: mssql
 
 - name: Modify MSSQL
   containers.podman.podman_container_exec:
@@ -64,6 +65,7 @@
 - name: Pause for 30 seconds
   ansible.builtin.pause:
     seconds: 30
+  tags: oracle
 
 - name: Modify Oracle
   containers.podman.podman_container_exec:
