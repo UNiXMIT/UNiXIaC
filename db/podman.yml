@@ -61,16 +61,19 @@
     seconds: 30
   tags: oracle
 
-- name: Modify Oracle
-  containers.podman.podman_container_exec:
-    name: oracle
-    command: |
-      sqlplus sys/{{ myPassword }}@//localhost:1521/FREE as sysdba <<EOF
+- name: Create oracle.sql
+  copy:
+    dest: "/tmp"
+    content: |
       ALTER SESSION SET "_ORACLE_SCRIPT"=true;
       CREATE USER {{ myUsername }} IDENTIFIED BY {{ myPassword }};
       GRANT ALL PRIVILEGES TO {{ myUsername }};
       EXIT;
-      EOF
+
+- name: Modify Oracle
+  containers.podman.podman_container_exec:
+    name: oracle
+    command: sqlplus sys/{{ myPassword }}@//localhost:1521/FREE as sysdba < /tmp/oracle.sql
   become: yes
   tags: oracle
 
