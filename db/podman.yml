@@ -80,6 +80,7 @@
   containers.podman.podman_container_exec:
     name: oracle
     command: 'sqlplus sys/{{ myPassword }}@//localhost:1521/FREE as sysdba < /tmp/oracle.sql'
+    tty: true
   become: yes
   tags: oracle
 
