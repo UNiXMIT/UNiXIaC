@@ -28,7 +28,6 @@ Standard_B2ls_v2
 
 ## Install/Update Instructions
 ```
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/Dockerfile
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/semaphore.sh
 chmod +x semaphore.sh
 mkdir /home/support/semaphore/config
