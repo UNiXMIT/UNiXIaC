@@ -41,9 +41,17 @@
     DBPORT: 1433
   tags: mssql
 
+- name: Create /home/oracle
+  file:
+    path: "/home/oracle"
+    state: directory
+    mode: '0777'
+  become: yes
+  tags: oracle
+
 - name: Create oracle.sql
   copy:
-    dest: "/home/{{ myUsername }}/oracle.sql"
+    dest: "/home/oracle/oracle.sql"
     content: |
       ALTER SESSION SET "_ORACLE_SCRIPT"=true;
       CREATE USER {{ myUsername }} IDENTIFIED BY {{ myPassword }};
@@ -61,7 +69,7 @@
     detach: true
     interactive: true
     ports: 1521:1521
-    volume: /home/{{ myUsername }}:/opt/oracle/scripts/startup:ro
+    volume: /home/oracle:/opt/oracle/scripts/startup
     env:
       ORACLE_PWD: '{{ myPassword }}'
       ORACLE_CHARACTERSET: 'AL32UTF8'
