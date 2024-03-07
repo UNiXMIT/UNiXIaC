@@ -58,8 +58,7 @@
        hostname: '{{ item.public_ip_address }}'
        ansible_port: 22
        ansible_user: '{{ myUsername }}'
-       ansible_password: '{{ myPassword }}'
-      #  ansible_ssh_private_key_file: '{{ keyLocation }}'
+       ansible_ssh_private_key_file: '{{ keyLocation }}'
        groups: awsEC2
     loop: '{{ ec2.instances }}'
     tags: default
