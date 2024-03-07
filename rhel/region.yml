@@ -1,14 +1,17 @@
 - name: EMEA Region
   set_fact:
     awsRegion: eu-west-2
+    availabilityZone: us-west-2a
   when: userRegion | default("1") == "1"
 
 - name: AMS Region
   set_fact:
     awsRegion: us-east-2
+    availabilityZone: us-east-2a
   when: userRegion | default("1") == "2"
 
 - name: APJ Region
   set_fact:
     awsRegion: ap-southeast-2
+    availabilityZone: ap-southeast-2a
   when: userRegion | default("1") == "3"
