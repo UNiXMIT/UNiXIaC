@@ -24,7 +24,6 @@
 
 - name: Set AWS Facts
   set_fact:
-    hashedPassword: "{{ myPassword | password_hash }}"
     imageName: RHEL9
     instanceType: t3.xlarge
     deviceName: /dev/sda1

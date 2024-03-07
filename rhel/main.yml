@@ -1,9 +1,9 @@
-- name: AWS Region
+- name: AWS Initial Configuration
   hosts: local
   gather_facts: no
   tasks:
-  - name: Import region.yml
-    import_tasks: region.yml
+  - name: Import initial.yml
+    import_tasks: initial.yml
   tags: default
 
 - name: SSO 2FA
@@ -28,9 +28,6 @@
         system_info:
           default_user:
             name: {{ myUsername }}
-        runcmd:
-          - echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
-          - systemctl restart sshd
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
@@ -50,7 +47,6 @@
       state: running
       wait: true
     register: ec2
-    # no_log: True
     tags: default
 
   - name: Add Host to awsEC2 Group 
