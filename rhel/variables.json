@@ -8,9 +8,9 @@
   "securityGroupsAPJ": "['sg-XXXXXX','sg-XXXXXX']",
   "awsProfile": "848105473048_Fed_COBOL2_Compute",
   "webAPI": "https://WebAPI.com/",
-  "vmCount": 1,
   "ssoEmail": "email@domain.com",
   "ssoPassword": "strongPassword",
   "ssoMethod": "1",
-  "ssoToken": "XXXXXX"
+  "ssoToken": "XXXXXX",
+  "vmCount": 1
 }
