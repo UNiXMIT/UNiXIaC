@@ -38,6 +38,10 @@
             lock-passwd: false
             ssh_pwauth: true
             chpasswd: {expire: False}
+        runcmd:
+          - echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+          - echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
+          - systemctl restart sshd
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
       network:  
