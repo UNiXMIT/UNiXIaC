@@ -36,8 +36,10 @@
           sudo: ALL=(ALL) NOPASSWD:ALL
           groups: users,admin,wheel
         - name: root
-          lock-passwd: false
           passwd: "{{ myPassword | password_hash('sha512') }}"
+          lock-passwd: false
+          ssh_pwauth: True
+          chpasswd: {expire: False}
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
       network:  
