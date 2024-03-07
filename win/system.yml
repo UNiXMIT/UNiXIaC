@@ -1,6 +1,7 @@
 - name: Set timezone to 'GMT Standard Time' (GMT)
   community.windows.win_timezone:
     timezone: GMT Standard Time
+  when: userRegion | default("1") == "1"
 
 - name: Disable Windows Firewall
   win_firewall:

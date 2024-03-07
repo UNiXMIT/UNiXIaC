@@ -1,0 +1,30 @@
+- name: EMEA Region
+  set_fact:
+    awsRegion: eu-west-2
+    availabilityZone: us-west-2a
+    awsAMI: ami-0be53fc5198dbd294
+    securityGroups: '{{ securityGroupsEMEA }}'
+  when: userRegion | default("1") == "1"
+
+- name: AMS Region
+  set_fact:
+    awsRegion: us-east-2
+    availabilityZone: us-east-2a
+    awsAMI: ami-0e6aa5f69f06ffa91
+    securityGroups: '{{ securityGroupsAMS }}'
+  when: userRegion | default("1") == "2"
+
+- name: APJ Region
+  set_fact:
+    awsRegion: ap-southeast-2
+    availabilityZone: ap-southeast-2a
+    awsAMI: ami-02ed1a17d1bd5f706
+    securityGroups: '{{ securityGroupsAPJ }}'
+  when: userRegion | default("1") == "3"
+
+- name: Set AWS Facts
+  set_fact:
+    instanceType: t3.xlarge
+    deviceName: /dev/sda1
+    volumeType: gp3
+    volumeSize: 120

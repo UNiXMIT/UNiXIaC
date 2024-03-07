@@ -118,7 +118,7 @@
     bucket: mturner
     mode: geturl
     object: DB2/v11.5.9_nt32_odbc_cli.zip
-    region: '{{ awsRegion }}'
+    region: eu-west-2
     expiry: 4000
     sig_v4: true
   register: s332
@@ -130,7 +130,7 @@
     bucket: mturner
     mode: geturl
     object: DB2/v11.5.9_ntx64_odbc_cli.zip
-    region: '{{ awsRegion }}'
+    region: eu-west-2
     expiry: 4000
     sig_v4: true
   register: s364

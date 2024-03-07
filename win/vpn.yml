@@ -4,7 +4,7 @@
     bucket: mturner
     mode: geturl
     object: PulseVPN/ps-pulse-win-9.1r15.0-b15819-64bitinstaller.msi
-    region: '{{ awsRegion }}'
+    region: eu-west-2
     expiry: 4000
     sig_v4: true
   register: s3
@@ -21,7 +21,7 @@
     bucket: mturner
     mode: geturl
     object: PulseVPN/MFIPulseVPN.pulsepreconfig
-    region: '{{ awsRegion }}'
+    region: eu-west-2
     expiry: 4000
     sig_v4: true
   register: s3

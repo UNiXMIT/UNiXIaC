@@ -13,7 +13,7 @@
         bucket: mturner
         mode: geturl
         object: ED/70/Microsoft.VisualStudio.Setup.Configuration.Native.dll
-        region: '{{ awsRegion }}'
+        region: eu-west-2
         expiry: 4000
         sig_v4: true
       register: s3

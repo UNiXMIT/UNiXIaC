@@ -7,7 +7,7 @@
 - name: Add VS 2019 Tags
   amazon.aws.ec2_tag:
     aws_profile: '{{ awsProfile }}'
-    region: '{{ awsRegion }}'
+    region: "{{ hostvars['localhost']['awsRegion'] }}"
     resource: '{{ item }}'
     tags:
       VS: 'Visual Studio Professional 2019'
@@ -25,7 +25,7 @@
 - name: Add VS 2022 Tags
   amazon.aws.ec2_tag:
     aws_profile: '{{ awsProfile }}'
-    region: '{{ awsRegion }}'
+    region: "{{ hostvars['localhost']['awsRegion'] }}"
     resource: '{{ item }}'
     tags:
       VS: 'Visual Studio Professional 2022'
