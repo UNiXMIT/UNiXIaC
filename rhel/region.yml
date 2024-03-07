@@ -3,6 +3,7 @@
     awsRegion: eu-west-2
     availabilityZone: us-west-2a
     awsAMI: ami-07fb9d5c721566c65
+    securityGroups: '{{ securityGroupsEMEA }}'
   when: userRegion | default("1") == "1"
 
 - name: AMS Region
@@ -10,6 +11,7 @@
     awsRegion: us-east-2
     availabilityZone: us-east-2a
     awsAMI: ami-0d77c9d87c7e619f9
+    securityGroups: '{{ securityGroupsAMS }}'
   when: userRegion | default("1") == "2"
 
 - name: APJ Region
@@ -17,4 +19,5 @@
     awsRegion: ap-southeast-2
     availabilityZone: ap-southeast-2a
     awsAMI: ami-0d6857b844e855670
+    securityGroups: '{{ securityGroupsAPJ }}'
   when: userRegion | default("1") == "3"

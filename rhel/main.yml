@@ -25,12 +25,21 @@
     amazon.aws.ec2_instance:
       user_data: |
         #cloud-config
-        system_info:
-          default_user:
-            name: {{ myUsername }}
+        users:
+        - default
+        - name: '{{ myUsername }}'
+          passwd: "{{ myPassword | password_hash('sha512') }}"
+          shell: /bin/bash
+          lock-passwd: false
+          ssh_pwauth: True
+          chpasswd: { expire: False }
+          sudo: ALL=(ALL) NOPASSWD:ALL
+          groups: users,admin,wheel
+        - name: root
+          lock-passwd: false
+          passwd: "{{ myPassword | password_hash('sha512') }}"
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
-      key_name: '{{ keyName }}'
       network:  
         assign_public_ip: yes
       security_groups: '{{ securityGroups }}'
@@ -52,11 +61,11 @@
 
   - name: Add Host to awsEC2 Group 
     add_host: 
-       hostname: '{{ item.public_ip_address }}'
-       ansible_port: 22
-       ansible_user: '{{ myUsername }}'
-       ansible_ssh_private_key_file: '{{ keyLocation }}'
-       groups: awsEC2
+      hostname: '{{ item.public_ip_address }}'
+      ansible_port: 22
+      ansible_user: '{{ myUsername }}'
+      ansible_password: '{{ myPassword }}'
+      groups: awsEC2
     loop: '{{ ec2.instances }}'
     tags: default
   
