@@ -28,17 +28,17 @@
         users:
         - default
         - name: '{{ myUsername }}'
-          passwd: "{{ myPassword | password_hash('sha512') }}"
+          passwd: "{{ hashedPassword }}"
           shell: /bin/bash
           lock-passwd: false
-          ssh_pwauth: True
+          ssh_pwauth: true
           chpasswd: { expire: False }
           sudo: ALL=(ALL) NOPASSWD:ALL
           groups: users,admin,wheel
         - name: root
-          passwd: "{{ myPassword | password_hash('sha512') }}"
+          passwd: "{{ hashedPassword }}"
           lock-passwd: false
-          ssh_pwauth: True
+          ssh_pwauth: true
           chpasswd: {expire: False}
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
@@ -101,15 +101,15 @@
     import_tasks: system.yml
   tags: default
 
-- name: Manage Users
-  hosts: awsEC2
-  gather_facts: no
-  become: yes
-  tasks: 
-  - name: Import users.yml
-    import_tasks: users.yml
-  no_log: True
-  tags: default
+# - name: Manage Users
+#   hosts: awsEC2
+#   gather_facts: no
+#   become: yes
+#   tasks: 
+#   - name: Import users.yml
+#     import_tasks: users.yml
+#   no_log: True
+#   tags: default
 
 - name: Install Software
   hosts: awsEC2
