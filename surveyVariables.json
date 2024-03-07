@@ -34,6 +34,13 @@
 			"required": false,
 			"type": "int",
 			"description": "Create how many instances? (default=1)"
+		},
+		{
+			"name": "userRegion",
+			"title": "AWS Region",
+			"required": false,
+			"type": "int",
+			"description": "1=EMEA 2=AMS 3=APJ (default=1)"
 		}
 	]
 }
