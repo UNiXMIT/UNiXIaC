@@ -47,6 +47,7 @@
       state: running
       wait: true
     register: ec2
+    no_log: true
     tags: default
 
   - name: Add Host to awsEC2 Group 

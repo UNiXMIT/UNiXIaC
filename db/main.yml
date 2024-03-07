@@ -1,3 +1,11 @@
+- name: AWS Initial Configuration
+  hosts: local
+  gather_facts: no
+  tasks:
+  - name: Import initial.yml
+    import_tasks: initial.yml
+  tags: default
+
 - name: SSO 2FA
   hosts: local
   gather_facts: no
@@ -39,7 +47,7 @@
       state: running
       wait: true
     register: ec2
-    no_log: True
+    no_log: true
     tags: default
 
   - name: Add Host to awsEC2 Group 
