@@ -25,25 +25,15 @@
     amazon.aws.ec2_instance:
       user_data: |
         #cloud-config
-        users:
-          - name: '{{ myUsername }}'
-            passwd: "{{ hashedPassword }}"
-            shell: /bin/bash
-            lock-passwd: false
-            ssh_pwauth: true
-            chpasswd: { expire: False }
-            sudo: ALL=(ALL) NOPASSWD:ALL
-          - name: root
-            passwd: "{{ hashedPassword }}"
-            lock-passwd: false
-            ssh_pwauth: true
-            chpasswd: {expire: False}
+        system_info:
+          default_user:
+            name: {{ myUsername }}
         runcmd:
-          - echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
           - echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
           - systemctl restart sshd
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
+      key_name: '{{ keyName }}'
       network:  
         assign_public_ip: yes
       security_groups: '{{ securityGroups }}'
@@ -65,11 +55,12 @@
 
   - name: Add Host to awsEC2 Group 
     add_host: 
-      hostname: '{{ item.public_ip_address }}'
-      ansible_port: 22
-      ansible_user: '{{ myUsername }}'
-      ansible_password: '{{ myPassword }}'
-      groups: awsEC2
+       hostname: '{{ item.public_ip_address }}'
+       ansible_port: 22
+       ansible_user: '{{ myUsername }}'
+       ansible_password: '{{ myPassword }}'
+      #  ansible_ssh_private_key_file: '{{ keyLocation }}'
+       groups: awsEC2
     loop: '{{ ec2.instances }}'
     tags: default
   
@@ -103,15 +94,15 @@
     import_tasks: system.yml
   tags: default
 
-# - name: Manage Users
-#   hosts: awsEC2
-#   gather_facts: no
-#   become: yes
-#   tasks: 
-#   - name: Import users.yml
-#     import_tasks: users.yml
-#   no_log: True
-#   tags: default
+- name: Manage Users
+  hosts: awsEC2
+  gather_facts: no
+  become: yes
+  tasks: 
+  - name: Import users.yml
+    import_tasks: users.yml
+  no_log: True
+  tags: default
 
 - name: Install Software
   hosts: awsEC2
