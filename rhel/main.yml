@@ -7,6 +7,14 @@
   no_log: True
   tags: default
 
+- name: AWS Region
+  hosts: local
+  gather_facts: no
+  tasks:
+  - name: Import region.yml
+    import_tasks: region.yml
+  tags: default
+
 - name: AWS EC2 Management
   hosts: local
   vars:
