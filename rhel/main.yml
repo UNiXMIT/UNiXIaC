@@ -31,13 +31,11 @@
           shell: /bin/bash
           lock-passwd: false
           ssh_pwauth: true
-          chpasswd: { expire: False }
           sudo: ALL=(ALL) NOPASSWD:ALL
         - name: root
           passwd: "{{ hashedPassword }}"
           lock-passwd: false
           ssh_pwauth: true
-          chpasswd: {expire: False}
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
       network:  
