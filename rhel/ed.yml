@@ -105,6 +105,7 @@
 - name: Install AutoPass License File
   shell: mv /tmp/LicFile.txt /opt/microfocus/licensing/autopass/clientdetails/data/LicFile.txt
   become: yes
+  ignore_errors: true
 
 - name: Start MFDS
   shell: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64"
