@@ -139,6 +139,7 @@
 #   win_get_url: 
 #     url: '{{ AutoPassFile }}'
 #     dest: C:\ProgramData\Micro Focus\LicFile.txt
+#   ignore_errors: true
 #   tags: es
 
 - name: Install AutoPass License File
@@ -146,6 +147,7 @@
     src: C:\temp\LicFile.txt
     dest: C:\ProgramData\Micro Focus\LicFile.txt
     remote_src: true
+  ignore_errors: true
   tags: es
 
 - name: Import JCL Region

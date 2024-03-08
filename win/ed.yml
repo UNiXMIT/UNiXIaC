@@ -187,6 +187,7 @@
 #   win_get_url: 
 #     url: '{{ AutoPassFile }}'
 #     dest: C:\ProgramData\Micro Focus\LicFile.txt
+#   ignore_errors: true
 #   tags: ed
 
 - name: Install AutoPass License File
@@ -194,6 +195,7 @@
     src: C:\MFInstallers\LicFile.txt
     dest: C:\ProgramData\Micro Focus\LicFile.txt
     remote_src: true
+  ignore_errors: true
   tags: ed
   
 - name: Stop MFDS Service
