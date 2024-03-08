@@ -1,24 +1,24 @@
 - name: EMEA Region
   set_fact:
-    awsRegion: eu-west-2
-    availabilityZone: us-west-2a
-    awsAMI: ami-0be53fc5198dbd294
+    awsRegion: '{{ regionEMEA }}'
+    availabilityZone: '{{ azEMEA }}'
+    awsAMI: '{{ amiEMEA }}'
     securityGroups: '{{ securityGroupsEMEA }}'
   when: userRegion | default("1") == "1"
 
 - name: AMS Region
   set_fact:
-    awsRegion: us-east-2
-    availabilityZone: us-east-2a
-    awsAMI: ami-0e6aa5f69f06ffa91
+    awsRegion: '{{ regionAMS }}'
+    availabilityZone: '{{ azAMS }}'
+    awsAMI: '{{ amiAMS }}'
     securityGroups: '{{ securityGroupsAMS }}'
   when: userRegion | default("1") == "2"
 
 - name: APJ Region
   set_fact:
-    awsRegion: ap-southeast-2
-    availabilityZone: ap-southeast-2a
-    awsAMI: ami-02ed1a17d1bd5f706
+    awsRegion: '{{ regionAPJ }}'
+    availabilityZone: '{{ azAPJ }}'
+    awsAMI: '{{ amiAPJ }}'
     securityGroups: '{{ securityGroupsAPJ }}'
   when: userRegion | default("1") == "3"
 

@@ -1,6 +1,7 @@
 {
   "myUsername": "support",
   "myPassword": "strongPassword",
+  "imageName": "RHEL9",
   "keyName": "support",
   "keyLocation": "~/.ssh/support.pem",
   "securityGroupsEMEA": "['sg-XXXXXX','sg-XXXXXX']",
