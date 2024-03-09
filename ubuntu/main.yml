@@ -81,9 +81,13 @@
     loop: '{{ ec2.instances }}'
     tags: default
 
-- name: Pause for 30 seconds
-  ansible.builtin.pause:
-    seconds: 30
+- name: Wait for AWS Instance
+  hosts: local
+  gather_facts: no
+  tasks:
+  - name: Pause for 30 seconds
+    ansible.builtin.pause:
+      seconds: 30
   tags: default
 
 - name: Modify OS Config
