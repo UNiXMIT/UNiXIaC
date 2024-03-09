@@ -13,7 +13,7 @@
   "azAMS": "us-east-2a",
   "azAPJ": "ap-southeast-2a",
   "keyName": "support",
-  "keyLocation": "~/.ssh/support.pem",
+  "keyLocation": "/home/semaphore/.ssh/support.pem",
   "securityGroupsEMEA": "['sg-XXXXXX','sg-XXXXXX']",
   "securityGroupsAMS": "['sg-XXXXXX','sg-XXXXXX']",
   "securityGroupsAPJ": "['sg-XXXXXX','sg-XXXXXX']",

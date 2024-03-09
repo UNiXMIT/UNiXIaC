@@ -1,6 +1,7 @@
 - name: Set timezone to Europe/London
   community.general.timezone:
     name: Europe/London
+  when: userRegion | default("1") == "1"
 
 - name: Allow SSH password authentication
   lineinfile:
