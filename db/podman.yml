@@ -1,4 +1,4 @@
-- name: Create MSSQL
+- name: Create MSSQL 2022
   containers.podman.podman_container:
     name: mssql
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -19,7 +19,53 @@
     log_opt:
       max_size: 50mb
   become: yes
-  tags: mssql
+  tags: mssql2022
+
+- name: Create MSSQL 2019
+  containers.podman.podman_container:
+    name: mssql
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    state: started
+    restart_policy: "always"
+    detach: true
+    interactive: true
+    ports: 1433:1433
+    env:
+      SA_PASSWORD: '{{ myPassword }}'
+      ACCEPT_EULA: 'Y'
+      MSSQL_COLLATION: 'SQL_Latin1_General_CP1_CI_AS'
+    healthcheck: '/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P {{ myPassword }} -Q "SELECT 1" -b -o /dev/null'
+    healthcheck_interval: "10s"
+    healthcheck_retries: 10
+    healthcheck_start_period: "10s"
+    healthcheck_timeout: "3s"
+    log_opt:
+      max_size: 50mb
+  become: yes
+  tags: mssql2019
+
+- name: Create MSSQL 2017
+  containers.podman.podman_container:
+    name: mssql
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    state: started
+    restart_policy: "always"
+    detach: true
+    interactive: true
+    ports: 1433:1433
+    env:
+      SA_PASSWORD: '{{ myPassword }}'
+      ACCEPT_EULA: 'Y'
+      MSSQL_COLLATION: 'SQL_Latin1_General_CP1_CI_AS'
+    healthcheck: '/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P {{ myPassword }} -Q "SELECT 1" -b -o /dev/null'
+    healthcheck_interval: "10s"
+    healthcheck_retries: 10
+    healthcheck_start_period: "10s"
+    healthcheck_timeout: "3s"
+    log_opt:
+      max_size: 50mb
+  become: yes
+  tags: mssql2017
 
 - name: Pause for 30 seconds
   ansible.builtin.pause:
@@ -60,10 +106,10 @@
   become: yes
   tags: oracle
 
-- name: Create Oracle
+- name: Create Oracle 23c FREE
   containers.podman.podman_container:
     name: oracle
-    image: container-registry.oracle.com/database/free:latest
+    image: container-registry.oracle.com/database/free:23.3.0.0
     state: started
     restart_policy: "always"
     detach: true
@@ -74,7 +120,39 @@
       ORACLE_PWD: '{{ myPassword }}'
       ORACLE_CHARACTERSET: 'AL32UTF8'
   become: yes
-  tags: oracle
+  tags: oracle23c
+
+- name: Create Oracle 21c XE
+  containers.podman.podman_container:
+    name: oracle
+    image: container-registry.oracle.com/database/express:21.3.0-xe
+    state: started
+    restart_policy: "always"
+    detach: true
+    interactive: true
+    ports: 1521:1521
+    volume: /home/oracle:/opt/oracle/scripts/startup
+    env:
+      ORACLE_PWD: '{{ myPassword }}'
+      ORACLE_CHARACTERSET: 'AL32UTF8'
+  become: yes
+  tags: oracle21c
+
+- name: Create Oracle 18c XE
+  containers.podman.podman_container:
+    name: oracle
+    image: container-registry.oracle.com/database/express:18.4.0-xe
+    state: started
+    restart_policy: "always"
+    detach: true
+    interactive: true
+    ports: 1521:1521
+    volume: /home/oracle:/opt/oracle/scripts/startup
+    env:
+      ORACLE_PWD: '{{ myPassword }}'
+      ORACLE_CHARACTERSET: 'AL32UTF8'
+  become: yes
+  tags: oracle18c
 
 - name: Set Oracle Facts
   set_fact:
