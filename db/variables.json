@@ -2,7 +2,7 @@
   "myUsername": "support",
   "myPassword": "strongPassword",
   "imageName": "DB",
-  "amiEMEA": "ami-07fb9d5c721566c65",
+  "amiEMEA": "ami-035cecbff25e0d91e",
   "amiAMS": "ami-0d77c9d87c7e619f9",
   "amiAPJ": "ami-0d6857b844e855670",
   "regionEMEA": "eu-west-2",

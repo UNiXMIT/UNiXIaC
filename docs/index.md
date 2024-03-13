@@ -1,9 +1,15 @@
 # [UNiXIaC](https://github.com/UNiXMIT/UNiXIaC)
 # Ansible Semaphore Documentation
 
+- [Overview](#overview)
 - [AWS Instance Creation](#aws-instance-creation)
     - [Additional Details](#additional-details)
 - [Supported Products](#supported-os--products)
+
+## Overview
+- **Effortless Automation:** Semaphore, a graphical user interface for Ansible, simplifies infrastructure provisioning. It enables the automatic creation and configuration of virtual machines, like AWS EC2 instances, through a user-friendly interface.  
+
+- **On-Demand Infrastructure:** Semaphore and Ansible empower you to manage EC2 instances efficiently. You can easily spin up instances for testing purposes and terminate them directly from the AWS portal once testing is complete. This eliminates the need to maintain unnecessary instances, reducing costs and optimizing resource utilization.  
 
 ## AWS Instance Creation
 1. After logging in, navigate to the 'Task Templates' in the nav bar on the left hand side.   
