@@ -21,6 +21,11 @@
   become: yes
   tags: mssql2022
 
+- name: Set MSSQL 2022 Facts
+  set_fact:
+    DBNAME: SQL Server 2022
+  tags: mssql2022
+
 - name: Create MSSQL 2019
   containers.podman.podman_container:
     name: mssql
@@ -42,6 +47,11 @@
     log_opt:
       max_size: 50mb
   become: yes
+  tags: mssql2019
+
+- name: Set MSSQL 2019 Facts
+  set_fact:
+    DBNAME: SQL Server 2019
   tags: mssql2019
 
 - name: Create MSSQL 2017
@@ -67,6 +77,11 @@
   become: yes
   tags: mssql2017
 
+- name: Set MSSQL 2017 Facts
+  set_fact:
+    DBNAME: SQL Server 2017
+  tags: mssql2017
+
 - name: Pause for 30 seconds
   ansible.builtin.pause:
     seconds: 30
@@ -81,7 +96,6 @@
 
 - name: Set MSSQL Facts
   set_fact:
-    DBNAME: SQL Server 2022
     DBSHORT: MSSQL
     DBUSER: '{{ myUsername }}'
     DBPORT: 1433
@@ -122,6 +136,14 @@
   become: yes
   tags: oracle23c
 
+- name: Set Oracle 23c Facts
+  set_fact:
+    DBNAME: Oracle 23c FREE
+    DBSHORT: ORACLE
+    DBUSER: '{{ myUsername }} / SID - FREE'
+    DBPORT: 1521
+  tags: oracle23c
+
 - name: Create Oracle 21c XE
   containers.podman.podman_container:
     name: oracle
@@ -137,6 +159,14 @@
       ORACLE_CHARACTERSET: 'AL32UTF8'
   become: yes
   tags: oracle21c
+
+- name: Set Oracle 21c Facts
+  set_fact:
+    DBNAME: Oracle 21c XE
+    DBSHORT: ORACLE
+    DBUSER: '{{ myUsername }} / SID - XE'
+    DBPORT: 1521
+  tags: oracle21c  
 
 - name: Create Oracle 18c XE
   containers.podman.podman_container:
@@ -154,13 +184,13 @@
   become: yes
   tags: oracle18c
 
-- name: Set Oracle Facts
+- name: Set Oracle 18c Facts
   set_fact:
-    DBNAME: Oracle 23c Free
+    DBNAME: Oracle 18c XE
     DBSHORT: ORACLE
-    DBUSER: '{{ myUsername }} / SID - FREE'
+    DBUSER: '{{ myUsername }} / SID - XE'
     DBPORT: 1521
-  tags: oracle
+  tags: oracle18c
 
 - name: Create DB2
   containers.podman.podman_container:
