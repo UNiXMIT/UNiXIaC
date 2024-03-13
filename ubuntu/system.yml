@@ -16,6 +16,7 @@
     regexp: "^PasswordAuthentication"
     line: "PasswordAuthentication yes"
     state: present
+  ignore_errors: true
 
 - name: Allow TCP Forwarding
   lineinfile:
