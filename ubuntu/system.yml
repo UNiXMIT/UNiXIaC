@@ -10,6 +10,13 @@
     line: "PasswordAuthentication yes"
     state: present
 
+- name: Allow SSH password authentication in 50-cloud-init.conf
+  lineinfile:
+    dest: /etc/ssh/sshd_config.d/50-cloud-init.conf
+    regexp: "^PasswordAuthentication"
+    line: "PasswordAuthentication yes"
+    state: present
+
 - name: Allow TCP Forwarding
   lineinfile:
     dest: /etc/ssh/sshd_config
