@@ -127,6 +127,7 @@
     owner: '{{ myUsername }}' 
     group: '{{ myUsername }}'
     mode: '0775'
+  when: ansible_facts['distribution_major_version'] | int == 9
 
 - name: Get Oracle Instant Client Precompiler RHEL8 Download URL from S3
   amazon.aws.s3_object:
@@ -139,6 +140,15 @@
     sig_v4: true
   register: s3ora
   delegate_to: localhost
+  when: ansible_facts['distribution_major_version'] | int == 8
+
+- name: Download Oracle Instant Client Precompiler RHEL8 from S3
+  ansible.builtin.get_url:
+    url: '{{ s3ora.url }}'
+    dest: /opt/oracle/oracle-instantclient-precomp.x86_64.rpm
+    owner: '{{ myUsername }}' 
+    group: '{{ myUsername }}'
+    mode: '0775'
   when: ansible_facts['distribution_major_version'] | int == 8
 
 - name: Get Oracle Instant Client Precompiler RHEL7 Download URL from S3
@@ -154,6 +164,14 @@
   delegate_to: localhost
   when: ansible_facts['distribution_major_version'] | int == 7
 
+- name: Download Oracle Instant Client Precompiler RHEL7 from S3
+  ansible.builtin.get_url:
+    url: '{{ s3ora.url }}'
+    dest: /opt/oracle/oracle-instantclient-precomp.x86_64.rpm
+    owner: '{{ myUsername }}' 
+    group: '{{ myUsername }}'
+    mode: '0775'
+  when: ansible_facts['distribution_major_version'] | int == 7
 
 - name: Install Oracle Instant Client Precompiler
   yum: 
