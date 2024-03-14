@@ -116,12 +116,12 @@
 
 - name: Download Oracle Instant Client Precompiler 32bit
   ansible.windows.win_get_url:
-    url: '{{ s3ora32 }}'
+    url: '{{ s3ora32.url }}'
     dest: C:\Users\Public\Documents\instantclient-precomp-nt.zip
 
 - name: Download Oracle Instant Client Precompiler 64bit
   ansible.windows.win_get_url:
-    url: '{{ s3ora64 }}'
+    url: '{{ s3ora64.url  }}'
     dest: C:\Users\Public\Documents\instantclient-precomp-windows.x64.zip
 
 - name: Unzip Oracle Instant Client Precompiler 32bit
