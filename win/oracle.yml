@@ -46,7 +46,7 @@
 - name: Install Oracle Instant Client ODBC 64bit
   ansible.windows.win_command: odbc_install.exe
   args:
-    chdir: C:\instantClient64instantclient_21_13
+    chdir: C:\instantClient64\instantclient_21_13
 
 - name: Download Oracle Instant Client SQLPlus 32bit
   ansible.windows.win_get_url:

@@ -37,6 +37,41 @@
     dest: /opt/oracle
     remote_src: yes
 
+- name: Download Oracle Instant Client SDK Package
+  get_url:
+    url: https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-sdk-linux.x64-21.13.0.0.0dbru.zip
+    dest: /opt/oracle
+
+- name: Extract Oracle Instant Client SDK Package
+  ansible.builtin.unarchive:
+    src: /opt/oracle/instantclient-sdk-linux.x64-21.13.0.0.0dbru.zip
+    dest: /opt/oracle
+    remote_src: yes
+
+- name: Get Oracle Instant Client Precompiler Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: Oracle/InstantClient/21/instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip
+    region: eu-west-2
+    expiry: 4000
+    sig_v4: true
+  register: s3ora
+  delegate_to: localhost
+  become: no
+
+- name: Download Oracle Instant Client Precompiler from S3
+  ansible.builtin.get_url:
+    url: '{{ s3ora.url }}'
+    dest: /opt/oracle/instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip
+
+- name: Extract Oracle Instant Client Precompiler Package
+  ansible.builtin.unarchive:
+    src: /opt/oracle/instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip
+    dest: /opt/oracle
+    remote_src: yes
+
 - name: Change Ownership of /opt/oracle Directory
   file:
     path: /opt/oracle
@@ -49,7 +84,7 @@
     dest: /etc/profile.d/oracle.sh
     content: |
       #!/bin/bash
-      export PATH="$PATH:/opt/oracle/instantclient_21_13"
+      export PATH="$PATH:/opt/oracle/instantclient_21_13:/opt/oracle/instantclient_21_13/sdk"
       export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/oracle/instantclient_21_13"
 
 - name: Setup Oracle Instant Client ODBC Driver and DSN
