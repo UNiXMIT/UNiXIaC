@@ -1,0 +1,75 @@
+- name: Get 32bit DB2 ODBC Driver Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: DB2/v11.5.9_nt32_odbc_cli.zip
+    region: eu-west-2
+    expiry: 4000
+    sig_v4: true
+  register: s332
+  delegate_to: localhost
+
+- name: Get 64bit DB2 ODBC Driver Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: DB2/v11.5.9_ntx64_odbc_cli.zip
+    region: eu-west-2
+    expiry: 4000
+    sig_v4: true
+  register: s364
+  delegate_to: localhost
+
+- name: Create DB2
+  win_file:
+    path: C:\db2cli
+    state: directory
+
+- name: Create DB2 32
+  win_file:
+    path: C:\db2cli\32
+    state: directory
+
+- name: Create DB2 64
+  win_file:
+    path: C:\db2cli\64
+    state: directory
+
+- name: Everyone permissions on DB2
+  win_acl:
+    user: Everyone
+    path: C:\db2cli
+    type: allow
+    rights: FullControl
+
+- name: Download 32bit DB2 ODBC Driver
+  ansible.windows.win_get_url:
+    url: '{{ s332.url }}'
+    dest: C:\db2cli\32
+
+- name: Download 64bit DB2 ODBC Driver
+  ansible.windows.win_get_url:
+    url: '{{ s364.url }}'
+    dest: C:\db2cli\64
+
+- name: Extract 32bit DB2 ODBC Driver
+  community.windows.win_unzip:
+    src: C:\db2cli\32\v11.5.9_nt32_odbc_cli.zip
+    dest: C:\db2cli\32
+
+- name: Extract 64bit DB2 ODBC Driver
+  community.windows.win_unzip:
+    src: C:\db2cli\64\v11.5.9_ntx64_odbc_cli.zip
+    dest: C:\db2cli\64
+
+- name: Install 32bit DB2 ODBC Driver
+  win_command:
+    cmd: db2cli install -setup
+    chdir: C:\db2cli\32\clidriver\bin
+
+- name: Install 64bit DB2 ODBC Driver
+  win_command:
+    cmd: db2cli install -setup
+    chdir: C:\db2cli\64\clidriver\bin

@@ -1,0 +1,135 @@
+- name: Download Oracle Instant Client 32bit
+  ansible.windows.win_get_url:
+    url: https://download.oracle.com/otn_software/nt/instantclient/2113000/instantclient-basic-nt-21.13.0.0.0dbru.zip
+    dest: C:\Users\Public\Documents\instantclient-basic-nt-21.13.0.0.0dbru.zip
+
+- name: Download Oracle Instant Client 64bit
+  ansible.windows.win_get_url:
+    url: https://download.oracle.com/otn_software/nt/instantclient/2113000/instantclient-basic-windows.x64-21.13.0.0.0dbru.zip
+    dest: C:\Users\Public\Documents\instantclient-basic-windows.x64-21.13.0.0.0dbru.zip
+
+- name: Unzip Oracle Instant Client 32bit
+  community.windows.win_unzip:
+    src: C:\Users\Public\Documents\instantclient-basic-nt-21.13.0.0.0dbru.zip
+    dest: C:\instantClient32
+
+- name: Unzip Oracle Instant Client 64bit
+  community.windows.win_unzip:
+    src: C:\Users\Public\Documents\instantclient-basic-windows.x64-21.13.0.0.0dbru.zip
+    dest: C:\instantClient64
+
+- name: Download Oracle Instant Client ODBC 32bit
+  ansible.windows.win_get_url:
+    url: https://download.oracle.com/otn_software/nt/instantclient/2113000/instantclient-odbc-nt-21.13.0.0.0dbru.zip
+    dest: C:\Users\Public\Documents\instantclient-odbc-nt-21.13.0.0.0dbru.zip
+
+- name: Download Oracle Instant Client ODBC 64bit
+  ansible.windows.win_get_url:
+    url: https://download.oracle.com/otn_software/nt/instantclient/2113000/instantclient-odbc-windows.x64-21.13.0.0.0dbru.zip
+    dest: C:\Users\Public\Documents\instantclient-odbc-windows.x64-21.13.0.0.0dbru.zip
+
+- name: Unzip Oracle Instant Client ODBC 32bit
+  community.windows.win_unzip:
+    src: C:\Users\Public\Documents\instantclient-odbc-nt-21.13.0.0.0dbru.zip
+    dest: C:\instantClient32
+
+- name: Unzip Oracle Instant Client ODBC 64bit
+  community.windows.win_unzip:
+    src: C:\Users\Public\Documents\instantclient-odbc-windows.x64-21.13.0.0.0dbru.zip
+    dest: C:\instantClient64\
+
+- name: Install Oracle Instant Client ODBC 32bit
+  ansible.windows.win_command: odbc_install.exe
+  args:
+    chdir: C:\instantClient32\instantclient_21_13
+
+- name: Install Oracle Instant Client ODBC 64bit
+  ansible.windows.win_command: odbc_install.exe
+  args:
+    chdir: C:\instantClient64\instantclient_21_13
+
+- name: Download Oracle Instant Client SQLPlus 32bit
+  ansible.windows.win_get_url:
+    url: https://download.oracle.com/otn_software/nt/instantclient/2113000/instantclient-sqlplus-nt-21.13.0.0.0dbru.zip
+    dest: C:\Users\Public\Documents\instantclient-sqlplus-nt-21.13.0.0.0dbru.zip
+
+- name: Download Oracle Instant Client SQLPlus 64bit
+  ansible.windows.win_get_url:
+    url: https://download.oracle.com/otn_software/nt/instantclient/2113000/instantclient-sqlplus-windows.x64-21.13.0.0.0dbru.zip
+    dest: C:\Users\Public\Documents\instantclient-sqlplus-windows.x64-21.13.0.0.0dbru.zip
+
+- name: Unzip Oracle Instant Client SQLPlus 32bit
+  community.windows.win_unzip:
+    src: C:\Users\Public\Documents\instantclient-sqlplus-nt-21.13.0.0.0dbru.zip
+    dest: C:\instantClient32
+
+- name: Unzip Oracle Instant Client SQLPlus 64bit
+  community.windows.win_unzip:
+    src: C:\Users\Public\Documents\instantclient-sqlplus-windows.x64-21.13.0.0.0dbru.zip
+    dest: C:\instantClient64\
+
+- name: Download Oracle Instant Client SDK 32bit
+  ansible.windows.win_get_url:
+    url: https://download.oracle.com/otn_software/nt/instantclient/2113000/instantclient-sdk-nt-21.13.0.0.0dbru.zip
+    dest: C:\Users\Public\Documents\instantclient-sdk-nt-21.13.0.0.0dbru.zip
+
+- name: Download Oracle Instant Client SDK 64bit
+  ansible.windows.win_get_url:
+    url: https://download.oracle.com/otn_software/nt/instantclient/2113000/instantclient-sdk-windows.x64-21.13.0.0.0dbru.zip
+    dest: C:\Users\Public\Documents\instantclient-sdk-windows.x64-21.13.0.0.0dbru.zip
+
+- name: Unzip Oracle Instant Client SDK 32bit
+  community.windows.win_unzip:
+    src: C:\Users\Public\Documents\instantclient-sdk-nt-21.13.0.0.0dbru.zip
+    dest: C:\instantClient32
+
+- name: Unzip Oracle Instant Client SDK 64bit
+  community.windows.win_unzip:
+    src: C:\Users\Public\Documents\instantclient-sdk-windows.x64-21.13.0.0.0dbru.zip
+    dest: C:\instantClient64\
+
+- name: Get Oracle Instant Client Precompiler 32bit Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: Oracle/InstantClient/21/instantclient-precomp-nt-21.13.0.0.0dbru.zip
+    region: eu-west-2
+    expiry: 4000
+    sig_v4: true
+  register: s3ora32
+  delegate_to: localhost
+  become: no
+
+- name: Get Oracle Instant Client Precompiler 64bit Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: Oracle/InstantClient/21/instantclient-precomp-windows.x64-21.13.0.0.0dbru.zip
+    region: eu-west-2
+    expiry: 4000
+    sig_v4: true
+  register: s3ora64
+  delegate_to: localhost
+  become: no
+
+- name: Download Oracle Instant Client Precompiler 32bit
+  ansible.windows.win_get_url:
+    url: '{{ s3ora32 }}'
+    dest: C:\Users\Public\Documents\instantclient-precomp-nt.zip
+
+- name: Download Oracle Instant Client Precompiler 64bit
+  ansible.windows.win_get_url:
+    url: '{{ s3ora64 }}'
+    dest: C:\Users\Public\Documents\instantclient-precomp-windows.x64.zip
+
+- name: Unzip Oracle Instant Client Precompiler 32bit
+  community.windows.win_unzip:
+    src: C:\Users\Public\Documents\instantclient-precomp-nt.zip
+    dest: C:\instantClient32
+
+- name: Unzip Oracle Instant Client Precompiler 64bit
+  community.windows.win_unzip:
+    src: C:\Users\Public\Documents\instantclient-precomp-windows.x64.zip
+    dest: C:\instantClient64\
