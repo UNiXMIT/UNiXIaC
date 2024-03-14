@@ -1,0 +1,147 @@
+- name: Install Oracle RPM Key 
+  rpm_key:
+    state: present
+    key: https://yum.oracle.com/RPM-GPG-KEY-oracle-ol{{ ansible_distribution_major_version }}
+
+- name: Install Oracle Instant Client RHEL9
+  dnf: 
+    name: https://download.oracle.com/otn_software/linux/instantclient/2112000/el9/oracle-instantclient-basic-21.12.0.0.0-1.el9.x86_64.rpm
+    state: present
+    disable_gpg_check: yes
+  when: ansible_facts['distribution_major_version'] | int == 9
+
+- name: Install Oracle Instant Client ODBC RHEL9
+  dnf: 
+    name: https://download.oracle.com/otn_software/linux/instantclient/2112000/el9/oracle-instantclient-odbc-21.12.0.0.0-1.el9.x86_64.rpm
+    state: present
+    disable_gpg_check: yes
+  when: ansible_facts['distribution_major_version'] | int == 9
+
+- name: Install Oracle Instant Client SQLPlus RHEL9
+  dnf: 
+    name: https://download.oracle.com/otn_software/linux/instantclient/2112000/el9/oracle-instantclient-sqlplus-21.12.0.0.0-1.el9.x86_64.rpm
+    state: present
+    disable_gpg_check: yes
+  when: ansible_facts['distribution_major_version'] | int == 9
+
+- name: Install Oracle Instant Client SDK RHEL9
+  dnf: 
+    name: https://download.oracle.com/otn_software/linux/instantclient/2112000/el9/oracle-instantclient-devel-21.12.0.0.0-1.el9.x86_64.rpm
+    state: present
+    disable_gpg_check: yes
+  when: ansible_facts['distribution_major_version'] | int == 9
+
+- name: Install Oracle Instant Client RHEL8
+  dnf: 
+    name: https://download.oracle.com/otn_software/linux/instantclient/2113000/oracle-instantclient-basic-21.13.0.0.0-1.el8.x86_64.rpm
+    state: present
+    disable_gpg_check: yes
+  when: ansible_facts['distribution_major_version'] | int == 8
+
+- name: Install Oracle Instant Client ODBC RHEL8
+  dnf: 
+    name: https://download.oracle.com/otn_software/linux/instantclient/2113000/oracle-instantclient-odbc-21.13.0.0.0-1.el8.x86_64.rpm
+    state: present
+    disable_gpg_check: yes
+  when: ansible_facts['distribution_major_version'] | int == 8
+
+- name: Install Oracle Instant Client SQLPlus RHEL8
+  dnf: 
+    name: https://download.oracle.com/otn_software/linux/instantclient/2113000/oracle-instantclient-sqlplus-21.13.0.0.0-1.el8.x86_64.rpm
+    state: present
+    disable_gpg_check: yes
+  when: ansible_facts['distribution_major_version'] | int == 8
+
+- name: Install Oracle Instant Client SDK RHEL8
+  dnf: 
+    name: https://download.oracle.com/otn_software/linux/instantclient/2113000/oracle-instantclient-devel-21.13.0.0.0-1.el8.x86_64.rpm
+    state: present
+    disable_gpg_check: yes
+  when: ansible_facts['distribution_major_version'] | int == 8
+
+- name: Install Oracle Instant Client RHEL7
+  yum: 
+    name: https://download.oracle.com/otn_software/linux/instantclient/2113000/oracle-instantclient-basic-21.13.0.0.0-1.x86_64.rpm
+    state: present
+    disable_gpg_check: yes
+  when: ansible_facts['distribution_major_version'] | int == 7
+
+- name: Install Oracle Instant Client ODBC RHEL7
+  yum: 
+    name: https://download.oracle.com/otn_software/linux/instantclient/2113000/oracle-instantclient-odbc-21.13.0.0.0-1.x86_64.rpm
+    state: present
+    disable_gpg_check: yes
+  when: ansible_facts['distribution_major_version'] | int == 7
+
+- name: Install Oracle Instant Client SQLPlus RHEL7
+  yum: 
+    name: https://download.oracle.com/otn_software/linux/instantclient/2113000/oracle-instantclient-sqlplus-21.13.0.0.0-1.x86_64.rpm
+    state: present
+    disable_gpg_check: yes
+  when: ansible_facts['distribution_major_version'] | int == 7
+
+- name: Install Oracle Instant Client SDK RHEL7
+  yum: 
+    name: https://download.oracle.com/otn_software/linux/instantclient/2113000/oracle-instantclient-devel-21.13.0.0.0-1.x86_64.rpm
+    state: present
+    disable_gpg_check: yes
+  when: ansible_facts['distribution_major_version'] | int == 7
+
+# - name: Create oracle
+#   file:
+#     path: /opt/oracle
+#     state: directory
+#     mode: '0755'
+
+- name: Get Oracle Instant Client Precompiler RHEL9 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: Oracle/InstantClient/21/oracle-instantclient-precomp-21.12.0.0.0-1.el9.x86_64.rpm
+    region: eu-west-2
+    expiry: 4000
+    sig_v4: true
+  register: s3ora
+  delegate_to: localhost
+  when: ansible_facts['distribution_major_version'] | int == 9
+
+- name: Get Oracle Instant Client Precompiler RHEL8 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: Oracle/InstantClient/21/oracle-instantclient-precomp-21.13.0.0.0-1.el8.x86_64.rpm
+    region: eu-west-2
+    expiry: 4000
+    sig_v4: true
+  register: s3ora
+  delegate_to: localhost
+  when: ansible_facts['distribution_major_version'] | int == 8
+
+- name: Get Oracle Instant Client Precompiler RHEL7 Download URL from S3
+  amazon.aws.s3_object:
+    profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: Oracle/InstantClient/21/oracle-instantclient-precomp-21.13.0.0.0-1.x86_64.rpm
+    region: eu-west-2
+    expiry: 4000
+    sig_v4: true
+  register: s3ora
+  delegate_to: localhost
+  when: ansible_facts['distribution_major_version'] | int == 7
+
+# - name: Download {{ installerName }}
+#   ansible.builtin.get_url:
+#     url: '{{ s3ora.url }}'
+#     dest: "/opt/oracle"
+#     owner: '{{ myUsername }}' 
+#     group: '{{ myUsername }}'
+#     mode: '0775'
+
+- name: Install Oracle Instant Client Precompiler
+  yum: 
+    name: '{{ s3ora.url }}'
+    state: present
+    disable_gpg_check: yes
