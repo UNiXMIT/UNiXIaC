@@ -111,9 +111,9 @@ LDAP URL - ldap://localhost:389
 - IBM MQ 9.3 
 - Informix 14.10 Developer Edition 
 - MySQL Server 8 Community Edition 
-- Oracle 23c Free 
+- Oracle 23c FREE, 21c XE and 18c XE  
 - PostgreSQL 16.1 
 - Redis 7 
-- SQL Server 2022 
+- SQL Server 2022, 2019 and 2017  
 - Sybase 16.2 
 - OpenLDAP for ES
