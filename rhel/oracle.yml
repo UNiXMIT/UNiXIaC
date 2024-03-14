@@ -105,6 +105,7 @@
   register: s3ora
   delegate_to: localhost
   when: ansible_facts['distribution_major_version'] | int == 9
+  become: no
 
 - name: Get Oracle Instant Client Precompiler RHEL8 Download URL from S3
   amazon.aws.s3_object:
@@ -118,6 +119,7 @@
   register: s3ora
   delegate_to: localhost
   when: ansible_facts['distribution_major_version'] | int == 8
+  become: no
 
 - name: Get Oracle Instant Client Precompiler RHEL7 Download URL from S3
   amazon.aws.s3_object:
@@ -131,6 +133,7 @@
   register: s3ora
   delegate_to: localhost
   when: ansible_facts['distribution_major_version'] | int == 7
+  become: no
 
 # - name: Download {{ installerName }}
 #   ansible.builtin.get_url:
