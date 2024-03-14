@@ -121,6 +121,7 @@
 - name: Install Oracle Instant Client
   hosts: awsEC2
   gather_facts: no
+  become: yes
   tasks:
   - name: Import oracle.yml
     import_tasks: oracle.yml
