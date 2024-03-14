@@ -87,11 +87,11 @@
     disable_gpg_check: yes
   when: ansible_facts['distribution_major_version'] | int == 7
 
-# - name: Create oracle
-#   file:
-#     path: /opt/oracle
-#     state: directory
-#     mode: '0755'
+- name: Create oracle
+  file:
+    path: /opt/oracle
+    state: directory
+    mode: '0755'
 
 - name: Get Oracle Instant Client Precompiler RHEL9 Download URL from S3
   amazon.aws.s3_object:
@@ -135,16 +135,17 @@
   when: ansible_facts['distribution_major_version'] | int == 7
   become: no
 
-# - name: Download {{ installerName }}
-#   ansible.builtin.get_url:
-#     url: '{{ s3ora.url }}'
-#     dest: "/opt/oracle"
-#     owner: '{{ myUsername }}' 
-#     group: '{{ myUsername }}'
-#     mode: '0775'
+- name: Download {{ installerName }}
+  ansible.builtin.get_url:
+    url: '{{ s3ora.url }}'
+    dest: /opt/oracle/oracle-instantclient-precomp.x86_64.rpm
+    owner: '{{ myUsername }}' 
+    group: '{{ myUsername }}'
+    mode: '0775'
+  become: no
 
 - name: Install Oracle Instant Client Precompiler
   yum: 
-    name: '{{ s3ora.url }}'
+    name: /opt/oracle/oracle-instantclient-precomp.x86_64.rpm
     state: present
     disable_gpg_check: yes
