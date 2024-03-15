@@ -5,6 +5,7 @@
 - [AWS Instance Creation](#aws-instance-creation)
     - [Additional Details](#additional-details)
 - [Supported Products](#supported-os--products)
+- [Stopping/Terminating Instances](#stoppingterminating-instances)
 
 ## Overview
 - **Effortless Automation:** Semaphore, a graphical user interface for Ansible, simplifies infrastructure provisioning. It enables the automatic creation and configuration of virtual machines, like AWS EC2 instances, through a user-friendly interface.  
@@ -98,7 +99,7 @@ LDAP URL - ldap://localhost:389
 
 ### ODBC Drivers/Libraries
 - SQL Server ODBC
-- Oracle Instant Client 'Basic', 'ODBC','SQL*Plus', 'SDK' and 'Precompiler' packages.  
+- Oracle Instant Client 'Basic', 'ODBC','SQL*Plus', 'SDK' and 'Precompiler' packages  
 - PostgreSQL ODBC
 - DB2 (for XA and ODBC) 
 
@@ -117,3 +118,6 @@ LDAP URL - ldap://localhost:389
 - SQL Server 2022, 2019 and 2017  
 - Sybase 16.2 
 - OpenLDAP for ES
+
+## Stopping/Terminating Instances
+Semaphore is only for the creation and initial configuration of AWS EC2 Instances. To stop, terminate or re-start instances you need to use the AWS portal.  
