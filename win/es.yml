@@ -39,17 +39,17 @@
     - name: Download {{ installerNameES }}
       ansible.windows.win_get_url:
         url: '{{ s3es.url }}'
-        dest: C:\temp\
+        dest: C:\MFInstallers\
     
     - name: Download SafeNet License
       ansible.windows.win_get_url:
         url: '{{ s3sn.url }}'
-        dest: C:\temp\
+        dest: C:\MFInstallers\
     
     - name: Download AutoPass License
       ansible.windows.win_get_url:
         url: '{{ s3ap.url }}'
-        dest: C:\temp\
+        dest: C:\MFInstallers\
   tags: es
 
 - name: Download ES PU 
@@ -69,7 +69,7 @@
     - name: Download {{ installerNameESPU }}
       ansible.windows.win_get_url:
         url: '{{ s3espu.url }}'
-        dest: C:\temp\
+        dest: C:\MFInstallers\
   tags: espu
 
 - name: Add ES Tags
@@ -101,18 +101,18 @@
   block:
     - name: Install {{ installerNameES }}
       win_package:
-        path: C:\temp\{{ installerNameES }}
+        path: C:\MFInstallers\{{ installerNameES }}
         state: present
-        arguments: /passive /log C:\temp\{{ installerNameES }}.log /norestart
+        arguments: /passive /log C:\MFInstallers\{{ installerNameES }}.log /norestart
   tags: es
 
 - name: Install ES PU
   block:
     - name: Install {{ installerNameESPU }}
       win_package:
-        path: C:\temp\{{ installerNameESPU }}
+        path: C:\MFInstallers\{{ installerNameESPU }}
         state: present
-        arguments: /passive /log C:\temp\{{ installerNameESPU }}.log /norestart
+        arguments: /passive /log C:\MFInstallers\{{ installerNameESPU }}.log /norestart
   tags: espu
 
 # - name: Add License Server
@@ -130,7 +130,7 @@
   
 - name: Install Safenet License File
   ansible.windows.win_copy:
-    src: C:\temp\lservrc.net
+    src: C:\MFInstallers\lservrc.net
     dest: C:\ProgramData\Micro Focus\lservrc.net
     remote_src: true
   tags: es
@@ -144,16 +144,10 @@
 
 - name: Install AutoPass License File
   ansible.windows.win_copy:
-    src: C:\temp\LicFile.txt
+    src: C:\MFInstallers\LicFile.txt
     dest: C:\ProgramData\Micro Focus\LicFile.txt
     remote_src: true
   ignore_errors: true
-  tags: es
-
-- name: Import JCL Region
-  win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml'
-    chdir: C:\MFSamples\JCL
   tags: es
   
 - name: Stop MFDS Service
@@ -177,6 +171,16 @@
   ansible.windows.win_service:
     name: mf_CCITCP2
     state: started
+  tags: es
+
+- name: Pause for 10 seconds
+  ansible.builtin.pause:
+    seconds: 10
+
+- name: Import JCL Region
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml'
+    chdir: C:\MFSamples\JCL
   tags: es
 
 - name: Stop ESCWA Service
