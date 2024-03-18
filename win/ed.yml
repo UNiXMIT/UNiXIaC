@@ -224,6 +224,7 @@
 - name: Pause for 10 seconds
   ansible.builtin.pause:
     seconds: 10
+  tags: ed
 
 - name: Import JCL Region
   win_command:
