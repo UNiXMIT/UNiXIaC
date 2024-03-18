@@ -1,0 +1,7 @@
+- name: ED 10.0
+  set_fact:
+    installerNameEDVS: edvs2022_100.exe
+    installerNameEDE: ede_100.exe
+    S3Prefix: ED/100/ST/
+    productName: ED100
+  tags: ed100

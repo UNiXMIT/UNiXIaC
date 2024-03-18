@@ -236,6 +236,13 @@
   - name: Import ed90.yml
     import_tasks: ed90.yml
 
+- name: Install ED 10.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import ed100.yml
+    import_tasks: ed100.yml
+
 - name: Setup ED
   hosts: awsEC2
   gather_facts: no
@@ -277,6 +284,13 @@
   tasks:
   - name: Import es90.yml
     import_tasks: es90.yml
+
+- name: Install ES 10.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import es100.yml
+    import_tasks: es100.yml
 
 - name: Setup ES
   hosts: awsEC2

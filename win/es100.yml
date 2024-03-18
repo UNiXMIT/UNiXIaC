@@ -1,0 +1,6 @@
+- name: ES 10.0
+  set_fact:
+    installerNameES: es_100.exe
+    S3Prefix: ED/100/ST/
+    productName: ES10
+  tags: es100

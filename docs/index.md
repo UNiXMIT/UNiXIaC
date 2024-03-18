@@ -54,14 +54,14 @@
 
 ## Supported OS / Products
 ### Windows Server 2022
-- ED/ES 6.0, 7.0, 8.0 and 9.0   
+- ED/ES 6.0, 7.0, 8.0, 9.0 and 10.0   
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
 
 ### Windows Server 2019
 - ED/ES 5.0  
 
 ### RHEL 9
-- ED 7.0, 8.0 and 9.0  
+- ED 7.0, 8.0, 9.0 and 10.0  
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
 
 ### RHEL 8
@@ -71,11 +71,11 @@
 - ED 5.0
 
 ### SLES 15
-- ED 9.0
+- ED 9.0 and 10.0  
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
 
 ### Ubuntu 22.04
-- ED 9.0
+- ED 9.0 and 10.0  
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
 
 > **NOTE:** Patch Updates will be added as they become GA.  
@@ -84,7 +84,7 @@
 ED/ES and AcuCOBOL-GT extend are all licensed, ready to use.  
 
 ### Security
-ED/ES 7.0, 8.0 and 9.0 tasks will also install and setup ADLDS (Windows) OpenLDAP (Linux).  
+ED/ES 7.0, 8.0, 9.0 and 10.0 tasks will also install and setup ADLDS (Windows) OpenLDAP (Linux).  
 The connection details are automatically added into ESCWA using the API.  
 
 #### ADLDS
