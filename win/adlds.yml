@@ -74,7 +74,7 @@
     headers:
       accept: application/json
       X-Requested-With: API
-      Cookie: "{{ loginResponse.cookies_string | default('') }}"
+      Cookie: "{{ loginResponse.set_cookie | default('') }}"
       Origin: http://localhost:10086
 
 - name: Add ADLDS MFDS Security Entry
@@ -98,5 +98,5 @@
     headers:
       accept: application/json
       X-Requested-With: API
-      Cookie: "{{ loginResponse.cookies_string | default('') }}"
+      Cookie: "{{ loginResponse.set_cookie | default('') }}"
       Origin: http://localhost:10086

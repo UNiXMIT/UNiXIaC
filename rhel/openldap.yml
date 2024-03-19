@@ -110,6 +110,10 @@
   register: loginResponse
   when: edVer >= 100
 
+- name: Debug
+  ansible.builtin.debug:
+    msg: "{{ loginResponse }}"
+
 - name: Add OpenLDAP ESCWA Security Entry
   ansible.builtin.uri:
     url: http://localhost:10086/server/v1/config/esm
@@ -131,7 +135,7 @@
     headers:
       accept: application/json
       X-Requested-With: API
-      Cookie: "{{ loginResponse.cookies_string | default('') }}"
+      Cookie: "{{ loginResponse.set_cookie | default('') }}"
       Origin: http://localhost:10086
 
 - name: Add OpenLDAP MFDS Security Entry
@@ -155,5 +159,5 @@
     headers:
       accept: application/json
       X-Requested-With: API
-      Cookie: "{{ loginResponse.cookies_string | default('') }}"
+      Cookie: "{{ loginResponse.set_cookie | default('') }}"
       Origin: http://localhost:10086
