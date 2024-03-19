@@ -35,6 +35,7 @@
         sig_v4: true
       register: s3sn
       delegate_to: localhost
+      when: edVer <= 90
     
     - name: Get AutoPass License Download URL from S3
       amazon.aws.s3_object:
@@ -47,6 +48,7 @@
         sig_v4: true
       register: s3ap
       delegate_to: localhost
+      when: edVer >= 80
 
     - name: Download {{ installerNameEDVS }}
       ansible.windows.win_get_url:
@@ -62,11 +64,13 @@
       ansible.windows.win_get_url:
         url: '{{ s3sn.url }}'
         dest: C:\MFInstallers\
+      when: edVer <= 90
     
     - name: Download AutoPass License
       ansible.windows.win_get_url:
         url: '{{ s3ap.url }}'
         dest: C:\MFInstallers\
+      when: edVer >= 80
   tags: ed
 
 - name: Download ED PU 

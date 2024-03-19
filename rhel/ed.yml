@@ -49,6 +49,7 @@
     owner: '{{ myUsername }}' 
     group: '{{ myUsername }}'
     mode: '0775'
+  when: edVer <= 90
 
 - name: Download AutoPass License
   ansible.builtin.get_url:
@@ -57,6 +58,7 @@
     owner: '{{ myUsername }}' 
     group: '{{ myUsername }}'
     mode: '0775'
+  when: edVer >= 80
 
 - name: Add ED Tags
   amazon.aws.ec2_tag:
