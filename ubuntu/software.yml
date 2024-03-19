@@ -47,7 +47,7 @@
   ansible.builtin.apt:
     name:
       - build-essential
-      - openjdk-17-jdk
+      - openjdk-21-jdk
       - unixodbc-dev
       - wget
       - curl
