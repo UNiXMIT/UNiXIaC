@@ -35,6 +35,22 @@
   ansible.windows.win_powershell:
     script: |
       Set-ADAccountPassword -Server localhost -Identity 'CN=MFReader,CN=ADAM Users,CN=Micro Focus,CN=Program Data,DC=local' -NewPassword (ConvertTo-SecureString -AsPlainText '{{ myPassword }}' -Force) -Reset 
+
+- name: ESCWA Login
+  ansible.windows.win_uri:
+    url: http://localhost:10086/logon
+    method: POST
+    content_type: application/json
+    body: |
+      {
+        "mfUser": "SYSAD",
+        "mfPassword": "SYSAD"
+      }
+    headers:
+      accept: application/json
+      X-Requested-With: API
+      Origin: http://localhost:10086
+  when: edVer >= 100 or esVer >= 100
       
 - name: Add ADLDS ESCWA Security Entry
   ansible.windows.win_uri:

@@ -3,6 +3,7 @@
     installerNameES: es_70.exe
     S3Prefix: ED/70/GA/
     productName: ES70
+    esVer: 70
   tags: es70
 
 - name: ES 70 PU 15

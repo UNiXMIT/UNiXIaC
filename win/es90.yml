@@ -3,6 +3,7 @@
     installerNameES: es_90.exe
     S3Prefix: ED/90/GA/
     productName: ES90
+    esVer: 90
   tags: es90
 
 - name: ES 9.0 PU 1

@@ -4,4 +4,5 @@
     installerNameEDE: ede_100.exe
     S3Prefix: ED/100/ST/
     productName: ED100
+    edVer: 10
   tags: ed100

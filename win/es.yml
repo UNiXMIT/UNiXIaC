@@ -147,7 +147,7 @@
     src: C:\MFInstallers\LicFile.txt
     dest: C:\ProgramData\Micro Focus\LicFile.txt
     remote_src: true
-  ignore_errors: true
+  when: esVer >= 80
   tags: es
   
 - name: Stop MFDS Service
@@ -159,7 +159,7 @@
 - name: Enable ESMAC UI
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" --UI-on'
-  ignore_errors: yes
+  when: esVer >= 70
   tags: es
 
 - name: Enable ESMAC Listen All
@@ -178,10 +178,17 @@
     seconds: 10
   tags: es
 
+- name: Set SYSAD
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfsecconv.exe" reset --user SYSAD --pass SYSAD'
+  when: esVer >= 100
+  tags: es
+
 - name: Import JCL Region
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml'
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml D SYSAD SYSAD'
     chdir: C:\MFSamples\JCL
+  when: esVer <= 90
   tags: es
 
 - name: Stop ESCWA Service

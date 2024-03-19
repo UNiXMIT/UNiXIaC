@@ -195,7 +195,7 @@
     src: C:\MFInstallers\LicFile.txt
     dest: C:\ProgramData\Micro Focus\LicFile.txt
     remote_src: true
-  ignore_errors: true
+  when: edVer >= 80
   tags: ed
   
 - name: Stop MFDS Service
@@ -207,7 +207,7 @@
 - name: Enable ESMAC UI
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" --UI-on'
-  ignore_errors: yes
+  when: edVer >= 70
   tags: ed
 
 - name: Enable ESMAC Listen All
@@ -226,9 +226,15 @@
     seconds: 10
   tags: ed
 
+- name: Set SYSAD
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfsecconv.exe" reset --user SYSAD --pass SYSAD'
+  when: edVer >= 100
+  tags: ed
+
 - name: Import JCL Region
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml'
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml D SYSAD SYSAD'
     chdir: C:\MFSamples\JCL
   tags: ed
 
@@ -256,5 +262,5 @@
     name: mfhacloud
     start_mode: auto
     state: started
+  when: edVer >= 90
   tags: ed
-  ignore_errors: true
