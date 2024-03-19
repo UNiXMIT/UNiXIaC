@@ -110,10 +110,6 @@
   register: loginResponse
   when: edVer >= 100
 
-- name: ESCWA Cookies
-  set_fact:
-    cookies: "{{ loginResponse.headers.set-cookie | default('') }}"
-
 - name: Add OpenLDAP ESCWA Security Entry
   ansible.builtin.uri:
     url: http://localhost:10086/server/v1/config/esm
@@ -135,7 +131,7 @@
     headers:
       accept: application/json
       X-Requested-With: API
-      Cookie: "{{ cookies }}"
+      Cookie: "{{ loginResponse.cookies_string | default('') }}"
       Origin: http://localhost:10086
 
 - name: Add OpenLDAP MFDS Security Entry
@@ -159,5 +155,5 @@
     headers:
       accept: application/json
       X-Requested-With: API
-      Cookie: "{{ cookies }}"
+      Cookie: "{{ loginResponse.cookies_string | default('') }}"
       Origin: http://localhost:10086
