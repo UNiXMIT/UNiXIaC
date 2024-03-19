@@ -50,8 +50,19 @@
       accept: application/json
       X-Requested-With: API
       Origin: http://localhost:10086
+  register: login_response
   when: edVer >= 100 or esVer >= 100
-      
+
+- name: ESCWA Cookies >= 10.0
+  set_fact:
+    cookies: "{{ login_response.headers.set-cookie }}"
+  when: edVer >= 100 or esVer >= 100
+
+- name: ESCWA Cookies <= 9.0
+  set_fact:
+    cookies: ''
+  when: edVer <= 90 or esVer <= 90
+     
 - name: Add ADLDS ESCWA Security Entry
   ansible.windows.win_uri:
     url: http://localhost:10086/server/v1/config/esm
@@ -73,6 +84,7 @@
     headers:
       accept: application/json
       X-Requested-With: API
+      Cookie: "{{ cookies }}"
       Origin: http://localhost:10086
 
 - name: Add ADLDS MFDS Security Entry
@@ -96,4 +108,5 @@
     headers:
       accept: application/json
       X-Requested-With: API
+      Cookie: "{{ cookies }}"
       Origin: http://localhost:10086
