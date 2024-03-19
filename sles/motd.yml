@@ -24,7 +24,7 @@
               startmf.sh (-h for usage)
 
             Install Options:
-              -skipsafenet -skipautopass -IacceptEULA -ESadminID={{ myUsername }} -il=/home/products/edXXpuXX
+              -IacceptEULA -ESadminID={{ myUsername }} -il=/home/products/edXXpuXX
 
       ****************************************************************************************************
       
