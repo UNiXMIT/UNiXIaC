@@ -101,11 +101,12 @@
 #     dest: /opt/microfocus/licensing/autopass/clientdetails/data/LicFile.txt
 #     mode: '0775'
 #   become: yes
+#   when: edVer >= 80
 
 - name: Install AutoPass License File
   shell: mv /tmp/LicFile.txt /opt/microfocus/licensing/autopass/clientdetails/data/LicFile.txt
   become: yes
-  ignore_errors: true
+  when: edVer >= 80
 
 - name: Start MFDS
   shell: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64"
@@ -115,5 +116,10 @@
   ansible.builtin.pause:
     seconds: 10
 
+- name: Set SYSAD
+  shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfsecconv reset --user SYSAD --pass SYSAD'
+  become: yes
+  when: edVer >= 100
+
 - name: Import JCL Region
-  shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml'
+  shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml D SYSAD SYSAD'

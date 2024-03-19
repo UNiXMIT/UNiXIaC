@@ -139,7 +139,7 @@
 #   win_get_url: 
 #     url: '{{ AutoPassFile }}'
 #     dest: C:\ProgramData\Micro Focus\LicFile.txt
-#   ignore_errors: true
+#   when: esVer >= 80
 #   tags: es
 
 - name: Install AutoPass License File

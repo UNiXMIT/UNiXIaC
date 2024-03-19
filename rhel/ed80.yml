@@ -4,6 +4,7 @@
     installerName: setup_entdev_8.0_patchupdate05_318651_redhat_x86_64
     S3Prefix: ED/80/PU5/
     productName: ED80PU5
+    edVer: 80
   tags: ed80pu5
 
 - name: ED 8.0 PU 6
@@ -12,6 +13,7 @@
     installerName: setup_entdev_8.0_patchupdate06_321063_redhat_x86_64
     S3Prefix: ED/80/PU6/
     productName: ED80PU6
+    edVer: 80
   tags: ed80pu6
 
 - name: ED 8.0 PU 7
@@ -20,6 +22,7 @@
     installerName: setup_entdev_8.0_patchupdate07_323529_redhat_x86_64
     S3Prefix: ED/80/PU7/
     productName: ED80PU7
+    edVer: 80
   tags: ed80pu7
 
 - name: ED 8.0 PU 8
@@ -28,6 +31,7 @@
     installerName: setup_entdev_8.0_patchupdate08_324515_redhat_x86_64
     S3Prefix: ED/80/PU8/
     productName: ED80PU8
+    edVer: 80
   tags: ed80pu8
 
 - name: ED 8.0 PU 9
@@ -36,6 +40,7 @@
     installerName: setup_entdev_8.0_patchupdate09_328363_redhat_x86_64
     S3Prefix: ED/80/PU9/
     productName: ED80PU9
+    edVer: 80
   tags: ed80pu9
 
 - name: ED 8.0 PU 10
@@ -44,6 +49,7 @@
     installerName: setup_entdev_8.0_patchupdate10_330750_redhat_x86_64
     S3Prefix: ED/80/PU10/
     productName: ED80PU10
+    edVer: 80
   tags: ed80pu10
 
 - name: ED 8.0 PU 11
@@ -52,6 +58,7 @@
     installerName: setup_entdev_8.0_patchupdate11_331768_redhat_x86_64
     S3Prefix: ED/80/PU11/
     productName: ED80PU11
+    edVer: 80
   tags: ed80pu11
 
 - name: ED 8.0 PU 12
@@ -60,6 +67,7 @@
     installerName: setup_entdev_8.0_patchupdate12_336860_redhat_x86_64
     S3Prefix: ED/80/PU12/
     productName: ED80PU12
+    edVer: 80
   tags: ed80pu12
 
 - name: ED 8.0 PU 13
@@ -68,6 +76,7 @@
     installerName: setup_entdev_8.0_patchupdate13_340839_redhat_x86_64
     S3Prefix: ED/80/PU13/
     productName: ED80PU13
+    edVer: 80
   tags: ed80pu13
 
 - name: ED 8.0 PU 14
@@ -76,6 +85,7 @@
     installerName: setup_entdev_8.0_patchupdate14_342017_redhat_x86_64
     S3Prefix: ED/80/PU14/
     productName: ED80PU14
+    edVer: 80
   tags: ed80pu14
 
 - name: ED 8.0 PU 15
@@ -84,4 +94,5 @@
     installerName: setup_entdev_8.0_patchupdate15_346053_redhat_x86_64
     S3Prefix: ED/80/PU15/
     productName: ED80PU15
+    edVer: 80
   tags: ed80pu15
