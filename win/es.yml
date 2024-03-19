@@ -139,7 +139,7 @@
 #   win_get_url: 
 #     url: '{{ AutoPassFile }}'
 #     dest: C:\ProgramData\Micro Focus\LicFile.txt
-#   when: esVer >= 80
+#   when: edVer >= 80
 #   tags: es
 
 - name: Install AutoPass License File
@@ -147,7 +147,7 @@
     src: C:\MFInstallers\LicFile.txt
     dest: C:\ProgramData\Micro Focus\LicFile.txt
     remote_src: true
-  when: esVer >= 80
+  when: edVer >= 80
   tags: es
   
 - name: Stop MFDS Service
@@ -159,7 +159,7 @@
 - name: Enable ESMAC UI
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" --UI-on'
-  when: esVer >= 70
+  when: edVer >= 70
   tags: es
 
 - name: Enable ESMAC Listen All
@@ -181,14 +181,14 @@
 - name: Set SYSAD
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfsecconv.exe" reset --user SYSAD --pass SYSAD'
-  when: esVer >= 100
+  when: edVer >= 100
   tags: es
 
 - name: Import JCL Region
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml D SYSAD SYSAD'
     chdir: C:\MFSamples\JCL
-  when: esVer <= 90
+  when: edVer <= 90
   tags: es
 
 - name: Stop ESCWA Service

@@ -107,12 +107,12 @@
       accept: application/json
       X-Requested-With: API
       Origin: http://localhost:10086
-  register: login_response
+  register: loginResponse
   when: edVer >= 100
 
 - name: ESCWA Cookies
   set_fact:
-    cookies: "{{ login_response.headers.set-cookie }} | default('')"
+    cookies: "{{ loginResponse.headers.set-cookie }} | default('')"
 
 - name: Add OpenLDAP ESCWA Security Entry
   ansible.builtin.uri:
