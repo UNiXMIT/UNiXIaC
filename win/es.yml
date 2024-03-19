@@ -126,6 +126,7 @@
 #   win_get_url: 
 #     url: '{{ SafenetFile }}'
 #     dest: C:\ProgramData\Micro Focus\lservrc.net
+#   when: edVer <= 90
 #   tags: es
   
 - name: Install Safenet License File
@@ -133,6 +134,7 @@
     src: C:\MFInstallers\lservrc.net
     dest: C:\ProgramData\Micro Focus\lservrc.net
     remote_src: true
+  when: edVer <= 90
   tags: es
 
 # - name: Install AutoPass License File

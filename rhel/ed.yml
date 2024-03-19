@@ -89,10 +89,12 @@
 #     url: '{{ SafenetFile }}'
 #     dest: /var/microfocuslicensing/bin/lservrc.net
 #     mode: '0775'
+#   when: edVer <= 90
 #   become: yes
 
 - name: Install Safenet License File
   shell: mv /tmp/lservrc.net /var/microfocuslicensing/bin/lservrc.net
+  when: edVer <= 90
   become: yes
 
 # - name: Install AutoPass License File
