@@ -112,7 +112,7 @@
 
 - name: ESCWA Cookies
   set_fact:
-    cookies: "{{ loginResponse.headers.set-cookie }} | default('')"
+    cookies: "{{ loginResponse.headers.['set-cookie'] | default([]) }}"
 
 - name: Add OpenLDAP ESCWA Security Entry
   ansible.builtin.uri:
