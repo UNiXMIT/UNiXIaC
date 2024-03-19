@@ -55,7 +55,7 @@
 
 - name: ESCWA Cookies
   set_fact:
-    cookies: "{{ loginResponse.headers.['set-cookie'] | default([]) }}"
+    cookies: "{{ loginResponse.headers.set-cookie | default('') }}"
 
 - name: Add ADLDS ESCWA Security Entry
   ansible.windows.win_uri:
