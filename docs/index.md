@@ -101,7 +101,7 @@ LDAP URL - ldap://localhost:389
 - SQL Server ODBC
 - Oracle Instant Client 'Basic', 'ODBC','SQL*Plus', 'SDK' and 'Precompiler' packages  
 - PostgreSQL ODBC
-- DB2 (for XA and ODBC) 
+- DB2 ODBC 
 
 ### VPN
 - PulseVPN (Windows)
