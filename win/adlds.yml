@@ -53,6 +53,10 @@
   register: loginResponse
   when: edVer >= 100
 
+- name: Debug
+  ansible.builtin.debug:
+    msg: "{{ loginResponse }}"
+
 - name: Add ADLDS ESCWA Security Entry
   ansible.windows.win_uri:
     url: http://localhost:10086/server/v1/config/esm

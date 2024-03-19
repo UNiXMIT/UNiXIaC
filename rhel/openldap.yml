@@ -110,10 +110,6 @@
   register: loginResponse
   when: edVer >= 100
 
-- name: Debug
-  ansible.builtin.debug:
-    msg: "{{ loginResponse }}"
-
 - name: Add OpenLDAP ESCWA Security Entry
   ansible.builtin.uri:
     url: http://localhost:10086/server/v1/config/esm
