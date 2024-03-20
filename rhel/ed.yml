@@ -78,39 +78,15 @@
     chdir: /home/{{ myUsername }}/MFSupport/MFInstallers
   become: yes
 
-# - name: Add License Server
-#   lineinfile:
-#     path: /var/microfocuslicensing/bin/ces.ini
-#     state: present
-#     regexp: '^lshost'
-#     line: 'lshost = {{ licenseServer }}'
-#   become: yes
-
-# - name: Install Safenet License File
-#   get_url:
-#     url: '{{ SafenetFile }}'
-#     dest: /var/microfocuslicensing/bin/lservrc.net
-#     mode: '0775'
-#   when: edVer <= 90
-#   become: yes
-
 - name: Install Safenet License File
   shell: mv /tmp/lservrc.net /var/microfocuslicensing/bin/lservrc.net
   when: edVer <= 90
   become: yes
 
-# - name: Install AutoPass License File
-#   get_url:
-#     url: '{{ AutoPassFile }}'
-#     dest: /opt/microfocus/licensing/autopass/clientdetails/data/LicFile.txt
-#     mode: '0775'
-#   become: yes
-#   when: edVer >= 80
-
 - name: Install AutoPass License File
   shell: mv /tmp/LicFile.txt /opt/microfocus/licensing/autopass/clientdetails/data/LicFile.txt
-  become: yes
   when: edVer >= 80
+  become: yes
 
 - name: Start MFDS
   shell: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64"

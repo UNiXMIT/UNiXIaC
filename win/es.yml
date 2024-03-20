@@ -118,20 +118,6 @@
         state: present
         arguments: /passive /log C:\MFInstallers\{{ installerNameESPU }}.log /norestart
   tags: espu
-
-# - name: Add License Server
-#   win_lineinfile:
-#     path: C:\ProgramData\Micro Focus\ces.ini
-#     regex: '^lshost'
-#     line: 'lshost = {{ licenseServer }}'
-#   tags: es
-
-# - name: Install Safenet License File
-#   win_get_url: 
-#     url: '{{ SafenetFile }}'
-#     dest: C:\ProgramData\Micro Focus\lservrc.net
-#   when: edVer <= 90
-#   tags: es
   
 - name: Install Safenet License File
   ansible.windows.win_copy:
@@ -140,14 +126,7 @@
     remote_src: true
   when: edVer <= 90
   tags: es
-
-# - name: Install AutoPass License File
-#   win_get_url: 
-#     url: '{{ AutoPassFile }}'
-#     dest: C:\ProgramData\Micro Focus\LicFile.txt
-#   when: edVer >= 80
-#   tags: es
-
+  
 - name: Install AutoPass License File
   ansible.windows.win_copy:
     src: C:\MFInstallers\LicFile.txt

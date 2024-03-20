@@ -22,6 +22,23 @@
   ansible.builtin.pause:
     seconds: 10
 
+- name: ESCWA Login
+  ansible.builtin.uri:
+    url: http://localhost:10086/logon
+    method: POST
+    body_format: json
+    body: |
+      {
+        "mfUser": "SYSAD",
+        "mfPassword": "SYSAD"
+      }
+    headers:
+      accept: application/json
+      X-Requested-With: API
+      Origin: http://localhost:10086
+  register: loginResponse
+  when: edVer >= 100
+
 - name: Add OpenLDAP ESCWA Security Entry
   ansible.builtin.uri:
     url: http://localhost:10086/server/v1/config/esm
@@ -43,6 +60,7 @@
     headers:
       accept: application/json
       X-Requested-With: API
+      Cookie: "{{ loginResponse.set_cookie | default('') }}"
       Origin: http://localhost:10086
 
 - name: Add OpenLDAP MFDS Security Entry
@@ -66,4 +84,5 @@
     headers:
       accept: application/json
       X-Requested-With: API
+      Cookie: "{{ loginResponse.set_cookie | default('') }}"
       Origin: http://localhost:10086
