@@ -2,6 +2,6 @@
   set_fact:
     installerNameES: es_100.exe
     S3Prefix: ED/100/ST/
-    productName: ES10
+    productName: ES100
     edVer: 100
   tags: es100
