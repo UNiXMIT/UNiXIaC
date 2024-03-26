@@ -4,13 +4,8 @@
 - [Install Instructions](#install-instructions)
 - [Ansible Semaphore](#ansible-semaphore)
 - [Update Semaphore/NGiNX](#update-semaphorenginx)
-- [Generate SSH Key](#generate-ssh-key)
-- [Update TLS Certificate/Key](#update-tls-certificatekey)
 - [Backup Semaphore](#backup-semaphore)
 - [Check Semaphore Logs](#check-semaphore-logs)
-- [Tags](#tags)
-  - [Windows](#windows)
-  - [Linux](#linux)  
 
 ## Prerequisites
 Install Podman (or Docker).  

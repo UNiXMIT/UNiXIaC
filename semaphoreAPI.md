@@ -10,7 +10,7 @@ POST /api/auth/login
 cURL Example:  
 ```
 curl --request POST \
-  --url https://example.com.com/api/auth/login \
+  --url https://example.com/api/auth/login \
   --header 'Content-Type: application/json' \
   -c cookies.txt -b cookies.txt \
   --data '{
