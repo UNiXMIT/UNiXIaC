@@ -25,9 +25,10 @@
 4. You will now see a pop-up window showing 5 entry fields. Only the first 2, SSO Email and password, are required fields.  
     - SSO Email - Micro Focus Email to authenticate with Pulse VPN.  
     - SSO Password - Micro Focus Password to Authenticate with Pulse VPN.  
-    - SSO Method - SSO Authentication method to use. 1=SmartPhonePush 2=TOTP (default=1).  
+    - SSO Method - SSO Authentication method to use. 1=SmartPhonePush 2=TOTP (default=1)  
     - SSO Token - Valid authentication token to use for TOTP.  
-    - VM Count - Number of duplicate EC2 instances to create (default=1).  
+    - VM Count - Number of duplicate EC2 instances to create (default=1). 
+    - AWS Region - Region where you want the EC2 instance to be created. 1=EMEA 2=AMS 3=APJ (default=1)   
 ![4](images/4.png)  
 
     > **NOTE:** Unless you are creating and testing new Tasks, there is no need to check any of the checkboxes at the bottom.  
