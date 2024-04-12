@@ -13,3 +13,11 @@
     S3Prefix: ED/70/PU23/
     productName: ED70PU23
   tags: ed70pu23
+
+- name: ED 7.0 PU 24
+  set_fact:
+    installPath: /home/products/ed70pu24
+    installerName: setup_entdev_7.0_patchupdate24_350231_suse_x64
+    S3Prefix: ED/70/PU24/
+    productName: ED70PU24
+  tags: ed70pu24
