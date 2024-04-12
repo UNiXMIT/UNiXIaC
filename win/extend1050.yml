@@ -24,3 +24,12 @@
     S3Prefix: AcuCOBOL/1051/GA/
     productName: extend1051
   tags: extend1051
+
+- name: extend 10.5.1 PU 1
+  set_fact:
+    installPath32: C:\Program Files (x86)\Micro Focus\extend 10.5.1
+    installPath64: C:\Program Files\Micro Focus\extend 10.5.1
+    installerName: extend_Version_10.5.1_x64.msi
+    S3Prefix: AcuCOBOL/1051/PU1/
+    productName: extend1051PU1
+  tags: extend1051pu1

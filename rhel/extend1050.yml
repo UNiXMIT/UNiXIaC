@@ -27,3 +27,13 @@
         S3Prefix: AcuCOBOL/1051/GA/
         productName: extend1051
   tags: extend1051
+
+- name: extend 10.5.1 PU 1
+  block:
+    - name: Set Facts
+      set_fact:
+        installPath: /home/products/acu1051shx64pu1/
+        installerName: setup_acucob1051pmk59shACU
+        S3Prefix: AcuCOBOL/1051/PU1/
+        productName: extend1051PU1
+  tags: extend1051pu1
