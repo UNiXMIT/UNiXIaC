@@ -13,3 +13,11 @@
     S3Prefix: ED/80/PU15/
     productName: ED80PU15
   tags: ed80pu15
+
+- name: ED 8.0 PU 16
+  set_fact:
+    installPath: /home/products/ed80pu16
+    installerName: setup_entdev_8.0_patchupdate16_351547_suse_x64
+    S3Prefix: ED/80/PU16/
+    productName: ED80PU16
+  tags: ed80pu16
