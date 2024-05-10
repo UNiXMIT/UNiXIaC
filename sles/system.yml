@@ -33,8 +33,7 @@
     dest: "/etc/profile.d/profile.sh"
     content: |
       #!/bin/bash
-      [ -d \"/opt/microfocus/EnterpriseDeveloper/bin\" ] && . /opt/microfocus/EnterpriseDeveloper/bin/cobsetenv
-      export PATH=$PATH:~/AcuSupport/AcuScripts:~/MFSupport/MFScripts
+      export PATH=$PATH:~/AcuSupport/AcuScripts:~/MFSupport/MFScripts:~/
       export TERM=xterm
 
 - name: Make profile.sh executable
