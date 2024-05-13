@@ -6,6 +6,7 @@
     - [Additional Details](#additional-details)
 - [Supported Products](#supported-os--products)
 - [Stopping/Terminating Instances](#stoppingterminating-instances)
+- [Troubleshooting](#troubleshooting)
 
 ## Overview
 - **Effortless Automation:** Semaphore, a graphical user interface for Ansible, simplifies infrastructure provisioning. It enables the automatic creation and configuration of virtual machines, like AWS EC2 instances, through a user-friendly interface.  
@@ -122,3 +123,17 @@ LDAP URL - ldap://localhost:389
 
 ## Stopping/Terminating Instances
 Semaphore is only for the creation and initial configuration of AWS EC2 Instances. To stop, terminate or re-start instances you need to use the AWS portal.  
+
+## Troubleshooting
+### Connection Issues
+AWS EC2 security groups act as virtual firewalls for your EC2 instances, controlling inbound and outbound traffic. They define which protocols, ports, and IP ranges can access your instances. Adding your external IP address allows you to connect to your EC2 instances securely by specifying that only traffic from your specific IP address is permitted, enhancing security by limiting access to trusted sources.  
+
+To view the security groups attached to an EC2 instance, you can navigate to the AWS Management Console and follow these steps:  
+
+1. Go to the EC2 dashboard.  
+2. Select "Instances" from the left-hand navigation pane.  
+3. Choose the EC2 instance you're interested in.  
+4. Select the "Security" tab in the instance details pane.  
+5. Below the header "Security groups" you'll see a list of security groups attached to the EC2 instance, along with their names and IDs.  
+
+![7](images/7.png)
