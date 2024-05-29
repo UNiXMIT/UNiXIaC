@@ -40,14 +40,13 @@ removeContainer() {
 
 updateContainer() {
     printf "Updating Container...\n\n"
-    sudo ${containerRuntime} pull ${containerRepo}
+    sudo ${containerRuntime} pull semaphoreui/semaphore:latest
 }
 
 buildContainer() {
     printf "Building Container...\n\n"
-    sudo ${containerRuntime} pull semaphoreui/semaphore:latest
-    curl -o Dockerfile https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/Dockerfile
-    sudo ${containerRuntime} build --tag ${containerRepo} -f Dockerfile
+    curl -0 $(dirname "$0")/semaphore/Dockerfile https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/Dockerfile
+    sudo ${containerRuntime} build --no-cache --tag ${containerRepo} -f $(dirname "$0")/semaphore/Dockerfile
 }
 
 startContainer() {
