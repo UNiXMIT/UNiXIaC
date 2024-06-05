@@ -137,3 +137,11 @@ To view the security groups attached to an EC2 instance, you can navigate to the
 5. Below the header "Security groups" you'll see a list of security groups attached to the EC2 instance, along with their names and IDs.  
 
 ![7](images/7.png)
+
+To add your external IP address to the security group:  
+
+1. Click 'Edit inbound rules' -> 'Add rule'.  
+2. Add your external IP address (prepended with /32), Type 'All traffic' and a name for the rule.  
+3. Click 'Save rules'.  
+
+![8](images/8.png)
