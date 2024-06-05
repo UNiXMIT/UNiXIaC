@@ -14,7 +14,7 @@
 - **On-Demand Infrastructure:** Semaphore and Ansible empower you to manage EC2 instances efficiently. You can easily spin up instances for testing purposes and terminate them directly from the AWS portal once testing is complete. This eliminates the need to maintain unnecessary instances, reducing costs and optimizing resource utilization.  
 
 ## AWS Instance Creation
-1. After logging in, navigate to the 'Task Templates' in the nav bar on the left hand side.   
+1. After logging in, navigate to the 'Task Templates' in the nav bar on the left-hand side.   
 ![1](images/1.png)  
 
 2. Along the top you will see a list of OS versions to filter tasks by OS. There is also a 'DB' filter for databases and other services.  
@@ -38,7 +38,7 @@
    You can safely close the browser now or leave it open to monitor its creation.  If you want to come back to the task later to check progress, take note of the Task number. When you return, open the Dashboard and click on the 'History' tab. The find your Task and click the Task number to re-open the Task console.  
 ![5](images/5.png)
 
-6. Once the Task has completed and is marked as a 'Success', scroll to the very bottom of the Task console an you will see the EC2 Instance details like public IP/DNS and database connection information.  
+6. Once the Task has completed and is marked as a 'Success', scroll to the very bottom of the Task console and you will see the EC2 Instance details like public IP/DNS and database connection information.  
 ![6](images/6.png)
 
 > **NOTE:** If a task fails, check the Task console to see where it has failed. If it failed on SSO authentication try again or check that 2FA is still working elsewhere.  
@@ -52,7 +52,7 @@
 - Instances are created with a 120GB SSD, 4vCPUs, 16GiB Memory and 3.1 GHz Clock Speed (t3.xlarge).  
 - Instances are created with your username, OS and products name as Instance name.  
 - Tags are added to the instance to show what products have been installed and what installers were used.  
-- Instances are all set to shutdown at 8pm GMT to encourage users not to leave instances running for no reason. If a instance really needs to stay on longer, the auto shutdown can be disabled from either the task scheduler (Windows) or the root cron job (Linux).  
+- Instances are all set to shutdown at 8pm GMT to encourage users not to leave instances running for no reason. If an instance really needs to stay on longer, the auto shutdown can be disabled from either the task scheduler (Windows) or the root cron job (Linux).  
 
 ## Supported OS / Products
 ### Windows Server 2022
