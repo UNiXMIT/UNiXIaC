@@ -126,7 +126,7 @@ Semaphore is only for the creation and initial configuration of AWS EC2 Instance
 
 ## Troubleshooting
 ### Connection Issues
-AWS EC2 security groups act as virtual firewalls for your EC2 instances, controlling inbound and outbound traffic. They define which protocols, ports, and IP ranges can access your instances. Adding your external IP address allows you to connect to your EC2 instances securely by specifying that only traffic from your specific IP address is permitted, enhancing security by limiting access to trusted sources.  
+AWS EC2 security groups act as virtual firewalls for your EC2 instances, controlling inbound and outbound traffic. They define which protocols, ports, and IP ranges can access your instances. Adding your external/public IP address allows you to connect to your EC2 instances securely by specifying that only traffic from your specific IP address is permitted, enhancing security by limiting access to trusted sources.  
 
 To view the security groups attached to an EC2 instance, you can navigate to the AWS Management Console and follow these steps:  
 
@@ -138,10 +138,10 @@ To view the security groups attached to an EC2 instance, you can navigate to the
 
 ![7](images/7.png)
 
-To add your external IP address to the security group:  
+To add your external/public IP address to the security group:  
 
 1. Click 'Edit inbound rules' -> 'Add rule'.  
-2. Add your external IP address (appended with /32), Type 'All traffic' and a name for the rule.  
+2. Add your external/public IP address (appended with /32), Type 'All traffic' and a name for the rule.  
 3. Click 'Save rules'.  
 
 ![8](images/8.png)
