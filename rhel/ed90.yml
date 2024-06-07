@@ -69,3 +69,12 @@
     productName: ED90PU7
     edVer: 90
   tags: ed90pu7
+
+- name: ED 9.0 PU 8
+  set_fact:
+    installPath: /home/products/ed90pu8
+    installerName: setup_entdev_9.0_patchupdate08_355853_redhat_x86_64
+    S3Prefix: ED/90/PU8/
+    productName: ED90PU8
+    edVer: 90
+  tags: ed90pu8
