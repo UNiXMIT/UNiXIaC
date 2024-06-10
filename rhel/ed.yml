@@ -102,7 +102,7 @@
   when: edVer >= 100
 
 - name: Set SYSAD in Vault
-  shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfsecretsadmin write microfocus/temp/admin -overwrite {"mfUser":"SYSAD", "mfPassword":"SYSAD"}'
+  shell: . {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfsecretsadmin write microfocus/temp/admin -overwrite '{"mfUser":"SYSAD", "mfPassword":"SYSAD"}'
   become: yes
   when: edVer >= 100
 
