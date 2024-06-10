@@ -96,8 +96,13 @@
   ansible.builtin.pause:
     seconds: 10
 
-- name: Set SYSAD
+- name: Set SYSAD in VSAM ESM
   shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfsecconv reset --user SYSAD --pass SYSAD'
+  become: yes
+  when: edVer >= 100
+
+- name: Set SYSAD in Vault
+  shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfsecretsadmin write microfocus/temp/admin -overwrite {"mfUser":"SYSAD", "mfPassword":"SYSAD"}'
   become: yes
   when: edVer >= 100
 
