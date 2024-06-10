@@ -165,13 +165,15 @@
 
 - name: Set SYSAD in VSAM ESM
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfsecconv.exe" reset --user SYSAD --pass SYSAD'
+    cmd: mfsecconv reset --user SYSAD --pass SYSAD
+    chdir: C:\Program Files (x86)\Micro Focus\Enterprise Server\bin
   when: edVer >= 100
   tags: es
 
 - name: Set SYSAD in Vault
   win_command:
-    cmd: C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfsecretsadmin write microfocus/temp/admin -overwrite "{'mfUser':'SYSAD', 'mfPassword':'SYSAD'}"
+    cmd: mfsecretsadmin write microfocus/temp/admin -overwrite "{'mfUser':'SYSAD', 'mfPassword':'SYSAD'}"
+    chdir: C:\Program Files (x86)\Micro Focus\Enterprise Server\bin
   when: edVer >= 100
   tags: es
 
