@@ -30,9 +30,9 @@
 #     state: present
 #   when: ansible_facts['distribution_major_version'] | int == 8
 
-- name: Enable powertools for RHEL 8
-  shell: dnf config-manager --set-enabled powertools
-  when: ansible_facts['distribution_major_version'] | int == 8
+# - name: Enable powertools for RHEL 8
+#   shell: dnf config-manager --set-enabled powertools
+#   when: ansible_facts['distribution_major_version'] | int == 8
 
 - name: Download MSSQL ODBC Driver Repo
   get_url:
