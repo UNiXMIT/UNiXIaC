@@ -28,13 +28,21 @@
     dest: /openldap
     remote_src: yes
 
-- name: Install OpenLDAP
+- name: Install OpenLDAP for RHEL 7/9
   package:
     name:
       - openldap-servers
       - openldap-clients
       - openssl
     state: present
+  when: ansible_facts['distribution_major_version'] | int <= 7 or ansible_facts['distribution_major_version'] | int >= 9
+
+- name: Install OpenLDAP for RHEL 8
+  ansible.builtin.shell: |
+    curl -o /etc/yum.repos.d/soldap-release26.repo https://repo.symas.com/configs/SOLDAP/rhel8/release26.repo
+    dnf update -y
+    dnf install symas-openldap-clients symas-openldap-servers openssl -y
+  when: ansible_facts['distribution_major_version'] | int == 8
 
 - name: Configure OpenLDAP for ED
   ansible.builtin.shell: |
