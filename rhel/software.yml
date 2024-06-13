@@ -24,11 +24,11 @@
 #     name: 'http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-8-6.el8.noarch.rpm'
 #   when: ansible_facts['distribution_major_version'] | int == 8
 
-- name: Install CentOS Repo for RHEL 8
-  dnf:
-    name: 'http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-stream-repos-8-6.el8.noarch.rpm'
-    state: present
-  when: ansible_facts['distribution_major_version'] | int == 8
+# - name: Install CentOS Repo for RHEL 8
+#   dnf:
+#     name: 'http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-stream-repos-8-6.el8.noarch.rpm'
+#     state: present
+#   when: ansible_facts['distribution_major_version'] | int == 8
 
 - name: Enable powertools for RHEL 8
   shell: dnf config-manager --set-enabled powertools
