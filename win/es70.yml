@@ -75,3 +75,10 @@
     S3PrefixPU: ED/70/PU24/
     productName: ES70PU24
   tags: es70pu24
+
+- name: ES 7.0 PU 25
+  set_fact:
+    installerNameEDVSPU: es_70_pu25_358576.exe
+    S3PrefixPU: ED/70/PU25/
+    productName: ES70PU25
+  tags: es70pu25
