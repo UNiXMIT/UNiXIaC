@@ -45,7 +45,7 @@ updateContainer() {
 
 buildContainer() {
     printf "Building Container...\n\n"
-    curl -0 $(dirname "$0")/semaphore/Dockerfile https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/Dockerfile
+    curl -o $(dirname "$0")/semaphore/Dockerfile https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/Dockerfile
     sudo ${containerRuntime} build --no-cache --tag ${containerRepo} -f $(dirname "$0")/semaphore/Dockerfile
 }
 
