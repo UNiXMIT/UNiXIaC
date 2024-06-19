@@ -40,7 +40,11 @@ removeContainer() {
 
 updateContainer() {
     printf "Updating Container...\n\n"
-    sudo ${containerRuntime} pull semaphoreui/semaphore:latest
+    tag=$2
+    if [ -z "$tag" ]; then
+        tag=latest
+    fi
+    sudo ${containerRuntime} pull semaphoreui/semaphore:$2
 }
 
 buildContainer() {
