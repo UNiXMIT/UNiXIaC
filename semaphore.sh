@@ -40,7 +40,6 @@ removeContainer() {
 
 updateContainer() {
     printf "Updating Container...\n\n"
-    tag=$2
     if [ -z "$tag" ]; then
         tag=latest
     fi
@@ -59,6 +58,7 @@ startContainer() {
     sudo ${containerRuntime} run -d --name ${containerName} "${runOptions[@]}" ${containerRepo} 
 }
 
+tag=$2
 checkContainerRuntime
 removeContainer
 if [[ $1 == 'update' ]]; then
