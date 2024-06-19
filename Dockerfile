@@ -1,4 +1,4 @@
-FROM semaphoreui/semaphore:latest
+FROM semaphoreui/semaphore:CHANGEME
 EXPOSE 3000
 USER root
 RUN apk add --no-cache python3 py3-pip py3-passlib

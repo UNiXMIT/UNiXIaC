@@ -44,12 +44,13 @@ updateContainer() {
     if [ -z "$tag" ]; then
         tag=latest
     fi
-    sudo ${containerRuntime} pull semaphoreui/semaphore:$2
+    sudo ${containerRuntime} pull semaphoreui/semaphore:$tag
 }
 
 buildContainer() {
     printf "Building Container...\n\n"
     curl -o $(dirname "$0")/semaphore/Dockerfile https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/Dockerfile
+    sed -i "s/CHANGEME/$tag/g" $(dirname "$0")/semaphore/Dockerfile
     sudo ${containerRuntime} build --no-cache --tag ${containerRepo} -f $(dirname "$0")/semaphore/Dockerfile
 }
 
