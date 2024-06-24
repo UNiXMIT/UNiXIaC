@@ -148,13 +148,13 @@
     import_tasks: db2.yml
   tags: default
 
-# - name: Install VPN
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import vpn.yml
-#     import_tasks: vpn.yml
-#   tags: default
+- name: Install VPN
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import vpn.yml
+    import_tasks: vpn.yml
+  tags: default
 
 - name: Install Visual Studio
   hosts: awsEC2
