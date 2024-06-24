@@ -70,11 +70,11 @@
     edVer: 90
   tags: ed90pu7
 
-- name: ED 9.0 PU 8
+- name: ED 9.0 PU 9
   set_fact:
-    installPath: /home/products/ed90pu8
-    installerName: setup_entdev_9.0_patchupdate08_355853_ubuntu_x64
-    S3Prefix: ED/90/PU8/
-    productName: ED90PU8
+    installPath: /home/products/ed90pu9
+    installerName: setup_entdev_9.0_patchupdate09_358101_ubuntu_x64
+    S3Prefix: ED/90/PU9/
+    productName: ED90PU9
     edVer: 90
-  tags: ed90pu8
+  tags: ed90pu9
