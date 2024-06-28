@@ -1,8 +1,9 @@
 - name: SmartPhonePush Authentication
-  ansible.builtin.shell:
-    cmd: pfsso -a -s 12 -2 SmartPhonePush -g {{ awsRegion }} -u {{ ssoEmail }}
-  environment:
-    PFSSO_PASSWORD: '{{ ssoPassword }}'
+  ansible.builtin.expect:
+    command: pfsso -a -s 12 -2 SmartPhonePush -g {{ awsRegion }}
+    responses:
+      SSO Email: '{{ ssoEmail }}'
+      SSO Password: '{{ ssoPassword }}'
   when: ssoMethod | default("1") == "1"
 
 - name: TOTP Authentication
