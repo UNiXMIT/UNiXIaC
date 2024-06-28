@@ -21,7 +21,8 @@
             Set Environment:
               . setenvmf.sh
 
-              startmf.sh (-h for usage)
+              startmf.sh                (-h for usage)
+              startmf.sh open           Start MF Services with loopback disabled
 
             Install Options:
               -IacceptEULA -ESadminID={{ myUsername }} -il=/home/products/edXXpuXX
