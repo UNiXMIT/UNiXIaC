@@ -24,8 +24,8 @@
 ![3](images/3.png)  
 
 4. You will now see a pop-up window showing 5 entry fields. Only the first 2, SSO Email and password, are required fields.  
-    - SSO Email - Micro Focus Email to authenticate with Pulse VPN.  
-    - SSO Password - Micro Focus Password to Authenticate with Pulse VPN.  
+    - SSO Email - NEW Micro Focus Email to authenticate with MF 2FA. DO NOT use your MF username, it will fail.    
+    - SSO Password - NEW Micro Focus Password to Authenticate with MF 2FA.  
     - SSO Method - SSO Authentication method to use. 1=SmartPhonePush 2=TOTP (default=1)  
     - SSO Token - Valid authentication token to use for TOTP.  
     - VM Count - Number of duplicate EC2 instances to create (default=1). 
@@ -38,7 +38,7 @@
    You can safely close the browser now or leave it open to monitor its creation.  If you want to come back to the task later to check progress, take note of the Task number. When you return, open the Dashboard and click on the 'History' tab. The find your Task and click the Task number to re-open the Task console.  
 ![5](images/5.png)
 
-6. Once the Task has completed and is marked as a 'Success', scroll to the very bottom of the Task console and you will see the EC2 Instance details like public IP/DNS and database connection information.  
+6. Once the Task has completed and is marked as a 'Success', scroll to the very bottom of the Task console, and you will see the EC2 Instance details like public IP/DNS and database connection information.  
 ![6](images/6.png)
 
 > **NOTE:** If a task fails, check the Task console to see where it has failed. If it failed on SSO authentication try again or check that 2FA is still working elsewhere.  
