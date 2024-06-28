@@ -96,7 +96,7 @@
       - libxcrypt
       - libxcrypt.i686
       - libgcc.i686
-      - ncurses-libs-6.1-9.20180224.el8.i686
+      - ncurses-libs.i686
       - zlib.i686
       - webkit2gtk3
       - PackageKit-gtk3-module
