@@ -12,7 +12,7 @@
   tasks:
   - name: Import sso.yml
     import_tasks: sso.yml
-  no_log: True
+  no_log: False
   tags: default
 
 - name: AWS EC2 Management
