@@ -7,11 +7,17 @@ runOptions=(
 -v /home/support/semaphore/db:/var/lib/semaphore
 --restart always
 -e SEMAPHORE_DB_DIALECT=bolt
+# -e SEMAPHORE_DB_DIALECT=postgres
 -e SEMAPHORE_ADMIN=admin
 -e SEMAPHORE_ADMIN_PASSWORD=strongPassword123
 -e SEMAPHORE_ADMIN_EMAIL=admin@localhost
+# -e SEMAPHORE_DB_USER=postgres
+# -e SEMAPHORE_DB_PASS=strongPassword123
+# -e SEMAPHORE_DB_HOST=x.x.x.x
+# -e SEMAPHORE_DB_PORT=5432
+# -e SEMAPHORE_DB=semaphore?sslmode=disable
 -p 3000:3000
---health-cmd "curl -sf domain.com:3000/api/auth/login  || exit 1"
+--health-cmd "curl -sf example.com:3000/api/auth/login  || exit 1"
 --health-interval 1m
 --health-timeout 2s
 --health-retries 5
@@ -40,9 +46,6 @@ removeContainer() {
 
 updateContainer() {
     printf "Updating Container...\n\n"
-    if [ -z "$tag" ]; then
-        tag=latest
-    fi
     sudo ${containerRuntime} pull semaphoreui/semaphore:$tag
 }
 
@@ -59,6 +62,9 @@ startContainer() {
 }
 
 tag=$2
+if [ -z "$tag" ]; then
+    tag=latest
+fi
 checkContainerRuntime
 removeContainer
 if [[ $1 == 'update' ]]; then
