@@ -96,3 +96,10 @@
     S3PrefixPU: ED/80/PU17/
     productName: ES80PU17
   tags: es80pu17
+
+- name: ES 8.0 PU 18
+  set_fact:
+    installerNameESPU: es_80_pu18_358450.exe
+    S3PrefixPU: ED/80/PU18/
+    productName: ES80PU18
+  tags: es80pu18

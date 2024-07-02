@@ -114,3 +114,12 @@
     productName: ED80PU17
     edVer: 80
   tags: ed80pu17
+
+- name: ED 8.0 PU 18
+  set_fact:
+    installPath: /home/products/ed80pu18
+    installerName: setup_entdev_8.0_patchupdate18_358448_redhat_x86_64
+    S3Prefix: ED/80/PU18/
+    productName: ED80PU18
+    edVer: 80
+  tags: ed80pu18
