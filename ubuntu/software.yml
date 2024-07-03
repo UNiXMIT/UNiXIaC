@@ -87,3 +87,18 @@
 
 - name: Enable Podman Socket
   ansible.builtin.shell: systemctl enable --now podman.socket
+
+- name: Add PostgreSQL driver in odbcinst.ini
+  ansible.builtin.blockinfile:
+    path: /etc/odbcinst.ini
+    block: |
+      [PostgreSQL ANSI]
+      Description=PostgreSQL ODBC driver (ANSI version)
+      Driver=psqlodbca.so
+      Setup=libodbcpsqlS.so
+
+      [PostgreSQL Unicode]
+      Description=PostgreSQL ODBC driver (Unicode version)
+      Driver=psqlodbcw.so
+      Setup=libodbcpsqlS.so
+  become: yes
