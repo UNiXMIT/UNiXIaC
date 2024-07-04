@@ -103,14 +103,14 @@
       - PackageKit-gtk3-module
       - systemd-libs
       - systemd-libs.i686
+      - podman
+      - buildah
     state: present
   when: ansible_facts['distribution_major_version'] | int >= 8
 
 - name: RHEL>=9 Package installation
   package:
     name: 
-      - podman
-      - buildah
       - libxcrypt-compat
       - libxcrypt-compat.i686
     state: present
@@ -118,7 +118,7 @@
 
 - name: Enable Podman Socket
   ansible.builtin.shell: systemctl enable --now podman.socket
-  when: ansible_facts['distribution_major_version'] | int >= 9
+  when: ansible_facts['distribution_major_version'] | int >= 8
 
 - name: Add PostgreSQL driver in odbcinst.ini
   ansible.builtin.blockinfile:
