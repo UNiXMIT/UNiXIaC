@@ -101,4 +101,3 @@
       Description=PostgreSQL ODBC driver (Unicode version)
       Driver=psqlodbcw.so
       Setup=libodbcpsqlS.so
-  become: yes

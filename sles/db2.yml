@@ -52,7 +52,7 @@
   ansible.builtin.blockinfile:
     path: /etc/unixODBC/odbcinst.ini
     block: |
-      [DB2 ODBC Driver]
+      [IBM DB2 ODBC DRIVER]
       Description = DB2 Driver
       Driver = /opt/db2/odbc_cli/clidriver/lib/libdb2o.so
       fileusage=1
@@ -70,4 +70,12 @@
       Port = 50000
       UID = {{ myUsername }}
       PWD = {{ myPassword }}
+  become: yes
+
+- name: Set DB2 Tools on PATH
+  copy:
+    dest: /etc/profile.d/db2.sh
+    content: |
+      #!/bin/bash
+      export PATH="$PATH:/opt/db2/odbc_cli/clidriver/bin"
   become: yes
