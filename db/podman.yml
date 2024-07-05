@@ -116,6 +116,8 @@
       ALTER SESSION SET "_ORACLE_SCRIPT"=true;
       CREATE USER {{ myUsername }} IDENTIFIED BY {{ myPassword }};
       GRANT ALL PRIVILEGES TO {{ myUsername }};
+      GRANT SYSDBA TO {{ myUsername }};
+      GRANT SELECT ON V_\$INSTANCE TO {{ myUsername }};
       EXIT;
   become: yes
   tags: oracle
