@@ -78,4 +78,5 @@
     content: |
       #!/bin/bash
       export PATH="$PATH:/opt/db2/odbc_cli/clidriver/bin"
+      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/db2/odbc_cli/clidriver/lib"
   become: yes
