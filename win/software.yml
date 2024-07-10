@@ -43,6 +43,3 @@
       Invoke-WebRequest -Uri $msTermURL -outfile C:\Users\Public\Documents\Microsoft.WindowsTerminal.zip
       Expand-Archive -LiteralPath C:\Users\Public\Documents\Microsoft.WindowsTerminal.zip -DestinationPath C:\Users\Public\Documents
       setx /m PATH "$env:PATH;C:\Users\Public\Documents\terminal-${msTermVer}"
-  
-- name: Clink Autorun
-  win_command: clink autorun install
