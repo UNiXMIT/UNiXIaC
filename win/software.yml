@@ -16,9 +16,11 @@
     - jq
     - cascadiamono
     - ntop.portable
+    - psql
     - psqlodbc
     - openjdk
     - python
+    - clink
     # - dotnet
     # - windows-sdk-11-version-22h2-all
     # - visualstudio2017buildtools
