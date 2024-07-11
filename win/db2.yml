@@ -28,6 +28,11 @@
       FILE=C:\Program Files\IBM\SQLLIB\
       INSTALL_TYPE=CUSTOM
       COMP=BASE_CLIENT
+      COMP=DOTNET_DATA_PROVIDER
+      COMP=JDBC_SUPPORT
+      COMP=ODBC_SUPPORT
+      COMP=OLE_DB_SUPPORT
+      COMP=SQLJ_SUPPORT
     dest: C:\Users\Public\Documents\CLIENT\db2.win.rsp
 
 - name: Install DB2 Client
