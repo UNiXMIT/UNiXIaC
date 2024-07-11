@@ -120,7 +120,7 @@
   ansible.builtin.shell: systemctl enable --now podman.socket
   when: ansible_facts['distribution_major_version'] | int >= 8
 
-- name: Add PostgreSQL driver in odbcinst.ini
+- name: Add PostgreSQL and DB2 driver in odbcinst.ini
   ansible.builtin.blockinfile:
     path: /etc/odbcinst.ini
     block: |
@@ -133,3 +133,9 @@
       Description=PostgreSQL ODBC driver (Unicode version)
       Driver=psqlodbcw.so
       Setup=libodbcpsqlS.so
+
+      [IBM DB2 ODBC DRIVER]
+      Description = DB2 Driver
+      Driver = /home/{{ myUsername }}/sqllib/lib64/libdb2o.so
+      fileusage=1
+      dontdlclose=1
