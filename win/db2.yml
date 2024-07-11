@@ -13,12 +13,12 @@
 - name: Download DB2 Client Installer
   ansible.windows.win_get_url:
     url: '{{ s3.url }}'
-    dest: C:\Users\{{ myUsername }}\AppData\Local\Temp
+    dest: C:\Users\Public\Documents
 
 - name: Extract DB2 Client Installer
   win_command:
     cmd: v11.5.9_ntx64_client.exe /auto .
-    chdir: C:\Users\{{ myUsername }}\AppData\Local\Temp
+    chdir: C:\Users\Public\Documents
 
 - name: Create DB2 Response File
   win_copy:
@@ -28,9 +28,9 @@
       FILE=C:\Program Files\IBM\SQLLIB\
       INSTALL_TYPE=CUSTOM
       COMP=BASE_CLIENT
-    dest: C:\Users\{{ myUsername }}\AppData\Local\Temp\CLIENT\db2.win.rsp
+    dest: C:\Users\Public\Documents\CLIENT\db2.win.rsp
 
 - name: Install DB2 Client
   win_command:
     cmd: setup -u db2.win.rsp
-    chdir: C:\Users\{{ myUsername }}\AppData\Local\Temp\CLIENT
+    chdir: C:\Users\Public\Documents\CLIENT
