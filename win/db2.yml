@@ -25,7 +25,7 @@
     content: |
       PROD=CLIENT
       LIC_AGREEMENT=ACCEPT
-      FILE=C:\Program Files\IBM\SQLLIB\
+      FILE=C:\Program Files\IBM\SQLLIB_01\
       INSTALL_TYPE=CUSTOM
       COMP=BASE_CLIENT
       COMP=DOTNET_DATA_PROVIDER
@@ -33,6 +33,16 @@
       COMP=ODBC_SUPPORT
       COMP=OLE_DB_SUPPORT
       COMP=SQLJ_SUPPORT
+      LANG=EN
+      INSTANCE=DB2
+      DB2.NAME=DB2
+      DEFAULT_INSTANCE=DB2
+      DB2.TYPE=CLIENT
+      DB2_EXTSECURITY=NO
+      DB2_COMMON_APP_DATA_TOP_PATH=C:\ProgramData
+      DB2_COPY_NAME=DB2
+      DEFAULT_COPY=YES
+      DEFAULT_CLIENT_INTERFACE_COPY=YES
     dest: C:\Users\Public\Documents\CLIENT\db2.win.rsp
 
 - name: Install DB2 Client
