@@ -26,23 +26,21 @@ Standard_B2ls_v2
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/semaphore.sh
 chmod +x semaphore.sh
 mkdir /home/support/semaphore/config
-mkdir /home/support/semaphore/db
 semaphore.sh
 ```
 **NOTE:** Dockerfile, pfsso*.zip and support.pem must be located in the current working directory before starting the build. 
+
+## Command Line  
+### Create admin user
+```
+podman exec it semaphore semaphore user add --admin --login john --name=John --email=john1996@gmail.com --password=12345 --config=/etc/semaphore/config.json  
+```
 
 ## Ansible Semaphore
 #### https://www.ansible-semaphore.com
 You can access the Semaphore Web UI with:
 ```
 http://serverIP:3000
-```
-
-## Backup Semaphore
-The Semaphore config and database.boltdb file are mapped onto the host in the following locations:
-```
-/home/support/semaphore/config/config.json
-/home/support/semaphore/db/database.boltdb
 ```
 
 ## Check Semaphore Logs

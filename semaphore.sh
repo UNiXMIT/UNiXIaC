@@ -4,18 +4,18 @@ containerName=semaphore
 containerRepo=mf/semaphore
 runOptions=(
 -v /home/support/semaphore/config:/etc/semaphore
--v /home/support/semaphore/db:/var/lib/semaphore
+# -v /home/support/semaphore/db:/var/lib/semaphore
 --restart always
--e SEMAPHORE_DB_DIALECT=bolt
-# -e SEMAPHORE_DB_DIALECT=postgres
--e SEMAPHORE_ADMIN=admin
--e SEMAPHORE_ADMIN_PASSWORD=strongPassword123
--e SEMAPHORE_ADMIN_EMAIL=admin@localhost
-# -e SEMAPHORE_DB_USER=postgres
-# -e SEMAPHORE_DB_PASS=strongPassword123
-# -e SEMAPHORE_DB_HOST=x.x.x.x
-# -e SEMAPHORE_DB_PORT=5432
-# -e SEMAPHORE_DB=semaphore?sslmode=disable
+# -e SEMAPHORE_DB_DIALECT=bolt
+-e SEMAPHORE_DB_DIALECT=postgres
+# -e SEMAPHORE_ADMIN=admin
+# -e SEMAPHORE_ADMIN_PASSWORD=strongPassword123
+# -e SEMAPHORE_ADMIN_EMAIL=admin@localhost
+-e SEMAPHORE_DB_USER=postgres
+-e SEMAPHORE_DB_PASS=strongPassword123
+-e SEMAPHORE_DB_HOST=example.com
+-e SEMAPHORE_DB_PORT=5432
+-e SEMAPHORE_DB=semaphore?sslmode=disable
 -p 3000:3000
 --health-cmd "curl -sf example.com:3000/api/auth/login  || exit 1"
 --health-interval 1m
