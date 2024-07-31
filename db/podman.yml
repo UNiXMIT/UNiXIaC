@@ -392,6 +392,12 @@
     mode: '0775'
   tags: openldap
 
+- name: Set OpenLDAP Password
+  ansible.builtin.command: sed -i 's/strongPassword123/{{ myPassword }}/' /tmp/openldap.sh
+  args:
+    chdir: /tmp
+  tags: openldap
+
 - name: Create OpenLDAP for ES Container
   ansible.builtin.command: /tmp/openldap.sh
   args:
