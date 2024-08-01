@@ -78,3 +78,11 @@
     S3PrefixPU: ED/90/PU9/
     productName: ED90PU9
   tags: ed90pu9
+
+- name: ED 9.0 PU 10
+  set_fact:
+    installerNameEDVSPU: edvs2022_90_pu10_359892.exe
+    installerNameEDEPU: ede_90_pu10_359892.exe
+    S3PrefixPU: ED/90/PU10/
+    productName: ED90PU10
+  tags: ed90pu10

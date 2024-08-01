@@ -78,3 +78,12 @@
     productName: ED90PU9
     edVer: 90
   tags: ed90pu9
+
+- name: ED 9.0 PU 10
+  set_fact:
+    installPath: /home/products/ed90pu10
+    installerName: setup_entdev_9.0_patchupdate10_359890_ubuntu_x64
+    S3Prefix: ED/90/PU10/
+    productName: ED90PU10
+    edVer: 90
+  tags: ed90pu10
