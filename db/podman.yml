@@ -406,6 +406,15 @@
     DBPORT: 1389
   tags: openldap
 
+- name: Wait 10 seconds for OpenLDAP Container
+  ansible.builtin.pause:
+    seconds: 10
+
+- name: Change OpenLDAP Password
+  containers.podman.podman_container_exec:
+    name: openldap
+    command: /openldap/newpasswd.sh {{ myPassword }}
+
 - name: Add DB Tags
   amazon.aws.ec2_tag:
     aws_profile: '{{ awsProfile }}'
