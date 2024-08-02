@@ -72,7 +72,6 @@
       - expect
       - postgresql-client
       - odbc-postgresql
-      - p
       - net-tools
       - lsof
       - pax-utils
