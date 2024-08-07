@@ -53,6 +53,7 @@
 - Instances are created with your username, OS and products name as Instance name.  
 - Tags are added to the instance to show what products have been installed and what installers were used.  
 - Instances are all set to shutdown at 8pm GMT to encourage users not to leave instances running for no reason. If an instance really needs to stay on longer, the auto shutdown can be disabled from either the task scheduler (Windows) or the root cron job (Linux).  
+- Task completion/fail notifications are sent to the #team-amc-semaphore Slack channel. This channel can also be used to ask questions or post suggestions/improvements.  
 
 ## Supported OS / Products
 ### Windows Server 2022
