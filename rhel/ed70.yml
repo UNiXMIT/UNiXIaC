@@ -96,3 +96,12 @@
     productName: ED70PU25
     edVer: 70
   tags: ed70pu25
+
+- name: ED 7.0 PU 26
+  set_fact:
+    installPath: /home/products/ed70pu26
+    installerName: setup_entdev_7.0_patchupdate26_362445_redhat_x86_64
+    S3Prefix: ED/70/PU26/
+    productName: ED70PU26
+    edVer: 70
+  tags: ed70pu26

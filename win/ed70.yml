@@ -118,3 +118,11 @@
     S3PrefixPU: ED/70/PU25/
     productName: ED70PU25
   tags: ed70pu25
+
+- name: ED 7.0 PU 26
+  set_fact:
+    installerNameEDVSPU: edvs2019_70_pu26_362449.exe
+    installerNameEDEPU: ede_70_pu26_362447.exe
+    S3PrefixPU: ED/70/PU26/
+    productName: ED70PU26
+  tags: ed70pu26
