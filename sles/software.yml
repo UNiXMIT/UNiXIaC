@@ -81,6 +81,9 @@
       - gtk3-tools
       - libjasper4
       - libnotify-tools
+      - net-tools-deprecated
+      - pam
+      - pam-32bit
     state: present
     update_cache: true
 
