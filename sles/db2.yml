@@ -52,7 +52,7 @@
   become: yes
 
 - name: Install DB2 Client
-  shell: /opt/ibm/client/db2setup -r /opt/ibm/client/db2.linux.rsp
+  shell: /opt/ibm/client/db2setup -r /opt/ibm/client/db2.linux.rsp -f sysreq
 
 - name: Set DB2 Environment
   copy:
