@@ -51,37 +51,37 @@
     mode: '0755'
   become: yes
 
-# - name: Install DB2 Client
-#   shell: /opt/ibm/client/db2setup -r /opt/ibm/client/db2.linux.rsp -f sysreq
+- name: Install DB2 Client
+  shell: /opt/ibm/client/db2setup -r /opt/ibm/client/db2.linux.rsp -f sysreq
 
-# - name: Set DB2 Environment
-#   copy:
-#     dest: /etc/profile.d/db2.sh
-#     content: |
-#       #!/bin/bash
-#       . /home/{{ myUsername }}/sqllib/db2profile
-#   become: yes
+- name: Set DB2 Environment
+  copy:
+    dest: /etc/profile.d/db2.sh
+    content: |
+      #!/bin/bash
+      . /home/{{ myUsername }}/sqllib/db2profile
+  become: yes
 
-# - name: Add DB2 driver in odbcinst.ini
-#   ansible.builtin.blockinfile:
-#     path: /etc/odbcinst.ini
-#     block: |
-#       [IBM DB2 ODBC DRIVER]
-#       Description = DB2 Driver
-#       Driver = /home/{{ myUsername }}/sqllib/lib64/libdb2o.so
-#       fileusage=1
-#       dontdlclose=1
-#   become: yes
+- name: Add DB2 driver in odbcinst.ini
+  ansible.builtin.blockinfile:
+    path: /etc/odbcinst.ini
+    block: |
+      [IBM DB2 ODBC DRIVER]
+      Description = DB2 Driver
+      Driver = /home/{{ myUsername }}/sqllib/lib64/libdb2o.so
+      fileusage=1
+      dontdlclose=1
+  become: yes
 
-# - name: Add DB2 DSN in odbc.ini
-#   ansible.builtin.blockinfile:
-#     path: /etc/odbc.ini
-#     block: |
-#       [db2]
-#       Driver = /home/{{ myUsername }}/sqllib/lib64/libdb2o.so
-#       Database = support
-#       Server = localhost
-#       Port = 50000
-#       UID = {{ myUsername }}
-#       PWD = {{ myPassword }}
-#   become: yes
+- name: Add DB2 DSN in odbc.ini
+  ansible.builtin.blockinfile:
+    path: /etc/odbc.ini
+    block: |
+      [db2]
+      Driver = /home/{{ myUsername }}/sqllib/lib64/libdb2o.so
+      Database = support
+      Server = localhost
+      Port = 50000
+      UID = {{ myUsername }}
+      PWD = {{ myPassword }}
+  become: yes
