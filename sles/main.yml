@@ -129,13 +129,13 @@
     import_tasks: oracle.yml
   tags: default
 
-#- name: Install DB2 ODBC Drivers
-#  hosts: awsEC2
-#  gather_facts: no
-#  tasks:
-#  - name: Import db2.yml
-#    import_tasks: db2.yml
-#  tags: default
+- name: Install DB2 Drivers
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import db2.yml
+    import_tasks: db2.yml
+  tags: default
 
 - name: Create Support Files and Directories
   hosts: awsEC2
