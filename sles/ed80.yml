@@ -42,3 +42,12 @@
     productName: ED80PU18
     edVer: 80
   tags: ed80pu18
+
+- name: ED 8.0 PU 19
+  set_fact:
+    installPath: /home/products/ed80pu19
+    installerName: setup_entdev_8.0_patchupdate19_364198_suse_x64
+    S3Prefix: ED/80/PU19/
+    productName: ED80PU19
+    edVer: 80
+  tags: ed80pu19
