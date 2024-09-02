@@ -52,7 +52,7 @@
   become: yes
 
 - name: Install DB2 Client
-  shell: /opt/ibm/client/db2setup -r /opt/ibm/client/db2.linux.rsp
+  shell: /opt/ibm/client/db2setup -r /opt/ibm/client/db2.linux.rsp -f sysreq
 
 - name: Set DB2 Environment
   copy:
@@ -64,7 +64,7 @@
 
 - name: Add DB2 driver in odbcinst.ini
   ansible.builtin.blockinfile:
-    path: /etc/odbcinst.ini
+    path: /etc/unixODBC/odbcinst.ini
     block: |
       [IBM DB2 ODBC DRIVER]
       Description = DB2 Driver
@@ -75,7 +75,7 @@
 
 - name: Add DB2 DSN in odbc.ini
   ansible.builtin.blockinfile:
-    path: /etc/odbc.ini
+    path: /etc/unixODBC/odbc.ini
     block: |
       [db2]
       Driver = /home/{{ myUsername }}/sqllib/lib64/libdb2o.so

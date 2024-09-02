@@ -28,6 +28,8 @@
         system_info:
           default_user:
             name: {{ myUsername }}
+            primary_group: wheel
+            groups: users
       name: '{{ tempName }}'
       image_id: '{{ awsAMI }}'
       key_name: '{{ keyName }}'
@@ -127,7 +129,7 @@
     import_tasks: oracle.yml
   tags: default
 
-- name: Install DB2 ODBC Drivers
+- name: Install DB2 Drivers
   hosts: awsEC2
   gather_facts: no
   tasks:
