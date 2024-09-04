@@ -418,6 +418,30 @@
     name: openldap
     command: /openldap/newpasswd.sh {{ myPassword }}
 
+- name: Create APLS
+  containers.podman.podman_container:
+    name: apls
+    image: mfsharedtech/apls:latest
+    state: started
+    restart_policy: "always"
+    detach: true
+    interactive: true
+    privileged: true
+    ports: 4814:4814
+    env:
+      EULA='true'
+      TIME_ZONE=GMT
+  become: yes
+  tags: apls
+
+- name: Set APLS Facts
+  set_fact:
+    DBNAME: Micro Focus AutoPass License Server  
+    DBSHORT: APLS
+    DBUSER: 
+    DBPORT: 4814
+  tags: apls
+
 - name: Add DB Tags
   amazon.aws.ec2_tag:
     aws_profile: '{{ awsProfile }}'
