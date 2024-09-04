@@ -421,7 +421,7 @@
 - name: Create APLS
   containers.podman.podman_container:
     name: apls
-    image: mfsharedtech/apls:latest
+    image: docker.io/mfsharedtech/apls:latest
     state: started
     restart_policy: "always"
     detach: true
