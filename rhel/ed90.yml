@@ -87,3 +87,12 @@
     productName: ED90PU10
     edVer: 90
   tags: ed90pu10
+
+- name: ED 9.0 PU 11
+  set_fact:
+    installPath: /home/products/ed90pu11
+    installerName: setup_entdev_9.0_patchupdate11_364117_redhat_x86_64
+    S3Prefix: ED/90/PU11/
+    productName: ED90PU11
+    edVer: 90
+  tags: ed90pu11
