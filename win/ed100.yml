@@ -6,3 +6,11 @@
     productName: ED100
     edVer: 100
   tags: ed100
+
+- name: ED 10.0 PU 1
+  set_fact:
+    installerNameEDVSPU: edvs2022_100_pu01_364374.exe
+    installerNameEDEPU: ede_100_pu01_364374.exe
+    S3PrefixPU: ED/100/PU1/
+    productName: ED100PU1
+  tags: ed100pu1

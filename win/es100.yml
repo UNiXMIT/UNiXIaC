@@ -5,3 +5,10 @@
     productName: ES100
     edVer: 100
   tags: es100
+
+- name: ES 10.0 PU 1
+  set_fact:
+    installerNameESPU: es_100_pu01_364374
+    S3PrefixPU: ED/100/PU1/
+    productName: ES100PU1
+  tags: es100pu1
