@@ -93,7 +93,7 @@
 - name: Modify MSSQL
   containers.podman.podman_container_exec:
     name: mssql
-    command: /opt/{{ TOOLSVER }}/bin/sqlcmd -S localhost -U SA -P {{ myPassword }} -Q "CREATE DATABASE {{ myUsername }}; CREATE LOGIN {{ myUsername }} WITH PASSWORD='{{ myPassword }}', DEFAULT_DATABASE={{ myUsername }}; ALTER SERVER ROLE sysadmin ADD MEMBER {{ myUsername }}; CREATE USER {{ myUsername }} FOR LOGIN {{ myUsername }}; ALTER USER {{ myUsername }} WITH DEFAULT_SCHEMA=dbo; ALTER ROLE db_owner ADD MEMBER {{ myUsername }}"
+    command: /opt/{{ TOOLSVER }}/bin/sqlcmd -C -S localhost -U SA -P {{ myPassword }} -Q "CREATE DATABASE {{ myUsername }}; CREATE LOGIN {{ myUsername }} WITH PASSWORD='{{ myPassword }}', DEFAULT_DATABASE={{ myUsername }}; ALTER SERVER ROLE sysadmin ADD MEMBER {{ myUsername }}; CREATE USER {{ myUsername }} FOR LOGIN {{ myUsername }}; ALTER USER {{ myUsername }} WITH DEFAULT_SCHEMA=dbo; ALTER ROLE db_owner ADD MEMBER {{ myUsername }}"
   become: yes
   tags: mssql
 
