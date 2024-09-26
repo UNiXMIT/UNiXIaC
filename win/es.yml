@@ -189,7 +189,7 @@
     chdir: C:\MFSamples\CICS
   tags: es
 
-- name: Copy MFHDRDAT
+- name: Copy DFHDRDAT
   ansible.windows.win_copy:
     src: C:\Program Files (x86)\Micro Focus\Enterprise Developer\etc\cas\dfhdrdat
     dest: C:\MFSamples\CICS\system\

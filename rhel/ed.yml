@@ -112,7 +112,7 @@
 - name: Import CICS Region
   shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/CICS/CICS.xml D SYSAD SYSAD'
 
-- name: Copy MFHDRDAT
+- name: Copy DFHDRDAT
   ansible.builtin.copy:
     src: '{{ installPath }}/etc/cas/dfhdrdat'
     dest: /home/{{ myUsername }}/MFSupport/MFSamples/CICS/system/dfhdrdat
