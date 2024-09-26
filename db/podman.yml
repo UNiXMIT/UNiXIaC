@@ -11,7 +11,7 @@
       SA_PASSWORD: '{{ myPassword }}'
       ACCEPT_EULA: 'Y'
       MSSQL_COLLATION: 'SQL_Latin1_General_CP1_CI_AS'
-    healthcheck: '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P {{ myPassword }} -Q "SELECT 1" -b -o /dev/null'
+    healthcheck: '/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P {{ myPassword }} -Q "SELECT 1" -b -o /dev/null'
     healthcheck_interval: "10s"
     healthcheck_retries: 10
     healthcheck_start_period: "10s"
@@ -40,7 +40,7 @@
       SA_PASSWORD: '{{ myPassword }}'
       ACCEPT_EULA: 'Y'
       MSSQL_COLLATION: 'SQL_Latin1_General_CP1_CI_AS'
-    healthcheck: '/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P {{ myPassword }} -Q "SELECT 1" -b -o /dev/null'
+    healthcheck: '/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P {{ myPassword }} -Q "SELECT 1" -b -o /dev/null'
     healthcheck_interval: "10s"
     healthcheck_retries: 10
     healthcheck_start_period: "10s"
@@ -93,7 +93,7 @@
 - name: Modify MSSQL
   containers.podman.podman_container_exec:
     name: mssql
-    command: /opt/{{ TOOLSVER }}/bin/sqlcmd -S localhost -U SA -P {{ myPassword }} -Q "CREATE DATABASE {{ myUsername }}; CREATE LOGIN {{ myUsername }} WITH PASSWORD='{{ myPassword }}', DEFAULT_DATABASE={{ myUsername }}; ALTER SERVER ROLE sysadmin ADD MEMBER {{ myUsername }}; CREATE USER {{ myUsername }} FOR LOGIN {{ myUsername }}; ALTER USER {{ myUsername }} WITH DEFAULT_SCHEMA=dbo; ALTER ROLE db_owner ADD MEMBER {{ myUsername }}"
+    command: /opt/{{ TOOLSVER }}/bin/sqlcmd -C -S localhost -U SA -P {{ myPassword }} -Q "CREATE DATABASE {{ myUsername }}; CREATE LOGIN {{ myUsername }} WITH PASSWORD='{{ myPassword }}', DEFAULT_DATABASE={{ myUsername }}; ALTER SERVER ROLE sysadmin ADD MEMBER {{ myUsername }}; CREATE USER {{ myUsername }} FOR LOGIN {{ myUsername }}; ALTER USER {{ myUsername }} WITH DEFAULT_SCHEMA=dbo; ALTER ROLE db_owner ADD MEMBER {{ myUsername }}"
   become: yes
   tags: mssql
 
