@@ -235,6 +235,19 @@
     chdir: C:\MFSamples\JCL
   tags: ed
 
+- name: Import CICS Region
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\CICS\CICS.xml D SYSAD SYSAD'
+    chdir: C:\MFSamples\CICS
+  tags: ed
+
+- name: Copy MFHDRDAT
+  ansible.windows.win_copy:
+    src: C:\Program Files (x86)\Micro Focus\Enterprise Developer\etc\cas\dfhdrdat
+    dest: C:\MFSamples\CICS\system\
+    remote_src: true
+  tags: ed
+
 - name: Stop ESCWA Service
   ansible.windows.win_service:
     name: escwa

@@ -215,6 +215,38 @@
     type: allow
     rights: FullControl
 
+- name: Create CICS
+  win_file:
+    path: C:\MFSamples\CICS
+    state: directory
+
+- name: Create CICS loadlib
+  win_file:
+    path: C:\MFSamples\CICS\loadlib
+    state: directory
+
+- name: Create CICS system
+  win_file:
+    path: C:\MFSamples\CICS\system
+    state: directory
+
+- name: Create CICS data
+  win_file:
+    path: C:\MFSamples\CICS\data
+    state: directory
+
+- name: Download CICS.xml
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CICS.xml
+    dest: C:\MFSamples\CICS
+
+- name: Everyone permissions on CICS
+  win_acl:
+    user: Everyone
+    path: C:\MFSamples\CICS
+    type: allow
+    rights: FullControl
+
 - name: Everyone permissions on MFSamples
   win_acl:
     user: Everyone
