@@ -208,6 +208,36 @@
     dest: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml
     mode: '0775'
 
+- name: Create CICS
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/CICS"
+    state: directory
+    mode: '0775'
+
+- name: Create system
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/CICS/system"
+    state: directory
+    mode: '0775'
+
+- name: Create data
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/CICS/data"
+    state: directory
+    mode: '0775'
+
+- name: Create loadlib
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/CICS/loadlib"
+    state: directory
+    mode: '0775'
+
+- name: Download CICS.xml
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml
+    dest: /home/{{ myUsername }}/MFSupport/MFSamples/CICS/CICS.xml
+    mode: '0775'
+
 - name: Create Products
   file:
     path: /home/products
