@@ -60,6 +60,7 @@
     content: |
       #!/bin/bash
       . /home/{{ myUsername }}/sqllib/db2profile
+      export PATH=$PATH:/home/{{ myUsername }}/sqllib/lib64:/home/{{ myUsername }}/sqllib/lib64/gskit:/home/{{ myUsername }}/sqllib/lib32
   become: yes
 
 - name: Add DB2 driver in odbcinst.ini
