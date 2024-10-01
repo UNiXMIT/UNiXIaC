@@ -185,13 +185,13 @@
 
 - name: Import CICS Region
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\CICS\CICS.xml D SYSAD SYSAD'
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\CICS\CICS.xml D SYSAD SYSAD'
     chdir: C:\MFSamples\CICS
   tags: es
 
 - name: Copy DFHDRDAT
   ansible.windows.win_copy:
-    src: C:\Program Files (x86)\Micro Focus\Enterprise Developer\etc\cas\dfhdrdat
+    src: C:\Program Files (x86)\Micro Focus\Enterprise Server\etc\cas\dfhdrdat
     dest: C:\MFSamples\CICS\system\
     remote_src: true
   tags: es
