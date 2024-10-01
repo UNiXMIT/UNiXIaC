@@ -8,84 +8,84 @@
 
 - name: ES 70 PU 15
   set_fact:
-    installerNameEDVSPU: es_70_pu15_315321.exe
+    installerNameESPU: es_70_pu15_315321.exe
     S3PrefixPU: ED/70/PU15/
     productName: ES70PU15
   tags: es70pu15
 
 - name: ES 7.0 PU 16
   set_fact:
-    installerNameEDVSPU: es_70_pu16_318103.exe
+    installerNameESPU: es_70_pu16_318103.exe
     S3PrefixPU: ED/70/PU16/
     productName: ES70PU16
   tags: es70pu16
 
 - name: ES 7.0 PU 17
   set_fact:
-    installerNameEDVSPU: es_70_pu17_320926.exe
+    installerNameESPU: es_70_pu17_320926.exe
     S3PrefixPU: ED/70/PU17/
     productName: ES70PU17
   tags: es70pu17
 
 - name: ES 7.0 PU 18
   set_fact:
-    installerNameEDVSPU: es_70_pu18_322467.exe
+    installerNameESPU: es_70_pu18_322467.exe
     S3PrefixPU: ED/70/PU18/
     productName: ES70PU18
   tags: es70pu18
 
 - name: ES 7.0 PU 19
   set_fact:
-    installerNameEDVSPU: es_70_pu19_324235.exe
+    installerNameESPU: es_70_pu19_324235.exe
     S3PrefixPU: ED/70/PU19/
     productName: ES70PU19
   tags: es70pu19
 
 - name: ES 7.0 PU 20
   set_fact:
-    installerNameEDVSPU: es_70_pu20_328615.exe
+    installerNameESPU: es_70_pu20_328615.exe
     S3PrefixPU: ED/70/PU20/
     productName: ES70PU20
   tags: es70pu20
 
 - name: ES 7.0 PU 21
   set_fact:
-    installerNameEDVSPU: es_70_pu21_330880.exe
+    installerNameESPU: es_70_pu21_330880.exe
     S3PrefixPU: ED/70/PU21/
     productName: ES70PU21
   tags: es70pu21
 
 - name: ES 7.0 PU 22
   set_fact:
-    installerNameEDVSPU: es_70_pu22_337404.exe
+    installerNameESPU: es_70_pu22_337404.exe
     S3PrefixPU: ED/70/PU22/
     productName: ES70PU22
   tags: es70pu22
 
 - name: ES 7.0 PU 23
   set_fact:
-    installerNameEDVSPU: es_70_pu23_342480.exe
+    installerNameESPU: es_70_pu23_342480.exe
     S3PrefixPU: ED/70/PU23/
     productName: ES70PU23
   tags: es70pu23
 
 - name: ES 7.0 PU 24
   set_fact:
-    installerNameEDVSPU: es_70_pu24_350234.exe
+    installerNameESPU: es_70_pu24_350234.exe
     S3PrefixPU: ED/70/PU24/
     productName: ES70PU24
   tags: es70pu24
 
 - name: ES 7.0 PU 25
   set_fact:
-    installerNameEDVSPU: es_70_pu25_358576.exe
+    installerNameESPU: es_70_pu25_358576.exe
     S3PrefixPU: ED/70/PU25/
     productName: ES70PU25
   tags: es70pu25
 
 - name: ES 7.0 PU 26
   set_fact:
-    installerNameEDVSPU: es_70_pu26_362447.exe
+    installerNameESPU: es_70_pu26_362447.exe
     S3PrefixPU: ED/70/PU26/
     productName: ES70PU26
   tags: es70pu26
