@@ -70,9 +70,6 @@
 ### RHEL 8
 - ED 6.0 and 7.0  
 
-### RHEL 7
-- ED 5.0
-
 ### SLES 15
 - ED 9.0 and 10.0  
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
