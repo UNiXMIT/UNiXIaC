@@ -42,7 +42,7 @@
       availability_zone: '{{ availabilityZone }}'
       aws_profile: '{{ awsProfile }}'
       instance_type: '{{ instanceType }}'
-      count: '{{ vmCount | default(1) }}'
+      count: '{{ vmCount | default(1) | int }}'
       volumes:
       - device_name: '{{ deviceName }}'
         ebs:
