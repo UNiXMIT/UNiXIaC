@@ -4,7 +4,7 @@
     availabilityZone: '{{ azEMEA }}'
     awsAMI: '{{ amiEMEA }}'
     securityGroups: '{{ securityGroupsEMEA }}'
-  when: userRegion | default("1") | int == "1"
+  when: userRegion | default("1") == "1"
 
 - name: AMS Region
   set_fact:
@@ -12,7 +12,7 @@
     availabilityZone: '{{ azAMS }}'
     awsAMI: '{{ amiAMS }}'
     securityGroups: '{{ securityGroupsAMS }}'
-  when: userRegion | default("1") | int == "2"
+  when: userRegion | default("1") == "2"
 
 - name: APJ Region
   set_fact:
@@ -20,4 +20,4 @@
     availabilityZone: '{{ azAPJ }}'
     awsAMI: '{{ amiAPJ }}'
     securityGroups: '{{ securityGroupsAPJ }}'
-  when: userRegion | default("1") | int == "3"    
+  when: userRegion | default("1") == "3"    
