@@ -4,7 +4,7 @@
     availabilityZone: '{{ azEMEA }}'
     awsAMI: '{{ amiEMEA }}'
     securityGroups: '{{ securityGroupsEMEA }}'
-  when: userRegion | default("1") == "1"
+  when: userRegion | default("1") == "1" and userRegion | default("1") not in ["1", "2", "3"]
 
 - name: AMS Region
   set_fact:
