@@ -22,6 +22,11 @@
     securityGroups: '{{ securityGroupsAPJ }}'
   when: userRegion | default("1") == "3"    
 
+- name: VM Count
+  set_fact:
+    vmNum: '{{ vmCount }}'
+  when: vmCount is defined
+
 - name: Default VM Count
   set_fact:
     vmNum: 1
