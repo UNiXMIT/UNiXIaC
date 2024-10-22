@@ -126,3 +126,11 @@
     S3PrefixPU: ED/80/PU19/
     productName: ED80PU19
   tags: ed80pu19
+
+- name: ED 8.0 PU 20
+  set_fact:
+    installerNameEDVSPU: edvs2022_80_pu20_366828.exe
+    installerNameEDEPU: ede_80_pu20_366824.exe
+    S3PrefixPU: ED/80/PU20/
+    productName: ED80PU20
+  tags: ed80pu20

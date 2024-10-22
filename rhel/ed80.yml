@@ -132,3 +132,12 @@
     productName: ED80PU19
     edVer: 80
   tags: ed80pu19
+
+- name: ED 8.0 PU 20
+  set_fact:
+    installPath: /home/products/ed80pu20
+    installerName: setup_entdev_8.0_patchupdate20_366822_redhat_x86_64
+    S3Prefix: ED/80/PU20/
+    productName: ED80PU20
+    edVer: 80
+  tags: ed80pu20
