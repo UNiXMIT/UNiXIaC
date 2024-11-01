@@ -8,7 +8,14 @@
 
 - name: ES 10.0 PU 1
   set_fact:
-    installerNameESPU: es_100_pu01_364374
+    installerNameESPU: es_100_pu01_364374.exe
     S3PrefixPU: ED/100/PU1/
     productName: ES100PU1
   tags: es100pu1
+
+- name: ES 10.0 PU 2
+  set_fact:
+    installerNameESPU: es_100_pu02_367537.exe
+    S3PrefixPU: ED/100/PU2/
+    productName: ES100PU2
+  tags: es100pu2

@@ -15,3 +15,12 @@
     productName: ED100PU1
     edVer: 100
   tags: ed100pu1
+
+- name: ED 10.0 PU 2
+  set_fact:
+    installPath: /home/products/ed100pu2
+    installerName: setup_entdev_10.0_patchupdate02_367535_ubuntu_x64
+    S3Prefix: ED/100/PU2/
+    productName: ED100PU2
+    edVer: 100
+  tags: ed100pu2
