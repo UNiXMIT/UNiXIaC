@@ -20,13 +20,5 @@
   "instanceType": "t3.xlarge",
   "deviceName": "/dev/sda1",
   "volumeType": "gp3",
-  "volumeSize": 120,
-  "awsProfile": "awsProfile",
-  "webAPI": "https://WebAPI.com/",
-  "ssoEmail": "email@domain.com",
-  "ssoPassword": "strongPassword",
-  "ssoMethod": "1",
-  "ssoToken": "XXXXXX",
-  "vmCount": 1
+  "volumeSize": 120
 }
-

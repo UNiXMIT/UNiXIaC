@@ -23,11 +23,7 @@
 3. To start a task, click the 'RUN' button on the right side of the row for the Task you want to execute.  
 ![3](images/3.png)  
 
-4. You will now see a pop-up window showing 5 entry fields. Only the first 2, SSO Email and password, are required fields.  
-    - SSO Email - NEW Micro Focus Email to authenticate with MF 2FA. DO NOT use your MF username, it will fail.    
-    - SSO Password - NEW Micro Focus Password to Authenticate with MF 2FA.  
-    - SSO Method - SSO Authentication method to use. 1=SmartPhonePush 2=TOTP (default=1)  
-    - SSO Token - Valid authentication token to use for TOTP.  
+4. You will now see a pop-up window showing 2 entry fields.  
     - VM Count - Number of duplicate EC2 instances to create (default=1). 
     - AWS Region - Region where you want the EC2 instance to be created. 1=EMEA 2=AMS 3=APJ (default=1)   
 ![4](images/4.png)  
@@ -41,8 +37,7 @@
 6. Once the Task has completed and is marked as a 'Success', scroll to the very bottom of the Task console, and you will see the EC2 Instance details like public IP/DNS and database connection information.  
 ![6](images/6.png)
 
-> **NOTE:** If a task fails, check the Task console to see where it has failed. If it failed on SSO authentication try again or check that 2FA is still working elsewhere.  
-> If it failed elsewhere in the script, report the issue (including the Task number) to an admin to check the problem.  
+> **NOTE:** If it failed elsewhere in the script, report the issue (including the Task number) to an admin to check the problem.  
 
 ### Additional Details
 - Windows EC2 instances are accessible via RDP using the 'support' user and the usual password.  
