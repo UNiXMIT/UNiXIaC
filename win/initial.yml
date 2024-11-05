@@ -1,6 +1,5 @@
 - name: EMEA Region
   set_fact:
-    awsRegion: '{{ regionEMEA }}'
     availabilityZone: '{{ azEMEA }}'
     awsAMI: '{{ amiEMEA }}'
     securityGroups: '{{ securityGroupsEMEA }}'
@@ -8,7 +7,6 @@
 
 - name: AMS Region
   set_fact:
-    awsRegion: '{{ regionAMS }}'
     availabilityZone: '{{ azAMS }}'
     awsAMI: '{{ amiAMS }}'
     securityGroups: '{{ securityGroupsAMS }}'
@@ -16,7 +14,6 @@
 
 - name: APJ Region
   set_fact:
-    awsRegion: '{{ regionAPJ }}'
     availabilityZone: '{{ azAPJ }}'
     awsAMI: '{{ amiAPJ }}'
     securityGroups: '{{ securityGroupsAPJ }}'
