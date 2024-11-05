@@ -6,7 +6,6 @@
     filters:
       name: Windows_Server-2022-English-Full-Base*
       architecture: x86_64
-      block-device-mapping.volume-type: gp3
       virtualization-type: hvm
   register: amis
 
