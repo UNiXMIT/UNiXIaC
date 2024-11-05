@@ -8,8 +8,16 @@
       architecture: x86_64
       virtualization-type: hvm
   register: amis
+  tags: wins2022
 
-- name: Extract the most recently created AMI from the list
-  debug:
-    msg: "{{ amis.images[-1] }}"
-  register: latest_amzl2_ami
+- name: Get latest Windows Server 2019 AMI
+  amazon.aws.ec2_ami_info:
+    owners:
+      - amazon
+    region: '{{ regionEMEA }}'
+    filters:
+      name: Windows_Server-2019-English-Full-Base*
+      architecture: x86_64
+      virtualization-type: hvm
+  register: amis
+  tags: wins2019
