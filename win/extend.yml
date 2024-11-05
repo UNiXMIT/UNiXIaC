@@ -17,7 +17,9 @@
 
 - name: Add extend Tags
   amazon.aws.ec2_tag:
-    aws_profile: '{{ awsProfile }}'
+    # aws_profile: '{{ awsProfile }}'
+    # aws_access_key: '{{ AWSID }}'
+    # aws_secret_key: '{{ AWSKEY }}'
     region: "{{ hostvars['localhost']['awsRegion'] }}"
     resource: '{{ item }}'
     tags:
