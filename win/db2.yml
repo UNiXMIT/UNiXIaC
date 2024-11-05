@@ -1,6 +1,6 @@
 - name: Get DB2 Client Installer Download URL from S3
   amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
+    # profile: '{{ awsProfile }}'
     bucket: mturner
     mode: geturl
     object: DB2/v11.5.9_ntx64_client.exe

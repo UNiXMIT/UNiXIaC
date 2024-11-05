@@ -1,6 +1,6 @@
 - name: Get PulseVPN Installer Download URL from S3
   amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
+    # profile: '{{ awsProfile }}'
     bucket: mturner
     mode: geturl
     object: PulseVPN/ps-pulse-win-9.1r15.0-b15819-64bitinstaller.msi
@@ -17,7 +17,7 @@
 
 - name: Get PulseVPN Config File Download URL from S3
   amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
+    # profile: '{{ awsProfile }}'
     bucket: mturner
     mode: geturl
     object: PulseVPN/MFIPulseVPN.pulsepreconfig

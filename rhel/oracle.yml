@@ -95,7 +95,7 @@
 
 - name: Get Oracle Instant Client Precompiler RHEL9 Download URL from S3
   amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
+    # profile: '{{ awsProfile }}'
     bucket: mturner
     mode: geturl
     object: Oracle/InstantClient/21/oracle-instantclient-precomp-21.12.0.0.0-1.el9.x86_64.rpm
@@ -118,7 +118,7 @@
 
 - name: Get Oracle Instant Client Precompiler RHEL8 Download URL from S3
   amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
+    # profile: '{{ awsProfile }}'
     bucket: mturner
     mode: geturl
     object: Oracle/InstantClient/21/oracle-instantclient-precomp-21.13.0.0.0-1.el8.x86_64.rpm
@@ -141,7 +141,7 @@
 
 - name: Get Oracle Instant Client Precompiler RHEL7 Download URL from S3
   amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
+    # profile: '{{ awsProfile }}'
     bucket: mturner
     mode: geturl
     object: Oracle/InstantClient/21/oracle-instantclient-precomp-21.13.0.0.0-1.x86_64.rpm

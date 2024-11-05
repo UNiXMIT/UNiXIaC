@@ -50,7 +50,7 @@
 
 - name: Get Oracle Instant Client Precompiler Download URL from S3
   amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
+    # profile: '{{ awsProfile }}'
     bucket: mturner
     mode: geturl
     object: Oracle/InstantClient/21/instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip

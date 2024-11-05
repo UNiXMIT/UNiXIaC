@@ -27,7 +27,7 @@
     "name": "ssoToken",
     "title": "SSO Token",
     "required": false,
-    "type": "int",
+    "type": "secret",
     "description": "Auth Token - Required if using TOTP",
     "values": []
   },

@@ -1,6 +1,6 @@
 - name: Get {{ installerName }} Download URL from S3
   amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
+    # profile: '{{ awsProfile }}'
     bucket: mturner
     mode: geturl
     object: '{{ S3Prefix }}{{ installerName }}'
@@ -12,7 +12,7 @@
 
 - name: Get SafeNet License Download URL from S3
   amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
+    # profile: '{{ awsProfile }}'
     bucket: mturner
     mode: geturl
     object: ED/Licenses/lservrc.net
@@ -24,7 +24,7 @@
     
 - name: Get AutoPass License Download URL from S3
   amazon.aws.s3_object:
-    profile: '{{ awsProfile }}'
+    # profile: '{{ awsProfile }}'
     bucket: mturner
     mode: geturl
     object: ED/Licenses/LicFile.txt
@@ -62,7 +62,7 @@
 
 - name: Add ED Tags
   amazon.aws.ec2_tag:
-    aws_profile: '{{ awsProfile }}'
+    # aws_profile: '{{ awsProfile }}'
     region: "{{ hostvars['localhost']['awsRegion'] }}"
     resource: '{{ item }}'
     tags:

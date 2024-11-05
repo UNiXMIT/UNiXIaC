@@ -48,8 +48,6 @@
          volume_type: '{{ volumeType }}'
          volume_size: '{{ volumeSize }}'
       # aws_profile: '{{ awsProfile }}'
-      # aws_access_key: '{{ AWSID }}'
-      # aws_secret_key: '{{ AWSKEY }}'
       state: running
       wait: true
     register: ec2
@@ -73,8 +71,6 @@
   - name: Rename AWS EC2 instance
     amazon.aws.ec2_tag:
       # aws_profile: '{{ awsProfile }}'
-      # aws_access_key: '{{ AWSID }}'
-      # aws_secret_key: '{{ AWSKEY }}'
       region: '{{ awsRegion }}'
       resource: '{{ item }}'
       tags:

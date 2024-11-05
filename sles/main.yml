@@ -6,14 +6,14 @@
     import_tasks: initial.yml
   tags: default
   
-- name: SSO 2FA
-  hosts: local
-  gather_facts: no
-  tasks:
-  - name: Import sso.yml
-    import_tasks: sso.yml
-  no_log: True
-  tags: default
+# - name: SSO 2FA
+#   hosts: local
+#   gather_facts: no
+#   tasks:
+#   - name: Import sso.yml
+#     import_tasks: sso.yml
+#   no_log: True
+#   tags: default
 
 - name: AWS EC2 Management
   hosts: local
@@ -38,7 +38,7 @@
       security_groups: '{{ securityGroups }}'
       region: '{{ awsRegion }}'
       availability_zone: '{{ availabilityZone }}'
-      aws_profile: '{{ awsProfile }}'
+      # aws_profile: '{{ awsProfile }}'
       instance_type: '{{ instanceType }}'
       count: '{{ vmNum | default(1) }}'
       volumes:
@@ -64,12 +64,12 @@
   
   - name: Rename AWS EC2 instance
     amazon.aws.ec2_tag:
-      aws_profile: '{{ awsProfile }}'
+      # aws_profile: '{{ awsProfile }}'
       region: '{{ awsRegion }}'
       resource: '{{ item }}'
       tags:
         Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
-        Owner: '{{ ssoEmail }}'
+        Owner: '{{ semaphore_vars.task_details.username|upper }}'
         OS: '{{ imageName }}'
       state: present
     loop: '{{ ec2.instance_ids }}'

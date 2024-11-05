@@ -10,7 +10,7 @@
 
     - name: Get Microsoft.VisualStudio.Setup.Configuration.Native.dll Download URL from S3
       amazon.aws.s3_object:
-        profile: '{{ awsProfile }}'
+        # profile: '{{ awsProfile }}'
         bucket: mturner
         mode: geturl
         object: ED/70/Microsoft.VisualStudio.Setup.Configuration.Native.dll
