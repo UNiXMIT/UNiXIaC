@@ -2,6 +2,7 @@
   amazon.aws.ec2_ami_info:
     owners:
       - amazon
+    region: '{{ regionEMEA }}'
     filters:
       name: Windows_Server-2022-English-Full-Base*
       architecture: x86_64
