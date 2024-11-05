@@ -1,3 +1,11 @@
+- name: AWS AMI Info
+  hosts: local
+  gather_facts: no
+  tasks:
+  - name: Import ami.yml
+    import_tasks: ami.yml
+  tags: ami
+
 - name: AWS Initial Configuration
   hosts: local
   gather_facts: no

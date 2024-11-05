@@ -1,0 +1,10 @@
+- name: Get latest Windows Server 2022 AMI
+  amazon.aws.ec2_ami_info:
+    filters:
+      - Name=name*Windows Server 2022 Base*
+      - owner-id=ami-owners-microsoft
+    region: '{{ regionEMEA }}'
+  register: ami_info
+
+- debug:
+    msg: "Latest Windows Server 2022 AMI: {{ ami_info.amis[0].ami_id }}"
