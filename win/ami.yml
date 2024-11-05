@@ -8,7 +8,7 @@
       architecture: x86_64
       block-device-mapping.volume-type: gp3
       virtualization-type: hvm
-      register: amis
+  register: amis
 
 - name: Extract the most recently created AMI from the list
   debug:
