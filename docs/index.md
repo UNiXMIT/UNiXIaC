@@ -138,3 +138,10 @@ To add your external/public IP address to the security group:
 3. Click 'Save rules'.  
 
 ![8](images/8.png)
+
+### Task fails with error 'Not authorized for images'
+If a task fails with the following error, the AWS EC2 instance AMI number needs updating because Amazon has changed it. Contact an admin to have the AMI updated.  
+
+```
+Failed to create new EC2 instance: An error occurred (AuthFailure) when calling the RunInstances operation: Not authorized for images: [ami-0729cb43cbe3dbf3c]
+```
