@@ -11,5 +11,5 @@
 
 - name: Extract the most recently created AMI from the list
   debug:
-    msg: "{{ amis.images }}"
+    msg: "{{ amis.images.image_id | last }}"
   register: latest_amzl2_ami
