@@ -1,10 +1,15 @@
 - name: Get latest Windows Server 2022 AMI
   amazon.aws.ec2_ami_info:
+    owners:
+      - amazon
     filters:
-      - Name=name*Windows Server 2022 Base*
-      - owner-id=ami-owners-microsoft
-    region: '{{ regionEMEA }}'
-  register: ami_info
+      name: Windows_Server-2022-English-Full-Base*
+      architecture: x86_64
+      block-device-mapping.volume-type: gp3
+      virtualization-type: hvm
+      register: amis
 
-- debug:
-    msg: "Latest Windows Server 2022 AMI: {{ ami_info.amis[0].ami_id }}"
+- name: Extract the most recently created AMI from the list
+  debug:
+    msg: "{{ amis.images[-1].image_id }}"
+  register: latest_amzl2_ami
