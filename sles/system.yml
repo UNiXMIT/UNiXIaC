@@ -11,7 +11,7 @@
   ansible.builtin.lineinfile:
     state: present
     dest: /etc/hosts
-    line: 127.0.0.1 support
+    line: '127.0.0.1 {{ myUsername }}'
 
 - name: Allow SSH password authentication
   lineinfile:
