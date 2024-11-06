@@ -52,8 +52,6 @@
   become: yes
 
 - name: Install DB2 Client
-  vars:
-    DB2HOST: '{{ myUsername }}'
   shell: /opt/ibm/client/db2setup -r /opt/ibm/client/db2.linux.rsp -f sysreq
 
 - name: Set DB2 Environment
