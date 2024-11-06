@@ -4,7 +4,7 @@
       - amazon
     region: '{{ awsRegion }}'
     filters:
-      name: suse-sles-15*
+      name: suse-sles-15-sp6-v*
       architecture: x86_64
       virtualization-type: hvm
   register: amis

@@ -4,7 +4,7 @@
       - amazon
     region: '{{ awsRegion }}'
     filters:
-      name: Ubuntu_22.04*
+      name: '*ubuntu-jammy-22.04*'
       architecture: x86_64
       virtualization-type: hvm
   register: amis
