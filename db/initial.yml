@@ -2,7 +2,6 @@
   set_fact:
     awsRegion: '{{ regionEMEA }}'
     availabilityZone: '{{ azEMEA }}'
-    awsAMI: '{{ amiEMEA }}'
     securityGroups: '{{ securityGroupsEMEA }}'
   when: userRegion | default("1") == "1" or userRegion | default("1") not in ["1", "2", "3"]
 
@@ -10,7 +9,6 @@
   set_fact:
     awsRegion: '{{ regionAMS }}'
     availabilityZone: '{{ azAMS }}'
-    awsAMI: '{{ amiAMS }}'
     securityGroups: '{{ securityGroupsAMS }}'
   when: userRegion | default("1") == "2"
 
@@ -18,7 +16,6 @@
   set_fact:
     awsRegion: '{{ regionAPJ }}'
     availabilityZone: '{{ azAPJ }}'
-    awsAMI: '{{ amiAPJ }}'
     securityGroups: '{{ securityGroupsAPJ }}'
   when: userRegion | default("1") == "3"    
 

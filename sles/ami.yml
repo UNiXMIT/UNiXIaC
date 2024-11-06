@@ -1,0 +1,11 @@
+- name: Get latest SLES 15 AMI
+  amazon.aws.ec2_ami_info:
+    owners:
+      - amazon
+    region: '{{ awsRegion }}'
+    filters:
+      name: suse-sles-15*
+      architecture: x86_64
+      virtualization-type: hvm
+  register: amis
+  tags: sles15

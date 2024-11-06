@@ -5,6 +5,13 @@
   - name: Import initial.yml
     import_tasks: initial.yml
   tags: default
+
+- name: AWS AMI Info
+  hosts: local
+  gather_facts: no
+  tasks:
+  - name: Import ami.yml
+    import_tasks: ami.yml
   
 # - name: SSO 2FA
 #   hosts: local
@@ -31,7 +38,7 @@
             primary_group: wheel
             groups: users
       name: '{{ tempName }}'
-      image_id: '{{ awsAMI }}'
+      image_id: '{{ amis.images[-1].image_id }}'
       key_name: '{{ keyName }}'
       network:  
         assign_public_ip: yes

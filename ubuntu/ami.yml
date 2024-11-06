@@ -1,0 +1,11 @@
+- name: Get latest Ubuntu 22.04 AMI
+  amazon.aws.ec2_ami_info:
+    owners:
+      - amazon
+    region: '{{ awsRegion }}'
+    filters:
+      name: Ubuntu_22.04*
+      architecture: x86_64
+      virtualization-type: hvm
+  register: amis
+  tags: ubuntu2204

@@ -1,23 +1,23 @@
-- name: Get latest Windows Server 2019 AMI
+- name: Get latest RHEL 8 AMI
   amazon.aws.ec2_ami_info:
     owners:
       - amazon
     region: '{{ awsRegion }}'
     filters:
-      name: Windows_Server-2019-English-Full-Base*
+      name: RHEL-8*
       architecture: x86_64
       virtualization-type: hvm
   register: amis
-  tags: wins2019
+  tags: rhel8
 
-- name: Get latest Windows Server 2022 AMI
+- name: Get latest RHEL 9 AMI
   amazon.aws.ec2_ami_info:
     owners:
       - amazon
     region: '{{ awsRegion }}'
     filters:
-      name: Windows_Server-2022-English-Full-Base*
+      name: RHEL-9*
       architecture: x86_64
       virtualization-type: hvm
   register: amis
-  tags: wins2022
+  tags: rhel9
