@@ -1,0 +1,30 @@
+- name: Reboot EC2 Instance
+  reboot:
+
+# - name: WebAPI Notification
+#   ansible.builtin.uri:
+#     url: '{{ webAPI }}'
+#     method: POST
+#     body_format: json
+#     body:
+#       username: "{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ hostvars[item.public_ip_address].productName }} Build Complete"
+#       content: "Public IP - {{ item.public_ip_address }} \nPublic DNS - {{ item.public_dns_name }}"
+#       avatar_url: "https://clipground.com/images/ansible-logo-clipart-5.png"
+#     status_code:
+#         - 200
+#         - 202
+#         - 204
+#   loop: '{{ ec2.instances }}'
+#   tags: default
+
+- name: Display AWS EC2 Information
+  debug:
+    msg: 
+    - "Instance Name   - {{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ hostvars[item.public_ip_address].productName }}"
+    - 'AWS ID          - {{ item.instance_id }}'
+    - 'AWS Region      - {{ awsRegion }}'
+    - 'Public IP       - {{ item.public_ip_address }}'
+    - 'Public DNS      - {{ item.public_dns_name }}'
+    - 'Private IP      - {{ item.private_ip_address }}'
+    - 'Private DNS     - {{ item.private_dns_name }}'
+  loop: '{{ ec2.instances }}'

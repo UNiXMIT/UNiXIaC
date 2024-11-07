@@ -1,0 +1,12 @@
+- name: Terminate Failed Instance(s)
+  amazon.aws.ec2_instance:
+    state: absent
+    instance_ids:
+      - '{{ item.instance_id }}'
+  loop: '{{ ec2.instances }}'
+
+- name: Task Fail Notification
+  debug:
+    msg: 
+    - "Task {{ semaphore_vars.task_details.username|upper }}-{{ imageName }} Failed!"
+    - "Failed AWS EC2 Instances have been removed."

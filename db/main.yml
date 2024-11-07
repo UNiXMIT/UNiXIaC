@@ -1,186 +1,107 @@
-- name: AWS Initial Configuration
-  hosts: local
-  gather_facts: no
-  tasks:
-  - name: Import initial.yml
-    import_tasks: initial.yml
-  tags: default
+tasks:
+  block:
+    - name: Task to be failed
+      ansible.builtin.shell: /bin/false
 
-- name: AWS AMI Info
-  hosts: local
-  gather_facts: no
-  tasks:
-  - name: Import ami.yml
-    import_tasks: ami.yml
+    - name: AWS Initial Configuration
+      hosts: local
+      gather_facts: no
+      tasks:
+      - name: Import initial.yml
+        import_tasks: initial.yml
+      tags: default
 
-# - name: SSO 2FA
-#   hosts: local
-#   gather_facts: no
-#   tasks:
-#   - name: Import sso.yml
-#     import_tasks: sso.yml
-#   no_log: True
-#   tags: default
+    - name: AWS AMI Info
+      hosts: local
+      gather_facts: no
+      tasks:
+      - name: Import ami.yml
+        import_tasks: ami.yml
 
-- name: AWS EC2 Management
-  hosts: local
-  vars:
-    tempName: SEM-{{ 2048 | random }}
-  gather_facts: no
-  tasks:
-  - name: Create AWS EC2 instance
-    amazon.aws.ec2_instance:
-      user_data: |
-        #cloud-config
-        system_info:
-          default_user:
-            name: {{ myUsername }}
-      name: '{{ tempName }}'
-      image_id: '{{ amis.images[-1].image_id }}'
-      key_name: '{{ keyName }}'
-      network:  
-        assign_public_ip: yes
-      security_groups: '{{ securityGroups }}'
-      region: '{{ awsRegion }}'
-      availability_zone: '{{ availabilityZone }}'
-      # aws_profile: '{{ awsProfile }}'
-      instance_type: '{{ instanceType }}'
-      count: '{{ vmNum | default(1) }}'
-      volumes:
-      - device_name: '{{ deviceName }}'
-        ebs:
-         volume_type: '{{ volumeType }}'
-         volume_size: '{{ volumeSize }}'
-      state: running
-      wait: true
-    register: ec2
-    no_log: true
-    tags: default
+    # - name: SSO 2FA
+    #   hosts: local
+    #   gather_facts: no
+    #   tasks:
+    #   - name: Import sso.yml
+    #     import_tasks: sso.yml
+    #   no_log: True
+    #   tags: default
 
-  - name: Add Host to awsEC2 Group 
-    add_host: 
-       hostname: '{{ item.public_ip_address }}'
-       ansible_port: 22
-       ansible_user: '{{ myUsername }}'
-       ansible_ssh_private_key_file: '{{ keyLocation }}'
-       groups: awsEC2
-    loop: '{{ ec2.instances }}'
-    tags: default
-  
-  - name: Rename AWS EC2 instance
-    amazon.aws.ec2_tag:
-      # aws_profile: '{{ awsProfile }}'
-      region: '{{ awsRegion }}'
-      resource: '{{ item }}'
-      tags:
-        Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
-        Owner: '{{ semaphore_vars.task_details.username|upper }}'
-      state: present
-    loop: '{{ ec2.instance_ids }}'
-    tags: default
+    - name: AWS EC2 Management
+      hosts: local
+      vars:
+        tempName: SEM-{{ 2048 | random }}
+      gather_facts: no
+      tasks:
+      - name: Import aws.yml
+        import_tasks: aws.yml
+      tags: default
 
-  - name: SSH Check
-    ansible.builtin.wait_for:
-      host: '{{ item.public_ip_address }}'
-      port: 22
-      timeout: 120
-    loop: '{{ ec2.instances }}'
-    tags: default
+    - name: Modify OS Config
+      hosts: awsEC2
+      gather_facts: no
+      become: yes
+      tasks:
+      - name: Import system.yml
+        import_tasks: system.yml
+      tags: default
 
-- name: Wait for AWS Instance
-  hosts: local
-  gather_facts: no
-  tasks:
-  - name: Pause for 30 seconds
-    ansible.builtin.pause:
-      seconds: 30
-  tags: default
+    - name: Reboot EC2 Instance
+      hosts: awsEC2
+      gather_facts: no
+      become: yes
+      tasks:
+      - name: Reboot
+        reboot:
+      tags: default
 
-- name: Modify OS Config
-  hosts: awsEC2
-  gather_facts: no
-  become: yes
-  tasks:
-  - name: Import system.yml
-    import_tasks: system.yml
-  tags: default
+    - name: Manage Users
+      hosts: awsEC2
+      gather_facts: no
+      become: yes
+      tasks: 
+      - name: Import users.yml
+        import_tasks: users.yml
+      no_log: True
+      tags: default
 
-- name: Reboot EC2 Instance
-  hosts: awsEC2
-  gather_facts: no
-  become: yes
-  tasks:
-  - name: Reboot
-    reboot:
-  tags: default
+    - name: Install Software
+      hosts: awsEC2
+      gather_facts: yes
+      become: yes
+      tasks:
+      - name: Import software.yml
+        import_tasks: software.yml
+      tags: default
 
-- name: Manage Users
-  hosts: awsEC2
-  gather_facts: no
-  become: yes
-  tasks: 
-  - name: Import users.yml
-    import_tasks: users.yml
-  no_log: True
-  tags: default
+    - name: Create Podman Containers
+      hosts: awsEC2
+      gather_facts: no
+      tasks:
+      - name: Import podman.yml
+        import_tasks: podman.yml
 
-- name: Install Software
-  hosts: awsEC2
-  gather_facts: yes
-  become: yes
-  tasks:
-  - name: Import software.yml
-    import_tasks: software.yml
-  tags: default
+    - name: Add CRON Jobs
+      hosts: awsEC2
+      gather_facts: no
+      become: yes
+      tasks:
+      - name: Import cron.yml
+        import_tasks: cron.yml
+      tags: default
 
-- name: Create Podman Containers
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import podman.yml
-    import_tasks: podman.yml
+    - name: Final tasks
+      hosts: local
+      gather_facts: no
+      tasks: 
+      - name: Import final.yml
+        import_tasks: final.yml
+      tags: default
 
-- name: Add CRON Jobs
-  hosts: awsEC2
-  gather_facts: no
-  become: yes
-  tasks:
-  - name: Import cron.yml
-    import_tasks: cron.yml
-  tags: default
-
-- name: AWS EC2 Instance Created and Setup
-  hosts: local
-  gather_facts: no
-  tasks:
-  # - name: WebAPI Notification
-  #   ansible.builtin.uri:
-  #     url: '{{ webAPI }}'
-  #     method: POST
-  #     body_format: json
-  #     body:
-  #       username: "{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ hostvars[item.public_ip_address].DBSHORT }} Build Complete"
-  #       content: "Public IP - {{ item.public_ip_address }} \nPublic DNS - {{ item.public_dns_name }} \nDB Name - {{ hostvars[item.public_ip_address].DBNAME }} \nDB User - {{ hostvars[item.public_ip_address].DBUSER }} \nDB Port - {{ hostvars[item.public_ip_address].DBPORT }}"
-  #       avatar_url: "https://clipground.com/images/ansible-logo-clipart-5.png"
-  #     status_code:
-  #         - 200
-  #         - 202
-  #         - 204
-  #   loop: '{{ ec2.instances }}'
-  #   tags: default
-    
-  - name: Display AWS EC2 Information
-    debug:
-      msg: 
-      - "Instance Name   - {{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ hostvars[item.public_ip_address].DBSHORT }}"
-      - 'AWS ID          - {{ item.instance_id }}'
-      - 'AWS Region      - {{ awsRegion }}'
-      - 'Public IP       - {{ item.public_ip_address }}'
-      - 'Public DNS      - {{ item.public_dns_name }}'
-      - 'Private IP      - {{ item.private_ip_address }}'
-      - 'Private DNS     - {{ item.private_dns_name }}'
-      - "DB Name         - {{ hostvars[item.public_ip_address].DBNAME }}"
-      - "DB User         - {{ hostvars[item.public_ip_address].DBUSER }}"
-      - "DB Port         - {{ hostvars[item.public_ip_address].DBPORT }}"
-    loop: '{{ ec2.instances }}'
-    tags: default
+  rescue:
+    - name: Task Failure
+      hosts: local
+      gather_facts: no
+      tasks: 
+      - name: Import fail.yml
+        import_tasks: fail.yml

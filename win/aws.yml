@@ -1,0 +1,67 @@
+- name: Create AWS EC2 instance
+  amazon.aws.ec2_instance:
+    user_data: |
+      <powershell>
+      net user administrator {{ myPassword }}
+      $url = "https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/win/ConfigureRemotingForAnsible.ps1"
+      $file = "$env:temp\ConfigureRemotingForAnsible.ps1"
+      Invoke-Webrequest $url -OutFile $file
+      sleep 2
+      powershell.exe -ExecutionPolicy ByPass -File $file -EnableCredSSP -DisableBasicAuth
+      </powershell>
+    name: '{{ tempName }}'
+    image_id: '{{ amis.images[-1].image_id }}'
+    key_name: '{{ keyName }}'
+    network:  
+      assign_public_ip: yes
+    security_groups: '{{ securityGroups }}'
+    region: '{{ awsRegion }}'
+    availability_zone: '{{ availabilityZone }}'
+    instance_type: '{{ instanceType }}'
+    count: '{{ vmNum | default(1) }}'
+    volumes:
+    - device_name: '{{ deviceName }}'
+      ebs:
+        volume_type: '{{ volumeType }}'
+        volume_size: '{{ volumeSize }}'
+    # aws_profile: '{{ awsProfile }}'
+    state: running
+    wait: true
+  register: ec2
+
+- name: Add Host to awsEC2 Group 
+  add_host: 
+    hostname: '{{ item.public_ip_address }}'
+    ansible_user: '{{ ansibleUser }}'
+    ansible_password: '{{ myPassword }}'
+    ansible_connection: winrm
+    ansible_winrm_transport: credssp
+    ansible_winrm_server_cert_validation: ignore
+    ansible_port: 5986
+    ansible_winrm_connection_timeout: 120
+    groups: awsEC2
+  loop: '{{ ec2.instances }}'
+  no_log: True
+
+- name: Rename AWS EC2 instance
+  amazon.aws.ec2_tag:
+    # aws_profile: '{{ awsProfile }}'
+    region: '{{ awsRegion }}'
+    resource: '{{ item }}'
+    tags:
+      Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
+      Owner: '{{ semaphore_vars.task_details.username|upper }}'
+      OS: '{{ imageName }}'
+    state: present
+  loop: '{{ ec2.instance_ids }}'
+
+- name: WinRM Check
+  ansible.builtin.wait_for:
+    host: '{{ item.public_ip_address }}'
+    port: 5986
+    timeout: 300
+  loop: '{{ ec2.instances }}'
+
+- name: Wait for 30 seconds AWS Instance
+  ansible.builtin.pause:
+    seconds: 30
