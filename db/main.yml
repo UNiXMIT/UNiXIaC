@@ -33,6 +33,7 @@
   handlers:
     - name: Import fail.yml
       import_tasks: fail.yml
+  force_handlers: True
   tags: default
 
 - name: Modify OS Config
