@@ -1,2 +1,0 @@
-- name: Task to be failed
-  ansible.builtin.shell: /bin/false
