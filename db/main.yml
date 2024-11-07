@@ -1,107 +1,106 @@
-tasks:
-  block:
-    - name: Task to be failed
-      ansible.builtin.shell: /bin/false
+block:
+  - name: Task to be failed
+    ansible.builtin.shell: /bin/false
 
-    - name: AWS Initial Configuration
-      hosts: local
-      gather_facts: no
-      tasks:
-      - name: Import initial.yml
-        import_tasks: initial.yml
-      tags: default
+  - name: AWS Initial Configuration
+    hosts: local
+    gather_facts: no
+    tasks:
+    - name: Import initial.yml
+      import_tasks: initial.yml
+    tags: default
 
-    - name: AWS AMI Info
-      hosts: local
-      gather_facts: no
-      tasks:
-      - name: Import ami.yml
-        import_tasks: ami.yml
+  - name: AWS AMI Info
+    hosts: local
+    gather_facts: no
+    tasks:
+    - name: Import ami.yml
+      import_tasks: ami.yml
 
-    # - name: SSO 2FA
-    #   hosts: local
-    #   gather_facts: no
-    #   tasks:
-    #   - name: Import sso.yml
-    #     import_tasks: sso.yml
-    #   no_log: True
-    #   tags: default
+  # - name: SSO 2FA
+  #   hosts: local
+  #   gather_facts: no
+  #   tasks:
+  #   - name: Import sso.yml
+  #     import_tasks: sso.yml
+  #   no_log: True
+  #   tags: default
 
-    - name: AWS EC2 Management
-      hosts: local
-      vars:
-        tempName: SEM-{{ 2048 | random }}
-      gather_facts: no
-      tasks:
-      - name: Import aws.yml
-        import_tasks: aws.yml
-      tags: default
+  - name: AWS EC2 Management
+    hosts: local
+    vars:
+      tempName: SEM-{{ 2048 | random }}
+    gather_facts: no
+    tasks:
+    - name: Import aws.yml
+      import_tasks: aws.yml
+    tags: default
 
-    - name: Modify OS Config
-      hosts: awsEC2
-      gather_facts: no
-      become: yes
-      tasks:
-      - name: Import system.yml
-        import_tasks: system.yml
-      tags: default
+  - name: Modify OS Config
+    hosts: awsEC2
+    gather_facts: no
+    become: yes
+    tasks:
+    - name: Import system.yml
+      import_tasks: system.yml
+    tags: default
 
-    - name: Reboot EC2 Instance
-      hosts: awsEC2
-      gather_facts: no
-      become: yes
-      tasks:
-      - name: Reboot
-        reboot:
-      tags: default
+  - name: Reboot EC2 Instance
+    hosts: awsEC2
+    gather_facts: no
+    become: yes
+    tasks:
+    - name: Reboot
+      reboot:
+    tags: default
 
-    - name: Manage Users
-      hosts: awsEC2
-      gather_facts: no
-      become: yes
-      tasks: 
-      - name: Import users.yml
-        import_tasks: users.yml
-      no_log: True
-      tags: default
+  - name: Manage Users
+    hosts: awsEC2
+    gather_facts: no
+    become: yes
+    tasks: 
+    - name: Import users.yml
+      import_tasks: users.yml
+    no_log: True
+    tags: default
 
-    - name: Install Software
-      hosts: awsEC2
-      gather_facts: yes
-      become: yes
-      tasks:
-      - name: Import software.yml
-        import_tasks: software.yml
-      tags: default
+  - name: Install Software
+    hosts: awsEC2
+    gather_facts: yes
+    become: yes
+    tasks:
+    - name: Import software.yml
+      import_tasks: software.yml
+    tags: default
 
-    - name: Create Podman Containers
-      hosts: awsEC2
-      gather_facts: no
-      tasks:
-      - name: Import podman.yml
-        import_tasks: podman.yml
+  - name: Create Podman Containers
+    hosts: awsEC2
+    gather_facts: no
+    tasks:
+    - name: Import podman.yml
+      import_tasks: podman.yml
 
-    - name: Add CRON Jobs
-      hosts: awsEC2
-      gather_facts: no
-      become: yes
-      tasks:
-      - name: Import cron.yml
-        import_tasks: cron.yml
-      tags: default
+  - name: Add CRON Jobs
+    hosts: awsEC2
+    gather_facts: no
+    become: yes
+    tasks:
+    - name: Import cron.yml
+      import_tasks: cron.yml
+    tags: default
 
-    - name: Final tasks
-      hosts: local
-      gather_facts: no
-      tasks: 
-      - name: Import final.yml
-        import_tasks: final.yml
-      tags: default
+  - name: Final tasks
+    hosts: local
+    gather_facts: no
+    tasks: 
+    - name: Import final.yml
+      import_tasks: final.yml
+    tags: default
 
-  rescue:
-    - name: Task Failure
-      hosts: local
-      gather_facts: no
-      tasks: 
-      - name: Import fail.yml
-        import_tasks: fail.yml
+rescue:
+  - name: Task Failure
+    hosts: local
+    gather_facts: no
+    tasks: 
+    - name: Import fail.yml
+      import_tasks: fail.yml
