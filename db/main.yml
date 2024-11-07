@@ -6,7 +6,7 @@
         - name: Import test.yml
           import_tasks: test.yml
       rescue: 
-        - name: Import test.yml
+        - name: Import fail.yml
           import_tasks: fail.yml
   tags: default
 
