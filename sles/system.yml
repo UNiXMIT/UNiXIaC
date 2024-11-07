@@ -9,9 +9,9 @@
 
 - name: Update hosts file
   ansible.builtin.lineinfile:
-    state: present
-    dest: /etc/hosts
-    line: '127.0.0.1 {{ myUsername }}'
+    path: /etc/hosts
+    search_string: '127.0.0.1'
+    line: 127.0.0.1 localhost {{ myUsername }}
 
 - name: Allow SSH password authentication
   lineinfile:
