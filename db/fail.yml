@@ -4,7 +4,7 @@
     instance_ids:
       - '{{ item.instance_id }}'
   loop: '{{ ec2.instances }}'
-  when: '{{ ec2.instances }} is defined'
+  when: ec2.instances is defined
 
 - name: Task Failure Notification
   debug:
