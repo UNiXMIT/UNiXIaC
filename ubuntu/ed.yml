@@ -117,3 +117,4 @@
     src: '{{ installPath }}/etc/cas/dfhdrdat'
     dest: /home/{{ myUsername }}/MFSupport/MFSamples/CICS/system/dfhdrdat
     mode: '0775'
+    remote_src: yes
