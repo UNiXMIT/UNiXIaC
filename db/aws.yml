@@ -55,6 +55,3 @@
 - name: Wait for 30 seconds AWS Instance
   ansible.builtin.pause:
     seconds: 30
-
-- name: Task to be failed
-  ansible.builtin.shell: /bin/false
