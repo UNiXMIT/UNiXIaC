@@ -2,11 +2,12 @@
   hosts: local
   gather_facts: no
   tasks:
-  - name: Import test.yml
-    block:
-      import_tasks: test.yml
-    rescue: 
-      import_tasks: fail.yml
+    - block:
+        - name: Import test.yml
+          import_tasks: test.yml
+      rescue: 
+        - name: Import test.yml
+          import_tasks: fail.yml
   tags: default
 
 - name: AWS Initial Configuration
