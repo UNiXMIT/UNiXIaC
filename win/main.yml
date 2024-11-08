@@ -28,32 +28,48 @@
     tempName: SEM-{{ 2048 | random }}
   gather_facts: no
   tasks:
-  - name: Import aws.yml
-    import_tasks: aws.yml
+    - block:
+        - name: Import aws.yml
+          import_tasks: aws.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: default
 
 - name: Optimise Ansible on Windows
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import optimise.yml
-    import_tasks: optimise.yml
+    - block:
+        - name: Import optimise.yml
+          import_tasks: optimise.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: default
 
 - name: Modify OS Config
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import system.yml
-    import_tasks: system.yml
+    - block:
+        - name: Import system.yml
+          import_tasks: system.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: default
 
 - name: Add Users
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import users.yml
-    import_tasks: users.yml
+    - block:
+        - name: Import users.yml
+          import_tasks: users.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   no_log: True
   tags: default
 
@@ -61,40 +77,48 @@
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import software.yml
-    import_tasks: software.yml
+    - block:
+        - name: Import software.yml
+          import_tasks: software.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: default
 
 - name: Install Oralce Instant Client
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import oracle.yml
-    import_tasks: oracle.yml
+    - block:
+        - name: Import oracle.yml
+          import_tasks: oracle.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: default
 
 - name: Install DB2 ODBC Drivers
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import db2.yml
-    import_tasks: db2.yml
+    - block:
+        - name: Import db2.yml
+          import_tasks: db2.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: default
-
-# - name: Install VPN
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import vpn.yml
-#     import_tasks: vpn.yml
-#   tags: default
 
 - name: Install Visual Studio
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import vs.yml 
-    import_tasks: vs.yml
+    - block:
+        - name: Import vs.yml 
+          import_tasks: vs.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Install VSCode + Extensions
   hosts: awsEC2
@@ -106,8 +130,12 @@
   vars:
     ansible_become_pass: '{{ myPassword }}'
   tasks:
-  - name: Import vscode.yml
-    import_tasks: vscode.yml
+    - block:
+        - name: Import vscode.yml
+          import_tasks: vscode.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   no_log: True
   tags: default
 
@@ -121,8 +149,12 @@
   vars:
     ansible_become_pass: '{{ myPassword }}'
   tasks:
-  - name: Import systemUser.yml
-    import_tasks: systemUser.yml
+    - block:
+        - name: Import systemUser.yml
+          import_tasks: systemUser.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   no_log: True
   tags: default
 
@@ -130,136 +162,212 @@
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import createFilesDir.yml
-    import_tasks: createFilesDir.yml
+    - block:
+        - name: Import createFilesDir.yml
+          import_tasks: createFilesDir.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: default
 
 - name: Install ED 5.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import ed50.yml
-    import_tasks: ed50.yml
+    - block:
+        - name: Import ed50.yml
+          import_tasks: ed50.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Install ED 6.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import ed60.yml
-    import_tasks: ed60.yml
+    - block:
+        - name: Import ed60.yml
+          import_tasks: ed60.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Install ED 7.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import ed70.yml
-    import_tasks: ed70.yml
+    - block:
+        - name: Import ed70.yml
+          import_tasks: ed70.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Install ED 8.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import ed80.yml
-    import_tasks: ed80.yml
+    - block:
+        - name: Import ed80.yml
+          import_tasks: ed80.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Install ED 9.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import ed90.yml
-    import_tasks: ed90.yml
+    - block:
+        - name: Import ed90.yml
+          import_tasks: ed90.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Install ED 10.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import ed100.yml
-    import_tasks: ed100.yml
+    - block:
+        - name: Import ed100.yml
+          import_tasks: ed100.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Setup ED
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import ed.yml
-    import_tasks: ed.yml
+    - block:
+        - name: Import ed.yml
+          import_tasks: ed.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Install ES 5.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import es50.yml
-    import_tasks: es50.yml
+    - block:
+        - name: Import es50.yml
+          import_tasks: es50.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Install ES 6.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import es60.yml
-    import_tasks: es60.yml
+    - block:
+        - name: Import es60.yml
+          import_tasks: es60.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Install ES 7.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import es70.yml
-    import_tasks: es70.yml
+    - block:
+        - name: Import es70.yml
+          import_tasks: es70.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Install ES 8.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import es80.yml
-    import_tasks: es80.yml
+    - block:
+        - name: Import es80.yml
+          import_tasks: es80.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Install ES 9.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import es90.yml
-    import_tasks: es90.yml
+    - block:
+        - name: Import es90.yml
+          import_tasks: es90.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Install ES 10.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import es100.yml
-    import_tasks: es100.yml
+    - block:
+        - name: Import es100.yml
+          import_tasks: es100.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Setup ES
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import es.yml
-    import_tasks: es.yml
+    - block:
+        - name: Import es.yml
+          import_tasks: es.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Setup ADLDS
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import adlds.yml
-    import_tasks: adlds.yml
+    - block:
+        - name: Import adlds.yml
+          import_tasks: adlds.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: adlds
 
 - name: extend 10.4.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import extend1040.yml
-    import_tasks: extend1040.yml
+    - block:
+        - name: Import extend1040.yml
+          import_tasks: extend1040.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: extend 10.5.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import extend1050.yml
-    import_tasks: extend1050.yml
+    - block:
+        - name: Import extend1050.yml
+          import_tasks: extend1050.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Install extend
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import extend.yml
-    import_tasks: extend.yml
+    - block:
+        - name: Import extend.yml
+          import_tasks: extend.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: extend
 
 - name: Reboot EC2 Instance

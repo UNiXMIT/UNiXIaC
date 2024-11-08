@@ -28,8 +28,12 @@
     tempName: SEM-{{ 2048 | random }}
   gather_facts: no
   tasks:
-  - name: Import aws.yml
-    import_tasks: aws.yml
+    - block:
+        - name: Import aws.yml
+          import_tasks: aws.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: default
 
 - name: Modify OS Config
@@ -37,8 +41,12 @@
   gather_facts: no
   become: yes
   tasks:
-  - name: Import system.yml
-    import_tasks: system.yml
+    - block:
+        - name: Import system.yml
+          import_tasks: system.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: default
 
 - name: Manage Users
@@ -46,8 +54,12 @@
   gather_facts: no
   become: yes
   tasks: 
-  - name: Import users.yml
-    import_tasks: users.yml
+    - block:
+        - name: Import users.yml
+          import_tasks: users.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   no_log: True
   tags: default
 
@@ -56,8 +68,12 @@
   gather_facts: yes
   become: yes
   tasks:
-  - name: Import software.yml
-    import_tasks: software.yml
+    - block:
+        - name: Import software.yml
+          import_tasks: software.yml
+      rescue: 
+      - name: Import fail.yml
+        import_tasks: fail.yml
   tags: default
 
 - name: Install Oracle Instant Client
@@ -65,16 +81,24 @@
   gather_facts: no
   become: yes
   tasks:
-  - name: Import oracle.yml
-    import_tasks: oracle.yml
+    - block:
+        - name: Import oracle.yml
+          import_tasks: oracle.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: default
 
 - name: Install DB2 ODBC Drivers
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import db2.yml
-    import_tasks: db2.yml
+    - block:
+        - name: Import db2.yml
+          import_tasks: db2.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: default
 
 - name: Create Support Files and Directories
@@ -82,30 +106,46 @@
   gather_facts: no
   become: yes
   tasks:
-  - name: Import createFilesDir.yml
-    import_tasks: createFilesDir.yml
+    - block:
+        - name: Import createFilesDir.yml
+          import_tasks: createFilesDir.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: default
   
 - name: ED 9.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import ed90.yml
-    import_tasks: ed90.yml
+    - block:
+        - name: Import ed90.yml
+          import_tasks: ed90.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: ED 10.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import ed100.yml
-    import_tasks: ed100.yml
+    - block:
+        - name: Import ed100.yml
+          import_tasks: ed100.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Install ED
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import ed.yml
-    import_tasks: ed.yml
+    - block:
+        - name: Import ed.yml
+          import_tasks: ed.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: ed
 
 - name: Setup OpenLDAP
@@ -113,30 +153,46 @@
   gather_facts: yes
   become: yes
   tasks:
-  - name: Import openldap.yml
-    import_tasks: openldap.yml
+    - block:
+        - name: Import openldap.yml
+          import_tasks: openldap.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.ymls
   tags: openldap
 
 - name: extend 10.4.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import extend1040.yml
-    import_tasks: extend1040.yml
+    - block:
+        - name: Import extend1040.yml
+          import_tasks: extend1040.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: extend 10.5.0
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import extend1050.yml
-    import_tasks: extend1050.yml
+    - block:
+        - name: Import extend1050.yml
+          import_tasks: extend1050.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
 
 - name: Install extend
   hosts: awsEC2
   gather_facts: no
   tasks:
-  - name: Import extend.yml
-    import_tasks: extend.yml
+    - block:
+        - name: Import extend.yml
+          import_tasks: extend.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: extend
 
 - name: Create MOTD
@@ -144,8 +200,12 @@
   gather_facts: yes
   become: yes
   tasks:
-  - name: Import motd.yml
-    import_tasks: motd.yml
+    - block:
+        - name: Import motd.yml
+          import_tasks: motd.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: default
 
 - name: Add CRON Jobs
@@ -153,8 +213,12 @@
   gather_facts: no
   become: yes
   tasks:
-  - name: Import cron.yml
-    import_tasks: cron.yml
+    - block:
+        - name: Import cron.yml
+          import_tasks: cron.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: default
 
 - name: Reboot EC2 Instance
