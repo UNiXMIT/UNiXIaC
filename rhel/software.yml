@@ -66,14 +66,14 @@
       - xauth
     state: present
 
-- name: RHEL<=7 Package installation
-  package:
-    name: 
-      - java-11-openjdk
-      - libcanberra-gtk3
-      - webkitgtk4
-    state: present
-  when: ansible_facts['distribution_major_version'] | int <= 7
+# - name: RHEL<=7 Package installation
+#   package:
+#     name: 
+#       - java-11-openjdk
+#       - libcanberra-gtk3
+#       - webkitgtk4
+#     state: present
+#   when: ansible_facts['distribution_major_version'] | int <= 7
 
 - name: RHEL<=8 Package installation
   package:

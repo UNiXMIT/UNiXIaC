@@ -119,3 +119,9 @@
       Description=PostgreSQL ODBC driver (Unicode version)
       Driver=psqlodbcw.so
       Setup=libodbcpsqlS.so
+
+      [IBM DB2 ODBC DRIVER]
+      Description = DB2 Driver
+      Driver = /home/{{ myUsername }}/sqllib/lib64/libdb2o.so
+      fileusage=1
+      dontdlclose=1
