@@ -2,6 +2,13 @@
   set_fact:
     productName: 
 
+- name: RHEL>=8 Remove Default Java
+  package:
+    name: 
+      - java*
+    state: absent
+  when: ansible_facts['distribution_major_version'] | int >= 8
+
 - name: Install EPEL key 
   rpm_key:
     state: present
@@ -80,13 +87,6 @@
     name: spax
     state: present
   when: ansible_facts['distribution_major_version'] | int <= 8
-
-- name: RHEL>=8 Remove Default Java
-  package:
-    name: 
-      - java*
-    state: absent
-  when: ansible_facts['distribution_major_version'] | int >= 8
   
 - name: RHEL>=8 Package installation
   package:
