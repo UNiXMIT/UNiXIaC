@@ -2,13 +2,6 @@
   set_fact:
     productName: 
 
-- name: RHEL>=8 Remove Default Java
-  package:
-    name: 
-      - java*
-    state: absent
-  when: ansible_facts['distribution_major_version'] | int >= 8
-
 - name: Install EPEL key 
   rpm_key:
     state: present
@@ -51,7 +44,7 @@
       - cronie
       - dos2unix
       - htop
-      - libstdc++.i686
+      - 'libstdc++-devel.i686'
       - libaio-devel
       - glibc-devel
       - glibc-devel.i686
@@ -87,6 +80,13 @@
     name: spax
     state: present
   when: ansible_facts['distribution_major_version'] | int <= 8
+
+- name: RHEL>=8 Remove Default Java
+  package:
+    name: 
+      - java*
+    state: absent
+  when: ansible_facts['distribution_major_version'] | int >= 8
   
 - name: RHEL>=8 Package installation
   package:
