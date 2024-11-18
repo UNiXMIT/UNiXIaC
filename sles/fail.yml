@@ -1,11 +1,12 @@
 - name: Terminate Failed Instance(s)
   amazon.aws.ec2_instance:
     state: absent
-    region: '{{ awsRegion }}'
+    region: "{{ hostvars['localhost']['awsRegion'] }}"
     instance_ids:
       - '{{ item.instance_id }}'
   loop: "{{ hostvars['localhost'].ec2.instances }}"
   when: hostvars['localhost'].ec2.instances is defined
+  delegate_to: localhost
 
 - name: Task Failure Notification
   fail:
