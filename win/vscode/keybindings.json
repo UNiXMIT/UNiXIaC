@@ -1,0 +1,11 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "alt+win+l",
+        "command": "editor.action.transformToLowercase"
+    },
+    {
+        "key": "alt+win+u",
+        "command": "editor.action.transformToUppercase"
+    }
+]

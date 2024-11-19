@@ -1,0 +1,16 @@
+{
+    "workbench.colorTheme": "One Dark Pro",
+    "window.newWindowDimensions": "inherit",
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.minimap.enabled": false,
+    "workbench.startupEditor": "none",
+    "workbench.editorLargeFileConfirmation": 2048,
+    "window.restoreWindows": "none",
+    "files.hotExit": "off",
+    "security.workspace.trust.enabled": false,
+    "extensions.ignoreRecommendations": true,
+    "terminal.integrated.copyOnSelection": true,
+    "editor.wordWrap": "on",
+    "update.showReleaseNotes": false
+}
