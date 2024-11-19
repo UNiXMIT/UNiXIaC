@@ -69,7 +69,7 @@
       - glibc-32bit
       - libcrypt1-32bit
       - libncurses5-32bit
-      - libstdc++6-32bit
+      - 'libstdc++6-32bit'
       - libgcc_s1-32bit
       - libz1-32bit
       - podman

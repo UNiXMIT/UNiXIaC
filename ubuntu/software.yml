@@ -54,8 +54,8 @@
       - cron
       - dos2unix
       - htop
-      - lib32stdc++6
-      - libstdc++6:i386
+      - 'lib32stdc++6'
+      - 'libstdc++6:i386'
       - libaio-dev
       - libncurses5
       - apt-file 

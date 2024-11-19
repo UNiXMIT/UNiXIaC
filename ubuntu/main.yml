@@ -89,7 +89,7 @@
           import_tasks: fail.yml
   tags: default
 
-- name: Install DB2 ODBC Drivers
+- name: Install DB2 Client
   hosts: awsEC2
   gather_facts: no
   tasks:
