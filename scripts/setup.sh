@@ -29,7 +29,6 @@ else
   export user=$USER
 fi
 
-
 # Modify OS Config
 sudo timedatectl set-timezone Europe/London
 sudo hostnamectl set-hostname $user
