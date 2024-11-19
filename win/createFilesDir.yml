@@ -94,18 +94,6 @@
     type: allow
     rights: FullControl
 
-- name: Create .vscode
-  win_file:
-    path: C:\AcuScripts\.vscode
-    state: directory
-
-- name: Everyone permissions on .vscode
-  win_acl:
-    user: Everyone
-    path: C:\AcuScripts\.vscode
-    type: allow
-    rights: FullControl
-
 - name: Create AcuLogs
   win_file:
     path: C:\AcuLogs
@@ -127,16 +115,6 @@
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/AcuScripts/setenvacu.cmd
     dest: C:\AcuScripts\setenvacu.cmd
-
-- name: Download settings.json
-  win_get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/AcuScripts/vscode/settings.json
-    dest: C:\AcuScripts\.vscode\settings.json
-  
-- name: Download tasks.json
-  win_get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/AcuScripts/vscode/tasks.json
-    dest: C:\AcuScripts\.vscode\tasks.json
 
 - name: Download AcuThin-AutoUpdate.cfg
   win_get_url:

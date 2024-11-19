@@ -85,7 +85,7 @@
           import_tasks: fail.yml
   tags: default
 
-- name: Install Oralce Instant Client
+- name: Install Oracle Instant Client
   hosts: awsEC2
   gather_facts: no
   tasks:

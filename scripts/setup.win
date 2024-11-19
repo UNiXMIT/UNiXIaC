@@ -31,12 +31,13 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v DeferQualityUpdatesPeriodInDays /t REG_DWORD /d 30 /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}" /v "IsInstalled" /t REG_DWORD /d 0 /f 
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}" /v "IsInstalled" /t REG_DWORD /d 0 /f
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v HideFilesExt /t REG_DWORD /d 0 /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\WindowsUpdate" /v "SetActiveHours" /t REG_DWORD /d 1 /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\WindowsUpdate" /v "ActiveHoursStart" /t REG_DWORD /d 0 /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\WindowsUpdate" /v "ActiveHoursEnd" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v HideFilesExt /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Hidden /t REG_DWORD /d 0 /f
 
-:: Install/Configure Software
+:: Install Software
 choco feature enable -n=allowGlobalConfirmation
 choco install firefox
 choco install procmon
@@ -71,20 +72,65 @@ choco install vscode /NoDesktopIcon
 :: choco install tinytask
 :: choco install speedtest
 :: choco install clumsy
-set msTermVer=1.19.10573.0
+set msTermVer=1.21.2911.0
 set msTermURL=https://github.com/microsoft/terminal/releases/download/v%msTermVer%/Microsoft.WindowsTerminal_%msTermVer%_x64.zip
 powershell -Command "Invoke-WebRequest -Uri $env:msTermURL -outfile C:\Users\Public\Documents\Microsoft.WindowsTerminal.zip"
 powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\Microsoft.WindowsTerminal.zip -DestinationPath C:\Users\Public\Documents"
 setx /m PATH "%PATH%;C:\Users\Public\Documents\terminal-%msTermVer%"
-
-:: Import VSCode settings and install VSCode Extensions
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension zhuangtongfa.material-theme
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension bitlang.cobol
-call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension micro-focus-amc.mfenterprise
+call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension rocketsoftware.rocket-enterprise
+call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension rangav.vscode-thunder-client
 curl -s -o %APPDATA%\Code\User\settings.json https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/refs/heads/main/win/vscode/settings.json
 curl -s -o %APPDATA%\Code\User\keybindings.json https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/refs/heads/main/win/vscode/keybindings.json
 
-:: Create directories, change permissions and set PATH
+:: Install Oracle Instant Client
+powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-basic-nt-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-basic-nt-21.15.0.0.0dbru.zip"
+powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-basic-nt-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient32"
+powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-basic-windows.x64-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-basic-windows.x64-21.15.0.0.0dbru.zip"
+powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-basic-windows.x64-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient64"
+powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-odbc-nt-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-odbc-nt-21.15.0.0.0dbru.zip"
+powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-odbc-nt-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient32"
+powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-odbc-windows.x64-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-odbc-windows.x64-21.15.0.0.0dbru.zip"
+powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-odbc-windows.x64-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient64"
+powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sqlplus-nt-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-sqlplus-nt-21.15.0.0.0dbru.zip"
+powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-sqlplus-nt-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient32"
+powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sqlplus-windows.x64-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-sqlplus-windows.x64-21.15.0.0.0dbru.zip"
+powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-sqlplus-windows.x64-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient64"
+powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sdk-nt-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-sdk-nt-21.15.0.0.0dbru.zip"
+powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-sdk-nt-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient32"
+powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip"
+powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient64"
+call C:\instantClient32\instantclient_21_15\odbc_install.exe
+call C:\instantClient64\instantclient_21_15\odbc_install.exe
+setx /m PATH "%PATH%;C:\instantClient32\instantclient_21_15;C:\instantClient32\instantclient_21_15\sdk"
+
+:: DB2 Client
+echo PROD=CLIENT > C:\Users\Public\Documents\db2.win.rsp
+echo LIC_AGREEMENT=ACCEPT >> C:\Users\Public\Documents\db2.win.rsp
+echo FILE=C:\Program Files\IBM\SQLLIB_01\ >> C:\Users\Public\Documents\db2.win.rsp
+echo INSTALL_TYPE=CUSTOM >> C:\Users\Public\Documents\db2.win.rsp
+echo COMP=BASE_CLIENT >> C:\Users\Public\Documents\db2.win.rsp
+echo COMP=DOTNET_DATA_PROVIDER >> C:\Users\Public\Documents\db2.win.rsp
+echo COMP=JDBC_SUPPORT >> C:\Users\Public\Documents\db2.win.rsp
+echo COMP=ODBC_SUPPORT >> C:\Users\Public\Documents\db2.win.rsp
+echo COMP=OLE_DB_SUPPORT >> C:\Users\Public\Documents\db2.win.rsp
+echo COMP=SQLJ_SUPPORT >> C:\Users\Public\Documents\db2.win.rsp
+echo LANG=EN >> C:\Users\Public\Documents\db2.win.rsp
+echo INSTANCE=DB2 >> C:\Users\Public\Documents\db2.win.rsp
+echo DB2.NAME=DB2 >> C:\Users\Public\Documents\db2.win.rsp
+echo DEFAULT_INSTANCE=DB2 >> C:\Users\Public\Documents\db2.win.rsp
+echo DB2.TYPE=CLIENT >> C:\Users\Public\Documents\db2.win.rsp
+echo DB2_EXTSECURITY=NO >> C:\Users\Public\Documents\db2.win.rsp
+echo DB2_COMMON_APP_DATA_TOP_PATH=C:\ProgramData >> C:\Users\Public\Documents\db2.win.rsp
+echo DB2_COPY_NAME=DB2 >> C:\Users\Public\Documents\db2.win.rsp
+echo DEFAULT_COPY=YES >> C:\Users\Public\Documents\db2.win.rsp
+echo DEFAULT_CLIENT_INTERFACE_COPY=YES >> C:\Users\Public\Documents\db2.win.rsp
+echo @ECHO OFF > C:\Users\Public\Documents\installDB2.cmd
+echo v11.5.9_ntx64_client.exe /auto . >> C:\Users\Public\Documents\installDB2.cmd
+echo C:\Users\Public\Documents\CLIENT\setup -u C:\Users\Public\Documents\db2.win.rsp >> C:\Users\Public\Documents\installDB2.cmd
+
+:: Create Support Files and Directories
 md \temp
 cacls \temp /e /p Everyone:f
 md \etc
@@ -97,30 +143,14 @@ md \AcuDataFiles
 cacls \AcuDataFiles /e /p Everyone:f
 md \AcuSamples
 cacls \AcuSamples /e /p Everyone:f
+md \AcuInstallers
+cacls \AcuInstallers /e /p Everyone:f
 md \AcuScripts
 cacls \AcuScripts /e /p Everyone:f
 md \AcuLogs
 cacls \AcuLogs /e /p Everyone:f
-md \MFSamples
-cacls \MFSamples /e /p Everyone:f
-md \MFSamples\JCL
-cacls \MFSamples\JCL /e /p Everyone:f
-md \MFDataFiles
-cacls \MFDataFiles /e /p Everyone:f
-md \MFScripts
-cacls \MFScripts /e /p Everyone:f
-setx /m PATH "C:\AcuScripts;C:\MFScripts;%PATH%"
-
-:: Download AcuScripts
 cd \AcuScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/AcuScripts/setenvacu.cmd
-md .vscode
-cacls .vscode /e /p Everyone:f
-cd \AcuScripts\.vscode
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/AcuScripts/vscode/settings.json
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/AcuScripts/vscode/tasks.json
-
-:: Download etc
 cd \etc
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/AcuThin-AutoUpdate.cfg
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/a_srvcfg
@@ -132,16 +162,30 @@ curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/e
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/gateway.conf
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/gateway.toml
 
-:: Download MFScripts
+md \MFSamples
+md \MFSamples\JCL
+md \MFSamples\CICS
+md \MFSamples\CICS\loadlib
+md \MFSamples\CICS\system
+md \MFSamples\CICS\data
+cacls \MFSamples /e /t /p Everyone:f
+md \MFDataFiles
+cacls \MFDataFiles /e /p Everyone:f
+md \MFInstallers
+cacls \MFInstaller /e /p Everyone:f
+md \MFScripts
+cacls \MFScripts /e /p Everyone:f
+cd \MFSamples\JCL
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.xml
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.zip
+powershell -Command "Expand-Archive -LiteralPath JCL.zip -DestinationPath C:\MFSamples\JCL"
+cd \MFSamples\CICS
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CICS.xml
 cd \MFScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/setenvmf.cmd
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/FormatDumps.cmd
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/AutoPAC.cmd
-
-:: Download JCL
-cd \MFSamples\JCL
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.xml
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.zip
+setx /m PATH "C:\AcuScripts;C:\MFScripts;%PATH%"
 
 cd \temp
 

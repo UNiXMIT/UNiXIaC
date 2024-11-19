@@ -38,7 +38,7 @@
 - name: Install New Windows Terminal
   ansible.windows.win_powershell:
     script: |
-      $msTermVer = "1.19.10573.0"
+      $msTermVer = "1.21.2911.0"
       $msTermURL = "https://github.com/microsoft/terminal/releases/download/v${msTermVer}/Microsoft.WindowsTerminal_${msTermVer}_x64.zip"
       Invoke-WebRequest -Uri $msTermURL -outfile C:\Users\Public\Documents\Microsoft.WindowsTerminal.zip
       Expand-Archive -LiteralPath C:\Users\Public\Documents\Microsoft.WindowsTerminal.zip -DestinationPath C:\Users\Public\Documents
