@@ -119,7 +119,18 @@ fi
 sudo systemctl enable --now podman.socket
 
 # ODBC
-sudo cat > $ODBCPATH/odbcinst.ini <<EOF
+if [ "$WHICHOS" = "RHEL" ]; then
+  sudo cat >> $ODBCPATH/odbc.ini <<EOF
+[oracle]
+Description     = Oracle ODBC Connection
+Driver          = /usr/lib/oracle/21/client64/lib/libsqora.so.21.1
+Database        = $user
+Servername      = 127.0.0.1:1521/FREE
+UserID          = $user
+EOF
+fi
+
+sudo cat >> $ODBCPATH/odbcinst.ini <<EOF
 [PostgreSQL ANSI]
 Description=PostgreSQL ODBC driver (ANSI version)
 Driver=psqlodbca.so
@@ -137,7 +148,7 @@ fileusage=1
 dontdlclose=1
 EOF
 
-sudo cat > $ODBCPATH/odbc.ini <<EOF
+sudo cat >> $ODBCPATH/odbc.ini <<EOF
 [postgres]
 Description         = PostgreSQL ODBC connection
 Driver              = PostgreSQL ANSI
@@ -149,10 +160,10 @@ Port                = 5432
 
 [db2]
 Driver = IBM DB2 ODBC DRIVER
-Database = support
+Database = $user
 Server = localhost
 Port = 50000
-UID = support
+UID = $user
 PWD = strongPassword123
 EOF
 

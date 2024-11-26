@@ -109,6 +109,7 @@
 - name: Add PostgreSQL driver in odbcinst.ini
   ansible.builtin.blockinfile:
     path: /etc/unixODBC/odbcinst.ini
+    marker: "# {mark} ANSIBLE MANAGED BLOCK PostgreSQL"
     block: |
       [PostgreSQL ANSI]
       Description=PostgreSQL ODBC driver (ANSI version)
@@ -120,8 +121,16 @@
       Driver=psqlodbcw.so
       Setup=libodbcpsqlS.so
 
-      [IBM DB2 ODBC DRIVER]
-      Description = DB2 Driver
-      Driver = /home/{{ myUsername }}/sqllib/lib64/libdb2o.so
-      fileusage=1
-      dontdlclose=1
+- name: Add PostgreSQL DSN in odbc.ini
+  ansible.builtin.blockinfile:
+    path: /etc/unixODBC/odbc.ini
+    marker: "# {mark} ANSIBLE MANAGED BLOCK PostgreSQL"
+    block: |
+      [postgres]
+      Description         = PostgreSQL ODBC connection
+      Driver              = /usr/lib64/psqlodbcw.so
+      Database            = {{ myUsername }}
+      Servername          = 127.0.0.1
+      UserName            = {{ myUsername }}
+      Password            = {{ myPassword }}
+      Port                = 5432

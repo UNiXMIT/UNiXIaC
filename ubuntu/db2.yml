@@ -66,6 +66,7 @@
 - name: Add DB2 driver in odbcinst.ini
   ansible.builtin.blockinfile:
     path: /etc/odbcinst.ini
+    marker: "# {mark} ANSIBLE MANAGED BLOCK DB2"
     block: |
       [IBM DB2 ODBC DRIVER]
       Description = DB2 Driver
@@ -77,6 +78,7 @@
 - name: Add DB2 DSN in odbc.ini
   ansible.builtin.blockinfile:
     path: /etc/odbc.ini
+    marker: "# {mark} ANSIBLE MANAGED BLOCK DB2"
     block: |
       [db2]
       Driver = /home/{{ myUsername }}/sqllib/lib64/libdb2o.so

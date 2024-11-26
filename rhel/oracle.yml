@@ -117,3 +117,16 @@
     state: present
     disable_gpg_check: yes
   become: yes
+
+- name: Add Oracle DSN in odbc.ini
+  ansible.builtin.blockinfile:
+    path: /etc/odbc.ini
+    marker: "# {mark} ANSIBLE MANAGED BLOCK Oracle"
+    block: |
+      [oracle]
+      Description     = Oracle ODBC Connection
+      Driver          = /usr/lib/oracle/21/client64/lib/libsqora.so.21.1
+      Database        = {{ myUsername }}
+      Servername      = 127.0.0.1:1521/FREE
+      UserID          = {{ myUsername }}
+  become: yes
