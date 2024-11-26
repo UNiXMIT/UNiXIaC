@@ -42,18 +42,18 @@ choco feature enable -n=allowGlobalConfirmation
 choco install firefox
 choco install procmon
 choco install procexp
-vcredist140
+choco install vcredist140
 choco install 7zip 
 choco install winscp
-notepadplusplus
-jq
-cascadiamono
-ntop.portable
-psql
-psqlodbc
-openjdk
-python
-clink
+choco install notepadplusplus 
+choco install jq
+choco install cascadiamono
+choco install ntop.portable
+choco install psql
+choco install psqlodbc
+choco install openjdk
+choco install python
+choco install clink
 choco install vscode /NoDesktopIcon 
 :: choco install visualstudio2017professional
 :: choco install visualstudio2019professional
