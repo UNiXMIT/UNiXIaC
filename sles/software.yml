@@ -106,20 +106,31 @@
 - name: Enable Podman Socket
   ansible.builtin.shell: systemctl enable --now podman.socket
 
-- name: Add PostgreSQL driver in odbcinst.ini
+- name: Add MSSQL DSN in odbc.ini
   ansible.builtin.blockinfile:
-    path: /etc/unixODBC/odbcinst.ini
-    marker: "# {mark} ANSIBLE MANAGED BLOCK PostgreSQL"
+    path: /etc/unixODBC/odbc.ini
+    marker: "# {mark} ANSIBLE MANAGED BLOCK MSSQL"
     block: |
-      [PostgreSQL ANSI]
-      Description=PostgreSQL ODBC driver (ANSI version)
-      Driver=psqlodbca.so
-      Setup=libodbcpsqlS.so
+      [MSSQL]  
+      Driver = ODBC Driver 17 for SQL Server  
+      Server = tcp:localhost,1433
+      Encrypt = yes
+      TrustServerCertificate = yes
 
-      [PostgreSQL Unicode]
-      Description=PostgreSQL ODBC driver (Unicode version)
-      Driver=psqlodbcw.so
-      Setup=libodbcpsqlS.so
+# - name: Add PostgreSQL driver in odbcinst.ini
+#   ansible.builtin.blockinfile:
+#     path: /etc/unixODBC/odbcinst.ini
+#     marker: "# {mark} ANSIBLE MANAGED BLOCK PostgreSQL"
+#     block: |
+#       [PostgreSQL ANSI]
+#       Description=PostgreSQL ODBC driver (ANSI version)
+#       Driver=psqlodbca.so
+#       Setup=libodbcpsqlS.so
+
+#       [PostgreSQL Unicode]
+#       Description=PostgreSQL ODBC driver (Unicode version)
+#       Driver=psqlodbcw.so
+#       Setup=libodbcpsqlS.so
 
 - name: Add PostgreSQL DSN in odbc.ini
   ansible.builtin.blockinfile:
