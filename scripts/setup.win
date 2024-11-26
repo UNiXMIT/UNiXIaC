@@ -106,6 +106,7 @@ call C:\instantClient64\instantclient_21_15\odbc_install.exe
 setx /m PATH "%PATH%;C:\instantClient32\instantclient_21_15;C:\instantClient32\instantclient_21_15\sdk"
 
 :: DB2 Client
+curl -s -o C:\Users\Public\Documents\v11.5.9_ntx64_client.exe https://mega.nz/file/KCIQwAQZ#P1iM0O-1cMKagd-qlqMRPHFiRDho6BCGubqi9WuYnJQ
 echo PROD=CLIENT > C:\Users\Public\Documents\db2.win.rsp
 echo LIC_AGREEMENT=ACCEPT >> C:\Users\Public\Documents\db2.win.rsp
 echo FILE=C:\Program Files\IBM\SQLLIB_01\ >> C:\Users\Public\Documents\db2.win.rsp
@@ -126,9 +127,9 @@ echo DB2_COMMON_APP_DATA_TOP_PATH=C:\ProgramData >> C:\Users\Public\Documents\db
 echo DB2_COPY_NAME=DB2 >> C:\Users\Public\Documents\db2.win.rsp
 echo DEFAULT_COPY=YES >> C:\Users\Public\Documents\db2.win.rsp
 echo DEFAULT_CLIENT_INTERFACE_COPY=YES >> C:\Users\Public\Documents\db2.win.rsp
-echo @ECHO OFF > C:\Users\Public\Documents\installDB2.cmd
-echo v11.5.9_ntx64_client.exe /auto . >> C:\Users\Public\Documents\installDB2.cmd
-echo C:\Users\Public\Documents\CLIENT\setup -u C:\Users\Public\Documents\db2.win.rsp >> C:\Users\Public\Documents\installDB2.cmd
+cd C:\Users\Public\Documents
+v11.5.9_ntx64_client.exe /auto .
+CLIENT\setup -u db2.win.rsp
 
 :: Create Support Files and Directories
 md \temp
