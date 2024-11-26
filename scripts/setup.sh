@@ -118,55 +118,6 @@ EOF
 fi
 sudo systemctl enable --now podman.socket
 
-# ODBC
-if [ "$WHICHOS" = "RHEL" ]; then
-  sudo cat >> $ODBCPATH/odbc.ini <<EOF
-[oracle]
-Description     = Oracle ODBC Connection
-Driver          = /usr/lib/oracle/21/client64/lib/libsqora.so.21.1
-Database        = $user
-Servername      = 127.0.0.1:1521/FREE
-UserID          = $user
-EOF
-fi
-
-sudo cat >> $ODBCPATH/odbcinst.ini <<EOF
-[PostgreSQL ANSI]
-Description=PostgreSQL ODBC driver (ANSI version)
-Driver=psqlodbca.so
-Setup=libodbcpsqlS.so
-
-[PostgreSQL Unicode]
-Description=PostgreSQL ODBC driver (Unicode version)
-Driver=psqlodbcw.so
-Setup=libodbcpsqlS.so
-
-[IBM DB2 ODBC DRIVER]
-Description = DB2 Driver
-Driver = /home/$user/sqllib/lib64/libdb2o.so
-fileusage=1
-dontdlclose=1
-EOF
-
-sudo cat >> $ODBCPATH/odbc.ini <<EOF
-[postgres]
-Description         = PostgreSQL ODBC connection
-Driver              = PostgreSQL ANSI
-Database            = support
-Servername          = 127.0.0.1
-UserName            = support
-Password            = strongPassword123
-Port                = 5432
-
-[db2]
-Driver = IBM DB2 ODBC DRIVER
-Database = $user
-Server = localhost
-Port = 50000
-UID = $user
-PWD = strongPassword123
-EOF
-
 # Install Oracle Instant Client
 if [ "$WHICHOS" = "RHEL" ]; then
   if [[ ${VERSION_ID%.*} = 8 ]]; then
@@ -204,8 +155,6 @@ elif [ "$WHICHOS" = "UBUNTU" || "$WHICHOS" == "SLES" ]; then
 export PATH="$PATH:/opt/oracle/instantclient_21_13:/opt/oracle/instantclient_21_13/sdk"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/oracle/instantclient_21_13"
 EOF
-  sudo chmod +x /opt/oracle/instantclient_21_13/odbc_update_ini.sh
-  sudo /opt/oracle/instantclient_21_13/odbc_update_ini.sh / /opt/oracle/instantclient_21_13 "Oracle 21 ODBC driver" Oracle /etc/odbc.ini
 fi
 
 # DB2 Client
@@ -226,6 +175,71 @@ sudo cat > /opt/ibm/db2.sh <<EOF
 #!/bin/bash
 . /home/$user/sqllib/db2profile
 export PATH=$PATH:/home/$user/sqllib/lib64:/home/$user/sqllib/lib64/gskit:/home/$user/sqllib/lib32
+EOF
+
+# ODBC
+if [ "$WHICHOS" = "RHEL" ]; then
+  sudo cat >> $ODBCPATH/odbc.ini <<EOF
+[oracle]
+Description     = Oracle ODBC Connection
+Driver          = /usr/lib/oracle/21/client64/lib/libsqora.so.21.1
+Database        = $user
+Servername      = 127.0.0.1:1521/FREE
+UserID          = $user
+EOF
+elif [ "$WHICHOS" = "UBUNTU" || "$WHICHOS" == "SLES" ]; then
+  sudo cat >> $ODBCPATH/odbc.ini <<EOF
+[oracle]
+Description     = Oracle ODBC Connection
+Driver          = /opt/oracle/instantclient_21_13/libsqora.so.21.1
+Database        = $user
+Servername      = 127.0.0.1:1521/FREE
+UserID          = $user
+EOF
+fi
+
+sudo cat >> $ODBCPATH/odbcinst.ini <<EOF
+[PostgreSQL ANSI]
+Description=PostgreSQL ODBC driver (ANSI version)
+Driver=psqlodbca.so
+Setup=libodbcpsqlS.so
+
+[PostgreSQL Unicode]
+Description=PostgreSQL ODBC driver (Unicode version)
+Driver=psqlodbcw.so
+Setup=libodbcpsqlS.so
+
+[IBM DB2 ODBC DRIVER]
+Description = DB2 Driver
+Driver = /home/$user/sqllib/lib64/libdb2o.so
+fileusage=1
+dontdlclose=1
+EOF
+
+sudo cat >> $ODBCPATH/odbc.ini <<EOF
+[oracle]
+Description     = Oracle ODBC Connection
+Driver          = /usr/lib/oracle/21/client64/lib/libsqora.so.21.1
+Database        = $user
+Servername      = 127.0.0.1:1521/FREE
+UserID          = $user
+
+[postgres]
+Description     = PostgreSQL ODBC connection
+Driver          = PostgreSQL ANSI
+Database        = $user
+Servername      = 127.0.0.1
+UserName        = $user
+Password        = strongPassword123
+Port            = 5432
+
+[db2]
+Driver = IBM DB2 ODBC DRIVER
+Database = $user
+Server = localhost
+Port = 50000
+UID = $user
+PWD = strongPassword123
 EOF
 
 # Create Support Files and Directories

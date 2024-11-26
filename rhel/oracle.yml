@@ -116,7 +116,6 @@
     name: /opt/oracle/oracle-instantclient-precomp.x86_64.rpm
     state: present
     disable_gpg_check: yes
-  become: yes
 
 - name: Add Oracle DSN in odbc.ini
   ansible.builtin.blockinfile:
@@ -129,4 +128,3 @@
       Database        = {{ myUsername }}
       Servername      = 127.0.0.1:1521/FREE
       UserID          = {{ myUsername }}
-  become: yes
