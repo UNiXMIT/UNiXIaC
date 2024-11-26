@@ -87,3 +87,4 @@
       Driver = /home/{{ myUsername }}/sqllib/lib64/libdb2o.so
       fileusage=1
       dontdlclose=1
+  become: yes
