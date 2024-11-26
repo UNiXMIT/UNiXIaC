@@ -158,7 +158,7 @@
           import_tasks: openldap.yml
       rescue: 
         - name: Import fail.yml
-          import_tasks: fail.ymls
+          import_tasks: fail.yml
   tags: openldap
 
 - name: extend 10.4.0

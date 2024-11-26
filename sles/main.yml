@@ -73,7 +73,7 @@
           import_tasks: software.yml
       rescue: 
         - name: Import fail.yml
-          import_tasks: fail.ymls
+          import_tasks: fail.yml
   tags: default
 
 - name: Install Oracle Instant Client
