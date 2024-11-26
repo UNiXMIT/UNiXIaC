@@ -111,7 +111,7 @@
     path: /etc/unixODBC/odbc.ini
     marker: "# {mark} ANSIBLE MANAGED BLOCK MSSQL"
     block: |
-      [MSSQL]  
+      [mssql]  
       Driver = ODBC Driver 17 for SQL Server  
       Server = tcp:localhost,1433
       Encrypt = yes
@@ -139,7 +139,7 @@
     block: |
       [postgres]
       Description         = PostgreSQL ODBC connection
-      Driver              = /usr/lib64/psqlodbcw.so
+      Driver              = PostgreSQL Unicode
       Database            = {{ myUsername }}
       Servername          = 127.0.0.1
       UserName            = {{ myUsername }}

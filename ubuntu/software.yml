@@ -92,7 +92,7 @@
     path: /etc/odbc.ini
     marker: "# {mark} ANSIBLE MANAGED BLOCK MSSQL"
     block: |
-      [MSSQL]  
+      [mssql]  
       Driver = ODBC Driver 17 for SQL Server  
       Server = tcp:localhost,1433
       Encrypt = yes

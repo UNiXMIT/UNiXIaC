@@ -178,6 +178,28 @@ export PATH=$PATH:/home/$user/sqllib/lib64:/home/$user/sqllib/lib64/gskit:/home/
 EOF
 
 # ODBC
+sudo cat >> $ODBCPATH/odbcinst.ini <<EOF
+[IBM DB2 ODBC DRIVER]
+Description = DB2 Driver
+Driver = /home/$user/sqllib/lib64/libdb2o.so
+fileusage=1
+dontdlclose=1
+EOF
+
+if [ "$WHICHOS" = "RHEL" || "$WHICHOS" == "SLES" && "$WHICHOS" != "UBUNTU" ]; then
+sudo cat >> $ODBCPATH/odbcinst.ini <<EOF
+[PostgreSQL ANSI]
+Description=PostgreSQL ODBC driver (ANSI version)
+Driver=psqlodbca.so
+Setup=libodbcpsqlS.so
+
+[PostgreSQL Unicode]
+Description=PostgreSQL ODBC driver (Unicode version)
+Driver=psqlodbcw.so
+Setup=libodbcpsqlS.so
+EOF
+fi
+
 if [ "$WHICHOS" = "RHEL" ]; then
   sudo cat >> $ODBCPATH/odbc.ini <<EOF
 [oracle]
@@ -198,31 +220,12 @@ UserID          = $user
 EOF
 fi
 
-sudo cat >> $ODBCPATH/odbcinst.ini <<EOF
-[PostgreSQL ANSI]
-Description=PostgreSQL ODBC driver (ANSI version)
-Driver=psqlodbca.so
-Setup=libodbcpsqlS.so
-
-[PostgreSQL Unicode]
-Description=PostgreSQL ODBC driver (Unicode version)
-Driver=psqlodbcw.so
-Setup=libodbcpsqlS.so
-
-[IBM DB2 ODBC DRIVER]
-Description = DB2 Driver
-Driver = /home/$user/sqllib/lib64/libdb2o.so
-fileusage=1
-dontdlclose=1
-EOF
-
 sudo cat >> $ODBCPATH/odbc.ini <<EOF
-[oracle]
-Description     = Oracle ODBC Connection
-Driver          = /usr/lib/oracle/21/client64/lib/libsqora.so.21.1
-Database        = $user
-Servername      = 127.0.0.1:1521/FREE
-UserID          = $user
+[mssql]  
+Driver = ODBC Driver 17 for SQL Server  
+Server = tcp:localhost,1433
+Encrypt = yes
+TrustServerCertificate = yes
 
 [postgres]
 Description     = PostgreSQL ODBC connection

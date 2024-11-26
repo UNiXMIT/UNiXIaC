@@ -81,7 +81,7 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK DB2"
     block: |
       [db2]
-      Driver = /home/{{ myUsername }}/sqllib/lib64/libdb2o.so
+      Driver = IBM DB2 ODBC DRIVER
       Database = support
       Server = localhost
       Port = 50000
