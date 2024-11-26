@@ -64,7 +64,7 @@ choco install vscode /NoDesktopIcon
 :: choco install dotnet
 :: choco install windows-sdk-11-version-22h2-all
 :: choco install visualstudio2017buildtools
-: choco install powertoys
+:: choco install powertoys
 :: choco install office365business
 :: choco install adobereader
 :: choco install linkshellextension
