@@ -1,18 +1,18 @@
-- name: Get DB2 Client Installer Download URL from S3
-  amazon.aws.s3_object:
-    # profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: DB2/v11.5.9_ntx64_client.exe
-    region: eu-west-2
-    expiry: 4000
-    sig_v4: true
-  register: s3
-  delegate_to: localhost
+# - name: Get DB2 Client Installer Download URL from S3
+#   amazon.aws.s3_object:
+#     # profile: '{{ awsProfile }}'
+#     bucket: mturner
+#     mode: geturl
+#     object: DB2/v11.5.9_ntx64_client.exe
+#     region: eu-west-2
+#     expiry: 4000
+#     sig_v4: true
+#   register: s3
+#   delegate_to: localhost
 
 - name: Download DB2 Client Installer
   ansible.windows.win_get_url:
-    url: '{{ s3.url }}'
+    url: https://mturner.s3.eu-west-2.amazonaws.com/Public/DB2/v11.5.9_ntx64_client.exe
     dest: C:\Users\Public\Documents
 
 - name: Extract DB2 Client Installer

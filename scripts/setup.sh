@@ -125,7 +125,7 @@ if [ "$WHICHOS" = "RHEL" ]; then
     sudo dnf install -y https://download.oracle.com/otn_software/linux/instantclient/2113000/oracle-instantclient-odbc-21.13.0.0.0-1.el8.x86_64.rpm
     sudo dnf install -y https://download.oracle.com/otn_software/linux/instantclient/2113000/oracle-instantclient-sqlplus-21.13.0.0.0-1.el8.x86_64.rpm
     sudo dnf install -y https://download.oracle.com/otn_software/linux/instantclient/2113000/oracle-instantclient-devel-21.13.0.0.0-1.el8.x86_64.rpm
-    curl -s -o /tmp/oracle-instantclient-precomp-21.13.0.0.0-1.el8.x86_64.rpm https://mega.nz/file/uahg1C7J#ulZ0fBwY7oI0ZD-Y4xMVIQdbubuYk7C1qn_5e78Qk-M
+    curl -s -o /tmp/oracle-instantclient-precomp-21.13.0.0.0-1.el8.x86_64.rpm https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/oracle-instantclient-precomp-21.13.0.0.0-1.el8.x86_64.rpm
     sudo dnf install -y /tmp/oracle-instantclient-precomp-21.13.0.0.0-1.el8.x86_64.rpm
     
   elif [[ ${VERSION_ID%.*} = 9 ]]; then
@@ -133,7 +133,7 @@ if [ "$WHICHOS" = "RHEL" ]; then
     sudo dnf install -y https://download.oracle.com/otn_software/linux/instantclient/2112000/el9/oracle-instantclient-odbc-21.12.0.0.0-1.el9.x86_64.rpm
     sudo dnf install -y https://download.oracle.com/otn_software/linux/instantclient/2112000/el9/oracle-instantclient-sqlplus-21.12.0.0.0-1.el9.x86_64.rpm
     sudo dnf install -y https://download.oracle.com/otn_software/linux/instantclient/2112000/el9/oracle-instantclient-devel-21.12.0.0.0-1.el9.x86_64.rpm
-    curl -s -o /tmp/oracle-instantclient-precomp-21.12.0.0.0-1.el9.x86_64.rpm https://mega.nz/file/fTQiHDSb#dXJYvONfaJaFSAHcUnFRrB9euFdlfoYWKDl937Pjn8s
+    curl -s -o /tmp/oracle-instantclient-precomp-21.12.0.0.0-1.el9.x86_64.rpm https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/oracle-instantclient-precomp-21.12.0.0.0-1.el9.x86_64.rpm
     sudo dnf install -y /tmp/oracle-instantclient-precomp-21.12.0.0.0-1.el9.x86_64.rpm
   fi
 elif [ "$WHICHOS" = "UBUNTU" || "$WHICHOS" == "SLES" ]; then
@@ -147,7 +147,7 @@ elif [ "$WHICHOS" = "UBUNTU" || "$WHICHOS" == "SLES" ]; then
   unzip instantclient-sqlplus*.zip
   curl -s -O https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-sdk-linux.x64-21.13.0.0.0dbru.zip
   unzip instantclient-sdk*.zip
-  curl -s -o instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip https://mega.nz/file/fahxzBAJ#RiE7G1Mk-9AdfZPPF2RpARmSlhDWmyTcXDt6JWqKN2c
+  curl -s -o instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip
   unzip instantclient-precomp*.zip
   sudo chmod -R 755 /opt/oracle
   sudo cat > /etc/profile.d/oracle.sh <<EOF
@@ -160,7 +160,7 @@ fi
 # DB2 Client
 sudo mkdir -m 755 /opt/ibm
 cd /opt/ibm
-curl -o v11.5.9_linuxx64_client.tar.gz https://mega.nz/file/bHZhGCja#HPHLDzOpE3nMV-LVp7bSvKRasoqd-dKOuoA8Za_OK-M
+curl -o v11.5.9_linuxx64_client.tar.gz https://mturner.s3.eu-west-2.amazonaws.com/Public/DB2/v11.5.9_linuxx64_client.tar.gz
 tar -zxf v11.5.9_linuxx64_client.tar.gz
 sudo cat > /opt/ibm/db2.linux.rsp <<EOF 
 INTERACTIVE = NONE

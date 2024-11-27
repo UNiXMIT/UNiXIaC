@@ -88,40 +88,40 @@
     src: C:\Users\Public\Documents\instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip
     dest: C:\instantClient64
 
-- name: Get Oracle Instant Client Precompiler 32bit Download URL from S3
-  amazon.aws.s3_object:
-    # profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: Oracle/InstantClient/21/instantclient-precomp-nt-21.15.0.0.0dbru.zip
-    region: eu-west-2
-    expiry: 4000
-    sig_v4: true
-  register: s3ora32
-  delegate_to: localhost
-  become: no
+# - name: Get Oracle Instant Client Precompiler 32bit Download URL from S3
+#   amazon.aws.s3_object:
+#     # profile: '{{ awsProfile }}'
+#     bucket: mturner
+#     mode: geturl
+#     object: Oracle/InstantClient/21/instantclient-precomp-nt-21.15.0.0.0dbru.zip
+#     region: eu-west-2
+#     expiry: 4000
+#     sig_v4: true
+#   register: s3ora32
+#   delegate_to: localhost
+#   become: no
 
-- name: Get Oracle Instant Client Precompiler 64bit Download URL from S3
-  amazon.aws.s3_object:
-    # profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: Oracle/InstantClient/21/instantclient-precomp-windows.x64-21.15.0.0.0dbru.zip
-    region: eu-west-2
-    expiry: 4000
-    sig_v4: true
-  register: s3ora64
-  delegate_to: localhost
-  become: no
+# - name: Get Oracle Instant Client Precompiler 64bit Download URL from S3
+#   amazon.aws.s3_object:
+#     # profile: '{{ awsProfile }}'
+#     bucket: mturner
+#     mode: geturl
+#     object: Oracle/InstantClient/21/instantclient-precomp-windows.x64-21.15.0.0.0dbru.zip
+#     region: eu-west-2
+#     expiry: 4000
+#     sig_v4: true
+#   register: s3ora64
+#   delegate_to: localhost
+#   become: no
 
 - name: Download Oracle Instant Client Precompiler 32bit
   ansible.windows.win_get_url:
-    url: '{{ s3ora32.url }}'
+    url: https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-nt-21.15.0.0.0dbru.zip
     dest: C:\Users\Public\Documents\instantclient-precomp-nt.zip
 
 - name: Download Oracle Instant Client Precompiler 64bit
   ansible.windows.win_get_url:
-    url: '{{ s3ora64.url  }}'
+    url: https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-windows.x64-21.15.0.0.0dbru.zip
     dest: C:\Users\Public\Documents\instantclient-precomp-windows.x64.zip
 
 - name: Unzip Oracle Instant Client Precompiler 32bit

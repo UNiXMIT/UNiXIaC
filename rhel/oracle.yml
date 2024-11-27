@@ -65,46 +65,46 @@
     state: directory
     mode: '0777'
 
-- name: Get Oracle Instant Client Precompiler RHEL9 Download URL from S3
-  amazon.aws.s3_object:
-    # profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: Oracle/InstantClient/21/oracle-instantclient-precomp-21.12.0.0.0-1.el9.x86_64.rpm
-    region: eu-west-2
-    expiry: 4000
-    sig_v4: true
-  register: s3ora
-  delegate_to: localhost
-  become: no
-  when: ansible_facts['distribution_major_version'] | int == 9
+# - name: Get Oracle Instant Client Precompiler RHEL9 Download URL from S3
+#   amazon.aws.s3_object:
+#     # profile: '{{ awsProfile }}'
+#     bucket: mturner
+#     mode: geturl
+#     object: Oracle/InstantClient/21/oracle-instantclient-precomp-21.12.0.0.0-1.el9.x86_64.rpm
+#     region: eu-west-2
+#     expiry: 4000
+#     sig_v4: true
+#   register: s3ora
+#   delegate_to: localhost
+#   become: no
+#   when: ansible_facts['distribution_major_version'] | int == 9
 
 - name: Download Oracle Instant Client Precompiler RHEL9 from S3
   ansible.builtin.get_url:
-    url: '{{ s3ora.url }}'
+    url: https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/oracle-instantclient-precomp-21.12.0.0.0-1.el9.x86_64.rpm
     dest: /opt/oracle/oracle-instantclient-precomp.x86_64.rpm
     owner: '{{ myUsername }}' 
     group: '{{ myUsername }}'
     mode: '0775'
   when: ansible_facts['distribution_major_version'] | int == 9
 
-- name: Get Oracle Instant Client Precompiler RHEL8 Download URL from S3
-  amazon.aws.s3_object:
-    # profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: Oracle/InstantClient/21/oracle-instantclient-precomp-21.13.0.0.0-1.el8.x86_64.rpm
-    region: eu-west-2
-    expiry: 4000
-    sig_v4: true
-  register: s3ora
-  delegate_to: localhost
-  become: no
-  when: ansible_facts['distribution_major_version'] | int == 8
+# - name: Get Oracle Instant Client Precompiler RHEL8 Download URL from S3
+#   amazon.aws.s3_object:
+#     # profile: '{{ awsProfile }}'
+#     bucket: mturner
+#     mode: geturl
+#     object: Oracle/InstantClient/21/oracle-instantclient-precomp-21.13.0.0.0-1.el8.x86_64.rpm
+#     region: eu-west-2
+#     expiry: 4000
+#     sig_v4: true
+#   register: s3ora
+#   delegate_to: localhost
+#   become: no
+#   when: ansible_facts['distribution_major_version'] | int == 8
 
 - name: Download Oracle Instant Client Precompiler RHEL8 from S3
   ansible.builtin.get_url:
-    url: '{{ s3ora.url }}'
+    url: https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/oracle-instantclient-precomp-21.13.0.0.0-1.el8.x86_64.rpm
     dest: /opt/oracle/oracle-instantclient-precomp.x86_64.rpm
     owner: '{{ myUsername }}' 
     group: '{{ myUsername }}'

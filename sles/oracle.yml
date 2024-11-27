@@ -48,22 +48,22 @@
     dest: /opt/oracle
     remote_src: yes
 
-- name: Get Oracle Instant Client Precompiler Download URL from S3
-  amazon.aws.s3_object:
-    # profile: '{{ awsProfile }}'
-    bucket: mturner
-    mode: geturl
-    object: Oracle/InstantClient/21/instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip
-    region: eu-west-2
-    expiry: 4000
-    sig_v4: true
-  register: s3ora
-  delegate_to: localhost
-  become: no
+# - name: Get Oracle Instant Client Precompiler Download URL from S3
+#   amazon.aws.s3_object:
+#     # profile: '{{ awsProfile }}'
+#     bucket: mturner
+#     mode: geturl
+#     object: Oracle/InstantClient/21/instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip
+#     region: eu-west-2
+#     expiry: 4000
+#     sig_v4: true
+#   register: s3ora
+#   delegate_to: localhost
+#   become: no
 
 - name: Download Oracle Instant Client Precompiler from S3
   ansible.builtin.get_url:
-    url: '{{ s3ora.url }}'
+    url: https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip
     dest: /opt/oracle/instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip
 
 - name: Extract Oracle Instant Client Precompiler Package

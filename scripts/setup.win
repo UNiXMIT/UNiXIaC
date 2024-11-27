@@ -101,16 +101,16 @@ powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_soft
 powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-sdk-nt-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient32"
 powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip"
 powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient64"
-powershell -Command "Invoke-WebRequest -Uri https://www.dropbox.com/scl/fi/iywgapxoa31xngnuwpu3h/instantclient-precomp-nt-21.15.0.0.0dbru.zip?rlkey=nkgktn9710aokgzqpqbb82m2v&st=yss5iai4&dl=1 -outfile C:\Users\Public\Documents\instantclient-precomp-nt-21.15.0.0.0dbru.zip"
+powershell -Command "Invoke-WebRequest -Uri https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-nt-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-precomp-nt-21.15.0.0.0dbru.zip"
 powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-precomp-nt-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient64"
-powershell -Command "Invoke-WebRequest -Uri https://mega.nz/file/WLpUQZxI#iG9hMfQTqcWE-8x8rhUN9dBEEz99q5S-FndAad4OXPU -outfile C:\Users\Public\Documents\instantclient-precomp-windows.x64-21.15.0.0.0dbru.zip"
+powershell -Command "Invoke-WebRequest -Uri https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-windows.x64-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-precomp-windows.x64-21.15.0.0.0dbru.zip"
 powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-precomp-windows.x64-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient64"
 call C:\instantClient32\instantclient_21_15\odbc_install.exe
 call C:\instantClient64\instantclient_21_15\odbc_install.exe
 setx /m PATH "%PATH%;C:\instantClient32\instantclient_21_15;C:\instantClient32\instantclient_21_15\sdk"
 
 :: DB2 Client
-curl -s -o C:\Users\Public\Documents\v11.5.9_ntx64_client.exe https://www.dropbox.com/scl/fi/nlvdc2g0tsea62org4rio/v11.5.9_ntx64_client.exe?rlkey=mnshj0dcrnoipywvnruaifsn4&st=88zomjcf&dl=1
+curl -s -o C:\Users\Public\Documents\v11.5.9_ntx64_client.exe https://mturner.s3.eu-west-2.amazonaws.com/Public/DB2/v11.5.9_ntx64_client.exe
 echo PROD=CLIENT > C:\Users\Public\Documents\db2.win.rsp
 echo LIC_AGREEMENT=ACCEPT >> C:\Users\Public\Documents\db2.win.rsp
 echo FILE=C:\Program Files\IBM\SQLLIB_01\ >> C:\Users\Public\Documents\db2.win.rsp
