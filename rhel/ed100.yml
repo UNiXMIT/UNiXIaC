@@ -24,3 +24,12 @@
     productName: ED100PU2
     edVer: 100
   tags: ed100pu2
+
+- name: ED 10.0 PU 3
+  set_fact:
+    installPath: /home/products/ed100pu3
+    installerName: setup_entdev_10.0_patchupdate03_369165_redhat_x86_64
+    S3Prefix: ED/100/PU3/
+    productName: ED100PU3
+    edVer: 100
+  tags: ed100pu3
