@@ -8,6 +8,7 @@
       Invoke-Webrequest $url -OutFile $file
       sleep 2
       powershell.exe -ExecutionPolicy ByPass -File $file -EnableCredSSP -DisableBasicAuth
+      Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
       </powershell>
     name: '{{ tempName }}'
     image_id: '{{ amis.images[-1].image_id }}'

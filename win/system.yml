@@ -11,15 +11,6 @@
     - Private
     - Public
 
-- name: Install Chocolatey
-  chocolatey.chocolatey.win_chocolatey:
-    name: chocolatey
-    state: present
-  retries: 3
-  delay: 5
-  register: result
-  until: result.rc == 0
-
 - name: Install OpenSSH Service
   win_chocolatey:
     name: openssh
