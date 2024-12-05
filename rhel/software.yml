@@ -159,3 +159,10 @@
       UserName            = {{ myUsername }}
       Password            = {{ myPassword }}
       Port                = 5432
+
+- name: Install Kubernetes (kubectl)
+  ansible.builtin.shell: |
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+  args:
+    chdir: /tmp
