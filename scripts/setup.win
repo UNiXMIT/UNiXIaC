@@ -8,9 +8,30 @@ if '%ERRORLEVEL%' NEQ '0' (
 )I  
 
 :: Manage Users
-:: net accounts /maxpwage:unlimited
-:: net user administrator Unidos30
-:: net localgroup administrators support /add
+set NEWUSER=support
+set NEWPASSW=strongPassword123
+net accounts /maxpwage:unlimited
+set /p CREATENEW="Create new user? [Y/N]?: "
+if /i "%CREATENEW%"=="Y" (
+    set /p "NEWUSER=User to create [support]: "
+    set /p "NEWPASSW=User Password [strongPassword123]: "
+    net user %NEWUSER% 2>nul
+    if %ERRORLEVEL% EQU 1 (     
+        net user %NEWUSER% %NEWPASSW% /add
+        net localgroup administrators %NEWUSER% /add
+    ) else (
+        echo User already exists. User "%NEWUSER%" will not be created!
+    )
+)
+net user support 2>nul
+if %ERRORLEVEL% EQU 0 (     
+   net localgroup administrators support /add
+)
+set /p ADMINPASSW="Change admin password? [Y/N]?: "
+of /i "%ADMINPASSW%"=="Y" (
+    set /p "NEWPASSW=Admin Password [strongPassword123]: "
+    net user administrator %NEWPASSW%
+)
 
 :: Install Chocolatey
 powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
