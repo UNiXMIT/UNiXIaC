@@ -1,8 +1,8 @@
-# - name: Load TCPtuning.conf at boot
-#   cron:
-#     name: TCP Tuning
-#     special_time: reboot
-#     job: "sysctl -p /home/{{ myUsername }}/AcuSupport/etc/TCPtuning.conf"
+- name: Load TCPtuning.conf at boot
+  cron:
+    name: TCP Tuning
+    special_time: reboot
+    job: "sysctl -p /home/{{ myUsername }}/AcuSupport/etc/TCPtuning.conf"
     
 - name: Auto ShutDown
   cron:
