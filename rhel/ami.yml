@@ -16,7 +16,7 @@
       - amazon
     region: '{{ awsRegion }}'
     filters:
-      name: RHEL-9*
+      name: RHEL-9.5*
       architecture: x86_64
       virtualization-type: hvm
   register: amis
