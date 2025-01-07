@@ -7,7 +7,6 @@
           name: {{ myUsername }}
       packages:
         - python3.11
-        - libselinux-python
     name: '{{ tempName }}'
     image_id: '{{ amis.images[-1].image_id }}'
     key_name: '{{ keyName }}'
@@ -56,6 +55,6 @@
     timeout: 120
   loop: '{{ ec2.instances }}'
 
-- name: Wait for 60 seconds AWS Instance
+- name: Wait for 120 seconds AWS Instance
   ansible.builtin.pause:
-    seconds: 60
+    seconds: 120
