@@ -5,8 +5,6 @@
       system_info:
         default_user:
           name: {{ myUsername }}
-      packages:
-        - ansible-core
     name: '{{ tempName }}'
     image_id: '{{ amis.images[-1].image_id }}'
     key_name: '{{ keyName }}'
