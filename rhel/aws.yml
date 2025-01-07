@@ -5,8 +5,8 @@
       system_info:
         default_user:
           name: {{ myUsername }}
-      runcmd:
-        - [ dnf, install, -y, python3 ]
+      packages:
+        - python3
     name: '{{ tempName }}'
     image_id: '{{ amis.images[-1].image_id }}'
     key_name: '{{ keyName }}'
