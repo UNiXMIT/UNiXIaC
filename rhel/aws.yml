@@ -6,7 +6,7 @@
         default_user:
           name: {{ myUsername }}
       packages:
-        - python3
+        - python3.11
     name: '{{ tempName }}'
     image_id: '{{ amis.images[-1].image_id }}'
     key_name: '{{ keyName }}'
@@ -55,6 +55,6 @@
     timeout: 120
   loop: '{{ ec2.instances }}'
 
-- name: Wait for 120 seconds AWS Instance
+- name: Wait for 60 seconds AWS Instance
   ansible.builtin.pause:
-    seconds: 120
+    seconds: 60
