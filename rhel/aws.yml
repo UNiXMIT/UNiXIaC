@@ -53,6 +53,6 @@
     timeout: 120
   loop: '{{ ec2.instances }}'
 
-- name: Wait for 120 seconds AWS Instance
+- name: Wait for 30 seconds AWS Instance
   ansible.builtin.pause:
-    seconds: 120
+    seconds: 30
