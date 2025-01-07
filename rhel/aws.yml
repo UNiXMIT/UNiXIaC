@@ -7,6 +7,7 @@
           name: {{ myUsername }}
       packages:
         - python3.11
+        - libselinux-python
     name: '{{ tempName }}'
     image_id: '{{ amis.images[-1].image_id }}'
     key_name: '{{ keyName }}'
