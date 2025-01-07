@@ -13,7 +13,7 @@
     name: '{{ tempName }}'
     image_id: '{{ amis.images[-1].image_id }}'
     key_name: '{{ keyName }}'
-    network:  
+    network_interfaces:  
       assign_public_ip: yes
     security_groups: '{{ securityGroups }}'
     region: '{{ awsRegion }}'
