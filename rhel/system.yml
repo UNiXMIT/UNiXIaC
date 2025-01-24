@@ -99,3 +99,9 @@
     line: '* soft nofile 50000' 
     state: present
   become: true
+
+- name: Create a symlink libnsl.so.1 > libnsl.so 
+  ansible.builtin.file:
+    src: /usr/lib64/libnsl.so.1
+    path: /usr/lib64/libnsl.so 
+    state: link
