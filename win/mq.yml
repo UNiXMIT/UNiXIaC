@@ -1,0 +1,15 @@
+- name: Download IBM MQ Client Libraries
+  ansible.windows.win_get_url:
+    url: https://ibm.biz/IBM-MQC-Redist-Win64zip
+    dest: C:\Users\Public\Documents\IBM-MQC-Redist-Win64.zip
+
+- name: Unzip IBM MQ Client Libraries
+  community.windows.win_unzip:
+    src: C:\Users\Public\Documents\IBM-MQC-Redist-Win64.zip
+    dest: C:\Program Files\IBM\MQ
+
+- name: Set IBM MQ bin on PATH
+  ansible.windows.win_path:
+    elements:
+      - C:\Program Files\IBM\MQ
+      - C:\Program Files\IBM\MQ\bin
