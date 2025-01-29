@@ -101,6 +101,18 @@
           import_tasks: fail.yml
   tags: default
 
+- name: Install IBM MQ Client
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+    - block:
+        - name: Import mq.yml
+          import_tasks: mq.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
+  tags: default
+
 - name: Create Support Files and Directories
   hosts: awsEC2
   gather_facts: no
