@@ -1,9 +1,9 @@
-- name: Download IBM MQ Client Libraries
+- name: Download IBM MQ Client
   ansible.windows.win_get_url:
     url: https://ibm.biz/IBM-MQC-Redist-Win64zip
     dest: C:\Users\Public\Documents\IBM-MQC-Redist-Win64.zip
 
-- name: Unzip IBM MQ Client Libraries
+- name: Unzip IBM MQ Client
   community.windows.win_unzip:
     src: C:\Users\Public\Documents\IBM-MQC-Redist-Win64.zip
     dest: C:\Program Files\IBM\MQ

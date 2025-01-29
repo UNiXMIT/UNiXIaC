@@ -109,7 +109,7 @@
           import_tasks: fail.yml
   tags: default
 
-- name: Install IBM MQ Client Libraries
+- name: Install IBM MQ Client
   hosts: awsEC2
   gather_facts: no
   tasks:
