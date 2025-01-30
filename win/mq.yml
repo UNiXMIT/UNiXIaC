@@ -2,6 +2,7 @@
   ansible.windows.win_get_url:
     url: https://ibm.biz/IBM-MQC-Redist-Win64zip
     dest: C:\Users\Public\Documents\IBM-MQC-Redist-Win64.zip
+    timeout: 60
 
 - name: Unzip IBM MQ Client
   community.windows.win_unzip:

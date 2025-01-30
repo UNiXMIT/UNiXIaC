@@ -10,6 +10,7 @@
     url: https://ibm.biz/IBM-MQC-Redist-LinuxX64targz
     dest: /opt/ibm/mq/IBM-MQC-Redist-LinuxX64.tar.gz
     mode: '0755'
+    timeout: 60
   become: yes
 
 - name: Extract IBM MQ Client
