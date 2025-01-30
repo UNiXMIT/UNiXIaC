@@ -177,6 +177,18 @@ sudo cat > /opt/ibm/db2.sh <<EOF
 export PATH=$PATH:/home/$user/sqllib/lib64:/home/$user/sqllib/lib64/gskit:/home/$user/sqllib/lib32
 EOF
 
+# MQ Client
+sudo mkdir -p -m 775 /opt/ibm/mqm
+curl -s -o /opt/ibm/mq/IBM-MQC-Redist-LinuxX64.tar.gz -L https://ibm.biz/IBM-MQC-Redist-LinuxX64targz
+cd /opt/ibm/mqm
+tar -zxf /opt/ibm/mq/IBM-MQC-Redist-LinuxX64.tar.gz
+sudo chmod 775 -R /opt/ibm/mqm
+sudo cat > /etc/profile.d/mq.sh <<EOF
+#!/bin/bash
+export PATH=$PATH:/opt/ibm/mq/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/ibm/mq/lib64
+EOF
+
 # ODBC
 sudo cat >> $ODBCPATH/odbcinst.ini <<EOF
 [IBM DB2 ODBC DRIVER]

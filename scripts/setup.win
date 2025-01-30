@@ -156,6 +156,12 @@ cd C:\Users\Public\Documents
 v11.5.9_ntx64_client.exe /auto .
 CLIENT\setup -u db2.win.rsp
 
+:: MQ Client
+md "\Program Files\IBM\MQ"
+curl -s -o "\Program Files\IBM\MQ\IBM-MQC-Redist-Win64.zip" -L https://ibm.biz/IBM-MQC-Redist-Win64zip
+powershell -Command "Expand-Archive -LiteralPath C:\Program Files\IBM\MQ\IBM-MQC-Redist-Win64.zip -DestinationPath C:\Program Files\IBM\MQ"
+setx /m PATH "%PATH%;C:\Program Files\IBM\MQ;C:\Program Files\IBM\MQ\bin"
+
 :: Create Support Files and Directories
 md \temp
 cacls \temp /e /p Everyone:f
