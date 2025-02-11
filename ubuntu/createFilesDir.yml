@@ -238,6 +238,12 @@
     state: directory
     mode: '0775'
 
+- name: Create catalog
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/CICS/catalog"
+    state: directory
+    mode: '0775'
+
 - name: Download CICS.xml
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml

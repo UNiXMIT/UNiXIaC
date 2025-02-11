@@ -218,6 +218,11 @@
     path: C:\MFSamples\CICS\dataset
     state: directory
 
+- name: Create CICS catalog
+  win_file:
+    path: C:\MFSamples\CICS\catalog
+    state: directory
+
 - name: Download CICS.xml
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CICS.xml
