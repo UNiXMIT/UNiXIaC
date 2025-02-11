@@ -200,7 +200,7 @@ md \MFSamples\JCL
 md \MFSamples\CICS
 md \MFSamples\CICS\loadlib
 md \MFSamples\CICS\system
-md \MFSamples\CICS\data
+md \MFSamples\CICS\dataset
 cacls \MFSamples /e /t /p Everyone:f
 md \MFDataFiles
 cacls \MFDataFiles /e /p Everyone:f

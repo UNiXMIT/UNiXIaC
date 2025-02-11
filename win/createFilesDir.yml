@@ -213,9 +213,9 @@
     path: C:\MFSamples\CICS\system
     state: directory
 
-- name: Create CICS data
+- name: Create CICS dataset
   win_file:
-    path: C:\MFSamples\CICS\data
+    path: C:\MFSamples\CICS\dataset
     state: directory
 
 - name: Download CICS.xml

@@ -226,9 +226,9 @@
     state: directory
     mode: '0775'
 
-- name: Create data
+- name: Create dataset
   file:
-    path: "/home/{{ myUsername }}/MFSupport/MFSamples/CICS/data"
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/CICS/dataset"
     state: directory
     mode: '0775'
 

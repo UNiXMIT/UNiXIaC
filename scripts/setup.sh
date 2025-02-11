@@ -314,7 +314,7 @@ if [ ! -d "JCL" ]; then
 fi
 if [ ! -d "CICS" ]; then
   mkdir -m 775 CICS
-  mkdir -m 775 CICS/system CICS/data JCL/loadlib
+  mkdir -m 775 CICS/system CICS/dataset JCL/loadlib
   curl -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml
 fi
 touch /home/$user/.Xauthority
