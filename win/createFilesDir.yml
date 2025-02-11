@@ -141,6 +141,11 @@
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/boomerang.cfg
     dest: C:\etc\boomerang.cfg
 
+- name: Download boomerang_alias.ini
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/boomerang_alias.ini
+    dest: C:\etc\boomerang_alias.ini
+
 - name: Download cblconfi
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/cblconfi

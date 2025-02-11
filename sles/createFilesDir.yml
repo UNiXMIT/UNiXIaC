@@ -82,6 +82,12 @@
     dest: /home/{{ myUsername }}/AcuSupport/etc/boomerang.cfg
     mode: '0775'
 
+- name: Download boomerang_alias.ini
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/boomerang_alias.ini
+    dest: /home/{{ myUsername }}/AcuSupport/etc/boomerang_alias.ini
+    mode: '0775'
+
 - name: Download cblconfig
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/cblconfig
