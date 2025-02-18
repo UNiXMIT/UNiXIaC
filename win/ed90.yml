@@ -113,8 +113,8 @@
 
 - name: ED 9.0 PU 14
   set_fact:
-    installerNameEDVSPU: edvs2022_90_pu13_368122.exe
-    installerNameEDEPU: ede_90_pu13_368122.exe
+    installerNameEDVSPU: edvs2022_90_pu14_371508.exe
+    installerNameEDEPU: ede_90_pu14_371508.exe
     S3PrefixPU: ED/90/PU14/
     productName: ED90PU14
   tags: ed90pu14
