@@ -1,0 +1,8 @@
+- name: extend 11.0.0
+  set_fact:
+    installPath32: C:\Program Files (x86)\Rocket Software\extend 11.0.0
+    installPath64: C:\Program Files\Rocket Software\extend 11.0.0
+    installerName: extend(R) Version 11.0.0 x64.msi
+    S3Prefix: AcuCOBOL/1100/GA/
+    productName: extend1100
+  tags: extend1100

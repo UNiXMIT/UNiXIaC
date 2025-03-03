@@ -1,0 +1,9 @@
+- name: extend 11.0.0
+  block:
+    - name: Set Facts
+      set_fact:
+        installPath: /home/products/acu1100shx64/
+        installerName: setup_acucob1100pmk59shACU
+        S3Prefix: AcuCOBOL/1100/GA/
+        productName: extend1100
+  tags: extend1100

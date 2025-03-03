@@ -217,6 +217,17 @@
         - name: Import fail.yml
           import_tasks: fail.yml
 
+- name: extend 11.0.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+    - block:
+        - name: Import extend1100.yml
+          import_tasks: extend1100.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
+
 - name: Install extend
   hosts: awsEC2
   gather_facts: no

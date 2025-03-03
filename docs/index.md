@@ -53,25 +53,22 @@
 ## Supported OS / Products
 ### Windows Server 2022
 - ED/ES 6.0, 7.0, 8.0, 9.0 and 10.0   
-- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
+- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0, 10.5.1 and 11.0.0   
 
 ### Windows Server 2019
 - ED/ES 5.0  
 
 ### RHEL 9
-- ED 7.0, 8.0, 9.0 and 10.0  
-- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
-
-### RHEL 8
-- ED 6.0 and 7.0  
+- ED 8.0, 9.0 and 10.0  
+- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0, 10.5.1 and 11.0.0  
 
 ### SLES 15
 - ED 9.0 and 10.0  
-- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
+- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0, 10.5.1 and 11.0.0  
 
 ### Ubuntu 22.04
 - ED 9.0 and 10.0  
-- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
+- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0, 10.5.1 and 11.0.0  
 
 > **NOTE:** Patch Updates will be added as they become GA.  
 
@@ -97,6 +94,7 @@ LDAP URL - ldap://localhost:389
 - Oracle Instant Client 'Basic', 'ODBC', 'SQL*Plus', 'SDK' and 'Precompiler' packages  
 - PostgreSQL ODBC
 - DB2 ODBC 
+- MQ Client
 
 ### VPN
 - OpenConnect (Linux)
