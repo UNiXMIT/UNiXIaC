@@ -124,3 +124,10 @@
     S3PrefixPU: ED/80/PU21/
     productName: ES80PU21
   tags: es80pu21
+
+- name: ES 8.0 PU 22
+  set_fact:
+    installerNameESPU: es_80_pu22_372375.exe
+    S3PrefixPU: ED/80/PU22/
+    productName: ES80PU22
+  tags: es80pu22
