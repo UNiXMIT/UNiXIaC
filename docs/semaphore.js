@@ -6,9 +6,8 @@ let observer = new MutationObserver(mutations => {
     }
     let forkIcons = document.querySelectorAll('.mdi-source-fork');
     forkIcons.forEach(icon => {
-        let parentSpan = icon.closest('span');
-        if (parentSpan) {
-            parentSpan.style.display = 'hidden';
+        if (icon.parentNode && icon.parentNode.tagName === 'SPAN') {
+            icon.parentNode.hidden = true;
         }
     });
 });
