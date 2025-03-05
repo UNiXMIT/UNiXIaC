@@ -6,7 +6,7 @@ let observer = new MutationObserver(mutations => {
     }
     let forkIcons = document.querySelectorAll('.mdi-source-fork');
     forkIcons.forEach(icon => {
-        const parentSpan = icon.closest('span');
+        let parentSpan = icon.closest('span');
         if (parentSpan) {
             parentSpan.style.display = 'hidden';
         }
