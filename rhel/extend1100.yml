@@ -3,7 +3,7 @@
     - name: Set Facts
       set_fact:
         installPath: /home/products/acu1100shx64/
-        installerName: setup_acucob1100pmk59shACU
+        installerName: setup_acucob1100pmk31shACU
         S3Prefix: AcuCOBOL/1100/GA/
         productName: extend1100
   tags: extend1100
