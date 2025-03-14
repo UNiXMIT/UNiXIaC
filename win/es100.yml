@@ -26,3 +26,10 @@
     S3PrefixPU: ED/100/PU3/
     productName: ES100PU3
   tags: es100pu3
+
+- name: ES 10.0 PU 4
+  set_fact:
+    installerNameESPU: es_100_pu04_373097.exe
+    S3PrefixPU: ED/100/PU4/
+    productName: ES100PU4
+  tags: es100pu4

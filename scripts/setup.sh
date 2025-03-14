@@ -95,7 +95,7 @@ elif [ "$WHICHOS" = "UBUNTU" ]; then
 export PATH="$PATH:/opt/mssql-tools/bin"
 EOF
   sudo chmod 775 /etc/profile.d/mssql.sh
-  sudo apt install -y -m build-essential openjdk-21-jdk unixodbc-devel wget curl cron dos2unix htop lib32stdc++6 libstdc++6:i386 libaio-dev libncurses5 apt-file zlib1g:i386 libc6:i386 libgc1 tcpdump ed tmux openconnect jq python3 python3-pip expect postgresql-client odbc-postgresql net-tools lsof pax-utils podman buildah unzip libgtk-3-0;
+  sudo apt install -y -m build-essential openjdk-21-jdk unixodbc-dev wget curl cron dos2unix htop lib32stdc++6 libstdc++6:i386 libaio-dev libncurses5 apt-file zlib1g:i386 libc6:i386 libgc1 tcpdump ed tmux openconnect jq python3 python3-pip expect postgresql-client odbc-postgresql net-tools lsof pax-utils podman buildah unzip libgtk-3-0;
   sudo apt-file update;
   export ODBCPATH=/etc
 # SLES
