@@ -123,3 +123,12 @@
     productName: ED90PU14
     edVer: 90
   tags: ed90pu14
+
+- name: ED 9.0 PU 15
+  set_fact:
+    installPath: /home/products/ed90pu15
+    installerName: setup_entdev_9.0_patchupdate15_374029_suse_x64
+    S3Prefix: ED/90/PU15/
+    productName: ED90PU15
+    edVer: 90
+  tags: ed90pu15
