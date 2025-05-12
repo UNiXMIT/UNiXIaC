@@ -38,3 +38,11 @@
     S3PrefixPU: ED/100/PU4/
     productName: ED100PU4
   tags: ed100pu4
+
+- name: ED 10.0 PU 5
+  set_fact:
+    installerNameEDVSPU: edvs2022_100_pu05_376772.exe
+    installerNameEDEPU: ede_100_pu05_376772.exe
+    S3PrefixPU: ED/100/PU5/
+    productName: ED100PU5
+  tags: ed100pu5

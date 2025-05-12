@@ -42,3 +42,12 @@
     productName: ED100PU4
     edVer: 100
   tags: ed100pu4
+
+- name: ED 10.0 PU 5
+  set_fact:
+    installPath: /home/products/ed100pu5
+    installerName: setup_entdev_10.0_patchupdate05_376770_redhat_x86_64
+    S3Prefix: ED/100/PU5/
+    productName: ED100PU5
+    edVer: 100
+  tags: ed100pu5

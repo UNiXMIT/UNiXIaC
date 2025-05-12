@@ -126,3 +126,11 @@
     S3PrefixPU: ED/90/PU15/
     productName: ED90PU15
   tags: ed90pu15
+
+- name: ED 9.0 PU 16
+  set_fact:
+    installerNameEDVSPU: edvs2022_90_pu16_377167.exe
+    installerNameEDEPU: ede_90_pu16_377167.exe
+    S3PrefixPU: ED/90/PU16/
+    productName: ED90PU16
+  tags: ed90pu16
