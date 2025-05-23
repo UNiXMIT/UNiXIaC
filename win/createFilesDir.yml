@@ -297,3 +297,8 @@
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/AutoPAC.cmd
     dest: C:\MFScripts\AutoPAC.cmd
+  
+- name: Download VSFIX.cmd
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSFIX.cmd
+    dest: C:\MFScripts\VSFIX.cmd
