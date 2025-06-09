@@ -118,6 +118,18 @@
         state: present
         arguments: /passive /log C:\MFInstallers\{{ installerNameESPU }}.log /norestart
   tags: espu
+
+- name: Create Micro Focus Directory
+  ansible.windows.win_file:
+    path: C:\Program Files (x86)\Micro Focus
+    state: directory
+  when: edVer >= 110
+  tags: es
+
+- name: Create Symlink for MF <<===>> Rocket
+  win_command: cmd.exe /k mklink /d "C:\Program Files (x86)\Micro Focus\Enterprise Server" "C:\Program Files (x86)\Rocket Software\Enterprise Server"
+  when: edVer >= 110
+  tags: es
   
 - name: Install Safenet License File
   ansible.windows.win_copy:
@@ -215,6 +227,12 @@
     state: started
   tags: es
 
-- name: Create Symlink for ES <<===>> ED
+- name: Create Symlink for ES <<===>> ED version 10.0 and below
   win_command: cmd.exe /k mklink /d "C:\Program Files (x86)\Micro Focus\Enterprise Developer" "C:\Program Files (x86)\Micro Focus\Enterprise Server"
+  when: edVer <= 100
+  tags: es
+
+- name: Create Symlink for ES <<===>> ED version 11.0 and above
+  win_command: cmd.exe /k mklink /d "C:\Program Files (x86)\Micro Focus\Enterprise Developer" "C:\Program Files (x86)\Rocket Software\Enterprise Server"
+  when: edVer >= 110
   tags: es

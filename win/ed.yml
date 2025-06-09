@@ -170,6 +170,18 @@
         arguments: /passive RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDEPU }}.log /norestart
       tags: ede
   tags: edpu
+
+- name: Create Micro Focus Directory
+  ansible.windows.win_file:
+    path: C:\Program Files (x86)\Micro Focus
+    state: directory
+  when: edVer >= 110
+  tags: ed
+
+- name: Create Symlink for MF <<===>> Rocket
+  win_command: cmd.exe /k mklink /d "C:\Program Files (x86)\Micro Focus\Enterprise Developer" "C:\Program Files (x86)\Rocket Software\Enterprise Developer"
+  when: edVer >= 110
+  tags: ed
   
 - name: Install Safenet License File
   ansible.windows.win_copy:
