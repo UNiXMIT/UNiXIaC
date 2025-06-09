@@ -248,6 +248,17 @@
         - name: Import fail.yml
           import_tasks: fail.yml
 
+- name: Install ED 11.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+    - block:
+        - name: Import ed110.yml
+          import_tasks: ed110.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
+
 - name: Setup ED
   hosts: awsEC2
   gather_facts: no
@@ -321,6 +332,17 @@
     - block:
         - name: Import es100.yml
           import_tasks: es100.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
+
+- name: Install ES 11.0
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+    - block:
+        - name: Import es110.yml
+          import_tasks: es110.yml
       rescue: 
         - name: Import fail.yml
           import_tasks: fail.yml

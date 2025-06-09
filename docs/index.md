@@ -52,22 +52,22 @@
 
 ## Supported OS / Products
 ### Windows Server 2022
-- ED/ES 6.0, 7.0, 8.0, 9.0 and 10.0   
+- ED/ES 6.0, 7.0, 8.0, 9.0, 10.0 and 11.0   
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0, 10.5.1 and 11.0.0   
 
 ### Windows Server 2019
 - ED/ES 5.0  
 
 ### RHEL 9
-- ED 8.0, 9.0 and 10.0  
+- ED 8.0, 9.0, 10.0 and 11.0  
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0, 10.5.1 and 11.0.0  
 
 ### SLES 15
-- ED 9.0 and 10.0  
+- ED 9.0, 10.0 and 11.0  
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0, 10.5.1 and 11.0.0  
 
 ### Ubuntu 22.04
-- ED 9.0 and 10.0  
+- ED 9.0, 10.0 and 11.0  
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0, 10.5.1 and 11.0.0  
 
 > **NOTE:** Patch Updates will be added as they become GA.  
