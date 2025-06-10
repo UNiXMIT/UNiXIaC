@@ -8,7 +8,7 @@
       architecture: x86_64
       virtualization-type: hvm
   register: amis
-  tags: rhel8
+  tags: [ rhel8, amd]
 
 - name: Get latest RHEL 9 AMI
   amazon.aws.ec2_ami_info:
@@ -20,4 +20,16 @@
       architecture: x86_64
       virtualization-type: hvm
   register: amis
-  tags: rhel9
+  tags: [ rhel9, amd]
+
+- name: Get latest RHEL 9 ARM AMI
+  amazon.aws.ec2_ami_info:
+    owners:
+      - amazon
+    region: '{{ awsRegion }}'
+    filters:
+      name: RHEL-9.5*
+      architecture: arm64
+      virtualization-type: hvm
+  register: amis
+  tags: [ rhel9, arm]
