@@ -104,7 +104,6 @@
       - libnsl
       - libxcrypt
       - libncurses*
-      - zlib.i686
       - webkit2gtk3
       - PackageKit-gtk3-module
       - systemd-libs
