@@ -102,6 +102,7 @@ call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension zhuangton
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension bitlang.cobol
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension rocketsoftware.rocket-enterprise
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension rangav.vscode-thunder-client
+call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension ms-vscode.hexeditor
 curl -s -o %APPDATA%\Code\User\settings.json https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/refs/heads/main/win/vscode/settings.json
 curl -s -o %APPDATA%\Code\User\keybindings.json https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/refs/heads/main/win/vscode/keybindings.json
 

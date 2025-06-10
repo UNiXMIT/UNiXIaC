@@ -20,6 +20,10 @@
   win_command:
     cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension rangav.vscode-thunder-client'
 
+- name: VSCode Hex Editor Extension
+  win_command:
+    cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension ms-vscode.hexeditor'
+
 - name: Download VSCode Settings 
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/refs/heads/main/win/vscode/settings.json
