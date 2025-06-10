@@ -14,7 +14,7 @@
     region: '{{ awsRegion }}'
     availability_zone: '{{ availabilityZone }}'
     # aws_profile: '{{ awsProfile }}'
-    instance_type: '{{ instanceType }}'
+    instance_type: '{{ instType }}'
     count: '{{ vmNum | default(1) }}'
     volumes:
     - device_name: '{{ deviceName }}'
