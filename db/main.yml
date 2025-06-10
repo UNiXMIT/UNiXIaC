@@ -41,12 +41,8 @@
   gather_facts: no
   become: yes
   tasks:
-    - block:
-        - name: Import system.yml
-          import_tasks: system.yml
-      rescue: 
-        - name: Import fail.yml
-          import_tasks: fail.yml
+  - name: Import system.yml
+    import_tasks: system.yml
   tags: default
 
 - name: Reboot EC2 Instance
@@ -54,12 +50,8 @@
   gather_facts: no
   become: yes
   tasks:
-    - block:
-        - name: Reboot
-          reboot:
-      rescue: 
-        - name: Import fail.yml
-          import_tasks: fail.yml
+  - name: Reboot
+    reboot:
   tags: default
 
 - name: Manage Users
@@ -67,12 +59,8 @@
   gather_facts: no
   become: yes
   tasks: 
-    - block:
-        - name: Import users.yml
-          import_tasks: users.yml
-      rescue: 
-        - name: Import fail.yml
-          import_tasks: fail.yml
+  - name: Import users.yml
+    import_tasks: users.yml
   no_log: True
   tags: default
 
@@ -81,36 +69,24 @@
   gather_facts: yes
   become: yes
   tasks:
-    - block:
-        - name: Import software.yml
-          import_tasks: software.yml
-      rescue: 
-        - name: Import fail.yml
-          import_tasks: fail.yml
+  - name: Import software.yml
+    import_tasks: software.yml
   tags: default
 
 - name: Create Podman Containers
   hosts: awsEC2
   gather_facts: no
   tasks:
-    - block:
-        - name: Import podman.yml
-          import_tasks: podman.yml
-      rescue: 
-        - name: Import fail.yml
-          import_tasks: fail.yml
+  - name: Import podman.yml
+    import_tasks: podman.yml
 
 - name: Add CRON Jobs
   hosts: awsEC2
   gather_facts: no
   become: yes
   tasks:
-    - block:
-        - name: Import cron.yml
-          import_tasks: cron.yml
-      rescue: 
-        - name: Import fail.yml
-          import_tasks: fail.yml
+  - name: Import cron.yml
+    import_tasks: cron.yml
   tags: default
 
 - name: Final tasks
