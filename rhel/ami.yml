@@ -21,6 +21,7 @@
       virtualization-type: hvm
   register: amis
   tags: [ rhel9, amd]
+  when: "'arm' not in ansible_run_tags"
 
 - name: Get latest RHEL 9 ARM AMI
   amazon.aws.ec2_ami_info:
@@ -33,3 +34,4 @@
       virtualization-type: hvm
   register: amis
   tags: [ rhel9, arm]
+  when: "'amd' not in ansible_run_tags"
