@@ -28,3 +28,13 @@
   set_fact:
     vmNum: 1
   when: vmCount is not defined or (vmCount | int) == 0
+
+- name: AMD Instance
+  set_fact:
+    instType: '{{ instanceType }}'
+  when: "'arm' not in ansible_run_tags"
+
+- name: ARM Instance
+  set_fact:
+    instType: '{{ instanceTypeARM }}'
+  when: "'amd' not in ansible_run_tags"

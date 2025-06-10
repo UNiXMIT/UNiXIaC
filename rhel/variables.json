@@ -14,6 +14,7 @@
   "securityGroupsAMS": "['sg-XXXXXX','sg-XXXXXX']",
   "securityGroupsAPJ": "['sg-XXXXXX','sg-XXXXXX']",
   "instanceType": "t3.xlarge",
+  "instanceTypeARM": "t4g.xlarge",
   "deviceName": "/dev/sda1",
   "volumeType": "gp3",
   "volumeSize": 120
