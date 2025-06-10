@@ -40,18 +40,14 @@
   package:
     name:
       - '@Development tools'
-      - unixODBC-devel
       - wget
       - curl
       - cronie
       - dos2unix
       - htop
-      - 'libstdc++-devel.i686'
       - libaio-devel
       - glibc-devel
-      - glibc-devel.i686
       - glibc
-      - glibc.i686
       - tcpdump
       - ed
       - tmux
@@ -67,6 +63,16 @@
       - xterm
       - xauth
     state: present
+
+- name: Package installation NON-ARM
+  package:
+    name:
+      - unixODBC-devel
+      - 'libstdc++-devel.i686'
+      - glibc-devel.i686
+      - glibc.i686
+    state: present
+  when: "'arm' not in ansible_run_tags"
 
 # - name: RHEL<=7 Package installation
 #   package:
@@ -169,6 +175,7 @@
     sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
   args:
     chdir: /tmp
+  when: "'arm' not in ansible_run_tags"
   
 - name: Create a symlink libnsl.so.1 > libnsl.so 
   ansible.builtin.file:
