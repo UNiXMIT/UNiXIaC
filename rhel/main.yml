@@ -71,8 +71,8 @@
   tasks:
   - name: Import oracle.yml
     import_tasks: oracle.yml
+    when: "'arm' not in ansible_run_tags"
   tags: default
-  when: "'arm' not in ansible_run_tags"
 
 - name: Install DB2 Client
   hosts: awsEC2
@@ -80,8 +80,8 @@
   tasks:
   - name: Import db2.yml
     import_tasks: db2.yml
+    when: "'arm' not in ansible_run_tags"
   tags: default
-  when: "'arm' not in ansible_run_tags"
 
 - name: Install IBM MQ Client
   hosts: awsEC2
@@ -89,8 +89,8 @@
   tasks:
   - name: Import mq.yml
     import_tasks: mq.yml
+    when: "'arm' not in ansible_run_tags"
   tags: default
-  when: "'arm' not in ansible_run_tags"
 
 - name: Create Support Files and Directories
   hosts: awsEC2
