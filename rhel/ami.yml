@@ -36,6 +36,10 @@
   tags: [ rhel9 ]
   when: "'amd' not in ansible_run_tags"
 
+- name: Show ALL variables
+  debug:
+    var: amis
+
 - name: Validate AMI results
   assert:
     that:
