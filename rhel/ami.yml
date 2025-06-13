@@ -17,40 +17,7 @@
     region: '{{ awsRegion }}'
     filters:
       name: RHEL-9.5*
-      architecture: x86_64
+      architecture: '{{ arch }}'
       virtualization-type: hvm
   register: amis
   tags: rhel9
-  when: "'arm' not in ansible_run_tags"
-
-- name: Get latest RHEL 9 ARM AMI
-  amazon.aws.ec2_ami_info:
-    owners:
-      - amazon
-    region: '{{ awsRegion }}'
-    filters:
-      name: RHEL-9.5*
-      architecture: arm64
-      virtualization-type: hvm
-  register: amis
-  tags: rhel9
-  when: "'amd' not in ansible_run_tags"
-
-- name: Show ALL variables
-  debug:
-    var: amis
-  tags: default
-  when: "'arm' not in ansible_run_tags"
-
-- name: Validate AMI results
-  assert:
-    that:
-      - amis.images is defined
-      - amis.images | length > 0
-    fail_msg: "ERROR: AMI lookup failed or no images found."
-  tags: default
-
-- name: Extract latest AMI ID
-  set_fact:
-    latest_ami_id: "{{ (amis.images | sort(attribute='creation_date') | last).image_id }}"
-  tags: default

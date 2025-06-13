@@ -31,10 +31,12 @@
 
 - name: AMD Instance
   set_fact:
+    arch: 'x86_64'
     instType: '{{ instanceType }}'
   when: "'arm' not in ansible_run_tags"
 
 - name: ARM Instance
   set_fact:
+    arch: 'arm64'
     instType: '{{ instanceTypeARM }}'
   when: "'amd' not in ansible_run_tags"
