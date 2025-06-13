@@ -35,3 +35,17 @@
   register: amis
   tags: [ rhel9, arm ]
   when: "'amd' not in ansible_run_tags"
+
+- name: Validate AMI results
+  assert:
+    that:
+      - not amis.failed | default(false)
+      - amis.images is defined
+      - amis.images | length > 0
+    fail_msg: "ERROR: AMI lookup failed or no images found."
+  tags: default
+
+- name: Extract latest AMI ID
+  set_fact:
+    latest_ami_id: "{{ (amis.images | sort(attribute='creation_date') | last).image_id }}"
+  tags: default

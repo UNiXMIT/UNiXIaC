@@ -28,8 +28,12 @@
     tempName: SEM-{{ 2048 | random }}
   gather_facts: no
   tasks:
-  - name: Import aws.yml
-    import_tasks: aws.yml
+    - block:
+        - name: Import aws.yml
+          import_tasks: aws.yml
+      rescue: 
+        - name: Import fail.yml
+          import_tasks: fail.yml
   tags: default
 
 - name: Modify OS Config

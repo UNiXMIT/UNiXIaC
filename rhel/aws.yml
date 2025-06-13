@@ -6,7 +6,7 @@
         default_user:
           name: {{ myUsername }}
     name: '{{ tempName }}'
-    image_id: '{{ amis.images[-1].image_id }}'
+    image_id: '{{ latest_ami_id }}'
     key_name: '{{ keyName }}'
     network_interfaces:  
       - assign_public_ip: true
