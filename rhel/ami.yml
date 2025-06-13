@@ -39,6 +39,7 @@
 - name: Show ALL variables
   debug:
     var: amis
+  tags: default
 
 - name: Validate AMI results
   assert:
