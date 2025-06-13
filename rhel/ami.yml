@@ -8,7 +8,7 @@
       architecture: x86_64
       virtualization-type: hvm
   register: amis
-  tags: [ rhel8 ]
+  tags: rhel8
 
 - name: Get latest RHEL 9 AMI
   amazon.aws.ec2_ami_info:
@@ -20,7 +20,7 @@
       architecture: x86_64
       virtualization-type: hvm
   register: amis
-  tags: [ rhel9 ]
+  tags: rhel9
   when: "'arm' not in ansible_run_tags"
 
 - name: Get latest RHEL 9 ARM AMI
@@ -33,13 +33,14 @@
       architecture: arm64
       virtualization-type: hvm
   register: amis
-  tags: [ rhel9 ]
+  tags: rhel9
   when: "'amd' not in ansible_run_tags"
 
 - name: Show ALL variables
   debug:
     var: amis
   tags: default
+  when: "'arm' not in ansible_run_tags"
 
 - name: Validate AMI results
   assert:
