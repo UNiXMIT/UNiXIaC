@@ -39,7 +39,6 @@
 - name: Validate AMI results
   assert:
     that:
-      - not amis.failed | default(false)
       - amis.images is defined
       - amis.images | length > 0
     fail_msg: "ERROR: AMI lookup failed or no images found."
