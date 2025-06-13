@@ -8,7 +8,7 @@
       architecture: x86_64
       virtualization-type: hvm
   register: amis
-  tags: [ rhel8, amd]
+  tags: [ rhel8 ]
 
 - name: Get latest RHEL 9 AMI
   amazon.aws.ec2_ami_info:
