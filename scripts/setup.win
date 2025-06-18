@@ -101,6 +101,7 @@ setx /m PATH "%PATH%;C:\Users\Public\Documents\terminal-%msTermVer%"
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension zhuangtongfa.material-theme
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension bitlang.cobol
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension rocketsoftware.rocket-enterprise
+:: call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension rocketsoftware.rocket-acucobolgt
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension rangav.vscode-thunder-client
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension ms-vscode.hexeditor
 curl -s -o %APPDATA%\Code\User\settings.json https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/refs/heads/main/win/vscode/settings.json

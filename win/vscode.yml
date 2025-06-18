@@ -16,6 +16,10 @@
   win_command:
     cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension rocketsoftware.rocket-enterprise'
 
+# - name: VSCode Rocket AcuCOBOL-GT Extension
+#   win_command:
+#     cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension rocketsoftware.rocket-acucobolgt'
+
 - name: VSCode Thunder Client Extension
   win_command:
     cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension rangav.vscode-thunder-client'
