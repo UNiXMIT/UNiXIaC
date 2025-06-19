@@ -9,11 +9,19 @@
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/adlds/adlds.cmd
     dest: C:\MFScripts\adlds.cmd
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download adlds.txt
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/adlds/adlds.txt
     dest: C:\MFScripts\adlds.txt
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Configure ADLDS
   win_command:

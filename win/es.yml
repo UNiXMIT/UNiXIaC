@@ -42,18 +42,30 @@
       ansible.windows.win_get_url:
         url: '{{ s3es.url }}'
         dest: C:\MFInstallers\
+      register: result
+      retries: 5
+      delay: 30
+      until: result is not failed
     
     - name: Download SafeNet License
       ansible.windows.win_get_url:
         url: '{{ s3sn.url }}'
         dest: C:\MFInstallers\
       when: edVer <= 90
+      register: result
+      retries: 5
+      delay: 30
+      until: result is not failed
     
     - name: Download AutoPass License
       ansible.windows.win_get_url:
         url: '{{ s3ap.url }}'
         dest: C:\MFInstallers\
       when: edVer >= 80
+      register: result
+      retries: 5
+      delay: 30
+      until: result is not failed
   tags: es
 
 - name: Download ES PU 
@@ -74,6 +86,10 @@
       ansible.windows.win_get_url:
         url: '{{ s3espu.url }}'
         dest: C:\MFInstallers\
+      register: result
+      retries: 5
+      delay: 30
+      until: result is not failed
   tags: espu
 
 - name: Add ES Tags

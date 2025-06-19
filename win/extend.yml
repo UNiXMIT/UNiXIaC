@@ -14,6 +14,10 @@
   ansible.windows.win_get_url:
     url: '{{ s3.url }}'
     dest: C:\AcuInstallers
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Add extend Tags
   amazon.aws.ec2_tag:

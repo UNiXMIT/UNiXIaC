@@ -1,10 +1,10 @@
 - name: Download Oracle Instant Client 32bit
   ansible.windows.win_get_url:
-    url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-basic-nt-21.15.0.0.0dbru.zi
+    url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-basic-nt-21.15.0.0.0dbru.zip
     dest: C:\Users\Public\Documents\instantclient-basic-nt-21.15.0.0.0dbru.zip
   register: result
-  retries: 10
-  delay: 10
+  retries: 5
+  delay: 30
   until: result is not failed
 
 - name: Download Oracle Instant Client 64bit
@@ -12,8 +12,8 @@
     url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-basic-windows.x64-21.15.0.0.0dbru.zip
     dest: C:\Users\Public\Documents\instantclient-basic-windows.x64-21.15.0.0.0dbru.zip
   register: result
-  retries: 10
-  delay: 10
+  retries: 5
+  delay: 30
   until: result is not failed
 
 - name: Unzip Oracle Instant Client 32bit
@@ -21,8 +21,8 @@
     src: C:\Users\Public\Documents\instantclient-basic-nt-21.15.0.0.0dbru.zip
     dest: C:\instantClient32
   register: result
-  retries: 10
-  delay: 10
+  retries: 5
+  delay: 30
   until: result is not failed
 
 - name: Unzip Oracle Instant Client 64bit
@@ -30,8 +30,8 @@
     src: C:\Users\Public\Documents\instantclient-basic-windows.x64-21.15.0.0.0dbru.zip
     dest: C:\instantClient64
   register: result
-  retries: 10
-  delay: 10
+  retries: 5
+  delay: 30
   until: result is not failed
 
 - name: Download Oracle Instant Client ODBC 32bit
@@ -39,8 +39,8 @@
     url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-odbc-nt-21.15.0.0.0dbru.zip
     dest: C:\Users\Public\Documents\instantclient-odbc-nt-21.15.0.0.0dbru.zip
   register: result
-  retries: 10
-  delay: 10
+  retries: 5
+  delay: 30
   until: result is not failed
 
 - name: Download Oracle Instant Client ODBC 64bit
@@ -48,8 +48,8 @@
     url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-odbc-windows.x64-21.15.0.0.0dbru.zip
     dest: C:\Users\Public\Documents\instantclient-odbc-windows.x64-21.15.0.0.0dbru.zip
   register: result
-  retries: 10
-  delay: 10
+  retries: 5
+  delay: 30
   until: result is not failed
 
 - name: Unzip Oracle Instant Client ODBC 32bit
@@ -77,8 +77,8 @@
     url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sqlplus-nt-21.15.0.0.0dbru.zip
     dest: C:\Users\Public\Documents\instantclient-sqlplus-nt-21.15.0.0.0dbru.zip
   register: result
-  retries: 10
-  delay: 10
+  retries: 5
+  delay: 30
   until: result is not failed
 
 - name: Download Oracle Instant Client SQLPlus 64bit
@@ -86,8 +86,8 @@
     url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sqlplus-windows.x64-21.15.0.0.0dbru.zip
     dest: C:\Users\Public\Documents\instantclient-sqlplus-windows.x64-21.15.0.0.0dbru.zip
   register: result
-  retries: 10
-  delay: 10
+  retries: 5
+  delay: 30
   until: result is not failed
 
 - name: Unzip Oracle Instant Client SQLPlus 32bit
@@ -105,8 +105,8 @@
     url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sdk-nt-21.15.0.0.0dbru.zip
     dest: C:\Users\Public\Documents\instantclient-sdk-nt-21.15.0.0.0dbru.zip
   register: result
-  retries: 10
-  delay: 10
+  retries: 5
+  delay: 30
   until: result is not failed
 
 - name: Download Oracle Instant Client SDK 64bit
@@ -114,8 +114,8 @@
     url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip
     dest: C:\Users\Public\Documents\instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip
   register: result
-  retries: 10
-  delay: 10
+  retries: 5
+  delay: 30
   until: result is not failed
 
 - name: Unzip Oracle Instant Client SDK 32bit
@@ -159,8 +159,8 @@
     url: https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-nt-21.15.0.0.0dbru.zip
     dest: C:\Users\Public\Documents\instantclient-precomp-nt.zip
   register: result
-  retries: 10
-  delay: 10
+  retries: 5
+  delay: 30
   until: result is not failed
 
 - name: Download Oracle Instant Client Precompiler 64bit
@@ -168,8 +168,8 @@
     url: https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-windows.x64-21.15.0.0.0dbru.zip
     dest: C:\Users\Public\Documents\instantclient-precomp-windows.x64.zip
   register: result
-  retries: 10
-  delay: 10
+  retries: 5
+  delay: 30
   until: result is not failed
 
 - name: Unzip Oracle Instant Client Precompiler 32bit

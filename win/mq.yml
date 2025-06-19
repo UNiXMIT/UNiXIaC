@@ -3,6 +3,10 @@
     url: https://ibm.biz/IBM-MQC-Redist-Win64zip
     dest: C:\Users\Public\Documents\IBM-MQC-Redist-Win64.zip
     timeout: 60
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Unzip IBM MQ Client
   community.windows.win_unzip:

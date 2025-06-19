@@ -115,56 +115,100 @@
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/AcuScripts/setenvacu.cmd
     dest: C:\AcuScripts\setenvacu.cmd
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download AcuThin-AutoUpdate.cfg
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/AcuThin-AutoUpdate.cfg
     dest: C:\etc\AcuThin-AutoUpdate.cfg
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download a_srvcfg
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/a_srvcfg
     dest: C:\etc\a_srvcfg
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download acurcl.cfg
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/acurcl.cfg
     dest: C:\etc\acurcl.cfg
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download acurcl.ini
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/acurcl.ini
     dest: C:\etc\acurcl.ini
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download boomerang.cfg
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/boomerang.cfg
     dest: C:\etc\boomerang.cfg
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download boomerang_alias.ini
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/boomerang_alias.ini
     dest: C:\etc\boomerang_alias.ini
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download cblconfi
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/cblconfi
     dest: C:\etc\cblconfi
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download fillCombo.js
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/fillCombo.js
     dest: C:\etc\fillCombo.js
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download gateway.conf
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/gateway.conf
     dest: C:\etc\gateway.conf
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download gateway.toml
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/gateway.toml
     dest: C:\etc\gateway.toml
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Create MFSamples
   win_file:
@@ -180,11 +224,19 @@
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.xml
     dest: C:\MFSamples\JCL
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download JCL.zip
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.zip
     dest: C:\MFSamples\JCL\JCL.zip
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Unzip JCL.zip
   win_unzip:
@@ -227,6 +279,10 @@
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CICS.xml
     dest: C:\MFSamples\CICS
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Everyone permissions on CICS
   win_acl:
@@ -287,23 +343,43 @@
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/setenvmf.cmd
     dest: C:\MFScripts\setenvmf.cmd
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download FormatDumps.cmd
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/FormatDumps.cmd
     dest: C:\MFScripts\FormatDumps.cmd
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download AutoPAC.cmd
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/AutoPAC.cmd
     dest: C:\MFScripts\AutoPAC.cmd
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
   
 - name: Download disableSecurity.cmd
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/disableSecurity.cmd
     dest: C:\MFScripts\disableSecurity.cmd
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
   
 - name: Download VSFIX.cmd
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSFIX.cmd
     dest: C:\MFScripts\VSFIX.cmd
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
