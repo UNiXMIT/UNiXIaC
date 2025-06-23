@@ -16,6 +16,7 @@
     name: openssh
     package_params: /SSHServerFeature
     state: present
+  ignore_errors: true
 
 - name: Disable UAC
   win_regedit:
