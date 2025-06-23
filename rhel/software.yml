@@ -6,11 +6,19 @@
   rpm_key:
     state: present
     key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Install EPEL
   package:
     name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm'
     state: present
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download MSSQL ODBC Driver Repo
   get_url:
@@ -18,6 +26,10 @@
     dest: /etc/yum.repos.d/mssql-release.repo
     mode: '0775'
   when: "'arm' not in ansible_run_tags"
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Install MSSQL ODBC Driver 17
   environment:
@@ -64,6 +76,10 @@
       - xterm
       - xauth
     state: present
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Package installation NON-ARM
   package:
@@ -74,6 +90,10 @@
       - glibc.i686
     state: present
   when: "'arm' not in ansible_run_tags"
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 # - name: RHEL<=7 Package installation
 #   package:
@@ -89,6 +109,10 @@
     name: spax
     state: present
   when: ansible_facts['distribution_major_version'] | int <= 8
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: RHEL>=8 Remove Default Java
   package:
@@ -96,6 +120,10 @@
       - java*
     state: absent
   when: ansible_facts['distribution_major_version'] | int >= 8
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
   
 - name: RHEL>=8 Package installation
   package:
@@ -111,6 +139,10 @@
       - buildah
     state: present
   when: ansible_facts['distribution_major_version'] | int >= 8
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: RHEL>=8 Package installation NON-ARM
   package:
@@ -125,6 +157,10 @@
   when: 
     - ansible_facts['distribution_major_version'] | int >= 8
     - "'arm' not in ansible_run_tags"
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: RHEL>=9 Package installation
   package:
@@ -132,6 +168,10 @@
       - libxcrypt-compat
     state: present
   when: ansible_facts['distribution_major_version'] | int >= 9
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: RHEL>=9 Package installation NON-ARM
   package:
@@ -141,6 +181,10 @@
   when: 
     - ansible_facts['distribution_major_version'] | int >= 9
     - "'arm' not in ansible_run_tags"
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Enable Podman Socket
   ansible.builtin.shell: systemctl enable --now podman.socket
@@ -193,6 +237,10 @@
   args:
     chdir: /tmp
   when: "'arm' not in ansible_run_tags"
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Install Kubernetes (kubectl) ARM
   ansible.builtin.shell: |
@@ -201,6 +249,10 @@
   args:
     chdir: /tmp
   when: "'amd' not in ansible_run_tags"
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
   
 - name: Create a symlink libnsl.so.1 > libnsl.so 
   ansible.builtin.file:

@@ -23,6 +23,10 @@
     dest: /opt/ibm
     mode: '0755'
   become: yes
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Extract DB2 Client Installer
   ansible.builtin.unarchive:

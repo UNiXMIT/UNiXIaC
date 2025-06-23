@@ -26,6 +26,10 @@
     owner: '{{ myUsername }}' 
     group: '{{ myUsername }}'
     mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Add extend Tags
   amazon.aws.ec2_tag:
