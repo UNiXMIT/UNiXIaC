@@ -8,6 +8,10 @@
   get_url:
     url: https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip
     dest: /opt/oracle
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Extract Oracle Instant Client Basic Package
   ansible.builtin.unarchive:
@@ -19,6 +23,10 @@
   get_url:
     url: https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-odbc-linux.x64-21.13.0.0.0dbru.zip
     dest: /opt/oracle
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Extract Oracle Instant Client ODBC Package
   ansible.builtin.unarchive:
@@ -30,6 +38,10 @@
   get_url:
     url: https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-sqlplus-linux.x64-21.13.0.0.0dbru.zip
     dest: /opt/oracle
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Extract Oracle Instant Client SQLPlus Package
   ansible.builtin.unarchive:
@@ -41,6 +53,10 @@
   get_url:
     url: https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-sdk-linux.x64-21.13.0.0.0dbru.zip
     dest: /opt/oracle
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Extract Oracle Instant Client SDK Package
   ansible.builtin.unarchive:
@@ -65,6 +81,10 @@
   ansible.builtin.get_url:
     url: https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip
     dest: /opt/oracle/instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Extract Oracle Instant Client Precompiler Package
   ansible.builtin.unarchive:

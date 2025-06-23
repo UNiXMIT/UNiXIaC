@@ -21,12 +21,20 @@
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/openldap/openldap.sh
     dest: /openldap
     mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download and Extract schema.zip
   ansible.builtin.unarchive:
     src: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/openldap/schema.zip
     dest: /openldap
     remote_src: yes
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Install OpenLDAP
   ansible.builtin.apt:
@@ -35,6 +43,10 @@
       - ldap-utils
       - openssl
     state: present
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Configure OpenLDAP for ED
   ansible.builtin.shell: |

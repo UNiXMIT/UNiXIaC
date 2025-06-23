@@ -12,6 +12,10 @@
     mode: '0755'
     timeout: 60
   become: yes
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Extract IBM MQ Client
   ansible.builtin.unarchive:

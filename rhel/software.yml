@@ -40,6 +40,10 @@
       - mssql-tools
     state: present
   when: "'arm' not in ansible_run_tags"
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Set MSSQL Tools on PATH
   copy:

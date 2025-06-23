@@ -44,6 +44,10 @@
       - openssl
     state: present
   when: ansible_facts['distribution_major_version'] | int <= 7 or ansible_facts['distribution_major_version'] | int >= 9
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Install OpenLDAP for RHEL 8
   ansible.builtin.shell: |
@@ -51,6 +55,10 @@
     dnf update -y
     dnf install symas-openldap-clients symas-openldap-servers openssl -y
   when: ansible_facts['distribution_major_version'] | int == 8
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Configure OpenLDAP for ED
   ansible.builtin.shell: |

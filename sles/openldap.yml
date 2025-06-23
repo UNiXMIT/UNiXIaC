@@ -3,6 +3,10 @@
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/openldap/podman.sh
     dest: /tmp/openldap.sh
     mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Create OpenLDAP for ES Container
   ansible.builtin.command: /tmp/openldap.sh

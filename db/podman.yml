@@ -394,6 +394,10 @@
     dest: /tmp/openldap.sh
     mode: '0775'
   tags: openldap
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Create OpenLDAP for ES Container
   ansible.builtin.command: /tmp/openldap.sh

@@ -8,23 +8,39 @@
 - name: Update APT Cache
   ansible.builtin.apt:
     update_cache: yes
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Update all packages to their latest version
   ansible.builtin.apt:
     name: "*"
     state: latest
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download MSSQL ODBC Driver Key
   get_url:
     url: https://packages.microsoft.com/keys/microsoft.asc
     dest: /etc/apt/trusted.gpg.d/microsoft.asc
     mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Download MSSQL ODBC Driver Repo
   get_url:
     url: https://packages.microsoft.com/config/ubuntu/{{ ansible_distribution_version }}/prod.list
     dest: /etc/apt/sources.list.d/mssql-release.list
     mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Install MSSQL ODBC Driver 17
   environment:
@@ -35,6 +51,10 @@
       - mssql-tools
     state: present
     update_cache: true
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Set MSSQL Tools on PATH
   copy:
@@ -80,9 +100,17 @@
       - unzip
       - libgtk-3-0
     state: present
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
   
 - name: Update apt-file
   command: apt-file update
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Enable Podman Socket
   ansible.builtin.shell: systemctl enable --now podman.socket

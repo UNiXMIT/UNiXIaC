@@ -11,29 +11,49 @@
     name: '*'
     state: latest
     update_cache: true
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
   
 - name: Apply all available patches
   community.general.zypper:
     name: '*'
     state: latest
     type: patch
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Install Base Development
   community.general.zypper:
     name: devel_basis
     type: pattern
     state: present
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Add a OpenSUSE Leap repo and add its gpg key
   community.general.zypper_repository:
     repo: 'http://download.opensuse.org/distribution/leap/15.5/repo/oss/'
     name: openSUSE-Leap-15.5-OSS
     auto_import_keys: true
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Add MSSQL ODBC Driver Repo
   community.general.zypper_repository:
     repo: 'https://packages.microsoft.com/config/sles/15/prod.repo'
     auto_import_keys: true
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Uninstall default Docker
   community.general.zypper:
@@ -86,6 +106,10 @@
       - pam-32bit
     state: present
     update_cache: true
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Install MSSQL ODBC Driver 17
   environment:
@@ -95,6 +119,10 @@
       - msodbcsql17
       - mssql-tools
     state: present
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Set MSSQL Tools on PATH
   copy:
