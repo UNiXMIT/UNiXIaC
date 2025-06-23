@@ -21,3 +21,15 @@
       virtualization-type: hvm
   register: amis
   tags: wins2022
+
+- name: Get latest Windows Server 2025 AMI
+  amazon.aws.ec2_ami_info:
+    owners:
+      - amazon
+    region: '{{ awsRegion }}'
+    filters:
+      name: Windows_Server-2025-English-Full-Base*
+      architecture: x86_64
+      virtualization-type: hvm
+  register: amis
+  tags: wins2025
