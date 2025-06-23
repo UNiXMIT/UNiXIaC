@@ -21,3 +21,15 @@
       virtualization-type: hvm
   register: amis
   tags: rhel9
+
+- name: Get latest RHEL 10 AMI
+  amazon.aws.ec2_ami_info:
+    owners:
+      - amazon
+    region: '{{ awsRegion }}'
+    filters:
+      name: RHEL-10.0*
+      architecture: '{{ arch }}'
+      virtualization-type: hvm
+  register: amis
+  tags: rhel10

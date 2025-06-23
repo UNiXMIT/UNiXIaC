@@ -9,3 +9,15 @@
       virtualization-type: hvm
   register: amis
   tags: ubuntu2204
+
+- name: Get latest Ubuntu 24.04 AMI
+  amazon.aws.ec2_ami_info:
+    owners:
+      - amazon
+    region: '{{ awsRegion }}'
+    filters:
+      name: '*ubuntu-noble-24.04*'
+      architecture: x86_64
+      virtualization-type: hvm
+  register: amis
+  tags: ubuntu2404
