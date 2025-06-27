@@ -93,11 +93,6 @@ choco install vscode /NoDesktopIcon
 :: choco install tinytask
 :: choco install speedtest
 :: choco install clumsy
-set msTermVer=1.21.2911.0
-set msTermURL=https://github.com/microsoft/terminal/releases/download/v%msTermVer%/Microsoft.WindowsTerminal_%msTermVer%_x64.zip
-powershell -Command "Invoke-WebRequest -Uri $env:msTermURL -outfile C:\Users\Public\Documents\Microsoft.WindowsTerminal.zip"
-powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\Microsoft.WindowsTerminal.zip -DestinationPath C:\Users\Public\Documents"
-setx /m PATH "%PATH%;C:\Users\Public\Documents\terminal-%msTermVer%"
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension zhuangtongfa.material-theme
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension bitlang.cobol
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension rocketsoftware.rocket-enterprise
