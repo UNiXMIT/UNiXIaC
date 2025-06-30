@@ -141,3 +141,12 @@
     productName: ED90PU16
     edVer: 90
   tags: ed90pu16
+
+- name: ED 9.0 PU 17
+  set_fact:
+    installPath: /home/products/ed90pu17
+    installerName: setup_entdev_9.0_patchupdate17_381441_ubuntu_x64
+    S3Prefix: ED/90/PU17/
+    productName: ED90PU17
+    edVer: 90
+  tags: ed90pu17

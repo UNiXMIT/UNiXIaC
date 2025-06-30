@@ -110,3 +110,10 @@
     S3PrefixPU: ED/90/PU16/
     productName: ES90PU16
   tags: es90pu16
+
+- name: ES 9.0 PU 17
+  set_fact:
+    installerNameESPU: es_90_pu17_381443.exe
+    S3PrefixPU: ED/90/PU17/
+    productName: ES90PU17
+  tags: es90pu17
