@@ -60,3 +60,12 @@
     productName: ED100PU6
     edVer: 100
   tags: ed100pu6
+
+- name: ED 10.0 PU 7
+  set_fact:
+    installPath: /home/products/ed100pu7
+    installerName: setup_entdev_10.0_patchupdate07_381298_suse_x64
+    S3Prefix: ED/100/PU7/
+    productName: ED100PU7
+    edVer: 100
+  tags: ed100pu7
