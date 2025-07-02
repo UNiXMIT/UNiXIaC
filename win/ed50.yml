@@ -20,7 +20,7 @@
       register: s3
       delegate_to: localhost
 
-    - name: Workaround for Install Issue 'Installing EDVS2019_70.exe, a blank window pops up and then disappears' - https://portal.microfocus.com/s/article/KM000004846
+    - name: Workaround for Install Issue 'Installing EDVS2019_70.exe, a blank window pops up and then disappears' - https://my.rocketsoftware.com/RocketCommunity/s/article/Microsoft-VisualStudio-Setup-Configuration-Native-dll-causing-issues-with-VS-Enterprise-Developer-installs-1739543801627
       ansible.windows.win_get_url:
         url: '{{ s3.url }}'
         dest: C:\ProgramData\Microsoft\VisualStudio\Setup\x86\
