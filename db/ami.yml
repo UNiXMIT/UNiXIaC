@@ -1,10 +1,10 @@
-- name: Get latest RHEL 9 AMI
+- name: Get latest RHEL 10 AMI
   amazon.aws.ec2_ami_info:
     owners:
       - amazon
     region: '{{ awsRegion }}'
     filters:
-      name: RHEL-9*
+      name: RHEL-10*
       architecture: x86_64
       virtualization-type: hvm
   register: amis
