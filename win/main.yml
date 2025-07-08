@@ -250,6 +250,13 @@
   - name: Import es.yml
     import_tasks: es.yml
 
+- name: Install .NET
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import net.yml
+    import_tasks: net.yml
+
 - name: Setup ADLDS
   hosts: awsEC2
   gather_facts: no

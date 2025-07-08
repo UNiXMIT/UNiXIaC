@@ -1,0 +1,28 @@
+- name: .NET 3.1 Installation
+  win_chocolatey:
+    name: 
+      - dotnetcore-3.1-sdk
+    state: present
+  ignore_errors: true
+  when: edVer <= 70
+  tags: [ ed, es ]
+
+- name: .NET 6.0 Installation
+  win_chocolatey:
+    name: 
+      - dotnet-6.0-sdk
+    state: present
+  ignore_errors: true
+  when:
+    - edVer >= 80
+    - edVer <= 90
+  tags: [ ed, es ]
+
+- name: .NET 8.0 Installation
+  win_chocolatey:
+    name: 
+      - dotnet-8.0-sdk
+    state: present
+  ignore_errors: true
+  when: edVer >= 100
+  tags: [ ed, es ]
