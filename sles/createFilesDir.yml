@@ -172,6 +172,24 @@
     state: directory
     mode: '0775'
 
+- name: Create CTF
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/CTF"
+    state: directory
+    mode: '0775'
+
+- name: Create CTF/TEXT
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/CTF/TEXT"
+    state: directory
+    mode: '0775'
+
+- name: Create CTF/BIN
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/CTF/BIN"
+    state: directory
+    mode: '0775'
+
 - name: Create MFScripts
   file:
     path: "/home/{{ myUsername }}/MFSupport/MFScripts"
@@ -240,6 +258,16 @@
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/autopac.sh
     dest: /home/{{ myUsername }}/MFSupport/MFScripts/autopac.sh
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download ctf.cfg
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/windows/ctf.cfg
+    dest: "/home/{{ myUsername }}/MFSupport/CTF/ctf.cfg"
     mode: '0775'
   register: result
   retries: 5

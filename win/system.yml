@@ -18,6 +18,13 @@
       Start-Service sshd
       Set-Service -Name sshd -StartupType 'Automatic' 
 
+- name: Install OpenSSH Service
+  win_chocolatey:
+    name: openssh
+    package_params: /SSHServerFeature
+    state: present
+  ignore_errors: true
+
 - name: Disable UAC
   win_regedit:
     path: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
