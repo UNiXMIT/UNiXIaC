@@ -370,6 +370,15 @@
   delay: 30
   until: result is not failed
 
+- name: Download MFESDIAGS.cmd
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/windows/MFScripts/MFESDIAGS.cmd
+    dest: C:\MFScripts\MFESDIAGS.cmd
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Download FormatDumps.cmd
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/FormatDumps.cmd

@@ -253,6 +253,16 @@
   retries: 5
   delay: 30
   until: result is not failed
+
+- name: Download mfesdiags.sh
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/linux/MFScripts/mfesdiags.sh
+    dest: /home/{{ myUsername }}/MFSupport/MFScripts/mfesdiags.sh
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
   
 - name: Download formatdumps.sh
   get_url:
