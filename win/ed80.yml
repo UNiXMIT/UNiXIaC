@@ -158,11 +158,3 @@
     S3PrefixPU: ED/80/PU23/
     productName: ED80PU23
   tags: ed80pu23
-
-- name: ED 8.0 PU 24
-  set_fact:
-    installerNameEDVSPU: edvs2022_80_pu24
-    installerNameEDEPU: ede_80_pu24
-    S3PrefixPU: ED/80/PU24/
-    productName: ED80PU24
-  tags: ed80pu24
