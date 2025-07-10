@@ -168,3 +168,12 @@
     productName: ED80PU23
     edVer: 80
   tags: ed80pu23
+
+- name: ED 8.0 PU 24
+  set_fact:
+    installPath: /home/products/ed80pu24
+    installerName: setup_entdev_8.0_patchupdate24_381256_redhat_x86_64
+    S3Prefix: ED/80/PU24/
+    productName: ED80PU24
+    edVer: 80
+  tags: ed80pu24
