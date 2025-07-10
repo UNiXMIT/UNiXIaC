@@ -2,9 +2,11 @@
   amazon.aws.s3_object:
     # profile: '{{ awsProfile }}'
     bucket: mturner
-    mode: list
-    prefix: '{{ S3Prefix }}{{ installerName }}'
+    mode: geturl
+    object: '{{ S3Prefix }}{{ installerName }}'
     region: eu-west-2
+    expiry: 4000
+    sig_v4: true
   register: s3
   delegate_to: localhost
 
@@ -33,23 +35,16 @@
   delegate_to: localhost
 
 - name: Download {{ installerName }}
-  amazon.aws.s3_object:
-    bucket: mturner
-    region: eu-west-2
-    object: "{{ s3.s3_keys | select('match', '.*redhat.*') | first | string }}"
+  ansible.builtin.get_url:
+    url: '{{ s3.url }}'
     dest: "/home/{{ myUsername }}/MFSupport/MFInstallers/"
-    mode: get
+    owner: '{{ myUsername }}' 
+    group: '{{ myUsername }}'
+    mode: '0775'
   register: result
   retries: 5
   delay: 30
   until: result is not failed
-
-- name: Set {{ installerName }} permissions
-  ansible.builtin.filefile:
-    path: "{{ result.dest }}"
-    owner: '{{ myUsername }}' 
-    group: '{{ myUsername }}'
-    mode: "0775"
 
 - name: Download SafeNet License
   ansible.builtin.get_url:

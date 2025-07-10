@@ -95,9 +95,12 @@
       amazon.aws.s3_object:
         # profile: '{{ awsProfile }}'
         bucket: mturner
-        mode: list
+        mode: geturl
+        object: '{{ S3PrefixPU }}'
         prefix: '{{ S3PrefixPU }}{{ installerNameEDVSPU }}'
         region: eu-west-2
+        expiry: 4000
+        sig_v4: true
       register: s3edvspu
       delegate_to: localhost
 
@@ -105,33 +108,28 @@
       amazon.aws.s3_object:
         # profile: '{{ awsProfile }}'
         bucket: mturner
-        mode: list
+        mode: geturl
+        object: '{{ S3PrefixPU }}'
         prefix: '{{ S3PrefixPU }}{{ installerNameEDEPU }}'
         region: eu-west-2
+        expiry: 4000
+        sig_v4: true
       register: s3edepu
       delegate_to: localhost
       
     - name: Download {{ installerNameEDVSPU }}
-      amazon.aws.s3_object:
-        bucket: mturner
-        region: eu-west-2
-        object: "{{ item }}"
+      ansible.windows.win_get_url:
+        url: '{{ s3edvspu.url }}'
         dest: C:\MFInstallers\
-        mode: get
-      loop: "{{ s3edvspu.s3_keys }}"
       register: result
       retries: 5
       delay: 30
       until: result is not failed
     
     - name: Download {{ installerNameEDEPU }}
-      amazon.aws.s3_object:
-        bucket: mturner
-        region: eu-west-2
-        object: "{{ item }}"
+      ansible.windows.win_get_url:
+        url: '{{ s3edepu.url }}'
         dest: C:\MFInstallers\
-        mode: get
-      loop: "{{ s3edepu.s3_keys }}"
       register: result
       retries: 5
       delay: 30
