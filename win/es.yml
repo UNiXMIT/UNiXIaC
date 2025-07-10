@@ -1,11 +1,21 @@
 - name: Download ES 
   block:
+    - name: Get {{ installerNameES }} Download from S3
+      amazon.aws.s3_object:
+        # profile: '{{ awsProfile }}'
+        bucket: mturner
+        mode: list
+        prefix: '{{ S3Prefix }}{{ installerNameES }}'
+        region: eu-west-2
+      register: s3eslist
+      delegate_to: localhost
+    
     - name: Get {{ installerNameES }} Download URL from S3
       amazon.aws.s3_object:
         # profile: '{{ awsProfile }}'
         bucket: mturner
         mode: geturl
-        object: '{{ S3Prefix }}{{ installerNameES }}'
+        object: "{{ s3eslist.s3_keys }}"
         region: eu-west-2
         expiry: 4000
         sig_v4: true
@@ -38,9 +48,9 @@
       delegate_to: localhost
       when: edVer >= 80
 
-    - name: Download {{ installerNameES }}
+    - name: Download {{ s3es.contents }}
       ansible.windows.win_get_url:
-        url: '{{ s3es.url }}'
+        url: "{{ s3es.url }}"
         dest: C:\MFInstallers\
       register: result
       retries: 5
@@ -101,7 +111,7 @@
     resource: '{{ item }}'
     tags:
       Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ productName }}'
-      ES: '{{ installerNameES }}'
+      ES: '{{ s3es.contents }}'
     state: present
   loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
   delegate_to: localhost
@@ -121,11 +131,11 @@
 
 - name: Install ES 
   block:
-    - name: Install {{ installerNameES }}
+    - name: Install {{ s3es.contents }}
       win_package:
-        path: C:\MFInstallers\{{ installerNameES }}
+        path: C:\MFInstallers\{{ s3es.contents }}
         state: present
-        arguments: /passive /log C:\MFInstallers\{{ installerNameES }}.log /norestart
+        arguments: /passive /log C:\MFInstallers\{{ s3es.contents }}.log /norestart
   tags: es
 
 - name: Install ES PU
