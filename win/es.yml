@@ -23,7 +23,7 @@
         sig_v4: true
       register: s3sn
       delegate_to: localhost
-      when: '{{ edVer | int }} <= 90'
+      when: edVer | int <= 90
     
     - name: Get AutoPass License Download URL from S3
       amazon.aws.s3_object:
@@ -36,7 +36,7 @@
         sig_v4: true
       register: s3ap
       delegate_to: localhost
-      when: '{{ edVer | int }} >= 80'
+      when: edVer | int >= 80
 
     - name: Download {{ installerNameES }}
       ansible.windows.win_get_url:
@@ -51,7 +51,7 @@
       ansible.windows.win_get_url:
         url: '{{ s3sn.url }}'
         dest: C:\MFInstallers\
-      when: '{{ edVer | int }} <= 90'
+      when: edVer | int <= 90
       register: result
       retries: 5
       delay: 30
@@ -61,7 +61,7 @@
       ansible.windows.win_get_url:
         url: '{{ s3ap.url }}'
         dest: C:\MFInstallers\
-      when: '{{ edVer | int }} >= 80'
+      when: edVer | int >= 80
       register: result
       retries: 5
       delay: 30
@@ -139,12 +139,12 @@
   ansible.windows.win_file:
     path: C:\Program Files (x86)\Micro Focus
     state: directory
-  when: '{{ edVer | int }} >= 110'
+  when: edVer | int >= 110
   tags: es
 
 - name: Create Symlink for MF <<===>> Rocket
   win_command: cmd.exe /k mklink /d "C:\Program Files (x86)\Micro Focus\Enterprise Server" "C:\Program Files (x86)\Rocket Software\Enterprise Server"
-  when: '{{ edVer | int }} >= 110'
+  when: edVer | int >= 110
   tags: es
   
 - name: Install Safenet License File
@@ -152,7 +152,7 @@
     src: C:\MFInstallers\lservrc.net
     dest: C:\ProgramData\Micro Focus\lservrc.net
     remote_src: true
-  when: '{{ edVer | int }} <= 90'
+  when: edVer | int <= 90
   tags: es
   
 - name: Install AutoPass License File
@@ -160,7 +160,7 @@
     src: C:\MFInstallers\LicFile.txt
     dest: C:\ProgramData\Micro Focus\LicFile.txt
     remote_src: true
-  when: '{{ edVer | int }} >= 80'
+  when: edVer | int >= 80
   tags: es
   
 - name: Stop MFDS Service
@@ -172,7 +172,7 @@
 - name: Enable ESMAC UI
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" --UI-on'
-  when: '{{ edVer | int }} >= 70'
+  when: edVer | int >= 70
   tags: es
 
 - name: Enable ESMAC Listen All
@@ -195,14 +195,14 @@
   win_command:
     cmd: mfsecconv reset --user SYSAD --pass SYSAD
     chdir: C:\Program Files (x86)\Micro Focus\Enterprise Server\bin
-  when: '{{ edVer | int }} >= 100'
+  when: edVer | int >= 100
   tags: es
 
 - name: Set SYSAD in Vault
   win_command:
     cmd: mfsecretsadmin write microfocus/temp/admin -overwrite "{'mfUser':'SYSAD', 'mfPassword':'SYSAD'}"
     chdir: C:\Program Files (x86)\Micro Focus\Enterprise Server\bin
-  when: '{{ edVer | int }} >= 100'
+  when: edVer | int >= 100
   tags: es
 
 - name: Import JCL Region
@@ -245,10 +245,10 @@
 
 - name: Create Symlink for ES <<===>> ED version 10.0 and below
   win_command: cmd.exe /k mklink /d "C:\Program Files (x86)\Micro Focus\Enterprise Developer" "C:\Program Files (x86)\Micro Focus\Enterprise Server"
-  when: '{{ edVer | int }} <= 100'
+  when: edVer | int <= 100
   tags: es
 
 - name: Create Symlink for ES <<===>> ED version 11.0 and above
   win_command: cmd.exe /k mklink /d "C:\Program Files (x86)\Micro Focus\Enterprise Developer" "C:\Program Files (x86)\Rocket Software\Enterprise Server"
-  when: '{{ edVer | int }} >= 110'
+  when: edVer | int >= 110
   tags: es
