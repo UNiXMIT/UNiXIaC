@@ -132,7 +132,7 @@
       X-Requested-With: API
       Origin: http://localhost:10086
   register: loginResponse
-  when: edVer >= 100
+  when: edVer | int >= 100
 
 - name: Add OpenLDAP ESCWA Security Entry
   ansible.builtin.uri:

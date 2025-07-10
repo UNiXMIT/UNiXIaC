@@ -5,7 +5,7 @@
         installerNameEDVS: edvs2019_70.exe
         installerNameEDE: ede_70.exe
         S3Prefix: ED/70/GA/
-        edVer: 70
+        edVer | int: 70
         productName: ED70
 
     - name: Get Microsoft.VisualStudio.Setup.Configuration.Native.dll Download URL from S3

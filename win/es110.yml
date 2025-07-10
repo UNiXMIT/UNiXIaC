@@ -3,5 +3,5 @@
     installerNameES: es_110.exe
     S3Prefix: ED/110/GA/
     productName: ES110
-    edVer: 110
+    edVer | int: 110
   tags: es110

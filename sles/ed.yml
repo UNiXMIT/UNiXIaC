@@ -53,7 +53,7 @@
     owner: '{{ myUsername }}' 
     group: users
     mode: '0775'
-  when: edVer <= 90
+  when: edVer | int <= 90
   register: result
   retries: 5
   delay: 30
@@ -66,7 +66,7 @@
     owner: '{{ myUsername }}' 
     group: users
     mode: '0775'
-  when: edVer >= 80
+  when: edVer | int >= 80
   register: result
   retries: 5
   delay: 30
@@ -92,12 +92,12 @@
 
 - name: Install Safenet License File
   shell: mv /tmp/lservrc.net /var/microfocuslicensing/bin/lservrc.net
-  when: edVer <= 90
+  when: edVer | int <= 90
   become: yes
 
 - name: Install AutoPass License File
   shell: mv /tmp/LicFile.txt /opt/microfocus/licensing/autopass/clientdetails/data/LicFile.txt
-  when: edVer >= 80
+  when: edVer | int >= 80
   become: yes
 
 - name: Start MFDS
@@ -111,12 +111,12 @@
 - name: Set SYSAD in VSAM ESM
   shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfsecconv reset --user SYSAD --pass SYSAD'
   become: yes
-  when: edVer >= 100
+  when: edVer | int >= 100
 
 - name: Set SYSAD in Vault
   shell: . {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfsecretsadmin write microfocus/temp/admin -overwrite '{"mfUser":"SYSAD", "mfPassword":"SYSAD"}'
   become: yes
-  when: edVer >= 100
+  when: edVer | int >= 100
 
 - name: Import JCL Region
   shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml D SYSAD SYSAD'

@@ -4,7 +4,7 @@
     installerNameEDE: ede_80.exe
     S3Prefix: ED/80/GA/
     productName: ED80
-    edVer: 80
+    edVer | int: 80
   tags: ed80
 
 - name: ED 8.0 PU 5

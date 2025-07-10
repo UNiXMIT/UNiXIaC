@@ -4,5 +4,5 @@
     installerNameEDE: ede_110.exe
     S3Prefix: ED/110/GA/
     productName: ED110
-    edVer: 110
+    edVer | int: 110
   tags: ed110

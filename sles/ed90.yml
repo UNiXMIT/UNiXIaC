@@ -4,7 +4,7 @@
     installerName: setup_entdev_9.0_suse_x64
     S3Prefix: ED/90/GA/
     productName: ED90
-    edVer: 90
+    edVer | int: 90
   tags: ed90
 
 - name: ED 9.0 PU 1
@@ -13,7 +13,7 @@
     installerName: setup_entdev_9.0_patchupdate01_328659_suse_x64
     S3Prefix: ED/90/PU1/
     productName: ED90PU1
-    edVer: 90
+    edVer | int: 90
   tags: ed90pu1
 
 - name: ED 9.0 PU 2
@@ -22,7 +22,7 @@
     installerName: setup_entdev_9.0_patchupdate02_330827_suse_x64
     S3Prefix: ED/90/PU2/
     productName: ED90PU2
-    edVer: 90
+    edVer | int: 90
   tags: ed90pu2
 
 - name: ED 9.0 PU 3
@@ -31,7 +31,7 @@
     installerName: setup_entdev_9.0_patchupdate03_332283_suse_x64
     S3Prefix: ED/90/PU3/
     productName: ED90PU3
-    edVer: 90
+    edVer | int: 90
   tags: ed90pu3
 
 - name: ED 9.0 PU 4
@@ -40,7 +40,7 @@
     installerName: setup_entdev_9.0_patchupdate04_339842_suse_x64
     S3Prefix: ED/90/PU4/
     productName: ED90PU4
-    edVer: 90
+    edVer | int: 90
   tags: ed90pu4
 
 - name: ED 9.0 PU 5
@@ -49,7 +49,7 @@
     installerName: setup_entdev_9.0_patchupdate05_342652_suse_x64
     S3Prefix: ED/90/PU5/
     productName: ED90PU5
-    edVer: 90
+    edVer | int: 90
   tags: ed90pu5
 
 - name: ED 9.0 PU 6
@@ -58,7 +58,7 @@
     installerName: setup_entdev_9.0_patchupdate06_346108_suse_x64
     S3Prefix: ED/90/PU6/
     productName: ED90PU6
-    edVer: 90
+    edVer | int: 90
   tags: ed90pu6
 
 - name: ED 9.0 PU 7
@@ -67,7 +67,7 @@
     installerName: setup_entdev_9.0_patchupdate07_350131_suse_x64
     S3Prefix: ED/90/PU7/
     productName: ED90PU7
-    edVer: 90
+    edVer | int: 90
   tags: ed90pu7
 
 - name: ED 9.0 PU 9
@@ -76,7 +76,7 @@
     installerName: setup_entdev_9.0_patchupdate09_358101_suse_x64
     S3Prefix: ED/90/PU9/
     productName: ED90PU9
-    edVer: 90
+    edVer | int: 90
   tags: ed90pu9
 
 - name: ED 9.0 PU 10
@@ -85,7 +85,7 @@
     installerName: setup_entdev_9.0_patchupdate10_359890_suse_x64
     S3Prefix: ED/90/PU10/
     productName: ED90PU10
-    edVer: 90
+    edVer | int: 90
   tags: ed90pu10
 
 - name: ED 9.0 PU 11
@@ -94,7 +94,7 @@
     installerName: setup_entdev_9.0_patchupdate11_364117_suse_x64
     S3Prefix: ED/90/PU11/
     productName: ED90PU11
-    edVer: 90
+    edVer | int: 90
   tags: ed90pu11
 
 - name: ED 9.0 PU 12
@@ -103,7 +103,7 @@
     installerName: setup_entdev_9.0_patchupdate12_366515_suse_x64
     S3Prefix: ED/90/PU12/
     productName: ED90PU12
-    edVer: 90
+    edVer | int: 90
   tags: ed90pu12
 
 - name: ED 9.0 PU 13
@@ -112,7 +112,7 @@
     installerName: setup_entdev_9.0_patchupdate13_368120_suse_x64
     S3Prefix: ED/90/PU13/
     productName: ED90PU13
-    edVer: 90
+    edVer | int: 90
   tags: ed90pu13
 
 - name: ED 9.0 PU 14
@@ -121,7 +121,7 @@
     installerName: setup_entdev_9.0_patchupdate14_371506_suse_x64
     S3Prefix: ED/90/PU14/
     productName: ED90PU14
-    edVer: 90
+    edVer | int: 90
   tags: ed90pu14
 
 - name: ED 9.0 PU 15
@@ -130,7 +130,7 @@
     installerName: setup_entdev_9.0_patchupdate15_374029_suse_x64
     S3Prefix: ED/90/PU15/
     productName: ED90PU15
-    edVer: 90
+    edVer | int: 90
   tags: ed90pu15
 
 - name: ED 9.0 PU 16
@@ -139,7 +139,7 @@
     installerName: setup_entdev_9.0_patchupdate16_377169_suse_x64
     S3Prefix: ED/90/PU16/
     productName: ED90PU16
-    edVer: 90
+    edVer | int: 90
   tags: ed90pu16
 
 - name: ED 9.0 PU 17
@@ -148,5 +148,5 @@
     installerName: setup_entdev_9.0_patchupdate17_381441_suse_x64
     S3Prefix: ED/90/PU17/
     productName: ED90PU17
-    edVer: 90
+    edVer | int: 90
   tags: ed90pu17

@@ -4,7 +4,7 @@
       - dotnetcore-3.1-sdk
     state: present
   ignore_errors: true
-  when: edVer <= 70
+  when: edVer | int <= 70
   tags: [ ed, es ]
 
 - name: .NET 6.0 Installation
@@ -14,8 +14,8 @@
     state: present
   ignore_errors: true
   when:
-    - edVer >= 80
-    - edVer <= 90
+    - edVer | int >= 80
+    - edVer | int <= 90
   tags: [ ed, es ]
 
 - name: .NET 8.0 Installation
@@ -24,5 +24,5 @@
       - dotnet-8.0-sdk
     state: present
   ignore_errors: true
-  when: edVer >= 100
+  when: edVer | int >= 100
   tags: [ ed, es ]

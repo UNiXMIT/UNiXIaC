@@ -4,7 +4,7 @@
     installerNameEDE: ede_90.exe
     S3Prefix: ED/90/GA/
     productName: ED90
-    edVer: 90
+    edVer | int: 90
   tags: ed90
 
 - name: ED 9.0 PU 1

@@ -4,5 +4,5 @@
     installerName: setup_entdev_11.0_ubuntu_x64
     S3Prefix: ED/110/GA/
     productName: ED110
-    edVer: 110
+    edVer | int: 110
   tags: ed110

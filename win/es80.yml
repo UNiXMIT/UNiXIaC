@@ -3,7 +3,7 @@
     installerNameES: es_80.exe
     S3Prefix: ED/80/GA/
     productName: ES80
-    edVer: 80
+    edVer | int: 80
   tags: es80
 
 - name: ES 8.0 PU 5
