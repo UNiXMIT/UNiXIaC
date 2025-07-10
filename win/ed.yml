@@ -96,7 +96,8 @@
         # profile: '{{ awsProfile }}'
         bucket: mturner
         mode: geturl
-        object: '{{ S3PrefixPU }}{{ installerNameEDVSPU }}'
+        object: '{{ S3PrefixPU }}'
+        prefix: '{{ S3PrefixPU }}{{ installerNameEDVSPU }}'
         region: eu-west-2
         expiry: 4000
         sig_v4: true
@@ -108,7 +109,8 @@
         # profile: '{{ awsProfile }}'
         bucket: mturner
         mode: geturl
-        object: '{{ S3PrefixPU }}{{ installerNameEDEPU }}'
+        object: '{{ S3PrefixPU }}'
+        prefix: '{{ S3PrefixPU }}{{ installerNameEDEPU }}'
         region: eu-west-2
         expiry: 4000
         sig_v4: true

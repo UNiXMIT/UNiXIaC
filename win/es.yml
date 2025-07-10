@@ -75,7 +75,8 @@
         # profile: '{{ awsProfile }}'
         bucket: mturner
         mode: geturl
-        object: '{{ S3PrefixPU }}{{ installerNameESPU }}'
+        object: '{{ S3PrefixPU }}'
+        prefix: '{{ S3PrefixPU }}{{ installerNameESPU }}'
         region: eu-west-2
         expiry: 4000
         sig_v4: true
