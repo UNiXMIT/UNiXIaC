@@ -4,9 +4,11 @@
       amazon.aws.s3_object:
         # profile: '{{ awsProfile }}'
         bucket: mturner
-        mode: list
-        prefix: '{{ S3Prefix }}{{ installerNameEDVS }}'
+        mode: geturl
+        object: '{{ S3Prefix }}{{ installerNameEDVS }}'
         region: eu-west-2
+        expiry: 4000
+        sig_v4: true
       register: s3edvs
       delegate_to: localhost
 
@@ -14,9 +16,11 @@
       amazon.aws.s3_object:
         # profile: '{{ awsProfile }}'
         bucket: mturner
-        mode: list
-        prefix: '{{ S3Prefix }}{{ installerNameEDE }}'
+        mode: geturl
+        object: '{{ S3Prefix }}{{ installerNameEDE }}'
         region: eu-west-2
+        expiry: 4000
+        sig_v4: true
       register: s3ede
       delegate_to: localhost
 
@@ -47,26 +51,18 @@
       when: edVer >= 80
 
     - name: Download {{ installerNameEDVS }}
-      amazon.aws.s3_object:
-        bucket: mturner
-        region: eu-west-2
-        object: "{{ item }}"
+      ansible.windows.win_get_url:
+        url: '{{ s3edvs.url }}'
         dest: C:\MFInstallers\
-        mode: get
-      loop: "{{ s3edvs.s3_keys }}"
       register: result
       retries: 5
       delay: 30
       until: result is not failed
     
     - name: Download {{ installerNameEDE }}
-      aamazon.aws.s3_object:
-        bucket: mturner
-        region: eu-west-2
-        object: "{{ item }}"
+      ansible.windows.win_get_url:
+        url: '{{ s3ede.url }}'
         dest: C:\MFInstallers\
-        mode: get
-      loop: "{{ s3ede.s3_keys }}"
       register: result
       retries: 5
       delay: 30
