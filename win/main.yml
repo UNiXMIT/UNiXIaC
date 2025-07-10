@@ -1,12 +1,3 @@
-- name: DEBUG
-  hosts: local
-  gather_facts: no
-  tasks:
-  - debug:
-      msg: "{{ MITTEST }}"
-  tags: default
-
-
 - name: AWS Initial Configuration
   hosts: local
   gather_facts: no
