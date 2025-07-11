@@ -47,4 +47,4 @@
   shell: printf 'y\n{{ installPath }}\n' | {{ installPath }}{{ installerName }}
 
 - name: Activate Licenses
-  shell: printf '{{ s3.tags.CODE }}\n{{ s3.tags.KEY }}\n' | {{ installPath }}bin/activator
+  shell: printf '{{ CODE }}\n{{ KEY }}\n' | {{ installPath }}bin/activator
