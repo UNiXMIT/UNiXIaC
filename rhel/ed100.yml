@@ -4,7 +4,7 @@
     installerName: setup_entdev_10.0_redhat_x86_64
     S3Prefix: ED/100/GA/
     productName: ED100
-    edVer | int: 100
+    edVer: 100
   tags: ed100
 
 - name: ED 10.0 PU 1
@@ -13,7 +13,7 @@
     installerName: setup_entdev_10.0_patchupdate01_364372_redhat_x86_64
     S3Prefix: ED/100/PU1/
     productName: ED100PU1
-    edVer | int: 100
+    edVer: 100
   tags: ed100pu1
 
 - name: ED 10.0 PU 2
@@ -22,7 +22,7 @@
     installerName: setup_entdev_10.0_patchupdate02_367535_redhat_x86_64
     S3Prefix: ED/100/PU2/
     productName: ED100PU2
-    edVer | int: 100
+    edVer: 100
   tags: ed100pu2
 
 - name: ED 10.0 PU 3
@@ -31,7 +31,7 @@
     installerName: setup_entdev_10.0_patchupdate03_369165_redhat_x86_64
     S3Prefix: ED/100/PU3/
     productName: ED100PU3
-    edVer | int: 100
+    edVer: 100
   tags: ed100pu3
 
 - name: ED 10.0 PU 4
@@ -40,7 +40,7 @@
     installerName: setup_entdev_10.0_patchupdate04_373099_redhat_x86_64
     S3Prefix: ED/100/PU4/
     productName: ED100PU4
-    edVer | int: 100
+    edVer: 100
   tags: ed100pu4
 
 - name: ED 10.0 PU 5
@@ -49,7 +49,7 @@
     installerName: setup_entdev_10.0_patchupdate05_376770_redhat_x86_64
     S3Prefix: ED/100/PU5/
     productName: ED100PU5
-    edVer | int: 100
+    edVer: 100
   tags: ed100pu5
 
 - name: ED 10.0 PU 6
@@ -58,7 +58,7 @@
     installerName: setup_entdev_10.0_patchupdate06_379293_redhat_x86_64
     S3Prefix: ED/100/PU6/
     productName: ED100PU6
-    edVer | int: 100
+    edVer: 100
   tags: ed100pu6
 
 - name: ED 10.0 PU 7
@@ -67,5 +67,5 @@
     installerName: setup_entdev_10.0_patchupdate07_381298_redhat_x86_64
     S3Prefix: ED/100/PU7/
     productName: ED100PU7
-    edVer | int: 100
+    edVer: 100
   tags: ed100pu7

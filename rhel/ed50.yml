@@ -4,5 +4,5 @@
     installerName: setup_entdev_5.0_redhat_x86_64
     S3Prefix: ED/50/
     productName: ED50
-    edVer | int: 50
+    edVer: 50
   tags: ed50

@@ -4,7 +4,7 @@
     installerName: setup_entdev_8.0_patchupdate14_342017_suse_x64
     S3Prefix: ED/80/PU14/
     productName: ED80PU14
-    edVer | int: 80
+    edVer: 80
   tags: ed80pu14
 
 - name: ED 8.0 PU 15
@@ -13,7 +13,7 @@
     installerName: setup_entdev_8.0_patchupdate15_346053_suse_x64
     S3Prefix: ED/80/PU15/
     productName: ED80PU15
-    edVer | int: 80
+    edVer: 80
   tags: ed80pu15
 
 - name: ED 8.0 PU 16
@@ -22,7 +22,7 @@
     installerName: setup_entdev_8.0_patchupdate16_351547_suse_x64
     S3Prefix: ED/80/PU16/
     productName: ED80PU16
-    edVer | int: 80
+    edVer: 80
   tags: ed80pu16
 
 - name: ED 8.0 PU 17
@@ -31,7 +31,7 @@
     installerName: setup_entdev_8.0_patchupdate17_355214_suse_x64
     S3Prefix: ED/80/PU17/
     productName: ED80PU17
-    edVer | int: 80
+    edVer: 80
   tags: ed80pu17
 
 - name: ED 8.0 PU 18
@@ -40,7 +40,7 @@
     installerName: setup_entdev_8.0_patchupdate18_358448_suse_x64
     S3Prefix: ED/80/PU18/
     productName: ED80PU18
-    edVer | int: 80
+    edVer: 80
   tags: ed80pu18
 
 - name: ED 8.0 PU 19
@@ -49,7 +49,7 @@
     installerName: setup_entdev_8.0_patchupdate19_364198_suse_x64
     S3Prefix: ED/80/PU19/
     productName: ED80PU19
-    edVer | int: 80
+    edVer: 80
   tags: ed80pu19
 
 - name: ED 8.0 PU 20
@@ -58,7 +58,7 @@
     installerName: setup_entdev_8.0_patchupdate20_366822_suse_x64
     S3Prefix: ED/80/PU20/
     productName: ED80PU20
-    edVer | int: 80
+    edVer: 80
   tags: ed80pu20
 
 
@@ -68,7 +68,7 @@
     installerName: setup_entdev_8.0_patchupdate21_369449_suse_x64
     S3Prefix: ED/80/PU21/
     productName: ED80PU21
-    edVer | int: 80
+    edVer: 80
   tags: ed80pu21
 
 - name: ED 8.0 PU 22
@@ -77,7 +77,7 @@
     installerName: setup_entdev_8.0_patchupdate22_372373_suse_x64
     S3Prefix: ED/80/PU22/
     productName: ED80PU22
-    edVer | int: 80
+    edVer: 80
   tags: ed80pu22
 
 - name: ED 8.0 PU 23
@@ -86,7 +86,7 @@
     installerName: setup_entdev_8.0_patchupdate23_377380_suse_x64
     S3Prefix: ED/80/PU23/
     productName: ED80PU23
-    edVer | int: 80
+    edVer: 80
   tags: ed80pu23
 
 - name: ED 8.0 PU 24
@@ -95,5 +95,5 @@
     installerName: setup_entdev_8.0_patchupdate24_381256_suse_x64
     S3Prefix: ED/80/PU24/
     productName: ED80PU24
-    edVer | int: 80
+    edVer: 80
   tags: ed80pu24

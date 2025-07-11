@@ -4,7 +4,7 @@
     installerName: setup_entdev_11.0_redhat_x86_64
     S3Prefix: ED/110/GA/
     productName: ED110
-    edVer | int: 110
+    edVer: 110
   tags: ed110
   when: "'arm' not in ansible_run_tags"
 
@@ -14,6 +14,6 @@
     installerName: setup_entdev_11.0_redhat_arm64
     S3Prefix: ED/110/GA/
     productName: ED110
-    edVer | int: 110
+    edVer: 110
   tags: ed110
   when: "'amd' not in ansible_run_tags"
