@@ -5,7 +5,7 @@
         # profile: '{{ awsProfile }}'
         bucket: mturner
         mode: geturl
-        object: '{{ S3Prefix }}Microsoft.VisualStudio.Setup.Configuration.Native.dll'
+        object: 'ED/70/Microsoft.VisualStudio.Setup.Configuration.Native.dll'
         region: eu-west-2
         expiry: 4000
         sig_v4: true
