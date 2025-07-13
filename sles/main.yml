@@ -98,42 +98,41 @@
     import_tasks: createFilesDir.yml
   tags: default
 
-- name: ED 7.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import ed70.yml
-    import_tasks: ed70.yml
+# - name: ED 7.0
+#   hosts: awsEC2
+#   gather_facts: no
+#   tasks:
+#   - name: Import ed70.yml
+#     import_tasks: ed70.yml
 
-
-- name: ED 8.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import ed80.yml
-    import_tasks: ed80.yml
+# - name: ED 8.0
+#   hosts: awsEC2
+#   gather_facts: no
+#   tasks:
+#   - name: Import ed80.yml
+#     import_tasks: ed80.yml
 
   
-- name: ED 9.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import ed90.yml
-    import_tasks: ed90.yml
+# - name: ED 9.0
+#   hosts: awsEC2
+#   gather_facts: no
+#   tasks:
+#   - name: Import ed90.yml
+#     import_tasks: ed90.yml
 
-- name: ED 10.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import ed100.yml
-    import_tasks: ed100.yml
+# - name: ED 10.0
+#   hosts: awsEC2
+#   gather_facts: no
+#   tasks:
+#   - name: Import ed100.yml
+#     import_tasks: ed100.yml
 
-- name: ED 11.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import ed110.yml
-    import_tasks: ed110.yml
+# - name: ED 11.0
+#   hosts: awsEC2
+#   gather_facts: no
+#   tasks:
+#   - name: Import ed110.yml
+#     import_tasks: ed110.yml
 
 - name: Install ED
   hosts: awsEC2
@@ -152,26 +151,26 @@
     import_tasks: openldap.yml
   tags: openldap
 
-- name: extend 10.4.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import extend1040.yml
-    import_tasks: extend1040.yml
+# - name: extend 10.4.0
+#   hosts: awsEC2
+#   gather_facts: no
+#   tasks:
+#   - name: Import extend1040.yml
+#     import_tasks: extend1040.yml
 
-- name: extend 10.5.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import extend1050.yml
-    import_tasks: extend1050.yml
+# - name: extend 10.5.0
+#   hosts: awsEC2
+#   gather_facts: no
+#   tasks:
+#   - name: Import extend1050.yml
+#     import_tasks: extend1050.yml
 
-- name: extend 11.0.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import extend1100.yml
-    import_tasks: extend1100.yml
+# - name: extend 11.0.0
+#   hosts: awsEC2
+#   gather_facts: no
+#   tasks:
+#   - name: Import extend1100.yml
+#     import_tasks: extend1100.yml
 
 - name: Install extend
   hosts: awsEC2
