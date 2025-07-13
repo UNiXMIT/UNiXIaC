@@ -31,98 +31,98 @@
         chdir: C:\ProgramData\Microsoft\VisualStudio\Setup\x86
   tags: ed70
 
-- name: ED 70 PU 15
-  set_fact:
-    installerNameEDVSPU: edvs2019_70_pu15_315341.exe
-    installerNameEDEPU: ede_70_pu15_315321.exe
-    S3PrefixPU: ED/70/PU15/
-    productName: ED70PU15
-  tags: ed70pu15
+# - name: ED 70 PU 15
+#   set_fact:
+#     installerNameEDVSPU: edvs2019_70_pu15_315341.exe
+#     installerNameEDEPU: ede_70_pu15_315321.exe
+#     S3PrefixPU: ED/70/PU15/
+#     productName: ED70PU15
+#   tags: ed70pu15
 
-- name: ED 7.0 PU 16
-  set_fact:
-    installerNameEDVSPU: edvs2019_70_pu16_318123.exe
-    installerNameEDEPU: ede_70_pu16_318103.exe
-    S3PrefixPU: ED/70/PU16/
-    productName: ED70PU16
-  tags: ed70pu16
+# - name: ED 7.0 PU 16
+#   set_fact:
+#     installerNameEDVSPU: edvs2019_70_pu16_318123.exe
+#     installerNameEDEPU: ede_70_pu16_318103.exe
+#     S3PrefixPU: ED/70/PU16/
+#     productName: ED70PU16
+#   tags: ed70pu16
 
-- name: ED 7.0 PU 17
-  set_fact:
-    installerNameEDVSPU: edvs2019_70_pu17_320927.exe
-    installerNameEDEPU: ede_70_pu17_320926.exe
-    S3PrefixPU: ED/70/PU17/
-    productName: ED70PU17
-  tags: ed70pu17
+# - name: ED 7.0 PU 17
+#   set_fact:
+#     installerNameEDVSPU: edvs2019_70_pu17_320927.exe
+#     installerNameEDEPU: ede_70_pu17_320926.exe
+#     S3PrefixPU: ED/70/PU17/
+#     productName: ED70PU17
+#   tags: ed70pu17
 
-- name: ED 7.0 PU 18
-  set_fact:
-    installerNameEDVSPU: edvs2019_70_pu18_322470.exe
-    installerNameEDEPU: ede_70_pu18_322467.exe
-    S3PrefixPU: ED/70/PU18/
-    productName: ED70PU18
-  tags: ed70pu18
+# - name: ED 7.0 PU 18
+#   set_fact:
+#     installerNameEDVSPU: edvs2019_70_pu18_322470.exe
+#     installerNameEDEPU: ede_70_pu18_322467.exe
+#     S3PrefixPU: ED/70/PU18/
+#     productName: ED70PU18
+#   tags: ed70pu18
 
-- name: ED 7.0 PU 19
-  set_fact:
-    installerNameEDVSPU: edvs2019_70_pu19_324237.exe
-    installerNameEDEPU: ede_70_pu19_324235.exe
-    S3PrefixPU: ED/70/PU19/
-    productName: ED70PU19
-  tags: ed70pu19
+# - name: ED 7.0 PU 19
+#   set_fact:
+#     installerNameEDVSPU: edvs2019_70_pu19_324237.exe
+#     installerNameEDEPU: ede_70_pu19_324235.exe
+#     S3PrefixPU: ED/70/PU19/
+#     productName: ED70PU19
+#   tags: ed70pu19
 
-- name: ED 7.0 PU 20
-  set_fact:
-    installerNameEDVSPU: edvs2019_70_pu20_328617.exe
-    installerNameEDEPU: ede_70_pu20_328615.exe
-    S3PrefixPU: ED/70/PU20/
-    productName: ED70PU20
-  tags: ed70pu20
+# - name: ED 7.0 PU 20
+#   set_fact:
+#     installerNameEDVSPU: edvs2019_70_pu20_328617.exe
+#     installerNameEDEPU: ede_70_pu20_328615.exe
+#     S3PrefixPU: ED/70/PU20/
+#     productName: ED70PU20
+#   tags: ed70pu20
 
-- name: ED 7.0 PU 21
-  set_fact:
-    installerNameEDVSPU: edvs2019_70_pu21_330882.exe
-    installerNameEDEPU: ede_70_pu21_330880.exe
-    S3PrefixPU: ED/70/PU21/
-    productName: ED70PU21
-  tags: ed70pu21
+# - name: ED 7.0 PU 21
+#   set_fact:
+#     installerNameEDVSPU: edvs2019_70_pu21_330882.exe
+#     installerNameEDEPU: ede_70_pu21_330880.exe
+#     S3PrefixPU: ED/70/PU21/
+#     productName: ED70PU21
+#   tags: ed70pu21
 
-- name: ED 7.0 PU 22
-  set_fact:
-    installerNameEDVSPU: edvs2019_70_pu22_337406.exe
-    installerNameEDEPU: ede_70_pu22_337404.exe
-    S3PrefixPU: ED/70/PU22/
-    productName: ED70PU22
-  tags: ed70pu22
+# - name: ED 7.0 PU 22
+#   set_fact:
+#     installerNameEDVSPU: edvs2019_70_pu22_337406.exe
+#     installerNameEDEPU: ede_70_pu22_337404.exe
+#     S3PrefixPU: ED/70/PU22/
+#     productName: ED70PU22
+#   tags: ed70pu22
 
-- name: ED 7.0 PU 23
-  set_fact:
-    installerNameEDVSPU: edvs2019_70_pu23_342482.exe
-    installerNameEDEPU: ede_70_pu23_342480.exe
-    S3PrefixPU: ED/70/PU23/
-    productName: ED70PU23
-  tags: ed70pu23
+# - name: ED 7.0 PU 23
+#   set_fact:
+#     installerNameEDVSPU: edvs2019_70_pu23_342482.exe
+#     installerNameEDEPU: ede_70_pu23_342480.exe
+#     S3PrefixPU: ED/70/PU23/
+#     productName: ED70PU23
+#   tags: ed70pu23
 
-- name: ED 7.0 PU 24
-  set_fact:
-    installerNameEDVSPU: edvs2019_70_pu24_350236.exe
-    installerNameEDEPU: ede_70_pu24_350234.exe
-    S3PrefixPU: ED/70/PU24/
-    productName: ED70PU24
-  tags: ed70pu24
+# - name: ED 7.0 PU 24
+#   set_fact:
+#     installerNameEDVSPU: edvs2019_70_pu24_350236.exe
+#     installerNameEDEPU: ede_70_pu24_350234.exe
+#     S3PrefixPU: ED/70/PU24/
+#     productName: ED70PU24
+#   tags: ed70pu24
 
-- name: ED 7.0 PU 25
-  set_fact:
-    installerNameEDVSPU: edvs2019_70_pu25_358594.exe
-    installerNameEDEPU: ede_70_pu25_358576.exe
-    S3PrefixPU: ED/70/PU25/
-    productName: ED70PU25
-  tags: ed70pu25
+# - name: ED 7.0 PU 25
+#   set_fact:
+#     installerNameEDVSPU: edvs2019_70_pu25_358594.exe
+#     installerNameEDEPU: ede_70_pu25_358576.exe
+#     S3PrefixPU: ED/70/PU25/
+#     productName: ED70PU25
+#   tags: ed70pu25
 
-- name: ED 7.0 PU 26
-  set_fact:
-    installerNameEDVSPU: edvs2019_70_pu26_362449.exe
-    installerNameEDEPU: ede_70_pu26_362447.exe
-    S3PrefixPU: ED/70/PU26/
-    productName: ED70PU26
-  tags: ed70pu26
+# - name: ED 7.0 PU 26
+#   set_fact:
+#     installerNameEDVSPU: edvs2019_70_pu26_362449.exe
+#     installerNameEDEPU: ede_70_pu26_362447.exe
+#     S3PrefixPU: ED/70/PU26/
+#     productName: ED70PU26
+#   tags: ed70pu26
