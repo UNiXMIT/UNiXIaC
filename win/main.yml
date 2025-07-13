@@ -138,26 +138,26 @@
     import_tasks: createFilesDir.yml
   tags: default
 
-- name: Install ED 5.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import ed50.yml
-    import_tasks: ed50.yml
+# - name: Install ED 5.0
+#   hosts: awsEC2
+#   gather_facts: no
+#   tasks:
+#   - name: Import ed50.yml
+#     import_tasks: ed50.yml
 
-- name: Install ED 6.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import ed60.yml
-    import_tasks: ed60.yml
+# - name: Install ED 6.0
+#   hosts: awsEC2
+#   gather_facts: no
+#   tasks:
+#   - name: Import ed60.yml
+#     import_tasks: ed60.yml
 
-- name: Install ED 7.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import ed70.yml
-    import_tasks: ed70.yml
+# - name: Install ED 7.0
+#   hosts: awsEC2
+#   gather_facts: no
+#   tasks:
+#   - name: Import ed70.yml
+#     import_tasks: ed70.yml
 
 # - name: Install ED 8.0
 #   hosts: awsEC2
