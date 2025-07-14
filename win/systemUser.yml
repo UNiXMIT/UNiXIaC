@@ -11,3 +11,17 @@
     name: HideFileExt
     data: 0
     type: dword
+
+- name: Add folders to QuickAccess
+  ansible.windows.win_powershell:
+    script: |
+      $o = new-object -com shell.application
+      $o.Namespace('C:\temp').Self.InvokeVerb("pintohome")
+      $o.Namespace('C:\AcuSamples').Self.InvokeVerb("pintohome")
+      $o.Namespace('C:\AcuScripts').Self.InvokeVerb("pintohome")
+      $o.Namespace('C:\AcuSupport').Self.InvokeVerb("pintohome")
+      $o.Namespace('C:\etc').Self.InvokeVerb("pintohome")
+      $o.Namespace('C:\MFSamples').Self.InvokeVerb("pintohome")
+      $o.Namespace('C:\MFScripts').Self.InvokeVerb("pintohome")
+      $o.Namespace('C:\MFSupport').Self.InvokeVerb("pintohome")
+      $o.Namespace('C:\CTF').Self.InvokeVerb("pintohome")

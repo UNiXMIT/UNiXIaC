@@ -115,6 +115,14 @@
   no_log: True
   tags: default
 
+- name: Create Support Files and Directories
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Import createFilesDir.yml
+    import_tasks: createFilesDir.yml
+  tags: default
+
 - name: Modify {{ myUsername }} User OS Config
   hosts: awsEC2
   gather_facts: no
@@ -128,14 +136,6 @@
   - name: Import systemUser.yml
     import_tasks: systemUser.yml
   no_log: True
-  tags: default
-
-- name: Create Support Files and Directories
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import createFilesDir.yml
-    import_tasks: createFilesDir.yml
   tags: default
 
 - name: Install ED 5.0

@@ -210,6 +210,18 @@
   delay: 30
   until: result is not failed
 
+- name: Create MFSupport
+  win_file:
+    path: C:\MFSupport
+    state: directory
+
+- name: Everyone permissions on MFSupport
+  win_acl:
+    user: Everyone
+    path: C:\MFSupport
+    type: allow
+    rights: FullControl
+
 - name: Create MFSamples
   win_file:
     path: C:\MFSamples
