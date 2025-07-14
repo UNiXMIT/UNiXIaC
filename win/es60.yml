@@ -1,7 +1,0 @@
-- name: Set Facts
-  set_fact:
-    installerNameES: es_60.exe
-    S3Prefix: ED/60/
-    productName: ES60
-    edVer: 60
-  tags: es60

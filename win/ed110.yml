@@ -1,8 +1,0 @@
-- name: ED 11.0
-  set_fact:
-    installerNameEDVS: edvs2022_110.exe
-    installerNameEDE: ede_110.exe
-    S3Prefix: ED/110/GA/
-    productName: ED110
-    edVer: 110
-  tags: ed110

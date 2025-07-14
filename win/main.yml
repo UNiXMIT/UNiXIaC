@@ -13,15 +13,6 @@
   - name: Import ami.yml
     import_tasks: ami.yml
 
-# - name: SSO 2FA
-#   hosts: local
-#   gather_facts: no
-#   tasks:
-#   - name: Import sso.yml
-#     import_tasks: sso.yml
-#   no_log: True
-#   tags: default
-
 - name: AWS EC2 Management
   hosts: local
   vars:
@@ -138,110 +129,12 @@
   no_log: True
   tags: default
 
-# - name: Install ED 5.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import ed50.yml
-#     import_tasks: ed50.yml
-
-# - name: Install ED 6.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import ed60.yml
-#     import_tasks: ed60.yml
-
-# - name: Install ED 7.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import ed70.yml
-#     import_tasks: ed70.yml
-
-# - name: Install ED 8.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import ed80.yml
-#     import_tasks: ed80.yml
-
-# - name: Install ED 9.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import ed90.yml
-#     import_tasks: ed90.yml
-
-# - name: Install ED 10.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import ed100.yml
-#     import_tasks: ed100.yml
-
-# - name: Install ED 11.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import ed110.yml
-#     import_tasks: ed110.yml
-
 - name: Setup ED
   hosts: awsEC2
   gather_facts: no
   tasks:
   - name: Import ed.yml
     import_tasks: ed.yml
-
-# - name: Install ES 5.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import es50.yml
-#     import_tasks: es50.yml
-
-# - name: Install ES 6.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import es60.yml
-#     import_tasks: es60.yml
-
-# - name: Install ES 7.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import es70.yml
-#     import_tasks: es70.yml
-
-# - name: Install ES 8.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import es80.yml
-#     import_tasks: es80.yml
-
-# - name: Install ES 9.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import es90.yml
-#     import_tasks: es90.yml
-
-# - name: Install ES 10.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import es100.yml
-#     import_tasks: es100.yml
-
-# - name: Install ES 11.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import es110.yml
-#     import_tasks: es110.yml
 
 - name: Setup ES
   hosts: awsEC2
@@ -264,27 +157,6 @@
   - name: Import adlds.yml
     import_tasks: adlds.yml
   tags: adlds
-
-# - name: extend 10.4.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import extend1040.yml
-#     import_tasks: extend1040.yml
-
-# - name: extend 10.5.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import extend1050.yml
-#     import_tasks: extend1050.yml
-
-# - name: extend 11.0.0
-#   hosts: awsEC2
-#   gather_facts: no
-#   tasks:
-#   - name: Import extend1100.yml
-#     import_tasks: extend1100.yml
 
 - name: Install extend
   hosts: awsEC2

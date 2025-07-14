@@ -1,7 +1,0 @@
-- name: ES 11.0
-  set_fact:
-    installerNameES: es_110.exe
-    S3Prefix: ED/110/GA/
-    productName: ES110
-    edVer: 110
-  tags: es110
