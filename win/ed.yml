@@ -1,3 +1,33 @@
+- name: ED Version <= 7.0 Workaround
+  block:
+    - name: Get Microsoft.VisualStudio.Setup.Configuration.Native.dll Download URL from S3
+      amazon.aws.s3_object:
+        # profile: '{{ awsProfile }}'
+        bucket: mturner
+        mode: geturl
+        object: 'ED/70/Microsoft.VisualStudio.Setup.Configuration.Native.dll'
+        region: eu-west-2
+        expiry: 4000
+        sig_v4: true
+      register: s3
+      delegate_to: localhost
+
+    - name: Workaround for Install Issue 'Installing EDVS2019_70.exe, a blank window pops up and then disappears' - https://my.rocketsoftware.com/RocketCommunity/s/article/Microsoft-VisualStudio-Setup-Configuration-Native-dll-causing-issues-with-VS-Enterprise-Developer-installs-1739543801627
+      ansible.windows.win_get_url:
+        url: '{{ s3.url }}'
+        dest: C:\ProgramData\Microsoft\VisualStudio\Setup\x86\
+      register: result
+      retries: 5
+      delay: 30
+      until: result is not failed
+
+    - name: Register Workaround DLL
+      win_command: 
+        cmd: regsvr32 /s C:\ProgramData\Microsoft\VisualStudio\Setup\x86\Microsoft.VisualStudio.Setup.Configuration.Native.dll
+        chdir: C:\ProgramData\Microsoft\VisualStudio\Setup\x86
+  when: edVer | int <= 70
+  tags: ed
+
 - name: Download ED 
   block:
     - name: Get {{ installerNameEDVS }} Download URL from S3
