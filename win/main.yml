@@ -138,29 +138,12 @@
   no_log: True
   tags: default
 
-<<<<<<< HEAD
-- name: Install ED 5.0
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import ed50.yml
-    import_tasks: ed50.yml
-=======
-- name: Create Support Files and Directories
-  hosts: awsEC2
-  gather_facts: no
-  tasks:
-  - name: Import createFilesDir.yml
-    import_tasks: createFilesDir.yml
-  tags: default
-
 # - name: Install ED 5.0
 #   hosts: awsEC2
 #   gather_facts: no
 #   tasks:
 #   - name: Import ed50.yml
 #     import_tasks: ed50.yml
->>>>>>> 9bb1daa6fe9e1534e692d0e53b55b395378b0ec8
 
 # - name: Install ED 6.0
 #   hosts: awsEC2
