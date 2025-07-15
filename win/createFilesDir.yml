@@ -252,7 +252,7 @@
 
 - name: Download MFBSI.cfg
   win_get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/docs/ES/MFBSI.cfg
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/docs/es/MFBSI.cfg
     dest: C:\MFSamples\JCL\MFBSI.cfg
   register: result
   retries: 5
@@ -261,7 +261,7 @@
 
 - name: Download VSE.cfg
   win_get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/docs/ES/VSE.cfg
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/docs/es/VSE.cfg
     dest: C:\MFSamples\JCL\VSE.cfg
   register: result
   retries: 5
