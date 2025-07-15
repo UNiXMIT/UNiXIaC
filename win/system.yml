@@ -86,7 +86,7 @@
       arguments: /s /f /t 0
     triggers:
     - type: daily
-      start_boundary: '{{ ansible_date_time.year }}-{{ ansible_date_time.month }}-{{ (win_scheduled_task.day+1)|int }}T20:00:00'
+      start_boundary: '{{ ansible_date_time.year }}-{{ ansible_date_time.month }}-{{ (ansible_date_time.day+1)|int }}T20:00:00'
     username: '{{ ansibleUser }}'
     password: '{{ myPassword }}'
     logon_type: password
