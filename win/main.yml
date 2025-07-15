@@ -37,7 +37,7 @@
 
 - name: Modify OS Config
   hosts: awsEC2
-  gather_facts: no
+  gather_facts: true
   tasks:
   - name: Import system.yml
     import_tasks: system.yml
