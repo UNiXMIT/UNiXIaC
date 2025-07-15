@@ -334,6 +334,26 @@
   delay: 30
   until: result is not failed
 
+- name: Download MFBSI.cfg
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/docs/ES/MFBSI.cfg
+    dest: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/MFBSI.cfg
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download VSE.cfg
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/docs/ES/VSE.cfg
+    dest: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/VSE.cfg
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Create CICS
   file:
     path: "/home/{{ myUsername }}/MFSupport/MFSamples/CICS"

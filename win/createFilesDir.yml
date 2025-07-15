@@ -250,6 +250,24 @@
   delay: 30
   until: result is not failed
 
+- name: Download MFBSI.cfg
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/docs/ES/MFBSI.cfg
+    dest: C:\MFSamples\JCL\MFBSI.cfg
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download VSE.cfg
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/docs/ES/VSE.cfg
+    dest: C:\MFSamples\JCL\VSE.cfg
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Unzip JCL.zip
   win_unzip:
     src: C:\MFSamples\JCL\JCL.zip
@@ -261,6 +279,8 @@
     path: C:\MFSamples\JCL
     type: allow
     rights: FullControl
+
+
 
 - name: Create CICS
   win_file:
