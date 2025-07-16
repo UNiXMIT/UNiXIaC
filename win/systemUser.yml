@@ -15,7 +15,7 @@
 - name: Install Clink
   win_chocolatey:
     name: clink
-  state: present
+    state: present
   ignore_errors: true
 
 - name: Add folders to QuickAccess
