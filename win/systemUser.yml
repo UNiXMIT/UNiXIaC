@@ -12,6 +12,13 @@
     data: 0
     type: dword
 
+- name: Install Clink
+  win_chocolatey:
+    name: 
+    - clink
+  state: present
+  ignore_errors: true
+
 - name: Add folders to QuickAccess
   ansible.windows.win_powershell:
     script: |
