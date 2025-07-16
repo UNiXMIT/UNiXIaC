@@ -14,8 +14,7 @@
 
 - name: Install Clink
   win_chocolatey:
-    name: 
-    - clink
+    name: clink
   state: present
   ignore_errors: true
 
