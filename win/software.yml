@@ -36,8 +36,3 @@
     # - clumsy
     state: present
   ignore_errors: true
-
-- name: Clink Autorun for all users
-  win_command:
-    cmd: C:\Program Files (x86)\clink\clink_x64.exe autorun -a install
-  ignore_errors: true
