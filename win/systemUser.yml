@@ -13,8 +13,9 @@
     type: dword
 
 - name: Clink Autorun for {{ myUsername }}
-  win_command:
-    cmd: C:\Program Files (x86)\clink\clink_x64.exe autorun -a install
+  win_shell: C:\Program Files (x86)\clink\clink_x64.exe autorun -a install
+  args:
+    executable: cmd
   ignore_errors: true
 
 - name: Add folders to QuickAccess
