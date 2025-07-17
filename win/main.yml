@@ -41,7 +41,6 @@
   tasks:
   - name: Import system.yml
     import_tasks: system.yml
-  tags: default
 
 - name: Add Users
   hosts: awsEC2

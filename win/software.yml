@@ -36,3 +36,8 @@
     # - clumsy
     state: present
   ignore_errors: true
+
+- name: Set Clink on PATH
+  win_path:
+    name: PATH
+    elements: C:\Program Files (x86)\clink

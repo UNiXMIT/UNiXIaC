@@ -2,6 +2,7 @@
   community.windows.win_timezone:
     timezone: GMT Standard Time
   when: userRegion | default("1") == "1"
+  tags: default
 
 - name: Disable Windows Firewall
   win_firewall:
@@ -10,6 +11,7 @@
     - Domain
     - Private
     - Public
+  tags: default
 
 - name: Install OpenSSH Service
   ansible.windows.win_powershell:
@@ -17,6 +19,7 @@
       Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
       Start-Service sshd
       Set-Service -Name sshd -StartupType 'Automatic' 
+  tags: wins2025
 
 - name: Install OpenSSH Service
   win_chocolatey:
@@ -24,6 +27,7 @@
     package_params: /SSHServerFeature
     state: present
   ignore_errors: true
+  tags: [ wins2019, wins2022 ]
 
 - name: Disable UAC
   win_regedit:
@@ -31,24 +35,28 @@
     name: EnableLUA
     data: 0
     type: dword
+  tags: default
 
 - name: ExtractMSI
   win_regedit:
     path: HKCR:\Msi.Package\shell\extractMSI\command
     data: 'msiexec /a "%1" /qb TARGETDIR=\"%1 Contents\"'
     type: string
+  tags: default
 
 - name: AcuSilent MSI Install Option 1
   win_regedit:
     path: HKCR:\Msi.Package\shell\runas
     data: 'AcuSilent'
     type: string
+  tags: default
 
 - name: AcuSilent MSI Install Option 2
   win_regedit:
     path: HKCR:\Msi.Package\shell\runas\command
     data: 'msiexec /i "%1" ADDLOCAL=ALL WINDOWSVERSION=PostWindows7 /qb'
     type: string
+  tags: default
 
 - name: Defer Feature Updates
   win_regedit:
@@ -56,6 +64,7 @@
     name: DeferFeatureUpdates 
     data: 1
     type: dword
+  tags: default
 
 - name: Defer Feature Updates for 90 Days
   win_regedit:
@@ -63,6 +72,7 @@
     name: DeferFeatureUpdatesPeriodInDays  
     data: 90
     type: dword
+  tags: default
 
 - name: Defer Quality Updates
   win_regedit:
@@ -70,6 +80,7 @@
     name: DeferQualityUpdates  
     data: 1
     type: dword
+  tags: default
 
 - name: Defer Quality Updates for 30 Days
   win_regedit:
@@ -77,6 +88,7 @@
     name: DeferQualityUpdatesPeriodInDays  
     data: 1
     type: dword
+  tags: default
 
 - name: Create Auto Shutdown Schedule
   win_scheduled_task:
@@ -93,6 +105,7 @@
     run_level: highest
     state: present
     enabled: yes
+  tags: default
   
 - name: Disable IE ESC for Administrators
   win_regedit:
@@ -100,6 +113,7 @@
       name: IsInstalled
       data: 0
       type: dword
+  tags: default
 
 - name: Disable IE ESC for Users
   win_regedit:
@@ -107,6 +121,7 @@
       name: IsInstalled
       data: 0
       type: dword
+  tags: default
 
 - name: Set Active Hours
   win_regedit:
@@ -114,6 +129,7 @@
       name: SetActiveHours
       data: 1
       type: dword
+  tags: default
 
 - name: Active Hours Start
   win_regedit:
@@ -121,6 +137,7 @@
       name: ActiveHoursStart
       data: 1
       type: dword
+  tags: default
 
 - name: Active Hours End
   win_regedit:
@@ -128,3 +145,4 @@
       name: ActiveHoursEnd
       data: 4
       type: dword
+  tags: default
