@@ -41,3 +41,4 @@
   win_path:
     name: PATH
     elements: C:\Program Files (x86)\clink
+  ignore_errors: true

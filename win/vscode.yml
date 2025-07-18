@@ -3,18 +3,22 @@
     name: vscode
     package_params: /NoDesktopIcon
     state: present
+  ignore_errors: true
 
 - name: VSCode One Dark Pro Theme Extension
   win_command:
     cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension zhuangtongfa.material-theme'
+  ignore_errors: true
 
 - name: VSCode COBOL Extension
   win_command:
     cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension bitlang.cobol'
+  ignore_errors: true
 
 - name: VSCode Rocket Enterprise Extension
   win_command:
     cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension rocketsoftware.rocket-enterprise'
+  ignore_errors: true
 
 # - name: VSCode Rocket AcuCOBOL-GT Extension
 #   win_command:
@@ -23,17 +27,21 @@
 - name: VSCode Thunder Client Extension
   win_command:
     cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension rangav.vscode-thunder-client'
+  ignore_errors: true
 
 - name: VSCode Hex Editor Extension
   win_command:
     cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension ms-vscode.hexeditor'
+  ignore_errors: true
 
 - name: Download VSCode Settings 
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/refs/heads/main/win/vscode/settings.json
     dest: 'C:\Users\{{ myUsername }}\AppData\Roaming\Code\User\settings.json'
+  ignore_errors: true
 
 - name: Download VSCode KeyBindings
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/refs/heads/main/win/vscode/keybindings.json
     dest: 'C:\Users\{{ myUsername }}\AppData\Roaming\Code\User\keybindings.json'
+  ignore_errors: true
