@@ -28,7 +28,7 @@ chmod +x semaphore.sh
 mkdir /home/support/semaphore/config
 semaphore.sh
 ```
-**NOTE:** Dockerfile, pfsso*.zip and support.pem must be located in the current working directory before starting the build. 
+**NOTE:** Dockerfile and support.pem must be located in the current working directory before starting the build. 
 
 ## Command Line  
 ### Create admin user
