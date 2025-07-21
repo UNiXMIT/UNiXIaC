@@ -14,8 +14,9 @@
   "securityGroupsAMS": "['sg-XXXXXX','sg-XXXXXX']",
   "securityGroupsAPJ": "['sg-XXXXXX','sg-XXXXXX']",
   "instanceType": "t3.xlarge",
-  "instanceTypeARM": "t4g.xlarge",
+  "instanceTypeARM": "r6g.large",
   "deviceName": "/dev/sda1",
   "volumeType": "gp3",
-  "volumeSize": 120
+  "volumeSize": 120,
+  "awsProfile": "XXXXXX"
 }
