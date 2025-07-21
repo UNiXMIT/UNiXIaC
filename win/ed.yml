@@ -327,6 +327,13 @@
     line: '    "MfRequestedEndpoint" : "tcp:*:10086",'
   tags: ed
 
+- name: Modify ESCWA SSO Behaviour
+  community.windows.win_lineinfile:
+    path: C:\ProgramData\Micro Focus\Enterprise Developer\ESCWA\commonwebadmin.json
+    regex: 'InsecureAutoSignOn'
+    line: '    "InsecureAutoSignOn" : true,'
+  tags: ed
+
 - name: Start ESCWA Service
   ansible.windows.win_service:
     name: escwa
