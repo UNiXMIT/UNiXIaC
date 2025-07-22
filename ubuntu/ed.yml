@@ -101,6 +101,8 @@
   become: yes
 
 - name: Start MFDS
+  environment:
+    TERM: xterm
   shell: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64"
   become: yes
 
