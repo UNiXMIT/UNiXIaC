@@ -99,6 +99,8 @@
     chmod +x /openldap/newpasswd.sh
 
 - name: Start ESCWA
+  environment:
+    TERM: xterm
   shell: tmux new -d -s escwa ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/escwa"
 
 - name: Pause for 10 seconds
