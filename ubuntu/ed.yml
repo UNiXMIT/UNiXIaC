@@ -104,8 +104,6 @@
   environment:
     TERM: xterm
   shell: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64"
-  args:
-    executable: /bin/bash
   become: yes
 
 - name: Pause for 10 seconds
