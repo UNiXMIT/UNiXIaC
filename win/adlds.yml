@@ -36,7 +36,7 @@
 
 - name: Configure ADLDS for MF
   win_command:
-    cmd: es-ldap-setup.cmd {{ myUsername}} {{ myPassword }} "CN=Micro Focus,CN=Program Data,DC=local" localhost:389
+    cmd: es-ldap-setup.cmd administrator {{ myPassword }} "CN=Micro Focus,CN=Program Data,DC=local" localhost:389
     chdir: 'C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin'
 
 - name: Change MFReader password
