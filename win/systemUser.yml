@@ -17,6 +17,7 @@
   args:
     executable: cmd
   ignore_errors: true
+  tags: clink
 
 - name: Add folders to QuickAccess
   ansible.windows.win_powershell:
