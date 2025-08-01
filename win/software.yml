@@ -37,8 +37,10 @@
     state: present
   ignore_errors: true
 
-- name: Set Clink on PATH
-  win_path:
-    name: PATH
-    elements: C:\Program Files (x86)\clink
-  ignore_errors: true
+- name: Create enableClink script
+  win_copy:
+    content: |
+      @ECHO OFF
+      setx PATH="C:\Program Files (x86)\clink;%PATH%"
+      "C:\Program Files (x86)\clink" autorun -a install
+    dest: C:\Windows\enableClink.cmd

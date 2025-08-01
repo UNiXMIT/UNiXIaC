@@ -18,10 +18,11 @@
 - name: VSCode Rocket AcuCOBOL-GT Extension
   win_command:
     cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension rocketsoftware.rocket-acucobolgt'
+  ignore_errors: true
 
-- name: VSCode Thunder Client Extension
+- name: VSCode Rest Extension
   win_command:
-    cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension rangav.humao.rest-client'
+    cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension humao.rest-client'
   ignore_errors: true
 
 - name: VSCode Hex Editor Extension
