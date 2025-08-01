@@ -41,6 +41,6 @@
   win_copy:
     content: |
       @ECHO OFF
-      setx PATH="C:\Program Files (x86)\clink;%PATH%"
-      "C:\Program Files (x86)\clink" autorun -a install
+      setx /m PATH "C:\Program Files (x86)\clink;%PATH%"
+      "C:\Program Files (x86)\clink\clink" autorun -a install
     dest: C:\Windows\enableClink.cmd
