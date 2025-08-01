@@ -10,23 +10,18 @@
     cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension zhuangtongfa.material-theme'
   ignore_errors: true
 
-- name: VSCode COBOL Extension
-  win_command:
-    cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension bitlang.cobol'
-  ignore_errors: true
-
 - name: VSCode Rocket Enterprise Extension
   win_command:
     cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension rocketsoftware.rocket-enterprise'
   ignore_errors: true
 
-# - name: VSCode Rocket AcuCOBOL-GT Extension
-#   win_command:
-#     cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension rocketsoftware.rocket-acucobolgt'
+- name: VSCode Rocket AcuCOBOL-GT Extension
+  win_command:
+    cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension rocketsoftware.rocket-acucobolgt'
 
 - name: VSCode Thunder Client Extension
   win_command:
-    cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension rangav.vscode-thunder-client'
+    cmd: '"C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension rangav.humao.rest-client'
   ignore_errors: true
 
 - name: VSCode Hex Editor Extension
