@@ -40,6 +40,7 @@
   package:
     name:
       - openldap
+      - openldap-servers
       - openldap-clients
       - openssl
     state: present
