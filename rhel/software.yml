@@ -234,6 +234,16 @@
       Password            = {{ myPassword }}
       Port                = 5432
 
+- name: Install yq
+  ansible.builtin.get_url:
+    url: https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+    dest: /usr/local/bin/
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Install Kubernetes (kubectl)
   ansible.builtin.shell: |
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
