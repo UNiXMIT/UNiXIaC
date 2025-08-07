@@ -33,3 +33,6 @@
   loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
   delegate_to: localhost
   tags: vs2022
+
+- name: Run ngen to recompile DLLs after .NET updates
+  win_dotnet_ngen:
