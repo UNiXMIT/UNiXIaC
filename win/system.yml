@@ -20,6 +20,7 @@
       Add-MpPreference -ExclusionPath 'C:\Program Files (x86)\Rocket Software'
       Add-MpPreference -ExclusionPath 'C:\Program Files\Micro Focus'
       Add-MpPreference -ExclusionPath 'C:\Program Files\Rocket Software'
+  tags: default
 
 - name: Install OpenSSH Service
   ansible.windows.win_powershell:
