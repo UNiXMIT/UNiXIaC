@@ -90,6 +90,14 @@
   - name: Import vs.yml 
     import_tasks: vs.yml
 
+- name: Reboot EC2 Instance
+  hosts: awsEC2
+  gather_facts: no
+  tasks:
+  - name: Reboot
+    win_reboot:
+  tags: default
+
 - name: Install VSCode + Extensions
   hosts: awsEC2
   gather_facts: no
