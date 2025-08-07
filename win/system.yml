@@ -155,3 +155,11 @@
       data: 4
       type: dword
   tags: default
+
+- name: Modify DNS Settings
+  ansible.windows.win_dns_client:
+    adapter_names: '*'
+    dns_servers:
+      - 1.1.1.1
+      - 1.0.0.1
+  tags: default
