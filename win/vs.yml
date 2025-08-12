@@ -1,8 +1,41 @@
-- name: Install Visual Studio 2019
-  win_chocolatey:
-    name: visualstudio2019professional
-    package_params: '--wait --quiet --norestart --add Microsoft.Net.Component.4.5.TargetingPack --add Microsoft.Net.Component.4.5.2.TargetingPack --add Microsoft.VisualStudio.Component.Debugger.JustInTime --add Microsoft.VisualStudio.Component.GraphDocument --add Microsoft.VisualStudio.Component.NuGet --add Microsoft.VisualStudio.Component.DockerTools --add Microsoft.VisualStudio.Component.VisualStudioData --add Microsoft.VisualStudio.Component.Web --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.Azure --add Microsoft.VisualStudio.Component.Wcf.Tooling --add Microsoft.VisualStudio.Component.SQL.SSDT --add Microsoft.VisualStudio.Workload.NetCoreTools --downloadThenInstall'
+# - name: Install Visual Studio 2019
+#   win_chocolatey:
+#     name: visualstudio2019professional
+#     package_params: '--wait --quiet --norestart --add Microsoft.Net.Component.4.5.TargetingPack --add Microsoft.Net.Component.4.5.2.TargetingPack --add Microsoft.VisualStudio.Component.Debugger.JustInTime --add Microsoft.VisualStudio.Component.GraphDocument --add Microsoft.VisualStudio.Component.NuGet --add Microsoft.VisualStudio.Component.DockerTools --add Microsoft.VisualStudio.Component.VisualStudioData --add Microsoft.VisualStudio.Component.Web --add Microsoft.VisualStudio.Workload.ManagedDesktop --add Microsoft.VisualStudio.Workload.Azure --add Microsoft.VisualStudio.Component.Wcf.Tooling --add Microsoft.VisualStudio.Component.SQL.SSDT --add Microsoft.VisualStudio.Workload.NetCoreTools --downloadThenInstall'
+#   tags: vs2019
+
+- name: Download VS Professional 2019
+  ansible.windows.win_get_url:
+    url: https://download.visualstudio.microsoft.com/download/pr/12569159-fcaa-4029-a83e-b7b900c5f9d6/1874842a56f476fab072a8c338a4e27e0bae768a330cf14f3e2fe586727e6fc7/vs_Professional.exe
+    dest: C:\Users\Public\Documents
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
   tags: vs2019
+
+# - name: Install Visual Studio 2022
+#   win_chocolatey:
+#     name: visualstudio2022professional
+#     package_params: '--wait --quiet --norestart --add Microsoft.Net.Component.4.5.TargetingPack --add Microsoft.Net.Component.4.5.2.TargetingPack --add Microsoft.VisualStudio.Component.Debugger.JustInTime --add Microsoft.VisualStudio.Component.GraphDocument --add Microsoft.VisualStudio.Component.NuGet --add Microsoft.VisualStudio.Component.DockerTools --add Microsoft.VisualStudio.Component.VisualStudioData --add Microsoft.VisualStudio.Component.Web --add Microsoft.VisualStudio.Workload.ManagedDesktop.Core --add Microsoft.VisualStudio.Workload.Azure --add Microsoft.VisualStudio.Component.Wcf.Tooling --add Microsoft.VisualStudio.Component.SQL.SSDT --add Microsoft.VisualStudio.Workload.NetCoreTools --downloadThenInstall'
+#   tags: vs2022
+
+- name: Download VS Professional 2022
+  ansible.windows.win_get_url:
+    url: https://aka.ms/vs/17/release/vs_professional.exe
+    dest: C:\Users\Public\Documents
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+  tags: vs2022
+
+- name: Install VS Professional
+  win_package:
+    path: C:\Users\Public\Documents\vs_professional.exe
+    state: present
+    arguments: '--wait --quiet --norestart --add Microsoft.Net.Component.4.5.TargetingPack --add Microsoft.Net.Component.4.5.2.TargetingPack --add Microsoft.VisualStudio.Component.Debugger.JustInTime --add Microsoft.VisualStudio.Component.GraphDocument --add Microsoft.VisualStudio.Component.NuGet --add Microsoft.VisualStudio.Component.DockerTools --add Microsoft.VisualStudio.Component.VisualStudioData --add Microsoft.VisualStudio.Component.Web --add Microsoft.VisualStudio.Workload.ManagedDesktop.Core --add Microsoft.VisualStudio.Workload.Azure --add Microsoft.VisualStudio.Component.Wcf.Tooling --add Microsoft.VisualStudio.Component.SQL.SSDT --add Microsoft.VisualStudio.Workload.NetCoreTools --downloadThenInstall'
+  tags: [ vs2019, vs2022 ]
 
 - name: Add VS 2019 Tags
   amazon.aws.ec2_tag:
@@ -15,29 +48,6 @@
   loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
   delegate_to: localhost
   tags: vs2019
-
-# - name: Install Visual Studio 2022
-#   win_chocolatey:
-#     name: visualstudio2022professional
-#     package_params: '--wait --quiet --norestart --add Microsoft.Net.Component.4.5.TargetingPack --add Microsoft.Net.Component.4.5.2.TargetingPack --add Microsoft.VisualStudio.Component.Debugger.JustInTime --add Microsoft.VisualStudio.Component.GraphDocument --add Microsoft.VisualStudio.Component.NuGet --add Microsoft.VisualStudio.Component.DockerTools --add Microsoft.VisualStudio.Component.VisualStudioData --add Microsoft.VisualStudio.Component.Web --add Microsoft.VisualStudio.Workload.ManagedDesktop.Core --add Microsoft.VisualStudio.Workload.Azure --add Microsoft.VisualStudio.Component.Wcf.Tooling --add Microsoft.VisualStudio.Component.SQL.SSDT --add Microsoft.VisualStudio.Workload.NetCoreTools --downloadThenInstall'
-#   tags: vs2022
-
-- name: Download VS Professional 2022
-  ansible.windows.win_get_url:
-    url: https://aka.ms/vs/17/release.ltsc.17.12/vs_professional.exe
-    dest: C:\Users\Public\Documents
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-  tags: vs2022
-
-- name: Install VS Professional 2022
-  win_package:
-    path: C:\Users\Public\Documents\vs_professional.exe
-    state: present
-    arguments: '--wait --quiet --norestart --add Microsoft.Net.Component.4.5.TargetingPack --add Microsoft.Net.Component.4.5.2.TargetingPack --add Microsoft.VisualStudio.Component.Debugger.JustInTime --add Microsoft.VisualStudio.Component.GraphDocument --add Microsoft.VisualStudio.Component.NuGet --add Microsoft.VisualStudio.Component.DockerTools --add Microsoft.VisualStudio.Component.VisualStudioData --add Microsoft.VisualStudio.Component.Web --add Microsoft.VisualStudio.Workload.ManagedDesktop.Core --add Microsoft.VisualStudio.Workload.Azure --add Microsoft.VisualStudio.Component.Wcf.Tooling --add Microsoft.VisualStudio.Component.SQL.SSDT --add Microsoft.VisualStudio.Workload.NetCoreTools --downloadThenInstall'
-  tags: vs2022
 
 - name: Add VS 2022 Tags
   amazon.aws.ec2_tag:
