@@ -123,7 +123,7 @@
       win_package:
         path: C:\MFInstallers\{{ installerNameES }}
         state: present
-        arguments: /q /log C:\MFInstallers\{{ installerNameES }}.log /norestart
+        arguments: /q /log C:\MFInstallers\{{ installerNameES }}.log
   tags: es
 
 - name: Install ES PU
@@ -132,7 +132,7 @@
       win_package:
         path: C:\MFInstallers\{{ installerNameESPU }}
         state: present
-        arguments: /q /log C:\MFInstallers\{{ installerNameESPU }}.log /norestart
+        arguments: /q /log C:\MFInstallers\{{ installerNameESPU }}.log
   tags: espu
 
 - name: Create Micro Focus Directory
