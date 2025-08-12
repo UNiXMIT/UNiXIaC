@@ -163,9 +163,3 @@
       - 1.1.1.1
       - 1.0.0.1
   tags: default
-
-- name: Install all Windows updates and reboot
-  ansible.windows.win_updates:
-    category_names: '*'
-    reboot: true
-  tags: default
