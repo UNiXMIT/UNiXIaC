@@ -86,12 +86,6 @@
 - name: Install Visual Studio
   hosts: awsEC2
   gather_facts: no
-  become: yes
-  become_user: administrator
-  become_method: runas
-  become_flags: logon_type=interactive logon_flags=with_profile
-  vars:
-    ansible_become_pass: '{{ myPassword }}'
   tasks:
   - name: Import vs.yml 
     import_tasks: vs.yml
@@ -137,12 +131,6 @@
 - name: Setup ED
   hosts: awsEC2
   gather_facts: no
-  become: yes
-  become_user: administrator
-  become_method: runas
-  become_flags: logon_type=interactive logon_flags=with_profile
-  vars:
-    ansible_become_pass: '{{ myPassword }}'
   tasks:
   - name: Import ed.yml
     import_tasks: ed.yml
@@ -150,12 +138,6 @@
 - name: Setup ES
   hosts: awsEC2
   gather_facts: no
-  become: yes
-  become_user: administrator
-  become_method: runas
-  become_flags: logon_type=interactive logon_flags=with_profile
-  vars:
-    ansible_become_pass: '{{ myPassword }}'
   tasks:
   - name: Import es.yml
     import_tasks: es.yml
