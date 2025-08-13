@@ -87,7 +87,7 @@
   hosts: awsEC2
   gather_facts: no
   become: yes
-  become_user: '{{ myUsername }}'
+  become_user: administrator
   become_method: runas
   become_flags: logon_type=interactive logon_flags=with_profile
   vars:
@@ -138,7 +138,7 @@
   hosts: awsEC2
   gather_facts: no
   become: yes
-  become_user: '{{ myUsername }}'
+  become_user: administrator
   become_method: runas
   become_flags: logon_type=interactive logon_flags=with_profile
   vars:
@@ -151,7 +151,7 @@
   hosts: awsEC2
   gather_facts: no
   become: yes
-  become_user: '{{ myUsername }}'
+  become_user: administrator
   become_method: runas
   become_flags: logon_type=interactive logon_flags=with_profile
   vars:
