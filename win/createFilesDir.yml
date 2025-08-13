@@ -437,20 +437,29 @@
   retries: 5
   delay: 30
   until: result is not failed
-  
-- name: Download VSFIX.cmd
-  win_get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSFIX.cmd
-    dest: C:\MFScripts\VSFIX.cmd
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
 
 - name: Download ctf.cfg
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/windows/ctf.cfg
     dest: C:\CTF\ctf.cfg
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download VSMOD.cmd
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSMOD.cmd
+    dest: C:\MFScripts\VSMOD.cmd
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download VSFIX.cmd
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSFIX.cmd
+    dest: C:\MFScripts\VSFIX.cmd
   register: result
   retries: 5
   delay: 30
