@@ -295,6 +295,20 @@
   when: edVer | int >= 100
   tags: ed
 
+- name: Set SYSAD in HACloud escwacreds
+  win_command:
+    cmd: mfsecretsadmin write microfocus/hacloud/escwacreds -overwrite "{'mfUser':'SYSAD', 'mfPassword':'SYSAD'}"
+    chdir: C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin
+  when: edVer | int >= 100
+  tags: ed
+
+- name: Set SYSAD in HACloud mfdscreds
+  win_command:
+    cmd: mfsecretsadmin write microfocus/hacloud/mfdscreds -overwrite "{'mfUser':'SYSAD', 'mfPassword':'SYSAD'}"
+    chdir: C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin
+  when: edVer | int >= 100
+  tags: ed
+
 - name: Import JCL Region
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml D SYSAD SYSAD'

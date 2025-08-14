@@ -118,6 +118,16 @@
   become: yes
   when: edVer | int >= 100
 
+- name: Set SYSAD in HACloud escwacreds
+  shell: . {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfsecretsadmin write microfocus/hacloud/escwacreds -overwrite '{"mfUser":"SYSAD", "mfPassword":"SYSAD"}'
+  become: yes
+  when: edVer | int >= 100
+
+- name: Set SYSAD in HACloud mfdscreds
+  shell: . {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfsecretsadmin write microfocus/hacloud/mfdscreds -overwrite '{"mfUser":"SYSAD", "mfPassword":"SYSAD"}'
+  become: yes
+  when: edVer | int >= 100
+
 - name: Import JCL Region
   shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml D SYSAD SYSAD'
 
