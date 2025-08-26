@@ -23,6 +23,7 @@
       ebs:
         volume_type: '{{ volumeType }}'
         volume_size: '{{ volumeSize }}'
+        throughput: 500
     ebs_optimized: true
     state: running
     wait: true
