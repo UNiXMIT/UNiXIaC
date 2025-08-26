@@ -21,6 +21,7 @@
       ebs:
         volume_type: '{{ volumeType }}'
         volume_size: '{{ volumeSize }}'
+    ebs_optimized: true
     state: running
     wait: true
   register: ec2

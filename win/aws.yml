@@ -25,6 +25,7 @@
       ebs:
         volume_type: '{{ volumeType }}'
         volume_size: '{{ volumeSize }}'
+    ebs_optimized: true
     # aws_profile: '{{ awsProfile }}'
     state: running
     wait: true
