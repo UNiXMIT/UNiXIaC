@@ -168,3 +168,4 @@
   win_path:
     name: PATHEXT
     elements: .MSI
+  tags: default
