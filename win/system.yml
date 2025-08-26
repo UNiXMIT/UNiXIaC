@@ -163,3 +163,8 @@
       - 1.1.1.1
       - 1.0.0.1
   tags: default
+
+- name: Set .MSI on PATHEXT
+  win_path:
+    name: PATHEXT
+    elements: .MSI
