@@ -23,7 +23,6 @@
     - python
     - clink-maintained
     - kubernetes-cli
-    - fio
     # - dotnet
     # - windows-sdk-11-version-22h2-all
     # - visualstudio2017buildtools

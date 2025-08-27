@@ -26,6 +26,7 @@
         volume_type: '{{ volumeType }}'
         volume_size: '{{ volumeSize }}'
         throughput: 500
+        iops: 10000
     ebs_optimized: true
     # aws_profile: '{{ awsProfile }}'
     state: running

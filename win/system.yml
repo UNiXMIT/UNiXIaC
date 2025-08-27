@@ -169,3 +169,19 @@
     name: PATHEXT
     elements: .MSI
   tags: default
+
+- name: Install fio
+  win_chocolatey:
+    name: fio
+  state: present
+  tags: default
+
+- name: Initialize Amazon EBS volume
+  ansible.windows.win_command: 
+    cmd: fio --filename=\\.\PHYSICALDRIVE0 --rw=read --bs=1M --iodepth=32 --direct=1 --name=volume-initialize
+  tags: default
+
+- name: Disable Windows Defender Real-time Monitoring Temporarily
+  ansible.windows.win_command: 
+    cmd: powershell.exe -command "Set-MpPreference -DisableRealtimeMonitoring $true"
+  tags: default
