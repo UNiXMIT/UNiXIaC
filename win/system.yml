@@ -173,7 +173,7 @@
 - name: Install fio
   win_chocolatey:
     name: fio
-  state: present
+    state: present
   tags: default
 
 - name: Initialize Amazon EBS volume
