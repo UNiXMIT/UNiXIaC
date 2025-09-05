@@ -288,23 +288,30 @@
   when: edVer | int >= 100
   tags: ed
 
-- name: Set SYSAD in Vault
+- name: Set SYSAD in Vault microfocus/temp/admin
   win_command:
-    cmd: mfsecretsadmin write microfocus/temp/admin -overwrite "{'mfUser':'SYSAD', 'mfPassword':'SYSAD'}"
+    cmd: mfsecretsadmin write microfocus/temp/admin -overwrite "{\"mfUser\":\"SYSAD\", \"mfPassword\":\"SYSAD\"}"
+    chdir: C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin
+  when: edVer | int >= 100
+  tags: ed
+
+- name: Set SYSAD in Vault microfocus/common/readonly
+  win_command:
+    cmd: mfsecretsadmin write microfocus/common/readonly -overwrite "{\"mfUser\":\"SYSAD\", \"mfPassword\":\"SYSAD\"}"
     chdir: C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin
   when: edVer | int >= 100
   tags: ed
 
 - name: Set SYSAD in HACloud escwacreds
   win_command:
-    cmd: mfsecretsadmin write microfocus/hacloud/escwacreds -overwrite "{'mfUser':'SYSAD', 'mfPassword':'SYSAD'}"
+    cmd: mfsecretsadmin write microfocus/hacloud/escwacreds -overwrite "{\"mfUser\":\"SYSAD\", \"mfPassword\":\"SYSAD\"}"
     chdir: C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin
   when: edVer | int >= 100
   tags: ed
 
 - name: Set SYSAD in HACloud mfdscreds
   win_command:
-    cmd: mfsecretsadmin write microfocus/hacloud/mfdscreds -overwrite "{'mfUser':'SYSAD', 'mfPassword':'SYSAD'}"
+    cmd: mfsecretsadmin write microfocus/hacloud/mfdscreds -overwrite "{\"mfUser\":\"SYSAD\", \"mfPassword\":\"SYSAD\"}"
     chdir: C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin
   when: edVer | int >= 100
   tags: ed
