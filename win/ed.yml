@@ -197,14 +197,14 @@
       win_package:
         path: C:\MFInstallers\{{ installerNameEDVS }}
         state: present
-        arguments: /q RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDVS }}.log
+        arguments: /q RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDVS }}.log /norestart
       tags: edvs
     
     - name: Install {{ installerNameEDE }}
       win_package:
         path: C:\MFInstallers\{{ installerNameEDE }}
         state: present
-        arguments: /q RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDE }}.log
+        arguments: /q RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDE }}.log /norestart
       tags: ede
   tags: ed
 
@@ -214,14 +214,14 @@
       win_package:
         path: C:\MFInstallers\{{ installerNameEDVSPU }}
         state: present
-        arguments: /q RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDVSPU }}.log
+        arguments: /q RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDVSPU }}.log /norestart
       tags: edvs
     
     - name: Install {{ installerNameEDEPU }}
       win_package:
         path: C:\MFInstallers\{{ installerNameEDEPU }}
         state: present
-        arguments: /q RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDEPU }}.log
+        arguments: /q RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDEPU }}.log /norestart
       tags: ede
   tags: edpu
 
