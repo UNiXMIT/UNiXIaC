@@ -22,7 +22,7 @@
 
 - name: Download VS Professional 2022
   ansible.windows.win_get_url:
-    url: https://aka.ms/vs/17/release/vs_professional.exe
+    url: https://download.visualstudio.microsoft.com/download/pr/87b94407-0aa3-45fc-b53f-d224027a42b3/4ee88e4bc5150cc2f9536eb64391501576348e2f9b73a6552ebc73b74c071910/vs_Professional.exe
     dest: C:\Users\Public\Documents
   register: result
   retries: 5
