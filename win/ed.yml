@@ -198,6 +198,7 @@
         path: C:\MFInstallers\{{ installerNameEDVS }}
         state: present
         arguments: /q RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDVS }}.log /norestart
+        expected_return_code: [0, 1, 3010]
       tags: edvs
     
     - name: Install {{ installerNameEDE }}
@@ -205,6 +206,7 @@
         path: C:\MFInstallers\{{ installerNameEDE }}
         state: present
         arguments: /q RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDE }}.log /norestart
+        expected_return_code: [0, 1, 3010]
       tags: ede
   tags: ed
 
@@ -215,6 +217,7 @@
         path: C:\MFInstallers\{{ installerNameEDVSPU }}
         state: present
         arguments: /q RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDVSPU }}.log /norestart
+        expected_return_code: [0, 1, 3010]
       tags: edvs
     
     - name: Install {{ installerNameEDEPU }}
@@ -222,6 +225,7 @@
         path: C:\MFInstallers\{{ installerNameEDEPU }}
         state: present
         arguments: /q RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDEPU }}.log /norestart
+        expected_return_code: [0, 1, 3010]
       tags: ede
   tags: edpu
 
