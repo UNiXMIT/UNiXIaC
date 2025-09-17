@@ -111,7 +111,12 @@
 
 - name: Install AutoPass License File
   shell: mv /tmp/LicFile.txt /opt/microfocus/licensing/autopass/clientdetails/data/LicFile.txt
-  when: edVer | int >= 80
+  when: edVer | int >= 80 and edVer | int <= 100
+  become: yes
+
+- name: Install RocketPass License File
+  shell: mv /tmp/LicFile.txt /opt/rocketsoftware/licensing/rocketpass/clientdetails/data/LicFile.txt
+  when: edVer | int >= 110
   become: yes
 
 - name: Start MFDS
