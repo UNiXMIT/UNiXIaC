@@ -49,6 +49,16 @@
     regexp: '^%wheel ALL='
     line: '%wheel ALL=(ALL) NOPASSWD:ALL'
 
+- name: Install libselinux-python3
+  package:
+    name: 
+      - libselinux-python3
+  state: present
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Disable SELinux
   selinux:
     state: disabled
