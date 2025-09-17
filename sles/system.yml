@@ -33,10 +33,17 @@
     state: present
     line: '%users ALL=(ALL) NOPASSWD: ALL'
 
-- name: Restart SSH
+- name: Restart SSHD
   service:
     name: sshd
     state: restarted
+  ignore_errors: true
+
+- name: Restart SSH
+  service:
+    name: ssh
+    state: restarted
+  ignore_errors: true
 
 - name: Create profile.sh
   copy:
