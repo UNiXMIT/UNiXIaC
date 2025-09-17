@@ -53,7 +53,7 @@
   package:
     name: 
       - libselinux-python3
-  state: present
+    state: present
   register: result
   retries: 5
   delay: 30
