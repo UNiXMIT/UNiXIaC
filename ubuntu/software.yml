@@ -19,6 +19,7 @@
     name:
       - python3-apt
     state: present
+    use: apt
   register: result
   retries: 5
   delay: 30
