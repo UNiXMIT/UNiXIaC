@@ -14,16 +14,8 @@
     line: "i386"
     create: yes
 
-- name: python3-apt installation
-  package:
-    name:
-      - python3-apt
-    state: present
-    use: apt
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
+- name: Install dependencies
+  ansible.builtin.shell: apt install software-properties-common gpg python3 -y
 
 - name: Update APT Cache
   ansible.builtin.apt:
