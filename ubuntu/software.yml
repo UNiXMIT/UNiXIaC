@@ -14,26 +14,36 @@
     line: "i386"
     create: yes
 
-- name: Update APT Cache and install dependencies
+- name: Update APT cache and install dependencies
   ansible.builtin.shell: |
     apt update
-    apt install software-properties-common gpg python3 python3-apt -y
+    apt install software-properties-common gpg python3 python3-apt curl gnupg -y
 
-- name: Download MSSQL ODBC Driver Key
-  get_url:
-    url: https://packages.microsoft.com/keys/microsoft.asc
-    dest: /etc/apt/trusted.gpg.d/microsoft.asc
-    mode: '0775'
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
+# - name: Add Microsoft GPG key
+#   ansible.builtin.apt_key:
+#     url: https://packages.microsoft.com/keys/microsoft.asc
+#     state: present
+#   register: result
+#   retries: 5
+#   delay: 30
+#   until: result is not failed
 
-- name: Download MSSQL ODBC Driver Repo
-  get_url:
-    url: https://packages.microsoft.com/config/ubuntu/{{ ansible_distribution_version }}/prod.list
-    dest: /etc/apt/sources.list.d/mssql-release.list
-    mode: '0775'
+# - name: Download MSSQL ODBC Driver Repo
+#   get_url:
+#     url: https://packages.microsoft.com/config/ubuntu/{{ ansible_distribution_version }}/prod.list
+#     dest: /etc/apt/sources.list.d/mssql-release.list
+#     mode: '0775'
+#   register: result
+#   retries: 5
+#   delay: 30
+#   until: result is not failed
+
+- name: Configure Microsoft repo and update APT cache
+  ansible.builtin.shell: |
+    curl -sSL -O https://packages.microsoft.com/config/ubuntu/$(grep VERSION_ID /etc/os-release | cut -d '"' -f 2)/packages-microsoft-prod.deb
+    dpkg -i packages-microsoft-prod.deb
+    rm packages-microsoft-prod.deb
+    apt update
   register: result
   retries: 5
   delay: 30
