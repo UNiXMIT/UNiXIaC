@@ -14,25 +14,10 @@
     line: "i386"
     create: yes
 
-- name: Install dependencies
-  ansible.builtin.shell: apt install software-properties-common gpg python3 -y
-
-- name: Update APT Cache
-  ansible.builtin.apt:
-    update_cache: yes
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: Update all packages to their latest version
-  ansible.builtin.apt:
-    name: "*"
-    state: latest
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
+- name: Update APT Cache and install dependencies
+  ansible.builtin.shell: |
+    apt update
+    apt install software-properties-common gpg python3 python3-apt -y
 
 - name: Download MSSQL ODBC Driver Key
   get_url:
