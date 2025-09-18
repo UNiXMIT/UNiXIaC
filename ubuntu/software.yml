@@ -2,8 +2,17 @@
   set_fact:
     productName: 
 
+- name: Add amd64 architecture
+  lineinfile:
+    path: /var/lib/dpkg/arch
+    line: "amd64"
+    create: yes
+
 - name: Add i386 architecture
-  command: dpkg --add-architecture i386
+  lineinfile:
+    path: /var/lib/dpkg/arch
+    line: "i386"
+    create: yes
 
 - name: Update APT Cache
   ansible.builtin.apt:
