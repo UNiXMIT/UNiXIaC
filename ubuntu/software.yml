@@ -47,6 +47,7 @@
       - msodbcsql18 
       - mssql-tools18
     state: present
+    allow_unauthenticated: true
     update_cache: true
   register: result
   retries: 5
