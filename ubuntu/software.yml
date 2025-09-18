@@ -14,6 +14,16 @@
     line: "i386"
     create: yes
 
+- name: python3-apt installation
+  package:
+    name:
+      - python3-apt
+    state: present
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Update APT Cache
   ansible.builtin.apt:
     update_cache: yes
