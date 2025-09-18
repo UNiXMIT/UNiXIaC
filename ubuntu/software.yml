@@ -19,25 +19,6 @@
     apt update
     apt install software-properties-common gpg python3 python3-apt curl gnupg -y
 
-# - name: Add Microsoft GPG key
-#   ansible.builtin.apt_key:
-#     url: https://packages.microsoft.com/keys/microsoft.asc
-#     state: present
-#   register: result
-#   retries: 5
-#   delay: 30
-#   until: result is not failed
-
-# - name: Download MSSQL ODBC Driver Repo
-#   get_url:
-#     url: https://packages.microsoft.com/config/ubuntu/{{ ansible_distribution_version }}/prod.list
-#     dest: /etc/apt/sources.list.d/mssql-release.list
-#     mode: '0775'
-#   register: result
-#   retries: 5
-#   delay: 30
-#   until: result is not failed
-
 - name: Configure Microsoft repo and update APT cache
   ansible.builtin.shell: |
     curl -sSL -O https://packages.microsoft.com/config/ubuntu/$(grep VERSION_ID /etc/os-release | cut -d '"' -f 2)/packages-microsoft-prod.deb
@@ -85,7 +66,7 @@
       - 'lib32stdc++6'
       - 'libstdc++6:i386'
       - libaio-dev
-      - libncurses5
+      - 'libncurses*'
       - apt-file 
       - zlib1g:i386
       - libc6:i386
