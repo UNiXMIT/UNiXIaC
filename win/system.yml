@@ -99,22 +99,26 @@
     type: dword
   tags: default
 
-# - name: Create Auto Shutdown Schedule
-#   win_scheduled_task:
-#     name: AutoShutdown
-#     actions:
-#     - path: shutdown
-#       arguments: /s /f /t 0
-#     triggers:
-#     - type: daily
-#       start_boundary: '{{ ansible_date_time.year }}-{{ ansible_date_time.month }}-{{ (ansible_date_time.day | int) + 1 }}T20:00:00'
-#     username: '{{ ansibleUser }}'
-#     password: '{{ myPassword }}'
-#     logon_type: password
-#     run_level: highest
-#     state: present
-#     enabled: yes
-#   tags: default
+- name: Get tomorrow's date
+  set_fact:
+    tomorrow_date: "{{ (ansible_date_time.date | to_datetime).replace(hour=0, minute=0, second=0) + timedelta(days=1) }}"
+
+- name: Create Auto Shutdown Schedule
+  win_scheduled_task:
+    name: AutoShutdown
+    actions:
+    - path: shutdown
+      arguments: /s /f /t 300
+    triggers:
+    - type: daily
+      start_boundary: "{{ tomorrow_date.strftime('%Y-%m-%d') }}T20:00:00"
+    username: '{{ ansibleUser }}'
+    password: '{{ myPassword }}'
+    logon_type: password
+    run_level: highest
+    state: present
+    enabled: yes
+  tags: default
   
 - name: Disable IE ESC for Administrators
   win_regedit:
