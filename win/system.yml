@@ -101,7 +101,7 @@
 
 - name: Get tomorrow's date
   set_fact:
-    tomorrow_date: "{{ lookup('pipe', 'date -d tomorrow +%Y-%m-%d') }}"
+    tomorrow_date: "{{ (('%s-%s-%s' | format(ansible_date_time.year, ansible_date_time.month, ansible_date_time.day)) | to_datetime('%Y-%m-%d') + timedelta(days=1)).strftime('%Y-%m-%d') }}"
   tags: default
 
 - name: Create Auto Shutdown Schedule
