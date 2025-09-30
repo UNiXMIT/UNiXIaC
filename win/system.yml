@@ -99,20 +99,15 @@
     type: dword
   tags: default
 
-- name: Get tomorrow's date
-  set_fact:
-    tomorrow_date: "{{ (('%s-%s-%s' | format(ansible_date_time.year, ansible_date_time.month, ansible_date_time.day)) | to_datetime('%Y-%m-%d') + timedelta(days=1)).strftime('%Y-%m-%d') }}"
-  tags: default
-
 - name: Create Auto Shutdown Schedule
   win_scheduled_task:
     name: AutoShutdown
     actions:
     - path: shutdown
-      arguments: /s /f /t 300
+      arguments: /s /f /t 0
     triggers:
     - type: daily
-      start_boundary: "{{ tomorrow_date }}T20:00:00"
+      start_boundary: '{{ ansible_date_time.year }}-{{ ansible_date_time.month }}-{{ ansible_date_time.day }}T20:00:00'
     username: '{{ ansibleUser }}'
     password: '{{ myPassword }}'
     logon_type: password
