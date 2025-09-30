@@ -101,7 +101,7 @@
 
 - name: Get tomorrow's date
   set_fact:
-    tomorrow_date: "{{ (ansible_date_time.date | to_datetime).replace(hour=0, minute=0, second=0) + timedelta(days=1) }}"
+    tomorrow_date: "{{ (ansible_date_time.date ~ ' ' ~ ansible_date_time.time | to_datetime) + timedelta(days=1) }}"
   tags: default
 
 - name: Create Auto Shutdown Schedule
