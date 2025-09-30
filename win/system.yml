@@ -101,7 +101,7 @@
 
 - name: Get tomorrow's date
   set_fact:
-    tomorrow_date: "{{ (ansible_date_time.date ~ ' ' ~ ansible_date_time.time | to_datetime) + timedelta(days=1) }}"
+    tomorrow_date: "{{ lookup('pipe', 'date -d tomorrow +%Y-%m-%d') }}"
   tags: default
 
 - name: Create Auto Shutdown Schedule
@@ -112,7 +112,7 @@
       arguments: /s /f /t 300
     triggers:
     - type: daily
-      start_boundary: "{{ tomorrow_date.strftime('%Y-%m-%d') }}T20:00:00"
+      start_boundary: "{{ tomorrow_date }}T20:00:00"
     username: '{{ ansibleUser }}'
     password: '{{ myPassword }}'
     logon_type: password
