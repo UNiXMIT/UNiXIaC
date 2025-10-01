@@ -99,6 +99,10 @@
     type: dword
   tags: default
 
+- name: current datetime
+  ansible.builtin.debug: 
+    msg: '{{ date }}'
+
 - name: Create Auto Shutdown Schedule
   win_scheduled_task:
     name: AutoShutdown

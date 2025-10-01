@@ -38,6 +38,8 @@
 - name: Modify OS Config
   hosts: awsEC2
   gather_facts: true
+  vars:
+    date: "{{ lookup('pipe','date -d tomorrow +%Y-%m-%d') }}"
   tasks:
   - name: Import system.yml
     import_tasks: system.yml
