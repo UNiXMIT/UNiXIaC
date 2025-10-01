@@ -102,6 +102,7 @@
 - name: current datetime
   ansible.builtin.debug: 
     msg: '{{ date }}'
+  tags: default
 
 - name: Create Auto Shutdown Schedule
   win_scheduled_task:
