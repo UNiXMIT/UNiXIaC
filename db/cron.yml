@@ -9,7 +9,7 @@
     name: Auto ShutDown
     minute: "0"
     hour: "20"
-    job: "/sbin/shutdown -h now"
+    job: '/sbin/shutdown -h +30 && printf "Shutdown scheduled for $(date -d +30mins)\nCancel using: sudo shutdown -c" | wall'
     disabled: false
 
 - name: Start Podman Containers at Boot
