@@ -99,11 +99,6 @@
     type: dword
   tags: default
 
-- name: current datetime
-  ansible.builtin.debug: 
-    msg: '{{ date }}'
-  tags: default
-
 - name: Create Auto Shutdown Schedule
   win_scheduled_task:
     name: AutoShutdown
@@ -112,7 +107,7 @@
       arguments: /s /f /t 0
     triggers:
     - type: daily
-      start_boundary: '{{ ansible_date_time.year }}-{{ ansible_date_time.month }}-{{ ansible_date_time.day }}T20:00:00'
+      start_boundary: '{{ date }}T20:00:00'
     username: '{{ ansibleUser }}'
     password: '{{ myPassword }}'
     logon_type: password
