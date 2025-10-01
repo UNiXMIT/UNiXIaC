@@ -9,5 +9,5 @@
     name: Auto ShutDown
     minute: "0"
     hour: "20"
-    job: "/sbin/shutdown -h now"
+    job: "/sbin/shutdown -h +30 && echo Shutdown scheduled for $(date -d +30mins), cancel using: sudo shutdown -c | wall"
     disabled: false

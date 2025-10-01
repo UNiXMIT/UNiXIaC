@@ -104,7 +104,7 @@
     name: AutoShutdown
     actions:
     - path: shutdown
-      arguments: /s /f /t 600
+      arguments: /s /f /t 1800
     triggers:
     - type: daily
       start_boundary: '{{ date }}T20:00:00'
