@@ -43,4 +43,5 @@
       @ECHO OFF
       setx /m PATH "C:\Program Files (x86)\clink;%PATH%"
       "C:\Program Files (x86)\clink\clink" autorun -a install
+      "C:\Program Files (x86)\clink\clink" set clink.logo none
     dest: C:\Windows\enableClink.cmd
