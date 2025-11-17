@@ -179,7 +179,7 @@ EOF
 
 # MQ Client
 sudo mkdir -p -m 775 /opt/ibm/mqm
-curl -s -o /opt/ibm/mq/IBM-MQC-Redist-LinuxX64.tar.gz -L https://ibm.biz/IBM-MQC-Redist-LinuxX64targz
+curl -s -o /opt/ibm/mq/IBM-MQC-Redist-LinuxX64.tar.gz -L https://mturner.s3.eu-west-2.amazonaws.com/Public/MQ/9.3.5.0-IBM-MQC-Redist-LinuxX64.tar.gz
 cd /opt/ibm/mqm
 tar -zxf /opt/ibm/mq/IBM-MQC-Redist-LinuxX64.tar.gz
 sudo chmod 775 -R /opt/ibm/mqm

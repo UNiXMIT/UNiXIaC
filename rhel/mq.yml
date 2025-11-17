@@ -7,7 +7,7 @@
 
 - name: Download IBM MQ Client
   ansible.builtin.get_url:
-    url: https://ibm.biz/IBM-MQC-Redist-LinuxX64targz
+    url: https://mturner.s3.eu-west-2.amazonaws.com/Public/MQ/9.3.5.0-IBM-MQC-Redist-LinuxX64.tar.gz
     dest: /opt/ibm/mq/IBM-MQC-Redist-LinuxX64.tar.gz
     mode: '0755'
     timeout: 60

@@ -1,6 +1,6 @@
 - name: Download IBM MQ Client
   ansible.windows.win_get_url:
-    url: https://ibm.biz/IBM-MQC-Redist-Win64zip
+    url: https://mturner.s3.eu-west-2.amazonaws.com/Public/MQ/9.3.5.0-IBM-MQC-Redist-Win64.zip
     dest: C:\Users\Public\Documents\IBM-MQC-Redist-Win64.zip
     timeout: 60
   register: result
