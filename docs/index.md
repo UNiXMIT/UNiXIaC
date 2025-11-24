@@ -44,7 +44,7 @@
 - Linux EC2 Instances are accessible via SSH using the 'support' user and the usual password. 
 > **NOTE:** If in doubt, try the usual password or contact an admin.  
 - The DB tasks create services in Podman containers, running on RHEL EC2 Instances. They are meant for quick deployment of a service for testing, then they can be removed. More information about connection details etc. for services in those containers, can be found at https://unixmit.github.io/UNiXPod   
-- Instances are created with a 120GB SSD, 4vCPUs, 16GiB Memory and 3.1 GHz Clock Speed (t3.xlarge).  
+- Instances are created with a 120GB SSD, 2vCPUs, 16GiB Memory and 2.5 GHz Clock Speed (r5a.large).  
 - Instances are created with your username, OS and products name as Instance name.  
 - Tags are added to the instance to show what products have been installed and what installers were used.  
 - Instances are all set to shutdown at 8pm GMT to encourage users not to leave instances running for no reason. If an instance really needs to stay on longer, the auto shutdown can be disabled from either the task scheduler (Windows) or the root cron job (Linux).  
@@ -62,7 +62,7 @@
 ### Windows Server 2019
 - ED/ES 5.0  
 
-### RHEL 9
+### RHEL 9 AMD
 - ED 8.0, 9.0, 10.0 and 11.0  
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0, 10.5.1 and 11.0.0  
 
