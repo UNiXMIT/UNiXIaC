@@ -68,7 +68,6 @@
 
 ### RHEL 9 ARM
 - ED 11.0  
-- AcuCOBOL-GT extend 11.0.0  
 
 ### SLES 15
 - ED 9.0 and 10.0  
