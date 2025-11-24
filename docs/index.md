@@ -51,9 +51,13 @@
 - Task completion/fail notifications are sent to the #team-amc-semaphore Slack channel. This channel can also be used to ask questions, post suggestions/improvements, report problems to an admin or to request a password reset.  
 
 ## Supported OS / Products
+### Windows Server 2025
+- ED/ES 11.0  
+- AcuCOBOL-GT extend 11.0.0  
+
 ### Windows Server 2022
-- ED/ES 6.0, 7.0, 8.0, 9.0, 10.0 and 11.0   
-- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0, 10.5.1 and 11.0.0   
+- ED/ES 6.0, 7.0, 8.0, 9.0 and 10.0  
+- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
 
 ### Windows Server 2019
 - ED/ES 5.0  
@@ -62,13 +66,21 @@
 - ED 8.0, 9.0, 10.0 and 11.0  
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0, 10.5.1 and 11.0.0  
 
+### RHEL 9 ARM
+- ED 11.0  
+- AcuCOBOL-GT extend 11.0.0  
+
 ### SLES 15
-- ED 9.0, 10.0 and 11.0  
+- ED 9.0 and 10.0  
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0, 10.5.1 and 11.0.0  
+
+### Ubuntu 24.04
+- ED 11.0  
+- AcuCOBOL-GT extend 11.0.0
 
 ### Ubuntu 22.04
 - ED 9.0, 10.0 and 11.0  
-- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0, 10.5.1 and 11.0.0  
+- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
 
 > **NOTE:** Patch Updates will be added as they become GA.  
 
@@ -76,7 +88,7 @@
 ED/ES and AcuCOBOL-GT extend are all licensed, ready to use.  
 
 ### Security
-ED/ES 7.0, 8.0, 9.0 and 10.0 tasks will also install and setup ADLDS (Windows) OpenLDAP (Linux).  
+ED/ES 7.0+ tasks will also install and setup ADLDS (Windows) OpenLDAP (Linux).  
 The connection details are automatically added into ESCWA using the API.  
 
 #### ADLDS
