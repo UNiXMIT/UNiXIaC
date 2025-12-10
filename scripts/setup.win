@@ -40,7 +40,12 @@ setx /m PATH "%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 :: Modify OS Config
 tzutil /s "GMT Standard Time"
 netsh advfirewall set  allprofiles state off
+powershell -Command "Add-MpPreference -ExclusionPath 'C:\Program Files (x86)\Micro Focus'"
+powershell -Command "Add-MpPreference -ExclusionPath 'C:\Program Files (x86)\Rocket Software'"
+powershell -Command "Add-MpPreference -ExclusionPath 'C:\Program Files\Micro Focus'"
+powershell -Command "Add-MpPreference -ExclusionPath 'C:\Program Files\Rocket Software'"
 powershell -command "Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0"
+sc start sshd
 sc config sshd start=auto
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableLUA /t REG_DWORD /d 0 /f
 reg add "HKEY_CLASSES_ROOT\Msi.Package\shell\extractMSI\command" /ve /t REG_SZ /d "msiexec /a \"%1\" /qb TARGETDIR=\"%1 Contents\"" /f
@@ -57,6 +62,12 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\WindowsUpdate" /v "Active
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\WindowsUpdate" /v "ActiveHoursEnd" /t REG_DWORD /d 0 /f
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v HideFilesExt /t REG_DWORD /d 0 /f
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Hidden /t REG_DWORD /d 0 /f
+powershell -command "$n=(Get-NetAdapter | where name -like '*Ether*').Name; netsh interface ip set dns name=\"$n\" static 1.1.1.1"
+powershell -command "$n=(Get-NetAdapter | where name -like '*Ether*').Name; netsh interface ip add dns name=\"$n\" 1.0.0.1 index=2"
+powershell -command "$n=(Get-NetAdapter | where name -like '*Ether*').Name; netsh interface ipv6 set dns name=\"$n\" static 2606:4700:4700::1111"
+powershell -command "$n=(Get-NetAdapter | where name -like '*Ether*').Name; netsh interface ipv6 add dns name=\"$n\" 2606:4700:4700::1001 index=2"
+setx /m PATHEXT "%PATEXT%;.MSI"
+powershell.exe -command "Set-MpPreference -DisableRealtimeMonitoring $true"
 
 :: Install Software
 choco feature enable -n=allowGlobalConfirmation
@@ -68,13 +79,16 @@ choco install 7zip
 choco install winscp
 choco install notepadplusplus 
 choco install jq
+choco install yq
 choco install cascadiamono
 choco install ntop.portable
 choco install psql
 choco install psqlodbc
 choco install openjdk
 choco install python
-choco install clink
+choco install clink-maintained
+choco install fio
+choco install kubernetes-cli
 choco install vscode /NoDesktopIcon 
 :: choco install visualstudio2017professional
 :: choco install visualstudio2019professional
@@ -93,11 +107,16 @@ choco install vscode /NoDesktopIcon
 :: choco install tinytask
 :: choco install speedtest
 :: choco install clumsy
+
+ECHO @ECHO OFF > C:\Windows\enableClink.cmd
+ECHO setx /m PATH "C:\Program Files (x86)\clink;%PATH%" >> C:\Windows\enableClink.cmd
+ECHO "C:\Program Files (x86)\clink\clink" autorun -a install >> C:\Windows\enableClink.cmd
+ECHO "C:\Program Files (x86)\clink\clink" set clink.logo none >> C:\Windows\enableClink.cmd
+
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension zhuangtongfa.material-theme
-call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension bitlang.cobol
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension rocketsoftware.rocket-enterprise
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension rocketsoftware.rocket-acucobolgt
-call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension rangav.vscode-thunder-client
+call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension rangav.humao.rest-client
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension ms-vscode.hexeditor
 curl -s -o %APPDATA%\Code\User\settings.json https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/refs/heads/main/win/vscode/settings.json
 curl -s -o %APPDATA%\Code\User\keybindings.json https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/refs/heads/main/win/vscode/keybindings.json
@@ -192,12 +211,15 @@ curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/e
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/gateway.conf
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/windows/etc/gateway.toml
 
+md \MFSupport
+cacls \MFSupport /e /p Everyone:f
 md \MFSamples
 md \MFSamples\JCL
 md \MFSamples\CICS
 md \MFSamples\CICS\loadlib
 md \MFSamples\CICS\system
 md \MFSamples\CICS\dataset
+md \MFSamples\CICS\catalog
 cacls \MFSamples /e /t /p Everyone:f
 md \MFDataFiles
 cacls \MFDataFiles /e /p Everyone:f
@@ -208,15 +230,38 @@ cacls \MFScripts /e /p Everyone:f
 cd \MFSamples\JCL
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.xml
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.zip
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/docs/es/MFBSI.cfg
+curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/docs/es/VSE.cfg
 powershell -Command "Expand-Archive -LiteralPath JCL.zip -DestinationPath C:\MFSamples\JCL"
 cd \MFSamples\CICS
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CICS.xml
 cd \MFScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/setenvmf.cmd
+curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/windows/MFScripts/MFESDIAGS.cmd
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/FormatDumps.cmd
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/AutoPAC.cmd
+curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/disableSecurity.cmd
+curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSMOD.cmd
+curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSFIX.cmd
 setx /m PATH "C:\AcuScripts;C:\MFScripts;%PATH%"
-
+md \CTF
+md \CTF\TEXT
+md \CTF\BIN
+cacls \CTF /e /p Everyone:f
+cd \CTF
+curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/windows/ctf.cfg
 cd \temp
+
+powershell -NoLogo -NoProfile -Command ^
+ "$o = New-Object -ComObject shell.application; ^
+  $o.Namespace('C:\temp').Self.InvokeVerb('pintohome'); ^
+  $o.Namespace('C:\AcuSamples').Self.InvokeVerb('pintohome'); ^
+  $o.Namespace('C:\AcuScripts').Self.InvokeVerb('pintohome'); ^
+  $o.Namespace('C:\AcuSupport').Self.InvokeVerb('pintohome'); ^
+  $o.Namespace('C:\etc').Self.InvokeVerb('pintohome'); ^
+  $o.Namespace('C:\MFSamples').Self.InvokeVerb('pintohome'); ^
+  $o.Namespace('C:\MFScripts').Self.InvokeVerb('pintohome'); ^
+  $o.Namespace('C:\MFSupport').Self.InvokeVerb('pintohome'); ^
+  $o.Namespace('C:\CTF').Self.InvokeVerb('pintohome')"
 
 :END

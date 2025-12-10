@@ -280,8 +280,6 @@
     type: allow
     rights: FullControl
 
-
-
 - name: Create CICS
   win_file:
     path: C:\MFSamples\CICS
@@ -353,45 +351,11 @@
     path: C:\MFInstallers
     type: allow
     rights: FullControl
-
-- name: Create CTF
-  win_file:
-    path: C:\CTF
-    state: directory
-
-- name: Create CTF\TEXT
-  win_file:
-    path: C:\CTF\TEXT
-    state: directory
-
-- name: Create CTF\BIN
-  win_file:
-    path: C:\CTF\BIN
-    state: directory
-
-- name: Everyone permissions on CTF
-  win_acl:
-    user: Everyone
-    path: C:\CTF
-    type: allow
-    rights: FullControl
   
 - name: Create MFScripts
   win_file:
     path: C:\MFScripts
     state: directory
-
-- name: Everyone permissions on MFScripts
-  win_acl:
-    user: Everyone
-    path: C:\MFScripts
-    type: allow
-    rights: FullControl
-
-- name: Set MFScripts on PATH
-  win_path:
-    name: PATH
-    elements: C:\MFScripts
   
 - name: Download setenvmf.cmd
   win_get_url:
@@ -438,15 +402,6 @@
   delay: 30
   until: result is not failed
 
-- name: Download ctf.cfg
-  win_get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/windows/ctf.cfg
-    dest: C:\CTF\ctf.cfg
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
 - name: Download VSMOD.cmd
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSMOD.cmd
@@ -464,3 +419,46 @@
   retries: 5
   delay: 30
   until: result is not failed
+
+- name: Everyone permissions on MFScripts
+  win_acl:
+    user: Everyone
+    path: C:\MFScripts
+    type: allow
+    rights: FullControl
+
+- name: Set MFScripts on PATH
+  win_path:
+    name: PATH
+    elements: C:\MFScripts
+
+- name: Create CTF
+  win_file:
+    path: C:\CTF
+    state: directory
+
+- name: Create CTF\TEXT
+  win_file:
+    path: C:\CTF\TEXT
+    state: directory
+
+- name: Create CTF\BIN
+  win_file:
+    path: C:\CTF\BIN
+    state: directory
+
+- name: Download ctf.cfg
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/windows/ctf.cfg
+    dest: C:\CTF\ctf.cfg
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Everyone permissions on CTF
+  win_acl:
+    user: Everyone
+    path: C:\CTF
+    type: allow
+    rights: FullControl
