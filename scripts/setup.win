@@ -256,16 +256,6 @@ cd \temp
 schtasks /create /tn "AutoShutdown" /tr "shutdown.exe /s /f /t 1800" /sc daily /st 20:00 /ru SYSTEM /f
 schtasks /change /tn "AutoShutdown" /disable
 
-powershell -NoLogo -NoProfile -Command ^
- "$o = New-Object -ComObject shell.application; ^
-  $o.Namespace('C:\temp').Self.InvokeVerb('pintohome'); ^
-  $o.Namespace('C:\AcuSamples').Self.InvokeVerb('pintohome'); ^
-  $o.Namespace('C:\AcuScripts').Self.InvokeVerb('pintohome'); ^
-  $o.Namespace('C:\AcuSupport').Self.InvokeVerb('pintohome'); ^
-  $o.Namespace('C:\etc').Self.InvokeVerb('pintohome'); ^
-  $o.Namespace('C:\MFSamples').Self.InvokeVerb('pintohome'); ^
-  $o.Namespace('C:\MFScripts').Self.InvokeVerb('pintohome'); ^
-  $o.Namespace('C:\MFSupport').Self.InvokeVerb('pintohome'); ^
-  $o.Namespace('C:\CTF').Self.InvokeVerb('pintohome')"
+powershell -NoLogo -NoProfile -Command "$o = New-Object -ComObject shell.application; $o.Namespace('C:\temp').Self.InvokeVerb('pintohome'); $o.Namespace('C:\AcuSamples').Self.InvokeVerb('pintohome'); $o.Namespace('C:\AcuScripts').Self.InvokeVerb('pintohome'); $o.Namespace('C:\AcuSupport').Self.InvokeVerb('pintohome'); $o.Namespace('C:\etc').Self.InvokeVerb('pintohome'); $o.Namespace('C:\MFSamples').Self.InvokeVerb('pintohome'); $o.Namespace('C:\MFScripts').Self.InvokeVerb('pintohome'); $o.Namespace('C:\MFSupport').Self.InvokeVerb('pintohome'); $o.Namespace('C:\CTF').Self.InvokeVerb('pintohome')"
 
 :END
