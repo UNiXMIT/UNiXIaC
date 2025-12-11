@@ -118,8 +118,8 @@ call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension rocketsof
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension rocketsoftware.rocket-acucobolgt
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension rangav.humao.rest-client
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension ms-vscode.hexeditor
-curl -s -o %APPDATA%\Code\User\settings.json https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/refs/heads/main/win/vscode/settings.json
-curl -s -o %APPDATA%\Code\User\keybindings.json https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/refs/heads/main/win/vscode/keybindings.json
+curl -s -o %APPDATA%\Code\User\settings.json https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/win/vscode/settings.json
+curl -s -o %APPDATA%\Code\User\keybindings.json https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/win/vscode/keybindings.json
 
 :: Install Oracle Instant Client
 powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-basic-nt-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-basic-nt-21.15.0.0.0dbru.zip"
@@ -230,14 +230,14 @@ cacls \MFScripts /e /p Everyone:f
 cd \MFSamples\JCL
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.xml
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.zip
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/docs/es/MFBSI.cfg
-curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/docs/es/VSE.cfg
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MFBSI.cfg
+curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
 powershell -Command "Expand-Archive -LiteralPath JCL.zip -DestinationPath C:\MFSamples\JCL"
 cd \MFSamples\CICS
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CICS.xml
 cd \MFScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/setenvmf.cmd
-curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/windows/MFScripts/MFESDIAGS.cmd
+curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/MFESDIAGS.cmd
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/FormatDumps.cmd
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/AutoPAC.cmd
 curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/disableSecurity.cmd
@@ -249,8 +249,12 @@ md \CTF\TEXT
 md \CTF\BIN
 cacls \CTF /e /p Everyone:f
 cd \CTF
-curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/windows/ctf.cfg
+curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/ctf.cfg
 cd \temp
+
+:: AutoShutdown
+schtasks /create /tn "AutoShutdown" /tr "shutdown.exe /s /f /t 1800" /sc daily /st 20:00 /ru SYSTEM /f
+schtasks /change /tn "AutoShutdown" /disable
 
 powershell -NoLogo -NoProfile -Command ^
  "$o = New-Object -ComObject shell.application; ^

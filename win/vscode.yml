@@ -32,12 +32,12 @@
 
 - name: Download VSCode Settings 
   win_get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/refs/heads/main/win/vscode/settings.json
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/win/vscode/settings.json
     dest: 'C:\Users\{{ myUsername }}\AppData\Roaming\Code\User\settings.json'
   ignore_errors: true
 
 - name: Download VSCode KeyBindings
   win_get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/refs/heads/main/win/vscode/keybindings.json
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/win/vscode/keybindings.json
     dest: 'C:\Users\{{ myUsername }}\AppData\Roaming\Code\User\keybindings.json'
   ignore_errors: true

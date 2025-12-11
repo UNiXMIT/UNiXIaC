@@ -252,7 +252,7 @@
 
 - name: Download MFBSI.cfg
   win_get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/docs/es/MFBSI.cfg
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MFBSI.cfg
     dest: C:\MFSamples\JCL\MFBSI.cfg
   register: result
   retries: 5
@@ -261,7 +261,7 @@
 
 - name: Download VSE.cfg
   win_get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/docs/es/VSE.cfg
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
     dest: C:\MFSamples\JCL\VSE.cfg
   register: result
   retries: 5
@@ -368,7 +368,7 @@
 
 - name: Download MFESDIAGS.cmd
   win_get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/windows/MFScripts/MFESDIAGS.cmd
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/MFESDIAGS.cmd
     dest: C:\MFScripts\MFESDIAGS.cmd
   register: result
   retries: 5
@@ -449,7 +449,7 @@
 
 - name: Download ctf.cfg
   win_get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/windows/ctf.cfg
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/ctf.cfg
     dest: C:\CTF\ctf.cfg
   register: result
   retries: 5

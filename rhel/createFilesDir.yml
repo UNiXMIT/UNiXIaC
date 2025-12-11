@@ -1,6 +1,6 @@
 - name: Download awsgui.sh
   get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/refs/heads/main/scripts/awsgui.sh
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/scripts/awsgui.sh
     dest: /home/{{ myUsername }}/awsgui.sh
     mode: '0775'
   register: result
@@ -256,7 +256,7 @@
 
 - name: Download mfesdiags.sh
   get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/linux/MFScripts/mfesdiags.sh
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/mfesdiags.sh
     dest: /home/{{ myUsername }}/MFSupport/MFScripts/mfesdiags.sh
     mode: '0775'
   register: result
@@ -286,7 +286,7 @@
 
 - name: Download disableSecurity.sh
   get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/linux/MFScripts/disableSecurity.sh
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/disableSecurity.sh
     dest: "/home/{{ myUsername }}/MFSupport/MFScripts/disableSecurity.sh"
     mode: '0775'
   register: result
@@ -296,7 +296,7 @@
 
 - name: Download ctf.cfg
   get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/windows/ctf.cfg
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/ctf.cfg
     dest: "/home/{{ myUsername }}/MFSupport/CTF/ctf.cfg"
     mode: '0775'
   register: result
@@ -346,7 +346,7 @@
 
 - name: Download MFBSI.cfg
   get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/docs/es/MFBSI.cfg
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MFBSI.cfg
     dest: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/MFBSI.cfg
     mode: '0775'
   register: result
@@ -356,7 +356,7 @@
 
 - name: Download VSE.cfg
   get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/refs/heads/main/docs/es/VSE.cfg
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
     dest: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/VSE.cfg
     mode: '0775'
   register: result
