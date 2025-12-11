@@ -66,7 +66,6 @@ powershell -command "$n=(Get-NetAdapter | where name -like '*Ether*').Name; nets
 powershell -command "$n=(Get-NetAdapter | where name -like '*Ether*').Name; netsh interface ip add dns name=\"$n\" 1.0.0.1 index=2"
 powershell -command "$n=(Get-NetAdapter | where name -like '*Ether*').Name; netsh interface ipv6 set dns name=\"$n\" static 2606:4700:4700::1111"
 powershell -command "$n=(Get-NetAdapter | where name -like '*Ether*').Name; netsh interface ipv6 add dns name=\"$n\" 2606:4700:4700::1001 index=2"
-setx /m PATHEXT "%PATEXT%;.MSI"
 powershell.exe -command "Set-MpPreference -DisableRealtimeMonitoring $true"
 
 :: Install Software
@@ -112,6 +111,7 @@ ECHO @ECHO OFF > C:\Windows\enableClink.cmd
 ECHO setx /m PATH "C:\Program Files (x86)\clink;%PATH%" >> C:\Windows\enableClink.cmd
 ECHO "C:\Program Files (x86)\clink\clink" autorun -a install >> C:\Windows\enableClink.cmd
 ECHO "C:\Program Files (x86)\clink\clink" set clink.logo none >> C:\Windows\enableClink.cmd
+setx /m PATHEXT "%PATEXT%;.MSI"
 
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension zhuangtongfa.material-theme
 call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension rocketsoftware.rocket-enterprise
