@@ -231,25 +231,25 @@ cd \MFSamples\JCL
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.xml
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.zip
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MFBSI.cfg
-curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
 powershell -Command "Expand-Archive -LiteralPath JCL.zip -DestinationPath C:\MFSamples\JCL"
 cd \MFSamples\CICS
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CICS.xml
 cd \MFScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/setenvmf.cmd
-curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/MFESDIAGS.cmd
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/MFESDIAGS.cmd
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/FormatDumps.cmd
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/AutoPAC.cmd
-curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/disableSecurity.cmd
-curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSMOD.cmd
-curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSFIX.cmd
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/disableSecurity.cmd
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSMOD.cmd
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSFIX.cmd
 setx /m PATH "C:\AcuScripts;C:\MFScripts;%PATH%"
 md \CTF
 md \CTF\TEXT
 md \CTF\BIN
 cacls \CTF /e /p Everyone:f
 cd \CTF
-curl -s -o https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/ctf.cfg
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/ctf.cfg
 cd \temp
 
 :: AutoShutdown
