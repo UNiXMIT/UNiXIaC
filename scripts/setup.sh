@@ -1,6 +1,7 @@
 #!/bin/bash
 
-BASEPATH=/home
+USERPATH=/home
+PRODPATH=/home
 
 # Detect OS
 if command -v dnf >/dev/null; then
@@ -30,6 +31,8 @@ if [[ "$yn" == "y" || "$yn" == "yes" ]]; then
 else
   export user=$USER
 fi
+sudo mkdir -p "$USERPATH/$user"
+sudo mkdir -p "$PRODPATH"
 
 # Modify OS Config
 sudo timedatectl set-timezone Europe/London
@@ -53,7 +56,7 @@ sudo service sshd restart &>/dev/null
 sudo mkdir -p /etc/profile.d
 sudo cat > /etc/profile.d/profile.sh <<EOF
 #!/bin/bash
-export PATH=$PATH:/home/$user/AcuSupport/AcuScripts:/home/$user/MFSupport/MFScripts:/home/$user
+export PATH=$PATH:$USERPATH/$user/AcuSupport/AcuScripts:$USERPATH/$user/MFSupport/MFScripts:$USERPATH/$user
 export TERM=xterm
 EOF
 sudo chmod 775 /etc/profile.d/profile.sh
@@ -146,7 +149,7 @@ if [ "$WHICHOS" = "RHEL" ]; then
     sudo dnf install -y /tmp/oracle-instantclient-precomp-21.12.0.0.0-1.el9.x86_64.rpm
   fi
 elif [ "$WHICHOS" = "UBUNTU" || "$WHICHOS" == "SLES" ]; then
-  sudo mkdir -m 755 /opt/oracle
+  sudo mkdir -p -m 755 /opt/oracle
   cd /opt/oracle
   curl -s -O https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip
   unzip instantclient-basic-linux*.zip
@@ -167,7 +170,7 @@ EOF
 fi
 
 # DB2 Client
-sudo mkdir -m 755 /opt/ibm
+sudo mkdir -p -m 755 /opt/ibm
 cd /opt/ibm
 curl -o v11.5.9_linuxx64_client.tar.gz https://mturner.s3.eu-west-2.amazonaws.com/Public/DB2/v11.5.9_linuxx64_client.tar.gz
 tar -zxf v11.5.9_linuxx64_client.tar.gz
@@ -200,25 +203,7 @@ EOF
 
 # ODBC
 ## odbcinst.ini
-sudo cat >> $ODBCPATH/odbcinst.ini <<EOF
-[PostgreSQL ANSI]
-Description=PostgreSQL ODBC driver (ANSI version)
-Driver=psqlodbca.so
-Setup=libodbcpsqlS.so
-
-[PostgreSQL Unicode]
-Description=PostgreSQL ODBC driver (Unicode version)
-Driver=psqlodbcw.so
-Setup=libodbcpsqlS.so
-
-[IBM DB2 ODBC DRIVER]
-Description = DB2 Driver
-Driver = /home/$user/sqllib/lib64/libdb2o.so
-fileusage=1
-dontdlclose=1
-EOF
-
-if [ "$WHICHOS" = "RHEL" || "$WHICHOS" == "SLES" && "$WHICHOS" != "UBUNTU" ]; then
+if [ "$WHICHOS" = "RHEL" || "$WHICHOS" == "SLES" ]; then
 sudo cat >> $ODBCPATH/odbcinst.ini <<EOF
 [PostgreSQL ANSI]
 Description=PostgreSQL ODBC driver (ANSI version)
@@ -231,6 +216,14 @@ Driver=psqlodbcw.so
 Setup=libodbcpsqlS.so
 EOF
 fi
+
+sudo cat >> $ODBCPATH/odbcinst.ini <<EOF
+[IBM DB2 ODBC DRIVER]
+Description = DB2 Driver
+Driver = /home/$user/sqllib/lib64/libdb2o.so
+fileusage=1
+dontdlclose=1
+EOF
 
 ## odbc.ini
 if [ "$WHICHOS" = "RHEL" ]; then
@@ -279,29 +272,29 @@ PWD = strongPassword123
 EOF
 
 # Create Support Files and Directories
-cd $BASEPATH
-[ ! -d "products" ] && sudo mkdir -m 775 products
+cd $PRODPATH
+sudo mkdir -p -m 775 products
 if [ "$WHICHOS" = "RHEL" || "$WHICHOS" = "UBUNTU" ]; then
   sudo chown -R $user:$user products
 elif [ "$WHICHOS" == "SLES" ]; then
   sudo chown -R $user:users products
 fi
 
-cd /home/$user
-[ ! -d "AcuSupport" ] && mkdir -m 775 AcuSupport
-cd /home/$user/AcuSupport
-[ ! -d "AcuDataFiles" ] && mkdir AcuDataFiles
-[ ! -d "AcuLogs" ] && mkdir AcuLogs
-[ ! -d "AcuResources" ] && mkdir AcuResources
-[ ! -d "AcuSamples" ] && mkdir AcuSamples
-[ ! -d "AcuScripts" ] && mkdir AcuScripts
-[ ! -d "CustomerPrograms" ] && mkdir CustomerPrograms
-[ ! -d "etc" ] && mkdir etc
-cd /home/$user/AcuSupport/AcuScripts
+cd $USERPATH/$user
+mkdir -p -m 775 AcuSupport
+cd $USERPATH/$user/AcuSupport
+mkdir -p AcuDataFiles
+mkdir -p AcuLogs
+mkdir -p AcuResources
+mkdir -p AcuSamples
+mkdir -p AcuScripts
+mkdir -p CustomerPrograms
+mkdir -p etc
+cd $USERPATH/$user/AcuSupport/AcuScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/setenvacu.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/startacu.sh
 sudo chmod +x setenvacu.sh startacu.sh
-cd /home/$user/AcuSupport/etc
+cd $USERPATH/$user/AcuSupport/etc
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/a_srvcfg
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.cfg
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.ini
@@ -313,19 +306,19 @@ curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/gateway.toml
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/TCPtuning.conf
 
-cd /home/$user
-[ ! -d "MFSupport" ] && mkdir -m 775 MFSupport
-cd /home/$user/MFSupport
-[ ! -d "MFScripts" ] && mkdir MFScripts
-[ ! -d "MFSamples" ] && mkdir MFSamples
-[ ! -d "MFInstallers" ] && mkdir MFInstallers
-[ ! -d "MFDataFiles" ] && mkdir MFDataFiles
-[ ! -d "CTF" ] && mkdir CTF
-cd /home/$user/MFSupport/CTF
-[ ! -d "TEXT" ] && mkdir TEXT
-[ ! -d "BIN" ] && mkdir BIN
+cd $USERPATH/$user
+mkdir -p -m 775 MFSupport
+cd $USERPATH/$user/MFSupport
+mkdir -p MFScripts
+mkdir -p MFSamples
+mkdir -p MFInstallers
+mkdir -p MFDataFiles
+mkdir -p CTF
+cd $USERPATH/$user/MFSupport/CTF
+mkdir -p TEXT
+mkdir -p BIN
 
-cd /home/$user/MFSupport/MFScripts
+cd $USERPATH/$user/MFSupport/MFScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setupmf.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/startmf.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setenvmf.sh
@@ -334,22 +327,25 @@ curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/autopac.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/disableSecurity.sh
 sudo chmod +x setupmf.sh startmf.sh setenvmf.sh formatdumps.sh autopac.sh mfesdiags.sh disableSecurity.sh
-cd /home/$user/MFSupport/CTF
+cd $USERPATH/$user/MFSupport/CTF
 cur -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/ctf.cfg
-cd /home/$user/MFSuport/MFSamples
+cd $USERPATH/$user/MFSuport/MFSamples
 if [ ! -d "JCL" ]; then
-  mkdir -m 775 JCL
-  mkdir -m 775 JCL/system JCL/catalog JCL/dataset JCL/loadlib
+  mkdir -p -m 775 JCL/system JCL/catalog JCL/dataset JCL/loadlib
   curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
   curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MFBSI.cfg
   curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
 fi
 if [ ! -d "CICS" ]; then
-  mkdir -m 775 CICS
-  mkdir -m 775 CICS/system CICS/dataset JCL/loadlib
+  mkdir -p -m 775 CICS/system CICS/dataset JCL/loadlib
   curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml
 fi
-sudo chmod -R 775 /home/$user
+sudo chmod -R 775 $USERPATH/$user
+if [ "$WHICHOS" = "RHEL" || "$WHICHOS" = "UBUNTU" ]; then
+  sudo chown -R $user:$user $USERPATH/$user
+elif [ "$WHICHOS" == "SLES" ]; then
+  sudo chown -R $user:users $USERPATH/$user
+fi
 
 touch /home/$user/.Xauthority
 sudo chmod 600 /home/$user/.Xauthority
@@ -357,7 +353,7 @@ sudo chmod 600 /home/$user/.Xauthority
 # CRON Jobs
 CRONLINE='#0 20 * * * sh -c '\''/sbin/shutdown -h +30 && printf "Shutdown scheduled for $(date -d +30mins)\\nCancel using: sudo shutdown -c" | wall'\'''
 (sudo crontab -l 2>/dev/null; echo "$CRONLINE") | sudo crontab -
-(sudo crontab -l ; echo "@reboot sysctl -p /home/$user/AcuSupport/etc/TCPtuning.conf")| sudo crontab -
+(sudo crontab -l ; echo "@reboot sysctl -p $USERPATH/$user/AcuSupport/etc/TCPtuning.conf")| sudo crontab -
 
 # MOTD
 . /etc/os-release
@@ -379,7 +375,7 @@ cat > motd.temp <<EOF
         startmf.sh (-h for usage)
 
       Install Options:
-        -IacceptEULA -ESadminID=${user} -il=$BASEPATH/products/esXXpuXX
+        -IacceptEULA -ESadminID=${user} -il=$PRODPATH/products/esXXpuXX
 
 ****************************************************************************************************
 EOF
@@ -393,5 +389,5 @@ systemd=true
 default=${user}
 EOF
 else
-  sudo sysctl -p /home/$user/AcuSupport/etc/TCPtuning.conf
+  sudo sysctl -p $USERPATH/$user/AcuSupport/etc/TCPtuning.conf
 fi
