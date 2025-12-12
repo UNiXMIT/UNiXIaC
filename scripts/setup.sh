@@ -180,7 +180,7 @@ COMP = BASE_CLIENT
 INSTALL_TYPE = CUSTOM
 EOF
 /opt/ibm/client/db2setup -f sysreq -r /opt/ibm/db2.linux.rsp
-sudo cat > /opt/ibm/db2.sh <<EOF
+sudo cat > /etc/profile.d/db2.sh <<EOF
 #!/bin/bash
 . /home/$user/sqllib/db2profile
 export PATH=$PATH:/home/$user/sqllib/lib64:/home/$user/sqllib/lib64/gskit:/home/$user/sqllib/lib32
