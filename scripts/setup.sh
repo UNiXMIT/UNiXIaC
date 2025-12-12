@@ -53,7 +53,7 @@ sudo service sshd restart &>/dev/null
 sudo mkdir -p /etc/profile.d
 sudo cat > /etc/profile.d/profile.sh <<EOF
 #!/bin/bash
-export PATH=$PATH:$BASEPATH/$user/AcuSupport/AcuScripts:$BASEPATH/$user/MFSupport/MFScripts:/$BASEPATH/$user:~/
+export PATH=$PATH:/home/$user/AcuSupport/AcuScripts:/home/$user/MFSupport/MFScripts:/home/$user
 export TERM=xterm
 EOF
 sudo chmod 775 /etc/profile.d/profile.sh
@@ -175,15 +175,15 @@ sudo cat > /opt/ibm/db2.linux.rsp <<EOF
 INTERACTIVE = NONE
 LIC_AGREEMENT = ACCEPT
 PROD = CLIENT
-FILE = $BASEPATH/$user/sqllib
+FILE = /home/$user/sqllib
 COMP = BASE_CLIENT
 INSTALL_TYPE = CUSTOM
 EOF
 /opt/ibm/client/db2setup -f sysreq -r /opt/ibm/db2.linux.rsp
 sudo cat > /opt/ibm/db2.sh <<EOF
 #!/bin/bash
-. $BASEPATH/$user/sqllib/db2profile
-export PATH=$PATH:$BASEPATH/$user/sqllib/lib64:$BASEPATH/$user/sqllib/lib64/gskit:$BASEPATH/$user/sqllib/lib32
+. /home/$user/sqllib/db2profile
+export PATH=$PATH:/home/$user/sqllib/lib64:/home/$user/sqllib/lib64/gskit:/home/$user/sqllib/lib32
 EOF
 
 # MQ Client
@@ -213,7 +213,7 @@ Setup=libodbcpsqlS.so
 
 [IBM DB2 ODBC DRIVER]
 Description = DB2 Driver
-Driver = $BASEPATH/$user/sqllib/lib64/libdb2o.so
+Driver = /home/$user/sqllib/lib64/libdb2o.so
 fileusage=1
 dontdlclose=1
 EOF
@@ -279,7 +279,7 @@ PWD = strongPassword123
 EOF
 
 # Create Support Files and Directories
-cd /opt
+cd $BASEPATH
 [ ! -d "products" ] && sudo mkdir -m 775 products
 if [ "$WHICHOS" = "RHEL" || "$WHICHOS" = "UBUNTU" ]; then
   sudo chown -R $user:$user products
@@ -287,9 +287,9 @@ elif [ "$WHICHOS" == "SLES" ]; then
   sudo chown -R $user:users products
 fi
 
-cd $BASEPATH/$user
+cd /home/$user
 [ ! -d "AcuSupport" ] && mkdir -m 775 AcuSupport
-cd $BASEPATH/$user/AcuSupport
+cd /home/$user/AcuSupport
 [ ! -d "AcuDataFiles" ] && mkdir AcuDataFiles
 [ ! -d "AcuLogs" ] && mkdir AcuLogs
 [ ! -d "AcuResources" ] && mkdir AcuResources
@@ -297,11 +297,11 @@ cd $BASEPATH/$user/AcuSupport
 [ ! -d "AcuScripts" ] && mkdir AcuScripts
 [ ! -d "CustomerPrograms" ] && mkdir CustomerPrograms
 [ ! -d "etc" ] && mkdir etc
-cd $BASEPATH/$user/AcuSupport/AcuScripts
+cd /home/$user/AcuSupport/AcuScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/setenvacu.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/startacu.sh
 sudo chmod +x setenvacu.sh startacu.sh
-cd $BASEPATH/$user/AcuSupport/etc
+cd /home/$user/AcuSupport/etc
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/a_srvcfg
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.cfg
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.ini
@@ -313,19 +313,19 @@ curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/gateway.toml
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/TCPtuning.conf
 
-cd $BASEPATH/$user
+cd /home/$user
 [ ! -d "MFSupport" ] && mkdir -m 775 MFSupport
-cd $BASEPATH/$user/MFSupport
+cd /home/$user/MFSupport
 [ ! -d "MFScripts" ] && mkdir MFScripts
 [ ! -d "MFSamples" ] && mkdir MFSamples
 [ ! -d "MFInstallers" ] && mkdir MFInstallers
 [ ! -d "MFDataFiles" ] && mkdir MFDataFiles
 [ ! -d "CTF" ] && mkdir CTF
-cd $BASEPATH/$user/MFSupport/CTF
+cd /home/$user/MFSupport/CTF
 [ ! -d "TEXT" ] && mkdir TEXT
 [ ! -d "BIN" ] && mkdir BIN
 
-cd $BASEPATH/$user/MFSupport/MFScripts
+cd /home/$user/MFSupport/MFScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setupmf.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/startmf.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setenvmf.sh
@@ -334,9 +334,9 @@ curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/autopac.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/disableSecurity.sh
 sudo chmod +x setupmf.sh startmf.sh setenvmf.sh formatdumps.sh autopac.sh mfesdiags.sh disableSecurity.sh
-cd $BASEPATH/$user/MFSupport/CTF
+cd /home/$user/MFSupport/CTF
 cur -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/ctf.cfg
-cd $BASEPATH/$user/MFSuport/MFSamples
+cd /home/$user/MFSuport/MFSamples
 if [ ! -d "JCL" ]; then
   mkdir -m 775 JCL
   mkdir -m 775 JCL/system JCL/catalog JCL/dataset JCL/loadlib
@@ -349,16 +349,15 @@ if [ ! -d "CICS" ]; then
   mkdir -m 775 CICS/system CICS/dataset JCL/loadlib
   curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml
 fi
-mkdir -m 775 $BASEPATH/products
+sudo chmod -R 775 /home/$user
+
 touch /home/$user/.Xauthority
 sudo chmod 600 /home/$user/.Xauthority
-sudo chmod -R 775 $BASEPATH/$user
-cd $BASEPATH/$user
 
 # CRON Jobs
 CRONLINE='#0 20 * * * sh -c '\''/sbin/shutdown -h +30 && printf "Shutdown scheduled for $(date -d +30mins)\\nCancel using: sudo shutdown -c" | wall'\'''
 (sudo crontab -l 2>/dev/null; echo "$CRONLINE") | sudo crontab -
-(sudo crontab -l ; echo "@reboot sysctl -p $BASEPATH/$user/AcuSupport/etc/TCPtuning.conf")| sudo crontab -
+(sudo crontab -l ; echo "@reboot sysctl -p /home/$user/AcuSupport/etc/TCPtuning.conf")| sudo crontab -
 
 # MOTD
 . /etc/os-release
@@ -394,5 +393,5 @@ systemd=true
 default=${user}
 EOF
 else
-  sudo sysctl -p $BASEPATH/$user/AcuSupport/etc/TCPtuning.conf
+  sudo sysctl -p /home/$user/AcuSupport/etc/TCPtuning.conf
 fi
