@@ -61,7 +61,7 @@ elif systemctl status ssh >/dev/null 2>&1; then
     sudo service ssh restart
 fi
 sudo mkdir -p /etc/profile.d
-sudo cat > /etc/profile.d/profile.sh <<EOF
+sudo tee /etc/profile.d/profile.sh > /dev/null <<EOF
 #!/bin/bash
 export PATH=$PATH:$FILEPATH/AcuSupport/AcuScripts:$FILEPATH/MFSupport/MFScripts:$FILEPATH
 export TERM=xterm
@@ -75,7 +75,7 @@ if [ "$WHICHOS" = "RHEL" ]; then
   . /etc/os-release;
   sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-${VERSION_ID%.*}.noarch.rpm;
   curl https://packages.microsoft.com/config/rhel/${VERSION_ID%.*}/prod.repo | sudo tee /etc/yum.repos.d/mssql-release.repo
-  sudo cat > /etc/profile.d/mssql.sh <<EOF
+  sudo tee /etc/profile.d/mssql.sh > /dev/null <<EOF
 #!/bin/bash
 export PATH="$PATH:/opt/mssql-tools/bin"
 EOF
@@ -105,7 +105,7 @@ elif [ "$WHICHOS" = "UBUNTU" ]; then
   sudo dpkg --add-architecture amd64;
   sudo dpkg --add-architecture i386;
   sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18 mssql-tools18
-  sudo cat > /etc/profile.d/mssql.sh <<EOF
+  sudo tee /etc/profile.d/mssql.sh > /dev/null <<EOF
 #!/bin/bash
 export PATH="$PATH:/opt/mssql-tools18/bin"
 EOF
@@ -123,7 +123,7 @@ elif [ "$WHICHOS" = "SLES" ]; then
   sudo rpm --import microsoft.asc
   sudo zypper ar https://packages.microsoft.com/config/sles/15/prod.repo
   sudo ACCEPT_EULA=Y zypper install -y msodbcsql17 mssql-tools
-  sudo cat > /etc/profile.d/mssql.sh <<EOF
+  sudo tee /etc/profile.d/mssql.sh > /dev/null <<EOF
 #!/bin/bash
 export PATH="$PATH:/opt/mssql-tools/bin"
 EOF
@@ -169,7 +169,7 @@ elif [ "$WHICHOS" = "UBUNTU" || "$WHICHOS" == "SLES" ]; then
   curl -s -o instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip
   unzip instantclient-precomp*.zip
   sudo chmod -R 755 /opt/oracle
-  sudo cat > /etc/profile.d/oracle.sh <<EOF
+  sudo tee /etc/profile.d/oracle.sh > /dev/null <<EOF
 #!/bin/bash
 export PATH="$PATH:/opt/oracle/instantclient_21_13:/opt/oracle/instantclient_21_13/sdk"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/oracle/instantclient_21_13"
@@ -181,7 +181,7 @@ sudo mkdir -p -m 755 /opt/ibm
 cd /opt/ibm
 curl -o v11.5.9_linuxx64_client.tar.gz https://mturner.s3.eu-west-2.amazonaws.com/Public/DB2/v11.5.9_linuxx64_client.tar.gz
 tar -zxf v11.5.9_linuxx64_client.tar.gz
-sudo cat > /opt/ibm/db2.linux.rsp <<EOF 
+sudo tee /opt/ibm/db2.linux.rsp > /dev/null <<EOF 
 INTERACTIVE = NONE
 LIC_AGREEMENT = ACCEPT
 PROD = CLIENT
@@ -190,7 +190,7 @@ COMP = BASE_CLIENT
 INSTALL_TYPE = CUSTOM
 EOF
 /opt/ibm/client/db2setup -f sysreq -r /opt/ibm/db2.linux.rsp
-sudo cat > /etc/profile.d/db2.sh <<EOF
+sudo tee /etc/profile.d/db2.sh > /dev/null <<EOF
 #!/bin/bash
 . /home/$user/sqllib/db2profile
 export PATH=$PATH:/home/$user/sqllib/lib64:/home/$user/sqllib/lib64/gskit:/home/$user/sqllib/lib32
@@ -202,7 +202,7 @@ curl -s -o /opt/ibm/mq/IBM-MQC-Redist-LinuxX64.tar.gz -L https://mturner.s3.eu-w
 cd /opt/ibm/mqm
 tar -zxf /opt/ibm/mq/IBM-MQC-Redist-LinuxX64.tar.gz
 sudo chmod 775 -R /opt/ibm/mqm
-sudo cat > /etc/profile.d/mq.sh <<EOF
+sudo tee /etc/profile.d/mq.sh > /dev/null <<EOF
 #!/bin/bash
 export PATH=$PATH:/opt/ibm/mq/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/ibm/mq/lib64
@@ -211,7 +211,7 @@ EOF
 # ODBC
 ## odbcinst.ini
 if [ "$WHICHOS" = "RHEL" || "$WHICHOS" == "SLES" ]; then
-sudo cat >> $ODBCPATH/odbcinst.ini <<EOF
+sudo tee -a $ODBCPATH/odbcinst.ini > /dev/null <<EOF
 [PostgreSQL ANSI]
 Description=PostgreSQL ODBC driver (ANSI version)
 Driver=psqlodbca.so
@@ -224,7 +224,7 @@ Setup=libodbcpsqlS.so
 EOF
 fi
 
-sudo cat >> $ODBCPATH/odbcinst.ini <<EOF
+sudo tee -a $ODBCPATH/odbcinst.ini > /dev/null <<EOF
 [IBM DB2 ODBC DRIVER]
 Description = DB2 Driver
 Driver = /home/$user/sqllib/lib64/libdb2o.so
@@ -234,7 +234,7 @@ EOF
 
 ## odbc.ini
 if [ "$WHICHOS" = "RHEL" ]; then
-  sudo cat >> $ODBCPATH/odbc.ini <<EOF
+  sudo tee -a $ODBCPATH/odbc.ini > /dev/null <<EOF
 [oracle]
 Description     = Oracle ODBC Connection
 Driver          = /usr/lib/oracle/21/client64/lib/libsqora.so.21.1
@@ -243,7 +243,7 @@ Servername      = 127.0.0.1:1521/FREE
 UserID          = $user
 EOF
 elif [ "$WHICHOS" = "UBUNTU" || "$WHICHOS" == "SLES" ]; then
-  sudo cat >> $ODBCPATH/odbc.ini <<EOF
+  sudo tee -a $ODBCPATH/odbc.ini > /dev/null <<EOF
 [oracle]
 Description     = Oracle ODBC Connection
 Driver          = /opt/oracle/instantclient_21_13/libsqora.so.21.1
@@ -253,7 +253,7 @@ UserID          = $user
 EOF
 fi
 
-sudo cat >> $ODBCPATH/odbc.ini <<EOF
+sudo tee -a $ODBCPATH/odbc.ini > /dev/null <<EOF
 [mssql]  
 Driver = ODBC Driver 17 for SQL Server  
 Server = tcp:localhost,1433
@@ -391,7 +391,7 @@ EOF
 sudo mv motd.temp /etc/motd
 if [[ $(grep microsoft /proc/version) ]]; then
   echo "cat /etc/motd" >> /etc/profile.d/profile.sh
-  sudo cat > /etc/wsl.conf <<EOF
+  sudo tee /etc/wsl.conf > /dev/null <<EOF
 [boot]
 systemd=true
 [user]
