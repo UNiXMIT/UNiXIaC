@@ -31,7 +31,11 @@ if [[ "$yn" == "y" || "$yn" == "yes" ]]; then
 else
   export user=$USER
 fi
-sudo mkdir -p "$USERPATH/$user"
+if [ -d "$USERPATH/$user" ]; then
+    FILEPATH="$USERPATH/$user"
+else
+    FILEPATH="$USERPATH"
+fi
 sudo mkdir -p "$PRODPATH"
 
 # Modify OS Config
@@ -56,7 +60,7 @@ sudo service sshd restart &>/dev/null
 sudo mkdir -p /etc/profile.d
 sudo cat > /etc/profile.d/profile.sh <<EOF
 #!/bin/bash
-export PATH=$PATH:$USERPATH/$user/AcuSupport/AcuScripts:$USERPATH/$user/MFSupport/MFScripts:$USERPATH/$user
+export PATH=$PATH:$FILEPATH/AcuSupport/AcuScripts:$FILEPATH/MFSupport/MFScripts:$FILEPATH
 export TERM=xterm
 EOF
 sudo chmod 775 /etc/profile.d/profile.sh
@@ -280,9 +284,9 @@ elif [ "$WHICHOS" == "SLES" ]; then
   sudo chown -R $user:users products
 fi
 
-cd $USERPATH/$user
+cd $FILEPATH
 mkdir -p -m 775 AcuSupport
-cd $USERPATH/$user/AcuSupport
+cd $FILEPATH/AcuSupport
 mkdir -p AcuDataFiles
 mkdir -p AcuLogs
 mkdir -p AcuResources
@@ -290,11 +294,11 @@ mkdir -p AcuSamples
 mkdir -p AcuScripts
 mkdir -p CustomerPrograms
 mkdir -p etc
-cd $USERPATH/$user/AcuSupport/AcuScripts
+cd $FILEPATH/AcuSupport/AcuScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/setenvacu.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/startacu.sh
 sudo chmod +x setenvacu.sh startacu.sh
-cd $USERPATH/$user/AcuSupport/etc
+cd $FILEPATH/AcuSupport/etc
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/a_srvcfg
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.cfg
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.ini
@@ -306,19 +310,19 @@ curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/gateway.toml
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/TCPtuning.conf
 
-cd $USERPATH/$user
+cd $FILEPATH
 mkdir -p -m 775 MFSupport
-cd $USERPATH/$user/MFSupport
+cd $FILEPATH/MFSupport
 mkdir -p MFScripts
 mkdir -p MFSamples
 mkdir -p MFInstallers
 mkdir -p MFDataFiles
 mkdir -p CTF
-cd $USERPATH/$user/MFSupport/CTF
+cd $FILEPATH/MFSupport/CTF
 mkdir -p TEXT
 mkdir -p BIN
 
-cd $USERPATH/$user/MFSupport/MFScripts
+cd $FILEPATH/MFSupport/MFScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setupmf.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/startmf.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setenvmf.sh
@@ -327,9 +331,9 @@ curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/autopac.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/disableSecurity.sh
 sudo chmod +x setupmf.sh startmf.sh setenvmf.sh formatdumps.sh autopac.sh mfesdiags.sh disableSecurity.sh
-cd $USERPATH/$user/MFSupport/CTF
+cd $FILEPATH/MFSupport/CTF
 cur -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/ctf.cfg
-cd $USERPATH/$user/MFSuport/MFSamples
+cd $FILEPATH/MFSuport/MFSamples
 if [ ! -d "JCL" ]; then
   mkdir -p -m 775 JCL/system JCL/catalog JCL/dataset JCL/loadlib
   curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
@@ -340,11 +344,13 @@ if [ ! -d "CICS" ]; then
   mkdir -p -m 775 CICS/system CICS/dataset JCL/loadlib
   curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml
 fi
-sudo chmod -R 775 $USERPATH/$user
+cd $FILEPATH
 if [ "$WHICHOS" = "RHEL" || "$WHICHOS" = "UBUNTU" ]; then
-  sudo chown -R $user:$user $USERPATH/$user
+  sudo chown -R $user:$user AcuSupport
+  sudo chown -R $user:$user MFSupport
 elif [ "$WHICHOS" == "SLES" ]; then
-  sudo chown -R $user:users $USERPATH/$user
+  sudo chown -R $user:users AcuSupport
+  sudo chown -R $user:users MFSupport
 fi
 
 touch /home/$user/.Xauthority
@@ -353,7 +359,7 @@ sudo chmod 600 /home/$user/.Xauthority
 # CRON Jobs
 CRONLINE='#0 20 * * * sh -c '\''/sbin/shutdown -h +30 && printf "Shutdown scheduled for $(date -d +30mins)\\nCancel using: sudo shutdown -c" | wall'\'''
 (sudo crontab -l 2>/dev/null; echo "$CRONLINE") | sudo crontab -
-(sudo crontab -l ; echo "@reboot sysctl -p $USERPATH/$user/AcuSupport/etc/TCPtuning.conf")| sudo crontab -
+(sudo crontab -l ; echo "@reboot sysctl -p $FILEPATH/AcuSupport/etc/TCPtuning.conf")| sudo crontab -
 
 # MOTD
 . /etc/os-release
@@ -389,5 +395,5 @@ systemd=true
 default=${user}
 EOF
 else
-  sudo sysctl -p $USERPATH/$user/AcuSupport/etc/TCPtuning.conf
+  sudo sysctl -p $FILEPATH/AcuSupport/etc/TCPtuning.conf
 fi
