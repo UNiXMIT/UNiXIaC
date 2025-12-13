@@ -25,10 +25,10 @@ Standard_B2ls_v2
 ```
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/semaphore.sh
 chmod +x semaphore.sh
-mkdir /home/support/semaphore/config
+mkdir -p semaphore/config
 semaphore.sh
 ```
-**NOTE:** Dockerfile and support.pem must be located in the current working directory before starting the build. 
+**NOTE:** The support.pem must be located in the semaphore directory before starting the build. If you have a config.json, place it in the semaphore/config directory.  
 
 ## Command Line  
 ### Create admin user
