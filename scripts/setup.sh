@@ -1,6 +1,4 @@
 #!/bin/bash
-# curl -fsSL https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/scripts/setup.sh | bash
-
 
 USERPATH=/home
 read -e -p "User Path [/home]: " -i "/home" USERPATH
