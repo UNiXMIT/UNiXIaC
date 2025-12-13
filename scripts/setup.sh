@@ -74,7 +74,7 @@ sudo grep -qxF 'fs.file-max=500000' /etc/sysctl.conf || sudo sh -c 'echo "fs.fil
 if [[ "$WHICHOS" = "RHEL" ]]; then
   . /etc/os-release;
   sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-${VERSION_ID%.*}.noarch.rpm;
-  curl https://packages.microsoft.com/config/rhel/${VERSION_ID%.*}/prod.repo | sudo tee /etc/yum.repos.d/mssql-release.repo
+  curl -s https://packages.microsoft.com/config/rhel/${VERSION_ID%.*}/prod.repo | sudo tee /etc/yum.repos.d/mssql-release.repo
   sudo tee /etc/profile.d/mssql.sh > /dev/null <<EOF
 #!/bin/bash
 export PATH="$PATH:/opt/mssql-tools/bin"
@@ -98,8 +98,8 @@ EOF
 # Ubuntu
 elif [[ "$WHICHOS" = "UBUNTU" ]]; then
   . /etc/os-release
-  curl https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
-  curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
+  curl -s https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
+  curl -s https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
   sudo apt update;
   sudo apt upgrade -y;
   sudo dpkg --add-architecture amd64;
@@ -120,7 +120,7 @@ elif [[ "$WHICHOS" = "SLES" ]]; then
   sudo zypper install -t pattern devel_basis
   cd /tmp
   curl -s -O https://packages.microsoft.com/keys/microsoft.asc
-  sudo rpm --import microsoft.asc
+  sudo rpm --import microsoft.asc >/dev/null
   sudo zypper ar https://packages.microsoft.com/config/sles/15/prod.repo
   sudo ACCEPT_EULA=Y zypper install -y msodbcsql17 mssql-tools
   sudo tee /etc/profile.d/mssql.sh > /dev/null <<EOF
@@ -133,7 +133,7 @@ EOF
 fi
 sudo systemctl enable --now podman.socket
 sudo curl -s -o /usr/local/bin/yq_linux_amd64 https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+curl -LO -s "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 sudo rm -f kubectl
 sudo ln -s /usr/lib64/libnsl.so.1 /usr/lib64/libnsl.so 
@@ -180,7 +180,7 @@ fi
 # DB2 Client
 sudo mkdir -p -m 755 /opt/ibm
 cd /opt/ibm
-sudo curl -o v11.5.9_linuxx64_client.tar.gz https://mturner.s3.eu-west-2.amazonaws.com/Public/DB2/v11.5.9_linuxx64_client.tar.gz
+sudo curl -s -o v11.5.9_linuxx64_client.tar.gz https://mturner.s3.eu-west-2.amazonaws.com/Public/DB2/v11.5.9_linuxx64_client.tar.gz
 sudo tar -zxf v11.5.9_linuxx64_client.tar.gz
 sudo tee /opt/ibm/db2.linux.rsp > /dev/null <<EOF 
 INTERACTIVE = NONE
@@ -293,65 +293,61 @@ elif [[ "$WHICHOS" == "SLES" ]]; then
 fi
 
 cd $FILEPATH
-mkdir -p -m 775 AcuSupport
+sudo mkdir -p -m 775 AcuSupport
 cd $FILEPATH/AcuSupport
-mkdir -p AcuDataFiles
-mkdir -p AcuLogs
-mkdir -p AcuResources
-mkdir -p AcuSamples
-mkdir -p AcuScripts
-mkdir -p CustomerPrograms
-mkdir -p etc
+sudo mkdir -p AcuDataFiles
+sudo mkdir -p AcuLogs
+sudo mkdir -p AcuResources
+sudo mkdir -p AcuSamples
+sudo mkdir -p AcuScripts
+sudo mkdir -p CustomerPrograms
+sudo mkdir -p etc
 cd $FILEPATH/AcuSupport/AcuScripts
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/setenvacu.sh
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/startacu.sh
-sudo chmod +x setenvacu.sh startacu.sh
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/setenvacu.sh
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/startacu.sh
+sudo sudo chmod +x setenvacu.sh startacu.sh
 cd $FILEPATH/AcuSupport/etc
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/a_srvcfg
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.cfg
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.ini
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/boomerang.cfg
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/boomerang_alias.ini
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/cblconfig
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/fillCombo.js
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/gateway.conf
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/gateway.toml
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/TCPtuning.conf
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/a_srvcfg
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.cfg
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.ini
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/boomerang.cfg
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/boomerang_alias.ini
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/cblconfig
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/fillCombo.js
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/gateway.conf
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/gateway.toml
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/TCPtuning.conf
 
 cd $FILEPATH
-mkdir -p -m 775 MFSupport
+sudo mkdir -p -m 775 MFSupport
 cd $FILEPATH/MFSupport
-mkdir -p MFScripts
-mkdir -p MFSamples
-mkdir -p MFInstallers
-mkdir -p MFDataFiles
-mkdir -p CTF
+sudo mkdir -p MFScripts
+sudo mkdir -p MFSamples
+sudo mkdir -p MFInstallers
+sudo mkdir -p MFDataFiles
+sudo mkdir -p CTF
 cd $FILEPATH/MFSupport/CTF
-mkdir -p TEXT
-mkdir -p BIN
+sudo mkdir -p TEXT
+sudo mkdir -p BIN
 
 cd $FILEPATH/MFSupport/MFScripts
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setupmf.sh
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/startmf.sh
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setenvmf.sh
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/mfesdiags.sh
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/formatdumps.sh
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/autopac.sh
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/disableSecurity.sh
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setupmf.sh
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/startmf.sh
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setenvmf.sh
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/mfesdiags.sh
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/formatdumps.sh
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/autopac.sh
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/disableSecurity.sh
 sudo chmod +x setupmf.sh startmf.sh setenvmf.sh formatdumps.sh autopac.sh mfesdiags.sh disableSecurity.sh
 cd $FILEPATH/MFSupport/CTF
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/ctf.cfg
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/ctf.cfg
 cd $FILEPATH/MFSupport/MFSamples
-if [ ! -d "JCL" ]; then
-  mkdir -p -m 775 JCL/system JCL/catalog JCL/dataset JCL/loadlib
-  curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
-  curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MFBSI.cfg
-  curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
-fi
-if [ ! -d "CICS" ]; then
-  mkdir -p -m 775 CICS/system CICS/dataset JCL/loadlib
-  curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml
-fi
+mkdir -p -m 775 JCL/system JCL/catalog JCL/dataset JCL/loadlib
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MFBSI.cfg
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
+mkdir -p -m 775 CICS/system CICS/dataset JCL/loadlib
+sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml
 cd $FILEPATH
 if [[ "$WHICHOS" = "RHEL" || "$WHICHOS" = "UBUNTU" ]]; then
   sudo chown -R $user:$user AcuSupport
@@ -395,7 +391,7 @@ tee motd.temp > /dev/null <<EOF
 EOF
 sudo mv motd.temp /etc/motd
 if [[ $(grep microsoft /proc/version) ]]; then
-  echo "cat /etc/motd" >> /etc/profile.d/profile.sh
+  echo "cat /etc/motd" | sudo tee -a /etc/profile.d/profile.sh
   sudo tee /etc/wsl.conf > /dev/null <<EOF
 [boot]
 systemd=true
