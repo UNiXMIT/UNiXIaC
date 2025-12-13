@@ -1,7 +1,11 @@
 #!/bin/bash
+# curl -fsSL https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/scripts/setup.sh | bash
+
 
 USERPATH=/home
+read -e -p "User Path [/home]: " -i "/home" USERPATH
 PRODPATH=/home
+read -e -p "Product Path [/home]: " -i "/home" PRODPATH
 
 # Detect OS
 if command -v dnf >/dev/null; then
