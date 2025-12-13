@@ -5,7 +5,7 @@ if '%ERRORLEVEL%' NEQ '0' (
     ECHO "Admin privileges are required!"
     timeout /t 5
     GOTO :END  
-)I  
+)  
 
 :: Manage Users
 set NEWUSER=support
@@ -28,7 +28,7 @@ if %ERRORLEVEL% EQU 0 (
    net localgroup administrators support /add
 )
 set /p ADMINPASSW="Change admin password? [Y/N]?: "
-of /i "%ADMINPASSW%"=="Y" (
+if /i "%ADMINPASSW%"=="Y" (
     set /p "NEWPASSW=Admin Password [strongPassword123]: "
     net user administrator %NEWPASSW%
 )
@@ -88,7 +88,7 @@ choco install python
 choco install clink-maintained
 choco install fio
 choco install kubernetes-cli
-choco install vscode /NoDesktopIcon 
+choco install vscode --params "/NoDesktopIcon"
 :: choco install visualstudio2017professional
 :: choco install visualstudio2019professional
 :: choco install visualstudio2022professional
@@ -224,7 +224,7 @@ cacls \MFSamples /e /t /p Everyone:f
 md \MFDataFiles
 cacls \MFDataFiles /e /p Everyone:f
 md \MFInstallers
-cacls \MFInstaller /e /p Everyone:f
+cacls \MFInstallers /e /p Everyone:f
 md \MFScripts
 cacls \MFScripts /e /p Everyone:f
 cd \MFSamples\JCL

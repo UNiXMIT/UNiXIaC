@@ -320,6 +320,9 @@ sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linu
 sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/gateway.toml
 sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/TCPtuning.conf
 
+sed -i "s|/home|$PRODPATH|g" $FILEPATH/AcuSupport/AcuScripts/setenvacu.sh
+sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/AcuSupport/AcuScripts/startacu.sh
+
 cd $FILEPATH
 sudo mkdir -p -m 775 MFSupport
 cd $FILEPATH/MFSupport
@@ -350,6 +353,9 @@ sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MF
 sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
 sudo mkdir -p -m 775 CICS/system CICS/dataset CICS/loadlib
 sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml
+
+sed -i "s|/home|$PRODPATH|g" $FILEPATH/MFSupport/MFScripts/setenvmf.sh
+
 cd $FILEPATH
 if [[ "$WHICHOS" = "RHEL" || "$WHICHOS" = "UBUNTU" ]]; then
   sudo chown -R $user:$user AcuSupport
@@ -358,6 +364,8 @@ elif [[ "$WHICHOS" == "SLES" ]]; then
   sudo chown -R $user:users AcuSupport
   sudo chown -R $user:users MFSupport
 fi
+
+sed -i "s|/home|$USERPATH|g" filename
 
 touch /home/$user/.Xauthority
 sudo chmod 600 /home/$user/.Xauthority
