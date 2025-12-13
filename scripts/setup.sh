@@ -342,11 +342,11 @@ sudo chmod +x setupmf.sh startmf.sh setenvmf.sh formatdumps.sh autopac.sh mfesdi
 cd $FILEPATH/MFSupport/CTF
 sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/ctf.cfg
 cd $FILEPATH/MFSupport/MFSamples
-mkdir -p -m 775 JCL/system JCL/catalog JCL/dataset JCL/loadlib
+sudo mkdir -p -m 775 JCL/system JCL/catalog JCL/dataset JCL/loadlib
 sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
 sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MFBSI.cfg
 sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
-mkdir -p -m 775 CICS/system CICS/dataset JCL/loadlib
+sudo mkdir -p -m 775 CICS/system CICS/dataset CICS/loadlib
 sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml
 cd $FILEPATH
 if [[ "$WHICHOS" = "RHEL" || "$WHICHOS" = "UBUNTU" ]]; then
@@ -367,7 +367,7 @@ CRONLINE='#0 20 * * * sh -c '\''/sbin/shutdown -h +30 && printf "Shutdown schedu
 
 # MOTD
 . /etc/os-release
-tee motd.temp > /dev/null <<EOF
+sudo tee motd.temp > /dev/null <<EOF
 ****************************************************************************************************
 
     $PRETTY_NAME
