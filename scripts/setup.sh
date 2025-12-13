@@ -55,8 +55,11 @@ if [[ -f /etc/ssh/sshd_config.d/50-cloud-init.conf ]]; then
   sudo sed -i -E 's/#?X11Forwarding no/X11Forwarding yes/' /etc/ssh/sshd_config;
 fi
 echo $user' ALL=(ALL:ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
-sudo service ssh restart &>/dev/null
-sudo service sshd restart &>/dev/null  
+if systemctl status sshd >/dev/null 2>&1; then
+    sudo service sshd restart
+elif systemctl status ssh >/dev/null 2>&1; then
+    sudo service ssh restart
+fi
 sudo mkdir -p /etc/profile.d
 sudo cat > /etc/profile.d/profile.sh <<EOF
 #!/bin/bash
