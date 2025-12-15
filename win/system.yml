@@ -172,6 +172,12 @@
     elements: .MSI
   tags: default
 
+- name: Set .PS1 on PATHEXT
+  win_path:
+    name: PATHEXT
+    elements: .PS1
+  tags: default
+
 - name: Install fio
   win_chocolatey:
     name: fio
