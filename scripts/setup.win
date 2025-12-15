@@ -121,62 +121,41 @@ call "C:\Program Files\Microsoft VS Code\bin\code" --install-extension ms-vscode
 curl -s -o %APPDATA%\Code\User\settings.json https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/win/vscode/settings.json
 curl -s -o %APPDATA%\Code\User\keybindings.json https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/win/vscode/keybindings.json
 
-:: Install Oracle Instant Client
-powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-basic-nt-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-basic-nt-21.15.0.0.0dbru.zip"
-powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-basic-nt-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient32 -Force"
-powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-basic-windows.x64-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-basic-windows.x64-21.15.0.0.0dbru.zip"
-powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-basic-windows.x64-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient64 -Force"
-powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-odbc-nt-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-odbc-nt-21.15.0.0.0dbru.zip"
-powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-odbc-nt-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient32 -Force"
-powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-odbc-windows.x64-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-odbc-windows.x64-21.15.0.0.0dbru.zip"
-powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-odbc-windows.x64-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient64 -Force"
-powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sqlplus-nt-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-sqlplus-nt-21.15.0.0.0dbru.zip"
-powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-sqlplus-nt-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient32 -Force"
-powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sqlplus-windows.x64-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-sqlplus-windows.x64-21.15.0.0.0dbru.zip"
-powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-sqlplus-windows.x64-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient64 -Force"
-powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sdk-nt-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-sdk-nt-21.15.0.0.0dbru.zip"
-powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-sdk-nt-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient32 -Force"
-powershell -Command "Invoke-WebRequest -Uri https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip"
-powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient64 -Force"
-powershell -Command "Invoke-WebRequest -Uri https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-nt-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-precomp-nt-21.15.0.0.0dbru.zip"
-powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-precomp-nt-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient64 -Force"
-powershell -Command "Invoke-WebRequest -Uri https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-windows.x64-21.15.0.0.0dbru.zip -outfile C:\Users\Public\Documents\instantclient-precomp-windows.x64-21.15.0.0.0dbru.zip"
-powershell -Command "Expand-Archive -LiteralPath C:\Users\Public\Documents\instantclient-precomp-windows.x64-21.15.0.0.0dbru.zip -DestinationPath C:\instantClient64 -Force"
-call C:\instantClient32\instantclient_21_15\odbc_install.exe
-call C:\instantClient64\instantclient_21_15\odbc_install.exe
-setx /m PATH "%PATH%;C:\instantClient32\instantclient_21_15;C:\instantClient32\instantclient_21_15\sdk"
-
 :: DB2 Client
 curl -s -o C:\Users\Public\Documents\v11.5.9_ntx64_client.exe https://mturner.s3.eu-west-2.amazonaws.com/Public/DB2/v11.5.9_ntx64_client.exe
-echo PROD=CLIENT > C:\Users\Public\Documents\db2.win.rsp
-echo LIC_AGREEMENT=ACCEPT >> C:\Users\Public\Documents\db2.win.rsp
-echo FILE=C:\Program Files\IBM\SQLLIB_01\ >> C:\Users\Public\Documents\db2.win.rsp
-echo INSTALL_TYPE=CUSTOM >> C:\Users\Public\Documents\db2.win.rsp
-echo COMP=BASE_CLIENT >> C:\Users\Public\Documents\db2.win.rsp
-echo COMP=DOTNET_DATA_PROVIDER >> C:\Users\Public\Documents\db2.win.rsp
-echo COMP=JDBC_SUPPORT >> C:\Users\Public\Documents\db2.win.rsp
-echo COMP=ODBC_SUPPORT >> C:\Users\Public\Documents\db2.win.rsp
-echo COMP=OLE_DB_SUPPORT >> C:\Users\Public\Documents\db2.win.rsp
-echo COMP=SQLJ_SUPPORT >> C:\Users\Public\Documents\db2.win.rsp
-echo LANG=EN >> C:\Users\Public\Documents\db2.win.rsp
-echo INSTANCE=DB2 >> C:\Users\Public\Documents\db2.win.rsp
-echo DB2.NAME=DB2 >> C:\Users\Public\Documents\db2.win.rsp
-echo DEFAULT_INSTANCE=DB2 >> C:\Users\Public\Documents\db2.win.rsp
-echo DB2.TYPE=CLIENT >> C:\Users\Public\Documents\db2.win.rsp
-echo DB2_EXTSECURITY=NO >> C:\Users\Public\Documents\db2.win.rsp
-echo DB2_COMMON_APP_DATA_TOP_PATH=C:\ProgramData >> C:\Users\Public\Documents\db2.win.rsp
-echo DB2_COPY_NAME=DB2 >> C:\Users\Public\Documents\db2.win.rsp
-echo DEFAULT_COPY=YES >> C:\Users\Public\Documents\db2.win.rsp
-echo DEFAULT_CLIENT_INTERFACE_COPY=YES >> C:\Users\Public\Documents\db2.win.rsp
+(
+echo PROD=CLIENT
+echo LIC_AGREEMENT=ACCEPT
+echo FILE=C:\Program Files\IBM\SQLLIB_01\
+echo INSTALL_TYPE=CUSTOM
+echo COMP=BASE_CLIENT
+echo COMP=DOTNET_DATA_PROVIDER
+echo COMP=JDBC_SUPPORT
+echo COMP=ODBC_SUPPORT
+echo COMP=OLE_DB_SUPPORT
+echo COMP=SQLJ_SUPPORT
+echo LANG=EN
+echo INSTANCE=DB2
+echo DB2.NAME=DB2
+echo DEFAULT_INSTANCE=DB2
+echo DB2.TYPE=CLIENT
+echo DB2_EXTSECURITY=NO
+echo DB2_COMMON_APP_DATA_TOP_PATH=C:\ProgramData
+echo DB2_COPY_NAME=DB2
+echo DEFAULT_COPY=YES
+echo DEFAULT_CLIENT_INTERFACE_COPY=YES
+) > C:\Users\Public\Documents\db2.win.rsp
 cd C:\Users\Public\Documents
 v11.5.9_ntx64_client.exe /auto .
 CLIENT\setup -u db2.win.rsp
 
 :: MQ Client
-md "\Program Files\IBM\MQ"
-curl -s -o "\Program Files\IBM\MQ\IBM-MQC-Redist-Win64.zip" -L https://mturner.s3.eu-west-2.amazonaws.com/Public/MQ/9.3.5.0-IBM-MQC-Redist-Win64.zip
-powershell -Command "Expand-Archive -LiteralPath C:\Program Files\IBM\MQ\IBM-MQC-Redist-Win64.zip -DestinationPath C:\Program Files\IBM\MQ"
-setx /m PATH "%PATH%;C:\Program Files\IBM\MQ;C:\Program Files\IBM\MQ\bin"
+set "ZIP=C:\Program Files\IBM\MQ\IBM-MQC-Redist-Win64.zip"
+set "DEST=C:\Program Files\IBM\MQ"
+set "URL=https://mturner.s3.eu-west-2.amazonaws.com/Public/MQ/9.3.5.0-IBM-MQC-Redist-Win64.zip"
+md %DEST%
+curl -s -L -o "%ZIP%" "%URL%"
+powershell -NoProfile -Command "$zip='%ZIP%'; $dest='%DEST%'; Expand-Archive -LiteralPath $zip -DestinationPath $dest"
 
 :: Create Support Files and Directories
 md \temp
