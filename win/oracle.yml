@@ -113,7 +113,7 @@
 
 - name: Unzip Oracle Instant Client SQLPlus 64bit
   community.windows.win_unzip:
-    src: C:\Users\Public\Documents\i{{ oracleSQLPlus64 }}
+    src: C:\Users\Public\Documents\{{ oracleSQLPlus64 }}
     dest: C:\instantClient64
 
 - name: Download Oracle Instant Client SDK 32bit
