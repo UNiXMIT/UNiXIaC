@@ -21,8 +21,8 @@
     - psqlodbc
     - openjdk
     - python
-    - clink-maintained
     - kubernetes-cli
+    # - clink-maintained
     # - dotnet
     # - windows-sdk-11-version-22h2-all
     # - visualstudio2017buildtools
@@ -41,6 +41,7 @@
   win_copy:
     content: |
       @ECHO OFF
+      choco install clink-maintained
       setx /m PATH "C:\Program Files (x86)\clink;%PATH%"
       "C:\Program Files (x86)\clink\clink" autorun -a install
       "C:\Program Files (x86)\clink\clink" set clink.logo none
