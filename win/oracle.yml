@@ -1,7 +1,23 @@
+- name: Set Oracle Facts
+  set_fact:
+    oracleBaseURL: "https://download.oracle.com/otn_software/nt/instantclient/2115000/"
+    oracleBase32: "instantclient-basic-nt-21.15.0.0.0dbru.zip"
+    oracleODBC32: "instantclient-odbc-nt-21.15.0.0.0dbru.zip"
+    oracleSQLPlus32: "instantclient-sqlplus-nt-21.15.0.0.0dbru.zip"
+    oracleSDK32: "instantclient-sdk-nt-21.15.0.0.0dbru.zip"
+    oracleBase64: "instantclient-basic-windows.x64-21.15.0.0.0dbru.zip"
+    oracleODBC64: "instantclient-odbc-windows.x64-21.15.0.0.0dbru.zip"
+    oracleSQLPlus64: "instantclient-sqlplus-windows.x64-21.15.0.0.0dbru.zip"
+    oracleSDK64: "instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip"
+    oraclePrecompURL: "https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/"
+    oraclePrecomp32: "instantclient-precomp-nt-21.15.0.0.0dbru.zip"
+    oraclePrecomp64: "instantclient-precomp-windows.x64-21.15.0.0.0dbru.zip"
+    baseDir: "instantclient_21_15"
+
 - name: Download Oracle Instant Client 32bit
   ansible.windows.win_get_url:
-    url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-basic-nt-21.15.0.0.0dbru.zip
-    dest: C:\Users\Public\Documents\instantclient-basic-nt-21.15.0.0.0dbru.zip
+    url: '{{ oracleBaseURL }}{{ oracleBase32 }}'
+    dest: C:\Users\Public\Documents\{{ oracleBase32 }}
   register: result
   retries: 5
   delay: 30
@@ -9,8 +25,8 @@
 
 - name: Download Oracle Instant Client 64bit
   ansible.windows.win_get_url:
-    url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-basic-windows.x64-21.15.0.0.0dbru.zip
-    dest: C:\Users\Public\Documents\instantclient-basic-windows.x64-21.15.0.0.0dbru.zip
+    url: '{{ oracleBaseURL }}{{ oracleBase64 }}'
+    dest: C:\Users\Public\Documents\{{ oracleBase64 }}
   register: result
   retries: 5
   delay: 30
@@ -18,7 +34,7 @@
 
 - name: Unzip Oracle Instant Client 32bit
   community.windows.win_unzip:
-    src: C:\Users\Public\Documents\instantclient-basic-nt-21.15.0.0.0dbru.zip
+    src: C:\Users\Public\Documents\{{ oracleBase32 }}
     dest: C:\instantClient32
   register: result
   retries: 5
@@ -27,7 +43,7 @@
 
 - name: Unzip Oracle Instant Client 64bit
   community.windows.win_unzip:
-    src: C:\Users\Public\Documents\instantclient-basic-windows.x64-21.15.0.0.0dbru.zip
+    src: C:\Users\Public\Documents\{{ oracleBase64 }}
     dest: C:\instantClient64
   register: result
   retries: 5
@@ -36,8 +52,8 @@
 
 - name: Download Oracle Instant Client ODBC 32bit
   ansible.windows.win_get_url:
-    url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-odbc-nt-21.15.0.0.0dbru.zip
-    dest: C:\Users\Public\Documents\instantclient-odbc-nt-21.15.0.0.0dbru.zip
+    url: '{{ oracleBaseURL }}{{ oracleODBC32 }}'
+    dest: C:\Users\Public\Documents\{{ oracleODBC32 }}
   register: result
   retries: 5
   delay: 30
@@ -45,8 +61,8 @@
 
 - name: Download Oracle Instant Client ODBC 64bit
   ansible.windows.win_get_url:
-    url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-odbc-windows.x64-21.15.0.0.0dbru.zip
-    dest: C:\Users\Public\Documents\instantclient-odbc-windows.x64-21.15.0.0.0dbru.zip
+    url: '{{ oracleBaseURL }}{{ oracleODBC64 }}'
+    dest: C:\Users\Public\Documents\{{ oracleODBC64 }}
   register: result
   retries: 5
   delay: 30
@@ -54,28 +70,28 @@
 
 - name: Unzip Oracle Instant Client ODBC 32bit
   community.windows.win_unzip:
-    src: C:\Users\Public\Documents\instantclient-odbc-nt-21.15.0.0.0dbru.zip
+    src: C:\Users\Public\Documents\{{ oracleODBC32 }}
     dest: C:\instantClient32
 
 - name: Unzip Oracle Instant Client ODBC 64bit
   community.windows.win_unzip:
-    src: C:\Users\Public\Documents\instantclient-odbc-windows.x64-21.15.0.0.0dbru.zip
+    src: C:\Users\Public\Documents\{{ oracleODBC64 }}
     dest: C:\instantClient64
 
 - name: Install Oracle Instant Client ODBC 32bit
   ansible.windows.win_command: odbc_install.exe
   args:
-    chdir: C:\instantClient32\instantclient_21_15
+    chdir: C:\instantClient32\{{ baseDir }}
 
 - name: Install Oracle Instant Client ODBC 64bit
   ansible.windows.win_command: odbc_install.exe
   args:
-    chdir: C:\instantClient64\instantclient_21_15
+    chdir: C:\instantClient64\{{ baseDir }}
 
 - name: Download Oracle Instant Client SQLPlus 32bit
   ansible.windows.win_get_url:
-    url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sqlplus-nt-21.15.0.0.0dbru.zip
-    dest: C:\Users\Public\Documents\instantclient-sqlplus-nt-21.15.0.0.0dbru.zip
+    url: '{{ oracleBaseURL }}{{ oracleSQLPlus32 }}'
+    dest: C:\Users\Public\Documents\{{ oracleSQLPlus32 }}
   register: result
   retries: 5
   delay: 30
@@ -83,8 +99,8 @@
 
 - name: Download Oracle Instant Client SQLPlus 64bit
   ansible.windows.win_get_url:
-    url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sqlplus-windows.x64-21.15.0.0.0dbru.zip
-    dest: C:\Users\Public\Documents\instantclient-sqlplus-windows.x64-21.15.0.0.0dbru.zip
+    url: '{{ oracleBaseURL }}{{ oracleSQLPlus64 }}'
+    dest: C:\Users\Public\Documents\{{ oracleSQLPlus64 }}
   register: result
   retries: 5
   delay: 30
@@ -92,18 +108,18 @@
 
 - name: Unzip Oracle Instant Client SQLPlus 32bit
   community.windows.win_unzip:
-    src: C:\Users\Public\Documents\instantclient-sqlplus-nt-21.15.0.0.0dbru.zip
+    src: C:\Users\Public\Documents\{{ oracleSQLPlus32 }}
     dest: C:\instantClient32
 
 - name: Unzip Oracle Instant Client SQLPlus 64bit
   community.windows.win_unzip:
-    src: C:\Users\Public\Documents\instantclient-sqlplus-windows.x64-21.15.0.0.0dbru.zip
+    src: C:\Users\Public\Documents\i{{ oracleSQLPlus64 }}
     dest: C:\instantClient64
 
 - name: Download Oracle Instant Client SDK 32bit
   ansible.windows.win_get_url:
-    url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sdk-nt-21.15.0.0.0dbru.zip
-    dest: C:\Users\Public\Documents\instantclient-sdk-nt-21.15.0.0.0dbru.zip
+    url: '{{ oracleBaseURL }}{{ oracleSDK32 }}'
+    dest: C:\Users\Public\Documents\{{ oracleSDK32 }}
   register: result
   retries: 5
   delay: 30
@@ -111,8 +127,8 @@
 
 - name: Download Oracle Instant Client SDK 64bit
   ansible.windows.win_get_url:
-    url: https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip
-    dest: C:\Users\Public\Documents\instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip
+    url: '{{ oracleBaseURL }}{{ oracleSDK64 }}'
+    dest: C:\Users\Public\Documents\{{ oracleSDK64 }}
   register: result
   retries: 5
   delay: 30
@@ -120,12 +136,12 @@
 
 - name: Unzip Oracle Instant Client SDK 32bit
   community.windows.win_unzip:
-    src: C:\Users\Public\Documents\instantclient-sdk-nt-21.15.0.0.0dbru.zip
+    src: C:\Users\Public\Documents\{{ oracleSDK32 }}
     dest: C:\instantClient32
 
 - name: Unzip Oracle Instant Client SDK 64bit
   community.windows.win_unzip:
-    src: C:\Users\Public\Documents\instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip
+    src: C:\Users\Public\Documents\{{ oracleSDK64 }}
     dest: C:\instantClient64
 
 # - name: Get Oracle Instant Client Precompiler 32bit Download URL from S3
@@ -156,8 +172,8 @@
 
 - name: Download Oracle Instant Client Precompiler 32bit
   ansible.windows.win_get_url:
-    url: https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-nt-21.15.0.0.0dbru.zip
-    dest: C:\Users\Public\Documents\instantclient-precomp-nt.zip
+    url: '{{ oraclePrecompURL }}{{ oraclePrecomp32 }}'
+    dest: C:\Users\Public\Documents\{{ oraclePrecomp32 }}
   register: result
   retries: 5
   delay: 30
@@ -165,8 +181,8 @@
 
 - name: Download Oracle Instant Client Precompiler 64bit
   ansible.windows.win_get_url:
-    url: https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-windows.x64-21.15.0.0.0dbru.zip
-    dest: C:\Users\Public\Documents\instantclient-precomp-windows.x64.zip
+    url: '{{ oraclePrecompURL }}{{ oraclePrecomp64 }}'
+    dest: C:\Users\Public\Documents\{{ oraclePrecomp64 }}
   register: result
   retries: 5
   delay: 30
@@ -174,16 +190,16 @@
 
 - name: Unzip Oracle Instant Client Precompiler 32bit
   community.windows.win_unzip:
-    src: C:\Users\Public\Documents\instantclient-precomp-nt.zip
+    src: C:\Users\Public\Documents\{{ oraclePrecomp32 }}
     dest: C:\instantClient32
 
 - name: Unzip Oracle Instant Client Precompiler 64bit
   community.windows.win_unzip:
-    src: C:\Users\Public\Documents\instantclient-precomp-windows.x64.zip
+    src: C:\Users\Public\Documents\{{ oraclePrecomp64 }}
     dest: C:\instantClient64
 
 - name: Set Oracle Instant Client 32bit on PATH
   ansible.windows.win_path:
     elements: 
-    - 'C:\instantClient32\instantclient_21_15'
-    - 'C:\instantClient32\instantclient_21_15\sdk'
+    - 'C:\instantClient32\{{ baseDir }}'
+    - 'C:\instantClient32\{{ baseDir }}\sdk'
