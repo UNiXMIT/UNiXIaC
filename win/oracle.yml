@@ -1,22 +1,25 @@
 - name: Set Oracle Facts
   set_fact:
-    oracleBaseURL: "https://download.oracle.com/otn_software/nt/instantclient/2115000/"
-    oracleBase32: "instantclient-basic-nt-21.15.0.0.0dbru.zip"
-    oracleODBC32: "instantclient-odbc-nt-21.15.0.0.0dbru.zip"
-    oracleSQLPlus32: "instantclient-sqlplus-nt-21.15.0.0.0dbru.zip"
-    oracleSDK32: "instantclient-sdk-nt-21.15.0.0.0dbru.zip"
-    oracleBase64: "instantclient-basic-windows.x64-21.15.0.0.0dbru.zip"
-    oracleODBC64: "instantclient-odbc-windows.x64-21.15.0.0.0dbru.zip"
-    oracleSQLPlus64: "instantclient-sqlplus-windows.x64-21.15.0.0.0dbru.zip"
-    oracleSDK64: "instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip"
-    oraclePrecompURL: "https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/"
-    oraclePrecomp32: "instantclient-precomp-nt-21.15.0.0.0dbru.zip"
-    oraclePrecomp64: "instantclient-precomp-windows.x64-21.15.0.0.0dbru.zip"
-    baseDir: "instantclient_21_15"
+    oracleBaseURL32: "https://download.oracle.com/otn_software/nt/instantclient/2118000/"
+    oracleBase32: "instantclient-basic-nt-21.18.0.0.0dbru.zip"
+    oracleODBC32: "instantclient-odbc-nt-21.18.0.0.0dbru.zip"
+    oracleSQLPlus32: "instantclient-sqlplus-nt-21.18.0.0.0dbru.zip"
+    oracleSDK32: "instantclient-sdk-nt-21.18.0.0.0dbru.zip"
+    oracleBaseURL64: "https://download.oracle.com/otn_software/nt/instantclient/2326000/"
+    oracleBase64: "instantclient-basic-windows.x64-23.26.0.0.0d.zip"
+    oracleODBC64: "instantclient-odbc-windows.x64-23.26.0.0.0.zip"
+    oracleSQLPlus64: "instantclient-sqlplus-windows.x64-23.26.0.0.0.zip"
+    oracleSDK64: "instantclient-sdk-windows.x64-23.26.0.0.0.zip"
+    oraclePrecompURL32: "https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/"
+    oraclePrecompURL64: "https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/23/"
+    oraclePrecomp32: "instantclient-precomp-nt-21.18.0.0.0dbru.zip"
+    oraclePrecomp64: "instantclient-precomp-windows.x64-23.26.0.0.0.zip"
+    baseDir32: "instantclient_21_18"
+    baseDir64: "instantclient_23_0"
 
 - name: Download Oracle Instant Client 32bit
   ansible.windows.win_get_url:
-    url: '{{ oracleBaseURL }}{{ oracleBase32 }}'
+    url: '{{ oracleBaseURL32 }}{{ oracleBase32 }}'
     dest: C:\Users\Public\Documents\{{ oracleBase32 }}
   register: result
   retries: 5
@@ -25,7 +28,7 @@
 
 - name: Download Oracle Instant Client 64bit
   ansible.windows.win_get_url:
-    url: '{{ oracleBaseURL }}{{ oracleBase64 }}'
+    url: '{{ oracleBaseURL64 }}{{ oracleBase64 }}'
     dest: C:\Users\Public\Documents\{{ oracleBase64 }}
   register: result
   retries: 5
@@ -52,7 +55,7 @@
 
 - name: Download Oracle Instant Client ODBC 32bit
   ansible.windows.win_get_url:
-    url: '{{ oracleBaseURL }}{{ oracleODBC32 }}'
+    url: '{{ oracleBaseURL32 }}{{ oracleODBC32 }}'
     dest: C:\Users\Public\Documents\{{ oracleODBC32 }}
   register: result
   retries: 5
@@ -61,7 +64,7 @@
 
 - name: Download Oracle Instant Client ODBC 64bit
   ansible.windows.win_get_url:
-    url: '{{ oracleBaseURL }}{{ oracleODBC64 }}'
+    url: '{{ oracleBaseURL64 }}{{ oracleODBC64 }}'
     dest: C:\Users\Public\Documents\{{ oracleODBC64 }}
   register: result
   retries: 5
@@ -81,16 +84,16 @@
 - name: Install Oracle Instant Client ODBC 32bit
   ansible.windows.win_command: odbc_install.exe
   args:
-    chdir: C:\instantClient32\{{ baseDir }}
+    chdir: C:\instantClient32\{{ baseDir32 }}
 
 - name: Install Oracle Instant Client ODBC 64bit
   ansible.windows.win_command: odbc_install.exe
   args:
-    chdir: C:\instantClient64\{{ baseDir }}
+    chdir: C:\instantClient64\{{ baseDir64 }}
 
 - name: Download Oracle Instant Client SQLPlus 32bit
   ansible.windows.win_get_url:
-    url: '{{ oracleBaseURL }}{{ oracleSQLPlus32 }}'
+    url: '{{ oracleBaseURL32 }}{{ oracleSQLPlus32 }}'
     dest: C:\Users\Public\Documents\{{ oracleSQLPlus32 }}
   register: result
   retries: 5
@@ -99,7 +102,7 @@
 
 - name: Download Oracle Instant Client SQLPlus 64bit
   ansible.windows.win_get_url:
-    url: '{{ oracleBaseURL }}{{ oracleSQLPlus64 }}'
+    url: '{{ oracleBaseURL64 }}{{ oracleSQLPlus64 }}'
     dest: C:\Users\Public\Documents\{{ oracleSQLPlus64 }}
   register: result
   retries: 5
@@ -118,7 +121,7 @@
 
 - name: Download Oracle Instant Client SDK 32bit
   ansible.windows.win_get_url:
-    url: '{{ oracleBaseURL }}{{ oracleSDK32 }}'
+    url: '{{ oracleBaseURL32 }}{{ oracleSDK32 }}'
     dest: C:\Users\Public\Documents\{{ oracleSDK32 }}
   register: result
   retries: 5
@@ -127,7 +130,7 @@
 
 - name: Download Oracle Instant Client SDK 64bit
   ansible.windows.win_get_url:
-    url: '{{ oracleBaseURL }}{{ oracleSDK64 }}'
+    url: '{{ oracleBaseURL64 }}{{ oracleSDK64 }}'
     dest: C:\Users\Public\Documents\{{ oracleSDK64 }}
   register: result
   retries: 5
@@ -172,7 +175,7 @@
 
 - name: Download Oracle Instant Client Precompiler 32bit
   ansible.windows.win_get_url:
-    url: '{{ oraclePrecompURL }}{{ oraclePrecomp32 }}'
+    url: '{{ oraclePrecompURL32 }}{{ oraclePrecomp32 }}'
     dest: C:\Users\Public\Documents\{{ oraclePrecomp32 }}
   register: result
   retries: 5
@@ -181,7 +184,7 @@
 
 - name: Download Oracle Instant Client Precompiler 64bit
   ansible.windows.win_get_url:
-    url: '{{ oraclePrecompURL }}{{ oraclePrecomp64 }}'
+    url: '{{ oraclePrecompURL64 }}{{ oraclePrecomp64 }}'
     dest: C:\Users\Public\Documents\{{ oraclePrecomp64 }}
   register: result
   retries: 5
@@ -201,5 +204,5 @@
 - name: Set Oracle Instant Client 32bit on PATH
   ansible.windows.win_path:
     elements: 
-    - 'C:\instantClient32\{{ baseDir }}'
-    - 'C:\instantClient32\{{ baseDir }}\sdk'
+    - 'C:\instantClient32\{{ baseDir32 }}'
+    - 'C:\instantClient32\{{ baseDir32 }}\sdk'
