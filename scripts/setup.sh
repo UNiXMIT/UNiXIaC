@@ -365,8 +365,6 @@ elif [[ "$WHICHOS" == "SLES" ]]; then
   sudo chown -R $user:users MFSupport
 fi
 
-sed -i "s|/home|$USERPATH|g" filename
-
 touch /home/$user/.Xauthority
 sudo chmod 600 /home/$user/.Xauthority
 
