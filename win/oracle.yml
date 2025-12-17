@@ -6,7 +6,7 @@
     oracleSQLPlus32: "instantclient-sqlplus-nt-21.18.0.0.0dbru.zip"
     oracleSDK32: "instantclient-sdk-nt-21.18.0.0.0dbru.zip"
     oracleBaseURL64: "https://download.oracle.com/otn_software/nt/instantclient/2326000/"
-    oracleBase64: "instantclient-basic-windows.x64-23.26.0.0.0d.zip"
+    oracleBase64: "instantclient-basic-windows.x64-23.26.0.0.0.zip"
     oracleODBC64: "instantclient-odbc-windows.x64-23.26.0.0.0.zip"
     oracleSQLPlus64: "instantclient-sqlplus-windows.x64-23.26.0.0.0.zip"
     oracleSDK64: "instantclient-sdk-windows.x64-23.26.0.0.0.zip"
