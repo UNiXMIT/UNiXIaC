@@ -6,14 +6,14 @@
 
 - name: Set Oracle Facts
   set_fact:
-    oracleBaseURL: "https://download.oracle.com/otn_software/linux/instantclient/2113000/"
-    oracleBase: "instantclient-basic-linux.x64-21.13.0.0.0dbru.zip"
-    oracleODBC: "instantclient-odbc-linux.x64-21.13.0.0.0dbru.zip"
-    oracleSQLPlus: "instantclient-sqlplus-linux.x64-21.13.0.0.0dbru.zip"
-    oracleSDK: "instantclient-sdk-linux.x64-21.13.0.0.0dbru.zip"
-    oraclePrecompURL: "https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/"
-    oraclePrecomp: "instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip"
-    baseDir: "instantclient_21_13"
+    oracleBaseURL: "https://download.oracle.com/otn_software/linux/instantclient/2326000/"
+    oracleBase: "instantclient-basic-linux.x64-23.26.0.0.0.zip"
+    oracleODBC: "instantclient-odbc-linux.x64-23.26.0.0.0.zip"
+    oracleSQLPlus: "instantclient-sqlplus-linux.x64-23.26.0.0.0.zip"
+    oracleSDK: "instantclient-sdk-linux.x64-23.26.0.0.0.zip"
+    oraclePrecompURL: "https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/23/"
+    oraclePrecomp: "instantclient-precomp-linux.x64-23.26.0.0.0.zip"
+    baseDir: "instantclient_23_0"
 
 - name: Download Oracle Instant Client Basic Package
   get_url:
