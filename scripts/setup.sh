@@ -134,7 +134,7 @@ EOF
   export ODBCPATH=/etc/unixODBC
 fi
 sudo systemctl enable --now podman.socket
-sudo curl -s -o /usr/local/bin/yq_linux_amd64 https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+sudo curl -s -o /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
 curl -LO -s "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 sudo rm -f kubectl
@@ -143,39 +143,60 @@ sudo ln -s /usr/lib64/libnsl.so.1 /usr/lib64/libnsl.so
 # Install Oracle Instant Client
 if [[ "$WHICHOS" = "RHEL" ]]; then
   if [[ ${VERSION_ID%.*} = 8 ]]; then
-    sudo dnf install -y https://download.oracle.com/otn_software/linux/instantclient/2113000/oracle-instantclient-basic-21.13.0.0.0-1.el8.x86_64.rpm
-    sudo dnf install -y https://download.oracle.com/otn_software/linux/instantclient/2113000/oracle-instantclient-odbc-21.13.0.0.0-1.el8.x86_64.rpm
-    sudo dnf install -y https://download.oracle.com/otn_software/linux/instantclient/2113000/oracle-instantclient-sqlplus-21.13.0.0.0-1.el8.x86_64.rpm
-    sudo dnf install -y https://download.oracle.com/otn_software/linux/instantclient/2113000/oracle-instantclient-devel-21.13.0.0.0-1.el8.x86_64.rpm
-    curl -s -o /tmp/oracle-instantclient-precomp-21.13.0.0.0-1.el8.x86_64.rpm https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/oracle-instantclient-precomp-21.13.0.0.0-1.el8.x86_64.rpm
-    sudo dnf install -y /tmp/oracle-instantclient-precomp-21.13.0.0.0-1.el8.x86_64.rpm
-    
+    oracleBaseURL=https://download.oracle.com/otn_software/linux/instantclient/2326000
+    oracleBase=oracle-instantclient-basic-23.26.0.0.0-1.el8.x86_64.rpm
+    oracleODBC=oracle-instantclient-odbc-23.26.0.0.0-1.el8.x86_64.rpm
+    oracleSQLPlus=oracle-instantclient-sqlplus-23.26.0.0.0-1.el8.x86_64.rpm
+    oracleSDK=oracle-instantclient-devel-23.26.0.0.0-1.el8.x86_64.rpm
+    oraclePrecompURL=https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/23
+    oraclePrecomp=oracle-instantclient-precomp-23.26.0.0.0-1.el8.x86_64.rpm
+    sudo dnf install -y $oracleBaseURL/$oracleBase
+    sudo dnf install -y $oracleBaseURL/$oracleODBC
+    sudo dnf install -y $oracleBaseURL/$oracleSQLPlus
+    sudo dnf install -y $oracleBaseURL/$oracleSDK
+    curl -s -o /tmp/$oraclePrecomp $oraclePrecompURL/$oraclePrecomp
+    sudo dnf install -y /tmp/$oraclePrecomp    
   elif [[ ${VERSION_ID%.*} = 9 ]]; then
-    sudo dnf install -y https://download.oracle.com/otn_software/linux/instantclient/2112000/el9/oracle-instantclient-basic-21.12.0.0.0-1.el9.x86_64.rpm
-    sudo dnf install -y https://download.oracle.com/otn_software/linux/instantclient/2112000/el9/oracle-instantclient-odbc-21.12.0.0.0-1.el9.x86_64.rpm
-    sudo dnf install -y https://download.oracle.com/otn_software/linux/instantclient/2112000/el9/oracle-instantclient-sqlplus-21.12.0.0.0-1.el9.x86_64.rpm
-    sudo dnf install -y https://download.oracle.com/otn_software/linux/instantclient/2112000/el9/oracle-instantclient-devel-21.12.0.0.0-1.el9.x86_64.rpm
-    curl -s -o /tmp/oracle-instantclient-precomp-21.12.0.0.0-1.el9.x86_64.rpm https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/oracle-instantclient-precomp-21.12.0.0.0-1.el9.x86_64.rpm
-    sudo dnf install -y /tmp/oracle-instantclient-precomp-21.12.0.0.0-1.el9.x86_64.rpm
+    oracleBaseURL=https://download.oracle.com/otn_software/linux/instantclient/2326000
+    oracleBase=oracle-instantclient-basic-23.26.0.0.0-1.el9.x86_64.rpm
+    oracleODBC=oracle-instantclient-odbc-23.26.0.0.0-1.el9.x86_64.rpm
+    oracleSQLPlus=oracle-instantclient-sqlplus-23.26.0.0.0-1.el9.x86_64.rpm
+    oracleSDK=oracle-instantclient-devel-23.26.0.0.0-1.el9.x86_64.rpm
+    oraclePrecompURL=https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/23
+    oraclePrecomp=oracle-instantclient-precomp-23.26.0.0.0-1.el9.x86_64.rpm
+    sudo dnf install -y $oracleBaseURL/$oracleBase
+    sudo dnf install -y $oracleBaseURL/$oracleODBC
+    sudo dnf install -y $oracleBaseURL/$oracleSQLPlus
+    sudo dnf install -y $oracleBaseURL/$oracleSDK
+    curl -s -o /tmp/$oraclePrecomp $oraclePrecompURL/$oraclePrecomp
+    sudo dnf install -y /tmp/$oraclePrecomp
   fi
 elif [[ "$WHICHOS" = "UBUNTU" || "$WHICHOS" == "SLES" ]]; then
   sudo mkdir -p -m 755 /opt/oracle
   cd /opt/oracle
-  curl -s -O https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-basic-linux.x64-21.13.0.0.0dbru.zip
-  unzip instantclient-basic-linux*.zip
-  curl -s -O https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-odbc-linux.x64-21.13.0.0.0dbru.zip
-  unzip instantclient-odbc*.zip
-  curl -s -O https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-sqlplus-linux.x64-21.13.0.0.0dbru.zip
-  unzip instantclient-sqlplus*.zip
-  curl -s -O https://download.oracle.com/otn_software/linux/instantclient/2113000/instantclient-sdk-linux.x64-21.13.0.0.0dbru.zip
-  unzip instantclient-sdk*.zip
-  curl -s -o instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-linux.x64-21.13.0.0.0dbru.zip
-  unzip instantclient-precomp*.zip
+  oraURL=https://download.oracle.com/otn_software/linux/instantclient/2326000
+  oracleBase=instantclient-basic-linux.x64-23.26.0.0.0.zip
+  oracleODBC=instantclient-odbc-linux.x64-23.26.0.0.0.zip
+  oracleSQLPlus=instantclient-sqlplus-linux.x64-23.26.0.0.0.zip
+  oracleSDK=instantclient-sdk-linux.x64-23.26.0.0.0.zip
+  oraclePrecompURL=https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/23
+  oraclePrecomp=instantclient-precomp-linux.x64-23.26.0.0.0.zip
+  baseDir=instantclient_23_0
+  curl -s -O $oraURL/$oracleBase
+  unzip $oracleBase
+  curl -s -O $oraURL/$oracleODBC
+  unzip $oracleODBC
+  curl -s -O $oraURL/$oracleSQLPlus
+  unzip $oracleSQLPlus
+  curl -s -O $oraURL/$oracleSDK
+  unzip $oracleSDK
+  curl -s -o $oraclePrecomp $oraclePrecompURL/$oraclePrecomp
+  unzip $oraclePrecomp
   sudo chmod -R 755 /opt/oracle
   sudo tee /etc/profile.d/oracle.sh > /dev/null <<EOF
 #!/bin/bash
-export PATH="$PATH:/opt/oracle/instantclient_21_13:/opt/oracle/instantclient_21_13/sdk"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/oracle/instantclient_21_13"
+export PATH="$PATH:/opt/oracle/$baseDir:/opt/oracle/$baseDir/sdk"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/oracle/$baseDir"
 EOF
 fi
 

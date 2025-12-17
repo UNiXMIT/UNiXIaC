@@ -183,11 +183,11 @@ Invoke-WebRequest -Uri $keybindingsUrl -OutFile (Join-Path $vsCodeUser "keybindi
 # Install Oracle Instant Client
 $temp = 'C:\Users\Public\Documents'
 $urls = @(
-  'https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-basic-nt-21.15.0.0.0dbru.zip'
-  'https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-odbc-nt-21.15.0.0.0dbru.zip'
-  'https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sqlplus-nt-21.15.0.0.0dbru.zip'
-  'https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sdk-nt-21.15.0.0.0dbru.zip'
-  'https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-nt-21.15.0.0.0dbru.zip'
+  'https://download.oracle.com/otn_software/nt/instantclient/2118000/instantclient-basic-nt-21.18.0.0.0dbru.zip'
+  'https://download.oracle.com/otn_software/nt/instantclient/2118000/instantclient-odbc-nt-21.18.0.0.0dbru.zip'
+  'https://download.oracle.com/otn_software/nt/instantclient/2118000/instantclient-sqlplus-nt-21.18.0.0.0dbru.zip'
+  'https://download.oracle.com/otn_software/nt/instantclient/2118000/instantclient-sdk-nt-21.18.0.0.0dbru.zip'
+  'https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-nt-21.18.0.0.0dbru.zip'
 )
 $dest = 'C:\instantClient32'
 foreach ($url in $urls) {
@@ -196,11 +196,11 @@ foreach ($url in $urls) {
     Expand-Archive -LiteralPath $file -DestinationPath $dest -Force
 }
 $urls = @(
-  'https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-basic-windows.x64-21.15.0.0.0dbru.zip'
-  'https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-odbc-windows.x64-21.15.0.0.0dbru.zip'
-  'https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sqlplus-windows.x64-21.15.0.0.0dbru.zip'
-  'https://download.oracle.com/otn_software/nt/instantclient/2115000/instantclient-sdk-windows.x64-21.15.0.0.0dbru.zip'
-  'https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/21/instantclient-precomp-windows.x64-21.15.0.0.0dbru.zip'
+  'https://download.oracle.com/otn_software/nt/instantclient/2326000/instantclient-basic-windows.x64-23.26.0.0.0.zip'
+  'https://download.oracle.com/otn_software/nt/instantclient/2326000/instantclient-odbc-windows.x64-23.26.0.0.0.zip'
+  'https://download.oracle.com/otn_software/nt/instantclient/2326000/instantclient-sqlplus-windows.x64-23.26.0.0.0.zip'
+  'https://download.oracle.com/otn_software/nt/instantclient/2326000/instantclient-sdk-windows.x64-23.26.0.0.0.zip'
+  'https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/23/instantclient-precomp-windows.x64-23.26.0.0.0.zip'
 )
 $dest = 'C:\instantClient64'
 foreach ($url in $urls) {
@@ -210,16 +210,16 @@ foreach ($url in $urls) {
 }
 
 Start-Process `
-  -FilePath "C:\instantClient32\instantclient_21_15\odbc_install.exe" `
-  -WorkingDirectory "C:\instantClient32\instantclient_21_15" `
+  -FilePath "C:\instantClient32\instantclient_21_18\odbc_install.exe" `
+  -WorkingDirectory "C:\instantClient32\instantclient_21_18" `
   -Wait
 Start-Process `
-  -FilePath "C:\instantClient64\instantclient_21_15\odbc_install.exe" `
-  -WorkingDirectory "C:\instantClient64\instantclient_21_15" `
+  -FilePath "C:\instantClient64\instantclient_23_0\odbc_install.exe" `
+  -WorkingDirectory "C:\instantClient64\instantclient_23_0" `
   -Wait
 $pathsToAdd = @(
-    "C:\instantClient32\instantclient_21_15"
-    "C:\instantClient32\instantclient_21_15\sdk"
+    "C:\instantClient32\instantclient_21_18"
+    "C:\instantClient32\instantclient_21_18\sdk"
 )
 $machinePath = [Environment]::GetEnvironmentVariable("PATH", "Machine")
 foreach ($p in $pathsToAdd) {

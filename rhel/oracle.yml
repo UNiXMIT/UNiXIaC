@@ -10,7 +10,7 @@
 - name: Set Oracle Facts
   set_fact:
     oracleBaseURL9: "https://download.oracle.com/otn_software/linux/instantclient/2326000/"
-    oracleBaseURL8: "https://download.oracle.com/otn_software/linux/instantclient/2113000/"
+    oracleBaseURL8: "https://download.oracle.com/otn_software/linux/instantclient/2326000/"
     oracleBase9: "oracle-instantclient-basic-23.26.0.0.0-1.el9.x86_64.rpm"
     oracleODBC9: "oracle-instantclient-odbc-23.26.0.0.0-1.el9.x86_64.rpm"
     oracleSQLPlus9: "oracle-instantclient-sqlplus-23.26.0.0.0-1.el9.x86_64.rpm"
