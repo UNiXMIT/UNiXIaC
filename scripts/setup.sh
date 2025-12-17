@@ -42,7 +42,6 @@ sudo mkdir -p "$PRODPATH"
 
 # Modify OS Config
 sudo timedatectl set-timezone Europe/London
-sudo hostnamectl set-hostname $user
 sudo sed -i "s/127.0.0.1 localhost/127.0.0.1 localhost ${user}/" /etc/hosts
 echo "if [[ -t 0 && $- = *i* ]]; then stty -ixon; fi" >> /home/$user/.bashrc
 echo 'export PS1="$PS1\[\e]1337;CurrentDir='\''\$(pwd)'\''\a\]"' >> /home/$user/.bash_profile

@@ -3,10 +3,6 @@
     name: Europe/London
   when: userRegion | default("1") == "1"
 
-- name: Set the hostname
-  ansible.builtin.hostname:
-    name: '{{ myUsername }}'
-
 - name: Update hosts file
   ansible.builtin.lineinfile:
     path: /etc/hosts
