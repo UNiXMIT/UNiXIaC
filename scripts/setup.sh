@@ -42,20 +42,22 @@ sudo mkdir -p "$PRODPATH"
 
 # Modify OS Config
 sudo timedatectl set-timezone Europe/London
-sudo sed -i "s/127.0.0.1 localhost/127.0.0.1 localhost ${user}/" /etc/hosts
-echo "if [[ -t 0 && $- = *i* ]]; then stty -ixon; fi" >> /home/$user/.bashrc
-echo 'export PS1="$PS1\[\e]1337;CurrentDir='\''\$(pwd)'\''\a\]"' >> /home/$user/.bash_profile
+sudo sed -i "s/127.0.0.1 localhost/127.0.0.1 localhost support/" /etc/hosts
+echo 'if [[ -t 0 && $- = *i* ]]; then stty -ixon; fi' \
+  | tee -a /home/$user/.bashrc > /dev/null
+echo 'export PS1="$PS1\[\e]1337;CurrentDir='\''\$(pwd)'\''\a\]"' \
+  | tee -a /home/$user/.bash_profile > /dev/null
 if [[ -f /etc/ssh/sshd_config ]]; then
-  sudo sed -i -E 's/#?AllowTcpForwarding no/AllowTcpForwarding yes/' /etc/ssh/sshd_config;
-  sudo sed -i -E 's/#?PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config;
-  sudo sed -i -E 's/#?X11Forwarding no/X11Forwarding yes/' /etc/ssh/sshd_config;
+  sudo sed -i -E 's/#?AllowTcpForwarding no/AllowTcpForwarding yes/' /etc/ssh/sshd_config
+  sudo sed -i -E 's/#?PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+  sudo sed -i -E 's/#?X11Forwarding no/X11Forwarding yes/' /etc/ssh/sshd_config
 fi
 if [[ -f /etc/ssh/sshd_config.d/50-cloud-init.conf ]]; then
   sudo sed -i -E 's/#?AllowTcpForwarding no/AllowTcpForwarding yes/' /etc/ssh/sshd_config.d/50-cloud-init.conf
-  sudo sed -i -E 's/#?PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config.d/50-cloud-init.conf;
-  sudo sed -i -E 's/#?X11Forwarding no/X11Forwarding yes/' /etc/ssh/sshd_config;
+  sudo sed -i -E 's/#?PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config.d/50-cloud-init.conf
+  sudo sed -i -E 's/#?X11Forwarding no/X11Forwarding yes/' /etc/ssh/sshd_config
 fi
-echo $user' ALL=(ALL:ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
+echo $user' ALL=(ALL:ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo > /dev/null
 if systemctl status sshd >/dev/null 2>&1; then
     sudo systemctl restart sshd
 elif systemctl status ssh >/dev/null 2>&1; then
@@ -73,38 +75,38 @@ sudo grep -qxF 'fs.file-max=500000' /etc/sysctl.conf || sudo sh -c 'echo "fs.fil
 # Install Software
 # RHEL
 if [[ "$WHICHOS" = "RHEL" ]]; then
-  . /etc/os-release;
-  sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-${VERSION_ID%.*}.noarch.rpm;
+  . /etc/os-release
+  sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-${VERSION_ID%.*}.noarch.rpm
   curl -s https://packages.microsoft.com/config/rhel/${VERSION_ID%.*}/prod.repo | sudo tee /etc/yum.repos.d/mssql-release.repo
   sudo tee /etc/profile.d/mssql.sh > /dev/null <<EOF
 #!/bin/bash
 export PATH="$PATH:/opt/mssql-tools/bin"
 EOF
   sudo chmod 775 /etc/profile.d/mssql.sh
-  sudo dnf update -y;
-  sudo dnf group install -y "Development Tools";
+  sudo dnf update -y
+  sudo dnf group install -y "Development Tools"
   sudo ACCEPT_EULA=Y yum install -y msodbcsql17 mssql-tools
   sudo dnf install -y --skip-broken unixODBC-devel wget curl cronie dos2unix htop libstdc++-devel.i686 libaio-devel glibc-devel glibc-devel.i686 glibc glibc.i686 tcpdump ed tmux openconnect jq python3 python3-pip expect postgresql postgresql-odbc net-tools lsof xterm xauth pam pam.i686
   if [[ ${VERSION_ID%.*} -le 8 ]]; then
-    sudo dnf install -y --skip-broken spax;
+    sudo dnf install -y --skip-broken spax
   elif [[ ${VERSION_ID%.*} -ge 8 ]]; then
     sudo dnf remove -y java*
     sudo dnf install -y --skip-broken java-latest-openjdk libnsl libnsl.i686 libxcrypt libncurses* libxcrypt.i686 libgcc.i686 ncurses-libs.i686 zlib.i686 webkit2gtk3 PackageKit-gtk3-module systemd-libs systemd-libs.i686 podman buildah
   elif [[ ${VERSION_ID%.*} -ge 9 ]]; then
-    sudo dnf install -y --skip-broken libxcrypt-compat libxcrypt-compat.i686;
+    sudo dnf install -y --skip-broken libxcrypt-compat libxcrypt-compat.i686
   fi
-  sudo setenforce 0;
-  sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config;
+  sudo setenforce 0
+  sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config
   export ODBCPATH=/etc
 # Ubuntu
 elif [[ "$WHICHOS" = "UBUNTU" ]]; then
   . /etc/os-release
   curl -s https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
   curl -s https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
-  sudo apt update;
-  sudo apt upgrade -y;
-  sudo dpkg --add-architecture amd64;
-  sudo dpkg --add-architecture i386;
+  sudo apt update
+  sudo apt upgrade -y
+  sudo dpkg --add-architecture amd64
+  sudo dpkg --add-architecture i386
   sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18 mssql-tools18
   sudo tee /etc/profile.d/mssql.sh > /dev/null <<EOF
 #!/bin/bash
@@ -112,12 +114,12 @@ export PATH="$PATH:/opt/mssql-tools18/bin"
 EOF
   sudo chmod 775 /etc/profile.d/mssql.sh
   sudo apt install -y -m build-essential openjdk-21-jdk unixodbc-dev wget curl cron dos2unix htop lib32stdc++6 libstdc++6:i386 libaio-dev libncurses* apt-file zlib1g:i386 libc6:i386 libgc1 tcpdump ed tmux openconnect jq python3 python3-pip expect postgresql-client odbc-postgresql net-tools lsof pax-utils podman buildah unzip libgtk-3-0 libpam0g libpam0g:i386
-  sudo apt-file update;
+  sudo apt-file update
   export ODBCPATH=/etc
 # SLES
 elif [[ "$WHICHOS" = "SLES" ]]; then
-  sudo zypper refresh;
-  sudo zypper update -y;
+  sudo zypper refresh
+  sudo zypper update -y
   sudo zypper install -t pattern devel_basis
   cd /tmp
   curl -s -O https://packages.microsoft.com/keys/microsoft.asc
@@ -129,7 +131,7 @@ elif [[ "$WHICHOS" = "SLES" ]]; then
 export PATH="$PATH:/opt/mssql-tools/bin"
 EOF
   sudo chmod 775 /etc/profile.d/mssql.sh
-  sudo zypper install -y unixODBC-devel wget curl cronie dos2unix htop tcpdump ed tmux jq python3 python3-pip expect postgresql net-tools lsof spax java-17-openjdk libaio-devel libaio-devel-32bit glibc-devel glibc-devel-32bit glibc glibc-32bit libcrypt1-32bit libncurses5-32bit libstdc++6-32bit libgcc_s1-32bit libz1-32bit podman buildah openconnect unzip xauth libgtk-3-0 gtk3-tools libjasper4 libnotify-tools net-tools-deprecated pam pam-32bit;
+  sudo zypper install -y unixODBC-devel wget curl cronie dos2unix htop tcpdump ed tmux jq python3 python3-pip expect postgresql net-tools lsof spax java-17-openjdk libaio-devel libaio-devel-32bit glibc-devel glibc-devel-32bit glibc glibc-32bit libcrypt1-32bit libncurses5-32bit libstdc++6-32bit libgcc_s1-32bit libz1-32bit podman buildah openconnect unzip xauth libgtk-3-0 gtk3-tools libjasper4 libnotify-tools net-tools-deprecated pam pam-32bit
   export ODBCPATH=/etc/unixODBC
 fi
 sudo systemctl enable --now podman.socket
@@ -308,11 +310,7 @@ EOF
 # Create Support Files and Directories
 cd $PRODPATH
 sudo mkdir -p -m 775 products
-if [[ "$WHICHOS" = "RHEL" || "$WHICHOS" = "UBUNTU" ]]; then
-  sudo chown -R $user:$user products
-elif [[ "$WHICHOS" == "SLES" ]]; then
-  sudo chown -R $user:users products
-fi
+sudo chown -R "$user":"$(id -gn "$user")" products
 
 cd $FILEPATH
 sudo mkdir -p -m 775 AcuSupport
@@ -324,21 +322,23 @@ sudo mkdir -p AcuSamples
 sudo mkdir -p AcuScripts
 sudo mkdir -p CustomerPrograms
 sudo mkdir -p etc
+cd $FILEPATH
+sudo chown -R "$user":"$(id -gn "$user")" AcuSupport
 cd $FILEPATH/AcuSupport/AcuScripts
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/setenvacu.sh
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/startacu.sh
-sudo sudo chmod +x setenvacu.sh startacu.sh
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/setenvacu.sh
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/startacu.sh
+chmod +x setenvacu.sh startacu.sh
 cd $FILEPATH/AcuSupport/etc
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/a_srvcfg
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.cfg
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.ini
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/boomerang.cfg
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/boomerang_alias.ini
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/cblconfig
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/fillCombo.js
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/gateway.conf
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/gateway.toml
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/TCPtuning.conf
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/a_srvcfg
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.cfg
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.ini
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/boomerang.cfg
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/boomerang_alias.ini
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/cblconfig
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/fillCombo.js
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/gateway.conf
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/gateway.toml
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/TCPtuning.conf
 
 sed -i "s|/home|$PRODPATH|g" $FILEPATH/AcuSupport/AcuScripts/setenvacu.sh
 sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/AcuSupport/AcuScripts/startacu.sh
@@ -354,37 +354,30 @@ sudo mkdir -p CTF
 cd $FILEPATH/MFSupport/CTF
 sudo mkdir -p TEXT
 sudo mkdir -p BIN
-
+cd $FILEPATH
+sudo chown -R "$user":"$(id -gn "$user")" MFSupport
 cd $FILEPATH/MFSupport/MFScripts
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setupmf.sh
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/startmf.sh
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setenvmf.sh
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/mfesdiags.sh
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/formatdumps.sh
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/autopac.sh
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/disableSecurity.sh
-sudo chmod +x setupmf.sh startmf.sh setenvmf.sh formatdumps.sh autopac.sh mfesdiags.sh disableSecurity.sh
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setupmf.sh
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/startmf.sh
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setenvmf.sh
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/mfesdiags.sh
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/formatdumps.sh
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/autopac.sh
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/disableSecurity.sh
+chmod +x setupmf.sh startmf.sh setenvmf.sh formatdumps.sh autopac.sh mfesdiags.sh disableSecurity.sh
 cd $FILEPATH/MFSupport/CTF
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/ctf.cfg
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/ctf.cfg
 cd $FILEPATH/MFSupport/MFSamples
-sudo mkdir -p -m 775 JCL/system JCL/catalog JCL/dataset JCL/loadlib
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MFBSI.cfg
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
-sudo mkdir -p -m 775 CICS/system CICS/dataset CICS/loadlib
-sudo curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml
+mkdir -p -m 775 JCL/system JCL/catalog JCL/dataset JCL/loadlib
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MFBSI.cfg
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
+mkdir -p -m 775 CICS/system CICS/dataset CICS/loadlib
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml
 
 sed -i "s|/home|$PRODPATH|g" $FILEPATH/MFSupport/MFScripts/setenvmf.sh
 
 cd $FILEPATH
-if [[ "$WHICHOS" = "RHEL" || "$WHICHOS" = "UBUNTU" ]]; then
-  sudo chown -R $user:$user AcuSupport
-  sudo chown -R $user:$user MFSupport
-elif [[ "$WHICHOS" == "SLES" ]]; then
-  sudo chown -R $user:users AcuSupport
-  sudo chown -R $user:users MFSupport
-fi
-
 touch /home/$user/.Xauthority
 sudo chmod 600 /home/$user/.Xauthority
 
