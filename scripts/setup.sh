@@ -18,7 +18,7 @@ else
 fi
 
 # Manage Users
-read -p "Do you want to create a new user? [Y/N]: " yn
+read -p "Do you want to create a new user? [y/N]: " yn
 yn=${yn,,}
 if [[ "$yn" == "y" || "$yn" == "yes" ]]; then
   read -p "User to create: " user
@@ -32,6 +32,15 @@ if [[ "$yn" == "y" || "$yn" == "yes" ]]; then
   echo "$user:$upasswd" | sudo chpasswd
 else
   export user=$USER
+fi
+if [[ -z "${upasswd:-}" ]]; then
+  read -p "Change $user and root password? [y/N]: " yn
+  case ${yn,,} in
+    y|yes)
+      sudo passwd root
+      sudo passwd $user
+      ;;
+  esac
 fi
 if [ -d "$USERPATH/$user" ]; then
     FILEPATH="$USERPATH/$user"
@@ -136,6 +145,7 @@ EOF
 fi
 sudo systemctl enable --now podman.socket
 sudo curl -s -o /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+sydo chmod +x /usr/local/bin/yq
 curl -LO -s "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 sudo rm -f kubectl
@@ -406,7 +416,7 @@ sudo tee motd.temp > /dev/null <<EOF
         startmf.sh (-h for usage)
 
       Install Options:
-        -IacceptEULA -ESadminID=${user} -il=$PRODPATH/products/esXXpuXX
+        -IacceptEULA -ESadminID=${user} -il=$PRODPATH/products/edXXpuXX
 
 ****************************************************************************************************
 EOF

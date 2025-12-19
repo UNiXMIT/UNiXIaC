@@ -1,0 +1,22 @@
+#cloud-config
+
+users:
+  - default
+  - name: support
+    gecos: Support User
+    shell: /bin/bash
+    groups: [wheel]
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    lock_passwd: true
+    ssh_authorized_keys: []
+
+runcmd:
+  - |
+    if [ -f /home/ec2-user/.ssh/authorized_keys ]; then
+      mkdir -p /home/support/.ssh
+      cp /home/ec2-user/.ssh/authorized_keys /home/support/.ssh/
+      chown -R support:support /home/support/.ssh
+      chmod 700 /home/support/.ssh
+      chmod 600 /home/support/.ssh/authorized_keys
+    fi
+    echo "support:strongPassword123" | sudo chpasswd
