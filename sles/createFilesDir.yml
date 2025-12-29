@@ -46,6 +46,12 @@
     state: directory
     mode: '0775'
 
+- name: Create AcuServices
+  file:
+    path: "/home/{{ myUsername }}/AcuSupport/AcuServices"
+    state: directory
+    mode: '0775'
+
 - name: Download setenvacu.sh
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/setenvacu.sh
@@ -56,15 +62,80 @@
   delay: 30
   until: result is not failed
 
-- name: Download startacu.sh
+# - name: Download startacu.sh
+#   get_url:
+#     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/startacu.sh
+#     dest: /home/{{ myUsername }}/AcuSupport/AcuScripts/startacu.sh
+#     mode: '0775'
+#   register: result
+#   retries: 5
+#   delay: 30
+#   until: result is not failed
+
+- name: Download acuServices.sh
   get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/startacu.sh
-    dest: /home/{{ myUsername }}/AcuSupport/AcuScripts/startacu.sh
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuServices/acuServices.sh
+    dest: /home/{{ myUsername }}/AcuSupport/AcuServices/acuServices.sh
     mode: '0775'
   register: result
   retries: 5
   delay: 30
   until: result is not failed
+
+- name: Download acurcl.service
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuServices/acurcl.service
+    dest: /home/{{ myUsername }}/AcuSupport/AcuServices/acurcl.service
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download acuserver.service
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuServices/acuserver.service
+    dest: /home/{{ myUsername }}/AcuSupport/AcuServices/acuserver.service
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download acuxdbcs.service
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuServices/acuxdbcs.service
+    dest: /home/{{ myUsername }}/AcuSupport/AcuServices/acuxdbcs.service
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download atw.service
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuServices/atw.service
+    dest: /home/{{ myUsername }}/AcuSupport/AcuServices/atw.service
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download boomerang.service
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuServices/boomerang.service
+    dest: /home/{{ myUsername }}/AcuSupport/AcuServices/boomerang.service
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Enable AcuServices
+  ansible.builtin.shell: |
+    ln -s /home/{{ myUsername }}/AcuSupport/AcuServices/*.service /etc/systemd/system/
+    systemctl daemon-reload
 
 - name: Download a_srvcfg
   get_url:
@@ -106,10 +177,10 @@
   delay: 30
   until: result is not failed
 
-- name: Download boomerang_alias.ini
+- name: Download boomerang.ini
   get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/boomerang_alias.ini
-    dest: /home/{{ myUsername }}/AcuSupport/etc/boomerang_alias.ini
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/boomerang.ini
+    dest: /home/{{ myUsername }}/AcuSupport/etc/boomerang.ini
     mode: '0775'
   register: result
   retries: 5
@@ -214,6 +285,12 @@
     state: directory
     mode: '0775'
 
+- name: Create MFServices
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFServices"
+    state: directory
+    mode: '0775'
+
 - name: Download setupmf.sh
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setupmf.sh
@@ -224,15 +301,15 @@
   delay: 30
   until: result is not failed
 
-- name: Download startmf.sh
-  get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/startmf.sh
-    dest: /home/{{ myUsername }}/MFSupport/MFScripts/startmf.sh
-    mode: '0775'
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
+# - name: Download startmf.sh
+#   get_url:
+#     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/startmf.sh
+#     dest: /home/{{ myUsername }}/MFSupport/MFScripts/startmf.sh
+#     mode: '0775'
+#   register: result
+#   retries: 5
+#   delay: 30
+#   until: result is not failed
 
 - name: Download setenvmf.sh
   get_url:
@@ -283,6 +360,51 @@
   retries: 5
   delay: 30
   until: result is not failed
+
+- name: Download mfServices.sh
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFServices/mfServices.sh
+    dest: "/home/{{ myUsername }}/MFSupport/MFServices/mfServices.sh"
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download escwa.service
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFServices/escwa.service
+    dest: "/home/{{ myUsername }}/MFSupport/MFServices/escwa.service"
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download fileshare.service
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFServices/fileshare.service
+    dest: "/home/{{ myUsername }}/MFSupport/MFServices/fileshare.service"
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download mfds.service
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFServices/mfds.service
+    dest: "/home/{{ myUsername }}/MFSupport/MFServices/mfds.service"
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Enable MFServices
+  ansible.builtin.shell: |
+    ln -s /home/{{ myUsername }}/MFSupport/MFServices/*.service /etc/systemd/system/
+    systemctl daemon-reload
 
 - name: Download ctf.cfg
   get_url:
