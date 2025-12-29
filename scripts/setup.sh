@@ -332,18 +332,28 @@ sudo mkdir -p AcuSamples
 sudo mkdir -p AcuScripts
 sudo mkdir -p CustomerPrograms
 sudo mkdir -p etc
+sudo mkdir -p AcuServices
 cd $FILEPATH
 sudo chown -R "$user":"$(id -gn "$user")" AcuSupport
 cd $FILEPATH/AcuSupport/AcuScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/setenvacu.sh
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/startacu.sh
-chmod +x setenvacu.sh startacu.sh
+chmod +x setenvacu.sh
+cd $FILEPATH/AcuSupport/AcuServices
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuServices/acuServices.sh
+chmod +x acuServices.sh
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuServices/acurcl.service
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuServices/acuserver.service
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuServices/acuxdbcs.service
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuServices/atw.service
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuServices/boomerang.service
+sudo ln -s $FILEPATH/AcuSupport/AcuServices/*.service /etc/systemd/system/
+sudo systemctl daemon-reload
 cd $FILEPATH/AcuSupport/etc
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/a_srvcfg
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.cfg
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/acurcl.ini
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/boomerang.cfg
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/boomerang_alias.ini
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/boomerang.ini
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/cblconfig
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/fillCombo.js
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/gateway.conf
@@ -360,6 +370,7 @@ sudo mkdir -p MFScripts
 sudo mkdir -p MFSamples
 sudo mkdir -p MFInstallers
 sudo mkdir -p MFDataFiles
+sudo mkdir -p MFServices
 sudo mkdir -p CTF
 cd $FILEPATH/MFSupport/CTF
 sudo mkdir -p TEXT
@@ -368,13 +379,20 @@ cd $FILEPATH
 sudo chown -R "$user":"$(id -gn "$user")" MFSupport
 cd $FILEPATH/MFSupport/MFScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setupmf.sh
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/startmf.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setenvmf.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/mfesdiags.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/formatdumps.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/autopac.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/disableSecurity.sh
-chmod +x setupmf.sh startmf.sh setenvmf.sh formatdumps.sh autopac.sh mfesdiags.sh disableSecurity.sh
+chmod +x *.sh
+cd $FILEPATH/MFSupport/MFServices
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFServices/mfServices.sh
+chmod +x mfServices.sh
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFServices/escwa.service
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFServices/fileshare.service
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFServices/mfds.service
+sudo ln -s $FILEPATH/MFSupport/MFServices/*.service /etc/systemd/system/
+sudo systemctl daemon-reload
 cd $FILEPATH/MFSupport/CTF
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/ctf.cfg
 cd $FILEPATH/MFSupport/MFSamples
@@ -407,13 +425,13 @@ sudo tee motd.temp > /dev/null <<EOF
       Set Environment:
         . setenvacu.sh (-h for usage)
           
-        startacu.sh (-h for usage)
+        sudo systemctl (start|stop|restart) (acurcl|atw|acuserve|acuxdbcs|boomerang)
 
     MFCOBOL
       Set Environment:
         . setenvmf.sh
 
-        startmf.sh (-h for usage)
+        sudo systemctl (start|stop|restart) (escwa|mfds|fileshare)
 
       Install Options:
         -IacceptEULA -ESadminID=${user} -il=$PRODPATH/products/edXXpuXX
