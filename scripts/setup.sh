@@ -425,7 +425,7 @@ sudo tee motd.temp > /dev/null <<EOF
       Set Environment:
         . setenvacu.sh (-h for usage)
           
-        sudo systemctl (start|stop|restart) (acurcl|atw|acuserve|acuxdbcs|boomerang)
+        sudo systemctl (start|stop|restart) (acurcl|atw|acuserver|acuxdbcs|boomerang)
 
     MFCOBOL
       Set Environment:
