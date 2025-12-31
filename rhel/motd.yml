@@ -15,13 +15,13 @@
             Set Environment:
               . setenvacu.sh (-h for usage)
                 
-              sudo systemctl (start|stop|restart) (acurcl|atw|acuserver|acuxdbcs|boomerang)
+              sudo systemctl (start|stop|restart|status) (acurcl|atw|acuserver|acuxdbcs|boomerang)
 
           MFCOBOL
             Set Environment:
               . setenvmf.sh
 
-              sudo systemctl (start|stop|restart) (escwa|mfds|fileshare)
+              sudo systemctl (start|stop|restart|status) (escwa|mfds|fileshare)
 
             Install Options:
               -IacceptEULA -ESadminID={{ myUsername }} -il=/home/products/edXXpuXX
