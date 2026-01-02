@@ -391,6 +391,7 @@ chmod +x mfServices.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFServices/escwa.service
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFServices/fileshare.service
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFServices/mfds.service
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFServices/hacloud.service
 sudo ln -s $FILEPATH/MFSupport/MFServices/*.service /etc/systemd/system/
 sudo systemctl daemon-reload
 cd $FILEPATH/MFSupport/CTF
@@ -433,7 +434,7 @@ sudo tee motd.temp > /dev/null <<EOF
       Set Environment:
         . setenvmf.sh
 
-        sudo systemctl (start|stop|restart) (escwa|mfds|fileshare)
+        sudo systemctl (start|stop|restart) (escwa|mfds|fileshare|hacloud)
 
       Install Options:
         -IacceptEULA -ESadminID=${user} -il=$PRODPATH/products/edXXpuXX

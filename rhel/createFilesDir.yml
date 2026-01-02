@@ -411,6 +411,16 @@
   delay: 30
   until: result is not failed
 
+- name: Download hacloud.service
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFServices/hacloud.service
+    dest: "/home/{{ myUsername }}/MFSupport/MFServices/hacloud.service"
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Enable MFServices
   ansible.builtin.shell: |
     ln -s /home/{{ myUsername }}/MFSupport/MFServices/*.service /etc/systemd/system/

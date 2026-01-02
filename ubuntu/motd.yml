@@ -19,7 +19,7 @@
             Set Environment:
               . setenvmf.sh
 
-              sudo systemctl (start|stop|restart|status) (escwa|mfds|fileshare)
+              sudo systemctl (start|stop|restart|status) (escwa|mfds|fileshare|hacloud)
 
             Install Options:
               -IacceptEULA -ESadminID={{ myUsername }} -il=/home/products/edXXpuXX
