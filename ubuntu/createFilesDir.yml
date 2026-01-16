@@ -361,6 +361,16 @@
   delay: 30
   until: result is not failed
 
+- name: Download CTFdump.zip
+  ansible.builtin.unarchive:
+    src: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CTFdump.zip
+    dest: "/home/{{ myUsername }}/MFSupport/MFScripts/"
+    remote_src: yes
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Download mfServices.sh
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFServices/mfServices.sh

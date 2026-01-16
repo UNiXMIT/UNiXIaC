@@ -75,7 +75,7 @@ fi
 sudo mkdir -p /etc/profile.d
 sudo tee /etc/profile.d/profile.sh > /dev/null <<EOF
 #!/bin/bash
-export PATH=$PATH:$FILEPATH/AcuSupport/AcuScripts:$FILEPATH/MFSupport/MFScripts:$FILEPATH
+export PATH=$PATH:$FILEPATH/AcuSupport/AcuScripts:$FILEPATH/MFSupport/MFScripts:$FILEPATH/MFSupport/MFScripts/CTFdump:$FILEPATH
 export TERM=xterm
 EOF
 sudo chmod 775 /etc/profile.d/profile.sh
@@ -384,7 +384,9 @@ curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/formatdumps.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/autopac.sh
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/disableSecurity.sh
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CTFdump.zip
 chmod +x *.sh
+unzip -o CTFdump.zip -d $FILEPATH/MFSupport/MFScripts/
 cd $FILEPATH/MFSupport/MFServices
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFServices/mfServices.sh
 chmod +x mfServices.sh

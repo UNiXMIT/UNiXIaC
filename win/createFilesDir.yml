@@ -420,6 +420,20 @@
   delay: 30
   until: result is not failed
 
+- name: Download CTFdump.zip
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CTFdump.zip
+    dest: C:\MFScripts\CTFdump.zip
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Unzip CTFdump.zip
+  win_unzip:
+    src: C:\MFScripts\CTFdump.zip
+    dest: C:\MFScripts
+
 - name: Everyone permissions on MFScripts
   win_acl:
     user: Everyone
@@ -430,7 +444,9 @@
 - name: Set MFScripts on PATH
   win_path:
     name: PATH
-    elements: C:\MFScripts
+    elements: 
+      - C:\MFScripts
+      - C:\MFScripts\CTFdump
 
 - name: Create CTF
   win_file:

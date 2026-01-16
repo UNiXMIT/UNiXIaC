@@ -368,14 +368,18 @@ $urls = @(
     'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/disableSecurity.cmd'
     'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSMOD.cmd'
     'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSFIX.cmd'
+    'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CTFdump.zip'
 )
 $dest = 'C:\MFScripts'
 foreach ($url in $urls) {
     $file = Join-Path $dest (Split-Path $url -Leaf)
     Invoke-WebRequest -Uri $url -OutFile $file
 }
+$zip = Join-Path $dest 'CTFdump.zip'
+Expand-Archive -LiteralPath $zip -DestinationPath $dest -Force
+
 $machinePath = [Environment]::GetEnvironmentVariable("Path", "Machine")
-[Environment]::SetEnvironmentVariable("Path", "C:\AcuScripts;C:\MFScripts;$machinePath", "Machine")
+[Environment]::SetEnvironmentVariable("Path", "C:\AcuScripts;C:\MFScripts;C:\MFScripts\CTFdump;$machinePath", "Machine")
 
 # AutoShutdown
 $action = New-ScheduledTaskAction `

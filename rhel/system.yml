@@ -76,7 +76,7 @@
     dest: "/etc/profile.d/profile.sh"
     content: |
       #!/bin/bash
-      export PATH=$PATH:~/AcuSupport/AcuScripts:~/MFSupport/MFScripts:~/
+      export PATH=$PATH:~/AcuSupport/AcuScripts:~/MFSupport/MFScripts:~/MFSupport/MFScripts/CTFdump:~/
       export TERM=xterm
 
 - name: Make profile.sh executable
