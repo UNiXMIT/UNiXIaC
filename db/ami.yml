@@ -4,8 +4,8 @@
       - amazon
     region: '{{ awsRegion }}'
     filters:
-      name: RHEL-10*
-      architecture: x86_64
+      name: RHEL-10.0*
+      architecture: '{{ arch }}'
       virtualization-type: hvm
   register: amis
   tags: default
