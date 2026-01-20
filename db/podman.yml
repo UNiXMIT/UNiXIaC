@@ -1,3 +1,32 @@
+- name: Create MSSQL 2025
+  containers.podman.podman_container:
+    name: mssql
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    state: started
+    restart_policy: "always"
+    detach: true
+    interactive: true
+    ports: 1433:1433
+    env:
+      SA_PASSWORD: '{{ myPassword }}'
+      ACCEPT_EULA: 'Y'
+      MSSQL_COLLATION: 'SQL_Latin1_General_CP1_CI_AS'
+    healthcheck: '/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P {{ myPassword }} -Q "SELECT 1" -b -o /dev/null'
+    healthcheck_interval: "10s"
+    healthcheck_retries: 10
+    healthcheck_start_period: "10s"
+    healthcheck_timeout: "3s"
+    log_opt:
+      max_size: 50mb
+  become: yes
+  tags: mssql2025
+
+- name: Set MSSQL 2025 Facts
+  set_fact:
+    DBNAME: SQL Server 2025
+    TOOLSVER: mssql-tools18
+  tags: mssql2025
+  
 - name: Create MSSQL 2022
   containers.podman.podman_container:
     name: mssql
