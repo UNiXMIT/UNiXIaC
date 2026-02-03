@@ -79,6 +79,8 @@
       - lsof
       - xterm
       - xauth
+      - pam
+      - pam.i686
     state: present
   register: result
   retries: 5
