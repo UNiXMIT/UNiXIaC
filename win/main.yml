@@ -115,6 +115,20 @@
     import_tasks: createFilesDir.yml
   tags: default
 
+- name: Modify Admin OS Config
+  hosts: awsEC2
+  gather_facts: no
+  become: yes
+  become_method: runas
+  become_flags: logon_type=interactive logon_flags=with_profile
+  vars:
+    ansible_become_pass: '{{ myPassword }}'
+  tasks:
+  - name: Import systemUser.yml
+    import_tasks: systemUser.yml
+  no_log: True
+  tags: default
+
 - name: Modify {{ myUsername }} User OS Config
   hosts: awsEC2
   gather_facts: no
