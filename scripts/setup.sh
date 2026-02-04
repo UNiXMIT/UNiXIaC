@@ -95,7 +95,7 @@ EOF
   sudo dnf update -y
   sudo dnf group install -y "Development Tools"
   sudo ACCEPT_EULA=Y yum install -y msodbcsql17 mssql-tools
-  sudo dnf install -y --skip-broken unixODBC-devel wget curl cronie dos2unix htop libstdc++-devel.i686 libaio-devel glibc-devel glibc-devel.i686 glibc glibc.i686 tcpdump ed tmux openconnect jq python3 python3-pip expect postgresql postgresql-odbc net-tools lsof xterm xauth pam pam.i686
+  sudo dnf install -y --skip-broken unixODBC-devel wget curl cronie dos2unix htop libstdc++-devel.i686 libaio-devel glibc-devel glibc-devel.i686 glibc glibc.i686 tcpdump ed tmux openconnect jq python3 python3-pip expect postgresql postgresql-odbc net-tools lsof xterm xauth pam
   if [[ ${VERSION_ID%.*} -le 8 ]]; then
     sudo dnf install -y --skip-broken spax
   elif [[ ${VERSION_ID%.*} -ge 8 ]]; then
