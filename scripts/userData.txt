@@ -7,8 +7,19 @@ users:
     shell: /bin/bash
     groups: [wheel]
     sudo: ["ALL=(ALL) NOPASSWD:ALL"]
-    lock_passwd: true
+    lock_passwd: false
     ssh_authorized_keys: []
+
+chpasswd:
+  expire: false
+  list: |
+    support:strongPassword123
+
+write_files:
+  - path: /etc/ssh/sshd_config.d/99-password-auth.conf
+    permissions: '0644'
+    content: |
+      PasswordAuthentication yes
 
 runcmd:
   - |
@@ -19,4 +30,4 @@ runcmd:
       chmod 700 /home/support/.ssh
       chmod 600 /home/support/.ssh/authorized_keys
     fi
-    echo "support:strongPassword123" | sudo chpasswd
+  - systemctl restart sshd
