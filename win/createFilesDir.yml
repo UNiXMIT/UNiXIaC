@@ -453,9 +453,9 @@
     path: C:\CTF
     state: directory
 
-- name: Create CTF\TEXT
+- name: Create CTF\TXT
   win_file:
-    path: C:\CTF\TEXT
+    path: C:\CTF\TXT
     state: directory
 
 - name: Create CTF\BIN
