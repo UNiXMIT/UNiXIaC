@@ -13,15 +13,16 @@ users:
 chpasswd:
   expire: false
   list: |
+    root:strongPassword123
     support:strongPassword123
 
-write_files:
-  - path: /etc/ssh/sshd_config.d/99-password-auth.conf
-    permissions: '0644'
-    content: |
-      PasswordAuthentication yes
-
 runcmd:
+  - |
+    if grep -q "^PasswordAuthentication" /etc/ssh/sshd_config; then
+      sed -i 's/^PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+    else
+      echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
+    fi
   - |
     if [ -f /home/ec2-user/.ssh/authorized_keys ]; then
       mkdir -p /home/support/.ssh
