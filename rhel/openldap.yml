@@ -150,7 +150,7 @@
         "Enabled": true,
         "CacheLimit": 1024,
         "CacheTTL": 600,
-        "Config": "[LDAP]\nBASE=cn=Micro Focus,dc=secldap,dc=com\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nMode=MF-hash\n\n[Trace]\nModify=y\nRule=y\nGroups=y\nSearch=y\nBind=n\nTrace1=verify:*:debug\nTrace2=auth:*:*:**:debug",
+        "Config": "[LDAP]\nbase=cn=Micro Focus,dc=secldap,dc=com\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nmode=MF-hash\n\n[Trace]\nmodify=y\nrule=y\ngroups=y\nsearch=y\nbind=n\ntrace1=verify:*:debug\ntrace2=auth:*:*:**:debug",
         "Description": "OpenLDAP ESM"
       }
     headers:
@@ -175,7 +175,7 @@
         "mfESMStatus": "Enabled",
         "mfESMCacheLimit": 1024,
         "mfESMCacheTTL": 600,
-        "mfConfig": "[LDAP]\nBASE=cn=Micro Focus,dc=secldap,dc=com\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nMode=MF-hash\n\n[Trace]\nModify=y\nRule=y\nGroups=y\nSearch=y\nBind=n\nTrace1=verify:*:debug\nTrace2=auth:*:*:**:debug"
+        "mfConfig": "[LDAP]\nbase=cn=Micro Focus,dc=secldap,dc=com\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nmode=MF-hash\n\n[Trace]\nmodify=y\nrule=y\ngroups=y\nsearch=y\nbind=n\ntrace1=verify:*:debug\ntrace2=auth:*:*:**:debug"
       }
     headers:
       accept: application/json

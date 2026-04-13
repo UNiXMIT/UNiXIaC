@@ -366,6 +366,7 @@ $urls = @(
     'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/FormatDumps.cmd'
     'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/AutoPAC.cmd'
     'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/disableSecurity.cmd'
+    'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/esNETsetup.ps1'
     'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSMOD.cmd'
     'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSFIX.cmd'
     'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CTFdump.zip'

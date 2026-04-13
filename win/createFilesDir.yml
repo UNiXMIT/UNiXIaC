@@ -402,6 +402,15 @@
   delay: 30
   until: result is not failed
 
+- name: Download esNETsetup.ps1
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/esNETsetup.ps1
+    dest: C:\MFScripts\esNETsetup.ps1
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Download VSMOD.cmd
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSMOD.cmd
