@@ -89,10 +89,22 @@
 - name: Package installation NON-ARM
   package:
     name:
-      - unixODBC-devel
       - 'libstdc++-devel.i686'
       - glibc-devel.i686
       - glibc.i686
+    state: present
+  when:
+    - "'arm' not in ansible_run_tags"
+    - "'rhel10' not in ansible_run_tags"
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: unixODBC installation
+  package:
+    name:
+      - unixODBC-devel
     state: present
   when: "'arm' not in ansible_run_tags"
   register: result
@@ -162,6 +174,7 @@
   when: 
     - ansible_facts['distribution_major_version'] | int >= 8
     - "'arm' not in ansible_run_tags"
+    - "'rhel10' not in ansible_run_tags"
   register: result
   retries: 5
   delay: 30
@@ -186,6 +199,7 @@
   when: 
     - ansible_facts['distribution_major_version'] | int >= 9
     - "'arm' not in ansible_run_tags"
+    - "'rhel10' not in ansible_run_tags"
   register: result
   retries: 5
   delay: 30
