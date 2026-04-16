@@ -116,7 +116,9 @@
     name:
       - unixODBC-devel
     state: present
-  when: "'arm' not in ansible_run_tags"
+  when: 
+    - "'arm' not in ansible_run_tags"
+    - "'rhel10' not in ansible_run_tags"
   register: result
   retries: 5
   delay: 30
