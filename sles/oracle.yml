@@ -12,19 +12,19 @@
     base_dir: "instantclient_23_0"
     oracle_packages:
       - name: basic
-        file: "instantclient-basic-linux.x64-23.26.0.0.0.zip"
+        file: "instantclient-basic-linux.x64-{{ oracle_version }}.zip"
         url: "{{ oracle_base_url }}"
       - name: odbc
-        file: "instantclient-odbc-linux.x64-23.26.0.0.0.zip"
+        file: "instantclient-odbc-linux.x64-{{ oracle_version }}.zip"
         url: "{{ oracle_base_url }}"
       - name: sqlplus
-        file: "instantclient-sqlplus-linux.x64-23.26.0.0.0.zip"
+        file: "instantclient-sqlplus-linux.x64-{{ oracle_version }}.zip"
         url: "{{ oracle_base_url }}"
       - name: sdk
-        file: "instantclient-sdk-linux.x64-23.26.0.0.0.zip"
+        file: "instantclient-sdk-linux.x64-{{ oracle_version }}.zip"
         url: "{{ oracle_base_url }}"
       - name: precomp
-        file: "instantclient-precomp-linux.x64-23.26.0.0.0.zip"
+        file: "instantclient-precomp-linux.x64-{{ oracle_version }}.zip"
         url: "{{ oracle_precomp_url }}"
 
 - name: Download Oracle packages
