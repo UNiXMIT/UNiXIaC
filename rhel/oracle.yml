@@ -1,12 +1,3 @@
-- name: Install Oracle {{ ansible_distribution_major_version }} RPM Key 
-  rpm_key:
-    state: present
-    key: "https://yum.oracle.com/RPM-GPG-KEY-oracle-ol{{ ansible_distribution_major_version }}"
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
 - name: Set Oracle variables
   set_fact:
     oracle:
@@ -14,9 +5,6 @@
         base_url: "https://download.oracle.com/otn_software/linux/instantclient/2326100/"
         version: "23.26.1.0.0"
       "9":
-        base_url: "https://download.oracle.com/otn_software/linux/instantclient/2326000/"
-        version: "23.26.0.0.0"
-      "8":
         base_url: "https://download.oracle.com/otn_software/linux/instantclient/2326000/"
         version: "23.26.0.0.0"
 
@@ -29,7 +17,6 @@
     oracle_precomp:
       "10": "oracle-instantclient-precomp-23.26.1.0.0-1.el10.x86_64.rpm"
       "9": "oracle-instantclient-precomp-23.26.0.0.0-1.el9.x86_64.rpm"
-      "8": "oracle-instantclient-precomp-23.26.0.0.0-1.el8.x86_64.rpm"
 
     oracle_precomp_url: "https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/23/"
 
@@ -43,7 +30,7 @@
   retries: 5
   delay: 30
   until: result is not failed
-  when: ansible_distribution_major_version in ['8','9','10']
+  when: ansible_distribution_major_version in ['9','10']
 
 - name: Ensure /opt/oracle exists
   file:
@@ -62,7 +49,7 @@
   retries: 5
   delay: 30
   until: result is not failed
-  when: ansible_distribution_major_version in ['8','9','10']
+  when: ansible_distribution_major_version in ['9','10']
 
 - name: Install Oracle Instant Client Precompiler
   yum:
