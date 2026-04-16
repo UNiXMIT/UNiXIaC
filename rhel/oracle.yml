@@ -1,4 +1,4 @@
-- name: Install Oracle RPM Key 
+- name: Install Oracle {{ ansible_distribution_major_version }} RPM Key 
   rpm_key:
     state: present
     key: "https://yum.oracle.com/RPM-GPG-KEY-oracle-ol{{ ansible_distribution_major_version }}"
