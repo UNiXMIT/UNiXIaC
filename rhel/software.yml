@@ -170,7 +170,7 @@
   package:
     name: 
       - java-latest-openjdk
-      - sudo dnf install 
+      - libnsl
       - libxcrypt
       - libncurses*
       - PackageKit-gtk3-module
