@@ -220,7 +220,7 @@
       - libxcrypt-compat.i686
     state: present
   when: 
-    - ansible_facts['distribution_major_version'] | int = 9
+    - ansible_facts['distribution_major_version'] | int == 9
     - "'arm' not in ansible_run_tags"
   register: result
   retries: 5
