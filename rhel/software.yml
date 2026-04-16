@@ -31,13 +31,13 @@
   delay: 30
   until: result is not failed
 
-- name: Install MSSQL ODBC Driver 17
+- name: Install MSSQL ODBC Driver 18
   environment:
     ACCEPT_EULA: "Y"
   package:
     name: 
-      - msodbcsql17 
-      - mssql-tools
+      - msodbcsql18 
+      - mssql-tools18
     state: present
   when: "'arm' not in ansible_run_tags"
   register: result
@@ -50,7 +50,7 @@
     dest: /etc/profile.d/mssql.sh
     content: |
       #!/bin/bash
-      export PATH="$PATH:/opt/mssql-tools/bin"
+      export PATH="$PATH:/opt/mssql-tools18/bin"
   when: "'arm' not in ansible_run_tags"
 
 - name: Package installation
@@ -201,7 +201,7 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK MSSQL"
     block: |
       [mssql]  
-      Driver = ODBC Driver 17 for SQL Server  
+      Driver = ODBC Driver 18 for SQL Server  
       Server = tcp:localhost,1433
       Encrypt = yes
       TrustServerCertificate = yes
