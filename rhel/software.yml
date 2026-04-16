@@ -105,7 +105,7 @@
     state: present
   when:
     - "'arm' not in ansible_run_tags"
-    - "'rhel10' not in ansible_run_tags"
+    - ansible_facts['distribution_major_version'] | int <= 9
   register: result
   retries: 5
   delay: 30
@@ -118,7 +118,7 @@
     state: present
   when: 
     - "'arm' not in ansible_run_tags"
-    - "'rhel10' not in ansible_run_tags"
+    - ansible_facts['distribution_major_version'] | int <= 9
   register: result
   retries: 5
   delay: 30
@@ -153,15 +153,26 @@
   retries: 5
   delay: 30
   until: result is not failed
+
+- name: RHEL>=8 and RHEL<=9 Package installation
+  package:
+    name: webkit2gtk3
+    state: present
+  when: 
+    - ansible_facts['distribution_major_version'] | int >= 8
+    - ansible_facts['distribution_major_version'] | int <= 9
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
   
 - name: RHEL>=8 Package installation
   package:
     name: 
       - java-latest-openjdk
-      - libnsl
+      - sudo dnf install 
       - libxcrypt
       - libncurses*
-      - webkit2gtk3
       - PackageKit-gtk3-module
       - systemd-libs
       - podman
@@ -173,7 +184,7 @@
   delay: 30
   until: result is not failed
 
-- name: RHEL>=8 Package installation NON-ARM
+- name: RHEL>=8 and RHEL<=9 Package installation NON-ARM
   package:
     name: 
       - libnsl.i686
@@ -185,8 +196,8 @@
     state: present
   when: 
     - ansible_facts['distribution_major_version'] | int >= 8
+    - ansible_facts['distribution_major_version'] | int <= 9
     - "'arm' not in ansible_run_tags"
-    - "'rhel10' not in ansible_run_tags"
   register: result
   retries: 5
   delay: 30
@@ -203,15 +214,14 @@
   delay: 30
   until: result is not failed
 
-- name: RHEL>=9 Package installation NON-ARM
+- name: RHEL=9 Package installation NON-ARM
   package:
     name: 
       - libxcrypt-compat.i686
     state: present
   when: 
-    - ansible_facts['distribution_major_version'] | int >= 9
+    - ansible_facts['distribution_major_version'] | int = 9
     - "'arm' not in ansible_run_tags"
-    - "'rhel10' not in ansible_run_tags"
   register: result
   retries: 5
   delay: 30
