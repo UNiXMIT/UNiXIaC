@@ -1,84 +1,45 @@
-- name: Create oracle
+- name: Create /opt/oracle Directory
   file:
     path: /opt/oracle
     state: directory
     mode: '0755'
 
-- name: Set Oracle Facts
+- name: Set Oracle variables
   set_fact:
-    oracleBaseURL: "https://download.oracle.com/otn_software/linux/instantclient/2326000/"
-    oracleBase: "instantclient-basic-linux.x64-23.26.0.0.0.zip"
-    oracleODBC: "instantclient-odbc-linux.x64-23.26.0.0.0.zip"
-    oracleSQLPlus: "instantclient-sqlplus-linux.x64-23.26.0.0.0.zip"
-    oracleSDK: "instantclient-sdk-linux.x64-23.26.0.0.0.zip"
-    oraclePrecompURL: "https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/23/"
-    oraclePrecomp: "instantclient-precomp-linux.x64-23.26.0.0.0.zip"
-    baseDir: "instantclient_23_0"
+    oracle:
+        base_url: "https://download.oracle.com/otn_software/linux/instantclient/2326000/"
+        version: "23.26.0.0.0"
+        precomp_url: "https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/23/"
+        precomp: "instantclient-precomp-linux.x64-23.26.0.0.0.zip"
+        baseDir: "instantclient_23_0"
 
-- name: Download Oracle Instant Client Basic Package
+    oracle_packages:
+      - basic
+      - odbc
+      - sqlplus
+      - sdk
+
+- name: Download Oracle Instant Client Packages
   get_url:
-    url: '{{ oracleBaseURL }}{{ oracleBase }}'
+    url: "{{ oracle.base_url }}instantclient-{{ item }}-linux.x64-{{ oracle.version }}.zip"
     dest: /opt/oracle
+  loop: "{{ oracle_packages }}"
   register: result
   retries: 5
   delay: 30
   until: result is not failed
 
-- name: Extract Oracle Instant Client Basic Package
+- name: Extract Oracle Instant Client Packages
   ansible.builtin.unarchive:
-    src: /opt/oracle/{{ oracleBase }}
+    src: /opt/oracle/instantclient-{{ item }}-linux.x64-{{ oracle.version }}.zip
     dest: /opt/oracle
     remote_src: yes
-
-- name: Download Oracle Instant Client ODBC Package
-  get_url:
-    url: '{{ oracleBaseURL }}{{ oracleODBC }}'
-    dest: /opt/oracle
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: Extract Oracle Instant Client ODBC Package
-  ansible.builtin.unarchive:
-    src: /opt/oracle/{{ oracleODBC }}
-    dest: /opt/oracle
-    remote_src: yes
-
-- name: Download Oracle Instant Client SQLPlus Package
-  get_url:
-    url: '{{ oracleBaseURL }}{{ oracleSQLPlus }}'
-    dest: /opt/oracle
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: Extract Oracle Instant Client SQLPlus Package
-  ansible.builtin.unarchive:
-    src: /opt/oracle/{{ oracleSQLPlus }}
-    dest: /opt/oracle
-    remote_src: yes
-
-- name: Download Oracle Instant Client SDK Package
-  get_url:
-    url: '{{ oracleBaseURL }}{{ oracleSDK }}'
-    dest: /opt/oracle
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: Extract Oracle Instant Client SDK Package
-  ansible.builtin.unarchive:
-    src: /opt/oracle/{{ oracleSDK }}
-    dest: /opt/oracle
-    remote_src: yes
+  loop: "{{ oracle_packages }}"
 
 - name: Download Oracle Instant Client Precompiler from S3
   ansible.builtin.get_url:
-    url: '{{ oraclePrecompURL }}{{ oraclePrecomp }}'
-    dest: /opt/oracle/{{ oraclePrecomp }}
+    url: '{{ oracle.precomp_url }}{{ oracle.precomp }}'
+    dest: /opt/oracle/{{ oracle.precomp }}
   register: result
   retries: 5
   delay: 30
@@ -86,7 +47,7 @@
 
 - name: Extract Oracle Instant Client Precompiler Package
   ansible.builtin.unarchive:
-    src: /opt/oracle/{{ oraclePrecomp }}
+    src: /opt/oracle/{{ oracle.precomp }}
     dest: /opt/oracle
     remote_src: yes
 
@@ -102,8 +63,8 @@
     dest: /etc/profile.d/oracle.sh
     content: |
       #!/bin/bash
-      export PATH="$PATH:/opt/oracle/{{ baseDir }}:/opt/oracle/{{ baseDir }}/sdk"
-      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/oracle/{{ baseDir }}"
+      export PATH="$PATH:/opt/oracle/{{ oracle.baseDir }}:/opt/oracle/{{ oracle.baseDir }}/sdk"
+      export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/oracle/{{ oracle.baseDir }}"
 
 - name: Add Oracle DSN in odbc.ini
   ansible.builtin.blockinfile:
@@ -112,7 +73,7 @@
     block: |
       [oracle]
       Description     = Oracle ODBC Connection
-      Driver          = /opt/oracle/{{ baseDir }}/libsqora.so.21.1
+      Driver          = /opt/oracle/{{ oracle.baseDir }}/libsqora.so.21.1
       Database        = {{ myUsername }}
       Servername      = 127.0.0.1:1521/FREE
       UserID          = {{ myUsername }}
