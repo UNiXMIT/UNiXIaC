@@ -15,16 +15,51 @@
     create: yes
 
 - name: Update APT cache and install dependencies
-  ansible.builtin.shell: |
-    apt update
-    apt install software-properties-common gpg python3 python3-apt curl gnupg -y
+  ansible.builtin.apt:
+    name:
+      - software-properties-common
+      - gpg
+      - python3
+      - python3-apt
+      - curl
+      - gnupg
+    state: present
+    update_cache: yes
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
-- name: Configure Microsoft repo and update APT cache
-  ansible.builtin.shell: |
-    curl -sSL -O https://packages.microsoft.com/config/ubuntu/$(grep VERSION_ID /etc/os-release | cut -d '"' -f 2)/packages-microsoft-prod.deb
-    dpkg -i packages-microsoft-prod.deb
-    rm packages-microsoft-prod.deb
-    apt update
+- name: Get Ubuntu version
+  ansible.builtin.set_fact:
+    ubuntu_version: "{{ ansible_distribution_version }}"
+
+- name: Download Microsoft repo package
+  ansible.builtin.get_url:
+    url: "https://packages.microsoft.com/config/ubuntu/{{ ubuntu_version }}/packages-microsoft-prod.deb"
+    dest: /tmp/packages-microsoft-prod.deb
+    mode: '0644'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Install Microsoft repo package
+  ansible.builtin.apt:
+    deb: /tmp/packages-microsoft-prod.deb
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Remove Microsoft repo package file
+  ansible.builtin.file:
+    path: /tmp/packages-microsoft-prod.deb
+    state: absent
+
+- name: Update APT cache after adding Microsoft repo
+  ansible.builtin.apt:
+    update_cache: yes
   register: result
   retries: 5
   delay: 30
