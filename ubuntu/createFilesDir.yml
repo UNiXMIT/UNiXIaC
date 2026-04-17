@@ -1,3 +1,13 @@
+- name: Download awsgui.sh
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/scripts/awsgui.ubuntu.sh
+    dest: /home/{{ myUsername }}/awsgui.sh
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Create AcuSupport
   file:
     path: "/home/{{ myUsername }}/AcuSupport"

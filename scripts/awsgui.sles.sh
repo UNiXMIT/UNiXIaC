@@ -1,35 +1,25 @@
 #!/bin/bash
-# SOURCE: https://repost.aws/articles/AR4Nbl3SxTSIW3WpFSUJhzXg/how-do-i-install-gui-graphical-desktop-on-amazon-ec2-instances-running-rhel-rocky-linux-8-9
-
-# Optional: Install SSM agent
-# if (! systemctl list-units | grep -q amazon-ssm-agent); then
-#   if (arch | grep -q x86); then
-#     sudo dnf install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm
-#   else
-#     sudo dnf install -y https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_arm64/amazon-ssm-agent.rpm
-#   fi
-# fi
+# SOURCE: https://repost.aws/articles/ARGF6bVA19QC6IVcaUy-69Ag/how-do-i-install-gui-graphical-desktop-on-amazon-ec2-instances-running-suse-linux-enterprise-server-15-sles-15
 
 # Install desktop environment and desktop manager
-sudo dnf update -y
-sudo dnf groupinstall -y 'Server with GUI'
-sudo dnf groupinstall -y GNOME
-sudo sed -i '/^\[daemon\]/a WaylandEnable=false' /etc/gdm/custom.conf
+sudo zypper install -y -t pattern gnome_basic
+sudo update-alternatives --set default-displaymanager /usr/lib/X11/displaymanagers/gdm
+sudo sed -i "s/DEFAULT_WM=\"\"/DEFAULT_WM=\"gnome\"/" /etc/sysconfig/windowmanager
 sudo systemctl set-default graphical.target
 
 # Install DCV server
 cd /tmp
 sudo rpm --import https://d1uj6qtbmh3dt5.cloudfront.net/NICE-GPG-KEY
-OS_VERSION=$(. /etc/os-release;echo $VERSION_ID | sed -e 's/\..*//g')
-curl -L -O https://d1uj6qtbmh3dt5.cloudfront.net/nice-dcv-el$OS_VERSION-$(arch).tgz
-tar -xvzf nice-dcv-el$OS_VERSION-$(arch).tgz && cd nice-dcv-*-el$OS_VERSION-$(arch)
-sudo dnf install -y ./nice-dcv-server-*.rpm
-sudo dnf install -y ./nice-dcv-web-viewer-*.rpm
-sudo dnf install -y ./nice-xdcv-*.rpm
+curl -L -O https://d1uj6qtbmh3dt5.cloudfront.net/nice-dcv-sles15-x86_64.tgz
+tar -xzf nice-dcv-sles15-x86_64.tgz && cd nice-dcv-*-sles15-x86_64
+sudo zypper install -y ./nice-dcv-server-*.rpm
+sudo zypper install -y ./nice-dcv-web-viewer-*.rpm
+sudo zypper install -y ./nice-xdcv-*.rpm
+sudo usermod -a -G video dcv
 sudo systemctl enable dcvserver
 
 # Console session XDummy driver
-sudo dnf install -y xorg-x11-drv-dummy
+sudo zypper install -y xf86-video-dummy
 sudo tee /etc/X11/xorg.conf > /dev/null << EOF
 Section "Device"
     Identifier "DummyDevice"
@@ -59,20 +49,12 @@ EndSection
 EOF
 
 # Configure DCV server
-# if (cat /etc/os-release | grep -q Rocky); then
-#   USER="rocky"
-# else
-#   USER="ec2-user"
-# fi
-USER=support
-sudo sed -i "/^\[session-management\/automatic-console-session/a owner=\"$USER\"\nstorage-root=\"%home%\"" /etc/dcv/dcv.conf
+sudo sed -i "/^\[session-management\/automatic-console-session/a owner=\"support\"\nstorage-root=\"%home%\"" /etc/dcv/dcv.conf
 sudo sed -i "s/^#create-session/create-session/g" /etc/dcv/dcv.conf
 
 # Disable firewall
-if (which firewall-offline-cmd); then
-  sudo systemctl stop firewalld
-  sudo systemctl disable firewalld
-fi
+sudo systemctl stop firewalld
+sudo systemctl disable firewalld
 
 # Restart X server and DCV server
 sudo systemctl isolate multi-user.target && sudo systemctl isolate graphical.target

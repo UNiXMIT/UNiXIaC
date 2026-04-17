@@ -1,6 +1,6 @@
 - name: Download awsgui.sh
   get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/scripts/awsgui.sh
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXIaC/main/scripts/awsgui.rhel.sh
     dest: /home/{{ myUsername }}/awsgui.sh
     mode: '0775'
   register: result
