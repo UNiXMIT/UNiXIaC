@@ -12,12 +12,14 @@
           AcuCOBOL
             Set Environment:
               . setenvacu.sh (-h for usage)
+              Note: Run once before using systemctl services.
                 
               sudo systemctl (start|stop|restart|status) (acurcl|atw|acuserver|acuxdbcs|boomerang)
 
           MFCOBOL
             Set Environment:
               . setenvmf.sh
+              Note: Run once before using systemctl services.
 
               sudo systemctl (start|stop|restart|status) (escwa|mfds|fileshare|hacloud)
 
