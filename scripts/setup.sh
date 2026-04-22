@@ -224,6 +224,8 @@ FILE = /home/$user/sqllib
 COMP = BASE_CLIENT
 INSTALL_TYPE = CUSTOM
 EOF
+mkdir -m 777 /opt/ibm/tmp
+export DB2TMPDIR=/opt/ibm/tmp
 /opt/ibm/client/db2setup -f sysreq -r /opt/ibm/db2.linux.rsp
 sudo tee /etc/profile.d/db2.sh > /dev/null <<EOF
 #!/bin/bash
@@ -360,8 +362,11 @@ curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/gateway.toml
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/etc/TCPtuning.conf
 
-sed -i "s|/home|$PRODPATH|g" $FILEPATH/AcuSupport/AcuScripts/setenvacu.sh
-sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/AcuSupport/AcuScripts/startacu.sh
+sed -i "s|/home/products|$PRODPATH/products|g" $FILEPATH/AcuSupport/AcuScripts/setenvacu.sh
+sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/AcuSupport/AcuScripts/setenvacu.sh
+sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/AcuSupport/AcuServices/*.service
+cd $FILEPATH/AcuSupport/etc
+sed -i "s|/home/support|$FILEPATH|g" cblconfig gateway.toml gateway.conf
 
 cd $FILEPATH
 sudo mkdir -p -m 775 MFSupport
@@ -400,19 +405,23 @@ cd $FILEPATH/MFSupport/CTF
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/ctf.cfg
 cd $FILEPATH/MFSupport/MFSamples
 mkdir -p -m 775 JCL/system JCL/catalog JCL/dataset JCL/loadlib
+mkdir -p -m 775 CICS/system CICS/dataset CICS/loadlib
 cd $FILEPATH/MFSupport/MFSamples/JCL
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MFBSI.cfg
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
-mkdir -p -m 775 CICS/system CICS/dataset CICS/loadlib
 cd $FILEPATH/MFSupport/MFSamples/CICS
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml
 
-sed -i "s|/home|$PRODPATH|g" $FILEPATH/MFSupport/MFScripts/setenvmf.sh
+sed -i "s|/home/products|$PRODPATH/products|g" $FILEPATH/MFSupport/MFScripts/setenvmf.sh
+sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/MFSupport/MFServices/*.service
+sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/MFSupport/MFSamples/JCL/JCL.xml
+sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/MFSupport/MFSamples/CICS/CICS.xml
 
 cd $FILEPATH
 touch /home/$user/.Xauthority
 sudo chmod 600 /home/$user/.Xauthority
+sudo chmod +x /etc/profile.d/*.sh
 
 # CRON Jobs
 CRONLINE='#0 20 * * * sh -c '\''/sbin/shutdown -h +30 && printf "Shutdown scheduled for $(date -d +30mins)\\nCancel using: sudo shutdown -c" | wall'\'''
