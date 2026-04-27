@@ -38,11 +38,7 @@
       $authKeysAdmin = "$sshDirAdmin\administrators_authorized_keys"
       Add-Content -Path $authKeys -Value $pubKey
       Add-Content -Path $authKeysAdmin -Value $pubKey
-      icacls $sshDir /inheritance:r
-      icacls $sshDirAdmin /inheritance:r
-      icacls $sshDir /grant "$($env:USERNAME):(F)"
-      icacls $sshDirAdmin /grant "$($env:USERNAME):(F)"
-      icacls $authKeys /inheritance:r
-      icacls $authKeysAdmin /inheritance:r
-      icacls $authKeys /grant "$($env:USERNAME):(F)"
-      icacls $authKeysAdmin /grant "$($env:USERNAME):(F)"
+      icacls $sshDir /inheritance:r /grant "$($env:USERNAME):(F)"
+      icacls $sshDirAdmin /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"
+      icacls $authKeys /inheritance:r /grant "$($env:USERNAME):(F)"
+      icacls $authKeysAdmin /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"

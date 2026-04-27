@@ -39,32 +39,20 @@
   tags: [ wins2019, wins2022 ]
 
 - name: Enable SSH Public Key Authentication
+  community.windows.win_lineinfile:
+    path: C:\ProgramData\ssh\sshd_config
+    line: 'PubkeyAuthentication yes'
+  tags: default
+
+- name: Disable SSH Strict Modes
+  community.windows.win_lineinfile:
+    path: C:\ProgramData\ssh\sshd_config
+    line: 'StrictModes no'
+  tags: default
+
+- name: Restart OpenSSH Service
   ansible.windows.win_powershell:
     script: |
-      $configPath = "C:\ProgramData\ssh\sshd_config"
-      $content = Get-Content $configPath
-      $foundPubKey = $false
-      $foundStrictModes = $false
-      $content = $content | ForEach-Object {
-          if ($_ -match '^\s*#?\s*PubkeyAuthentication\s+') {
-              $foundPubKey = $true
-              "PubkeyAuthentication yes"
-          }
-          elseif ($_ -match '^\s*#?\s*StrictModes\s+') {
-              $foundStrictModes = $true
-              "StrictModes no"
-          }
-          else {
-              $_
-          }
-      }
-      if (-not $foundPubKey) {
-          $content += "PubkeyAuthentication yes"
-      }
-      if (-not $foundStrictModes) {
-          $content += "StrictModes no"
-      }
-      $content | Set-Content $configPath
       Restart-Service sshd
   tags: default
 
