@@ -41,12 +41,14 @@
 - name: Enable SSH Public Key Authentication
   community.windows.win_lineinfile:
     path: C:\ProgramData\ssh\sshd_config
+    regex: '^#?PubkeyAuthentication\s+yes'
     line: 'PubkeyAuthentication yes'
   tags: default
 
 - name: Disable SSH Strict Modes
   community.windows.win_lineinfile:
     path: C:\ProgramData\ssh\sshd_config
+    regex: '^#?StrictModes\s+yes'
     line: 'StrictModes no'
   tags: default
 
