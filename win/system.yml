@@ -58,7 +58,6 @@
               $_
           }
       }
-
       if (-not $foundPubKey) {
           $content += "PubkeyAuthentication yes"
       }
