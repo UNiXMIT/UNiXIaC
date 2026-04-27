@@ -17,9 +17,11 @@ if ($CreateNew -eq 'Y') {
         Add-LocalGroupMember -Group "Administrators" -Member $newUser
         Write-Host "User '$newUser' created and added to Administrators."
     }
+} else {
+    $newUser = $env:USERNAME
 }
-if (Get-LocalUser -Name "support" -ErrorAction SilentlyContinue) {
-    Add-LocalGroupMember -Group "Administrators" -Member "support"
+if (Get-LocalUser -Name "$newUser" -ErrorAction SilentlyContinue) {
+    Add-LocalGroupMember -Group "Administrators" -Member "$newUser"
 }
 $adminPassw = Read-Host "Change admin password? [Y/N]"
 if ($adminPassw -ieq 'Y') {
@@ -53,6 +55,25 @@ Add-MpPreference -ExclusionPath 'C:\Program Files\Rocket Software'
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
 Start-Service sshd
 Set-Service sshd -StartupType Automatic
+$configPath = "$env:ProgramData\ssh\sshd_config"
+(Get-Content $configPath) `
+  -replace '#?PasswordAuthentication no', 'PasswordAuthentication yes' `
+  -replace '#?PubkeyAuthentication yes', 'PubkeyAuthentication yes' |
+  Set-Content $configPath
+Restart-Service sshd
+$pubKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZGxXj7Tud6Uc3RlwYb47coUufTpuw56P/wHIhAgYkkB2ONzR4jOekJlPiIUgmYG2K16OPJsC2TZHtdnzSSyGwwvJXMcaR14ZOL1uiHcgo8EUmbgdaC0hzR30K5xYT3LDuQGIwY2VFUToE82WufK6K37CPU5xl7WWi7z6+OLhBfmNB8vZ87FxMjCQAsdgyTmUfMbWdMJFV4h/0YANjDXRbXNAiOyzombeXgemvFU+mmz/CZtCNH2ANrg0m4xQRnQApHIhmd850MZYv6rNqIM4ur56+T9aW+pKAgB9p/gyWXSqfDjJG5HOIRxxIzoBUVNDvWJZ7FNdkrWuCpSt3KfBX support"
+$sshDir = "C:\Users\$newUser\.ssh"
+$sshDirAdmin = "C:\ProgramData\ssh\"
+New-Item -ItemType Directory -Path $sshDir -Force
+New-Item -ItemType Directory -Path $sshDir -Force
+$authKeys = "$sshDir\authorized_keys"
+$authKeysAdmin = "$sshDirAdmin\administrators_authorized_keys"
+Add-Content -Path $authKeys -Value $pubKey
+Add-Content -Path $authKeysAdmin -Value $pubKey
+icacls $sshDir /inheritance:r /grant "$newUser:(F)"
+icacls $sshDirAdmin /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"
+icacls $authKeys /inheritance:r /grant "$newUser:(F)"
+icacls $authKeysAdmin /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"
 # UAC: Disable
 New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Force | Out-Null
 New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" `

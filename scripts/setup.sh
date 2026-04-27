@@ -59,14 +59,20 @@ echo 'export PS1="$PS1\[\e]1337;CurrentDir='\''\$(pwd)'\''\a\]"' \
 if [[ -f /etc/ssh/sshd_config ]]; then
   sudo sed -i -E 's/#?AllowTcpForwarding no/AllowTcpForwarding yes/' /etc/ssh/sshd_config
   sudo sed -i -E 's/#?PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+  sudo sed -i -E 's/#?PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+  sudo sed -i -E 's/#?StrictModes yes/StrictModes no/' /etc/ssh/sshd_config
   sudo sed -i -E 's/#?X11Forwarding no/X11Forwarding yes/' /etc/ssh/sshd_config
 fi
 if [[ -f /etc/ssh/sshd_config.d/50-cloud-init.conf ]]; then
   sudo sed -i -E 's/#?AllowTcpForwarding no/AllowTcpForwarding yes/' /etc/ssh/sshd_config.d/50-cloud-init.conf
   sudo sed -i -E 's/#?PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config.d/50-cloud-init.conf
-  sudo sed -i -E 's/#?X11Forwarding no/X11Forwarding yes/' /etc/ssh/sshd_config
+  sudo sed -i -E 's/#?PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config.d/50-cloud-init.conf
+  sudo sed -i -E 's/#?StrictModes yes/StrictModes no/' /etc/ssh/sshd_config.d/50-cloud-init.conf
+  sudo sed -i -E 's/#?X11Forwarding no/X11Forwarding yes/' /etc/ssh/sshd_config.d/50-cloud-init.conf
 fi
 echo $user' ALL=(ALL:ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo > /dev/null
+pubKey="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZGxXj7Tud6Uc3RlwYb47coUufTpuw56P/wHIhAgYkkB2ONzR4jOekJlPiIUgmYG2K16OPJsC2TZHtdnzSSyGwwvJXMcaR14ZOL1uiHcgo8EUmbgdaC0hzR30K5xYT3LDuQGIwY2VFUToE82WufK6K37CPU5xl7WWi7z6+OLhBfmNB8vZ87FxMjCQAsdgyTmUfMbWdMJFV4h/0YANjDXRbXNAiOyzombeXgemvFU+mmz/CZtCNH2ANrg0m4xQRnQApHIhmd850MZYv6rNqIM4ur56+T9aW+pKAgB9p/gyWXSqfDjJG5HOIRxxIzoBUVNDvWJZ7FNdkrWuCpSt3KfBX support"
+echo $pubKey | tee -a /home/$user/.ssh/authorized_keys > /dev/null
 if systemctl status sshd >/dev/null 2>&1; then
     sudo systemctl restart sshd
 elif systemctl status ssh >/dev/null 2>&1; then
