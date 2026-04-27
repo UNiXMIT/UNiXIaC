@@ -61,18 +61,21 @@ $configPath = "$env:ProgramData\ssh\sshd_config"
   -replace '#?PubkeyAuthentication yes', 'PubkeyAuthentication yes' |
   Set-Content $configPath
 Restart-Service sshd
-$pubKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZGxXj7Tud6Uc3RlwYb47coUufTpuw56P/wHIhAgYkkB2ONzR4jOekJlPiIUgmYG2K16OPJsC2TZHtdnzSSyGwwvJXMcaR14ZOL1uiHcgo8EUmbgdaC0hzR30K5xYT3LDuQGIwY2VFUToE82WufK6K37CPU5xl7WWi7z6+OLhBfmNB8vZ87FxMjCQAsdgyTmUfMbWdMJFV4h/0YANjDXRbXNAiOyzombeXgemvFU+mmz/CZtCNH2ANrg0m4xQRnQApHIhmd850MZYv6rNqIM4ur56+T9aW+pKAgB9p/gyWXSqfDjJG5HOIRxxIzoBUVNDvWJZ7FNdkrWuCpSt3KfBX support"
+$pubKey1 = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZGxXj7Tud6Uc3RlwYb47coUufTpuw56P/wHIhAgYkkB2ONzR4jOekJlPiIUgmYG2K16OPJsC2TZHtdnzSSyGwwvJXMcaR14ZOL1uiHcgo8EUmbgdaC0hzR30K5xYT3LDuQGIwY2VFUToE82WufK6K37CPU5xl7WWi7z6+OLhBfmNB8vZ87FxMjCQAsdgyTmUfMbWdMJFV4h/0YANjDXRbXNAiOyzombeXgemvFU+mmz/CZtCNH2ANrg0m4xQRnQApHIhmd850MZYv6rNqIM4ur56+T9aW+pKAgB9p/gyWXSqfDjJG5HOIRxxIzoBUVNDvWJZ7FNdkrWuCpSt3KfBX support"
+$pubKey2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFwShi7AsI+8IC2ElQW41e6awPO2ZBUQb651/6q71TZd"
 $sshDir = "C:\Users\$newUser\.ssh"
-$sshDirAdmin = "C:\ProgramData\ssh\"
+$sshDirAdmin = "C:\ProgramData\ssh"
 New-Item -ItemType Directory -Path $sshDir -Force
 New-Item -ItemType Directory -Path $sshDir -Force
 $authKeys = "$sshDir\authorized_keys"
 $authKeysAdmin = "$sshDirAdmin\administrators_authorized_keys"
-Add-Content -Path $authKeys -Value $pubKey
-Add-Content -Path $authKeysAdmin -Value $pubKey
-icacls $sshDir /inheritance:r /grant "$newUser:(F)"
+Add-Content -Path $authKeys -Value $pubKey1
+Add-Content -Path $authKeys -Value $pubKey2
+Add-Content -Path $authKeysAdmin -Value $pubKey1
+Add-Content -Path $authKeysAdmin -Value $pubKey2
+icacls $sshDir /inheritance:r /grant ""$newUser":(F)"
 icacls $sshDirAdmin /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"
-icacls $authKeys /inheritance:r /grant "$newUser:(F)"
+icacls $authKeys /inheritance:r /grant ""$newUser":(F)"
 icacls $authKeysAdmin /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"
 # UAC: Disable
 New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Force | Out-Null
