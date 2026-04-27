@@ -25,3 +25,23 @@
       $o.Namespace('C:\MFScripts').Self.InvokeVerb("pintohome")
       $o.Namespace('C:\MFSupport').Self.InvokeVerb("pintohome")
       $o.Namespace('C:\CTF').Self.InvokeVerb("pintohome")
+
+- name: Install SSH Public Key
+  ansible.windows.win_powershell:
+    script: |
+      $pubKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCZGxXj7Tud6Uc3RlwYb47coUufTpuw56P/wHIhAgYkkB2ONzR4jOekJlPiIUgmYG2K16OPJsC2TZHtdnzSSyGwwvJXMcaR14ZOL1uiHcgo8EUmbgdaC0hzR30K5xYT3LDuQGIwY2VFUToE82WufK6K37CPU5xl7WWi7z6+OLhBfmNB8vZ87FxMjCQAsdgyTmUfMbWdMJFV4h/0YANjDXRbXNAiOyzombeXgemvFU+mmz/CZtCNH2ANrg0m4xQRnQApHIhmd850MZYv6rNqIM4ur56+T9aW+pKAgB9p/gyWXSqfDjJG5HOIRxxIzoBUVNDvWJZ7FNdkrWuCpSt3KfBX support"
+      $sshDir = "C:\Users\$env:USERNAME\.ssh"
+      $sshDirAdmin = "C:\ProgramData\ssh\"
+      New-Item -ItemType Directory -Path $sshDir -Force
+      New-Item -ItemType Directory -Path $sshDir -Force
+      $authKeys = "$sshDir\authorized_keys"
+      $authKeysAdmin = "$sshDirAdmin\administrators_authorized_keys"
+      Add-Content -Path $authKeys -Value $pubKey
+      icacls $sshDir /inheritance:r
+      icacls $sshDirAdmin /inheritance:r
+      icacls $sshDir /grant "$($env:USERNAME):(F)"
+      icacls $sshDirAdmin /grant "$($env:USERNAME):(F)"
+      icacls $authKeys /inheritance:r
+      icacls $authKeysAdmin /inheritance:r
+      icacls $authKeys /grant "$($env:USERNAME):(F)"
+      icacls $authKeysAdmin /grant "$($env:USERNAME):(F)"
