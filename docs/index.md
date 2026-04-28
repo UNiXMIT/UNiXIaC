@@ -31,7 +31,7 @@
     > **NOTE:** Unless you are creating and testing new Tasks, there is no need to check any of the checkboxes at the bottom.  
 
 5. A Task Console window will appear, while the EC2 instance is being created.  
-   You can safely close the browser now or leave it open to monitor its creation.  If you want to come back to the task later to check progress, take note of the Task number. When you return, open the Dashboard and click on the 'History' tab. The find your Task and click the Task number to re-open the Task console.  
+   You can safely close the browser now or leave it open to monitor its creation. If you want to come back to the task later to check progress, take note of the Task number. When you return, open the Dashboard and click on the 'History' tab. The find your Task and click the Task number to re-open the Task console.  
 ![5](images/5.png)
 
 6. Once the Task has completed and is marked as a 'Success', scroll to the very bottom of the Task console, and you will see the EC2 Instance details like public IP/DNS and database connection information.  
@@ -48,7 +48,7 @@
 - Instances are created with your username, OS and products name as Instance name.  
 - Tags are added to the instance to show what products have been installed and what installers were used.  
 - Instances are all set to shutdown at 8pm GMT to encourage users not to leave instances running for no reason. If an instance really needs to stay on longer, the auto shutdown can be disabled from either the task scheduler (Windows) or the root cron job (Linux).  
-- Task completion/fail notifications are sent to the #team-amc-semaphore Slack channel. This channel can also be used to ask questions, post suggestions/improvements, report problems to an admin or to request a password reset.  
+<!-- - Task completion/fail notifications are sent to the #team-amc-semaphore Slack channel. This channel can also be used to ask questions, post suggestions/improvements, report problems to an admin or to request a password reset.   -->
 
 ## Supported OS / Products
 ### Windows Server 2025
@@ -64,10 +64,16 @@
 
 ### RHEL 9 AMD
 - ED 8.0, 9.0, 10.0 and 11.0  
-- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0, 10.5.1 and 11.0.0  
+- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1
 
 ### RHEL 9 ARM
 - ED 11.0  
+
+### RHEL 10 AMD
+- ED 11.0 (PU 3 +) 
+- AcuCOBOL-GT extend 11.0.0  
+
+### RHEL 10 ARM
 
 ### SLES 15
 - ED 9.0 and 10.0  
