@@ -18,6 +18,16 @@
   until: result is not failed
   tags: vs2022
 
+- name: Download VS Professional 2026
+  ansible.windows.win_get_url:
+    url: https://download.visualstudio.microsoft.com/download/pr/ef8a1da5-1f31-4995-8be6-cb9800f90516/36e2e1e21504e900b2f08a1ccc233ee86aef45fc8281539a7b7784078d7b24b5/vs_Professional.exe
+    dest: C:\Users\Public\Documents
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+  tags: vs2026
+
 - name: Install VS Professional
   win_package:
     path: C:\Users\Public\Documents\vs_professional.exe
@@ -82,3 +92,15 @@
   loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
   delegate_to: localhost
   tags: vs2022
+
+- name: Add VS 2026 Tags
+  amazon.aws.ec2_tag:
+    # aws_profile: '{{ awsProfile }}'
+    region: "{{ hostvars['localhost']['awsRegion'] }}"
+    resource: '{{ item }}'
+    tags:
+      VS: 'Visual Studio Professional 2026'
+    state: present
+  loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
+  delegate_to: localhost
+  tags: vs2026
