@@ -489,7 +489,7 @@
 - name: Download MFBSI.cfg
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MFBSI.cfg
-    dest: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/MFBSI.cfg
+    dest: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/mfbsi.cfg
     mode: '0775'
   register: result
   retries: 5
@@ -499,7 +499,7 @@
 - name: Download VSE.cfg
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
-    dest: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/VSE.cfg
+    dest: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/vse.cfg
     mode: '0775'
   register: result
   retries: 5

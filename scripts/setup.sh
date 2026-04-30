@@ -414,8 +414,8 @@ mkdir -p -m 775 JCL/system JCL/catalog JCL/dataset JCL/loadlib
 mkdir -p -m 775 CICS/system CICS/dataset CICS/loadlib
 cd $FILEPATH/MFSupport/MFSamples/JCL
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MFBSI.cfg
-curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
+curl -s -o mfbsi.cfg https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MFBSI.cfg
+curl -s -o vse.cfg https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
 cd $FILEPATH/MFSupport/MFSamples/CICS
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml
 
