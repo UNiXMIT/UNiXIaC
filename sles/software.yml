@@ -26,6 +26,16 @@
   delay: 30
   until: result is not failed
 
+- name: Downgrade libncurses (Workaround for Base Development Installation)
+  community.general.zypper:
+    name: libncurses6-6.1-150000.5.30.1
+    oldpackage: true
+    state: present
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Install Base Development
   community.general.zypper:
     name: devel_basis
