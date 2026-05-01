@@ -97,47 +97,6 @@
   delay: 30
   until: result is not failed
 
-- name: Package installation NON-ARM
-  package:
-    name:
-      - 'libstdc++-devel.i686'
-      - glibc-devel.i686
-      - glibc.i686
-      - pam.i686
-    state: present
-  when:
-    - "'arm' not in ansible_run_tags"
-    - ansible_facts['distribution_major_version'] | int <= 9
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: unixODBC installation RHEL<=9 NON-ARM
-  package:
-    name: unixODBC-devel
-    state: present
-  when: 
-    - "'arm' not in ansible_run_tags"
-    - ansible_facts['distribution_major_version'] | int <= 9
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: unixODBC installation RHEL>=10 NON-ARM
-  dnf:
-    name:  	https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi10/10/x86_64/codeready-builder/os/Packages/u/unixODBC-devel-2.3.12-6.el10.x86_64.rpm
-    state: present
-    disable_gpg_check: yes
-  when: 
-    - "'arm' not in ansible_run_tags"
-    - ansible_facts['distribution_major_version'] | int >= 10
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
 # - name: RHEL<=7 Package installation
 #   package:
 #     name: 
@@ -168,18 +127,6 @@
   delay: 30
   until: result is not failed
 
-- name: RHEL>=8 and RHEL<=9 Package installation
-  package:
-    name: webkit2gtk3
-    state: present
-  when: 
-    - ansible_facts['distribution_major_version'] | int >= 8
-    - ansible_facts['distribution_major_version'] | int <= 9
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-  
 - name: RHEL>=8 Package installation
   package:
     name: 
@@ -193,6 +140,18 @@
       - buildah
     state: present
   when: ansible_facts['distribution_major_version'] | int >= 8
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: RHEL>=8 and RHEL<=9 Package installation
+  package:
+    name: webkit2gtk3
+    state: present
+  when: 
+    - ansible_facts['distribution_major_version'] | int >= 8
+    - ansible_facts['distribution_major_version'] | int <= 9
   register: result
   retries: 5
   delay: 30
@@ -217,12 +176,18 @@
   delay: 30
   until: result is not failed
 
-- name: RHEL>=9 Package installation
+- name: Package installation RHEL<=9 NON-ARM
   package:
-    name: 
-      - libxcrypt-compat
+    name:
+      - 'libstdc++-devel.i686'
+      - glibc-devel.i686
+      - glibc.i686
+      - pam.i686
+      - unixODBC-devel
     state: present
-  when: ansible_facts['distribution_major_version'] | int >= 9
+  when:
+    - "'arm' not in ansible_run_tags"
+    - ansible_facts['distribution_major_version'] | int <= 9
   register: result
   retries: 5
   delay: 30
@@ -236,6 +201,30 @@
   when: 
     - ansible_facts['distribution_major_version'] | int == 9
     - "'arm' not in ansible_run_tags"
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: RHEL>=9 Package installation
+  package:
+    name: 
+      - libxcrypt-compat
+    state: present
+  when: ansible_facts['distribution_major_version'] | int >= 9
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: unixODBC installation RHEL>=10 NON-ARM
+  dnf:
+    name:  	https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi10/10/x86_64/codeready-builder/os/Packages/u/unixODBC-devel-2.3.12-6.el10.x86_64.rpm
+    state: present
+    disable_gpg_check: yes
+  when: 
+    - "'arm' not in ansible_run_tags"
+    - ansible_facts['distribution_major_version'] | int >= 10
   register: result
   retries: 5
   delay: 30

@@ -95,20 +95,33 @@ if [[ "$WHICHOS" = "RHEL" ]]; then
   curl -s https://packages.microsoft.com/config/rhel/${VERSION_ID%.*}/prod.repo | sudo tee /etc/yum.repos.d/mssql-release.repo
   sudo tee /etc/profile.d/mssql.sh > /dev/null <<EOF
 #!/bin/bash
-export PATH="$PATH:/opt/mssql-tools/bin"
+export PATH="$PATH:/opt/mssql-tools18/bin"
 EOF
   sudo chmod 775 /etc/profile.d/mssql.sh
   sudo dnf update -y
   sudo dnf group install -y "Development Tools"
-  sudo ACCEPT_EULA=Y yum install -y msodbcsql17 mssql-tools
-  sudo dnf install -y --skip-broken unixODBC-devel wget curl cronie dos2unix htop libstdc++-devel.i686 libaio-devel glibc-devel glibc-devel.i686 glibc glibc.i686 tcpdump ed tmux openconnect jq python3 python3-pip expect postgresql postgresql-odbc net-tools lsof xterm xauth pam
+  sudo ACCEPT_EULA=Y yum install -y msodbcsql18 mssql-tools18
+  sudo dnf install -y --skip-broken wget curl cronie dos2unix htop libaio-devel glibc-devel glibc tcpdump ed tmux openconnect jq python3 python3-pip expect postgresql postgresql-odbc net-tools lsof xterm xauth pam
   if [[ ${VERSION_ID%.*} -le 8 ]]; then
     sudo dnf install -y --skip-broken spax
-  elif [[ ${VERSION_ID%.*} -ge 8 ]]; then
+  if [[ ${VERSION_ID%.*} -ge 8 ]]; then
     sudo dnf remove -y java*
-    sudo dnf install -y --skip-broken java-latest-openjdk libnsl libnsl.i686 libxcrypt libncurses* libxcrypt.i686 libgcc.i686 ncurses-libs.i686 zlib.i686 webkit2gtk3 PackageKit-gtk3-module systemd-libs systemd-libs.i686 podman buildah
-  elif [[ ${VERSION_ID%.*} -ge 9 ]]; then
-    sudo dnf install -y --skip-broken libxcrypt-compat libxcrypt-compat.i686
+    sudo dnf install -y --skip-broken java-latest-openjdk libnsl libnsl.i686 libxcrypt libncurses* webkit2gtk3 PackageKit-gtk3-module systemd-libs podman buildah
+  fi
+  if [[ ${VERSION_ID%.*} -ge 8 && ${VERSION_ID%.*} -le 9 ]]; then
+    sudo dnf install -y --skip-broken libxcrypt.i686 libgcc.i686 ncurses-libs.i686 zlib.i686 systemd-libs.i686
+  fi
+  if [[ ${VERSION_ID%.*} -le 9 ]]; then
+    sudo dnf install -y --skip-broken libstdc++-devel.i686 glibc-devel.i686 glibc.i686 pam.i686 unixODBC-devel
+  fi
+  if [[ ${VERSION_ID%.*} -eq 9 ]]; then
+    sudo dnf install -y --skip-broken libxcrypt-compat.i686
+  fi
+  if [[ ${VERSION_ID%.*} -ge 9 ]]; then
+    sudo dnf install -y --skip-broken libxcrypt-compat
+  fi
+  if [[ ${VERSION_ID%.*} -eq 10 ]]; then
+    sudo dnf install -y --skip-broken https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi10/10/x86_64/codeready-builder/os/Packages/u/unixODBC-devel-2.3.12-6.el10.x86_64.rpm
   fi
   sudo setenforce 0
   sudo sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config
@@ -151,7 +164,7 @@ EOF
 fi
 sudo systemctl enable --now podman.socket
 sudo curl -s -o /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-sydo chmod +x /usr/local/bin/yq
+sudo chmod +x /usr/local/bin/yq
 curl -LO -s "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 sudo rm -f kubectl
