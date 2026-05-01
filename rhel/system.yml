@@ -59,17 +59,17 @@
   selinux:
     state: disabled
 
-- name: Restart SSHD
-  service:
-    name: sshd
-    state: restarted
-  ignore_errors: true
+- name: Gather service facts
+  service_facts:
 
-- name: Restart SSH
+- name: Restart SSH service
   service:
-    name: ssh
+    name: "{{ item }}"
     state: restarted
-  ignore_errors: true
+  loop:
+    - sshd
+    - ssh
+  when: item in ansible_facts.services
 
 - name: Create profile.sh
   copy:
