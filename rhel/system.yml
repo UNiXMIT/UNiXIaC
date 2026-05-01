@@ -67,8 +67,8 @@
     name: "{{ item }}"
     state: restarted
   loop:
-    - sshd
-    - ssh
+    - sshd.service
+    - ssh.service
   when: item in ansible_facts.services
 
 - name: Create profile.sh
