@@ -9,6 +9,10 @@
     search_string: '127.0.0.1'
     line: 127.0.0.1 localhost {{ myUsername }}
 
+- name: Update Hostname
+  ansible.builtin.hostname:
+    name: '{{ semaphore_vars.task_details.username|lower }}{{ imageName|lower }}'
+
 - name: Allow SSH password authentication
   lineinfile:
     dest: /etc/ssh/sshd_config
