@@ -3,15 +3,15 @@
     name: Europe/London
   when: userRegion | default("1") == "1"
 
+- name: Update Hostname
+  ansible.builtin.hostname:
+    name: '{{ semaphore_vars.task_details.username|lower }}{{ imageName|lower }}'
+
 - name: Update hosts file
   ansible.builtin.lineinfile:
     path: /etc/hosts
     search_string: '127.0.0.1'
-    line: 127.0.0.1 localhost {{ myUsername }}
-
-- name: Update Hostname
-  ansible.builtin.hostname:
-    name: '{{ semaphore_vars.task_details.username|lower }}{{ imageName|lower }}'
+    line: 127.0.0.1 localhost {{ myUsername }} {{ semaphore_vars.task_details.username|lower }}{{ imageName|lower }}
 
 - name: Allow SSH password authentication
   lineinfile:
