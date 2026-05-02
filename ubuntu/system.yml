@@ -41,6 +41,9 @@
     state: present
     line: '{{ myUsername }} ALL=(ALL) NOPASSWD: ALL'
 
+- name: Gather service facts
+  service_facts:
+
 - name: Restart SSH service
   service:
     name: "{{ item }}"
