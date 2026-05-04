@@ -38,13 +38,13 @@ KEY86
 installPath  
 installerName  
 S3Prefix  
-productName
-edVer
+productName  
+edVer  
 
 ### extend
-installPath
-installerName
-S3Prefix
-productName
-CODE
-KEY
+installPath  
+installerName  
+S3Prefix  
+productName  
+CODE  
+KEY  
