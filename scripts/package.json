@@ -1,14 +1,13 @@
 {
-  "name": "scripts",
+  "name": "sempu",
   "version": "1.0.0",
-  "description": "",
+  "description": "Script for creating Semaphore templates for Patch Updates",
   "main": "semPU.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dryrun": "node semPU.js --dryrun",
+    "start": "node semPU.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "UNiXMIT",
   "type": "commonjs",
   "dependencies": {
     "dotenv": "^17.4.2"

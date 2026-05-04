@@ -1,4 +1,3 @@
-// node semPU.js (--dryrun to simulate without API calls)
 require('dotenv').config({ quiet: true });
 const dryRun = process.argv.includes("--dryrun");
 let cookieJar = "";
@@ -92,12 +91,14 @@ const newValuesED = {
     productName: `ED${configED.versionNumber}PU${configED.pu}`,
     productNameES: `ES${configED.versionNumber}PU${configED.pu}`,
     installerNameEDVS: `edvs${configED.vsVersion}_${configED.versionNumber}.exe`,
+    installerNameEDnoVS: `edvs_${configED.versionNumber}.exe`,
     installerNameEDE: `ede_${configED.versionNumber}.exe`,
     installerNameES: `es_${configED.versionNumber}.exe`,
     S3Prefix: `ED/${configED.versionNumber}/GA/`,
     S3PrefixPU: `ED/${configED.versionNumber}/PU${configED.pu}/`,
     installPath: `/home/products/ed${configED.versionNumber}pu${configED.pu}`,
     installerEDVSPU: `edvs${configED.vsVersion}_${configED.versionNumber}_pu${configED.puFormatted}_${configED.winBuild}.exe`,
+    installerEDnoVSPU: `edvs_${configED.versionNumber}_pu${configED.puFormatted}_${configED.winBuild}.exe`,
     installerEDEPU: `ede_${configED.versionNumber}_pu${configED.puFormatted}_${configED.winBuild}.exe`,
     installerESPU: `es_${configED.versionNumber}_pu${configED.puFormatted}_${configED.winBuild}.exe`,
     installerNameRHEL: `setup_entdev_${configED.version}_patchupdate${configED.puFormatted}_${configED.linuxBuild}_redhat_x86_64`,
@@ -137,12 +138,17 @@ async function createTemplates(data) {
     if (wins) {
         if (data.task_params.tags.includes("ed")) {
             data.name = `${wins.toUpperCase()} - ED ${configED.version} PU ${configED.pu}`
-            newArgs.push(`-e installerNameEDVS=${newValuesED.installerNameEDVS}`);
+            if ( (configED.versionNumber == 110 && configED.pu >= 5) || configED.versionNumber == 120 ) {
+                newArgs.push(`-e installerNameEDVS=${newValuesED.installerNameEDnoVS}`);
+                newArgs.push(`-e installerNameEDVSPU=${newValuesED.installerEDnoVSPU}`);
+            } else {
+                newArgs.push(`-e installerNameEDVS=${newValuesED.installerNameEDVS}`);
+                newArgs.push(`-e installerNameEDVSPU=${newValuesED.installerEDVSPU}`);
+            }
             newArgs.push(`-e installerNameEDE=${newValuesED.installerNameEDE}`);
             newArgs.push(`-e S3Prefix=${newValuesED.S3Prefix}`);
             newArgs.push(`-e productName=${newValuesED.productName}`);
             newArgs.push(`-e edVer=${configED.versionNumber}`);
-            newArgs.push(`-e installerNameEDVSPU=${newValuesED.installerEDVSPU}`);
             newArgs.push(`-e installerNameEDEPU=${newValuesED.installerEDEPU}`);
             newArgs.push(`-e S3PrefixPU=${newValuesED.S3PrefixPU}`);
         } else if (data.task_params.tags.includes("es")) {
