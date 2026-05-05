@@ -2,17 +2,20 @@
   {
     "name": "vmCount",
     "title": "VM Count",
-    "required": false,
     "type": "int",
-    "description": "Create how many instances? (default=1)",
-    "values": []
+    "description": "Create how many instances?",
+    "default_value": "1"
   },
   {
     "name": "userRegion",
     "title": "AWS Region",
-    "required": false,
-    "type": "int",
-    "description": "1=EMEA 2=AMS 3=APJ (default=1)",
-    "values": []
+    "type": "enum",
+    "description": "Create instance in which region?",
+    "values": [
+      { "name": "EU", "value": "1" },
+      { "name": "US", "value": "2" },
+      { "name": "AP", "value": "3" }
+    ],
+    "default_value": "1"
   }
 ]

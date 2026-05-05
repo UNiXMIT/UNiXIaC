@@ -4,6 +4,7 @@
 - [ wins2025, wins2022, wins2019 ]
 - amd
     - vs2022
+    - vs2026
         - [ ed, es ]
             - edpu
             - adlds
@@ -37,4 +38,5 @@
         - mssql2017
         - mssql2019
         - mssql2022
+        - mssql2025
     - sybase
