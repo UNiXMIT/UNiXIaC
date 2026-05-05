@@ -38,11 +38,7 @@
       --norestart
       --downloadThenInstall
       --add
-      Microsoft.Net.Component.4.5.TargetingPack
-      --add
-      Microsoft.Net.Component.4.5.2.TargetingPack
-      --add
-      Microsoft.Net.Component.4.7.2.TargetingPack
+      Microsoft.Net.Component.4.8.1.TargetingPack
       --add
       Microsoft.VisualStudio.Component.Debugger.JustInTime
       --add
