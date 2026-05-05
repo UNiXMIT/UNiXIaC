@@ -50,8 +50,6 @@
       --add
       Microsoft.VisualStudio.Component.NuGet
       --add
-      Microsoft.VisualStudio.Component.Windows10SDK.18362
-      --add
       Microsoft.VisualStudio.Component.DockerTools
       --add
       Microsoft.VisualStudio.Component.VisualStudioData
@@ -67,6 +65,8 @@
       Microsoft.VisualStudio.Component.SQL.SSDT 
       --add 
       Microsoft.VisualStudio.Workload.NetCoreTools 
+      --add
+      Microsoft.VisualStudio.Component.Windows10SDK
   tags: [ vs2019, vs2022, vs2026 ]
 
 - name: Add VS 2019 Tags
