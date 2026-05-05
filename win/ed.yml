@@ -199,6 +199,7 @@
         state: present
         arguments: /q RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDVS }}.log /norestart
       tags: edvs
+      register: result
       failed_when: result.rc not in [0, 3010, 5385]
     
     - name: Install {{ installerNameEDE }}
@@ -207,6 +208,7 @@
         state: present
         arguments: /q RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDE }}.log /norestart
       tags: ede
+      register: result
       failed_when: result.rc not in [0, 3010, 5385]
   tags: ed
 
@@ -218,6 +220,7 @@
         state: present
         arguments: /q RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDVSPU }}.log /norestart
       tags: edvs
+      register: result
       failed_when: result.rc not in [0, 3010, 5385]
     
     - name: Install {{ installerNameEDEPU }}
@@ -226,6 +229,7 @@
         state: present
         arguments: /q RumbaCheckbox=1 /log C:\MFInstallers\{{ installerNameEDEPU }}.log /norestart
       tags: ede
+      register: result
       failed_when: result.rc not in [0, 3010, 5385]
   tags: edpu
 
