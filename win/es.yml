@@ -124,8 +124,8 @@
         path: C:\MFInstallers\{{ installerNameES }}
         state: present
         arguments: /q /log C:\MFInstallers\{{ installerNameES }}.log /norestart
+      failed_when: result.rc not in [0, 3010, 5385]
   tags: es
-  failed_when: result.rc not in [0, 3010, 5385]
 
 - name: Install ES PU
   block:
@@ -134,8 +134,8 @@
         path: C:\MFInstallers\{{ installerNameESPU }}
         state: present
         arguments: /q /log C:\MFInstallers\{{ installerNameESPU }}.log /norestart
+      failed_when: result.rc not in [0, 3010, 5385]
   tags: espu
-  failed_when: result.rc not in [0, 3010, 5385]
   
 - name: Create Micro Focus Directory
   ansible.windows.win_file:
