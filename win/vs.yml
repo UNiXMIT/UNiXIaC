@@ -67,7 +67,7 @@
       Microsoft.VisualStudio.Component.SQL.SSDT 
       --add 
       Microsoft.VisualStudio.Workload.NetCoreTools 
-  tags: [ vs2019, vs2022 ]
+  tags: [ vs2019, vs2022, vs2026 ]
 
 - name: Add VS 2019 Tags
   amazon.aws.ec2_tag:
