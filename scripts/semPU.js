@@ -97,10 +97,10 @@ const newValuesED = {
     S3Prefix: `ED/${configED.versionNumber}/GA/`,
     S3PrefixPU: `ED/${configED.versionNumber}/PU${configED.pu}/`,
     installPath: `/home/products/ed${configED.versionNumber}pu${configED.pu}`,
-    installerEDVSPU: `edvs${configED.vsVersion}_${configED.versionNumber}_pu${configED.puFormatted}_${configED.winBuild}.exe`,
-    installerEDnoVSPU: `edvs_${configED.versionNumber}_pu${configED.puFormatted}_${configED.winBuild}.exe`,
-    installerEDEPU: `ede_${configED.versionNumber}_pu${configED.puFormatted}_${configED.winBuild}.exe`,
-    installerESPU: `es_${configED.versionNumber}_pu${configED.puFormatted}_${configED.winBuild}.exe`,
+    installerNameEDVSPU: `edvs${configED.vsVersion}_${configED.versionNumber}_pu${configED.puFormatted}_${configED.winBuild}.exe`,
+    installerNameEDnoVSPU: `edvs_${configED.versionNumber}_pu${configED.puFormatted}_${configED.winBuild}.exe`,
+    installerNameEDEPU: `ede_${configED.versionNumber}_pu${configED.puFormatted}_${configED.winBuild}.exe`,
+    installerNameESPU: `es_${configED.versionNumber}_pu${configED.puFormatted}_${configED.winBuild}.exe`,
     installerNameRHEL: `setup_entdev_${configED.version}_patchupdate${configED.puFormatted}_${configED.linuxBuild}_redhat_x86_64`,
     installerNameRHEL64: `setup_entdev_${configED.version}_patchupdate${configED.puFormatted}_${configED.linuxBuild}_redhat_x64`,
     installerNameRHELARM: `setup_entdev_${configED.version}_patchupdate${configED.puFormatted}_${configED.linuxBuild}_redhat_arm64`,
@@ -138,18 +138,18 @@ async function createTemplates(data) {
     if (wins) {
         if (data.task_params.tags.includes("ed")) {
             data.name = `${wins.toUpperCase()} - ED ${configED.version} PU ${configED.pu}`
-            if ( (configED.versionNumber == 110 && configED.pu >= 5) || configED.versionNumber == 120 ) {
+            if ( (configED.versionNumber == 110 && configED.pu >= 5) || configED.versionNumber >= 120 ) {
                 newArgs.push(`-e installerNameEDVS=${newValuesED.installerNameEDnoVS}`);
-                newArgs.push(`-e installerNameEDVSPU=${newValuesED.installerEDnoVSPU}`);
+                newArgs.push(`-e installerNameEDVSPU=${newValuesED.installerNameEDnoVSPU}`);
             } else {
                 newArgs.push(`-e installerNameEDVS=${newValuesED.installerNameEDVS}`);
-                newArgs.push(`-e installerNameEDVSPU=${newValuesED.installerEDVSPU}`);
+                newArgs.push(`-e installerNameEDVSPU=${newValuesED.installerNameEDVSPU}`);
             }
             newArgs.push(`-e installerNameEDE=${newValuesED.installerNameEDE}`);
             newArgs.push(`-e S3Prefix=${newValuesED.S3Prefix}`);
             newArgs.push(`-e productName=${newValuesED.productName}`);
             newArgs.push(`-e edVer=${configED.versionNumber}`);
-            newArgs.push(`-e installerNameEDEPU=${newValuesED.installerEDEPU}`);
+            newArgs.push(`-e installerNameEDEPU=${newValuesED.installerNameEDEPU}`);
             newArgs.push(`-e S3PrefixPU=${newValuesED.S3PrefixPU}`);
         } else if (data.task_params.tags.includes("es")) {
             data.name = `${wins.toUpperCase()} - ES ${configED.version} PU ${configED.pu}`
@@ -157,7 +157,7 @@ async function createTemplates(data) {
             newArgs.push(`-e S3Prefix=${newValuesED.S3Prefix}`);
             newArgs.push(`-e productName=${newValuesED.productNameES}`);
             newArgs.push(`-e edVer=${configED.versionNumber}`);
-            newArgs.push(`-e installerNameESPU=${newValuesED.installerESPU}`);
+            newArgs.push(`-e installerNameESPU=${newValuesED.installerNameESPU}`);
             newArgs.push(`-e S3PrefixPU=${newValuesED.S3PrefixPU}`); 
         } else if (data.task_params.tags.includes("extend")) {
             if (configACU.versionNumber < 1100) {
