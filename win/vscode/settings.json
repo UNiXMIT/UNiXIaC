@@ -12,5 +12,7 @@
     "extensions.ignoreRecommendations": true,
     "terminal.integrated.copyOnSelection": true,
     "editor.wordWrap": "on",
-    "update.showReleaseNotes": false
+    "update.showReleaseNotes": false,
+    "github.copilot.chat.claudeAgent.enabled": false,
+    "github.copilot.chat.agent.currentEditorContext.enabled": false
 }
