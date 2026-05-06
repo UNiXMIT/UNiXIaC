@@ -7,11 +7,11 @@
 - name: Set Oracle variables
   set_fact:
     oracle:
-        base_url: "https://download.oracle.com/otn_software/linux/instantclient/2326000/"
-        version: "23.26.0.0.0"
+        base_url: "https://download.oracle.com/otn_software/linux/instantclient/2326100/"
+        version: "23.26.1.0.0"
         precomp_url: "https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/23/"
-        precomp: "instantclient-precomp-linux.x64-23.26.0.0.0.zip"
-        baseDir: "instantclient_23_0"
+        precomp: "instantclient-precomp-linux.x64-23.26.1.0.0.zip"
+        baseDir: "instantclient_23_1"
 
     oracle_packages:
       - basic
@@ -73,7 +73,7 @@
     block: |
       [oracle]
       Description     = Oracle ODBC Connection
-      Driver          = /opt/oracle/{{ oracle.baseDir }}/libsqora.so.21.1
+      Driver          = /opt/oracle/{{ oracle.baseDir }}/libsqora.so.23.1
       Database        = {{ myUsername }}
       Servername      = 127.0.0.1:1521/FREE
       UserID          = {{ myUsername }}

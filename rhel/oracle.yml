@@ -64,7 +64,7 @@
     block: |
       [oracle]
       Description     = Oracle ODBC Connection
-      Driver          = /usr/lib/oracle/21/client64/lib/libsqora.so.21.1
+      Driver          = /usr/lib/oracle/23/client64/lib/libsqora.so.23.1
       Database        = {{ myUsername }}
       Servername      = 127.0.0.1:1521/FREE
       UserID          = {{ myUsername }}
