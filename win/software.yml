@@ -47,3 +47,14 @@
       "C:\Program Files (x86)\clink\clink" autorun -a install
       "C:\Program Files (x86)\clink\clink" set clink.logo none
     dest: C:\Windows\enableClink.cmd
+
+- name: Install New Windows Terminal
+  ansible.windows.win_powershell:
+    script: |
+      $msTermVer = "1.24.10921.0"
+      $msTermURL = "https://github.com/microsoft/terminal/releases/download/v${msTermVer}/Microsoft.WindowsTerminal_${msTermVer}_x64.zip"
+      Invoke-WebRequest -Uri $msTermURL -outfile C:\Users\Public\Documents\Microsoft.WindowsTerminal.zip
+      Expand-Archive -LiteralPath C:\Users\Public\Documents\Microsoft.WindowsTerminal.zip -DestinationPath C:\Users\Public\Documents
+      setx /m PATH "$env:PATH;C:\Users\Public\Documents\terminal-${msTermVer}"
+  ignore_errors: true
+  tags: [ wins2019, wins2022]

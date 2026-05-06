@@ -5,6 +5,9 @@
     - RSAT-ADDS
     state: present
 
+- name: Reboot to finalise ADLDS and ADSI Edit installation
+  ansible.windows.win_reboot:
+  
 - name: Download adlds.cmd
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/adlds/adlds.cmd
