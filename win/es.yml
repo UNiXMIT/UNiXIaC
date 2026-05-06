@@ -124,6 +124,7 @@
         path: C:\MFInstallers\{{ installerNameES }}
         state: present
         arguments: /q /log C:\MFInstallers\{{ installerNameES }}.log /norestart
+      register: result
       failed_when: result.rc not in [0, 3010, 5385]
   tags: es
 
@@ -134,6 +135,7 @@
         path: C:\MFInstallers\{{ installerNameESPU }}
         state: present
         arguments: /q /log C:\MFInstallers\{{ installerNameESPU }}.log /norestart
+      register: result
       failed_when: result.rc not in [0, 3010, 5385]
   tags: espu
   
