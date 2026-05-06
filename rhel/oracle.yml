@@ -5,8 +5,8 @@
         base_url: "https://download.oracle.com/otn_software/linux/instantclient/2326100/"
         version: "23.26.1.0.0"
       "9":
-        base_url: "https://download.oracle.com/otn_software/linux/instantclient/2326000/"
-        version: "23.26.0.0.0"
+        base_url: "https://download.oracle.com/otn_software/linux/instantclient/2326100/"
+        version: "23.26.1.0.0"
 
     oracle_packages:
       - basic
