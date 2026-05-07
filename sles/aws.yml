@@ -7,7 +7,7 @@
           name: {{ myUsername }}
           primary_group: wheel
           groups: users
-    name: '{{ tempName }}'
+    name: 'SEM{{ semaphore_vars.task_details.id }}'
     image_id: '{{ amis.images[-1].image_id }}'
     key_name: '{{ keyName }}'
     network_interfaces:  
@@ -29,13 +29,13 @@
     wait: true
   register: ec2
 
-- name: Add Host to awsEC2 Group 
+- name: Add Host to awsEC2_SEM{{ semaphore_vars.task_details.id }} Group 
   add_host: 
       hostname: '{{ item.public_ip_address }}'
       ansible_port: 22
       ansible_user: '{{ myUsername }}'
       ansible_ssh_private_key_file: '{{ keyLocation }}'
-      groups: awsEC2
+      groups: 'awsEC2_SEM{{ semaphore_vars.task_details.id }}'
   loop: '{{ ec2.instances }}'
 
 - name: Rename AWS EC2 instance

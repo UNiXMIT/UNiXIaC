@@ -24,8 +24,6 @@
 
 - name: AWS EC2 Management
   hosts: local
-  vars:
-    tempName: SEM-{{ 2048 | random }}
   gather_facts: no
   tasks:
     - block:
@@ -37,7 +35,7 @@
   tags: default
 
 - name: Modify OS Config
-  hosts: awsEC2
+  hosts: 'awsEC2_SEM{{ semaphore_vars.task_details.id }}'
   gather_facts: no
   become: yes
   tasks:
@@ -46,7 +44,7 @@
   tags: default
 
 - name: Reboot EC2 Instance
-  hosts: awsEC2
+  hosts: 'awsEC2_SEM{{ semaphore_vars.task_details.id }}'
   gather_facts: no
   become: yes
   tasks:
@@ -55,7 +53,7 @@
   tags: default
 
 - name: Manage Users
-  hosts: awsEC2
+  hosts: 'awsEC2_SEM{{ semaphore_vars.task_details.id }}'
   gather_facts: no
   become: yes
   tasks: 
@@ -65,7 +63,7 @@
   tags: default
 
 - name: Install Software
-  hosts: awsEC2
+  hosts: 'awsEC2_SEM{{ semaphore_vars.task_details.id }}'
   gather_facts: yes
   become: yes
   tasks:
@@ -74,14 +72,14 @@
   tags: default
 
 - name: Create Podman Containers
-  hosts: awsEC2
+  hosts: 'awsEC2_SEM{{ semaphore_vars.task_details.id }}'
   gather_facts: no
   tasks:
   - name: Import podman.yml
     import_tasks: podman.yml
 
 - name: Add CRON Jobs
-  hosts: awsEC2
+  hosts: 'awsEC2_SEM{{ semaphore_vars.task_details.id }}'
   gather_facts: no
   become: yes
   tasks:
