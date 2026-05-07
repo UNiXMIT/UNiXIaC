@@ -11,7 +11,7 @@
         version: "23.26.1.0.0"
         precomp_url: "https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/23/"
         precomp: "instantclient-precomp-linux.x64-23.26.1.0.0.zip"
-        baseDir: "instantclient_23_1"
+        baseDir: "instantclient_23_26"
 
     oracle_packages:
       - basic

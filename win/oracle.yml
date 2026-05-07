@@ -15,7 +15,7 @@
     oraclePrecomp32: "instantclient-precomp-nt-21.20.0.0.0dbru.zip"
     oraclePrecomp64: "instantclient-precomp-windows.x64-23.26.1.0.0.zip"
     baseDir32: "instantclient_21_20"
-    baseDir64: "instantclient_23_1"
+    baseDir64: "instantclient_23_0"
 
 - name: Download Oracle Instant Client 32bit
   ansible.windows.win_get_url:
