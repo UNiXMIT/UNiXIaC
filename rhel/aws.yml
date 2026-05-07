@@ -27,13 +27,13 @@
     wait: true
   register: ec2
 
-- name: Add Host to awsEC2 Group 
+- name: Add Host to awsEC2_{{ tempName }} Group 
   add_host: 
       hostname: '{{ item.public_ip_address }}'
       ansible_port: 22
       ansible_user: '{{ myUsername }}'
       ansible_ssh_private_key_file: '{{ keyLocation }}'
-      groups: awsEC2
+      groups: 'awsEC2_{{ tempName }}'
   loop: '{{ ec2.instances }}'
 
 - name: Rename AWS EC2 instance
