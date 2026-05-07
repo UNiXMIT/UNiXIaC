@@ -15,8 +15,6 @@
 
 - name: AWS EC2 Management
   hosts: local
-  vars:
-    tempName: SEM-{{ semaphore_vars.task_details.id }}
   gather_facts: no
   tasks:
     - block:
@@ -28,7 +26,7 @@
   tags: default
 
 - name: Modify OS Config
-  hosts: awsEC2_{{ tempName }}
+  hosts: awsEC2_SEM{{ semaphore_vars.task_details.id }}
   gather_facts: no
   become: yes
   tasks:
@@ -37,7 +35,7 @@
   tags: default
 
 - name: Manage Users
-  hosts: awsEC2_{{ tempName }}
+  hosts: awsEC2_SEM{{ semaphore_vars.task_details.id }}
   gather_facts: no
   become: yes
   tasks: 
@@ -47,7 +45,7 @@
   tags: default
 
 - name: Install Software
-  hosts: awsEC2_{{ tempName }}
+  hosts: awsEC2_SEM{{ semaphore_vars.task_details.id }}
   gather_facts: yes
   become: yes
   tasks:
@@ -56,7 +54,7 @@
   tags: default
 
 - name: Install Oracle Instant Client
-  hosts: awsEC2_{{ tempName }}
+  hosts: awsEC2_SEM{{ semaphore_vars.task_details.id }}
   gather_facts: no
   become: yes
   tasks:
@@ -66,7 +64,7 @@
   tags: default
 
 - name: Install DB2 Client
-  hosts: awsEC2_{{ tempName }}
+  hosts: awsEC2_SEM{{ semaphore_vars.task_details.id }}
   gather_facts: no
   tasks:
   - name: Import db2.yml
@@ -75,7 +73,7 @@
   tags: default
 
 - name: Install IBM MQ Client
-  hosts: awsEC2_{{ tempName }}
+  hosts: awsEC2_SEM{{ semaphore_vars.task_details.id }}
   gather_facts: no
   tasks:
   - name: Import mq.yml
@@ -84,7 +82,7 @@
   tags: default
 
 - name: Create Support Files and Directories
-  hosts: awsEC2_{{ tempName }}
+  hosts: awsEC2_SEM{{ semaphore_vars.task_details.id }}
   gather_facts: no
   become: yes
   tasks:
@@ -93,7 +91,7 @@
   tags: default
 
 - name: Install ED
-  hosts: awsEC2_{{ tempName }}
+  hosts: awsEC2_SEM{{ semaphore_vars.task_details.id }}
   gather_facts: no
   tasks:
   - name: Import ed.yml
@@ -101,7 +99,7 @@
   tags: ed
 
 - name: Setup OpenLDAP
-  hosts: awsEC2_{{ tempName }}
+  hosts: awsEC2_SEM{{ semaphore_vars.task_details.id }}
   gather_facts: yes
   become: yes
   tasks:
@@ -110,7 +108,7 @@
   tags: openldap
 
 - name: Install extend
-  hosts: awsEC2_{{ tempName }}
+  hosts: awsEC2_SEM{{ semaphore_vars.task_details.id }}
   gather_facts: no
   tasks:
   - name: Import extend.yml
@@ -118,7 +116,7 @@
   tags: extend
 
 - name: Create MOTD
-  hosts: awsEC2_{{ tempName }}
+  hosts: awsEC2_SEM{{ semaphore_vars.task_details.id }}
   gather_facts: yes
   become: yes
   tasks:
@@ -127,7 +125,7 @@
   tags: default
 
 - name: Add CRON Jobs
-  hosts: awsEC2_{{ tempName }}
+  hosts: awsEC2_SEM{{ semaphore_vars.task_details.id }}
   gather_facts: no
   become: yes
   tasks:
@@ -136,7 +134,7 @@
   tags: default
 
 - name: Reboot EC2 Instance
-  hosts: awsEC2_{{ tempName }}
+  hosts: awsEC2_SEM{{ semaphore_vars.task_details.id }}
   gather_facts: no
   become: yes
   tasks:
