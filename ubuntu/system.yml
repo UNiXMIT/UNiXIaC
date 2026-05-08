@@ -43,7 +43,7 @@
 
 - name: Restart SSH service
   service:
-    name: ssh
+    name: ssh.service
     state: restarted
 
 - name: Create profile.sh
