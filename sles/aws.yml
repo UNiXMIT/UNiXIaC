@@ -29,13 +29,13 @@
     wait: true
   register: ec2
 
-- name: Add Host to awsEC2_SEM{{ semaphore_vars.task_details.id }} Group 
+- name: Add Host to SEM{{ semaphore_vars.task_details.id }} Group 
   add_host: 
       hostname: '{{ item.public_ip_address }}'
       ansible_port: 22
       ansible_user: '{{ myUsername }}'
       ansible_ssh_private_key_file: '{{ keyLocation }}'
-      groups: 'awsEC2_SEM{{ semaphore_vars.task_details.id }}'
+      groups: 'SEM{{ semaphore_vars.task_details.id }}'
   loop: '{{ ec2.instances }}'
 
 - name: Rename AWS EC2 instance
