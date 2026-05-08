@@ -49,7 +49,7 @@
 
 - name: Restart SSH service
   service:
-    name: "{{ ssh_service_name }}"
+    name: "{{ ssh_service_name }}.service"
     state: restarted
 
 - name: Add a line to .bashrc
