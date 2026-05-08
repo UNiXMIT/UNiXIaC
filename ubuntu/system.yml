@@ -44,14 +44,18 @@
 - name: Gather service facts
   service_facts:
 
+- name: Determine SSH service name
+  set_fact:
+    ssh_service_name: >-
+      {{
+        'sshd' if 'sshd' in ansible_facts.services
+        else 'ssh'
+      }}
+
 - name: Restart SSH service
   service:
-    name: "{{ item }}"
+    name: "{{ ssh_service_name }}"
     state: restarted
-  loop:
-    - sshd.service
-    - ssh.service
-  when: item in ansible_facts.services
 
 - name: Create profile.sh
   copy:
