@@ -119,8 +119,6 @@
       - net-tools
       - lsof
       - pax-utils
-      - podman
-      - buildah
       - unzip
       - libgtk-3-0
     state: present
@@ -128,6 +126,18 @@
   retries: 5
   delay: 30
   until: result is not failed
+
+- name: Package installation Ubuntu 22.04
+  ansible.builtin.apt:
+    name:
+      - podman
+      - buildah
+    state: present
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+  when: ansible_distribution_version == "24.04"
   
 - name: Update apt-file
   command: apt-file update
