@@ -148,6 +148,7 @@
 
 - name: Enable Podman Socket
   ansible.builtin.shell: systemctl enable --now podman.socket
+  when: ansible_distribution_version == "24.04"
 
 - name: Add MSSQL DSN in odbc.ini
   ansible.builtin.blockinfile:
