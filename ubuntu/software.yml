@@ -30,13 +30,9 @@
   delay: 30
   until: result is not failed
 
-- name: Get Ubuntu version
-  ansible.builtin.set_fact:
-    ubuntu_version: "{{ ansible_distribution_version }}"
-
 - name: Download Microsoft repo package
   ansible.builtin.get_url:
-    url: "https://packages.microsoft.com/config/ubuntu/{{ ubuntu_version }}/packages-microsoft-prod.deb"
+    url: "https://packages.microsoft.com/config/ubuntu/{{ ansible_distribution_version }}/packages-microsoft-prod.deb"
     dest: /tmp/packages-microsoft-prod.deb
     mode: '0644'
   register: result
