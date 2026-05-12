@@ -49,6 +49,11 @@
       "C:\Program Files (x86)\clink\clink" set clink.logo none
     dest: C:\Windows\enableClink.cmd
 
+- name: Create a shortcut to ADExplorer
+  community.windows.win_shortcut:
+    src: C:\ProgramData\chocolatey\bin\ADexplorer64.exe
+    dest: C:\ProgramData\Microsoft\Windows\Start Menu\ADExplorer.lnk
+
 - name: Install New Windows Terminal
   ansible.windows.win_powershell:
     script: |
