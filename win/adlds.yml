@@ -74,12 +74,12 @@
         "Name": "ADLDS",
         "Module": "mldap_esm",
         "ConnectionPath": "localhost:389",
-        "AuthorizedID": "CN=MFReader,CN=ADAM Users,CN=Micro Focus,CN=Program Data,DC=local",
+        "AuthorizedID": "Administrator",
         "Password": "{{ myPassword }}",
         "Enabled": true,
         "CacheLimit": 1024,
         "CacheTTL": 600,
-        "Config": "[LDAP]\nbase=CN=Micro Focus,CN=Program Data,DC=local\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nmode=MF-hash\n\n[Trace]\nmodify=y\nrule=y\ngroups=y\nsearch=y\nbind=n\ntrace1=verify:*:debug\ntrace2=auth:*:*:**:debug",
+        "Config": "[LDAP]\nbind=negotiate\nbase=CN=Micro Focus,CN=Program Data,DC=local\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nmode=MF-hash\n\n[Trace]\nmodify=y\nrule=y\ngroups=y\nsearch=y\nbind=n\ntrace1=verify:*:debug\ntrace2=auth:*:*:**:debug",
         "Description": "ADLDS ESM"
       }
     headers:
@@ -99,12 +99,12 @@
         "description": "ADLDS ESM",
         "mfESMModule": "mldap_esm",
         "mfESMConnectionPath": "localhost:389",
-        "mfESMID": "CN=MFReader,CN=ADAM Users,CN=Micro Focus,CN=Program Data,DC=local",
+        "mfESMID": "Administrator",
         "mfESMPwd": "{{ myPassword }}",
         "mfESMStatus": "Enabled",
         "mfESMCacheLimit": 1024,
         "mfESMCacheTTL": 600,
-        "mfConfig": "[LDAP]\nbase=CN=Micro Focus,CN=Program Data,DC=local\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nmode=MF-hash\n\n[Trace]\nmodify=y\nrule=y\ngroups=y\nsearch=y\nbind=n\ntrace1=verify:*:debug\ntrace2=auth:*:*:**:debug"
+        "mfConfig": "[LDAP]\nbind=negotiate\nbase=CN=Micro Focus,CN=Program Data,DC=local\nuser class=microfocus-MFDS-User\nuser container=CN=Enterprise Server Users\ngroup container=CN=Enterprise Server User Groups\nresource container=CN=Enterprise Server Resources\n\n[Operation]\nset login count=yes\nsignon attempts=3\n\n[Verify]\nmode=MF-hash\n\n[Trace]\nmodify=y\nrule=y\ngroups=y\nsearch=y\nbind=n\ntrace1=verify:*:debug\ntrace2=auth:*:*:**:debug"
       }
     headers:
       accept: application/json

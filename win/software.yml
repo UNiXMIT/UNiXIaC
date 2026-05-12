@@ -23,6 +23,7 @@
     - openjdk
     - python
     - kubernetes-cli
+    - visualsyslog
     # - clink-maintained
     # - dotnet
     # - windows-sdk-11-version-22h2-all

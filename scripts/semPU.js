@@ -91,7 +91,7 @@ const newValuesED = {
     productName: `ED${configED.versionNumber}PU${configED.pu}`,
     productNameES: `ES${configED.versionNumber}PU${configED.pu}`,
     installerNameEDVS: `edvs${configED.vsVersion}_${configED.versionNumber}.exe`,
-    installerNameEDnoVS: `edvs_${configED.versionNumber}.exe`,
+    // installerNameEDnoVS: `edvs_${configED.versionNumber}.exe`,
     installerNameEDE: `ede_${configED.versionNumber}.exe`,
     installerNameES: `es_${configED.versionNumber}.exe`,
     S3Prefix: `ED/${configED.versionNumber}/GA/`,
@@ -139,12 +139,13 @@ async function createTemplates(data) {
         if (data.task_params.tags.includes("ed")) {
             data.name = `${wins.toUpperCase()} - ED ${configED.version} PU ${configED.pu}`
             if ( (configED.versionNumber == 110 && configED.pu >= 5) || configED.versionNumber >= 120 ) {
-                newArgs.push(`-e installerNameEDVS=${newValuesED.installerNameEDnoVS}`);
+                // newArgs.push(`-e installerNameEDVS=${newValuesED.installerNameEDnoVS}`);
                 newArgs.push(`-e installerNameEDVSPU=${newValuesED.installerNameEDnoVSPU}`);
             } else {
-                newArgs.push(`-e installerNameEDVS=${newValuesED.installerNameEDVS}`);
+                // newArgs.push(`-e installerNameEDVS=${newValuesED.installerNameEDVS}`);
                 newArgs.push(`-e installerNameEDVSPU=${newValuesED.installerNameEDVSPU}`);
             }
+            newArgs.push(`-e installerNameEDVS=${newValuesED.installerNameEDVS}`);
             newArgs.push(`-e installerNameEDE=${newValuesED.installerNameEDE}`);
             newArgs.push(`-e S3Prefix=${newValuesED.S3Prefix}`);
             newArgs.push(`-e productName=${newValuesED.productName}`);
