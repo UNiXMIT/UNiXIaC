@@ -10,6 +10,7 @@
     - procmon
     - procexp
     - adexplorer
+    - tcpview
     - vcredist140
     - 7zip
     - winscp
@@ -53,6 +54,11 @@
   community.windows.win_shortcut:
     src: C:\ProgramData\chocolatey\bin\ADexplorer64.exe
     dest: C:\ProgramData\Microsoft\Windows\Start Menu\ADExplorer.lnk
+  
+- name: Create a shortcut to TCPView
+  community.windows.win_shortcut:
+    src: C:\ProgramData\chocolatey\bin\tcpview64.exe
+    dest: C:\ProgramData\Microsoft\Windows\Start Menu\TCPView.lnk
 
 - name: Install New Windows Terminal
   ansible.windows.win_powershell:
