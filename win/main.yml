@@ -173,6 +173,21 @@
     win_reboot:
   tags: default
 
+- name: AWS EC2 Management Complete
+  hosts: local
+  gather_facts: no
+  tasks:
+    - name: AWS EC2 instance Configuration Complete
+      amazon.aws.ec2_tag:
+        # aws_profile: '{{ awsProfile }}'
+        region: '{{ awsRegion }}'
+        resource: '{{ item }}'
+        tags:
+          SemStatus: 'Ready'
+        state: present
+      loop: '{{ ec2.instance_ids }}'
+  tags: default
+
 - name: Final tasks
   hosts: local
   gather_facts: no
