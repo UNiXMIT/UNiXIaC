@@ -51,7 +51,6 @@ sudo mkdir -p "$PRODPATH"
 
 # Modify OS Config
 sudo timedatectl set-timezone Europe/London
-sudo sed -i "s/127.0.0.1 localhost/127.0.0.1 localhost support/" /etc/hosts
 echo 'if [[ -t 0 && $- = *i* ]]; then stty -ixon; fi' \
   | tee -a /home/$user/.bashrc > /dev/null
 echo 'export PS1="$PS1\[\e]1337;CurrentDir='\''\$(pwd)'\''\a\]"' \
