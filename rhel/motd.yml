@@ -16,14 +16,14 @@
               . setenvacu.sh (-h for usage)
               Note: Run once before using systemctl services.
                 
-              sudo systemctl (start|stop|restart|status) (acurcl|atw|acuserver|acuxdbcs|boomerang)
+              sudo systemctl (start|stop|restart|status|enable) (acurcl|atw|acuserver|acuxdbcs|boomerang)
 
           MFCOBOL
             Set Environment:
               . setenvmf.sh
               Note: Run once before using systemctl services.
 
-              sudo systemctl (start|stop|restart|status) (escwa|mfds|fileshare|hacloud)
+              sudo systemctl (start|stop|restart|status|enable) (escwa|mfds|fileshare|hacloud)
 
             Install Options:
               -IacceptEULA -ESadminID={{ myUsername }} -il=/home/products/edXXpuXX
