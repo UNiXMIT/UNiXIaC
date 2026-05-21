@@ -25,6 +25,16 @@
           import_tasks: fail.yml
   tags: default
 
+- name: semStatus Update
+  hosts: local
+  gather_facts: no
+  vars:
+    semStatus: Configuring OS
+  tasks:
+  - name: Import semStatus.yml
+    import_tasks: semStatus.yml
+  tags: default
+
 - name: Modify OS Config
   hosts: SEM{{ semaphore_vars.task_details.id }}
   gather_facts: no
@@ -32,6 +42,16 @@
   tasks:
   - name: Import system.yml
     import_tasks: system.yml
+  tags: default
+
+- name: semStatus Update
+  hosts: local
+  gather_facts: no
+  vars:
+    semStatus: Configuring Users
+  tasks:
+  - name: Import semStatus.yml
+    import_tasks: semStatus.yml
   tags: default
 
 - name: Manage Users
@@ -44,6 +64,16 @@
   no_log: True
   tags: default
 
+- name: semStatus Update
+  hosts: local
+  gather_facts: no
+  vars:
+    semStatus: Installing Software
+  tasks:
+  - name: Import semStatus.yml
+    import_tasks: semStatus.yml
+  tags: default
+
 - name: Install Software
   hosts: SEM{{ semaphore_vars.task_details.id }}
   gather_facts: yes
@@ -51,6 +81,16 @@
   tasks:
   - name: Import software.yml
     import_tasks: software.yml
+  tags: default
+
+- name: semStatus Update
+  hosts: local
+  gather_facts: no
+  vars:
+    semStatus: Installing Oracle Client
+  tasks:
+  - name: Import semStatus.yml
+    import_tasks: semStatus.yml
   tags: default
 
 - name: Install Oracle Instant Client
@@ -63,6 +103,16 @@
     when: "'arm' not in ansible_run_tags"
   tags: default
 
+- name: semStatus Update
+  hosts: local
+  gather_facts: no
+  vars:
+    semStatus: Installing DB2 Client
+  tasks:
+  - name: Import semStatus.yml
+    import_tasks: semStatus.yml
+  tags: default
+
 - name: Install DB2 Client
   hosts: SEM{{ semaphore_vars.task_details.id }}
   gather_facts: no
@@ -70,6 +120,16 @@
   - name: Import db2.yml
     import_tasks: db2.yml
     when: "'arm' not in ansible_run_tags"
+  tags: default
+
+- name: semStatus Update
+  hosts: local
+  gather_facts: no
+  vars:
+    semStatus: Installing IBM MQ Client
+  tasks:
+  - name: Import semStatus.yml
+    import_tasks: semStatus.yml
   tags: default
 
 - name: Install IBM MQ Client
@@ -81,6 +141,16 @@
     when: "'arm' not in ansible_run_tags"
   tags: default
 
+- name: semStatus Update
+  hosts: local
+  gather_facts: no
+  vars:
+    semStatus: Creating Files and Directories
+  tasks:
+  - name: Import semStatus.yml
+    import_tasks: semStatus.yml
+  tags: default
+
 - name: Create Support Files and Directories
   hosts: SEM{{ semaphore_vars.task_details.id }}
   gather_facts: no
@@ -90,6 +160,16 @@
     import_tasks: createFilesDir.yml
   tags: default
 
+- name: semStatus Update
+  hosts: local
+  gather_facts: no
+  vars:
+    semStatus: Installing ED
+  tasks:
+  - name: Import semStatus.yml
+    import_tasks: semStatus.yml
+  tags: ed
+
 - name: Install ED
   hosts: SEM{{ semaphore_vars.task_details.id }}
   gather_facts: no
@@ -97,6 +177,16 @@
   - name: Import ed.yml
     import_tasks: ed.yml
   tags: ed
+
+- name: semStatus Update
+  hosts: local
+  gather_facts: no
+  vars:
+    semStatus: OpenLDAP Setup
+  tasks:
+  - name: Import semStatus.yml
+    import_tasks: semStatus.yml
+  tags: openldap
 
 - name: Setup OpenLDAP
   hosts: SEM{{ semaphore_vars.task_details.id }}
@@ -107,6 +197,16 @@
     import_tasks: openldap.yml
   tags: openldap
 
+- name: semStatus Update
+  hosts: local
+  gather_facts: no
+  vars:
+    semStatus: Installing extend
+  tasks:
+  - name: Import semStatus.yml
+    import_tasks: semStatus.yml
+  tags: extend
+
 - name: Install extend
   hosts: SEM{{ semaphore_vars.task_details.id }}
   gather_facts: no
@@ -114,6 +214,16 @@
   - name: Import extend.yml
     import_tasks: extend.yml
   tags: extend
+
+- name: semStatus Update
+  hosts: local
+  gather_facts: no
+  vars:
+    semStatus: Final OS Configuration
+  tasks:
+  - name: Import semStatus.yml
+    import_tasks: semStatus.yml
+  tags: default
 
 - name: Create MOTD
   hosts: SEM{{ semaphore_vars.task_details.id }}
@@ -142,19 +252,14 @@
     reboot:
   tags: default
 
-- name: AWS EC2 Management Complete
+- name: semStatus Update
   hosts: local
   gather_facts: no
+  vars:
+    semStatus: Ready
   tasks:
-    - name: AWS EC2 instance Configuration Complete
-      amazon.aws.ec2_tag:
-        # aws_profile: '{{ awsProfile }}'
-        region: '{{ awsRegion }}'
-        resource: '{{ item }}'
-        tags:
-          SemStatus: 'Ready'
-        state: present
-      loop: '{{ ec2.instance_ids }}'
+  - name: Import semStatus.yml
+    import_tasks: semStatus.yml
   tags: default
 
 - name: Final tasks
