@@ -29,7 +29,7 @@
   hosts: local
   gather_facts: no
   vars:
-    semStatus: Configuring OS
+    semStatus: System Configuration
   tasks:
   - name: Import semStatus.yml
     import_tasks: semStatus.yml
@@ -48,7 +48,7 @@
   hosts: local
   gather_facts: no
   vars:
-    semStatus: Configuring Users
+    semStatus: User Configuration
   tasks:
   - name: Import semStatus.yml
     import_tasks: semStatus.yml
@@ -68,7 +68,7 @@
   hosts: local
   gather_facts: no
   vars:
-    semStatus: Installing Software
+    semStatus: Software Installation
   tasks:
   - name: Import semStatus.yml
     import_tasks: semStatus.yml
@@ -87,7 +87,7 @@
   hosts: local
   gather_facts: no
   vars:
-    semStatus: Installing Oracle Client
+    semStatus: Oracle Client Installation
   tasks:
   - name: Import semStatus.yml
     import_tasks: semStatus.yml
@@ -107,7 +107,7 @@
   hosts: local
   gather_facts: no
   vars:
-    semStatus: Installing DB2 Client
+    semStatus: DB2 Client Installation
   tasks:
   - name: Import semStatus.yml
     import_tasks: semStatus.yml
@@ -126,7 +126,7 @@
   hosts: local
   gather_facts: no
   vars:
-    semStatus: Installing IBM MQ Client
+    semStatus: MQ Client Installation
   tasks:
   - name: Import semStatus.yml
     import_tasks: semStatus.yml
@@ -145,7 +145,7 @@
   hosts: local
   gather_facts: no
   vars:
-    semStatus: Creating Files and Directories
+    semStatus: Creating Filesystem Structure
   tasks:
   - name: Import semStatus.yml
     import_tasks: semStatus.yml
@@ -164,7 +164,7 @@
   hosts: local
   gather_facts: no
   vars:
-    semStatus: Installing ED
+    semStatus: ED Installation
   tasks:
   - name: Import semStatus.yml
     import_tasks: semStatus.yml
@@ -182,7 +182,7 @@
   hosts: local
   gather_facts: no
   vars:
-    semStatus: OpenLDAP Setup
+    semStatus: OpenLDAP Installation
   tasks:
   - name: Import semStatus.yml
     import_tasks: semStatus.yml
@@ -201,7 +201,7 @@
   hosts: local
   gather_facts: no
   vars:
-    semStatus: Installing extend
+    semStatus: extend Installation
   tasks:
   - name: Import semStatus.yml
     import_tasks: semStatus.yml
@@ -219,7 +219,7 @@
   hosts: local
   gather_facts: no
   vars:
-    semStatus: Final OS Configuration
+    semStatus: Finalizing System Configuration
   tasks:
   - name: Import semStatus.yml
     import_tasks: semStatus.yml
@@ -243,6 +243,16 @@
     import_tasks: cron.yml
   tags: default
 
+- name: semStatus Update
+  hosts: local
+  gather_facts: no
+  vars:
+    semStatus: Rebooting System
+  tasks:
+  - name: Import semStatus.yml
+    import_tasks: semStatus.yml
+  tags: default
+
 - name: Reboot EC2 Instance
   hosts: SEM{{ semaphore_vars.task_details.id }}
   gather_facts: no
@@ -256,7 +266,7 @@
   hosts: local
   gather_facts: no
   vars:
-    semStatus: Ready
+    semStatus: READY
   tasks:
   - name: Import semStatus.yml
     import_tasks: semStatus.yml

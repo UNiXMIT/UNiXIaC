@@ -45,7 +45,7 @@
       Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
       Owner: '{{ semaphore_vars.task_details.username|upper }}'
       OS: '{{ imageName }}'
-      SemStatus: 'Provisoning'
+      SemStatus: 'Provisioning'
     state: present
   loop: '{{ ec2.instance_ids }}'
   when: "'arm' not in ansible_run_tags"
@@ -59,7 +59,7 @@
       Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}-ARM'
       Owner: '{{ semaphore_vars.task_details.username|upper }}'
       OS: '{{ imageName }}'
-      SemStatus: 'Provisoning'
+      SemStatus: 'Provisioning'
     state: present
   loop: '{{ ec2.instance_ids }}'
   when: "'amd' not in ansible_run_tags"
