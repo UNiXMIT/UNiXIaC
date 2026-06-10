@@ -155,6 +155,32 @@ To add your external/public IP address to the security group:
 
 ![8](images/8.png)
 
+### Finding your Public IP Address
+To find your public IP address:
+
+1. In a command prompt, execute the following command:
+    ```
+    ssh sshmyip.com
+    ```
+2. You should see your IP address returned in the format:
+    ```
+    >ssh sshmyip.com
+    {
+    "comment": "##     Your IP Address is xxx.xxx.xxx.xxx (50847)     ##",
+    "family": "ipv4",
+    "ip": "xxx.xxx.xxx.xxx",
+    "port": "50847",
+    "protocol": "ssh",
+    "version": "v1.3.0",
+    "website": "https://github.com/packetsar/checkmyip",
+    "sponsor": "Sponsored by ConvergeOne, https://www.convergeone.com/"
+    }
+    Connection to sshmyip.com closed by remote host.
+    Connection to sshmyip.com closed.
+    ```
+
+> **NOTE:** HTTP(S) traffic on Rocket laptops is routed through a proxy, even when the device is not connected to the VPN. As a result, if you check your public IP address using a website in a browser, the IP address displayed may differ from the one used for SSH or RDP connections.
+
 ### Task fails with error 'Not authorized for images'
 If a task fails with the following error, the AWS EC2 instance AMI number needs updating because Amazon has changed it. Contact an admin to have the AMI updated.  
 
