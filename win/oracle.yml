@@ -207,13 +207,16 @@
     - 'C:\instantClient32\{{ baseDir32 }}'
     - 'C:\instantClient32\{{ baseDir32 }}\sdk'
 
-- name: Oracle Pro*COBOL orasql8.dll workaround for 32bit Instant Client
+# Load error: file 'ORASQL8'
+# https://docs.oracle.com/html/A95495_01/toc.htm?utm_source=chatgpt.com
+
+- name: Oracle Pro*COBOL orasql8.dll workaround for 32bit Instant Client - https://community.rocketsoftware.com/rocket-visual-cobol-28/errors-reported-when-compiling-running-pro-cobol-cobsql-programs-within-visual-studio-ide-20946
   ansible.windows.win_copy:
     src: C:\instantClient32\{{ baseDir32 }}\orasql.dll
     dest: C:\instantClient32\{{ baseDir32 }}\orasql8.dll
     remote_src: true
 
-- name: Oracle Pro*COBOL orasql8.dll workaround for 64bit Instant Client
+- name: Oracle Pro*COBOL orasql8.dll workaround for 64bit Instant Client - https://community.rocketsoftware.com/rocket-visual-cobol-28/errors-reported-when-compiling-running-pro-cobol-cobsql-programs-within-visual-studio-ide-20946
   ansible.windows.win_copy:
     src: C:\instantClient64\{{ baseDir64 }}\orasql.dll
     dest: C:\instantClient64\{{ baseDir64 }}\orasql8.dll
