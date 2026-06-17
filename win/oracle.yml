@@ -211,8 +211,10 @@
   ansible.windows.win_copy:
     src: C:\instantClient32\{{ baseDir32 }}\orasql.dll
     dest: C:\instantClient32\{{ baseDir32 }}\orasql8.dll
+    remote_src: true
 
 - name: Oracle Pro*COBOL orasql8.dll workaround for 64bit Instant Client
   ansible.windows.win_copy:
     src: C:\instantClient64\{{ baseDir64 }}\orasql.dll
     dest: C:\instantClient64\{{ baseDir64 }}\orasql8.dll
+    remote_src: true
