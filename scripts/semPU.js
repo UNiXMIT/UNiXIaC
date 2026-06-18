@@ -112,7 +112,7 @@ const newValuesACU = {
     productName: `extend${configACU.versionNumber}`,
     installPath32: `C:\\Program Files (x86)\\${configACU.company}\\extend ${configACU.version}`,
     installPath64: `C:\\Program Files\\${configACU.company}\\extend ${configACU.version}`,
-    installPath: `/home/products/acu${configACU.versionNumber}shx64`,
+    installPath: `/home/products/acu${configACU.versionNumber}shx64/`,
     installerNameWIN: `extend(R) Version ${configACU.version} x64.msi`,
     installerNameLINUX: `setup_acucob${configACU.versionNumber}pmk31shACU`,
     S3Prefix: `AcuCOBOL/${configACU.versionNumber}/GA/`,
@@ -123,7 +123,7 @@ const newValuesACUMF = {
     productName: `extend${configACU.majorVersion.replace(/\./g, "")}pu${configACU.pu}`,
     installPath32: `C:\\Program Files (x86)\\${configACU.companyMF}\\extend ${configACU.majorVersion}`,
     installPath64: `C:\\Program Files\\${configACU.companyMF}\\extend ${configACU.majorVersion}`,
-    installPath: `/home/products/acu${configACU.majorVersion.replace(/\./g, "")}shx64pu${configACU.pu}`,
+    installPath: `/home/products/acu${configACU.majorVersion.replace(/\./g, "")}shx64pu${configACU.pu}/`,
     installerNameWIN: `extend(R) Version ${configACU.majorVersion} x64.msi`,
     installerNameLINUX: `setup_acucob${configACU.majorVersion.replace(/\./g, "")}pu${configACU.pu}pmk59shACU`,
     S3Prefix: `AcuCOBOL/${configACU.majorVersion.replace(/\./g, "")}/GA/`,
@@ -238,7 +238,7 @@ async function createTemplates(data) {
             }
             newArgs.push(`-e installPath=${newValuesACUMF.installPath}`);
             newArgs.push(`-e installerName=${newValuesACUMF.installerNameLINUX}`);
-            newArgs.push(`-e S3PrefixPU=${newValuesACUMF.S3PrefixPU}`);
+            newArgs.push(`-e S3Prefix=${newValuesACUMF.S3PrefixPU}`);
             newArgs.push(`-e productName=${newValuesACUMF.productName}`);
         } else {
             if (rhel) {
@@ -250,7 +250,7 @@ async function createTemplates(data) {
             }
             newArgs.push(`-e installPath=${newValuesACU.installPath}`);
             newArgs.push(`-e installerName=${newValuesACU.installerNameLINUX}`);
-            newArgs.push(`-e S3PrefixPU=${newValuesACU.S3PrefixPU}`);
+            newArgs.push(`-e S3Prefix=${newValuesACU.S3PrefixPU}`);
             newArgs.push(`-e productName=${newValuesACU.productName}`);
         }
         newArgs.push(`-e CODE=${configACU.code}`);
