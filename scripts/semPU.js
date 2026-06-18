@@ -125,7 +125,7 @@ const newValuesACUMF = {
     installPath64: `C:\\Program Files\\${configACU.companyMF}\\extend ${configACU.majorVersion}`,
     installPath: `/home/products/acu${configACU.majorVersion.replace(/\./g, "")}shx64pu${configACU.pu}`,
     installerNameWIN: `extend(R) Version ${configACU.majorVersion} x64.msi`,
-    installerNameLINUX: `setup_acucob${configACU.majorVersion.replace(/\./g, "")}pmk59shACU`,
+    installerNameLINUX: `setup_acucob${configACU.majorVersion.replace(/\./g, "")}pu${configACU.pu}pmk59shACU`,
     S3Prefix: `AcuCOBOL/${configACU.majorVersion.replace(/\./g, "")}/GA/`,
     S3PrefixPU: `AcuCOBOL/${configACU.majorVersion.replace(/\./g, "")}/PU${configACU.pu}/`
 };
