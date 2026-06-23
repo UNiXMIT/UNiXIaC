@@ -176,7 +176,7 @@
 - name: Enable ESMAC UI
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" --UI-on'
-  when: edVer | int >= 70
+  when: (edVer | int >= 70) and (edVer | int <= 110)
   tags: es
 
 - name: Enable ESMAC Listen All
