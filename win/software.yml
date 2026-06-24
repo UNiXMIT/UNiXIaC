@@ -2,6 +2,11 @@
   set_fact:
     productName: 
 
+- name: Install Chocolatey
+  win_chocolatey:
+    name: chocolatey
+    state: present
+
 - name: Package Installation
   win_chocolatey:
     name: 
