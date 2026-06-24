@@ -7,6 +7,11 @@
     name: chocolatey
     state: present
 
+- name: Add Chocolatey bin to PATH and set ChocolateyInstall environment variable
+  ansible.windows.win_shell: |
+    $env:ChocolateyInstall = "$env:ProgramData\chocolatey"
+    $env:Path += ";$env:ProgramData\chocolatey\bin"
+
 - name: Package Installation
   win_chocolatey:
     name: 
