@@ -191,6 +191,16 @@
   delegate_to: localhost
   tags: edpu
 
+- name: Configure Safe Mode boot
+  win_command: 'bcdedit /set {default} safeboot network'
+  tags: ed
+
+- name: Reboot into Safe Mode
+  win_reboot:
+    pre_reboot_delay: 5
+    post_reboot_delay: 60
+  tags: ed
+
 - name: Install ED 
   block:
     - name: Install {{ installerNameEDVS }}
@@ -375,4 +385,14 @@
     start_mode: auto
     state: started
   when: edVer | int >= 90
+  tags: ed
+
+- name: Disable Safe Mode boot (always run)
+  win_command: 'bcdedit /deletevalue {default} safeboot'
+  tags: ed
+
+- name: Reboot to normal mode
+  win_reboot:
+    pre_reboot_delay: 5
+    post_reboot_delay: 30
   tags: ed
