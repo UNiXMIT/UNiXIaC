@@ -52,6 +52,10 @@
     script: |
       powershell -Command "Get-Service mf_CCITCP2, escwa | Where-Object Status -eq Stopped | Start-Service"
     chdir: C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin
+  
+- name: Pause for 10 seconds
+  ansible.builtin.pause:
+    seconds: 10
 
 - name: ESCWA Login
   ansible.windows.win_uri:
