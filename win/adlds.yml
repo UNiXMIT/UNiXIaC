@@ -47,6 +47,12 @@
     script: |
       Set-ADAccountPassword -Server localhost -Identity 'CN=MFReader,CN=ADAM Users,CN=Micro Focus,CN=Program Data,DC=local' -NewPassword (ConvertTo-SecureString -AsPlainText '{{ myPassword }}' -Force) -Reset 
 
+- name: Ensure ESCWA and MFDS services are running
+  ansible.windows.win_powershell:
+    script: |
+      powershell -Command "Get-Service mf_CCITCP2, escwa | Where-Object Status -eq Stopped | Start-Service"
+    chdir: C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin
+
 - name: ESCWA Login
   ansible.windows.win_uri:
     url: http://localhost:10086/logon

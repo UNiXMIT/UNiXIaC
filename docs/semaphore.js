@@ -8,7 +8,7 @@ let observer = new MutationObserver(mutations => {
     let forkIcons = document.querySelectorAll('.mdi-source-fork');
     forkIcons.forEach(icon => {
         if (icon.parentNode && icon.parentNode.tagName === 'SPAN') {
-            icon.parentNode.remove();;
+            icon.parentNode.remove();
         }
     });
     let taskMessage = document.querySelectorAll('.task-log-view__message');
