@@ -3,8 +3,8 @@
   gather_facts: yes
   tasks:
   - name: Display Semaphore Variables
-  ansible.builtin.debug:
-    msg: "{{ semaphore_vars | to_nice_json }}"
+    ansible.builtin.debug:
+      msg: "{{ semaphore_vars | to_nice_json }}"
   tags: default
 
 - name: AWS Initial Configuration
