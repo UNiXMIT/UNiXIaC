@@ -1,6 +1,5 @@
-- name: Output Semaphore Variables
-  hosts: local
-  debug:
+- name: Display Semaphore Variables
+  ansible.builtin.debug:
     msg: "{{ semaphore_vars | to_nice_json }}"
   tags: default
 
