@@ -173,7 +173,6 @@
       Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ productName }}'
       EDVS: '{{ installerNameEDVS }}'
       EDE: '{{ installerNameEDE }}'
-      BUILD: '{{ buildNumber }}'
     state: present
   loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
   delegate_to: localhost
