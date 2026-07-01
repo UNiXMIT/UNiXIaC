@@ -1,3 +1,9 @@
+- name: Output Semaphore Variables
+  hosts: local
+  debug:
+    msg: "{{ semaphore_vars | to_nice_json }}"
+  tags: default
+
 - name: AWS Initial Configuration
   hosts: local
   gather_facts: no
