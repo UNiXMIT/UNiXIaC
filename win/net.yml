@@ -24,5 +24,17 @@
       - dotnet-8.0-sdk
     state: present
   ignore_errors: true
-  when: edVer | int >= 100
+  when: 
+    - edVer | int >= 100
+    - edVer | int <= 110
+  tags: [ ed, es ]
+
+- name: .NET 10.0 Installation
+  win_chocolatey:
+    name: 
+      - dotnet-10.0-sdk
+    state: present
+  ignore_errors: true
+  when: 
+    - edVer | int >= 120
   tags: [ ed, es ]
