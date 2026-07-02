@@ -16,6 +16,7 @@
   ansible.windows.win_powershell:
     script: |
       $o = new-object -com shell.application
+      $o.Namespace('C:\').Self.InvokeVerb("pintohome")
       $o.Namespace('C:\temp').Self.InvokeVerb("pintohome")
       $o.Namespace('C:\AcuSamples').Self.InvokeVerb("pintohome")
       $o.Namespace('C:\AcuScripts').Self.InvokeVerb("pintohome")
