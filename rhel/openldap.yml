@@ -112,7 +112,9 @@
     chmod +x /openldap/newpasswd.sh
 
 - name: Start ESCWA
-  shell: tmux new -d -s escwa ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/escwa"
+  shell: |
+    . /home/{{ myUsername }}/MFSupport/MFScripts/setenvmf.sh 1
+    systemctl start escwa
 
 - name: Pause for 10 seconds
   ansible.builtin.pause:
