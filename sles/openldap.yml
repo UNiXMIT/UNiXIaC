@@ -20,7 +20,10 @@
     job: "/usr/bin/sudo /usr/bin/podman start openldap"
 
 - name: Start ESCWA
-  shell: tmux new -d -s escwa ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/escwa"
+  shell: |
+    . /home/{{ myUsername }}/MFSupport/MFScripts/setenvmf.sh 1
+    systemctl start escwa
+  become: yes
 
 - name: Pause for 10 seconds
   ansible.builtin.pause:

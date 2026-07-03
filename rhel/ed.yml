@@ -119,8 +119,10 @@
   when: edVer | int >= 110
   become: yes
 
-- name: Start MFDS
-  shell: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64"
+- name: Start mfds
+  shell: |
+    . /home/{{ myUsername }}/MFSupport/MFScripts/setenvmf.sh 1
+    systemctl start mfds
   become: yes
 
 - name: Pause for 10 seconds

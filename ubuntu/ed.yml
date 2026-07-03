@@ -108,7 +108,9 @@
 - name: Start MFDS
   environment:
     TERM: xterm
-  shell: tmux new -d -s mfds ". {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64"
+  shell:  |
+    . /home/{{ myUsername }}/MFSupport/MFScripts/setenvmf.sh 1
+    systemctl start mfds
   become: yes
 
 - name: Pause for 10 seconds
