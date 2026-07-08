@@ -232,9 +232,23 @@
     path: C:\MFSamples\JCL
     state: directory
 
+- name: Create JCL Cache
+  win_file:
+    path: C:\MFSamples\JCL\cache
+    state: directory
+
 - name: Download JCL.xml
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.xml
+    dest: C:\MFSamples\JCL
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download JCL.json
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.json
     dest: C:\MFSamples\JCL
   register: result
   retries: 5
@@ -305,9 +319,23 @@
     path: C:\MFSamples\CICS\catalog
     state: directory
 
+- name: Create CICS Cache
+  win_file:
+    path: C:\MFSamples\CICS\cache
+    state: directory
+
 - name: Download CICS.xml
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CICS.xml
+    dest: C:\MFSamples\CICS
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download CICS.json
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CICS.json
     dest: C:\MFSamples\CICS
   register: result
   retries: 5
