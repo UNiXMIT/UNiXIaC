@@ -359,6 +359,31 @@
     remote_src: true
   tags: ed
 
+- name: Modify mf-server.dat
+  ansible.windows.win_blockinfile:
+    path: C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mf-server.dat
+    block: |
+      [JCL/SSL/passphrases]
+      certificate=""
+      keyfile=""
+
+      [Web Services and J2EE/SSL/passphrases]
+      certificate=""
+      keyfile=""
+
+      [Web/SSL/passphrases]
+      certificate=""
+      keyfile=""
+
+      [TN3270/SSL/passphrases]
+      certificate=""
+      keyfile=""
+
+      [RFA/SSL/passphrases]
+      certificate=""
+      keyfile=""
+  tags: ed
+
 - name: Stop ESCWA Service
   ansible.windows.win_service:
     name: escwa

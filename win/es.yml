@@ -225,28 +225,28 @@
 
 - name: Import JCL Region XML
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml D SYSAD SYSAD'
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml D SYSAD SYSAD'
     chdir: C:\MFSamples\JCL
   when: edVer | int <= 90
   tags: es
 
 - name: Import JCL Region JSON
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.json D SYSAD SYSAD'
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.json D SYSAD SYSAD'
     chdir: C:\MFSamples\JCL
   when: edVer | int >= 100
   tags: es
 
 - name: Import CICS Region XML
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\CICS\CICS.xml D SYSAD SYSAD'
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\CICS\CICS.xml D SYSAD SYSAD'
     chdir: C:\MFSamples\CICS
   when: edVer | int <= 90
   tags: es
 
 - name: Import CICS Region JSON
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\CICS\CICS.json D SYSAD SYSAD'
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\CICS\CICS.json D SYSAD SYSAD'
     chdir: C:\MFSamples\CICS
   when: edVer | int >= 100
   tags: es
@@ -256,6 +256,31 @@
     src: C:\Program Files (x86)\Micro Focus\Enterprise Server\etc\cas\dfhdrdat
     dest: C:\MFSamples\CICS\system\
     remote_src: true
+  tags: es
+
+- name: Modify mf-server.dat
+  ansible.windows.win_blockinfile:
+    path: C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mf-server.dat
+    block: |
+      [JCL/SSL/passphrases]
+      certificate=""
+      keyfile=""
+
+      [Web Services and J2EE/SSL/passphrases]
+      certificate=""
+      keyfile=""
+
+      [Web/SSL/passphrases]
+      certificate=""
+      keyfile=""
+
+      [TN3270/SSL/passphrases]
+      certificate=""
+      keyfile=""
+
+      [RFA/SSL/passphrases]
+      certificate=""
+      keyfile=""
   tags: es
 
 - name: Stop ESCWA Service

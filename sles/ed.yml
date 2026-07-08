@@ -157,6 +157,30 @@
     dest: /home/{{ myUsername }}/MFSupport/MFSamples/CICS/system/dfhdrdat
     mode: '0775'
     remote_src: yes
+
+- name: Modify mf-server.dat
+  ansible.builtin.blockinfile:
+    path: '{{ installPath }}/etc/mf-server.dat'
+    block: |
+      [JCL/SSL/passphrases]
+      certificate=""
+      keyfile=""
+
+      [Web Services and J2EE/SSL/passphrases]
+      certificate=""
+      keyfile=""
+
+      [Web/SSL/passphrases]
+      certificate=""
+      keyfile=""
+
+      [TN3270/SSL/passphrases]
+      certificate=""
+      keyfile=""
+
+      [RFA/SSL/passphrases]
+      certificate=""
+      keyfile=""
   
 - name: Cleanup
   ansible.builtin.file:
