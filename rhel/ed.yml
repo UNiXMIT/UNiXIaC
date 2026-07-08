@@ -178,11 +178,7 @@
     
     - name: Print JCL.json Content b64decode
       ansible.builtin.debug:
-        msg: "{{ jcl_json.content | b64decode }}"
-
-    - name: Print JCL.json Content
-      ansible.builtin.debug:
-        msg: "{{ jcl_json.content }}"
+        msg: "{{ jcl_json.content | b64decode | to_json }}"
     
     - name: Import JCL Region JSON
       ansible.builtin.uri:
@@ -229,7 +225,7 @@
         url: http://localhost:10086/native/v1/import/127.0.0.1/86
         method: POST
         body_format: json
-        body: "{{ jcl_json.content | b64decode }}"
+        body: "{{ cics_json.content | b64decode | to_json }}"
         headers:
           accept: application/json
           X-Requested-With: API
