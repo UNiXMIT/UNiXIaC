@@ -175,6 +175,7 @@
       ansible.builtin.uri:
         url: http://localhost:10086/native/v1/import/127.0.0.1/86
         method: POST
+        body_format: json
         src: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.json
         remote_src: true
         headers:
