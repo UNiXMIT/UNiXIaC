@@ -476,10 +476,26 @@
     state: directory
     mode: '0775'
 
+- name: Create cache
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/JCL/cache"
+    state: directory
+    mode: '0775'
+
 - name: Download JCL.xml
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
     dest: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download JCL.json
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.json
+    dest: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.json
     mode: '0775'
   register: result
   retries: 5
@@ -536,10 +552,26 @@
     state: directory
     mode: '0775'
 
+- name: Create cache
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/CICS/cache"
+    state: directory
+    mode: '0775'
+
 - name: Download CICS.xml
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml
     dest: /home/{{ myUsername }}/MFSupport/MFSamples/CICS/CICS.xml
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download CICS.json
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.json
+    dest: /home/{{ myUsername }}/MFSupport/MFSamples/CICS/CICS.json
     mode: '0775'
   register: result
   retries: 5
