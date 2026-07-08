@@ -360,7 +360,7 @@
   tags: ed
 
 - name: Modify mf-server.dat
-  ansible.windows.win_lineinfile:
+  community.windows.win_lineinfile:
     path: C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mf-server.dat
     line: "{{ item }}"
     insertafter: EOF
