@@ -175,10 +175,14 @@
       ansible.builtin.slurp:
         src: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.json
       register: jcl_json
+
+    - name: Check decoded JSON type
+      ansible.builtin.debug:
+        msg: "{{ (jcl_json.content | b64decode | from_json ) | type_debug }}"
     
     - name: Check decoded JSON type
       ansible.builtin.debug:
-        msg: "{{ (jcl_json.content | b64decode | from_json) | type_debug }}"
+        msg: "{{ (jcl_json.content | b64decode | from_json | from_json ) | type_debug }}"
 
     - name: Check decoded JSON type
       ansible.builtin.debug:
@@ -186,7 +190,7 @@
 
     - name: Check decoded JSON type
       ansible.builtin.debug:
-        msg: "{{ (jcl_json.content | b64decode | to_json) | type_debug }}"
+        msg: "{{ (jcl_json.content | b64decode | to_json ) | type_debug }}"
     
     - name: Import JCL Region JSON
       ansible.builtin.uri:
