@@ -332,9 +332,39 @@
   tags: ed
 
 - name: Import JCL Region JSON
-  win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.json D SYSAD SYSAD'
-    chdir: C:\MFSamples\JCL
+  block:
+    - name: ESCWA Login
+      ansible.windows.win_uri:
+        url: http://localhost:10086/logon
+        method: POST
+        content_type: application/json
+        body: |
+          {
+            "mfUser": "SYSAD",
+            "mfPassword": "SYSAD"
+          }
+        headers:
+          accept: application/json
+          X-Requested-With: API
+          Origin: http://localhost:10086
+      register: loginResponse
+    
+    - name: Read JCL.json File
+      ansible.windows.slurp:
+        src: C:\MFSamples\JCL\JCL.json
+      register: jcl_json
+    
+    - name: Import JCL Region JSON
+      ansible.windows.win_uri:
+        url: http://localhost:10086/native/v1/import/127.0.0.1/86
+        method: POST
+        content_type: application/json
+        body: "{{ jcl_json.content | b64decode }}"
+        headers:
+          accept: application/json
+          X-Requested-With: API
+          Cookie: "{{ loginResponse.set_cookie | default('') }}"
+          Origin: http://localhost:10086
   when: edVer | int >= 100
   tags: ed
 
@@ -346,9 +376,39 @@
   tags: ed
 
 - name: Import CICS Region JSON
-  win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\CICS\CICS.json D SYSAD SYSAD'
-    chdir: C:\MFSamples\CICS
+  block:
+    - name: ESCWA Login
+      ansible.windows.win_uri:
+        url: http://localhost:10086/logon
+        method: POST
+        content_type: application/json
+        body: |
+          {
+            "mfUser": "SYSAD",
+            "mfPassword": "SYSAD"
+          }
+        headers:
+          accept: application/json
+          X-Requested-With: API
+          Origin: http://localhost:10086
+      register: loginResponse
+    
+    - name: Read CICS.json File
+      ansible.windows.slurp:
+        src: C:\MFSamples\CICS\CICS.json
+      register: cics_json
+    
+    - name: Import CICS Region JSON
+      ansible.windows.win_uri:
+        url: http://localhost:10086/native/v1/import/127.0.0.1/86
+        method: POST
+        content_type: application/json
+        body: "{{ cics_json.content | b64decode }}"
+        headers:
+          accept: application/json
+          X-Requested-With: API
+          Cookie: "{{ loginResponse.set_cookie | default('') }}"
+          Origin: http://localhost:10086
   when: edVer | int >= 100
   tags: ed
 
