@@ -179,13 +179,21 @@
     - name: Check decoded JSON type
       ansible.builtin.debug:
         msg: "{{ (jcl_json.content | b64decode | from_json) | type_debug }}"
+
+    - name: Check decoded JSON type
+      ansible.builtin.debug:
+        msg: "{{ (jcl_json.content | b64decode ) | type_debug }}"
+
+    - name: Check decoded JSON type
+      ansible.builtin.debug:
+        msg: "{{ (jcl_json.content | b64decode | to_json) | type_debug }}"
     
     - name: Import JCL Region JSON
       ansible.builtin.uri:
         url: http://localhost:10086/native/v1/import/127.0.0.1/86
         method: POST
         body_format: json
-        body: "{{ jcl_json.content | b64decode | from_json }}"
+        body: "{{ jcl_json.content | b64decode | from_json | from_json }}"
         headers:
           accept: application/json
           X-Requested-With: API
