@@ -155,362 +155,55 @@
 
 - name: Import JCL Region JSON
   block:
-    - name: ESCWA Login
-      ansible.builtin.uri:
-        url: http://localhost:10086/logon
-        method: POST
-        body_format: json
-        body: |
-          {
-            "mfUser": "SYSAD",
-            "mfPassword": "SYSAD"
-          }
-        headers:
-          accept: application/json
-          X-Requested-With: API
-          Origin: http://localhost:10086
-      register: loginResponse
+    # - name: ESCWA Login
+    #   ansible.builtin.uri:
+    #     url: http://localhost:10086/logon
+    #     method: POST
+    #     body_format: json
+    #     body: |
+    #       {
+    #         "mfUser": "SYSAD",
+    #         "mfPassword": "SYSAD"
+    #       }
+    #     headers:
+    #       accept: application/json
+    #       X-Requested-With: API
+    #       Origin: http://localhost:10086
+    #   register: loginResponse
     
-    - name: Import JCL Region JSON
-      ansible.builtin.uri:
-        url: http://localhost:10086/native/v1/import/127.0.0.1/86
-        method: POST
-        body_format: json
-        body: |
-          {
-            "ESCWAVersion": "8.0.10",
-            "mfDirectoryServerVersion": "2.0.26",
-            "mfServerList": [
-              {
-                "CN": "JCL",
-                "mfUID": "990d111e-95fa-45b6-b920-9bf27782115d",
-                "description": "Template region for JCL applications",
-                "mfError": "OK",
-                "mfCAS64Bit": 1,
-                "mfConfig": "[ES-Environment]\nMFROOT=/home/support/MFSupport/MFSamples/JCL\nES_DFS_STR_CACHEDIR=$MFROOT/cache",
-                "mfCASAuxiliaryTrace": 0,
-                "mfCASBatchEnabled": 1,
-                "mfCASCICSEZASOKET": 0,
-                "mfCASCICSPersonality": 1,
-                "mfCASColdStartTrace": 1,
-                "mfCASConsoleLogSize": 0,
-                "mfCASDumpOnAbend": 1,
-                "mfCASEventLogError": 0,
-                "mfCASEventLogInformational": 0,
-                "mfCASEventLogSevere": 0,
-                "mfCASEventLogWarning": 0,
-                "mfCASHSFCreateJCLFileRecords": 0,
-                "mfCASHSFEnabled": 0,
-                "mfCASHSFMaxDisplayRecords": 256,
-                "mfCASHSFMaxFileSize": 0,
-                "mfCASHSFWriteToDisk": 0,
-                "mfCASIMSCodesetBias": "A",
-                "mfCASIMSDBDataCompression": 1,
-                "mfCASIMSDBDumpOnDeadlock": 0,
-                "mfCASIMSDBDumpOnLockTimeout": 0,
-                "mfCASIMSDBIRLMLocking": 0,
-                "mfCASIMSDBKeyCompression": 1,
-                "mfCASIMSDBLockedResourceTimeout": 30,
-                "mfCASIMSDBRollforwardRecovery": 0,
-                "mfCASIMSDefaultMQName": 1,
-                "mfCASIMSEnabled": 0,
-                "mfCASIMSKeypointFrequency": 64,
-                "mfCASIMSMFSAttributeBias": "B",
-                "mfCASIMSMFSNullChar": "x'1A'",
-                "mfCASIMSTMMQBufferCount": 2,
-                "mfCASIMSTMMQColdStart": "N",
-                "mfCASIMSTMMQMaxBlocks": 32,
-                "mfCASIMSTMMQPersistColdStart": 0,
-                "mfCASIMSTMTransThreshold": 0,
-                "mfCASIMSTrailingSpace": 1,
-                "mfCASJCLALLOCLOC": "$MFROOT/dataset",
-                "mfCASJCLPATH": "$MFROOT/loadlib",
-                "mfCASJCLSYSPROCLIB": "SYS1.PROCLIB",
-                "mfCASLocalTraceSize": 341,
-                "mfCASMFSYSCAT": "$MFROOT/catalog/catalog.dat",
-                "mfCASMTOEnabled": 1,
-                "mfCASPerformanceMonitor": 0,
-                "mfCASPLIEnabled": 1,
-                "mfCASPurgeLogs": 0,
-                "mfCASRemoteDebug": 1,
-                "mfCASShMemCushion": 32,
-                "mfCASShMemPages": 512,
-                "mfCASShowConsole": 0,
-                "mfCASSICount": 2,
-                "mfCASStartOnSystemStart": 0,
-                "mfCASTraceFlagsApplication": 1,
-                "mfCASTraceFlagsApplicationContainer": 0,
-                "mfCASTraceFlagsCommunications": 0,
-                "mfCASTraceFlagsExit": 0,
-                "mfCASTraceFlagsRequestHandler": 0,
-                "mfCASTraceFlagsRMInterface": 0,
-                "mfCASTraceFlagsStorageControl": 0,
-                "mfCASTraceFlagsTableManagement": 0,
-                "mfCASTraceFlagsTaskControl": 1,
-                "mfCASTraceMaxSize": 0,
-                "mfCASTraceTableSize": 341,
-                "mfESEnableNotRespondingScript": 0,
-                "mfESEnableStartScript": 0,
-                "mfESEnableStopScript": 0,
-                "mfESRetries": 1,
-                "mfMarkedForDelete": 0,
-                "mfMQLEnabled": 0,
-                "mfServerLocal": "N",
-                "mfServerStatus": "Stopped",
-                "mfServerType": "MFES",
-                "mfVerifyStatus": "Not Run",
-                "mfCommsProcessList": [
-                  {
-                    "CN": "JCL-----1",
-                    "mfUID": "1e3d67ec-610c-4f2f-a501-d47ec267fac9",
-                    "mfConfig": "[soap]\nregion=JCL\n",
-                    "mfAutoStart": 1,
-                    "mfEndpoint": "tcp:0.0.0.0:0",
-                    "mfEndpointMulti": [
-                      "tcp:0.0.0.0:0"
-                    ],
-                    "mfInstance": 1,
-                    "mfListenerCount": 4,
-                    "mfRequestedEndpoint": "tcp:*:*",
-                    "mfRequestedEndpointMulti": [
-                      "tcp:*:*"
-                    ],
-                    "mfServerStatus": "Stopped",
-                    "mfServerUID": "990d111e-95fa-45b6-b920-9bf27782115d",
-                    "mfSSLAllowCertCNIPMismatch": "No",
-                    "mfSSLAllowNULLCipher": "No",
-                    "mfSSLCheckCertPublishersRevocation": "No",
-                    "mfSSLCheckCertRevocation": "Yes",
-                    "mfSSLClientOption": "All",
-                    "mfSSLHonorServerCipherList": "Yes",
-                    "mfSSLMaxKeyLength": 1024,
-                    "mfTLSDHMinimumGroupSize": 0,
-                    "mfTLSMiddleBoxCompatibilityMode": "No",
-                    "mfListenerList": [
-                      {
-                        "CN": "TN3270",
-                        "mfUID": "7a208d4c-24a9-4f29-9f9c-4ca0e7dae00e",
-                        "description": "Default TN3270 listener",
-                        "mfConnector": "tn3270",
-                        "mfEndpoint": "tcp:0.0.0.0:0",
-                        "mfEndpointMulti": [
-                          "tcp:0.0.0.0:0"
-                        ],
-                        "mfListenerStatus": "Stopped",
-                        "mfParentUID": "1e3d67ec-610c-4f2f-a501-d47ec267fac9",
-                        "mfRequestedEndpoint": "tcp:*:55551",
-                        "mfRequestedEndpointMulti": [
-                          "tcp:*:55551"
-                        ],
-                        "mfServerUID": "990d111e-95fa-45b6-b920-9bf27782115d",
-                        "mfSSLAllowCertCNIPMismatch": "No",
-                        "mfSSLAllowNULLCipher": "No",
-                        "mfSSLCheckCertPublishersRevocation": "No",
-                        "mfSSLCheckCertRevocation": "No",
-                        "mfSSLClientOption": "All",
-                        "mfSSLHonorServerCipherList": "Yes",
-                        "mfSSLMaxKeyLength": 0,
-                        "mfTLSDHMinimumGroupSize": 0,
-                        "mfTLSMiddleBoxCompatibilityMode": "No"
-                      },
-                      {
-                        "CN": "Web",
-                        "mfUID": "89ee264b-6600-4d29-b3a3-8a94fc4540dc",
-                        "description": "Basic HTTP web server",
-                        "mfConfig": "[virtual paths]\ncgi=<ES>/bin\nuploads=<ES>/deploy\ndocs=<ES>/help\n\n[allow]\ncgi=mfdeploy.exe\nuploads=*.txt *.car *.wsdl\n",
-                        "mfConnector": "http-switch",
-                        "mfEndpoint": "tcp:0.0.0.0:0",
-                        "mfEndpointMulti": [
-                          "tcp:0.0.0.0:0"
-                        ],
-                        "mfListenerStatus": "Stopped",
-                        "mfParentUID": "1e3d67ec-610c-4f2f-a501-d47ec267fac9",
-                        "mfRequestedEndpoint": "tcp:*:*",
-                        "mfRequestedEndpointMulti": [
-                          "tcp:*:*"
-                        ],
-                        "mfServerUID": "990d111e-95fa-45b6-b920-9bf27782115d",
-                        "mfSSLAllowCertCNIPMismatch": "No",
-                        "mfSSLAllowNULLCipher": "No",
-                        "mfSSLCheckCertPublishersRevocation": "No",
-                        "mfSSLCheckCertRevocation": "No",
-                        "mfSSLClientOption": "All",
-                        "mfSSLHonorServerCipherList": "Yes",
-                        "mfSSLMaxKeyLength": 0,
-                        "mfTLSDHMinimumGroupSize": 0,
-                        "mfTLSMiddleBoxCompatibilityMode": "No"
-                      },
-                      {
-                        "CN": "Web Services and J2EE",
-                        "mfUID": "de2d9448-b3e0-4964-9119-4022ea96b0fd",
-                        "description": "SOAP/REST Web Services and J2EE",
-                        "mfConnector": "mfcs-mp",
-                        "mfEndpoint": "tcp:0.0.0.0:0",
-                        "mfEndpointMulti": [
-                          "tcp:0.0.0.0:0"
-                        ],
-                        "mfListenerStatus": "Stopped",
-                        "mfParentUID": "1e3d67ec-610c-4f2f-a501-d47ec267fac9",
-                        "mfRequestedEndpoint": "tcp:*:55550",
-                        "mfRequestedEndpointMulti": [
-                          "tcp:*:55550"
-                        ],
-                        "mfServerUID": "990d111e-95fa-45b6-b920-9bf27782115d",
-                        "mfSSLAllowCertCNIPMismatch": "No",
-                        "mfSSLAllowNULLCipher": "No",
-                        "mfSSLCheckCertPublishersRevocation": "No",
-                        "mfSSLCheckCertRevocation": "No",
-                        "mfSSLClientOption": "All",
-                        "mfSSLHonorServerCipherList": "Yes",
-                        "mfSSLMaxKeyLength": 0,
-                        "mfTLSDHMinimumGroupSize": 0,
-                        "mfTLSMiddleBoxCompatibilityMode": "No"
-                      },
-                      {
-                        "CN": "RFA",
-                        "mfUID": "fde93d39-6f69-4f82-b191-fbab11a94ddc",
-                        "mfConfigManagerData": {},
-                        "mfConnector": "mfcs-rfa",
-                        "mfEndpoint": "tcp:0.0.0.0:0",
-                        "mfEndpointMulti": [
-                          "tcp:0.0.0.0:0"
-                        ],
-                        "mfListenerStatus": "Stopped",
-                        "mfParentUID": "1e3d67ec-610c-4f2f-a501-d47ec267fac9",
-                        "mfRequestedEndpoint": "tcp:*:55552",
-                        "mfRequestedEndpointMulti": [
-                          "tcp:*:55552"
-                        ],
-                        "mfServerUID": "990d111e-95fa-45b6-b920-9bf27782115d",
-                        "mfSSLAllowCertCNIPMismatch": "No",
-                        "mfSSLAllowNULLCipher": "No",
-                        "mfSSLCheckCertPublishersRevocation": "No",
-                        "mfSSLCheckCertRevocation": "No",
-                        "mfSSLClientOption": "All",
-                        "mfSSLHonorServerCipherList": "No",
-                        "mfSSLMaxKeyLength": 0,
-                        "mfTLSDHMinimumGroupSize": 0,
-                        "mfTLSMiddleBoxCompatibilityMode": "No"
-                      }
-                    ]
-                  }
-                ],
-                "mfServiceList": [
-                  {
-                    "CN": "CICS",
-                    "mfUID": "d53f58bf-0f55-475b-8a67-660333c14fed",
-                    "description": "CICS utility service",
-                    "mfBuildVersion": 0,
-                    "mfListenerUID": "de2d9448-b3e0-4964-9119-4022ea96b0fd",
-                    "mfLogMode": "Off",
-                    "mfMajorVersion": 1,
-                    "mfMinorVersion": 0,
-                    "mfSearchOrder": 1,
-                    "mfServerUID": "990d111e-95fa-45b6-b920-9bf27782115d",
-                    "mfServiceClass": "MF CICS",
-                    "mfServiceStatus": "Available",
-                    "mfTRMode": "Unknown"
-                  },
-                  {
-                    "CN": "ES",
-                    "mfUID": "65c6af6c-fdd5-4eef-8a55-0711ffc0fd81",
-                    "description": "ES utility service",
-                    "mfBuildVersion": 0,
-                    "mfListenerUID": "de2d9448-b3e0-4964-9119-4022ea96b0fd",
-                    "mfLogMode": "Off",
-                    "mfMajorVersion": 1,
-                    "mfMinorVersion": 0,
-                    "mfSearchOrder": 1,
-                    "mfServerUID": "990d111e-95fa-45b6-b920-9bf27782115d",
-                    "mfServiceClass": "MF ES",
-                    "mfServiceStatus": "Available",
-                    "mfTRMode": "Unknown"
-                  },
-                  {
-                    "CN": "Deployer",
-                    "mfUID": "b75455b1-9f83-4804-9943-31b82ff29d79",
-                    "description": "Deployment file-upload service",
-                    "mfConfig": "[MF client]\nscheme=http\nURL=/cgi/mfdeploy.exe/uploads\naccept=application/x-zip-compressed\n\n[destination]\nlistener=Web Services and J2EE\n",
-                    "mfBuildVersion": 0,
-                    "mfListenerUID": "89ee264b-6600-4d29-b3a3-8a94fc4540dc",
-                    "mfLogMode": "Off",
-                    "mfMajorVersion": 1,
-                    "mfMinorVersion": 0,
-                    "mfSearchOrder": 1,
-                    "mfServerUID": "990d111e-95fa-45b6-b920-9bf27782115d",
-                    "mfServiceClass": "MF deployment",
-                    "mfServiceStatus": "Available",
-                    "mfTRMode": "Unknown"
-                  },
-                  {
-                    "CN": "JES",
-                    "mfUID": "d7934ec6-4f68-42b7-96bc-8964f6f07064",
-                    "description": "Job Entry Subsystem service",
-                    "mfBuildVersion": 0,
-                    "mfListenerUID": "de2d9448-b3e0-4964-9119-4022ea96b0fd",
-                    "mfLogMode": "Off",
-                    "mfMajorVersion": 1,
-                    "mfMinorVersion": 0,
-                    "mfSearchOrder": 1,
-                    "mfServerUID": "990d111e-95fa-45b6-b920-9bf27782115d",
-                    "mfServiceClass": "MF JES",
-                    "mfServiceStatus": "Available",
-                    "mfTRMode": "Unknown"
-                  }
-                ],
-                "mfPackageList": [],
-                "mfHandlerList": [
-                  {
-                    "CN": "MFRHJSON",
-                    "mfUID": "10f7d48d-06fa-4f57-af17-c3363aa6ae9c",
-                    "description": "Handles REST requests",
-                    "mfHandlerStatus": "Enabled",
-                    "mfServerUID": "990d111e-95fa-45b6-b920-9bf27782115d"
-                  },
-                  {
-                    "CN": "MFRHJCL",
-                    "mfUID": "f0527a5b-510a-469d-8193-09ae3ce20a94",
-                    "description": "Handles batch requests",
-                    "mfHandlerStatus": "Enabled",
-                    "mfServerUID": "990d111e-95fa-45b6-b920-9bf27782115d"
-                  },
-                  {
-                    "CN": "MFRHSOAP",
-                    "mfUID": "971df0b2-fe52-4daf-b1d5-7cf11642deef",
-                    "description": "Handles SOAP requests",
-                    "mfHandlerStatus": "Enabled",
-                    "mfServerUID": "990d111e-95fa-45b6-b920-9bf27782115d"
-                  },
-                  {
-                    "CN": "MFRHBINP",
-                    "mfUID": "a0086237-94ae-47e0-87f2-fafc7ce2d980",
-                    "description": "Handles J2EE requests",
-                    "mfHandlerStatus": "Enabled",
-                    "mfServerUID": "990d111e-95fa-45b6-b920-9bf27782115d"
-                  }
-                ],
-                "mfXRMList": [],
-                "mfJESInitiatorList": [
-                  {
-                    "CN": "INITALL",
-                    "mfUID": "10fba70e-32a7-4861-adb3-263b695e99ff",
-                    "description": " ",
-                    "mfJESInitiatorClass": "ABCDEFGHIJKLMNOPQRSTUVWXYZ01234567",
-                    "mfJESInitiatorStatus": "Disabled",
-                    "mfServerUID": "990d111e-95fa-45b6-b920-9bf27782115d"
-                  }
-                ],
-                "mfJESPrinterList": [],
-                "mfIMSMPRList": [],
-                "mfMQListenerList": []
-              }
-            ]
-          }
-        headers:
-          accept: application/json
-          X-Requested-With: API
-          Cookie: "{{ loginResponse.set_cookie | default('') }}"
-          Origin: http://localhost:10086
+    # - name: Import JCL Region JSON
+    #   ansible.builtin.uri:
+    #     url: http://localhost:10086/native/v1/import/127.0.0.1/86
+    #     method: POST
+    #     body_format: json
+    #     src: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.json
+    #     remote_src: true
+    #     headers:
+    #       accept: application/json
+    #       X-Requested-With: API
+    #       Cookie: "{{ loginResponse.set_cookie | default('') }}"
+    #       Origin: http://localhost:10086
+    - name: ESCWA login
+      ansible.builtin.shell: |
+        curl -s \
+          -c /tmp/escwa.cookies \
+          -H "Accept: application/json" \
+          -H "X-Requested-With: API" \
+          -H "Origin: http://localhost:10086" \
+          -H "Content-Type: application/json" \
+          -d '{"mfUser":"SYSAD","mfPassword":"SYSAD"}' \
+          http://localhost:10086/logon
+
+    - name: Import JCL
+      ansible.builtin.shell: |
+        curl -s \
+          -b /tmp/escwa.cookies \
+          --data-binary @/home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.json \
+          -H "Accept: application/json" \
+          -H "X-Requested-With: API" \
+          -H "Origin: http://localhost:10086" \
+          -H "Content-Type: application/json" \
+          http://localhost:10086/native/v1/import/127.0.0.1/86
   when: edVer | int >= 100
 
 - name: Import CICS Region XML
