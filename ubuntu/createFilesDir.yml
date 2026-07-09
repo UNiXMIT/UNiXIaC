@@ -492,6 +492,16 @@
   delay: 30
   until: result is not failed
 
+- name: Download JCLRFA.xml
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCLRFA.xml
+    dest: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCLRFA.xml
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Download JCL.json
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.json
@@ -562,6 +572,16 @@
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml
     dest: /home/{{ myUsername }}/MFSupport/MFSamples/CICS/CICS.xml
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download CICSRFA.xml
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICSRFA.xml
+    dest: /home/{{ myUsername }}/MFSupport/MFSamples/CICS/CICSRFA.xml
     mode: '0775'
   register: result
   retries: 5

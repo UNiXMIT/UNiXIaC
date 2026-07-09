@@ -246,6 +246,15 @@
   delay: 30
   until: result is not failed
 
+- name: Download JCLRFA.xml
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCLRFA.xml
+    dest: C:\MFSamples\JCL
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Download JCL.json
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.json
@@ -327,6 +336,15 @@
 - name: Download CICS.xml
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CICS.xml
+    dest: C:\MFSamples\CICS
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download CICSRFA.xml
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CICSRFA.xml
     dest: C:\MFSamples\CICS
   register: result
   retries: 5
