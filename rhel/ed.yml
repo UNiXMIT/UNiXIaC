@@ -207,17 +207,13 @@
           Origin: http://localhost:10086
       register: loginResponse
     
-    - name: Read CICS.json File
-      ansible.builtin.slurp:
-        src: /home/{{ myUsername }}/MFSupport/MFSamples/CICS/CICS.json
-      register: cics_json
-    
     - name: Import CICS Region JSON
       ansible.builtin.uri:
         url: http://localhost:10086/native/v1/import/127.0.0.1/86
         method: POST
         body_format: json
-        body: "{{ cics_json.content | b64decode | to_json }}"
+        src: /home/{{ myUsername }}/MFSupport/MFSamples/CICS/CICS.json
+        remote_src: true
         headers:
           accept: application/json
           X-Requested-With: API
