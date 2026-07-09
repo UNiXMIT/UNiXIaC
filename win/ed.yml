@@ -434,26 +434,29 @@
   tags: ed
 
 - name: Modify mf-server.dat
-  community.windows.win_lineinfile:
-    path: C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mf-server.dat
-    line: "{{ item }}"
-    insertafter: EOF
-  loop:
-    - [JCL/SSL/passphrases]
-    - certificate=""
-    - keyfile=""
-    - [Web Services and J2EE/SSL/passphrases]
-    - certificate=""
-    - keyfile=""
-    - [Web/SSL/passphrases]
-    - certificate=""
-    - keyfile=""
-    - [TN3270/SSL/passphrases]
-    - certificate=""
-    - keyfile=""
-    - [RFA/SSL/passphrases]
-    - certificate=""
-    - keyfile=""
+  ansible.windows.win_shell: |
+    @'
+
+    [JCL/SSL/passphrases]
+    certificate=""
+    keyfile=""
+
+    [Web Services and J2EE/SSL/passphrases]
+    certificate=""
+    keyfile=""
+
+    [Web/SSL/passphrases]
+    certificate=""
+    keyfile=""
+
+    [TN3270/SSL/passphrases]
+    certificate=""
+    keyfile=""
+
+    [RFA/SSL/passphrases]
+    certificate=""
+    keyfile=""
+    '@ | Add-Content 'C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mf-server.dat'
   tags: ed
 
 - name: Stop ESCWA Service
