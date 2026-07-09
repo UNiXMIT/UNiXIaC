@@ -239,6 +239,7 @@
 - name: Modify mf-server.dat
   ansible.builtin.blockinfile:
     path: '{{ installPath }}/etc/mf-server.dat'
+    marker: "; {mark} ANSIBLE MANAGED BLOCK"
     block: |
       [JCL/SSL/passphrases]
       certificate=""
