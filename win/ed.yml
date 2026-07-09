@@ -436,7 +436,6 @@
 - name: Modify mf-server.dat
   ansible.windows.win_shell: |
     @'
-
     [JCL/SSL/passphrases]
     certificate=""
     keyfile=""
