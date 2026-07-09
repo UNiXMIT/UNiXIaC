@@ -227,7 +227,7 @@
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml D SYSAD SYSAD'
     chdir: C:\MFSamples\JCL
-  when: edVer | int <= 90
+  when: edVer | int <= 100
   tags: es
 
 - name: Import JCL Region JSON
@@ -264,14 +264,14 @@
           X-Requested-With: API
           Cookie: "{{ loginResponse.set_cookie | default('') }}"
           Origin: http://localhost:10086
-  when: edVer | int >= 100
+  when: edVer | int >= 110
   tags: es
 
 - name: Import CICS Region XML
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\CICS\CICS.xml D SYSAD SYSAD'
     chdir: C:\MFSamples\CICS
-  when: edVer | int <= 90
+  when: edVer | int <= 100
   tags: es
 
 - name: Import CICS Region JSON
@@ -308,7 +308,7 @@
           X-Requested-With: API
           Cookie: "{{ loginResponse.set_cookie | default('') }}"
           Origin: http://localhost:10086
-  when: edVer | int >= 100
+  when: edVer | int >= 110
   tags: es
 
 - name: Copy DFHDRDAT
