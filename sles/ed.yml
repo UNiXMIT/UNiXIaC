@@ -105,10 +105,10 @@
   when: edVer | int >= 110
   become: yes
 
-- name: Start ESCWA and MFDS
+- name: Start MFDS
   shell: |
     . /home/{{ myUsername }}/MFSupport/MFScripts/setenvmf.sh 1
-    systemctl start escwa mfds
+    systemctl start mfds
   become: yes
 
 - name: Pause for 10 seconds
@@ -144,35 +144,7 @@
   when: edVer | int >= 100 and edVer | int <= 110
 
 - name: Import JCL Region JSON
-  block:
-    - name: ESCWA Login
-      ansible.builtin.uri:
-        url: http://localhost:10086/logon
-        method: POST
-        body_format: json
-        body: |
-          {
-            "mfUser": "SYSAD",
-            "mfPassword": "SYSAD"
-          }
-        headers:
-          accept: application/json
-          X-Requested-With: API
-          Origin: http://localhost:10086
-      register: loginResponse
-    
-    - name: Import JCL Region JSON
-      ansible.builtin.uri:
-        url: http://localhost:10086/native/v1/import/127.0.0.1/86
-        method: POST
-        body_format: json
-        src: /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.json
-        remote_src: true
-        headers:
-          accept: application/json
-          X-Requested-With: API
-          Cookie: "{{ loginResponse.set_cookie | default('') }}"
-          Origin: http://localhost:10086
+  shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.json D SYSAD SYSAD'
   when: edVer | int >= 120
 
 - name: Import CICS Region XML
@@ -184,35 +156,7 @@
   when: edVer | int >= 100 and edVer | int <= 110
 
 - name: Import CICS Region JSON
-  block:
-    - name: ESCWA Login
-      ansible.builtin.uri:
-        url: http://localhost:10086/logon
-        method: POST
-        body_format: json
-        body: |
-          {
-            "mfUser": "SYSAD",
-            "mfPassword": "SYSAD"
-          }
-        headers:
-          accept: application/json
-          X-Requested-With: API
-          Origin: http://localhost:10086
-      register: loginResponse
-    
-    - name: Import CICS Region JSON
-      ansible.builtin.uri:
-        url: http://localhost:10086/native/v1/import/127.0.0.1/86
-        method: POST
-        body_format: json
-        src: /home/{{ myUsername }}/MFSupport/MFSamples/CICS/CICS.json
-        remote_src: true
-        headers:
-          accept: application/json
-          X-Requested-With: API
-          Cookie: "{{ loginResponse.set_cookie | default('') }}"
-          Origin: http://localhost:10086
+  shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/CICS/CICS.json D SYSAD SYSAD'
   when: edVer | int >= 120
 
 - name: Copy DFHDRDAT
@@ -231,35 +175,7 @@
   when: edVer | int >= 100 and edVer | int <= 110
 
 - name: Import IMS Region JSON
-  block:
-    - name: ESCWA Login
-      ansible.builtin.uri:
-        url: http://localhost:10086/logon
-        method: POST
-        body_format: json
-        body: |
-          {
-            "mfUser": "SYSAD",
-            "mfPassword": "SYSAD"
-          }
-        headers:
-          accept: application/json
-          X-Requested-With: API
-          Origin: http://localhost:10086
-      register: loginResponse
-    
-    - name: Import IMS Region JSON
-      ansible.builtin.uri:
-        url: http://localhost:10086/native/v1/import/127.0.0.1/86
-        method: POST
-        body_format: json
-        src: /home/{{ myUsername }}/MFSupport/MFSamples/IMS/IMS.json
-        remote_src: true
-        headers:
-          accept: application/json
-          X-Requested-With: API
-          Cookie: "{{ loginResponse.set_cookie | default('') }}"
-          Origin: http://localhost:10086
+  shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/IMS/IMS.json D SYSAD SYSAD'
   when: edVer | int >= 120
 
 - name: Copy DFHDRDAT into IMS System Directory
