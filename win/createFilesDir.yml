@@ -366,6 +366,75 @@
     path: C:\MFSamples\CICS
     type: allow
     rights: FullControl
+    
+- name: Create IMS
+  win_file:
+    path: C:\MFSamples\IMS
+    state: directory
+
+- name: Create IMS loadlib
+  win_file:
+    path: C:\MFSamples\IMS\loadlib
+    state: directory
+
+- name: Create IMS system
+  win_file:
+    path: C:\MFSamples\IMS\system
+    state: directory
+
+- name: Create IMS dataset
+  win_file:
+    path: C:\MFSamples\IMS\dataset
+    state: directory
+
+- name: Create IMS catalog
+  win_file:
+    path: C:\MFSamples\IMS\catalog
+    state: directory
+
+- name: Create IMS cache
+  win_file:
+    path: C:\MFSamples\IMS\cache
+    state: directory
+
+- name: Create IMS mfdemo
+  win_file:
+    path: C:\MFSamples\IMS\mfdemo
+    state: directory
+
+- name: Download IMS.xml
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/IMS.xml
+    dest: C:\MFSamples\IMS
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download IMSRFA.xml
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/IMSRFA.xml
+    dest: C:\MFSamples\IMS
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download IMS.json
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/IMS.json
+    dest: C:\MFSamples\IMS
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Everyone permissions on IMS
+  win_acl:
+    user: Everyone
+    path: C:\MFSamples\IMS
+    type: allow
+    rights: FullControl
 
 - name: Everyone permissions on MFSamples
   win_acl:

@@ -598,6 +598,78 @@
   delay: 30
   until: result is not failed
 
+- name: Create IMS
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/IMS"
+    state: directory
+    mode: '0775'
+
+- name: Create system
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/IMS/system"
+    state: directory
+    mode: '0775'
+
+- name: Create dataset
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/IMS/dataset"
+    state: directory
+    mode: '0775'
+
+- name: Create loadlib
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/IMS/loadlib"
+    state: directory
+    mode: '0775'
+
+- name: Create catalog
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/IMS/catalog"
+    state: directory
+    mode: '0775'
+
+- name: Create cache
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/IMS/cache"
+    state: directory
+    mode: '0775'
+
+- name: Create mfdemo
+  file:
+    path: "/home/{{ myUsername }}/MFSupport/MFSamples/IMS/mfdemo"
+    state: directory
+    mode: '0775'
+
+- name: Download IMS.xml
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/IMS.xml
+    dest: /home/{{ myUsername }}/MFSupport/MFSamples/IMS/IMS.xml
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download IMSRFA.xml
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/IMSRFA.xml
+    dest: /home/{{ myUsername }}/MFSupport/MFSamples/IMS/IMSRFA.xml
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download IMS.json
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/IMS.json
+    dest: /home/{{ myUsername }}/MFSupport/MFSamples/IMS/IMS.json
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Create Products
   file:
     path: /home/products

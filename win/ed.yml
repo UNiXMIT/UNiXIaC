@@ -244,6 +244,11 @@
   win_command: cmd.exe /k mklink /d "C:\Program Files (x86)\Micro Focus\Enterprise Developer" "C:\Program Files (x86)\Rocket Software\Enterprise Developer"
   when: edVer | int >= 110
   tags: ed
+
+- name: Create Symlink for MF <<===>> Rocket
+  win_command: cmd.exe /k mklink /d "C:\Users\Public\Documents\Micro Focus" "C:\Users\Public\Documents\Rocket Software"
+  when: edVer | int >= 110
+  tags: ed
   
 - name: Install Safenet License File
   ansible.windows.win_copy:
@@ -426,11 +431,76 @@
   when: edVer | int >= 120
   tags: ed
 
-- name: Copy DFHDRDAT
+- name: Copy DFHDRDAT into CICS System Directory
   ansible.windows.win_copy:
     src: C:\Program Files (x86)\Micro Focus\Enterprise Developer\etc\cas\dfhdrdat
     dest: C:\MFSamples\CICS\system\
     remote_src: true
+  tags: ed
+
+- name: Import IMS Region XML
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\IMS\IMS.xml D SYSAD SYSAD'
+    chdir: C:\MFSamples\IMS
+  when: edVer | int <= 90
+  tags: ed
+
+- name: Import IMS Region XML w/RFA
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\IMS\IMSRFA.xml D SYSAD SYSAD'
+    chdir: C:\MFSamples\IMS
+  when: edVer | int >= 100 and edVer | int <= 110
+  tags: ed
+
+- name: Import IMS Region JSON
+  block:
+    - name: ESCWA Login
+      ansible.windows.win_uri:
+        url: http://localhost:10086/logon
+        method: POST
+        content_type: application/json
+        body: |
+          {
+            "mfUser": "SYSAD",
+            "mfPassword": "SYSAD"
+          }
+        headers:
+          accept: application/json
+          X-Requested-With: API
+          Origin: http://localhost:10086
+      register: loginResponse
+    
+    - name: Read IMS.json File
+      ansible.windows.slurp:
+        src: C:\MFSamples\IMS\IMS.json
+      register: ims_json
+    
+    - name: Import IMS Region JSON
+      ansible.windows.win_uri:
+        url: http://localhost:10086/native/v1/import/127.0.0.1/86
+        method: POST
+        content_type: application/json
+        body: "{{ ims_json.content | b64decode }}"
+        headers:
+          accept: application/json
+          X-Requested-With: API
+          Cookie: "{{ loginResponse.set_cookie | default('') }}"
+          Origin: http://localhost:10086
+  when: edVer | int >= 120
+  tags: ed
+
+- name: Copy DFHDRDAT into IMS System Directory
+  ansible.windows.win_copy:
+    src: C:\Program Files (x86)\Micro Focus\Enterprise Developer\etc\cas\dfhdrdat
+    dest: C:\MFSamples\IMS\system\
+    remote_src: true
+  tags: ed
+
+- name: Copy IMS MFDEMO Files
+  ansible.windows.win_command: >
+    robocopy "C:\Users\Public\Documents\Micro Focus\Enterprise Developer\Samples\Mainframe\IMS\Classic\IVP"
+             "C:\MFSamples\IMS\mfdemo"
+             /E
   tags: ed
 
 - name: Modify mf-server.dat
