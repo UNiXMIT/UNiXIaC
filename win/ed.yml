@@ -407,10 +407,10 @@
   tags: ed
 
 - name: Copy IMS MFDEMO Files
-  ansible.windows.win_command: >
-    robocopy "C:\Users\Public\Documents\Micro Focus\Enterprise Developer\Samples\Mainframe\IMS\Classic\IVP"
-             "C:\MFSamples\IMS\mfdemo"
-             /E
+  ansible.windows.win_copy:
+    src: C:\Users\Public\Documents\Micro Focus\Enterprise Developer\Samples\Mainframe\IMS\Classic\IVP\
+    dest: C:\MFSamples\IMS\mfdemo
+    remote_src: true
   tags: ed
 
 - name: Modify mf-server.dat
