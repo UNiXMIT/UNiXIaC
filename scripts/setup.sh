@@ -424,21 +424,33 @@ curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/ctf.cfg
 cd $FILEPATH/MFSupport/MFSamples
 mkdir -p -m 775 JCL/system JCL/catalog JCL/dataset JCL/loadlib JCL/cache
 mkdir -p -m 775 CICS/system CICS/dataset CICS/loadlib CICS/cache
+mkdir -p -m 775 IMS/system IMS/catalog IMS/dataset IMS/loadlib IMS/cache IMS/mfdemo
 cd $FILEPATH/MFSupport/MFSamples/JCL
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.xml
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCLRFA.xml
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/JCL.json
 curl -s -o mfbsi.cfg https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MFBSI.cfg
 curl -s -o vse.cfg https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/VSE.cfg
 cd $FILEPATH/MFSupport/MFSamples/CICS
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.xml
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICSRFA.xml
 curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/CICS.json
+cd $FILEPATH/MFSupport/MFSamples/IMS
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/IMS.xml
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/IMSRFA.xml
+curl -s -O https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/IMS.json
 
 sed -i "s|/home/products|$PRODPATH/products|g" $FILEPATH/MFSupport/MFScripts/setenvmf.sh
 sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/MFSupport/MFServices/*.service
 sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/MFSupport/MFSamples/JCL/JCL.xml
+sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/MFSupport/MFSamples/JCL/JCLRFA.xml
 sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/MFSupport/MFSamples/JCL/JCL.json
 sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/MFSupport/MFSamples/CICS/CICS.xml
+sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/MFSupport/MFSamples/CICS/CICSRFA.xml
 sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/MFSupport/MFSamples/CICS/CICS.json
+sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/MFSupport/MFSamples/IMS/IMS.xml
+sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/MFSupport/MFSamples/IMS/IMSRFA.xml
+sed -i "s|/home/support|$FILEPATH|g" $FILEPATH/MFSupport/MFSamples/IMS/IMS.json
 
 cd $FILEPATH
 touch /home/$user/.Xauthority

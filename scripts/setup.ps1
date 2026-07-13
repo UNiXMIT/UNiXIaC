@@ -357,6 +357,13 @@ $folders = @(
     "C:\MFSamples\CICS\dataset",
     "C:\MFSamples\CICS\catalog",
     "C:\MFSamples\CICS\cache",
+    "C:\MFSamples\IMS",
+    "C:\MFSamples\IMS\loadlib",
+    "C:\MFSamples\IMS\system",
+    "C:\MFSamples\IMS\dataset",
+    "C:\MFSamples\IMS\catalog",
+    "C:\MFSamples\IMS\cache",
+    "C:\MFSamples\IMS\mfdemo",
     "C:\MFDataFiles"
     "C:\MFInstallers"
     "C:\MFScripts"
@@ -375,6 +382,7 @@ Invoke-WebRequest `
   -OutFile "C:\CTF\ctf.cfg"
 $urls = @(
     'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.xml'
+    'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCLRFA.xml'
     'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.json'
     'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/JCL.zip'
     'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/docs/es/MFBSI.cfg'
@@ -389,9 +397,20 @@ $zip = Join-Path $dest 'JCL.zip'
 Expand-Archive -LiteralPath $zip -DestinationPath $dest -Force
 $urls = @(
     'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CICS.xml'
+    'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CICSRFA.xml'
     'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CICS.json'
 )
 $dest = 'C:\MFSamples\CICS'
+foreach ($url in $urls) {
+    $file = Join-Path $dest (Split-Path $url -Leaf)
+    Invoke-WebRequest -Uri $url -OutFile $file
+}
+$urls = @(
+    'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/IMS.xml'
+    'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/IMSRFA.xml'
+    'https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/IMS.json'
+)
+$dest = 'C:\MFSamples\IMS'
 foreach ($url in $urls) {
     $file = Join-Path $dest (Split-Path $url -Leaf)
     Invoke-WebRequest -Uri $url -OutFile $file
