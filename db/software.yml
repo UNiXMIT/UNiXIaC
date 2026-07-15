@@ -4,7 +4,7 @@
 
 - name: Download EPEL RPM
   ansible.builtin.get_url:
-    url: 'https://mturner.s3.eu-west-2.amazonaws.com/Public/epel/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm'
+    url: https://mturner.s3.eu-west-2.amazonaws.com/Public/epel/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm
     dest: /tmp/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm
     mode: '0755'
   become: yes
