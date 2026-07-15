@@ -12,12 +12,23 @@
   delay: 30
   until: result is not failed
 
-- name: Download EPEL RPM
-  ansible.builtin.get_url:
-    url: https://mturner.s3.eu-west-2.amazonaws.com/Public/epel/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm
-    dest: /tmp/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm
-    mode: '0755'
-  become: yes
+# - name: Download EPEL RPM
+#   ansible.builtin.get_url:
+#     url: https://mturner.s3.eu-west-2.amazonaws.com/Public/epel/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm
+#     dest: /tmp/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm
+#     mode: '0755'
+#   become: yes
+#   register: result
+#   retries: 5
+#   delay: 30
+#   until: result is not failed
+
+- name: Download EPEL RPM (Alternative method)
+  ansible.builtin.command:
+    cmd: >
+      curl -fsSL
+      -o /tmp/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm
+      https://mturner.s3.eu-west-2.amazonaws.com/Public/epel/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm
   register: result
   retries: 5
   delay: 30
