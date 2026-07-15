@@ -23,7 +23,7 @@
 
 - name: Install EPEL
   package:
-    name: 'https://mirror.cs.vt.edu/pub/epel/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm'
+    name: 'https://mirror.init7.net/fedora/epel/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm'
     state: present
     disable_gpg_check: yes
   register: result
