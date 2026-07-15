@@ -90,7 +90,7 @@ sudo grep -qxF 'fs.file-max=500000' /etc/sysctl.conf || sudo sh -c 'echo "fs.fil
 # RHEL
 if [[ "$WHICHOS" = "RHEL" ]]; then
   . /etc/os-release
-  sudo dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-${VERSION_ID%.*}.noarch.rpm
+  sudo dnf install -y https://mirror.cs.vt.edu/pub/epel/epel-release-latest-${VERSION_ID%.*}.noarch.rpm
   curl -s https://packages.microsoft.com/config/rhel/${VERSION_ID%.*}/prod.repo | sudo tee /etc/yum.repos.d/mssql-release.repo
   sudo tee /etc/profile.d/mssql.sh > /dev/null <<EOF
 #!/bin/bash
