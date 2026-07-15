@@ -113,8 +113,8 @@ const newValuesED = {
 
 const newValuesACU = {
     productName: `extend${configACU.versionNumber}`,
-    installPath32: `C:\\Program Files (x86)\\${configACU.company}\\extend ${configACU.version}`,
-    installPath64: `C:\\Program Files\\${configACU.company}\\extend ${configACU.version}`,
+    installPath32: `C:\\Program Files (x86)\\${configACU.company}\\extend ${configACU.baseVersion}`,
+    installPath64: `C:\\Program Files\\${configACU.company}\\extend ${configACU.baseVersion}`,
     installPath: `/home/products/acu${configACU.versionNumber}shx64/`,
     installerNameWIN: `extend(R) Version ${configACU.version} x64.msi`,
     installerNameLINUX: `setup_acucob${configACU.versionNumber}pmk31shACU`,
