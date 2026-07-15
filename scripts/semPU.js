@@ -25,6 +25,9 @@ const configACU = {
     get version() {
         return this.majorVersion + '.' + this.pu;
     },
+    get baseVersion() {
+        return this.majorVersion.replace(".", "") + 0;
+    },
     get versionNumber() {
         return this.majorVersion.replace(".", "") + this.pu;
     },
@@ -115,8 +118,8 @@ const newValuesACU = {
     installPath: `/home/products/acu${configACU.versionNumber}shx64/`,
     installerNameWIN: `extend(R) Version ${configACU.version} x64.msi`,
     installerNameLINUX: `setup_acucob${configACU.versionNumber}pmk31shACU`,
-    S3Prefix: `AcuCOBOL/${configACU.versionNumber}/GA/`,
-    S3PrefixPU: `AcuCOBOL/${configACU.versionNumber}/PU${configACU.pu}/`
+    S3Prefix: `AcuCOBOL/${configACU.baseVersion}/GA/`,
+    S3PrefixPU: `AcuCOBOL/${configACU.baseVersion}/PU${configACU.pu}/`
 };
 
 const newValuesACUMF = {
