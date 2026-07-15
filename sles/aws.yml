@@ -47,6 +47,7 @@
       Name: '{{ semaphore_vars.task_details.username|upper }}-{{ imageName }}'
       Owner: '{{ semaphore_vars.task_details.username|upper }}'
       OS: '{{ imageName }}'
+      SemTaskId: '{{ semaphore_vars.task_details.id }}'
       SemStatus: 'Provisioning'
     state: present
   loop: '{{ ec2.instance_ids }}'
