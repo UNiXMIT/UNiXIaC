@@ -51,6 +51,7 @@ sudo mkdir -p "$PRODPATH"
 
 # Modify OS Config
 sudo timedatectl set-timezone Europe/London
+sudo hostnamectl set-hostname $user
 echo 'if [[ -t 0 && $- = *i* ]]; then stty -ixon; fi' \
   | tee -a /home/$user/.bashrc > /dev/null
 echo 'export PS1="$PS1\[\e]1337;CurrentDir='\''\$(pwd)'\''\a\]"' \
@@ -90,7 +91,7 @@ sudo grep -qxF 'fs.file-max=500000' /etc/sysctl.conf || sudo sh -c 'echo "fs.fil
 # RHEL
 if [[ "$WHICHOS" = "RHEL" ]]; then
   . /etc/os-release
-  sudo dnf install -y https://mirror.init7.net/fedora/epel/epel-release-latest-${VERSION_ID%.*}.noarch.rpm
+  sudo dnf install -y https://mturner.s3.eu-west-2.amazonaws.com/Public/epel/epel-release-latest-${VERSION_ID%.*}.noarch.rpm
   curl -s https://packages.microsoft.com/config/rhel/${VERSION_ID%.*}/prod.repo | sudo tee /etc/yum.repos.d/mssql-release.repo
   sudo tee /etc/profile.d/mssql.sh > /dev/null <<EOF
 #!/bin/bash
