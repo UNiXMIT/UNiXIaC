@@ -49,6 +49,7 @@
     url: https://packages.microsoft.com/config/rhel/{{ ansible_facts.distribution_major_version }}/prod.repo
     dest: /etc/yum.repos.d/mssql-release.repo
     mode: '0775'
+    validate_certs: no
   when: "'arm' not in ansible_run_tags"
   register: result
   retries: 5
