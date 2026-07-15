@@ -2,18 +2,20 @@
   set_fact:
     DBSHORT: 
 
-# - name: Install EPEL key 
-#   rpm_key:
-#     state: present
-#     key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_facts.distribution_major_version }}
-#   register: result
-#   retries: 5
-#   delay: 30
-#   until: result is not failed
+- name: Download EPEL RPM
+  ansible.builtin.get_url:
+    url: 'https://mturner.s3.eu-west-2.amazonaws.com/Public/epel/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm'
+    dest: /tmp/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm
+    mode: '0755'
+  become: yes
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
 
 - name: Install EPEL
   package:
-    name: 'https://mturner.s3.eu-west-2.amazonaws.com/Public/epel/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm'
+    name: /tmp/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm
     state: present
     disable_gpg_check: yes
   register: result
