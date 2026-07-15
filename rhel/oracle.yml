@@ -22,7 +22,7 @@
 
 - name: Install Oracle Instant Client packages
   dnf:
-    name: "{{ oracle[ansible_distribution_major_version].base_url }}oracle-instantclient-{{ item }}-{{ oracle[ansible_distribution_major_version].version }}-1.el{{ ansible_distribution_major_version }}.x86_64.rpm"
+    name: "{{ oracle[ansible_facts['distribution_major_version']].base_url }}oracle-instantclient-{{ item }}-{{ oracle[ansible_facts['distribution_major_version']].version }}-1.el{{ ansible_facts['distribution_major_version'] }}.x86_64.rpm"
     state: present
     disable_gpg_check: yes
   loop: "{{ oracle_packages }}"
@@ -30,7 +30,7 @@
   retries: 5
   delay: 30
   until: result is not failed
-  when: ansible_distribution_major_version in ['9','10']
+  when: ansible_facts['distribution_major_version'] in ['9','10']
 
 - name: Ensure /opt/oracle exists
   file:
@@ -40,7 +40,7 @@
 
 - name: Download Oracle Instant Client Precompiler
   get_url:
-    url: "{{ oracle_precomp_url }}{{ oracle_precomp[ansible_distribution_major_version] }}"
+    url: "{{ oracle_precomp_url }}{{ oracle_precomp[ansible_facts['distribution_major_version']] }}"
     dest: /opt/oracle/oracle-instantclient-precomp.x86_64.rpm
     owner: "{{ myUsername }}"
     group: "{{ myUsername }}"
@@ -49,7 +49,7 @@
   retries: 5
   delay: 30
   until: result is not failed
-  when: ansible_distribution_major_version in ['9','10']
+  when: ansible_facts['distribution_major_version'] in ['9','10']
 
 - name: Install Oracle Instant Client Precompiler
   yum:

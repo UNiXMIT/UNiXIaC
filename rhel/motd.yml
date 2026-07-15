@@ -9,7 +9,7 @@
     content: |
       ****************************************************************************************************
 
-          {{ ansible_distribution }} {{ ansible_distribution_version}}
+          {{ ansible_facts.distribution }} {{ ansible_facts.distribution_version}}
 
           AcuCOBOL
             Set Environment:

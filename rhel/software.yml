@@ -15,7 +15,7 @@
 # - name: Install EPEL key 
 #   rpm_key:
 #     state: present
-#     key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}
+#     key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_facts.distribution_major_version }}
 #   register: result
 #   retries: 5
 #   delay: 30
@@ -23,7 +23,7 @@
 
 - name: Install EPEL
   package:
-    name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm'
+    name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm'
     state: present
     disable_gpg_check: yes
   register: result
@@ -33,7 +33,7 @@
 
 - name: Download MSSQL ODBC Driver Repo
   get_url:
-    url: https://packages.microsoft.com/config/rhel/{{ ansible_distribution_major_version }}/prod.repo
+    url: https://packages.microsoft.com/config/rhel/{{ ansible_facts.distribution_major_version }}/prod.repo
     dest: /etc/yum.repos.d/mssql-release.repo
     mode: '0775'
   when: "'arm' not in ansible_run_tags"
