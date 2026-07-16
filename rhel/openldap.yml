@@ -36,7 +36,7 @@
   delay: 30
   until: result is not failed
 
-- name: Install OpenLDAP for RHEL 7/9
+- name: Install OpenLDAP for RHEL <=7 or >=9
   package:
     name:
       - openldap
