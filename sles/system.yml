@@ -3,16 +3,6 @@
     name: Europe/London
   when: userRegion | default("1") == "1"
 
-- name: Update Hostname
-  ansible.builtin.hostname:
-    name: "{{ myUsername }}"
-  
-- name: Update hosts file
-  ansible.builtin.lineinfile:
-    path: /etc/hosts
-    search_string: '127.0.0.1'
-    line: 127.0.0.1 localhost {{ myUsername }}
-
 - name: Allow SSH password authentication
   lineinfile:
     dest: /etc/ssh/sshd_config
