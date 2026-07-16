@@ -2,6 +2,26 @@
   set_fact:
     DBSHORT: 
 
+- name: Update all packages to latest
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+    update_cache: yes
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Install openssl-1:3.5.5-4.el9_8 - Workaround for RHEL 9 https://github.com/ansible/ansible/issues/87251
+  package:
+    name: openssl-1:3.5.5-4.el9_8
+    state: present
+  when: ansible_facts['distribution_major_version'] | int == 9
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Install EPEL
   package:
     name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm
@@ -11,38 +31,6 @@
   retries: 5
   delay: 30
   until: result is not failed
-
-# - name: Download EPEL RPM
-#   ansible.builtin.get_url:
-#     url: https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm
-#     dest: /tmp/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm
-#     mode: '0755'
-#   become: yes
-#   register: result
-#   retries: 5
-#   delay: 30
-#   until: result is not failed
-
-# - name: Download EPEL RPM (Alternative method)
-#   ansible.builtin.command:
-#     cmd: >
-#       curl -fsSL
-#       -o /tmp/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm
-#       https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm
-#   register: result
-#   retries: 5
-#   delay: 30
-#   until: result is not failed
-
-# - name: Install EPEL
-#   package:
-#     name: /tmp/epel-release-latest-{{ ansible_facts.distribution_major_version }}.noarch.rpm
-#     state: present
-#     disable_gpg_check: yes
-#   register: result
-#   retries: 5
-#   delay: 30
-#   until: result is not failed
 
 - name: Package installation
   package:
