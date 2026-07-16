@@ -137,11 +137,11 @@
 
 - name: Import JCL Region XML
   shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.xml D SYSAD SYSAD'
-  when: edVer | int <= 90
+  when: edVer | int <= 110
 
-- name: Import JCL Region XML w/RFA
-  shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCLRFA.xml D SYSAD SYSAD'
-  when: edVer | int >= 100 and edVer | int <= 110
+# - name: Import JCL Region XML w/RFA
+#   shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCLRFA.xml D SYSAD SYSAD'
+#   when: edVer | int >= 100 and edVer | int <= 110
 
 - name: Import JCL Region JSON
   shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/JCL/JCL.json D SYSAD SYSAD'
@@ -149,11 +149,11 @@
 
 - name: Import CICS Region XML
   shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/CICS/CICS.xml D SYSAD SYSAD'
-  when: edVer | int <= 90
+  when: edVer | int <= 110
 
-- name: Import CICS Region XML w/RFA
-  shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/CICS/CICSRFA.xml D SYSAD SYSAD'
-  when: edVer | int >= 100 and edVer | int <= 110
+# - name: Import CICS Region XML w/RFA
+#   shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/CICS/CICSRFA.xml D SYSAD SYSAD'
+#   when: edVer | int >= 100 and edVer | int <= 110
 
 - name: Import CICS Region JSON
   shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/CICS/CICS.json D SYSAD SYSAD'
@@ -168,11 +168,11 @@
 
 - name: Import IMS Region XML
   shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/IMS/IMS.xml D SYSAD SYSAD'
-  when: edVer | int <= 90
+  when: edVer | int <= 110
 
-- name: Import IMS Region XML w/RFA
-  shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/IMS/IMSRFA.xml D SYSAD SYSAD'
-  when: edVer | int >= 100 and edVer | int <= 110
+# - name: Import IMS Region XML w/RFA
+#   shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/IMS/IMSRFA.xml D SYSAD SYSAD'
+#   when: edVer | int >= 100 and edVer | int <= 110
 
 - name: Import IMS Region JSON
   shell: '. {{ installPath }}/bin/cobsetenv ; {{ installPath }}/bin/mfds64 -g 5 /home/{{ myUsername }}/MFSupport/MFSamples/IMS/IMS.json D SYSAD SYSAD'
