@@ -104,6 +104,8 @@
   shell: |
     . /home/{{ myUsername }}/MFSupport/MFScripts/setenvmf.sh 1
     systemctl start escwa
+  args:
+    executable: /bin/bash
   become: yes
 
 - name: Pause for 10 seconds
