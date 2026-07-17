@@ -191,7 +191,8 @@
 
 - name: Copy IMS MFDEMO Files
   ansible.builtin.command:
-    cmd: cp -a {{ installPath }}/demo/ims/ivp64/. /home/{{ myUsername }}/MFSupport/MFSamples/IMS/mfdemo/
+    cmd: cp -r {{ installPath }}/demo/ims/ivp64/ /home/{{ myUsername }}/MFSupport/MFSamples/IMS/mfdemo/
+  become: yes
 
 - name: Modify mf-server.dat
   ansible.builtin.blockinfile:
