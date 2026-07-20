@@ -333,15 +333,15 @@
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.xml D SYSAD SYSAD'
     chdir: C:\MFSamples\JCL
-  when: edVer | int <= 110
+  when: edVer | int <= 90
   tags: ed
 
-# - name: Import JCL Region XML w/RFA
-#   win_command:
-#     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCLRFA.xml D SYSAD SYSAD'
-#     chdir: C:\MFSamples\JCL
-#   when: edVer | int >= 100 and edVer | int <= 110
-#   tags: ed
+- name: Import JCL Region XML w/RFA
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCLRFA.xml D SYSAD SYSAD'
+    chdir: C:\MFSamples\JCL
+  when: edVer | int >= 100 and edVer | int <= 110
+  tags: ed
 
 - name: Import JCL Region JSON
   win_command:
@@ -354,15 +354,15 @@
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\CICS\CICS.xml D SYSAD SYSAD'
     chdir: C:\MFSamples\CICS
-  when: edVer | int <= 110
+  when: edVer | int <= 90
   tags: ed
 
-# - name: Import CICS Region XML w/RFA
-#   win_command:
-#     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\CICS\CICSRFA.xml D SYSAD SYSAD'
-#     chdir: C:\MFSamples\CICS
-#   when: edVer | int >= 100 and edVer | int <= 110
-#   tags: ed
+- name: Import CICS Region XML w/RFA
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\CICS\CICSRFA.xml D SYSAD SYSAD'
+    chdir: C:\MFSamples\CICS
+  when: edVer | int >= 100 and edVer | int <= 110
+  tags: ed
 
 - name: Import CICS Region JSON
   win_command:
@@ -382,15 +382,15 @@
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\IMS\IMS.xml D SYSAD SYSAD'
     chdir: C:\MFSamples\IMS
-  when: edVer | int <= 110
+  when: edVer | int <= 90
   tags: ed
 
-# - name: Import IMS Region XML w/RFA
-#   win_command:
-#     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\IMS\IMSRFA.xml D SYSAD SYSAD'
-#     chdir: C:\MFSamples\IMS
-#   when: edVer | int >= 100 and edVer | int <= 110
-#   tags: ed
+- name: Import IMS Region XML w/RFA
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\IMS\IMSRFA.xml D SYSAD SYSAD'
+    chdir: C:\MFSamples\IMS
+  when: edVer | int >= 100 and edVer | int <= 110
+  tags: ed
 
 - name: Import IMS Region JSON
   win_command:
