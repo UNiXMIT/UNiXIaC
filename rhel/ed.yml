@@ -228,9 +228,3 @@
       [RFA/SSL/passphrases]
       certificate=""
       keyfile=""
-
-- name: Cleanup
-  ansible.builtin.file:
-    path: /tmp/.mf.env
-    state: absent
-  become: yes

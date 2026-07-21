@@ -185,9 +185,3 @@
       X-Requested-With: API
       Cookie: "{{ loginResponse.set_cookie | default('') }}"
       Origin: http://localhost:10086
-
-- name: Cleanup
-  ansible.builtin.file:
-    path: /tmp/.mf.env
-    state: absent
-  become: yes
