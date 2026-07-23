@@ -64,28 +64,29 @@
 
 ### RHEL 9 AMD
 - ED 8.0, 9.0, 10.0 and 11.0  
-- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1
+- AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
 
 ### RHEL 9 ARM
-- ED 11.0  
+- ED 11.0   
 
 ### RHEL 10 AMD
-- ED 11.0 (PU 3 +) 
+- ED 11.0 (PU 3 +) and 12.0  
 - AcuCOBOL-GT extend 11.0.0  
 
 ### RHEL 10 ARM
+- ED 12.0  
 
 ### SLES 15
-- ED 9.0 and 10.0  
+- ED 9.0, 10.0, 11.0 and 12.0  
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0, 10.5.1 and 11.0.0  
 
-### Ubuntu 24.04
-- ED 11.0  
-- AcuCOBOL-GT extend 11.0.0
-
 ### Ubuntu 22.04
-- ED 9.0, 10.0 and 11.0  
+- ED 9.0 and 10.0 
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0 and 10.5.1  
+
+### Ubuntu 24.04
+- ED 11.0 and 12.0  
+- AcuCOBOL-GT extend 11.0.0
 
 > **NOTE:** Patch Updates will be added as they become GA.  
 
