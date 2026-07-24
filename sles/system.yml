@@ -4,7 +4,7 @@
   when: userRegion | default("1") == "1"
 
 - name: Get hostname -i output
-  ansible.builtin.command: hostname -i
+  ansible.builtin.command: hostname -I
   register: hostnameIpOutput
   changed_when: false
 
