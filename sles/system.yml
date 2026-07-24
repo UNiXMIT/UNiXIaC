@@ -3,6 +3,22 @@
     name: Europe/London
   when: userRegion | default("1") == "1"
 
+- name: Get hostname -i output
+  ansible.builtin.command: hostname -i
+  register: hostnameIpOutput
+  changed_when: false
+
+- name: Get hostname output
+  ansible.builtin.command: hostname
+  register: hostnameOutput
+  changed_when: false
+
+- name: Update hosts file
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    search_string: '{{ hostnameIpOutput.stdout }}'
+    line: '{{ hostnameIpOutput.stdout }} {{ hostnameOutput.stdout }}'
+
 - name: Allow SSH password authentication
   lineinfile:
     dest: /etc/ssh/sshd_config
