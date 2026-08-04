@@ -2,6 +2,19 @@
   set_fact:
     productName: 
 
+- name: Choco Failed Install Workaround - https://github.com/chocolatey/chocolatey-ansible/issues/118#issuecomment-1596960222
+  block:
+    - name: Install .NET Framework 4.8
+      win_package:
+        path: "https://go.microsoft.com/fwlink/?LinkId=2085155"
+        product_id: none
+        state: present
+        arguments: /q
+      register: install_response
+
+    - win_reboot:
+      when: install_response.changed == true and install_response.rc == 3010
+
 - name: Install Chocolatey
   win_chocolatey:
     name: chocolatey
