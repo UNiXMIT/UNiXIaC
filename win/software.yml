@@ -68,7 +68,7 @@
     content: |
       @ECHO OFF
       choco install -y clink-maintained
-      setx /m PATH "C:\Program Files (x86)\clink;%PATH%"
+      powershell -NoProfile -ExecutionPolicy Bypass -Command "$c='C:\Program Files (x86)\clink';$p=[Environment]::GetEnvironmentVariable('Path','Machine');if(-not (($p -split ';') -contains $c)){[Environment]::SetEnvironmentVariable('Path', ($c + ';' + $p), 'Machine')}"
       "C:\Program Files (x86)\clink\clink" autorun -a install
       "C:\Program Files (x86)\clink\clink" set clink.logo none
     dest: C:\Windows\enableClink.cmd
@@ -90,6 +90,10 @@
       $msTermURL = "https://github.com/microsoft/terminal/releases/download/v${msTermVer}/Microsoft.WindowsTerminal_${msTermVer}_x64.zip"
       Invoke-WebRequest -Uri $msTermURL -outfile C:\Users\Public\Documents\Microsoft.WindowsTerminal.zip
       Expand-Archive -LiteralPath C:\Users\Public\Documents\Microsoft.WindowsTerminal.zip -DestinationPath C:\Users\Public\Documents
-      setx /m PATH "$env:PATH;C:\Users\Public\Documents\terminal-${msTermVer}"
+      $termPath = "C:\Users\Public\Documents\terminal-${msTermVer}"
+      $machinePath = [Environment]::GetEnvironmentVariable('Path', 'Machine')
+      if (-not (($machinePath -split ';') -contains $termPath)) {
+        [Environment]::SetEnvironmentVariable('Path', ($machinePath + ';' + $termPath), 'Machine')
+      }
   ignore_errors: true
   tags: [ wins2019, wins2022]
