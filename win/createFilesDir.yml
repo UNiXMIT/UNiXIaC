@@ -535,6 +535,15 @@
   delay: 30
   until: result is not failed
 
+- name: Download demosit.cmd
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/demosit.cmd
+    dest: C:\MFScripts\demosit.cmd
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Download VSMOD.cmd
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/VSMOD.cmd

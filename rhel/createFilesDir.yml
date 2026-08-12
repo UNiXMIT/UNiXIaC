@@ -72,16 +72,6 @@
   delay: 30
   until: result is not failed
 
-# - name: Download startacu.sh
-#   get_url:
-#     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuScripts/startacu.sh
-#     dest: /home/{{ myUsername }}/AcuSupport/AcuScripts/startacu.sh
-#     mode: '0775'
-#   register: result
-#   retries: 5
-#   delay: 30
-#   until: result is not failed
-
 - name: Download acuServices.sh
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXextend/master/linux/AcuServices/acuServices.sh
@@ -311,16 +301,6 @@
   delay: 30
   until: result is not failed
 
-# - name: Download startmf.sh
-#   get_url:
-#     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/startmf.sh
-#     dest: /home/{{ myUsername }}/MFSupport/MFScripts/startmf.sh
-#     mode: '0775'
-#   register: result
-#   retries: 5
-#   delay: 30
-#   until: result is not failed
-
 - name: Download setenvmf.sh
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/setenvmf.sh
@@ -365,6 +345,16 @@
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/disableSecurity.sh
     dest: "/home/{{ myUsername }}/MFSupport/MFScripts/disableSecurity.sh"
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download demosit.sh
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/demosit.sh
+    dest: "/home/{{ myUsername }}/MFSupport/MFScripts/demosit.sh"
     mode: '0775'
   register: result
   retries: 5
