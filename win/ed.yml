@@ -371,11 +371,23 @@
   when: edVer | int >= 120
   tags: ed
 
-- name: Copy DFHDRDAT into CICS System Directory
-  ansible.windows.win_copy:
-    src: C:\Program Files (x86)\Micro Focus\Enterprise Developer\etc\cas\dfhdrdat
-    dest: C:\MFSamples\CICS\system\
-    remote_src: true
+# - name: Copy DFHDRDAT into CICS System Directory
+#   ansible.windows.win_copy:
+#     src: C:\Program Files (x86)\Micro Focus\Enterprise Developer\etc\cas\dfhdrdat
+#     dest: C:\MFSamples\CICS\system\
+#     remote_src: true
+#   tags: ed
+
+- name: Generate DFHDRDAT in CICS System Directory
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\caspcrd.exe" -c'
+    chdir: C:\MFSamples\CICS
+  tags: ed
+
+- name: Generate DFHDRDAT in CICS System Directory
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\casrdtup.exe" /fCICS.rdt /opC:\MFSamples\CICS\system /o'
+    chdir: C:\MFSamples\CICS\system
   tags: ed
 
 - name: Import IMS Region XML
@@ -399,11 +411,23 @@
   when: edVer | int >= 120
   tags: ed
 
-- name: Copy DFHDRDAT into IMS System Directory
-  ansible.windows.win_copy:
-    src: C:\Program Files (x86)\Micro Focus\Enterprise Developer\etc\cas\dfhdrdat
-    dest: C:\MFSamples\IMS\system\
-    remote_src: true
+# - name: Copy DFHDRDAT into IMS System Directory
+#   ansible.windows.win_copy:
+#     src: C:\Program Files (x86)\Micro Focus\Enterprise Developer\etc\cas\dfhdrdat
+#     dest: C:\MFSamples\IMS\system\
+#     remote_src: true
+#   tags: ed
+
+- name: Generate DFHDRDAT in IMS System Directory
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\caspcrd.exe" -c'
+    chdir: C:\MFSamples\IMS
+  tags: ed
+
+- name: Generate DFHDRDAT in IMS System Directory
+  win_command:
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\casrdtup.exe" /fCICS.rdt /opC:\MFSamples\IMS\system /o'
+    chdir: C:\MFSamples\IMS\system
   tags: ed
 
 - name: Copy IMS MFDEMO Files
