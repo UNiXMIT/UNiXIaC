@@ -273,7 +273,7 @@
 
 - name: Import CICS Resources
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\casrdtup.exe" /f"C:\MFSamples\CICS\CICS.rdt /op"C:\MFSamples\CICS\system" /o'
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\casrdtup.exe" /f"C:\MFSamples\CICS\CICS.rdt" /op"C:\MFSamples\CICS\system" /o'
     chdir: C:\MFSamples\CICS
   tags: es
 
