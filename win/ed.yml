@@ -377,10 +377,10 @@
     chdir: C:\MFSamples\CICS
   tags: ed
 
-- name: Generate DFHDRDAT in CICS System Directory
+- name: Import CICS Resources
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\casrdtup.exe" /fCICS.rdt /opC:\MFSamples\CICS\system /o'
-    chdir: C:\MFSamples\CICS\system
+    chdir: C:\MFSamples\CICS
   tags: ed
 
 - name: Import IMS Region XML
@@ -410,10 +410,10 @@
     chdir: C:\MFSamples\IMS
   tags: ed
 
-- name: Generate DFHDRDAT in IMS System Directory
+- name: Import CICS Resources
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\casrdtup.exe" /fCICS.rdt /opC:\MFSamples\IMS\system /o'
-    chdir: C:\MFSamples\IMS\system
+    chdir: C:\MFSamples\IMS
   tags: ed
 
 - name: Copy IMS MFDEMO Files

@@ -271,10 +271,10 @@
     chdir: C:\MFSamples\CICS
   tags: es
 
-- name: Generate DFHDRDAT in CICS System Directory
+- name: Import CICS Resources
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\casrdtup.exe" /fCICS.rdt /opC:\MFSamples\CICS\system /o'
-    chdir: C:\MFSamples\CICS\system
+    chdir: C:\MFSamples\CICS
   tags: es
 
 - name: Import IMS Region XML
@@ -304,10 +304,10 @@
     chdir: C:\MFSamples\IMS
   tags: es
 
-- name: Generate DFHDRDAT in IMS System Directory
+- name: Import CICS Resources
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\casrdtup.exe" /fCICS.rdt /opC:\MFSamples\IMS\system /o'
-    chdir: C:\MFSamples\IMS\system
+    chdir: C:\MFSamples\IMS
   tags: es
 
 - name: Modify mf-server.dat
