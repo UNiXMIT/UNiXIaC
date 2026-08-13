@@ -265,13 +265,6 @@
   when: edVer | int >= 120
   tags: es
 
-# - name: Copy DFHDRDAT into CICS System Directory
-#   ansible.windows.win_copy:
-#     src: C:\Program Files (x86)\Micro Focus\Enterprise Server\etc\cas\dfhdrdat
-#     dest: C:\MFSamples\CICS\system\
-#     remote_src: true
-#   tags: es
-
 - name: Generate DFHDRDAT in CICS System Directory
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\caspcrd.exe" -c'
@@ -304,13 +297,6 @@
     chdir: C:\MFSamples\IMS
   when: edVer | int >= 120
   tags: es
-
-# - name: Copy DFHDRDAT into IMS System Directory
-#   ansible.windows.win_copy:
-#     src: C:\Program Files (x86)\Micro Focus\Enterprise Server\etc\cas\dfhdrdat
-#     dest: C:\MFSamples\IMS\system\
-#     remote_src: true
-#   tags: es
 
 - name: Generate DFHDRDAT in IMS System Directory
   win_command:
