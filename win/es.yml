@@ -268,12 +268,12 @@
 - name: Generate DFHDRDAT in CICS System Directory
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\caspcrd.exe" -c'
-    chdir: C:\MFSamples\CICS
+    chdir: C:\MFSamples\CICS\system
   tags: es
 
 - name: Import CICS Resources
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\casrdtup.exe" /fCICS.rdt /opC:\MFSamples\CICS\system /o'
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\casrdtup.exe" /f"C:\MFSamples\CICS\CICS.rdt /op"C:\MFSamples\CICS\system" /o'
     chdir: C:\MFSamples\CICS
   tags: es
 
@@ -301,12 +301,12 @@
 - name: Generate DFHDRDAT in IMS System Directory
   win_command:
     cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\caspcrd.exe" -c'
-    chdir: C:\MFSamples\IMS
+    chdir: C:\MFSamples\IMS\system
   tags: es
 
 - name: Import CICS Resources
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\casrdtup.exe" /fCICS.rdt /opC:\MFSamples\IMS\system /o'
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\casrdtup.exe" /f"C:\MFSamples\IMS\CICS.rdt" /op"C:\MFSamples\IMS\system" /o'
     chdir: C:\MFSamples\IMS
   tags: es
 

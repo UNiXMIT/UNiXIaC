@@ -162,7 +162,7 @@
 - name: Generate DFHDRDAT in CICS System Directory
   shell: '. {{ installPath }}/bin/cobsetenv ; cd /home/{{ myUsername }}/MFSupport/MFSamples/CICS/system ; caspcrd -c'
 
-- name: Import CICS RDT
+- name: Import CICS Resources
   shell: '. {{ installPath }}/bin/cobsetenv ; cd /home/{{ myUsername }}/MFSupport/MFSamples/CICS ; casrdtup /fCICS.rdt /op/home/{{ myUsername }}/MFSupport/MFSamples/CICS/system /o'
 
 - name: Import IMS Region XML
@@ -180,7 +180,7 @@
 - name: Generate DFHDRDAT in IMS System Directory
   shell: '. {{ installPath }}/bin/cobsetenv ; cd /home/{{ myUsername }}/MFSupport/MFSamples/IMS/system ; caspcrd -c'
 
-- name: Import CICS RDT
+- name: Import CICS Resources
   shell: '. {{ installPath }}/bin/cobsetenv ; cd /home/{{ myUsername }}/MFSupport/MFSamples/IMS ; casrdtup /fCICS.rdt /op/home/{{ myUsername }}/MFSupport/MFSamples/IMS/system /o'
 
 - name: Copy IMS MFDEMO Files
