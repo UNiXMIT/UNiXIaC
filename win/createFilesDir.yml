@@ -360,6 +360,15 @@
   delay: 30
   until: result is not failed
 
+- name: Download CICS.rdt
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/CICS.rdt
+    dest: C:\MFSamples\CICS\CICS.rdt
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Everyone permissions on CICS
   win_acl:
     user: Everyone
@@ -424,6 +433,15 @@
   win_get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/IMS.json
     dest: C:\MFSamples\IMS
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download CICS.rdt
+  win_get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/CICS.rdt
+    dest: C:\MFSamples\IMS\CICS.rdt
   register: result
   retries: 5
   delay: 30

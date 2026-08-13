@@ -588,6 +588,16 @@
   delay: 30
   until: result is not failed
 
+- name: Download CICS.rdt
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/CICS.rdt
+    dest: /home/{{ myUsername }}/MFSupport/MFSamples/CICS/CICS.rdt
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
 - name: Create IMS
   file:
     path: "/home/{{ myUsername }}/MFSupport/MFSamples/IMS"
@@ -654,6 +664,16 @@
   get_url:
     url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/IMS.json
     dest: /home/{{ myUsername }}/MFSupport/MFSamples/IMS/IMS.json
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Download CICS.rdt
+  get_url:
+    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/CICS.rdt
+    dest: /home/{{ myUsername }}/MFSupport/MFSamples/IMS/CICS.rdt
     mode: '0775'
   register: result
   retries: 5
