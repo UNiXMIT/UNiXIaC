@@ -232,14 +232,14 @@
 
 - name: Import JCL Region XML w/RFA
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCLRFA.xml D SYSAD SYSAD'
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCLRFA.xml D SYSAD SYSAD'
     chdir: C:\MFSamples\JCL
   when: edVer | int >= 100 and edVer | int <= 110
   tags: es
 
 - name: Import JCL Region JSON
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.json D SYSAD SYSAD'
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\JCL\JCL.json D SYSAD SYSAD'
     chdir: C:\MFSamples\JCL
   when: edVer | int >= 120
   tags: es
@@ -253,14 +253,14 @@
 
 - name: Import CICS Region XML w/RFA
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\CICS\CICSRFA.xml D SYSAD SYSAD'
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\CICS\CICSRFA.xml D SYSAD SYSAD'
     chdir: C:\MFSamples\CICS
   when: edVer | int >= 100 and edVer | int <= 110
   tags: es
 
 - name: Import CICS Region JSON
   win_command:
-    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Developer\bin\mfds.exe" -g 5 C:\MFSamples\CICS\CICS.json D SYSAD SYSAD'
+    cmd: '"C:\Program Files (x86)\Micro Focus\Enterprise Server\bin\mfds.exe" -g 5 C:\MFSamples\CICS\CICS.json D SYSAD SYSAD'
     chdir: C:\MFSamples\CICS
   when: edVer | int >= 120
   tags: es
@@ -357,7 +357,7 @@
 
 - name: Enable ESCWA Listen All
   community.windows.win_lineinfile:
-    path: C:\ProgramData\Micro Focus\Enterprise Server\ESCWA\commonwebadmin.json
+    path: C:\ProgramData\Micro Focus\Enterprise Developer\ESCWA\commonwebadmin.json
     regex: 'MfRequestedEndpoint'
     line: '    "MfRequestedEndpoint" : "tcp:*:10086",'
   tags: es
