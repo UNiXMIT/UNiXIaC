@@ -3,6 +3,7 @@
 
 - [Overview](#overview)
 - [AWS Instance Creation](#aws-instance-creation)
+    - [Optional PU Installers (Windows ED/ES)](#optional-pu-installers-windows-edes)
     - [Additional Details](#additional-details)
 - [Supported Products](#supported-os--products)
 - [Stopping/Terminating Instances](#stoppingterminating-instances)
@@ -38,6 +39,30 @@
 ![6](images/6.png)
 
 > **NOTE:** If it failed elsewhere in the script, report the issue (including the Task number) to an admin to check the problem.  
+
+### Optional PU Installers (Windows ED/ES)
+For Windows ED/ES builds, the task now supports optional extra PU installers from:
+
+```
+C:\MFInstallers\PU
+```
+
+How it works:
+1. The task checks whether `C:\MFInstallers\PU` exists.
+2. If the folder does not exist, the PU step is skipped.
+3. If the folder exists but contains no `.exe` files, the PU step is skipped.
+4. If the folder contains one or more `.exe` files, each installer is executed silently in a loop.
+
+Execution order:
+1. Base ED/ES install runs first.
+2. Optional PU installers from `C:\MFInstallers\PU` run after the base install.
+
+Usage:
+1. Start the Windows ED/ES task.
+2. After the instance and installer directories are created, upload any PU installer `.exe` files to `C:\MFInstallers\PU` using SFTP.
+3. Ensure uploads are complete before the ED/ES install phase reaches the PU step.
+
+Each PU installer is launched with quiet install arguments and writes a log file to the same folder.
 
 ### Additional Details
 - Windows EC2 instances are accessible via RDP using the 'support' user and the usual password.  
