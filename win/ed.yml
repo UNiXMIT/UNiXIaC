@@ -247,12 +247,14 @@
       register: puInstallers
       when: puDir.stat.exists
 
-    - name: Install {{ item.filename }}
+    - name: Install PU installer(s)
       win_package:
         path: '{{ item.path }}'
         state: present
         arguments: /q /log C:\MFInstallers\PU\{{ item.filename }}.log /norestart
       loop: '{{ puInstallers.files }}'
+      loop_control:
+        label: '{{ item.filename }}'
       when:
         - puDir.stat.exists
         - puInstallers.files is defined
