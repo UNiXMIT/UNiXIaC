@@ -478,6 +478,11 @@
     path: C:\MFInstallers
     state: directory
 
+- name: Create PU
+  win_file:
+    path: C:\MFInstallers\PU
+    state: directory
+
 - name: Everyone permissions on MFInstallers
   win_acl:
     user: Everyone
