@@ -233,6 +233,34 @@
       failed_when: result.rc not in [0, 3010, 5385]
   tags: edpu
 
+- name: Install Additional ED PU Installers
+  block:
+    - name: Check if C:\MFInstallers\PU directory exists
+      ansible.windows.win_stat:
+        path: C:\MFInstallers\PU
+      register: puDir
+
+    - name: Find installers in C:\MFInstallers\PU
+      ansible.windows.win_find:
+        paths: C:\MFInstallers\PU
+        patterns: '*.exe'
+      register: puInstallers
+      when: puDir.stat.exists
+
+    - name: Install {{ item.filename }}
+      win_package:
+        path: '{{ item.path }}'
+        state: present
+        arguments: /q /log C:\MFInstallers\PU\{{ item.filename }}.log /norestart
+      loop: '{{ puInstallers.files }}'
+      when:
+        - puDir.stat.exists
+        - puInstallers.files is defined
+        - puInstallers.files | length > 0
+      register: result
+      failed_when: result.rc not in [0, 3010, 5385]
+  tags: ed
+
 - name: Create Micro Focus Directory
   ansible.windows.win_file:
     path: C:\Program Files (x86)\Micro Focus
