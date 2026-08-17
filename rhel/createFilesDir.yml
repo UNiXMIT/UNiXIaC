@@ -351,16 +351,6 @@
   delay: 30
   until: result is not failed
 
-- name: Download demosit.sh
-  get_url:
-    url: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/linux/MFScripts/demosit.sh
-    dest: "/home/{{ myUsername }}/MFSupport/MFScripts/demosit.sh"
-    mode: '0775'
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
 - name: Download CTFdump.zip
   ansible.builtin.unarchive:
     src: https://raw.githubusercontent.com/UNiXMIT/UNiXMF/main/windows/MFScripts/CTFdump.zip
