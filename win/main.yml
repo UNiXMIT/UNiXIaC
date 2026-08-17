@@ -85,6 +85,24 @@
   hosts: local
   gather_facts: no
   vars:
+    semStatus: Creating Filesystem Structure
+  tasks:
+  - name: Import semStatus.yml
+    import_tasks: semStatus.yml
+  tags: default
+
+- name: Create Support Files and Directories
+  hosts: 'SEM{{ semaphore_vars.task_details.id }}'
+  gather_facts: no
+  tasks:
+  - name: Import createFilesDir.yml
+    import_tasks: createFilesDir.yml
+  tags: default
+
+- name: semStatus Update
+  hosts: local
+  gather_facts: no
+  vars:
     semStatus: Software Installation
   tasks:
   - name: Import semStatus.yml
@@ -193,24 +211,6 @@
   - name: Import vscode.yml
     import_tasks: vscode.yml
   no_log: True
-  tags: default
-
-- name: semStatus Update
-  hosts: local
-  gather_facts: no
-  vars:
-    semStatus: Creating Filesystem Structure
-  tasks:
-  - name: Import semStatus.yml
-    import_tasks: semStatus.yml
-  tags: default
-
-- name: Create Support Files and Directories
-  hosts: 'SEM{{ semaphore_vars.task_details.id }}'
-  gather_facts: no
-  tasks:
-  - name: Import createFilesDir.yml
-    import_tasks: createFilesDir.yml
   tags: default
 
 - name: semStatus Update
