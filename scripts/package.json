@@ -5,7 +5,8 @@
   "main": "semPU.js",
   "scripts": {
     "dryrun": "node semPU.js --dryrun",
-    "start": "node semPU.js"
+    "start": "node semPU.js",
+    "description": "node semTest.js"
   },
   "author": "UNiXMIT",
   "type": "commonjs",
