@@ -60,7 +60,6 @@
     name:
       - '@Development tools'
       - wget
-      - curl
       - cronie
       - dos2unix
       - htop
@@ -70,20 +69,16 @@
       - tcpdump
       - ed
       - tmux
-      - openconnect
       - jq
       - python3
       - python3-pip
       - expect
-      - postgresql
       - postgresql-odbc
       - net-tools
       - lsof
       - xterm
       - xauth
       - pam
-      - webkit2gtk3
-      - java-latest-openjdk
       - libnsl
       - libxcrypt
       - libncurses*
@@ -91,30 +86,10 @@
       - systemd-libs
       - podman
       - buildah
-      - libnsl.i686
-      - libxcrypt.i686
-      - libgcc.i686
-      - ncurses-libs.i686
-      - zlib.i686
-      - systemd-libs.i686
-      - 'libstdc++-devel.i686'
-      - glibc-devel.i686
-      - glibc.i686
-      - pam.i686
       - unixODBC-devel
-      - libxcrypt-compat.i686
       - libxcrypt-compat
+      - java-26-amazon-corretto
     state: present
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: RHEL>=8 Remove Default Java
-  package:
-    name: 
-      - java*
-    state: absent
   register: result
   retries: 5
   delay: 30
