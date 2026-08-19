@@ -40,3 +40,8 @@
     arch: 'arm64'
     instType: '{{ instanceTypeARM }}'
   when: "'amd' not in ansible_run_tags"
+
+- name: Set Instance Name ROCKY10
+  set_fact:
+    imageName: ROCKY10
+  when: "'rocky10' in ansible_run_tags"

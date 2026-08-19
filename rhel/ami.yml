@@ -33,3 +33,13 @@
       virtualization-type: hvm
   register: amis
   tags: rhel10
+
+- name: Get latest Rocky 10 AMI
+  amazon.aws.ec2_ami_info:
+    region: '{{ awsRegion }}'
+    filters:
+      name: Rocky-10-EC2-Base*
+      architecture: '{{ arch }}'
+      virtualization-type: hvm
+  register: amis
+  tags: rocky10
