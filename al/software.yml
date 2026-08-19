@@ -24,7 +24,7 @@
 
 - name: Download MSSQL ODBC Driver Repo
   get_url:
-    url: https://packages.microsoft.com/config/rhel/{{ ansible_facts.distribution_major_version }}/prod.repo
+    url: https://packages.microsoft.com/config/rhel/9/prod.repo
     dest: /etc/yum.repos.d/mssql-release.repo
     mode: '0775'
   when: "'arm' not in ansible_run_tags"
@@ -82,26 +82,29 @@
       - xterm
       - xauth
       - pam
+      - webkit2gtk3
+      - java-latest-openjdk
+      - libnsl
+      - libxcrypt
+      - libncurses*
+      - PackageKit-gtk3-module
+      - systemd-libs
+      - podman
+      - buildah
+      - libnsl.i686
+      - libxcrypt.i686
+      - libgcc.i686
+      - ncurses-libs.i686
+      - zlib.i686
+      - systemd-libs.i686
+      - 'libstdc++-devel.i686'
+      - glibc-devel.i686
+      - glibc.i686
+      - pam.i686
+      - unixODBC-devel
+      - libxcrypt-compat.i686
+      - libxcrypt-compat
     state: present
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-# - name: RHEL<=7 Package installation
-#   package:
-#     name: 
-#       - java-11-openjdk
-#       - libcanberra-gtk3
-#       - webkitgtk4
-#     state: present
-#   when: ansible_facts['distribution_major_version'] | int <= 7
-
-- name: RHEL<=8 Package installation
-  package:
-    name: spax
-    state: present
-  when: ansible_facts['distribution_major_version'] | int <= 8
   register: result
   retries: 5
   delay: 30
@@ -112,110 +115,6 @@
     name: 
       - java*
     state: absent
-  when: ansible_facts['distribution_major_version'] | int >= 8
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: RHEL>=8 Package installation
-  package:
-    name: 
-      - java-latest-openjdk
-      - libnsl
-      - libxcrypt
-      - libncurses*
-      - PackageKit-gtk3-module
-      - systemd-libs
-      - podman
-      - buildah
-    state: present
-  when: ansible_facts['distribution_major_version'] | int >= 8
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: RHEL>=8 and RHEL<=9 Package installation
-  package:
-    name: webkit2gtk3
-    state: present
-  when: 
-    - ansible_facts['distribution_major_version'] | int >= 8
-    - ansible_facts['distribution_major_version'] | int <= 9
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: RHEL>=8 and RHEL<=9 Package installation NON-ARM
-  package:
-    name: 
-      - libnsl.i686
-      - libxcrypt.i686
-      - libgcc.i686
-      - ncurses-libs.i686
-      - zlib.i686
-      - systemd-libs.i686
-    state: present
-  when: 
-    - ansible_facts['distribution_major_version'] | int >= 8
-    - ansible_facts['distribution_major_version'] | int <= 9
-    - "'arm' not in ansible_run_tags"
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: Package installation RHEL<=9 NON-ARM
-  package:
-    name:
-      - 'libstdc++-devel.i686'
-      - glibc-devel.i686
-      - glibc.i686
-      - pam.i686
-      - unixODBC-devel
-    state: present
-  when:
-    - "'arm' not in ansible_run_tags"
-    - ansible_facts['distribution_major_version'] | int <= 9
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: RHEL=9 Package installation NON-ARM
-  package:
-    name: 
-      - libxcrypt-compat.i686
-    state: present
-  when: 
-    - ansible_facts['distribution_major_version'] | int == 9
-    - "'arm' not in ansible_run_tags"
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: RHEL>=9 Package installation
-  package:
-    name: 
-      - libxcrypt-compat
-    state: present
-  when: ansible_facts['distribution_major_version'] | int >= 9
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: unixODBC installation RHEL>=10 NON-ARM
-  dnf:
-    name: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi10/10/x86_64/codeready-builder/os/Packages/u/unixODBC-devel-2.3.12-6.el10.x86_64.rpm
-    state: present
-    disable_gpg_check: yes
-  when: 
-    - "'arm' not in ansible_run_tags"
-    - ansible_facts['distribution_major_version'] | int >= 10
   register: result
   retries: 5
   delay: 30
