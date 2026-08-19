@@ -28,3 +28,16 @@
   set_fact:
     vmNum: 1
   when: vmCount is not defined or (vmCount | int) == 0
+
+- name: Set Instance Name Based On Tag
+  vars:
+    imageNameByTag:
+      wins2019: WINS2019
+      wins2022: WINS2022
+      wins2025: WINS2025
+  set_fact:
+    imageName: '{{ item.value }}'
+  loop: '{{ imageNameByTag | dict2items }}'
+  when: item.key in ansible_run_tags
+  loop_control:
+    label: '{{ item.key }}'

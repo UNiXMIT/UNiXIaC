@@ -40,3 +40,14 @@
     arch: 'arm64'
     instType: '{{ instanceTypeARM }}'
   when: "'amd' not in ansible_run_tags"
+
+- name: Set Instance Name Based On Tag
+  vars:
+    imageNameByTag:
+      al2023: AL2023
+  set_fact:
+    imageName: '{{ item.value }}'
+  loop: '{{ imageNameByTag | dict2items }}'
+  when: item.key in ansible_run_tags
+  loop_control:
+    label: '{{ item.key }}'

@@ -28,3 +28,14 @@
   set_fact:
     vmNum: 1
   when: vmCount is not defined or (vmCount | int) == 0
+
+- name: Set Instance Name Based On Tag
+  vars:
+    imageNameByTag:
+      sles15: SLES15
+  set_fact:
+    imageName: '{{ item.value }}'
+  loop: '{{ imageNameByTag | dict2items }}'
+  when: item.key in ansible_run_tags
+  loop_control:
+    label: '{{ item.key }}'
