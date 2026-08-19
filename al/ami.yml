@@ -4,7 +4,7 @@
       - amazon
     region: '{{ awsRegion }}'
     filters:
-      name: al2023*
+      name: al2023-ami-2023*
       architecture: '{{ arch }}'
       virtualization-type: hvm
   register: amis
