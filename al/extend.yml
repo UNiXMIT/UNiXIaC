@@ -1,0 +1,50 @@
+- name: Create extend directory
+  file:
+    path: '{{ installPath }}'
+    state: directory
+    owner: '{{ myUsername }}'
+    group: '{{ myUsername }}'
+    mode: '0775'
+  become: yes
+
+- name: Get {{ installerName }} Download URL from S3
+  amazon.aws.s3_object:
+    # profile: '{{ awsProfile }}'
+    bucket: mturner
+    mode: geturl
+    object: '{{ S3Prefix }}{{ installerName }}'
+    region: eu-west-2
+    expiry: 4000
+    sig_v4: true
+  register: s3
+  delegate_to: localhost
+
+- name: Download {{ installerName }}
+  ansible.builtin.get_url:
+    url: '{{ s3.url }}'
+    dest: '{{ installPath }}'
+    owner: '{{ myUsername }}' 
+    group: '{{ myUsername }}'
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Add extend Tags
+  amazon.aws.ec2_tag:
+    # aws_profile: '{{ awsProfile }}'
+    region: "{{ hostvars['localhost']['awsRegion'] }}"
+    resource: '{{ item }}'
+    tags:
+      Name: "{{ semaphore_vars.task_details.username|upper }}-{{ imageName }} {{ productName }}"
+      extend: '{{ installerName }}'
+    state: present
+  loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
+  delegate_to: localhost
+    
+- name: Install {{ installerName }}
+  shell: printf 'y\n{{ installPath }}\n' | {{ installPath }}{{ installerName }}
+
+- name: Activate Licenses
+  shell: printf '{{ CODE }}\n{{ KEY }}\n' | {{ installPath }}bin/activator
