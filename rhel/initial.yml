@@ -41,7 +41,16 @@
     instType: '{{ instanceTypeARM }}'
   when: "'amd' not in ansible_run_tags"
 
-- name: Set Instance Name ROCKY10
+- name: Set Instance Name Based On Tag
+  vars:
+    imageNameByTag:
+      rhel9: RHEL9
+      rhel10: RHEL10
+      rocky9: ROCKY9
+      rocky10: ROCKY10
   set_fact:
-    imageName: ROCKY10
-  when: "'rocky10' in ansible_run_tags"
+    imageName: '{{ item.value }}'
+  loop: '{{ imageNameByTag | dict2items }}'
+  when: item.key in ansible_run_tags
+  loop_control:
+    label: '{{ item.key }}'
