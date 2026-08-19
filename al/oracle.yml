@@ -1,0 +1,70 @@
+- name: Set Oracle variables
+  set_fact:
+    oracle:
+      "10":
+        base_url: "https://download.oracle.com/otn_software/linux/instantclient/2326100/"
+        version: "23.26.1.0.0"
+      "9":
+        base_url: "https://download.oracle.com/otn_software/linux/instantclient/2326100/"
+        version: "23.26.1.0.0"
+
+    oracle_packages:
+      - basic
+      - odbc
+      - sqlplus
+      - devel
+
+    oracle_precomp:
+      "10": "oracle-instantclient-precomp-23.26.1.0.0-1.el10.x86_64.rpm"
+      "9": "oracle-instantclient-precomp-23.26.1.0.0-1.el9.x86_64.rpm"
+
+    oracle_precomp_url: "https://mturner.s3.eu-west-2.amazonaws.com/Public/Oracle/InstantClient/23/"
+
+- name: Install Oracle Instant Client packages
+  dnf:
+    name: "{{ oracle[ansible_facts['distribution_major_version']].base_url }}oracle-instantclient-{{ item }}-{{ oracle[ansible_facts['distribution_major_version']].version }}-1.el{{ ansible_facts['distribution_major_version'] }}.x86_64.rpm"
+    state: present
+    disable_gpg_check: yes
+  loop: "{{ oracle_packages }}"
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+  when: ansible_facts['distribution_major_version'] in ['9','10']
+
+- name: Ensure /opt/oracle exists
+  file:
+    path: /opt/oracle
+    state: directory
+    mode: '0777'
+
+- name: Download Oracle Instant Client Precompiler
+  get_url:
+    url: "{{ oracle_precomp_url }}{{ oracle_precomp[ansible_facts['distribution_major_version']] }}"
+    dest: /opt/oracle/oracle-instantclient-precomp.x86_64.rpm
+    owner: "{{ myUsername }}"
+    group: "{{ myUsername }}"
+    mode: '0775'
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+  when: ansible_facts['distribution_major_version'] in ['9','10']
+
+- name: Install Oracle Instant Client Precompiler
+  yum:
+    name: /opt/oracle/oracle-instantclient-precomp.x86_64.rpm
+    state: present
+    disable_gpg_check: yes
+
+- name: Add Oracle DSN in odbc.ini
+  blockinfile:
+    path: /etc/odbc.ini
+    marker: "# {mark} ANSIBLE MANAGED BLOCK Oracle"
+    block: |
+      [oracle]
+      Description     = Oracle ODBC Connection
+      Driver          = /usr/lib/oracle/23/client64/lib/libsqora.so.23.1
+      Database        = {{ myUsername }}
+      Servername      = 127.0.0.1:1521/FREE
+      UserID          = {{ myUsername }}

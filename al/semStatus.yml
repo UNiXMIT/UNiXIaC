@@ -1,0 +1,9 @@
+- name: semStatus {{ semStatus }}
+  amazon.aws.ec2_tag:
+    # aws_profile: '{{ awsProfile }}'
+    region: '{{ awsRegion }}'
+    resource: '{{ item }}'
+    tags:
+      SemStatus: '{{ semStatus }}'
+    state: present
+  loop: '{{ ec2.instance_ids }}'

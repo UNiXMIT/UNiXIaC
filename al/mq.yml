@@ -1,0 +1,42 @@
+- name: Create Directory for MQ
+  file:
+    path: "/opt/ibm/mq"
+    state: directory
+    mode: '0755'   
+  become: yes 
+
+- name: Download IBM MQ Client
+  ansible.builtin.get_url:
+    url: https://mturner.s3.eu-west-2.amazonaws.com/Public/MQ/9.3.5.0-IBM-MQC-Redist-LinuxX64.tar.gz
+    dest: /opt/ibm/mq/IBM-MQC-Redist-LinuxX64.tar.gz
+    mode: '0755'
+    timeout: 60
+  become: yes
+  register: result
+  retries: 5
+  delay: 30
+  until: result is not failed
+
+- name: Extract IBM MQ Client
+  ansible.builtin.unarchive:
+    src: /opt/ibm/mq/IBM-MQC-Redist-LinuxX64.tar.gz
+    dest: /opt/ibm/mq
+    remote_src: yes
+  become: yes
+
+- name: Change Ownership of /opt/ibm/mq Directory
+  file:
+    path: /opt/ibm/mq
+    state: directory
+    recurse: yes
+    mode: '0755'
+  become: yes
+
+- name: Set MQ Environment
+  copy:
+    dest: /etc/profile.d/mq.sh
+    content: |
+      #!/bin/bash
+      export PATH=$PATH:/opt/ibm/mq/bin
+      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/ibm/mq/lib64
+  become: yes

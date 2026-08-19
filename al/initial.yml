@@ -1,0 +1,42 @@
+- name: EMEA Region
+  set_fact:
+    awsRegion: '{{ regionEMEA }}'
+    availabilityZone: '{{ azEMEA }}'
+    securityGroups: '{{ securityGroupsEMEA }}'
+  when: userRegion | default("1") == "1" or userRegion | default("1") not in ["1", "2", "3"]
+
+- name: AMS Region
+  set_fact:
+    awsRegion: '{{ regionAMS }}'
+    availabilityZone: '{{ azAMS }}'
+    securityGroups: '{{ securityGroupsAMS }}'
+  when: userRegion | default("1") == "2"
+
+- name: APJ Region
+  set_fact:
+    awsRegion: '{{ regionAPJ }}'
+    availabilityZone: '{{ azAPJ }}'
+    securityGroups: '{{ securityGroupsAPJ }}'
+  when: userRegion | default("1") == "3"    
+
+- name: VM Count
+  set_fact:
+    vmNum: '{{ vmCount }}'
+  when: vmCount is defined
+
+- name: Default VM Count
+  set_fact:
+    vmNum: 1
+  when: vmCount is not defined or (vmCount | int) == 0
+
+- name: AMD Instance
+  set_fact:
+    arch: 'x86_64'
+    instType: '{{ instanceType }}'
+  when: "'arm' not in ansible_run_tags"
+
+- name: ARM Instance
+  set_fact:
+    arch: 'arm64'
+    instType: '{{ instanceTypeARM }}'
+  when: "'amd' not in ansible_run_tags"

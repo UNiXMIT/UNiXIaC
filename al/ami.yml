@@ -1,0 +1,11 @@
+- name: Get latest Amazon Linux 2023 AMI
+  amazon.aws.ec2_ami_info:
+    owners:
+      - amazon
+    region: '{{ awsRegion }}'
+    filters:
+      name: al2023-ami-2023*
+      architecture: x86_64
+      virtualization-type: hvm
+  register: amis
+  tags: al2023
