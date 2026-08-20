@@ -65,57 +65,32 @@
       export PATH="$PATH:/opt/mssql-tools/bin"
   when: "'arm' not in ansible_run_tags"
 
-- name: Package installation
-  package:
-    name:
-      - '@Development tools'
-      - wget
-      - curl
-      - cronie
-      - dos2unix
-      - htop
-      - libaio-devel
-      - glibc-devel
-      - glibc
-      - tcpdump
-      - ed
-      - tmux
-      - openconnect
-      - jq
-      - python3
-      - python3-pip
-      - expect
-      - postgresql
-      - postgresql-odbc
-      - net-tools
-      - lsof
-      - xterm
-      - xauth
-      - pam
-    state: present
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-# - name: RHEL<=7 Package installation
-#   package:
-#     name: 
-#       - java-11-openjdk
-#       - libcanberra-gtk3
-#       - webkitgtk4
-#     state: present
-#   when: ansible_facts['distribution_major_version'] | int <= 7
-
-- name: RHEL<=8 Package installation
-  package:
-    name: spax
-    state: present
-  when: ansible_facts['distribution_major_version'] | int <= 8
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
+- name: Build package list
+  vars:
+    osVer: "{{ ansible_facts['distribution_major_version'] | int }}"
+    isARM: "{{ 'arm' in ansible_run_tags }}"
+    isROCKY10: "{{ ansible_facts['distribution'] == 'Rocky' and ansible_facts['distribution_major_version'] | int == 10 }}"
+  set_fact:
+    rhel_packages: >-
+      {{
+        ['@Development tools', 'wget', 'curl', 'cronie', 'dos2unix', 'htop',
+         'libaio-devel', 'glibc-devel', 'glibc', 'tcpdump', 'ed', 'tmux',
+         'openconnect', 'jq', 'python3', 'python3-pip', 'expect',
+         'postgresql', 'postgresql-odbc', 'net-tools', 'lsof', 'xterm', 'xauth', 'pam']
+        + (['spax'] if osVer <= 8 else [])
+        + (['java-latest-openjdk', 'libnsl', 'libxcrypt', 'libncurses*',
+            'PackageKit-gtk3-module', 'systemd-libs', 'podman', 'buildah']
+           if osVer >= 8 else [])
+        + (['webkit2gtk3'] if osVer >= 8 and osVer <= 9 else [])
+        + (['libnsl.i686', 'libxcrypt.i686', 'libgcc.i686',
+            'ncurses-libs.i686', 'zlib.i686', 'systemd-libs.i686']
+           if (osVer >= 8 and osVer <= 9 or isROCKY10) and not isARM else [])
+        + (['libstdc++-devel.i686', 'glibc-devel.i686', 'glibc.i686', 'pam.i686', 'unixODBC-devel']
+           if (osVer <= 9 or isROCKY10) and not isARM else [])
+        + (['libxcrypt-compat.i686']
+           if (osVer == 9 or isROCKY10) and not isARM else [])
+        + (['libxcrypt-compat'] if osVer >= 9 else [])
+      }}
 
 - name: RHEL>=8 Remove Default Java
   package:
@@ -128,91 +103,10 @@
   delay: 30
   until: result is not failed
 
-- name: RHEL>=8 Package installation
+- name: Package installation
   package:
-    name: 
-      - java-latest-openjdk
-      - libnsl
-      - libxcrypt
-      - libncurses*
-      - PackageKit-gtk3-module
-      - systemd-libs
-      - podman
-      - buildah
+    name: "{{ rhel_packages }}"
     state: present
-  when: ansible_facts['distribution_major_version'] | int >= 8
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: RHEL>=8 and RHEL<=9 Package installation
-  package:
-    name: webkit2gtk3
-    state: present
-  when: 
-    - ansible_facts['distribution_major_version'] | int >= 8
-    - ansible_facts['distribution_major_version'] | int <= 9
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: RHEL>=8 and RHEL<=9 Package installation NON-ARM
-  package:
-    name: 
-      - libnsl.i686
-      - libxcrypt.i686
-      - libgcc.i686
-      - ncurses-libs.i686
-      - zlib.i686
-      - systemd-libs.i686
-    state: present
-  when: 
-    - ansible_facts['distribution_major_version'] | int >= 8
-    - ansible_facts['distribution_major_version'] | int <= 9
-    - "'arm' not in ansible_run_tags"
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: Package installation RHEL<=9 NON-ARM
-  package:
-    name:
-      - 'libstdc++-devel.i686'
-      - glibc-devel.i686
-      - glibc.i686
-      - pam.i686
-      - unixODBC-devel
-    state: present
-  when:
-    - "'arm' not in ansible_run_tags"
-    - ansible_facts['distribution_major_version'] | int <= 9
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: RHEL=9 Package installation NON-ARM
-  package:
-    name: 
-      - libxcrypt-compat.i686
-    state: present
-  when: 
-    - ansible_facts['distribution_major_version'] | int == 9
-    - "'arm' not in ansible_run_tags"
-  register: result
-  retries: 5
-  delay: 30
-  until: result is not failed
-
-- name: RHEL>=9 Package installation
-  package:
-    name: 
-      - libxcrypt-compat
-    state: present
-  when: ansible_facts['distribution_major_version'] | int >= 9
   register: result
   retries: 5
   delay: 30
