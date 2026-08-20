@@ -12,7 +12,7 @@
 
 ## Linux
 - default
-- [ rhel9, rhel10, sles15, ubuntu2204, ubuntu2404 ]
+- [ rhel9, rhel10, sles15, ubuntu2204, ubuntu2404, al2023, rocky9, rocky10 ]
 - [ amd, arm ]
     - ed
         - openldap
