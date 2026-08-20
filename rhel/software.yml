@@ -70,7 +70,7 @@
     osVer: "{{ ansible_facts['distribution_major_version'] | int }}"
     isARM: "{{ 'arm' in ansible_run_tags }}"
   set_fact:
-    rhel_packages: >-
+    rhelPackages: >-
       {{
         ['@Development tools', 'wget', 'curl', 'cronie', 'dos2unix', 'htop',
          'libaio-devel', 'glibc-devel', 'glibc', 'tcpdump', 'ed', 'tmux',
@@ -104,7 +104,7 @@
 
 - name: Package installation
   package:
-    name: "{{ rhel_packages }}"
+    name: "{{ rhelPackages }}"
     state: present
   register: result
   retries: 5
