@@ -107,8 +107,11 @@ const newValuesED = {
     installerNameRHEL: `setup_entdev_${configED.version}_patchupdate${configED.puFormatted}_${configED.linuxBuild}_redhat_x86_64`,
     installerNameRHEL64: `setup_entdev_${configED.version}_patchupdate${configED.puFormatted}_${configED.linuxBuild}_redhat_x64`,
     installerNameRHELARM: `setup_entdev_${configED.version}_patchupdate${configED.puFormatted}_${configED.linuxBuild}_redhat_arm64`,
+    installerNameROCKY: `setup_entdev_${configED.version}_patchupdate${configED.puFormatted}_${configED.linuxBuild}_rocky_x86_64`,
+    installerNameROCKY64: `setup_entdev_${configED.version}_patchupdate${configED.puFormatted}_${configED.linuxBuild}_rocky_x64`,
     installerNameSLES: `setup_entdev_${configED.version}_patchupdate${configED.puFormatted}_${configED.linuxBuild}_suse_x64`,
-    installerNameUBUNTU: `setup_entdev_${configED.version}_patchupdate${configED.puFormatted}_${configED.linuxBuild}_ubuntu_x64`
+    installerNameUBUNTU: `setup_entdev_${configED.version}_patchupdate${configED.puFormatted}_${configED.linuxBuild}_ubuntu_x64`,
+    installerNameAL: `setup_entdev_${configED.version}_patchupdate${configED.puFormatted}_${configED.linuxBuild}_amazon_x64`
 };
 
 const newValuesACU = {
@@ -206,6 +209,23 @@ async function createTemplates(data) {
         newArgs.push(`-e installPath=${newValuesED.installPath}`);
     }
 
+    const rocky = data.task_params.tags.find(t => t.includes("rocky"));
+    if (rocky && data.task_params.tags.includes("ed")) {
+        if (!data.task_params.tags.includes("arm")) {
+            data.name = `${rocky.toUpperCase()} - ED ${configED.version} PU ${configED.pu}`
+            if (configED.versionNumber >= 120) {
+                newArgs.push(`-e installerName=${newValuesED.installerNameROCKY64}`);
+            } else {
+                newArgs.push(`-e installerName=${newValuesED.installerNameROCKY}`);
+            }
+            
+        }
+        newArgs.push(`-e productName=${newValuesED.productName}`);
+        newArgs.push(`-e edVer=${configED.versionNumber}`);
+        newArgs.push(`-e S3Prefix=${newValuesED.S3PrefixPU}`);
+        newArgs.push(`-e installPath=${newValuesED.installPath}`);
+    }
+
     const sles = data.task_params.tags.find(t => t.includes("sles"));
     if (sles && data.task_params.tags.includes("ed")) {
         data.name = `${sles.toUpperCase()} - ED ${configED.version} PU ${configED.pu}`
@@ -227,6 +247,16 @@ async function createTemplates(data) {
         newArgs.push(`-e edVer=${configED.versionNumber}`);
         newArgs.push(`-e S3Prefix=${newValuesED.S3PrefixPU}`);
         newArgs.push(`-e installerName=${newValuesED.installerNameUBUNTU}`);
+        newArgs.push(`-e installPath=${newValuesED.installPath}`);
+    }
+
+    const al2023 = data.task_params.tags.find(t => t.includes("al2023"));
+    if (al2023 && data.task_params.tags.includes("ed")) {
+        data.name = `AL2023 - ED ${configED.version} PU ${configED.pu}`
+        newArgs.push(`-e productName=${newValuesED.productName}`);
+        newArgs.push(`-e edVer=${configED.versionNumber}`);
+        newArgs.push(`-e S3Prefix=${newValuesED.S3PrefixPU}`);
+        newArgs.push(`-e installerName=${newValuesED.installerNameAL}`);
         newArgs.push(`-e installPath=${newValuesED.installPath}`);
     }
 

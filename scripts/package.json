@@ -6,7 +6,7 @@
   "scripts": {
     "dryrun": "node semPU.js --dryrun",
     "start": "node semPU.js",
-    "description": "node semTest.js"
+    "description": "node semTestBuild.js"
   },
   "author": "UNiXMIT",
   "type": "commonjs",
