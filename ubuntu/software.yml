@@ -14,6 +14,12 @@
     line: "i386"
     create: yes
 
+- name: Clean APT lists
+  ansible.builtin.shell: |
+    apt-get clean
+    rm -rf /var/lib/apt/lists/*
+  changed_when: true
+
 - name: Update APT cache and install dependencies
   ansible.builtin.apt:
     name:
