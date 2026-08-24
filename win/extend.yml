@@ -1,5 +1,10 @@
 - name: AcuInstaller x64
   block:
+  - name: Initialise Installer Variables
+    set_fact:
+      installerName32:
+      installerName64:
+
   - name: Get {{ installerName }} Download URL from S3
     amazon.aws.s3_object:
       # profile: '{{ awsProfile }}'
@@ -42,6 +47,10 @@
 
 - name: AcuInstaller x86 + x64
   block:
+  - name: Initialise Installer Variables
+    set_fact:
+      installerName:
+
   - name: Get {{ installerName32 }} Download URL from S3
     amazon.aws.s3_object:
       # profile: '{{ awsProfile }}'

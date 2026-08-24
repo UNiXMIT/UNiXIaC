@@ -44,6 +44,8 @@ edVer
 ### extend
 installPath  
 installerName  
+installerName32  
+installerName64  
 S3Prefix  
 productName  
 CODE  
