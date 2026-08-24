@@ -101,6 +101,14 @@ Each PU installer is launched with quiet install arguments and writes a log file
 ### RHEL 10 ARM
 - ED 12.0  
 
+### ROCKY 9
+- ED 10.0 (PU 16 +) and 11.0 (PU 7 +)  
+- AcuCOBOL-GT extend 10.5.1  
+
+### ROCKY 10
+- ED 12.0  
+- AcuCOBOL-GT extend 11.0.0  
+
 ### SLES 15
 - ED 9.0, 10.0, 11.0 and 12.0  
 - AcuCOBOL-GT extend 10.4.0, 10.4.1, 10.5.0, 10.5.1 and 11.0.0  
@@ -112,6 +120,10 @@ Each PU installer is launched with quiet install arguments and writes a log file
 ### Ubuntu 24.04
 - ED 11.0 and 12.0  
 - AcuCOBOL-GT extend 11.0.0
+
+### Amazon Linux 2023
+- ED 10.0 (PU 16 +), 11.0 (PU 7 +) and 12.0  
+- AcuCOBOL-GT extend 11.0.0  
 
 > **NOTE:** Patch Updates will be added as they become GA.  
 
