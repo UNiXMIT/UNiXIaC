@@ -53,18 +53,6 @@
 
 - name: AcuInstaller x86 + x64
   block:
-  - name: Get {{ installerName32 }} Download URL from S3
-    amazon.aws.s3_object:
-      # profile: '{{ awsProfile }}'
-      bucket: mturner
-      mode: geturl
-      object: '{{ S3Prefix }}{{ installerName32 }}'
-      region: eu-west-2
-      expiry: 4000
-      sig_v4: true
-    register: s332
-    delegate_to: localhost
-  
   - name: Get {{ installerName64 }} Download URL from S3
     amazon.aws.s3_object:
       # profile: '{{ awsProfile }}'
@@ -77,18 +65,30 @@
     register: s364
     delegate_to: localhost
 
-  - name: Download {{ installerName32 }}
+  - name: Get {{ installerName32 }} Download URL from S3
+    amazon.aws.s3_object:
+      # profile: '{{ awsProfile }}'
+      bucket: mturner
+      mode: geturl
+      object: '{{ S3Prefix }}{{ installerName32 }}'
+      region: eu-west-2
+      expiry: 4000
+      sig_v4: true
+    register: s332
+    delegate_to: localhost
+  
+  - name: Download {{ installerName64 }}
     ansible.windows.win_get_url:
-      url: '{{ s332.url }}'
+      url: '{{ s364.url }}'
       dest: C:\AcuInstallers
     register: result
     retries: 5
     delay: 30
     until: result is not failed
   
-  - name: Download {{ installerName64 }}
+  - name: Download {{ installerName32 }}
     ansible.windows.win_get_url:
-      url: '{{ s364.url }}'
+      url: '{{ s332.url }}'
       dest: C:\AcuInstallers
     register: result
     retries: 5
@@ -106,16 +106,16 @@
       state: present
     loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
     delegate_to: localhost
+  
+  - name: Install {{ installerName64 }}
+    win_package:
+      path: C:\AcuInstallers\{{ installerName64 }}
+      state: present
+      arguments: /quiet StartAcuConnect=0 StartAcuServer=0 StartAcuToWeb=0 LaunchActivator=0 SetupType=Complete BisUserName={{ myUsername }} BisPassword={{ myPassword }}
 
   - name: Install {{ installerName32 }}
     win_package:
       path: C:\AcuInstallers\{{ installerName32 }}
-      state: present
-      arguments: /quiet StartAcuConnect=0 StartAcuServer=0 StartAcuToWeb=0 LaunchActivator=0 SetupType=Complete BisUserName={{ myUsername }} BisPassword={{ myPassword }}
-    
-  - name: Install {{ installerName64 }}
-    win_package:
-      path: C:\AcuInstallers\{{ installerName64 }}
       state: present
       arguments: /quiet StartAcuConnect=0 StartAcuServer=0 StartAcuToWeb=0 LaunchActivator=0 SetupType=Complete BisUserName={{ myUsername }} BisPassword={{ myPassword }}
   when: acuVer | int >= 1110
