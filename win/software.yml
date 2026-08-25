@@ -72,6 +72,8 @@
       powershell -NoProfile -ExecutionPolicy Bypass -Command "$c='C:\Program Files (x86)\clink';$p=[Environment]::GetEnvironmentVariable('Path','Machine');if(-not (($p -split ';') -contains $c)){[Environment]::SetEnvironmentVariable('Path', ($c + ';' + $p), 'Machine')}"
       "C:\Program Files (x86)\clink\clink" autorun -a install
       "C:\Program Files (x86)\clink\clink" set clink.logo none
+      "C:\Program Files (x86)\clink\clink" inject
+      "C:\Program Files (x86)\clink\clink" config prompt use agnoster
     dest: C:\Windows\enableClink.cmd
 
 - name: Create a shortcut to ADExplorer

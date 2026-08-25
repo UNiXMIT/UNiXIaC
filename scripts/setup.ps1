@@ -182,6 +182,8 @@ if ($currentPathExt -notlike "*.MSI*" -or $currentPathExt -notlike "*.PS1*") {
     )
 }
 $env:PATHEXT = "$currentPathExt;.MSI;.PS1"
+& "$clinkPath\clink" inject
+& "$clinkPath\clink" config prompt use agnoster
 
 # VS Code: Install Extensions and Settings
 $codePath = "C:\Program Files\Microsoft VS Code\bin"
