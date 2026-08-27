@@ -51,7 +51,7 @@ async function searchTemplates() {
             try {
                 const template = await fetchTemplate(summary.id);
                 if (JSON.stringify(template).includes(configSearch.searchString)) {
-                    matches.push(template.id);
+                    matches.push({ id: template.id, name: template.name });
                 }
             } catch (error) {
                 console.error(`Template ${summary.id} Error: ${error.message}`);
@@ -63,7 +63,10 @@ async function searchTemplates() {
     }
 
     if (matches.length) {
-        console.log(`Templates matching "${configSearch.searchString}": ${matches.join(", ")}`);
+        console.log(`Templates matching "${configSearch.searchString}": ${matches.map(m => m.id).join(", ")}`);
+        for (const match of matches) {
+            console.log(`${match.id} - ${match.name}`);
+        }
     } else {
         console.log(`No templates matched "${configSearch.searchString}"`);
     }
