@@ -4,9 +4,9 @@
   "description": "Script for creating Semaphore templates for Patch Updates",
   "main": "semPU.js",
   "scripts": {
-    "dryrun": "node semPU.js --dryrun",
-    "start": "node semPU.js",
-    "description": "node semTestBuild.js",
+    "pudryrun": "node semPU.js --dryrun",
+    "pu": "node semPU.js",
+    "testbuild": "node semTestBuild.js",
     "search": "node semSearch.js"
   },
   "author": "UNiXMIT",
