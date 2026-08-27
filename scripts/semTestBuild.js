@@ -1,5 +1,4 @@
 require('dotenv').config({ quiet: true });
-let cookieJar = "";
 
 function parseTemplateIds(value) {
     return String(value || "")
@@ -17,37 +16,14 @@ const configED = {
 
 const configAPI = {
     baseURL: process.env.BASEURL,
-    username: process.env.SEMUSER,
-    password: process.env.SEMPWD,
+    apitoken: process.env.SEMTOKEN,
     projectID: process.env.PROJECTID
 };
-
-async function login() {
-    try {
-        const response = await fetch(`${configAPI.baseURL}/auth/login`, {
-            method: "POST",
-            body: JSON.stringify({
-                auth: configAPI.username,
-                password: configAPI.password
-            }),
-            headers: {
-                "Content-type": "application/json"
-            }
-        });
-        if (!response.ok) {
-            throw new Error(`Login Response: ${response.status}`);
-        }
-        console.log("Login successful");
-        cookieJar = response.headers.get("set-cookie");
-    } catch (error) {
-        console.error(`Login Error: ${error.message}`);
-    }
-}
 
 async function fetchTemplate(templateId) {
     const response = await fetch(`${configAPI.baseURL}/project/${configAPI.projectID}/templates/${templateId}`, {
         headers: {
-            Cookie: cookieJar
+            Authorization: `Bearer ${configAPI.apitoken}`
         }
     });
 
@@ -111,7 +87,7 @@ async function updateDescription(templateId, description) {
         body: JSON.stringify(payload),
         headers: {
             "Content-type": "application/json",
-            Cookie: cookieJar
+            Authorization: `Bearer ${configAPI.apitoken}`
         }
     });
 
@@ -122,7 +98,7 @@ async function updateDescription(templateId, description) {
             body: JSON.stringify(fallbackPayload),
             headers: {
                 "Content-type": "application/json",
-                Cookie: cookieJar
+                Authorization: `Bearer ${configAPI.apitoken}`
             }
         });
     }
@@ -144,28 +120,9 @@ async function updateTemplateGroup(templateIds, description) {
     }
 }
 
-async function logout() {
-    try {
-        const response = await fetch(`${configAPI.baseURL}/auth/logout`, {
-            method: "POST",
-            headers: {
-                Cookie: cookieJar
-            }
-        });
-        if (!response.ok) {
-            throw new Error(`Logout Response: ${response.status}`);
-        } 
-        console.log("Logout successful");
-    } catch (error) {
-        console.error(`Logout Error: ${error.message}`);
-    }
-}
-
 async function run() {
-    await login();
     await updateTemplateGroup(configED.winTemp, configED.winDesc);
     await updateTemplateGroup(configED.linuxTemp, configED.linuxDesc);
-    await logout();
 }
 
 run();

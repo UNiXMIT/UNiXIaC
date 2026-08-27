@@ -1,6 +1,5 @@
 require('dotenv').config({ quiet: true });
 const dryRun = process.argv.includes("--dryrun");
-let cookieJar = "";
 const templateNumbers = process.env.TEMPLATENUMBERS
   .split(',')
   .map(n => Number(n.trim()));
@@ -43,41 +42,15 @@ const configACU = {
 
 const configAPI = {
     baseURL: process.env.BASEURL,
-    username: process.env.SEMUSER,
-    password: process.env.SEMPWD,
+    apitoken: process.env.SEMTOKEN,
     projectID: process.env.PROJECTID
 };
-
-async function login() {
-    try {
-        const response = await fetch(`${configAPI.baseURL}/auth/login`, {
-            method: "POST",
-            body: JSON.stringify({
-                auth: configAPI.username,
-                password: configAPI.password
-            }),
-            headers: {
-                "Content-type": "application/json"
-            }
-        });
-        if (!response.ok) {
-            throw new Error(`Login Response: ${response.status}`);
-        }
-        console.log("Login successful");
-        cookieJar = response.headers.get("set-cookie");
-        for (const template of templateNumbers) {
-            await fetchTemplates(template);
-        }
-    } catch (error) {
-        console.error(`Login Error: ${error.message}`);
-    }
-}
 
 async function fetchTemplates(templateNumber) {
     try {
         const response = await fetch(`${configAPI.baseURL}/project/${configAPI.projectID}/templates/${templateNumber}`, {
             headers: {
-                Cookie: cookieJar
+                Authorization: `Bearer ${configAPI.apitoken}`
             }
         });
         if (!response.ok) {
@@ -303,7 +276,7 @@ async function createTemplates(data) {
                 body: JSON.stringify(data),
                 headers: {
                     "Content-type": "application/json",
-                    Cookie: cookieJar
+                    Authorization: `Bearer ${configAPI.apitoken}`
                 }
             });
             if (!response.ok) {
@@ -316,26 +289,10 @@ async function createTemplates(data) {
     }
 }
 
-async function logout() {
-    try {
-        const response = await fetch(`${configAPI.baseURL}/auth/logout`, {
-            method: "POST",
-            headers: {
-                Cookie: cookieJar
-            }
-        });
-        if (!response.ok) {
-            throw new Error(`Logout Response: ${response.status}`);
-        } 
-        console.log("Logout successful");
-    } catch (error) {
-        console.error(`Logout Error: ${error.message}`);
-    }
-}
-
 async function run() {
-    await login();
-    await logout();
+    for (const template of templateNumbers) {
+        await fetchTemplates(template);
+    }
 }
 
 run();
