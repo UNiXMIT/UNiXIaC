@@ -13,7 +13,14 @@ const configED = {
     get puFormatted() {
         return this.pu.length === 1 ? "0" + this.pu : this.pu;
     },
-    vsVersion: process.env.VSVERSION,
+    get vsVersion() {
+        if (this.versionNumber <= 100 || (this.versionNumber == 110 && this.pu <= 4)) {
+            return "2022";
+        }
+        if ((this.versionNumber == 110 && this.pu >= 5) || this.versionNumber >= 120) {
+            return "2026";
+        }
+    },
     winBuild: process.env.WINBUILD,
     linuxBuild: process.env.LINUXBUILD
 };
