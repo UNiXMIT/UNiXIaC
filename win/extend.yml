@@ -1,17 +1,6 @@
-- name: Initialise Installer Variables x64
-  set_fact:
-    installerName32:
-    installerName64:
-  when: acuVer | int <= 1100
-
-- name: Initialise Installer Variables x86 + x64
-  set_fact:
-    installerName:
-  when: acuVer | int >= 1110
-
 - name: AcuInstaller x64
   block:
-  - name: Get {{ installerName }} Download URL from S3
+  - name: Get {{ installerName | default('') }} Download URL from S3
     amazon.aws.s3_object:
       # profile: '{{ awsProfile }}'
       bucket: mturner
@@ -23,7 +12,7 @@
     register: s3
     delegate_to: localhost
 
-  - name: Download {{ installerName }}
+  - name: Download {{ installerName | default('') }}
     ansible.windows.win_get_url:
       url: '{{ s3.url }}'
       dest: C:\AcuInstallers
@@ -44,16 +33,16 @@
     loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
     delegate_to: localhost
 
-  - name: Install {{ installerName }}
+  - name: Install {{ installerName | default('') }}
     win_package:
       path: C:\AcuInstallers\{{ installerName }}
       state: present
       arguments: ADDLOCAL=ALL WINDOWSVERSION=PostWindows7 /qb
-  when: acuVer | int <= 1100
+  when: acuVer | int < 1110
 
 - name: AcuInstaller x86 + x64
   block:
-  - name: Get {{ installerName64 }} Download URL from S3
+  - name: Get {{ installerName64 | default('') }} Download URL from S3
     amazon.aws.s3_object:
       # profile: '{{ awsProfile }}'
       bucket: mturner
@@ -65,7 +54,7 @@
     register: s364
     delegate_to: localhost
 
-  - name: Get {{ installerName32 }} Download URL from S3
+  - name: Get {{ installerName32 | default('') }} Download URL from S3
     amazon.aws.s3_object:
       # profile: '{{ awsProfile }}'
       bucket: mturner
@@ -77,7 +66,7 @@
     register: s332
     delegate_to: localhost
   
-  - name: Download {{ installerName64 }}
+  - name: Download {{ installerName64 | default('') }}
     ansible.windows.win_get_url:
       url: '{{ s364.url }}'
       dest: C:\AcuInstallers
@@ -86,7 +75,7 @@
     delay: 30
     until: result is not failed
   
-  - name: Download {{ installerName32 }}
+  - name: Download {{ installerName32 | default('') }}
     ansible.windows.win_get_url:
       url: '{{ s332.url }}'
       dest: C:\AcuInstallers
@@ -107,13 +96,13 @@
     loop: "{{ hostvars['localhost'].ec2.instance_ids }}"
     delegate_to: localhost
   
-  - name: Install {{ installerName64 }}
+  - name: Install {{ installerName64 | default('') }}
     win_package:
       path: C:\AcuInstallers\{{ installerName64 }}
       state: present
       arguments: /quiet StartAcuConnect=0 StartAcuServer=0 StartAcuToWeb=0 LaunchActivator=0 SetupType=Complete BisUserName={{ myUsername }} BisPassword={{ myPassword }}
 
-  - name: Install {{ installerName32 }}
+  - name: Install {{ installerName32 | default('') }}
     win_package:
       path: C:\AcuInstallers\{{ installerName32 }}
       state: present
