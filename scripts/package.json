@@ -7,8 +7,9 @@
     "pudryrun": "node semPU.js --dryrun",
     "preacupu": "node semFTP2S3.js acu",
     "acupu": "node semPU.js",
-    "preedpu": "node semFTP2S3.js ed",
+    "preedpu": "node semFTP2S3.js edpu",
     "edpu": "node semPU.js",
+    "ed": "node semFTP2S3.js ed",
     "testbuild": "node semTestBuild.js",
     "search": "node semSearch.js"
   },

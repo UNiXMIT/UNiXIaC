@@ -63,6 +63,27 @@ const concurrency = {
 };
 
 const EDVars = {
+    remoteDir: `${process.env.EDROOTLOC}/${config.ed.version}/ga`,
+    get fileList() {
+        const files = [
+            `ede_${config.ed.versionNumber}.exe`,
+            `edvs_${config.ed.versionNumber}.exe`,
+            `es_${config.ed.versionNumber}.exe`,
+            `setup_entdev_${config.ed.version}_amazon_x64`,
+            `setup_entdev_${config.ed.version}_suse_x64`,
+            `setup_entdev_${config.ed.version}_ubuntu_x64`,
+            `setup_entdev_${config.ed.version}_redhat_arm64`,
+            `setup_entdev_${config.ed.version}_redhat_x64`,
+            `setup_entdev_${config.ed.version}_redhat_x86_64`,
+            `setup_entdev_${config.ed.version}_rocky_x64`
+        ];
+        return files;
+    },
+    localDir: `${process.env.EDLOCALLOC}\\${config.ed.versionNumber}\\GA`,
+    S3Prefix: `${process.env.EDS3PREFIX}/${config.ed.versionNumber}/GA/`
+}
+
+const EDPUVars = {
     remoteDir: `${process.env.EDROOTLOC}/${config.ed.version}/patchupdates/pu${config.ed.puFormatted}`,
     get fileList() {
         const files = [
@@ -124,11 +145,11 @@ const ACUVars = {
     S3Prefix: `${process.env.ACUS3PREFIX}/${config.acu.versionNumber}/PU${config.acu.pu}/`
 }
 
-const targets = { ed: EDVars, acu: ACUVars };
-const targetName = (process.argv[2] || "ed").replace(/^--/, "").toLowerCase();
+const targets = { ed: EDVars, edpu: EDPUVars, acu: ACUVars };
+const targetName = (process.argv[2] || "edpu").replace(/^--/, "").toLowerCase();
 const target = targets[targetName];
 if (!target) {
-    console.error(`Unknown target "${targetName}". Use "ed" or "acu".`);
+    console.error(`Unknown target "${targetName}". Use "ed", "edpu" or "acu".`);
     process.exit(1);
 }
 
