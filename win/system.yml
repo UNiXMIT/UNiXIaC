@@ -37,6 +37,7 @@
     content: |
       Port 22
       PubkeyAuthentication yes
+      AuthorizedKeysFile      .ssh/authorized_keys
       PasswordAuthentication yes
       StrictModes no
       Subsystem sftp sftp-server.exe
