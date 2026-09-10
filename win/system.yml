@@ -26,8 +26,17 @@
   ansible.windows.win_powershell:
     script: |
       Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+      Set-Service -Name sshd -StartupType 'Automatic'
       Start-Service sshd
-      Set-Service -Name sshd -StartupType 'Automatic' 
+  tags: default
+
+- name: Wait for sshd_config to exist
+  ansible.windows.win_stat:
+    path: C:\ProgramData\ssh\sshd_config
+  register: sshd_config_stat
+  until: sshd_config_stat.stat.exists
+  retries: 10
+  delay: 3
   tags: default
 
 - name: Enable SSH Public Key Authentication
