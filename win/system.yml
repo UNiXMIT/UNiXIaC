@@ -186,6 +186,11 @@
       - '2606:4700:4700::1001'
   tags: default
 
+- name: Set C:\temp on PATH
+  win_path:
+    elements: C:\temp
+  tags: default
+
 - name: Set .MSI on PATHEXT
   win_path:
     name: PATHEXT
