@@ -5,6 +5,7 @@ containerRepo=mf/semaphore
 runOptions=(
 -v /home/support/semaphore/config:/etc/semaphore
 # -v /home/support/semaphore/db:/var/lib/semaphore
+--network semaphore
 --restart always
 -e SEMAPHORE_DB_DIALECT=postgres
 # -e SEMAPHORE_ADMIN=admin
@@ -55,6 +56,10 @@ buildContainer() {
     sudo ${containerRuntime} build --no-cache --tag ${containerRepo} -f $(dirname "$0")/semaphore/Dockerfile
 }
 
+createNetwork() {
+    sudo ${containerRuntime} network exists ${containerName} || sudo ${containerRuntime} network create ${containerName}
+}
+
 startContainer() {
     printf "Starting Container...\n\n"
     sudo ${containerRuntime} run -d --name ${containerName} "${runOptions[@]}" ${containerRepo} 
@@ -70,4 +75,5 @@ if [[ $1 == 'update' ]]; then
     updateContainer
 fi
 buildContainer
+createNetwork
 startContainer
