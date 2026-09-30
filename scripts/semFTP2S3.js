@@ -4,6 +4,14 @@ const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 const fs = require("node:fs");
 const path = require("node:path");
 
+const colors = {
+    downloading: "\x1b[36m",
+    downloaded: "\x1b[32m",
+    uploading: "\x1b[33m",
+    uploaded: "\x1b[34m",
+    reset: "\x1b[0m",
+};
+
 const config = {
     ed: {
         version: process.env.EDVERSION,
@@ -169,7 +177,7 @@ async function transferAll(target) {
 
     await runWithConcurrency(downloaded, concurrency.s3, (item) => {
         const key = target.S3Prefix + item.name;
-        console.log(`Uploading ${item.localPath} -> s3://${config.s3.bucket}/${key}`);
+        console.log(`${colors.uploading}Uploading ${item.localPath} -> s3://${config.s3.bucket}/${key}${colors.reset}`);
         return uploadToS3(s3, item.localPath, config.s3.bucket, key);
     });
 }
@@ -218,9 +226,9 @@ async function downloadOne(target, file) {
     const localPath = path.join(target.localDir, file.name);
     try {
         await client.access(ftpAccessOptions);
-        console.log(`Downloading ${remoteFile} -> ${localPath}`);
+        console.log(`${colors.downloading}Downloading ${remoteFile} -> ${localPath}${colors.reset}`);
         await client.downloadTo(localPath, remoteFile);
-        console.log(`Downloaded ${remoteFile} -> ${localPath}`);
+        console.log(`${colors.downloaded}Downloaded ${remoteFile} -> ${localPath}${colors.reset}`);
         return { name: file.name, localPath };
     } finally {
         client.close();
@@ -232,7 +240,7 @@ async function uploadToS3(s3, localPath, bucket, key) {
     await s3.send(
         new PutObjectCommand({ Bucket: bucket, Key: key, Body: body })
     );
-    console.log(`Uploaded ${localPath} -> s3://${bucket}/${key}`);
+    console.log(`${colors.uploaded}Uploaded ${localPath} -> s3://${bucket}/${key}${colors.reset}`);
 }
 
 async function main() {
