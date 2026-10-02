@@ -119,8 +119,8 @@ const EDPUVars = {
         }
         return files;
     },
-    localDir: `${process.env.EDLOCALLOC}\\${config.ed.versionNumber}\\PU${config.ed.puFormatted}`,
-    S3Prefix: `${process.env.EDS3PREFIX}/${config.ed.versionNumber}/PU${config.ed.puFormatted}/`
+    localDir: `${process.env.EDLOCALLOC}\\${config.ed.versionNumber}\\PU${config.ed.pu}`,
+    S3Prefix: `${process.env.EDS3PREFIX}/${config.ed.versionNumber}/PU${config.ed.pu}/`
 }
 
 const ACUVars = {
