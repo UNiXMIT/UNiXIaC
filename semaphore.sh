@@ -35,15 +35,6 @@ checkContainerRuntime() {
     printf "Using Container Runtime - ${containerRuntime}\n\n"
 }
 
-removeContainer() {
-    if [[ -n "$(sudo ${containerRuntime} ps -a -q -f name=${containerName})" ]]; then
-        printf "Removing Container...\n\n"
-        sudo ${containerRuntime} stop ${containerName} >/dev/null
-        sudo ${containerRuntime} wait ${containerName} >/dev/null
-        sudo ${containerRuntime} rm ${containerName} >/dev/null
-    fi
-}
-
 updateContainer() {
     printf "Updating Container...\n\n"
     sudo ${containerRuntime} pull semaphoreui/semaphore:$tag
@@ -62,7 +53,7 @@ createNetwork() {
 
 startContainer() {
     printf "Starting Container...\n\n"
-    sudo ${containerRuntime} run -d --name ${containerName} "${runOptions[@]}" ${containerRepo} 
+    sudo ${containerRuntime} run -d --name ${containerName} "${runOptions[@]}" --replace ${containerRepo} 
 }
 
 tag=$2
@@ -70,7 +61,6 @@ if [ -z "$tag" ]; then
     tag=latest
 fi
 checkContainerRuntime
-removeContainer
 if [[ $1 == 'update' ]]; then
     updateContainer
 fi
