@@ -16,6 +16,8 @@ runOptions=(
 -e SEMAPHORE_DB_HOST=example.com
 -e SEMAPHORE_DB_PORT=5432
 -e SEMAPHORE_DB=postgres?sslmode=disable
+--dns 1.1.1.1
+--dns 1.0.0.1
 -p 3000:3000
 --health-cmd "curl -sf localhost:3000/api/auth/login  || exit 1"
 --health-interval 1m
