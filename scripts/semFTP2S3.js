@@ -96,22 +96,24 @@ const EDPUVars = {
     get fileList() {
         const files = [
             `ede_${config.ed.versionNumber}_pu${config.ed.puFormatted}_${config.ed.winBuild}.exe`,
-            `edvs_${config.ed.versionNumber}_pu${config.ed.puFormatted}_${config.ed.winBuild}.exe`,
             `es_${config.ed.versionNumber}_pu${config.ed.puFormatted}_${config.ed.winBuild}.exe`,
             `setup_entdev_${config.ed.version}_patchupdate${config.ed.puFormatted}_${config.ed.linuxBuild}_amazon_x64`,
             `setup_entdev_${config.ed.version}_patchupdate${config.ed.puFormatted}_${config.ed.linuxBuild}_suse_x64`,
             `setup_entdev_${config.ed.version}_patchupdate${config.ed.puFormatted}_${config.ed.linuxBuild}_ubuntu_x64`
         ];
         if (config.ed.versionNumber == 100) {
+            files.push(`edvs2022_${config.ed.versionNumber}_pu${config.ed.puFormatted}_${config.ed.winBuild}.exe`);
             files.push(`setup_entdev_${config.ed.version}_patchupdate${config.ed.puFormatted}_${config.ed.linuxBuild}_redhat_x86_64`);
             files.push(`setup_entdev_${config.ed.version}_patchupdate${config.ed.puFormatted}_${config.ed.linuxBuild}_rocky_x86_64`);
         }
         if (config.ed.versionNumber == 110) {
+            files.push(`edvs_${config.ed.versionNumber}_pu${config.ed.puFormatted}_${config.ed.winBuild}.exe`);
             files.push(`setup_entdev_${config.ed.version}_patchupdate${config.ed.puFormatted}_${config.ed.linuxBuild}_redhat_x64`);
             files.push(`setup_entdev_${config.ed.version}_patchupdate${config.ed.puFormatted}_${config.ed.linuxBuild}_redhat_x86_64`);
             files.push(`setup_entdev_${config.ed.version}_patchupdate${config.ed.puFormatted}_${config.ed.linuxBuild}_rocky_x86_64`);
         }
         if (config.ed.versionNumber == 120) {
+            files.push(`edvs_${config.ed.versionNumber}_pu${config.ed.puFormatted}_${config.ed.winBuild}.exe`);
             files.push(`setup_entdev_${config.ed.version}_patchupdate${config.ed.puFormatted}_${config.ed.linuxBuild}_redhat_arm64`);
             files.push(`setup_entdev_${config.ed.version}_patchupdate${config.ed.puFormatted}_${config.ed.linuxBuild}_redhat_x64`);
             files.push(`setup_entdev_${config.ed.version}_patchupdate${config.ed.puFormatted}_${config.ed.linuxBuild}_redhat_x86_64`);
