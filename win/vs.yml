@@ -18,9 +18,9 @@
   until: result is not failed
   tags: vs2022
 
-- name: Download VS Professional 2026 18.11.4
+- name: Download VS Professional 2026
   ansible.windows.win_get_url:
-    url: https://download.visualstudio.microsoft.com/download/pr/eef426f0-27ac-46f6-8ac5-21bd5d239839/ae4f10f29a694e76a600f9c5f0ddd730c6839efa6b4c14788a4d017a345d8458/vs_Professional.exe
+    url: https://aka.ms/vs/stable/vs_professional.exe
     dest: C:\Users\Public\Documents
   register: result
   retries: 5
