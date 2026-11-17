@@ -1,6 +1,6 @@
-- name: Download VS Professional 2019 16.11.49
+- name: Download VS Professional 2019 16.11.63
   ansible.windows.win_get_url:
-    url: https://download.visualstudio.microsoft.com/download/pr/12569159-fcaa-4029-a83e-b7b900c5f9d6/1874842a56f476fab072a8c338a4e27e0bae768a330cf14f3e2fe586727e6fc7/vs_Professional.exe
+    url: https://download.visualstudio.microsoft.com/download/pr/9dacffc2-1f48-4c30-82da-123d3fe0e842/6641bea4b1488a6e565c8bf7bd11f720b4b257a56da7af5ea24699a335a4833f/vs_Professional.exe
     dest: C:\Users\Public\Documents
   register: result
   retries: 5
@@ -18,9 +18,9 @@
   until: result is not failed
   tags: vs2022
 
-- name: Download VS Professional 2026
+- name: Download VS Professional 2026 18.11.4
   ansible.windows.win_get_url:
-    url: https://download.visualstudio.microsoft.com/download/pr/ef8a1da5-1f31-4995-8be6-cb9800f90516/36e2e1e21504e900b2f08a1ccc233ee86aef45fc8281539a7b7784078d7b24b5/vs_Professional.exe
+    url: https://download.visualstudio.microsoft.com/download/pr/eef426f0-27ac-46f6-8ac5-21bd5d239839/ae4f10f29a694e76a600f9c5f0ddd730c6839efa6b4c14788a4d017a345d8458/vs_Professional.exe
     dest: C:\Users\Public\Documents
   register: result
   retries: 5
